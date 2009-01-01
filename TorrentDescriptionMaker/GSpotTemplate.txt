@@ -1,0 +1,20 @@
+﻿[pre][FILE]\r\n
+    Source : \r\n
+  Duration : %VIDEO_DURATION%\r\n
+ File Size : %FILE_SIZE% bytes\r\n
+ File Name : %FILE_NAME%\r\n
+\r\n
+[VIDEO]\r\n
+Resolution : %VIDEO_SIZE_X%x%VIDEO_SIZE_Y% (%VIDEO_ASPECT_TYPE_PAL%%VIDEO_ASPECT_TYPE_NTSC%)\r\n
+   BitRate : %VIDEO_BITRATE% Kbps\r\n
+     Codec : %VIDEO_CODEC_NAME%\r\n
+\r\n
+[AUDIO]\r\n
+Sample Rate : %AUDIO_SAMPLE_RATE% Hz (%AUDIO_CHANNEL_COUNT% channels)\r\n
+   BitRate : %AUDIO_BITRATE% Kbps (%AUDIO_BITRATE_TYPE%)\r\n
+     Codec : %AUDIO_CODEC%\r\n
+\r\n
+[SCREENSHOTS]\r\n
+[/pre]\r\n
+[img=]\r\n
+[img=]\r\n
