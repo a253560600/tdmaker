@@ -55,15 +55,17 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.txtPublish = new System.Windows.Forms.TextBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.gbImageShack = new System.Windows.Forms.GroupBox();
             this.tmrStatus = new System.Windows.Forms.Timer(this.components);
             this.btnPublish = new System.Windows.Forms.Button();
             this.txtMediaFile = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnBrowse = new System.Windows.Forms.Button();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.gbImageShack = new System.Windows.Forms.GroupBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.cboMtnArgs = new System.Windows.Forms.ComboBox();
             this.txtMtn = new System.Windows.Forms.TextBox();
+            this.chkAlignCenter = new System.Windows.Forms.CheckBox();
             this.chkUploadFullScreenshot = new System.Windows.Forms.CheckBox();
             this.chkOptImageShack = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
@@ -74,9 +76,10 @@
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.gbImageShack.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -135,7 +138,7 @@
             // 
             this.btnCopy0.AutoSize = true;
             this.btnCopy0.Enabled = false;
-            this.btnCopy0.Location = new System.Drawing.Point(562, 30);
+            this.btnCopy0.Location = new System.Drawing.Point(562, 31);
             this.btnCopy0.Name = "btnCopy0";
             this.btnCopy0.Size = new System.Drawing.Size(106, 23);
             this.btnCopy0.TabIndex = 3;
@@ -338,6 +341,28 @@
             this.txtPublish.Size = new System.Drawing.Size(736, 367);
             this.txtPublish.TabIndex = 1;
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.groupBox5);
+            this.tabPage4.Controls.Add(this.gbImageShack);
+            this.tabPage4.Controls.Add(this.chkOptImageShack);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(742, 373);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Options";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // gbImageShack
+            // 
+            this.gbImageShack.Controls.Add(this.chkUploadFullScreenshot);
+            this.gbImageShack.Location = new System.Drawing.Point(20, 47);
+            this.gbImageShack.Name = "gbImageShack";
+            this.gbImageShack.Size = new System.Drawing.Size(250, 59);
+            this.gbImageShack.TabIndex = 2;
+            this.gbImageShack.TabStop = false;
+            this.gbImageShack.Text = "ImageShack";
+            // 
             // tmrStatus
             // 
             this.tmrStatus.Enabled = true;
@@ -349,7 +374,7 @@
             this.btnPublish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPublish.AutoSize = true;
             this.btnPublish.Enabled = false;
-            this.btnPublish.Location = new System.Drawing.Point(584, 502);
+            this.btnPublish.Location = new System.Drawing.Point(599, 497);
             this.btnPublish.Name = "btnPublish";
             this.btnPublish.Size = new System.Drawing.Size(106, 23);
             this.btnPublish.TabIndex = 5;
@@ -372,7 +397,7 @@
             this.groupBox4.Controls.Add(this.txtMediaFile);
             this.groupBox4.Location = new System.Drawing.Point(32, 11);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(706, 70);
+            this.groupBox4.Size = new System.Drawing.Size(711, 70);
             this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Analyze Media File...";
@@ -380,7 +405,7 @@
             // btnBrowse
             // 
             this.btnBrowse.AutoSize = true;
-            this.btnBrowse.Location = new System.Drawing.Point(562, 29);
+            this.btnBrowse.Location = new System.Drawing.Point(567, 28);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(106, 23);
             this.btnBrowse.TabIndex = 7;
@@ -388,26 +413,15 @@
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
-            // tabPage4
+            // groupBox5
             // 
-            this.tabPage4.Controls.Add(this.gbImageShack);
-            this.tabPage4.Controls.Add(this.chkOptImageShack);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(742, 373);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Options";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // gbImageShack
-            // 
-            this.gbImageShack.Controls.Add(this.chkUploadFullScreenshot);
-            this.gbImageShack.Location = new System.Drawing.Point(20, 47);
-            this.gbImageShack.Name = "gbImageShack";
-            this.gbImageShack.Size = new System.Drawing.Size(250, 59);
-            this.gbImageShack.TabIndex = 2;
-            this.gbImageShack.TabStop = false;
-            this.gbImageShack.Text = "ImageShack";
+            this.groupBox5.Controls.Add(this.chkAlignCenter);
+            this.groupBox5.Location = new System.Drawing.Point(20, 121);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(250, 76);
+            this.groupBox5.TabIndex = 3;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Formatting";
             // 
             // cboMtnArgs
             // 
@@ -430,6 +444,18 @@
             this.txtMtn.TabIndex = 0;
             this.txtMtn.Text = global::TDMaker.Properties.Settings.Default.MTNPath;
             // 
+            // chkAlignCenter
+            // 
+            this.chkAlignCenter.AutoSize = true;
+            this.chkAlignCenter.Checked = global::TDMaker.Properties.Settings.Default.AlignCenter;
+            this.chkAlignCenter.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "AlignCenter", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkAlignCenter.Location = new System.Drawing.Point(17, 33);
+            this.chkAlignCenter.Name = "chkAlignCenter";
+            this.chkAlignCenter.Size = new System.Drawing.Size(83, 17);
+            this.chkAlignCenter.TabIndex = 0;
+            this.chkAlignCenter.Text = "Align &Center";
+            this.chkAlignCenter.UseVisualStyleBackColor = true;
+            // 
             // chkUploadFullScreenshot
             // 
             this.chkUploadFullScreenshot.AutoSize = true;
@@ -449,7 +475,7 @@
             this.chkOptImageShack.Checked = global::TDMaker.Properties.Settings.Default.UploadImageShack;
             this.chkOptImageShack.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkOptImageShack.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "UploadImageShack", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkOptImageShack.Location = new System.Drawing.Point(20, 20);
+            this.chkOptImageShack.Location = new System.Drawing.Point(37, 16);
             this.chkOptImageShack.Name = "chkOptImageShack";
             this.chkOptImageShack.Size = new System.Drawing.Size(192, 17);
             this.chkOptImageShack.TabIndex = 0;
@@ -490,12 +516,14 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             this.gbImageShack.ResumeLayout(false);
             this.gbImageShack.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -539,6 +567,8 @@
         private System.Windows.Forms.CheckBox chkOptImageShack;
         private System.Windows.Forms.GroupBox gbImageShack;
         private System.Windows.Forms.CheckBox chkUploadFullScreenshot;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.CheckBox chkAlignCenter;
     }
 }
 

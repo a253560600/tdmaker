@@ -86,5 +86,17 @@ namespace TDMaker.Properties {
                 this["UseFullPicture"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AlignCenter {
+            get {
+                return ((bool)(this["AlignCenter"]));
+            }
+            set {
+                this["AlignCenter"] = value;
+            }
+        }
     }
 }
