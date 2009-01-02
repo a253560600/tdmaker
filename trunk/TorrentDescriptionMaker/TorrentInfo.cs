@@ -33,7 +33,7 @@ namespace TorrentDescriptionMaker
         /// </summary>      
         private void sGetMovieInfo()
         {
-
+            BbCode bb = new BbCode();
             MediaInfoLib.MediaInfo mi = new MediaInfoLib.MediaInfo();
             mi.Open(mMovieFilePath);
 
@@ -45,7 +45,7 @@ namespace TorrentDescriptionMaker
             //Console.WriteLine(mi.Option("Complete"));
             //Console.WriteLine(mi.Inform());
 
-            sbMediaInfo.AppendLine("General:");
+            sbMediaInfo.AppendLine(bb.bold("General:"));
             sbMediaInfo.AppendLine();
             // File Name
             sbMediaInfo.AppendLine(string.Format("    File Name: {0}.{1}",
@@ -104,7 +104,7 @@ namespace TorrentDescriptionMaker
             VideoInfo vi = new VideoInfo();
 
             sbMediaInfo.AppendLine();
-            sbMediaInfo.AppendLine("Video:");
+            sbMediaInfo.AppendLine(bb.bold("Video:"));
             sbMediaInfo.AppendLine();
             // Format
             vi.FormatVersion = mi.Get(StreamKind.Video, 0, "Format_Version");
@@ -146,7 +146,7 @@ namespace TorrentDescriptionMaker
                 AudioInfo ai = new AudioInfo();
 
                 sbMediaInfo.AppendLine();
-                sbMediaInfo.AppendLine(string.Format("Audio #{0}:", a + 1));
+                sbMediaInfo.AppendLine(string.Format(bb.bold("Audio #{0}:"), a + 1));
                 sbMediaInfo.AppendLine();
                 // Format
                 sbMediaInfo.Append(string.Format("       Format: {0}", mi.Get(StreamKind.Audio, a, "Format")));
