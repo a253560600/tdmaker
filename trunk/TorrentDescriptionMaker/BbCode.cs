@@ -6,13 +6,19 @@ namespace TorrentDescriptionMaker
 {
     class BbCode
     {
-        public string img(string url){
+        public string img(string url)
+        {
             return string.Format("[img]{0}[/img]", url);
         }
 
         public string bold(string txt)
         {
             return string.Format("[b]{0}[/b]", txt);
+        }
+
+        public string bolditalic(string txt)
+        {
+            return string.Format("[b]{0}[/b]", italic(txt));
         }
 
         public string pre(string txt)
