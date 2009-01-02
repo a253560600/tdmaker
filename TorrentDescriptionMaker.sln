@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TorrentDescriptionMaker", "TorrentDescriptionMaker\TorrentDescriptionMaker.csproj", "{F3519E2C-4C9F-4EED-8EDA-78FED87BC10F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageUploader", "..\ZScreen\ImageUploader\ImageUploader\ImageUploader.csproj", "{223EC461-C070-4FF3-ADE7-92BC21AE66FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageUploader", "..\..\ZScreen\ImageUploader\ImageUploader\ImageUploader.csproj", "{223EC461-C070-4FF3-ADE7-92BC21AE66FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

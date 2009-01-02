@@ -61,7 +61,7 @@ namespace TorrentDescriptionMaker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PTP Torrent Description Maker.
+        ///   Looks up a localized string similar to Torrent Description Maker.
         /// </summary>
         internal static string AppName {
             get {
