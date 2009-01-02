@@ -59,15 +59,15 @@ namespace TorrentDescriptionMaker
                 sbMediaInfo.Append(string.Format(" ({0})", myMovie.FormatInfo));
             }
             sbMediaInfo.Append(Environment.NewLine);
-  
+
             // File Size
-            sbMediaInfo.AppendLine(string.Format("    [u]File Size:[/u] {0}", 
+            sbMediaInfo.AppendLine(string.Format("    [u]File Size:[/u] {0}",
                 mi.Get(0, 0, "FileSize/String4")));
             // Duration
-            sbMediaInfo.AppendLine(string.Format("     [u]Duration:[/u] {0}", 
+            sbMediaInfo.AppendLine(string.Format("     [u]Duration:[/u] {0}",
                 mi.Get(0, 0, "Duration/String2")));
             // Bitrate
-            sbMediaInfo.AppendLine(string.Format("      [u]Bitrate:[/u] {0}", 
+            sbMediaInfo.AppendLine(string.Format("      [u]Bitrate:[/u] {0}",
                 mi.Get(StreamKind.General, 0, "OverallBitRate/String")));
 
             int subCount = 0;
@@ -144,6 +144,9 @@ namespace TorrentDescriptionMaker
             sbMediaInfo.Append(bb.size(2, sbVideo.ToString()));
 
 
+            //*********************
+            //* Audio
+            //*********************          
             for (int a = 0; a < audioCount; a++)
             {
                 AudioInfo ai = new AudioInfo();
@@ -188,8 +191,15 @@ namespace TorrentDescriptionMaker
 
             }
 
-            this.MediaInfo = bb.alignCenter( sbMediaInfo.ToString());
-
+            if (Settings.Default.AlignCenter)
+            {
+                this.MediaInfo = bb.alignCenter(sbMediaInfo.ToString());
+            }
+            else
+            {
+                this.MediaInfo = sbMediaInfo.ToString();
+            }
+            
             mBwApp.ReportProgress(0, this.MediaInfo);
 
         }
