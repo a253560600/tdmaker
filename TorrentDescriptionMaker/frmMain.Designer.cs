@@ -29,11 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.cboMtnArgs = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtMtn = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnCopy0 = new System.Windows.Forms.Button();
@@ -61,6 +60,8 @@
             this.txtMediaFile = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnBrowse = new System.Windows.Forms.Button();
+            this.cboMtnArgs = new System.Windows.Forms.ComboBox();
+            this.txtMtn = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -94,16 +95,6 @@
             this.label6.TabIndex = 8;
             this.label6.Text = "Arguments:";
             // 
-            // cboMtnArgs
-            // 
-            this.cboMtnArgs.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "MTNArg", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cboMtnArgs.FormattingEnabled = true;
-            this.cboMtnArgs.Location = new System.Drawing.Point(114, 54);
-            this.cboMtnArgs.Name = "cboMtnArgs";
-            this.cboMtnArgs.Size = new System.Drawing.Size(442, 21);
-            this.cboMtnArgs.TabIndex = 7;
-            this.cboMtnArgs.Text = global::TDMaker.Properties.Settings.Default.MTNArg;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -112,17 +103,6 @@
             this.label1.Size = new System.Drawing.Size(51, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Location:";
-            // 
-            // txtMtn
-            // 
-            this.txtMtn.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.txtMtn.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
-            this.txtMtn.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "MTNPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtMtn.Location = new System.Drawing.Point(114, 25);
-            this.txtMtn.Name = "txtMtn";
-            this.txtMtn.Size = new System.Drawing.Size(442, 20);
-            this.txtMtn.TabIndex = 0;
-            this.txtMtn.Text = global::TDMaker.Properties.Settings.Default.MTNPath;
             // 
             // groupBox2
             // 
@@ -401,6 +381,27 @@
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
+            // cboMtnArgs
+            // 
+            this.cboMtnArgs.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "MTNArg", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cboMtnArgs.FormattingEnabled = true;
+            this.cboMtnArgs.Location = new System.Drawing.Point(114, 54);
+            this.cboMtnArgs.Name = "cboMtnArgs";
+            this.cboMtnArgs.Size = new System.Drawing.Size(442, 21);
+            this.cboMtnArgs.TabIndex = 7;
+            this.cboMtnArgs.Text = global::TDMaker.Properties.Settings.Default.MTNArg;
+            // 
+            // txtMtn
+            // 
+            this.txtMtn.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtMtn.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
+            this.txtMtn.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "MTNPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtMtn.Location = new System.Drawing.Point(114, 25);
+            this.txtMtn.Name = "txtMtn";
+            this.txtMtn.Size = new System.Drawing.Size(442, 20);
+            this.txtMtn.TabIndex = 0;
+            this.txtMtn.Text = global::TDMaker.Properties.Settings.Default.MTNPath;
+            // 
             // frmMain
             // 
             this.AllowDrop = true;
@@ -411,6 +412,7 @@
             this.Controls.Add(this.btnPublish);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
             this.Text = "Torrent Description Maker";
             this.Load += new System.EventHandler(this.frmMain_Load);

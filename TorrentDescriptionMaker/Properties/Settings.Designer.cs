@@ -25,7 +25,7 @@ namespace TDMaker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("mtn.exe")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string MTNPath {
             get {
                 return ((string)(this["MTNPath"]));
@@ -44,18 +44,6 @@ namespace TDMaker.Properties {
             }
             set {
                 this["MTNArg"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("H:\\Standalone\\GSpot270a\\gspot.exe")]
-        public string MovieInfoPath {
-            get {
-                return ((string)(this["MovieInfoPath"]));
-            }
-            set {
-                this["MovieInfoPath"] = value;
             }
         }
         

@@ -3,13 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="MTNPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">mtn.exe</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="MTNArg" Type="System.String" Scope="User">
       <Value Profile="(Default)">-P -w 0 -c 1 -r 3 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97</Value>
-    </Setting>
-    <Setting Name="MovieInfoPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">H:\Standalone\GSpot270a\gspot.exe</Value>
     </Setting>
     <Setting Name="MTNArgs" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
