@@ -3,6 +3,7 @@
 	TDMaker makes the assumption biggest file as the movie 
 	TDMaker opens the movie to read in MediaInfo and uploads screenshot to ImageShack
 	TDMaker checks for movie in the site for duplicates [Kattana]
+	TDMaker searches IMDB http://www.imdb.com/find?s=all&q=SEARCH_TERM_HERE&x=0&y=0
 	TDMaker creates torrent from the folder using http://mktorrent.sourceforge.net/
 	TDMaker uploads the torrent to the site
 	
