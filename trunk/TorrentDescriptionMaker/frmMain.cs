@@ -117,25 +117,29 @@ namespace TorrentDescriptionMaker
                 txtBBScrForums.Text = mTInfo.ScreenshotURLForums;
 
                 BbCode bb = new BbCode();
-                txtBBScrFull.Text = bb.img(txtImageShackURL.Text);
+                if (!string.IsNullOrEmpty(txtImageShackURL.Text))
+                    txtBBScrFull.Text = bb.img(txtImageShackURL.Text);
 
                 btnCopy0.Enabled = true;
                 btnCopy.Enabled = true;
                 btnCopy2.Enabled = true;
 
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine(txtMediaInfo.Text);
-                sb.AppendLine();
-                if (Settings.Default.UseFullPicture)
+                StringBuilder sbPublish = new StringBuilder();
+                sbPublish.AppendLine(txtMediaInfo.Text);
+
+                sbPublish.AppendLine();
+                if (!string.IsNullOrEmpty(txtBBScrFull.Text) && Settings.Default.UseFullPicture)
                 {
-                    sb.AppendLine(txtBBScrFull.Text);
+                    sbPublish.AppendLine(txtBBScrFull.Text);
                 }
-                else
+                else if (!string.IsNullOrEmpty(txtBBScrForums.Text))
                 {
-                    sb.AppendLine(txtBBScrForums.Text);
+                    sbPublish.AppendLine(txtBBScrForums.Text);
                 }
-                
-                txtPublish.Text = sb.ToString();
+
+                // sbPublish.AppendLine("Get your Torrent Description like this using TDMaker: http://code.google.com/p/tdmaker");
+
+                txtPublish.Text = sbPublish.ToString();
 
                 btnPublish.Enabled = true;
 
