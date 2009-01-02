@@ -96,13 +96,13 @@
             // 
             // cboMtnArgs
             // 
-            this.cboMtnArgs.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TorrentDescriptionMaker.Properties.Settings.Default, "MTNArg", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cboMtnArgs.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "MTNArg", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cboMtnArgs.FormattingEnabled = true;
             this.cboMtnArgs.Location = new System.Drawing.Point(114, 54);
             this.cboMtnArgs.Name = "cboMtnArgs";
             this.cboMtnArgs.Size = new System.Drawing.Size(442, 21);
             this.cboMtnArgs.TabIndex = 7;
-            this.cboMtnArgs.Text = global::TorrentDescriptionMaker.Properties.Settings.Default.MTNArg;
+            this.cboMtnArgs.Text = global::TDMaker.Properties.Settings.Default.MTNArg;
             // 
             // label1
             // 
@@ -117,12 +117,12 @@
             // 
             this.txtMtn.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txtMtn.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
-            this.txtMtn.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TorrentDescriptionMaker.Properties.Settings.Default, "MTNPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtMtn.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "MTNPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.txtMtn.Location = new System.Drawing.Point(114, 25);
             this.txtMtn.Name = "txtMtn";
             this.txtMtn.Size = new System.Drawing.Size(442, 20);
             this.txtMtn.TabIndex = 0;
-            this.txtMtn.Text = global::TorrentDescriptionMaker.Properties.Settings.Default.MTNPath;
+            this.txtMtn.Text = global::TDMaker.Properties.Settings.Default.MTNPath;
             // 
             // groupBox2
             // 
@@ -259,7 +259,7 @@
             // 
             // sbarIcon
             // 
-            this.sbarIcon.Image = global::TorrentDescriptionMaker.Properties.Resources.info_16_xp;
+            this.sbarIcon.Image = global::TDMaker.Properties.Resources.info_16_xp;
             this.sbarIcon.Name = "sbarIcon";
             this.sbarIcon.Size = new System.Drawing.Size(16, 17);
             // 

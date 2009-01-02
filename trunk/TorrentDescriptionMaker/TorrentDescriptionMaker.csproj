@@ -8,8 +8,8 @@
     <ProjectGuid>{F3519E2C-4C9F-4EED-8EDA-78FED87BC10F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TorrentDescriptionMaker</RootNamespace>
-    <AssemblyName>TorrentDescriptionMaker</AssemblyName>
+    <RootNamespace>TDMaker</RootNamespace>
+    <AssemblyName>TDMaker</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
