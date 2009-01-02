@@ -39,7 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AudioInfo.cs" />
     <Compile Include="BbCode.cs" />
     <Compile Include="cTorrentInfo.cs" />
     <Compile Include="frmMain.cs">
@@ -76,7 +75,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="VideoInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\info-16-xp.png" />

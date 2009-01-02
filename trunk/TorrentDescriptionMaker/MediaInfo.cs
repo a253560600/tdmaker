@@ -9,6 +9,12 @@ namespace TorrentDescriptionMaker
     /// </summary>
     public class MediaInfo
     {
+        public MediaInfo()
+        {
+            this.Audio = new List<AudioInfo>();
+            this.Video = new VideoInfo();
+        }
+
         public string FileName { get; set; }
         public string FileSize { get; set; }
         public string Format { get; set; }
@@ -18,4 +24,18 @@ namespace TorrentDescriptionMaker
         public VideoInfo Video { get; set; }
 
     }
+
+    public class AudioInfo
+    {
+        public string FormatProfile { get; set; }
+        public string FormatVersion { get; set; }
+    }
+
+    public class VideoInfo
+    {
+        public string Standard { get; set; }
+        public string FormatVersion { get; set; }
+
+    }
+
 }
