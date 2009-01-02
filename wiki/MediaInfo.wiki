@@ -1,0 +1,8 @@
+#summary MediaInfo
+
+= Details =
+
+MediaInfo supplies technical and tag information about a video or audio file.
+It is free software (free of charge and free access to source code: GPL or LGPL licence)
+
+http://mediainfo.sourceforge.net/en
