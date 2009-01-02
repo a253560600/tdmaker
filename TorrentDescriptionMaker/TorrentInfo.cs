@@ -45,8 +45,8 @@ namespace TorrentDescriptionMaker
 
             //Console.WriteLine(mi.Option("Complete"));
             //Console.WriteLine(mi.Inform());
-            
-            sbMediaInfo.AppendLine(bb.size(3, bb.bold("General:")));
+
+            sbMediaInfo.AppendLine(bb.size(3, bb.bolditalic("General:")));
             sbMediaInfo.AppendLine();
             // File Name
             sbMediaInfo.AppendLine(string.Format("    [u]File Name:[/u] {0}.{1}",
@@ -101,7 +101,7 @@ namespace TorrentDescriptionMaker
             //* Video
             //*********************                        
             sbMediaInfo.AppendLine();
-            sbMediaInfo.AppendLine(bb.size(3, bb.bold("Video:")));
+            sbMediaInfo.AppendLine(bb.size(3, bb.bolditalic("Video:")));
             sbMediaInfo.AppendLine();
 
             VideoInfo vi = new VideoInfo();
@@ -149,7 +149,7 @@ namespace TorrentDescriptionMaker
                 AudioInfo ai = new AudioInfo();
 
                 sbMediaInfo.AppendLine();
-                sbMediaInfo.AppendLine(string.Format(bb.size(3, bb.bold("Audio #{0}:")), a + 1));
+                sbMediaInfo.AppendLine(string.Format(bb.size(3, bb.bolditalic("Audio #{0}:")), a + 1));
                 sbMediaInfo.AppendLine();
 
                 StringBuilder sbAudio = new StringBuilder();
