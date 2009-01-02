@@ -1,2 +1,12 @@
-﻿Use AudioInfo, VideoInfo and MediaInfo classes to create public properties
+﻿Full Automation [tacoking]
+	User browses movie folder 
+	TDMaker makes the assumption biggest file as the movie 
+	TDMaker opens the movie to read in MediaInfo and uploads screenshot to ImageShack
+	TDMaker checks for movie in the site for duplicates [Kattana]
+	TDMaker creates torrent from the folder using http://mktorrent.sourceforge.net/
+	TDMaker uploads the torrent to the site
+	
+
+Support for syntax based custom formats for Publishing torrent info
+Use AudioInfo, VideoInfo and MediaInfo classes to create public properties
 Get TorrentInfo to use MediaInfo

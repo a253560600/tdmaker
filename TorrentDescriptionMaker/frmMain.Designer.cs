@@ -322,9 +322,10 @@
             this.txtMediaInfo.Multiline = true;
             this.txtMediaInfo.Name = "txtMediaInfo";
             this.txtMediaInfo.ReadOnly = true;
-            this.txtMediaInfo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtMediaInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtMediaInfo.Size = new System.Drawing.Size(736, 367);
             this.txtMediaInfo.TabIndex = 0;
+            this.txtMediaInfo.WordWrap = false;
             // 
             // tabPage2
             // 
@@ -379,7 +380,7 @@
             this.groupBox5.Controls.Add(this.chkAlignCenter);
             this.groupBox5.Location = new System.Drawing.Point(20, 121);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(250, 76);
+            this.groupBox5.Size = new System.Drawing.Size(250, 73);
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Formatting";
@@ -401,7 +402,7 @@
             this.gbImageShack.Controls.Add(this.chkUploadFullScreenshot);
             this.gbImageShack.Location = new System.Drawing.Point(20, 47);
             this.gbImageShack.Name = "gbImageShack";
-            this.gbImageShack.Size = new System.Drawing.Size(250, 59);
+            this.gbImageShack.Size = new System.Drawing.Size(250, 68);
             this.gbImageShack.TabIndex = 2;
             this.gbImageShack.TabStop = false;
             this.gbImageShack.Text = "ImageShack";
