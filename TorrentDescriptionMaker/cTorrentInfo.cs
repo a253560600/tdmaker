@@ -54,23 +54,33 @@ namespace TorrentDescriptionMaker
             sbMediaInfo.AppendLine();
             // Format
             sbMediaInfo.AppendLine(string.Format("    Format: {0}", mi.Get(StreamKind.Video, 0, "Format")));
-            sbMediaInfo.AppendLine(string.Format("     Codec: {0}", mi.Get(StreamKind.Video, 0, "CodecID")));
+            // Codec
+            this.VideoCodec = mi.Get(StreamKind.Video, 0, "CodecID/Hint");
+            if (string.IsNullOrEmpty(VideoCodec))
+                this.VideoCodec = mi.Get(StreamKind.Video, 0, "CodecID");
+            if (!string.IsNullOrEmpty(VideoCodec))
+                sbMediaInfo.AppendLine(string.Format("     Codec: {0}", this.VideoCodec));
+
             // Resolution
             sbMediaInfo.AppendLine(string.Format("Resolution: {0}x{1}",
                 mi.Get(StreamKind.Video, 0, "Width"),
                 mi.Get(StreamKind.Video, 0, "Height")));
 
-            int audioCount = 0; 
+            int audioCount = 0;
             int.TryParse(mi.Get(StreamKind.General, 0, "AudioCount"), out audioCount);
 
             for (int a = 0; a < audioCount; a++)
             {
                 sbMediaInfo.AppendLine();
-                sbMediaInfo.AppendLine(string.Format("Audio #{0}", a+1));
+                sbMediaInfo.AppendLine(string.Format("Audio #{0}", a + 1));
                 sbMediaInfo.AppendLine();
                 // Format
                 sbMediaInfo.AppendLine(string.Format("    Format: {0}", mi.Get(StreamKind.Audio, a, "Format")));
-                sbMediaInfo.AppendLine(string.Format("     Codec: {0}", mi.Get(StreamKind.Audio, 0, "CodecID/Hint")));
+                this.AudioCodec = mi.Get(StreamKind.Audio, 0, "CodecID/Hint");
+                if (string.IsNullOrEmpty(this.AudioCodec))
+                    this.AudioCodec = mi.Get(StreamKind.Audio, 0, "CodecID");
+                if (!string.IsNullOrEmpty(this.AudioCodec))
+                    sbMediaInfo.AppendLine(string.Format("     Codec: {0}", this.AudioCodec));
                 // Bitrate
                 sbMediaInfo.AppendLine(string.Format("   Bitrate: {0} ({1})",
                     mi.Get(StreamKind.Audio, a, "BitRate/String"),
@@ -152,11 +162,12 @@ namespace TorrentDescriptionMaker
         public string ScreenshotURLFull { get; private set; }
         public string MediaInfo { get; private set; }
 
+        public string AudioCodec { get; private set; }
+        public string AudioFormat { get; private set; }
         public string GeneralFileName { get; private set; }
         public string GeneralFileSize { get; private set; }
-        public string VideoFormat{ get; private set; }
         public string VideoCodec { get; private set; }
-
+        public string VideoFormat { get; private set; }
 
     }
 }
