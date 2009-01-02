@@ -1,3 +1,4 @@
+1.1.5.0 Media Info tab shows Media Info from Complete parameter
 1.1.4.0 Option to disable Align Center [Rodix]
 1.1.3.0 Option to disable ImageShack and choose between Full Image and Forum Thumbnail [nnnnnn]
 1.1.2.0 General, Video and Audio headings are in bold [cirrhosis]

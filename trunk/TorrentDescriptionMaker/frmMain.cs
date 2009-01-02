@@ -125,7 +125,7 @@ namespace TorrentDescriptionMaker
                 btnCopy2.Enabled = true;
 
                 StringBuilder sbPublish = new StringBuilder();
-                sbPublish.AppendLine(txtMediaInfo.Text);
+                sbPublish.AppendLine(mTInfo.MediaInfoForums1);
 
                 sbPublish.AppendLine();
                 if (!string.IsNullOrEmpty(txtBBScrFull.Text) && Settings.Default.UseFullPicture)

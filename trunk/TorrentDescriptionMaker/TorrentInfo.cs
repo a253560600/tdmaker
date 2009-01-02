@@ -193,14 +193,15 @@ namespace TorrentDescriptionMaker
 
             if (Settings.Default.AlignCenter)
             {
-                this.MediaInfo = bb.alignCenter(sbMediaInfo.ToString());
+                this.MediaInfoForums1 = bb.alignCenter(sbMediaInfo.ToString());
             }
             else
             {
-                this.MediaInfo = sbMediaInfo.ToString();
+                this.MediaInfoForums1 = sbMediaInfo.ToString();
             }
-            
-            mBwApp.ReportProgress(0, this.MediaInfo);
+
+            mi.Option("Complete");
+            mBwApp.ReportProgress(0, mi.Inform());
 
         }
 
@@ -261,7 +262,7 @@ namespace TorrentDescriptionMaker
 
         public string ScreenshotURLForums { get; private set; }
         public string ScreenshotURLFull { get; private set; }
-        public string MediaInfo { get; private set; }
+        public string MediaInfoForums1 { get; private set; }
 
         public string AudioCodec { get; private set; }
         public string AudioFormat { get; private set; }
