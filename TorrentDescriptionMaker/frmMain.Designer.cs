@@ -31,7 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.cboMtnArgs = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtMtn = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnCopy0 = new System.Windows.Forms.Button();
@@ -50,11 +52,15 @@
             this.pBar = new System.Windows.Forms.ToolStripProgressBar();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tmrStatus = new System.Windows.Forms.Timer(this.components);
-            this.cboMtnArgs = new System.Windows.Forms.ComboBox();
-            this.txtMtn = new System.Windows.Forms.TextBox();
             this.txtMediaInfo = new System.Windows.Forms.TextBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.txtPublish = new System.Windows.Forms.TextBox();
+            this.tmrStatus = new System.Windows.Forms.Timer(this.components);
+            this.btnPublish = new System.Windows.Forms.Button();
+            this.txtMediaFile = new System.Windows.Forms.TextBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnBrowse = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -62,6 +68,8 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -86,6 +94,16 @@
             this.label6.TabIndex = 8;
             this.label6.Text = "Arguments:";
             // 
+            // cboMtnArgs
+            // 
+            this.cboMtnArgs.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TorrentDescriptionMaker.Properties.Settings.Default, "MTNArg", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cboMtnArgs.FormattingEnabled = true;
+            this.cboMtnArgs.Location = new System.Drawing.Point(114, 54);
+            this.cboMtnArgs.Name = "cboMtnArgs";
+            this.cboMtnArgs.Size = new System.Drawing.Size(442, 21);
+            this.cboMtnArgs.TabIndex = 7;
+            this.cboMtnArgs.Text = global::TorrentDescriptionMaker.Properties.Settings.Default.MTNArg;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -94,6 +112,17 @@
             this.label1.Size = new System.Drawing.Size(51, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Location:";
+            // 
+            // txtMtn
+            // 
+            this.txtMtn.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtMtn.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
+            this.txtMtn.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TorrentDescriptionMaker.Properties.Settings.Default, "MTNPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtMtn.Location = new System.Drawing.Point(114, 25);
+            this.txtMtn.Name = "txtMtn";
+            this.txtMtn.Size = new System.Drawing.Size(442, 20);
+            this.txtMtn.TabIndex = 0;
+            this.txtMtn.Text = global::TorrentDescriptionMaker.Properties.Settings.Default.MTNPath;
             // 
             // groupBox2
             // 
@@ -221,9 +250,9 @@
             this.sbarIcon,
             this.sBar,
             this.pBar});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 474);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 550);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(784, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(794, 22);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -236,7 +265,7 @@
             // sBar
             // 
             this.sBar.Name = "sBar";
-            this.sBar.Size = new System.Drawing.Size(651, 17);
+            this.sBar.Size = new System.Drawing.Size(661, 17);
             this.sBar.Spring = true;
             this.sBar.Text = "Ready";
             this.sBar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -248,12 +277,15 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Location = new System.Drawing.Point(12, 92);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(750, 442);
+            this.tabControl1.Size = new System.Drawing.Size(760, 409);
             this.tabControl1.TabIndex = 4;
             // 
             // tabPage1
@@ -262,50 +294,10 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(742, 416);
+            this.tabPage1.Size = new System.Drawing.Size(752, 383);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Media Info";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.groupBox3);
-            this.tabPage2.Controls.Add(this.groupBox1);
-            this.tabPage2.Controls.Add(this.groupBox2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(742, 416);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Screenshots";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tmrStatus
-            // 
-            this.tmrStatus.Enabled = true;
-            this.tmrStatus.Interval = 1000;
-            this.tmrStatus.Tick += new System.EventHandler(this.tmrStatus_Tick);
-            // 
-            // cboMtnArgs
-            // 
-            this.cboMtnArgs.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TorrentDescriptionMaker.Properties.Settings.Default, "MTNArg", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cboMtnArgs.FormattingEnabled = true;
-            this.cboMtnArgs.Location = new System.Drawing.Point(114, 54);
-            this.cboMtnArgs.Name = "cboMtnArgs";
-            this.cboMtnArgs.Size = new System.Drawing.Size(442, 21);
-            this.cboMtnArgs.TabIndex = 7;
-            this.cboMtnArgs.Text = global::TorrentDescriptionMaker.Properties.Settings.Default.MTNArg;
-            // 
-            // txtMtn
-            // 
-            this.txtMtn.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.txtMtn.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
-            this.txtMtn.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TorrentDescriptionMaker.Properties.Settings.Default, "MTNPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtMtn.Location = new System.Drawing.Point(114, 25);
-            this.txtMtn.Name = "txtMtn";
-            this.txtMtn.Size = new System.Drawing.Size(442, 20);
-            this.txtMtn.TabIndex = 0;
-            this.txtMtn.Text = global::TorrentDescriptionMaker.Properties.Settings.Default.MTNPath;
             // 
             // txtMediaInfo
             // 
@@ -315,15 +307,103 @@
             this.txtMediaInfo.Multiline = true;
             this.txtMediaInfo.Name = "txtMediaInfo";
             this.txtMediaInfo.ReadOnly = true;
-            this.txtMediaInfo.Size = new System.Drawing.Size(736, 410);
+            this.txtMediaInfo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtMediaInfo.Size = new System.Drawing.Size(746, 377);
             this.txtMediaInfo.TabIndex = 0;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.groupBox3);
+            this.tabPage2.Controls.Add(this.groupBox1);
+            this.tabPage2.Controls.Add(this.groupBox2);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(752, 383);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Screenshots";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.txtPublish);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(752, 383);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Publish";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // txtPublish
+            // 
+            this.txtPublish.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtPublish.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPublish.Location = new System.Drawing.Point(3, 3);
+            this.txtPublish.Multiline = true;
+            this.txtPublish.Name = "txtPublish";
+            this.txtPublish.ReadOnly = true;
+            this.txtPublish.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtPublish.Size = new System.Drawing.Size(746, 377);
+            this.txtPublish.TabIndex = 1;
+            // 
+            // tmrStatus
+            // 
+            this.tmrStatus.Enabled = true;
+            this.tmrStatus.Interval = 1000;
+            this.tmrStatus.Tick += new System.EventHandler(this.tmrStatus_Tick);
+            // 
+            // btnPublish
+            // 
+            this.btnPublish.AutoSize = true;
+            this.btnPublish.Enabled = false;
+            this.btnPublish.Location = new System.Drawing.Point(594, 512);
+            this.btnPublish.Name = "btnPublish";
+            this.btnPublish.Size = new System.Drawing.Size(106, 23);
+            this.btnPublish.TabIndex = 5;
+            this.btnPublish.Text = "&Copy to Clipboard";
+            this.btnPublish.UseVisualStyleBackColor = true;
+            this.btnPublish.Click += new System.EventHandler(this.btnPublish_Click);
+            // 
+            // txtMediaFile
+            // 
+            this.txtMediaFile.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtMediaFile.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
+            this.txtMediaFile.Location = new System.Drawing.Point(26, 29);
+            this.txtMediaFile.Name = "txtMediaFile";
+            this.txtMediaFile.Size = new System.Drawing.Size(530, 20);
+            this.txtMediaFile.TabIndex = 6;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.btnBrowse);
+            this.groupBox4.Controls.Add(this.txtMediaFile);
+            this.groupBox4.Location = new System.Drawing.Point(32, 11);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(706, 70);
+            this.groupBox4.TabIndex = 7;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Analyze Media File...";
+            // 
+            // btnBrowse
+            // 
+            this.btnBrowse.AutoSize = true;
+            this.btnBrowse.Location = new System.Drawing.Point(562, 29);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(106, 23);
+            this.btnBrowse.TabIndex = 7;
+            this.btnBrowse.Text = "&Browse...";
+            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // frmMain
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 496);
+            this.ClientSize = new System.Drawing.Size(794, 572);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.btnPublish);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -347,6 +427,10 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -380,6 +464,12 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnCopy0;
         private System.Windows.Forms.TextBox txtMediaInfo;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TextBox txtPublish;
+        private System.Windows.Forms.Button btnPublish;
+        private System.Windows.Forms.TextBox txtMediaFile;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button btnBrowse;
     }
 }
 
