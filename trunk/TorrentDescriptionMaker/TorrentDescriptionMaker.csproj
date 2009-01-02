@@ -40,7 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AudioInfo.cs" />
-    <Compile Include="cBbCode.cs" />
+    <Compile Include="BbCode.cs" />
     <Compile Include="cTorrentInfo.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>

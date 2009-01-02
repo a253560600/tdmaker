@@ -113,7 +113,7 @@ namespace TorrentDescriptionMaker
                 txtImageShackURL.Text = mTInfo.ScreenshotURLFull;
                 txtBBScrForums.Text = mTInfo.ScreenshotURLForums;
 
-                cBbCode bb = new cBbCode();
+                BbCode bb = new BbCode();
                 txtBBScrFull.Text = bb.img(txtImageShackURL.Text);
 
                 btnCopy0.Enabled = true;

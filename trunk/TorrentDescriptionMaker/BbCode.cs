@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TorrentDescriptionMaker
 {
-    class cBbCode
+    class BbCode
     {
         public string img(string url){
             return string.Format("[img]{0}[/img]", url);
