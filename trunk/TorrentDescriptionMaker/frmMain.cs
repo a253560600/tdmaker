@@ -35,18 +35,23 @@ namespace TorrentDescriptionMaker
 
             string[] paths = (string[])e.Data.GetData(DataFormats.FileDrop, true);
             if (paths.Length == 1 && File.Exists(paths[0]))
-            {      
-                this.Text = string.Format("{0} - {1}", Resources.AppName, Path.GetFileNameWithoutExtension(paths[0]));
-
-                txtImageShackURL.Text = "";
-                txtBBScrFull.Text = "";
-                txtBBScrForums.Text = "";
-
-                pBar.Style = ProgressBarStyle.Marquee;
-                bwApp.RunWorkerAsync(paths[0]); 
-                
+            {
+                analyzeMedia(paths[0]);                
             }
 
+        }
+
+        private void analyzeMedia(string p)
+        {
+
+            this.Text = string.Format("{0} - {1}", Resources.AppName, Path.GetFileNameWithoutExtension(p));
+
+            txtImageShackURL.Text = "";
+            txtBBScrFull.Text = "";
+            txtBBScrForums.Text = "";
+
+            pBar.Style = ProgressBarStyle.Marquee;
+            bwApp.RunWorkerAsync(p); 
         }
 
         private void frmMain_Shown(object sender, EventArgs e)
@@ -123,6 +128,7 @@ namespace TorrentDescriptionMaker
         private void tmrStatus_Tick(object sender, EventArgs e)
         {
             sBar.Text = Program.Status;
+            // btnBrowse.Text = (File.Exists(txtMediaFile.Text) ? "&Analyze" : "&Browse...");
         }
 
         private void btnCopy2_Click(object sender, EventArgs e)
@@ -134,5 +140,27 @@ namespace TorrentDescriptionMaker
         {
             Clipboard.SetText(txtImageShackURL.Text);
         }
+
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Title = "Browse for Media file...";
+            dlg.Filter = "Media Files|*.avi; *.vob; *.mkv";
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                txtMediaFile.Text = dlg.FileName;
+                analyzeMedia(txtMediaFile.Text);
+
+            }
+
+        }
+
+        private void btnPublish_Click(object sender, EventArgs e)
+        {
+
+        }
+
+   
     }
 }

@@ -1,0 +1,2 @@
+﻿Use AudioInfo, VideoInfo and MediaInfo classes to create public properties
+Get TorrentInfo to use MediaInfo

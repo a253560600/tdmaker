@@ -19,15 +19,23 @@ namespace TorrentDescriptionMaker
             // sGetScreenshotPath();
         }
 
+        private void sReadMovie()
+        {
+
+        }
+
         /// <summary>
         /// Function to launch GSpot or MovieInfo to generate Movie Info
-        /// </summary>
+        /// </summary>      
         private void sGetMovieInfo()
         {
 
             MediaInfoLib.MediaInfo mi = new MediaInfoLib.MediaInfo();
             mi.Open(mMovieFilePath);
 
+            MediaInfo myMovie = new MediaInfo();
+            myMovie.Format = mi.Get(StreamKind.General, 0, "Format");
+            myMovie.FormatInfo = mi.Get(StreamKind.General, 0, "Format/Info");
             StringBuilder sbMediaInfo = new StringBuilder();
 
             //Console.WriteLine(mi.Option("Complete"));
@@ -39,9 +47,18 @@ namespace TorrentDescriptionMaker
             sbMediaInfo.Append(string.Format(" File Name: {0}", mi.Get(0, 0, "FileName")));
             sbMediaInfo.AppendLine(string.Format(".{0}", mi.Get(0, 0, "FileExtension")));
             // Format
-            sbMediaInfo.AppendLine(string.Format("    Format: {0} ({1})",
-                mi.Get(StreamKind.General, 0, "Format"),
-                mi.Get(StreamKind.General, 0, "Format/Info")));
+            if (!string.IsNullOrEmpty(myMovie.FormatInfo))
+            {
+                sbMediaInfo.AppendLine(string.Format("    Format: {0} ({1})",
+                    myMovie.Format,
+                    myMovie.FormatInfo));
+            }
+            else
+            {
+                sbMediaInfo.AppendLine(string.Format("    Format: {0}", myMovie.Format));
+            }
+
+
             // File Size
             sbMediaInfo.AppendLine(string.Format(" File Size: {0}", mi.Get(0, 0, "FileSize/String4")));
             // Duration
@@ -60,6 +77,10 @@ namespace TorrentDescriptionMaker
                 this.VideoCodec = mi.Get(StreamKind.Video, 0, "CodecID");
             if (!string.IsNullOrEmpty(VideoCodec))
                 sbMediaInfo.AppendLine(string.Format("     Codec: {0}", this.VideoCodec));
+            // Bitrate
+            sbMediaInfo.AppendLine(string.Format("    Bitrate: {0}", mi.Get(StreamKind.Video, 0, "BitRate/String")));
+            // Scan Type
+            sbMediaInfo.AppendLine(string.Format("    Scan Type: {0}", mi.Get(StreamKind.Video, 0, "ScanType/String")));
 
             // Resolution
             sbMediaInfo.AppendLine(string.Format("Resolution: {0}x{1}",
@@ -82,9 +103,17 @@ namespace TorrentDescriptionMaker
                 if (!string.IsNullOrEmpty(this.AudioCodec))
                     sbMediaInfo.AppendLine(string.Format("     Codec: {0}", this.AudioCodec));
                 // Bitrate
-                sbMediaInfo.AppendLine(string.Format("   Bitrate: {0} ({1})",
+                sbMediaInfo.AppendLine(string.Format("      Bitrate: {0} ({1})",
                     mi.Get(StreamKind.Audio, a, "BitRate/String"),
                     mi.Get(StreamKind.Audio, a, "BitRate_Mode/String")));
+                // Channels
+                sbMediaInfo.AppendLine(string.Format("   Channels: {0}", mi.Get(StreamKind.Audio, a, "Channel(s)/String")));
+                // Sampling Rate
+                sbMediaInfo.AppendLine(string.Format("Sampling Rate: {0}", mi.Get(StreamKind.Audio, a, "SamplingRate/String")));
+                // Resolution
+                this.AudioResolution = mi.Get(StreamKind.Audio, a, "Resolution/String");
+                if (!string.IsNullOrEmpty(AudioResolution))
+                    sbMediaInfo.AppendLine(string.Format("   Resolution: {0}", this.AudioResolution));
 
             }
 
@@ -164,8 +193,7 @@ namespace TorrentDescriptionMaker
 
         public string AudioCodec { get; private set; }
         public string AudioFormat { get; private set; }
-        public string GeneralFileName { get; private set; }
-        public string GeneralFileSize { get; private set; }
+        public string AudioResolution { get; private set; }
         public string VideoCodec { get; private set; }
         public string VideoFormat { get; private set; }
 
