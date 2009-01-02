@@ -31,9 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.cboMtnArgs = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtMtn = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnCopy0 = new System.Windows.Forms.Button();
@@ -52,18 +50,17 @@
             this.pBar = new System.Windows.Forms.ToolStripProgressBar();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtMovieInfo = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tmrStatus = new System.Windows.Forms.Timer(this.components);
+            this.cboMtnArgs = new System.Windows.Forms.ComboBox();
+            this.txtMtn = new System.Windows.Forms.TextBox();
+            this.txtMediaInfo = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -89,16 +86,6 @@
             this.label6.TabIndex = 8;
             this.label6.Text = "Arguments:";
             // 
-            // cboMtnArgs
-            // 
-            this.cboMtnArgs.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TorrentDescriptionMaker.Properties.Settings.Default, "MTNArg", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cboMtnArgs.FormattingEnabled = true;
-            this.cboMtnArgs.Location = new System.Drawing.Point(114, 54);
-            this.cboMtnArgs.Name = "cboMtnArgs";
-            this.cboMtnArgs.Size = new System.Drawing.Size(442, 21);
-            this.cboMtnArgs.TabIndex = 7;
-            this.cboMtnArgs.Text = global::TorrentDescriptionMaker.Properties.Settings.Default.MTNArg;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -107,17 +94,6 @@
             this.label1.Size = new System.Drawing.Size(51, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Location:";
-            // 
-            // txtMtn
-            // 
-            this.txtMtn.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.txtMtn.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
-            this.txtMtn.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TorrentDescriptionMaker.Properties.Settings.Default, "MTNPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtMtn.Location = new System.Drawing.Point(114, 25);
-            this.txtMtn.Name = "txtMtn";
-            this.txtMtn.Size = new System.Drawing.Size(442, 20);
-            this.txtMtn.TabIndex = 0;
-            this.txtMtn.Text = global::TorrentDescriptionMaker.Properties.Settings.Default.MTNPath;
             // 
             // groupBox2
             // 
@@ -282,7 +258,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.groupBox4);
+            this.tabPage1.Controls.Add(this.txtMediaInfo);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -290,37 +266,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Media Info";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.label3);
-            this.groupBox4.Controls.Add(this.txtMovieInfo);
-            this.groupBox4.Location = new System.Drawing.Point(16, 16);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(706, 67);
-            this.groupBox4.TabIndex = 1;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "GSpot Settings";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(41, 28);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Location:";
-            // 
-            // txtMovieInfo
-            // 
-            this.txtMovieInfo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.txtMovieInfo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
-            this.txtMovieInfo.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TorrentDescriptionMaker.Properties.Settings.Default, "MovieInfoPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtMovieInfo.Location = new System.Drawing.Point(114, 25);
-            this.txtMovieInfo.Name = "txtMovieInfo";
-            this.txtMovieInfo.Size = new System.Drawing.Size(485, 20);
-            this.txtMovieInfo.TabIndex = 0;
-            this.txtMovieInfo.Text = global::TorrentDescriptionMaker.Properties.Settings.Default.MovieInfoPath;
             // 
             // tabPage2
             // 
@@ -341,6 +286,38 @@
             this.tmrStatus.Interval = 1000;
             this.tmrStatus.Tick += new System.EventHandler(this.tmrStatus_Tick);
             // 
+            // cboMtnArgs
+            // 
+            this.cboMtnArgs.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TorrentDescriptionMaker.Properties.Settings.Default, "MTNArg", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cboMtnArgs.FormattingEnabled = true;
+            this.cboMtnArgs.Location = new System.Drawing.Point(114, 54);
+            this.cboMtnArgs.Name = "cboMtnArgs";
+            this.cboMtnArgs.Size = new System.Drawing.Size(442, 21);
+            this.cboMtnArgs.TabIndex = 7;
+            this.cboMtnArgs.Text = global::TorrentDescriptionMaker.Properties.Settings.Default.MTNArg;
+            // 
+            // txtMtn
+            // 
+            this.txtMtn.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtMtn.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
+            this.txtMtn.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TorrentDescriptionMaker.Properties.Settings.Default, "MTNPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtMtn.Location = new System.Drawing.Point(114, 25);
+            this.txtMtn.Name = "txtMtn";
+            this.txtMtn.Size = new System.Drawing.Size(442, 20);
+            this.txtMtn.TabIndex = 0;
+            this.txtMtn.Text = global::TorrentDescriptionMaker.Properties.Settings.Default.MTNPath;
+            // 
+            // txtMediaInfo
+            // 
+            this.txtMediaInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtMediaInfo.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMediaInfo.Location = new System.Drawing.Point(3, 3);
+            this.txtMediaInfo.Multiline = true;
+            this.txtMediaInfo.Name = "txtMediaInfo";
+            this.txtMediaInfo.ReadOnly = true;
+            this.txtMediaInfo.Size = new System.Drawing.Size(736, 410);
+            this.txtMediaInfo.TabIndex = 0;
+            // 
             // frmMain
             // 
             this.AllowDrop = true;
@@ -352,7 +329,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "frmMain";
-            this.Text = "PTP Torrent Description Maker";
+            this.Text = "Torrent Description Maker";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.Shown += new System.EventHandler(this.frmMain_Shown);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.frmMain_DragDrop);
@@ -368,8 +345,7 @@
             this.statusStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -397,15 +373,13 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cboMtnArgs;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtMovieInfo;
         private System.Windows.Forms.Timer tmrStatus;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnCopy2;
         private System.Windows.Forms.TextBox txtBBScrForums;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnCopy0;
+        private System.Windows.Forms.TextBox txtMediaInfo;
     }
 }
 

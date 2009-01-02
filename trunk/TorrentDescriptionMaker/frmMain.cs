@@ -84,7 +84,7 @@ namespace TorrentDescriptionMaker
 
             Program.Status = "Ready.";
 
-            tabControl1.TabPages.Remove(tabPage1);
+            // tabControl1.TabPages.Remove(tabPage1);
             this.Text = Resources.AppName + " - Drag and Drop a Movie file...";
         }
 
@@ -103,6 +103,8 @@ namespace TorrentDescriptionMaker
         {
             if (mTInfo != null)
             {
+                txtMediaInfo.Text = mTInfo.MediaInfo;
+
                 txtImageShackURL.Text = mTInfo.ScreenshotURLFull;
                 txtBBScrForums.Text = mTInfo.ScreenshotURLForums;
 
