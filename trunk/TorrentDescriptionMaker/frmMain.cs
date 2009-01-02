@@ -36,7 +36,7 @@ namespace TorrentDescriptionMaker
             string[] paths = (string[])e.Data.GetData(DataFormats.FileDrop, true);
             if (paths.Length == 1 && File.Exists(paths[0]))
             {
-                analyzeMedia(paths[0]);                
+                analyzeMedia(paths[0]);
             }
 
         }
@@ -51,7 +51,7 @@ namespace TorrentDescriptionMaker
             txtBBScrForums.Text = "";
 
             pBar.Style = ProgressBarStyle.Marquee;
-            bwApp.RunWorkerAsync(p); 
+            bwApp.RunWorkerAsync(p);
         }
 
         private void frmMain_Shown(object sender, EventArgs e)
@@ -59,6 +59,7 @@ namespace TorrentDescriptionMaker
             if (!File.Exists(Settings.Default.MTNPath))
             {
                 OpenFileDialog dlg = new OpenFileDialog();
+                dlg.InitialDirectory = Application.StartupPath;
                 dlg.Title = "Browse for mtn.exe";
                 dlg.Filter = "Applications (*.exe)|*.exe";
                 if (dlg.ShowDialog() == DialogResult.OK)
@@ -80,6 +81,9 @@ namespace TorrentDescriptionMaker
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(Settings.Default.MTNPath))
+                Settings.Default.MTNPath = Path.Combine(Application.StartupPath, "mtn.exe");
+
             cboMtnArgs.Items.Clear();
             foreach (string arg in Settings.Default.MTNArgs)
             {
@@ -94,7 +98,7 @@ namespace TorrentDescriptionMaker
         }
 
         private void btnCopy_Click(object sender, EventArgs e)
-        {            
+        {
             Clipboard.SetText(txtBBScrFull.Text);
         }
 
@@ -172,7 +176,7 @@ namespace TorrentDescriptionMaker
 
         private void bwApp_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            string msg = e.UserState.ToString();            
+            string msg = e.UserState.ToString();
             int perc = e.ProgressPercentage;
 
             switch (perc)
@@ -186,6 +190,6 @@ namespace TorrentDescriptionMaker
 
         }
 
-   
+
     }
 }
