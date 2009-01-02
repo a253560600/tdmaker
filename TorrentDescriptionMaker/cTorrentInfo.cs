@@ -6,17 +6,21 @@ using System.IO;
 using ZSS.ImageUploader;
 using MediaInfoLib;
 using System.Text;
+using System.ComponentModel;
 
 namespace TorrentDescriptionMaker
 {
     class cTorrentInfo
     {
         private string mMovieFilePath = string.Empty;
-        public cTorrentInfo(string filePath)
+        private BackgroundWorker mBwApp = null;
+
+        public cTorrentInfo(BackgroundWorker bwApp, string filePath)
         {
+            this.mBwApp = bwApp;
             this.mMovieFilePath = filePath;
             sGetMovieInfo();
-            // sGetScreenshotPath();
+            sGetScreenshotPath();
         }
 
         private void sReadMovie()
@@ -119,6 +123,8 @@ namespace TorrentDescriptionMaker
 
             this.MediaInfo = sbMediaInfo.ToString();
 
+            mBwApp.ReportProgress(0, this.MediaInfo);
+
             Console.WriteLine(sbMediaInfo.ToString());
 
 
@@ -136,8 +142,9 @@ namespace TorrentDescriptionMaker
         private void sGetScreenshotPath()
         {
 
-            Process p = new Process();
+            Process p = new Process();            
             ProcessStartInfo psi = new ProcessStartInfo(Settings.Default.MTNPath);
+            psi.WindowStyle = ProcessWindowStyle.Minimized;
             string tempPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "MTN");
             if (!Directory.Exists(tempPath))
                 Directory.CreateDirectory(tempPath);
