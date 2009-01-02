@@ -231,9 +231,9 @@
             this.sbarIcon,
             this.sBar,
             this.pBar});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 550);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 540);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(794, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(784, 22);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -246,7 +246,7 @@
             // sBar
             // 
             this.sBar.Name = "sBar";
-            this.sBar.Size = new System.Drawing.Size(661, 17);
+            this.sBar.Size = new System.Drawing.Size(651, 17);
             this.sBar.Spring = true;
             this.sBar.Text = "Ready";
             this.sBar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -264,10 +264,10 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(12, 92);
+            this.tabControl1.Location = new System.Drawing.Point(17, 87);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(760, 409);
+            this.tabControl1.Size = new System.Drawing.Size(750, 399);
             this.tabControl1.TabIndex = 4;
             // 
             // tabPage1
@@ -276,7 +276,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(752, 383);
+            this.tabPage1.Size = new System.Drawing.Size(742, 373);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Media Info";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -292,7 +292,7 @@
             this.txtMediaInfo.Name = "txtMediaInfo";
             this.txtMediaInfo.ReadOnly = true;
             this.txtMediaInfo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMediaInfo.Size = new System.Drawing.Size(746, 377);
+            this.txtMediaInfo.Size = new System.Drawing.Size(736, 367);
             this.txtMediaInfo.TabIndex = 0;
             // 
             // tabPage2
@@ -303,7 +303,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(752, 383);
+            this.tabPage2.Size = new System.Drawing.Size(742, 373);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Screenshots";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -314,7 +314,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(752, 383);
+            this.tabPage3.Size = new System.Drawing.Size(742, 373);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Publish";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -328,7 +328,7 @@
             this.txtPublish.Name = "txtPublish";
             this.txtPublish.ReadOnly = true;
             this.txtPublish.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtPublish.Size = new System.Drawing.Size(746, 377);
+            this.txtPublish.Size = new System.Drawing.Size(736, 367);
             this.txtPublish.TabIndex = 1;
             // 
             // tmrStatus
@@ -342,7 +342,7 @@
             this.btnPublish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPublish.AutoSize = true;
             this.btnPublish.Enabled = false;
-            this.btnPublish.Location = new System.Drawing.Point(594, 512);
+            this.btnPublish.Location = new System.Drawing.Point(584, 502);
             this.btnPublish.Name = "btnPublish";
             this.btnPublish.Size = new System.Drawing.Size(106, 23);
             this.btnPublish.TabIndex = 5;
@@ -407,13 +407,14 @@
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(794, 572);
+            this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.btnPublish);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Torrent Description Maker";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.Shown += new System.EventHandler(this.frmMain_Shown);
