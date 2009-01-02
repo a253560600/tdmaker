@@ -45,7 +45,7 @@ namespace TorrentDescriptionMaker
             //Console.WriteLine(mi.Option("Complete"));
             //Console.WriteLine(mi.Inform());
 
-            sbMediaInfo.AppendLine("General");
+            sbMediaInfo.AppendLine("General:");
             sbMediaInfo.AppendLine();
             // File Name
             sbMediaInfo.AppendLine(string.Format("    File Name: {0}.{1}",
@@ -71,13 +71,36 @@ namespace TorrentDescriptionMaker
             // Bitrate
             sbMediaInfo.AppendLine(string.Format("      Bitrate: {0}", mi.Get(StreamKind.General, 0, "OverallBitRate/String")));
 
+            int subCount = 0;
+            int.TryParse(mi.Get(StreamKind.Text, 0, "Count"), out subCount);
+
+            sbMediaInfo.Append("    Subtitles: ");
+            if (subCount > 0)
+            {
+               
+                for (int i = 0; i < subCount; i++)
+                {
+                    sbMediaInfo.Append(mi.Get(StreamKind.Text, i, "Language/String"));
+                    if (i<subCount-1)
+                        sbMediaInfo.Append(", ");
+
+                }
+            }
+            else
+            {
+                sbMediaInfo.Append("None");                
+            }
+            sbMediaInfo.Append(Environment.NewLine);
+
+
+
             //*********************
             //* Video
             //*********************
             VideoInfo vi = new VideoInfo();
 
             sbMediaInfo.AppendLine();
-            sbMediaInfo.AppendLine("Video");
+            sbMediaInfo.AppendLine("Video:");
             sbMediaInfo.AppendLine();
             // Format
             vi.FormatVersion = mi.Get(StreamKind.Video, 0, "Format_Version");
@@ -100,6 +123,9 @@ namespace TorrentDescriptionMaker
             vi.Standard = mi.Get(StreamKind.Video, 0, "Standard");
             if (!string.IsNullOrEmpty(vi.Standard))
                 sbMediaInfo.AppendLine(string.Format("     Standard: {0}", vi.Standard));
+            // Frame Rate
+            sbMediaInfo.AppendLine(string.Format("   Frame Rate: {0}", mi.Get(StreamKind.Video, 0, "FrameRate/String")));
+
             // Scan Type
             sbMediaInfo.AppendLine(string.Format("    Scan Type: {0}", mi.Get(StreamKind.Video, 0, "ScanType/String")));
 
@@ -116,7 +142,7 @@ namespace TorrentDescriptionMaker
                 AudioInfo ai = new AudioInfo();    
              
                 sbMediaInfo.AppendLine();
-                sbMediaInfo.AppendLine(string.Format("Audio #{0}", a + 1));
+                sbMediaInfo.AppendLine(string.Format("Audio #{0}:", a + 1));
                 sbMediaInfo.AppendLine();
                 // Format
                 sbMediaInfo.Append(string.Format("       Format: {0}", mi.Get(StreamKind.Audio, a, "Format")));
@@ -153,19 +179,7 @@ namespace TorrentDescriptionMaker
 
             this.MediaInfo = sbMediaInfo.ToString();
 
-            mBwApp.ReportProgress(0, this.MediaInfo);
-
-            Console.WriteLine(sbMediaInfo.ToString());
-
-
-
-
-            //Process p = new Process();
-            //ProcessStartInfo psi = new ProcessStartInfo(Settings.Default.MovieInfoPath);
-            //psi.Arguments = string.Format("\"{0}\" /X", mMovieFilePath);
-            //p.StartInfo = psi;
-            //p.Start();
-            //p.WaitForExit();
+            mBwApp.ReportProgress(0, this.MediaInfo);          
 
         }
 

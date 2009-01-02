@@ -80,11 +80,11 @@
     <None Include="Resources\info-16-xp.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GSpotTemplate.txt" />
     <Content Include="MediaInfo.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TODO.txt" />
+    <Content Include="VersionHistory.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\ZScreen\ImageUploader\ImageUploader\ImageUploader.csproj">
