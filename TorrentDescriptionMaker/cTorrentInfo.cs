@@ -77,18 +77,21 @@ namespace TorrentDescriptionMaker
             sbMediaInfo.Append("    Subtitles: ");
             if (subCount > 0)
             {
-               
+
                 for (int i = 0; i < subCount; i++)
                 {
-                    sbMediaInfo.Append(mi.Get(StreamKind.Text, i, "Language/String"));
-                    if (i<subCount-1)
-                        sbMediaInfo.Append(", ");
-
+                    string lang = mi.Get(StreamKind.Text, i, "Language/String");
+                    if (!string.IsNullOrEmpty(lang))
+                    {
+                        sbMediaInfo.Append(lang);
+                        if (i < subCount - 1)
+                            sbMediaInfo.Append(", ");
+                    }
                 }
             }
             else
             {
-                sbMediaInfo.Append("None");                
+                sbMediaInfo.Append("None");
             }
             sbMediaInfo.Append(Environment.NewLine);
 
@@ -139,8 +142,8 @@ namespace TorrentDescriptionMaker
 
             for (int a = 0; a < audioCount; a++)
             {
-                AudioInfo ai = new AudioInfo();    
-             
+                AudioInfo ai = new AudioInfo();
+
                 sbMediaInfo.AppendLine();
                 sbMediaInfo.AppendLine(string.Format("Audio #{0}:", a + 1));
                 sbMediaInfo.AppendLine();
@@ -153,7 +156,7 @@ namespace TorrentDescriptionMaker
                 if (!string.IsNullOrEmpty(ai.FormatProfile))
                     sbMediaInfo.Append(string.Format(" {0}", ai.FormatProfile));
                 sbMediaInfo.Append(Environment.NewLine);
-                
+
 
                 this.AudioCodec = mi.Get(StreamKind.Audio, 0, "CodecID/Hint");
                 if (string.IsNullOrEmpty(this.AudioCodec))
@@ -179,7 +182,7 @@ namespace TorrentDescriptionMaker
 
             this.MediaInfo = sbMediaInfo.ToString();
 
-            mBwApp.ReportProgress(0, this.MediaInfo);          
+            mBwApp.ReportProgress(0, this.MediaInfo);
 
         }
 
