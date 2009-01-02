@@ -1,2 +1,3 @@
+1.1.1.0 Added Subtitles and Frame Rate info
 1.1.0.0 MediaInfo integration
 1.0.0.0 Initial Release to publish screenshots using MTN to ImageShack

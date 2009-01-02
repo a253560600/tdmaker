@@ -64,7 +64,7 @@ namespace TorrentDescriptionMaker
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     txtMtn.Text = dlg.FileName;
-                    // Settings.Default.MTNPath = txtMtn.Text;
+                    Settings.Default.MTNPath = dlg.FileName;
                 }
             }
         }
