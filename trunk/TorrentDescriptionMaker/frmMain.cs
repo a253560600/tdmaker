@@ -101,14 +101,13 @@ namespace TorrentDescriptionMaker
         private void bwApp_DoWork(object sender, DoWorkEventArgs e)
         {
             Program.Status = "Reading " + e.Argument.ToString();
-            mTInfo = new cTorrentInfo(e.Argument.ToString());
+            mTInfo = new cTorrentInfo(bwApp, e.Argument.ToString());
         }
 
         private void bwApp_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (mTInfo != null)
             {
-                txtMediaInfo.Text = mTInfo.MediaInfo;
 
                 txtImageShackURL.Text = mTInfo.ScreenshotURLFull;
                 txtBBScrForums.Text = mTInfo.ScreenshotURLForums;
@@ -119,6 +118,15 @@ namespace TorrentDescriptionMaker
                 btnCopy0.Enabled = true;
                 btnCopy.Enabled = true;
                 btnCopy2.Enabled = true;
+
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(txtMediaInfo.Text);
+                sb.AppendLine();
+                sb.AppendLine(txtBBScrFull.Text);
+                txtPublish.Text = sb.ToString();
+
+                btnPublish.Enabled = true;
+
             }
 
             pBar.Style = ProgressBarStyle.Continuous;
@@ -128,6 +136,7 @@ namespace TorrentDescriptionMaker
         private void tmrStatus_Tick(object sender, EventArgs e)
         {
             sBar.Text = Program.Status;
+            btnBrowse.Enabled = !bwApp.IsBusy;
             // btnBrowse.Text = (File.Exists(txtMediaFile.Text) ? "&Analyze" : "&Browse...");
         }
 
@@ -158,6 +167,22 @@ namespace TorrentDescriptionMaker
 
         private void btnPublish_Click(object sender, EventArgs e)
         {
+            Clipboard.SetText(txtPublish.Text);
+        }
+
+        private void bwApp_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            string msg = e.UserState.ToString();            
+            int perc = e.ProgressPercentage;
+
+            switch (perc)
+            {
+                case 0:
+                    txtMediaInfo.Text = msg;
+                    break;
+                case 1:
+                    break;
+            }
 
         }
 
