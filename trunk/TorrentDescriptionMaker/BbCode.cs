@@ -14,5 +14,10 @@ namespace TorrentDescriptionMaker
         {
             return string.Format("[b]{0}[/b]", txt);
         }
+
+        public string pre(string txt)
+        {
+            return string.Format("[pre]{0}[/pre]", txt);
+        }
     }
 }
