@@ -126,7 +126,15 @@ namespace TorrentDescriptionMaker
                 StringBuilder sb = new StringBuilder();
                 sb.AppendLine(txtMediaInfo.Text);
                 sb.AppendLine();
-                sb.AppendLine(txtBBScrForums.Text);
+                if (Settings.Default.UseFullPicture)
+                {
+                    sb.AppendLine(txtBBScrFull.Text);
+                }
+                else
+                {
+                    sb.AppendLine(txtBBScrForums.Text);
+                }
+                
                 txtPublish.Text = sb.ToString();
 
                 btnPublish.Enabled = true;
@@ -188,6 +196,11 @@ namespace TorrentDescriptionMaker
                     break;
             }
 
+        }
+
+        private void chkOptImageShack_CheckedChanged(object sender, EventArgs e)
+        {
+            gbImageShack.Enabled = chkOptImageShack.Checked;
         }
 
 
