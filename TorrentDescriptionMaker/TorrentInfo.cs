@@ -203,6 +203,8 @@ namespace TorrentDescriptionMaker
             mi.Option("Complete");
             mBwApp.ReportProgress(0, mi.Inform());
 
+            mi.Close();
+
         }
 
         private void sGetScreenshotPath()
