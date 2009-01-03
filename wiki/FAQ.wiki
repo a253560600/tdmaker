@@ -1,0 +1,7 @@
+#summary Frequently Asked Questions
+
+= Where are the screenshots saved? =
+
+{{{
+Pictures\MTN folder
+}}}
