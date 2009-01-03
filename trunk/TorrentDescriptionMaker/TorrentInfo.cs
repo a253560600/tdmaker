@@ -233,14 +233,14 @@ namespace TorrentDescriptionMaker
                 ImageShackUploader su = new ImageShackUploader();
 
                 int retry = 1;
-                List<ZSS.ImageUploader.ImageFile> lstScreenshots = null;
-                while (retry <= 3 && lstScreenshots == null)
+                List<ZSS.ImageUploader.ImageFile> lstScreenshots = new List<ImageFile>();
+                while (retry <= 3 && lstScreenshots.Count < 1)
                 {
                     Program.Status = string.Format("Uploading screenshot to ImageShack... Attempt {0}", retry);
                     lstScreenshots = su.UploadImage(screenshot);
                 }
 
-                if (lstScreenshots != null)
+                if (lstScreenshots != null && lstScreenshots.Count > 0)
                 {
                     foreach (ImageFile imf in lstScreenshots)
                     {
