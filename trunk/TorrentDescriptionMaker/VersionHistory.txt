@@ -1,4 +1,5 @@
-1.1.7.0 Added Source description [Protech]
+1.1.8.0 Option to disable keeping screenshots Pictures\MTN [Protech]
+1.1.7.0 Added Source description to Publishing layout [Protech]
 1.1.6.0 Added support for optionally using pre text and ability to change font sizes [MiXiT]
 1.1.5.3 General body did not have the font size set [Protech]
 1.1.5.2 Retrying uploading to ImageShack did not work as expected [Protech]

@@ -220,7 +220,7 @@ namespace TorrentDescriptionMaker
 
         private void chkOptImageShack_CheckedChanged(object sender, EventArgs e)
         {
-            gbImageShack.Enabled = chkOptImageShack.Checked;
+            chkUploadFullScreenshot.Enabled = chkOptImageShack.Checked;
         }
 
 
