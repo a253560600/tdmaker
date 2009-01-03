@@ -1,4 +1,6 @@
-﻿Full Automation [tacoking]
+﻿Option to store screenshots temporarily in the local HDD
+
+Full Automation [tacoking]
 	User browses movie folder 
 	TDMaker makes the assumption biggest file as the movie 
 	TDMaker opens the movie to read in MediaInfo and uploads screenshot to ImageShack

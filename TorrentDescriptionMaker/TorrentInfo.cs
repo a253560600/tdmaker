@@ -34,6 +34,15 @@ namespace TorrentDescriptionMaker
         /// </summary>      
         private void sGetMovieInfo()
         {
+            int fontSizeHeading = (int)(Settings.Default.LargerPreText == true ? 
+                Settings.Default.FontSizeHeading + Settings.Default.FontSizeIncr : 
+                Settings.Default.FontSizeHeading);
+
+            int fontSizeBody = (int)(Settings.Default.LargerPreText == true ?
+                Settings.Default.FontSizeBody + Settings.Default.FontSizeIncr :
+                Settings.Default.FontSizeBody);
+            
+
             BbCode bb = new BbCode();
             MediaInfoLib.MediaInfo mi = new MediaInfoLib.MediaInfo();
             mi.Open(mMovieFilePath);
@@ -46,34 +55,46 @@ namespace TorrentDescriptionMaker
             //Console.WriteLine(mi.Option("Complete"));
             //Console.WriteLine(mi.Inform());
 
-            sbMediaInfo.AppendLine(bb.size(3, bb.bolditalic("General:")));
+            //*********************
+            //* General
+            //*********************    
+
+            StringBuilder sbGeneral = new StringBuilder();
+
+            sbMediaInfo.AppendLine(bb.size(fontSizeHeading, bb.bolditalic("General:")));
             sbMediaInfo.AppendLine();
+
+            // Source 
+            if (!string.IsNullOrEmpty(Settings.Default.Source))
+            {
+                sbGeneral.AppendLine(string.Format("       [u]Source:[/u] {0}", Settings.Default.Source));
+            }            
             // File Name
-            sbMediaInfo.AppendLine(string.Format("    [u]File Name:[/u] {0}.{1}",
+            sbGeneral.AppendLine(string.Format("    [u]File Name:[/u] {0}.{1}",
                 mi.Get(0, 0, "FileName"),
                 mi.Get(0, 0, "FileExtension")));
             // Format
-            sbMediaInfo.Append(string.Format("       [u]Format:[/u] {0}", myMovie.Format));
+            sbGeneral.Append(string.Format("       [u]Format:[/u] {0}", myMovie.Format));
             if (!string.IsNullOrEmpty(myMovie.FormatInfo))
             {
-                sbMediaInfo.Append(string.Format(" ({0})", myMovie.FormatInfo));
+                sbGeneral.Append(string.Format(" ({0})", myMovie.FormatInfo));
             }
-            sbMediaInfo.Append(Environment.NewLine);
+            sbGeneral.Append(Environment.NewLine);
 
             // File Size
-            sbMediaInfo.AppendLine(string.Format("    [u]File Size:[/u] {0}",
+            sbGeneral.AppendLine(string.Format("    [u]File Size:[/u] {0}",
                 mi.Get(0, 0, "FileSize/String4")));
             // Duration
-            sbMediaInfo.AppendLine(string.Format("     [u]Duration:[/u] {0}",
+            sbGeneral.AppendLine(string.Format("     [u]Duration:[/u] {0}",
                 mi.Get(0, 0, "Duration/String2")));
             // Bitrate
-            sbMediaInfo.AppendLine(string.Format("      [u]Bitrate:[/u] {0}",
+            sbGeneral.AppendLine(string.Format("      [u]Bitrate:[/u] {0}",
                 mi.Get(StreamKind.General, 0, "OverallBitRate/String")));
 
             int subCount = 0;
             int.TryParse(mi.Get(StreamKind.Text, 0, "Count"), out subCount);
 
-            sbMediaInfo.Append("    [u]Subtitles:[/u] ");
+            sbGeneral.Append("    [u]Subtitles:[/u] ");
             if (subCount > 0)
             {
 
@@ -83,25 +104,25 @@ namespace TorrentDescriptionMaker
                     if (!string.IsNullOrEmpty(lang))
                     {
                         // System.Windows.Forms.MessageBox.Show(lang);
-                        sbMediaInfo.Append(lang);
+                        sbGeneral.Append(lang);
                         if (i < subCount - 1)
-                            sbMediaInfo.Append(", ");
+                            sbGeneral.Append(", ");
                     }
                 }
             }
             else
             {
-                sbMediaInfo.Append("None");
+                sbGeneral.Append("None");
             }
-            sbMediaInfo.Append(Environment.NewLine);
+            sbGeneral.Append(Environment.NewLine);
 
-
+            sbMediaInfo.Append(bb.size(fontSizeBody, sbGeneral.ToString()));
 
             //*********************
             //* Video
             //*********************                        
             sbMediaInfo.AppendLine();
-            sbMediaInfo.AppendLine(bb.size(3, bb.bolditalic("Video:")));
+            sbMediaInfo.AppendLine(bb.size(fontSizeHeading, bb.bolditalic("Video:")));
             sbMediaInfo.AppendLine();
 
             VideoInfo vi = new VideoInfo();
@@ -141,7 +162,7 @@ namespace TorrentDescriptionMaker
             int audioCount = 0;
             int.TryParse(mi.Get(StreamKind.General, 0, "AudioCount"), out audioCount);
 
-            sbMediaInfo.Append(bb.size(2, sbVideo.ToString()));
+            sbMediaInfo.Append(bb.size(fontSizeBody, sbVideo.ToString()));
 
 
             //*********************
@@ -152,12 +173,12 @@ namespace TorrentDescriptionMaker
                 AudioInfo ai = new AudioInfo();
 
                 sbMediaInfo.AppendLine();
-                sbMediaInfo.AppendLine(string.Format(bb.size(3, bb.bolditalic("Audio #{0}:")), a + 1));
+                sbMediaInfo.AppendLine(string.Format(bb.size(fontSizeHeading, bb.bolditalic("Audio #{0}:")), a + 1));
                 sbMediaInfo.AppendLine();
 
                 StringBuilder sbAudio = new StringBuilder();
                 // Format
-                sbAudio.Append(string.Format("       [u]Format:[/u] {0}", mi.Get(StreamKind.Audio, a, "Format")));
+                sbAudio.Append(string.Format("        [u]Format:[/u] {0}", mi.Get(StreamKind.Audio, a, "Format")));
                 ai.FormatVersion = mi.Get(StreamKind.Audio, 0, "Format_Version");
                 if (!string.IsNullOrEmpty(ai.FormatVersion))
                     sbAudio.Append(string.Format(" {0}", ai.FormatVersion));
@@ -187,7 +208,7 @@ namespace TorrentDescriptionMaker
 
                 myMovie.Audio.Add(ai);
 
-                sbMediaInfo.Append(bb.size(2, sbAudio.ToString()));
+                sbMediaInfo.Append(bb.size(fontSizeBody, sbAudio.ToString()));
 
             }
 
@@ -198,6 +219,11 @@ namespace TorrentDescriptionMaker
             else
             {
                 this.MediaInfoForums1 = sbMediaInfo.ToString();
+            }
+
+            if (Settings.Default.PreText)
+            {
+                this.MediaInfoForums1 = bb.pre(this.MediaInfoForums1);
             }
 
             mi.Option("Complete");
