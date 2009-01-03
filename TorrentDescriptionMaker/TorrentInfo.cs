@@ -21,7 +21,7 @@ namespace TorrentDescriptionMaker
             this.mMovieFilePath = filePath;
             sGetMovieInfo();
             if (Settings.Default.UploadImageShack)
-                sGetScreenshotPath();
+                sGetScreenshot();
         }
 
         private void sReadMovie()
@@ -233,26 +233,32 @@ namespace TorrentDescriptionMaker
 
         }
 
-        private void sGetScreenshotPath()
+        private void sGetScreenshot()
         {
 
             Process p = new Process();
             ProcessStartInfo psi = new ProcessStartInfo(Settings.Default.MTNPath);
             psi.WindowStyle = ProcessWindowStyle.Minimized;
-            string tempPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "MTN");
-            if (!Directory.Exists(tempPath))
-                Directory.CreateDirectory(tempPath);
+
+            string picPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "MTN");
+            if (!Settings.Default.KeepScreenshot)
+            {
+                picPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "TDMaker");
+            }
+            
+            if (!Directory.Exists(picPath))
+                Directory.CreateDirectory(picPath);
 
             psi.Arguments = string.Format("{0} -O \"{1}\" \"{2}\"",
                 Settings.Default.MTNArg,
-                tempPath,
+                picPath,
                 this.mMovieFilePath);
 
             p.StartInfo = psi;
             p.Start();
             p.WaitForExit();
 
-            string screenshot = Path.Combine(tempPath, Path.GetFileNameWithoutExtension(mMovieFilePath) + "_s.jpg");
+            string screenshot = Path.Combine(picPath, Path.GetFileNameWithoutExtension(mMovieFilePath) + "_s.jpg");
 
             if (File.Exists(screenshot))
             {
@@ -284,6 +290,9 @@ namespace TorrentDescriptionMaker
                 {
                     Program.Status = "Failed uploading screenshot to ImageShack. Try again later.";
                 }
+
+                // delete if option set to temporary location 
+                File.Delete(screenshot);
             }
 
         }

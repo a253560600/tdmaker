@@ -189,5 +189,17 @@ namespace TDMaker.Properties {
                 this["Source"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool KeepScreenshot {
+            get {
+                return ((bool)(this["KeepScreenshot"]));
+            }
+            set {
+                this["KeepScreenshot"] = value;
+            }
+        }
     }
 }
