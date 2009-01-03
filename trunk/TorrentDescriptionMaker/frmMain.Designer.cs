@@ -32,19 +32,17 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.cboMtnArgs = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtMtn = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnCopy0 = new System.Windows.Forms.Button();
-            this.txtImageShackURL = new System.Windows.Forms.TextBox();
+            this.txtScrFull = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnCopy2 = new System.Windows.Forms.Button();
             this.txtBBScrForums = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnCopy = new System.Windows.Forms.Button();
+            this.btnCopy1 = new System.Windows.Forms.Button();
             this.txtBBScrFull = new System.Windows.Forms.TextBox();
             this.bwApp = new System.ComponentModel.BackgroundWorker();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -59,15 +57,27 @@
             this.txtPublish = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.chkAlignCenter = new System.Windows.Forms.CheckBox();
             this.gbImageShack = new System.Windows.Forms.GroupBox();
-            this.chkUploadFullScreenshot = new System.Windows.Forms.CheckBox();
-            this.chkOptImageShack = new System.Windows.Forms.CheckBox();
             this.tmrStatus = new System.Windows.Forms.Timer(this.components);
             this.btnPublish = new System.Windows.Forms.Button();
             this.txtMediaFile = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnBrowse = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.gbSource = new System.Windows.Forms.GroupBox();
+            this.cboSource = new System.Windows.Forms.ComboBox();
+            this.cboMtnArgs = new System.Windows.Forms.ComboBox();
+            this.txtMtn = new System.Windows.Forms.TextBox();
+            this.nudHeadingsText = new System.Windows.Forms.NumericUpDown();
+            this.nudBodyText = new System.Windows.Forms.NumericUpDown();
+            this.nudFontSizeIncr = new System.Windows.Forms.NumericUpDown();
+            this.chkPre = new System.Windows.Forms.CheckBox();
+            this.chkPreIncreaseFontSize = new System.Windows.Forms.CheckBox();
+            this.chkAlignCenter = new System.Windows.Forms.CheckBox();
+            this.chkUploadFullScreenshot = new System.Windows.Forms.CheckBox();
+            this.chkOptImageShack = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -80,6 +90,11 @@
             this.groupBox5.SuspendLayout();
             this.gbImageShack.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.gbSource.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHeadingsText)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBodyText)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeIncr)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -104,16 +119,6 @@
             this.label6.TabIndex = 8;
             this.label6.Text = "Arguments:";
             // 
-            // cboMtnArgs
-            // 
-            this.cboMtnArgs.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "MTNArg", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cboMtnArgs.FormattingEnabled = true;
-            this.cboMtnArgs.Location = new System.Drawing.Point(114, 54);
-            this.cboMtnArgs.Name = "cboMtnArgs";
-            this.cboMtnArgs.Size = new System.Drawing.Size(442, 21);
-            this.cboMtnArgs.TabIndex = 7;
-            this.cboMtnArgs.Text = global::TDMaker.Properties.Settings.Default.MTNArg;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -123,22 +128,11 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Location:";
             // 
-            // txtMtn
-            // 
-            this.txtMtn.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.txtMtn.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
-            this.txtMtn.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "MTNPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtMtn.Location = new System.Drawing.Point(114, 25);
-            this.txtMtn.Name = "txtMtn";
-            this.txtMtn.Size = new System.Drawing.Size(442, 20);
-            this.txtMtn.TabIndex = 0;
-            this.txtMtn.Text = global::TDMaker.Properties.Settings.Default.MTNPath;
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.btnCopy0);
-            this.groupBox2.Controls.Add(this.txtImageShackURL);
+            this.groupBox2.Controls.Add(this.txtScrFull);
             this.groupBox2.Location = new System.Drawing.Point(16, 125);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(706, 79);
@@ -167,13 +161,13 @@
             this.btnCopy0.UseVisualStyleBackColor = true;
             this.btnCopy0.Click += new System.EventHandler(this.btnCopy0_Click);
             // 
-            // txtImageShackURL
+            // txtScrFull
             // 
-            this.txtImageShackURL.Location = new System.Drawing.Point(114, 33);
-            this.txtImageShackURL.Name = "txtImageShackURL";
-            this.txtImageShackURL.ReadOnly = true;
-            this.txtImageShackURL.Size = new System.Drawing.Size(442, 20);
-            this.txtImageShackURL.TabIndex = 0;
+            this.txtScrFull.Location = new System.Drawing.Point(114, 33);
+            this.txtScrFull.Name = "txtScrFull";
+            this.txtScrFull.ReadOnly = true;
+            this.txtScrFull.Size = new System.Drawing.Size(442, 20);
+            this.txtScrFull.TabIndex = 0;
             // 
             // groupBox3
             // 
@@ -181,7 +175,7 @@
             this.groupBox3.Controls.Add(this.btnCopy2);
             this.groupBox3.Controls.Add(this.txtBBScrForums);
             this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Controls.Add(this.btnCopy);
+            this.groupBox3.Controls.Add(this.btnCopy1);
             this.groupBox3.Controls.Add(this.txtBBScrFull);
             this.groupBox3.Location = new System.Drawing.Point(16, 221);
             this.groupBox3.Name = "groupBox3";
@@ -228,17 +222,17 @@
             this.label5.TabIndex = 5;
             this.label5.Text = "Full Image:";
             // 
-            // btnCopy
+            // btnCopy1
             // 
-            this.btnCopy.AutoSize = true;
-            this.btnCopy.Enabled = false;
-            this.btnCopy.Location = new System.Drawing.Point(562, 40);
-            this.btnCopy.Name = "btnCopy";
-            this.btnCopy.Size = new System.Drawing.Size(106, 23);
-            this.btnCopy.TabIndex = 2;
-            this.btnCopy.Text = "&Copy to Clipboard";
-            this.btnCopy.UseVisualStyleBackColor = true;
-            this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
+            this.btnCopy1.AutoSize = true;
+            this.btnCopy1.Enabled = false;
+            this.btnCopy1.Location = new System.Drawing.Point(562, 40);
+            this.btnCopy1.Name = "btnCopy1";
+            this.btnCopy1.Size = new System.Drawing.Size(106, 23);
+            this.btnCopy1.TabIndex = 2;
+            this.btnCopy1.Text = "&Copy to Clipboard";
+            this.btnCopy1.UseVisualStyleBackColor = true;
+            this.btnCopy1.Click += new System.EventHandler(this.btnCopy_Click);
             // 
             // txtBBScrFull
             // 
@@ -365,6 +359,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.groupBox6);
             this.tabPage4.Controls.Add(this.groupBox5);
             this.tabPage4.Controls.Add(this.gbImageShack);
             this.tabPage4.Controls.Add(this.chkOptImageShack);
@@ -377,13 +372,216 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.nudFontSizeIncr);
+            this.groupBox5.Controls.Add(this.chkPre);
+            this.groupBox5.Controls.Add(this.chkPreIncreaseFontSize);
             this.groupBox5.Controls.Add(this.chkAlignCenter);
             this.groupBox5.Location = new System.Drawing.Point(20, 121);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(250, 73);
+            this.groupBox5.Size = new System.Drawing.Size(431, 88);
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Formatting";
+            this.groupBox5.Text = "Formatting using BBCode";
+            // 
+            // gbImageShack
+            // 
+            this.gbImageShack.Controls.Add(this.chkUploadFullScreenshot);
+            this.gbImageShack.Location = new System.Drawing.Point(20, 47);
+            this.gbImageShack.Name = "gbImageShack";
+            this.gbImageShack.Size = new System.Drawing.Size(431, 68);
+            this.gbImageShack.TabIndex = 2;
+            this.gbImageShack.TabStop = false;
+            this.gbImageShack.Text = "ImageShack";
+            // 
+            // tmrStatus
+            // 
+            this.tmrStatus.Enabled = true;
+            this.tmrStatus.Interval = 1000;
+            this.tmrStatus.Tick += new System.EventHandler(this.tmrStatus_Tick);
+            // 
+            // btnPublish
+            // 
+            this.btnPublish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPublish.AutoSize = true;
+            this.btnPublish.Enabled = false;
+            this.btnPublish.Location = new System.Drawing.Point(599, 497);
+            this.btnPublish.Name = "btnPublish";
+            this.btnPublish.Size = new System.Drawing.Size(106, 23);
+            this.btnPublish.TabIndex = 5;
+            this.btnPublish.Text = "&Copy to Clipboard";
+            this.btnPublish.UseVisualStyleBackColor = true;
+            this.btnPublish.Click += new System.EventHandler(this.btnPublish_Click);
+            // 
+            // txtMediaFile
+            // 
+            this.txtMediaFile.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtMediaFile.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
+            this.txtMediaFile.Location = new System.Drawing.Point(26, 29);
+            this.txtMediaFile.Name = "txtMediaFile";
+            this.txtMediaFile.Size = new System.Drawing.Size(426, 20);
+            this.txtMediaFile.TabIndex = 6;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.btnBrowse);
+            this.groupBox4.Controls.Add(this.txtMediaFile);
+            this.groupBox4.Location = new System.Drawing.Point(32, 11);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(550, 70);
+            this.groupBox4.TabIndex = 7;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Analyze Media File...";
+            // 
+            // btnBrowse
+            // 
+            this.btnBrowse.AutoSize = true;
+            this.btnBrowse.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnBrowse.Location = new System.Drawing.Point(469, 27);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(61, 23);
+            this.btnBrowse.TabIndex = 7;
+            this.btnBrowse.Text = "&Browse...";
+            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(45, 35);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(52, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Headings";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(66, 61);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(31, 13);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "Body";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.nudHeadingsText);
+            this.groupBox6.Controls.Add(this.label7);
+            this.groupBox6.Controls.Add(this.nudBodyText);
+            this.groupBox6.Controls.Add(this.label3);
+            this.groupBox6.Location = new System.Drawing.Point(20, 215);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(431, 101);
+            this.groupBox6.TabIndex = 7;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Font Size";
+            // 
+            // gbSource
+            // 
+            this.gbSource.Controls.Add(this.cboSource);
+            this.gbSource.Location = new System.Drawing.Point(599, 12);
+            this.gbSource.Name = "gbSource";
+            this.gbSource.Size = new System.Drawing.Size(164, 69);
+            this.gbSource.TabIndex = 8;
+            this.gbSource.TabStop = false;
+            this.gbSource.Text = "Source";
+            // 
+            // cboSource
+            // 
+            this.cboSource.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "Source", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cboSource.FormattingEnabled = true;
+            this.cboSource.Location = new System.Drawing.Point(19, 27);
+            this.cboSource.Name = "cboSource";
+            this.cboSource.Size = new System.Drawing.Size(121, 21);
+            this.cboSource.TabIndex = 0;
+            this.cboSource.Text = global::TDMaker.Properties.Settings.Default.Source;
+            // 
+            // cboMtnArgs
+            // 
+            this.cboMtnArgs.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "MTNArg", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cboMtnArgs.FormattingEnabled = true;
+            this.cboMtnArgs.Location = new System.Drawing.Point(114, 54);
+            this.cboMtnArgs.Name = "cboMtnArgs";
+            this.cboMtnArgs.Size = new System.Drawing.Size(442, 21);
+            this.cboMtnArgs.TabIndex = 7;
+            this.cboMtnArgs.Text = global::TDMaker.Properties.Settings.Default.MTNArg;
+            // 
+            // txtMtn
+            // 
+            this.txtMtn.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtMtn.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
+            this.txtMtn.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "MTNPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtMtn.Location = new System.Drawing.Point(114, 25);
+            this.txtMtn.Name = "txtMtn";
+            this.txtMtn.Size = new System.Drawing.Size(442, 20);
+            this.txtMtn.TabIndex = 0;
+            this.txtMtn.Text = global::TDMaker.Properties.Settings.Default.MTNPath;
+            // 
+            // nudHeadingsText
+            // 
+            this.nudHeadingsText.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TDMaker.Properties.Settings.Default, "FontSizeHeading", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nudHeadingsText.Location = new System.Drawing.Point(103, 32);
+            this.nudHeadingsText.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudHeadingsText.Name = "nudHeadingsText";
+            this.nudHeadingsText.Size = new System.Drawing.Size(55, 20);
+            this.nudHeadingsText.TabIndex = 4;
+            this.nudHeadingsText.Value = global::TDMaker.Properties.Settings.Default.FontSizeHeading;
+            // 
+            // nudBodyText
+            // 
+            this.nudBodyText.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TDMaker.Properties.Settings.Default, "FontSizeBody", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nudBodyText.Location = new System.Drawing.Point(103, 58);
+            this.nudBodyText.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudBodyText.Name = "nudBodyText";
+            this.nudBodyText.Size = new System.Drawing.Size(55, 20);
+            this.nudBodyText.TabIndex = 5;
+            this.nudBodyText.Value = global::TDMaker.Properties.Settings.Default.FontSizeBody;
+            // 
+            // nudFontSizeIncr
+            // 
+            this.nudFontSizeIncr.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TDMaker.Properties.Settings.Default, "FontSizeIncr", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nudFontSizeIncr.Location = new System.Drawing.Point(319, 55);
+            this.nudFontSizeIncr.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudFontSizeIncr.Name = "nudFontSizeIncr";
+            this.nudFontSizeIncr.Size = new System.Drawing.Size(55, 20);
+            this.nudFontSizeIncr.TabIndex = 9;
+            this.nudFontSizeIncr.Value = global::TDMaker.Properties.Settings.Default.FontSizeIncr;
+            // 
+            // chkPre
+            // 
+            this.chkPre.AutoSize = true;
+            this.chkPre.Checked = global::TDMaker.Properties.Settings.Default.PreText;
+            this.chkPre.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "PreText", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkPre.Location = new System.Drawing.Point(17, 56);
+            this.chkPre.Name = "chkPre";
+            this.chkPre.Size = new System.Drawing.Size(132, 17);
+            this.chkPre.TabIndex = 1;
+            this.chkPre.Text = "Use Preformatted Text";
+            this.chkPre.UseVisualStyleBackColor = true;
+            // 
+            // chkPreIncreaseFontSize
+            // 
+            this.chkPreIncreaseFontSize.AutoSize = true;
+            this.chkPreIncreaseFontSize.Checked = global::TDMaker.Properties.Settings.Default.LargerPreText;
+            this.chkPreIncreaseFontSize.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPreIncreaseFontSize.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "LargerPreText", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkPreIncreaseFontSize.Location = new System.Drawing.Point(165, 56);
+            this.chkPreIncreaseFontSize.Name = "chkPreIncreaseFontSize";
+            this.chkPreIncreaseFontSize.Size = new System.Drawing.Size(148, 17);
+            this.chkPreIncreaseFontSize.TabIndex = 8;
+            this.chkPreIncreaseFontSize.Text = "and increase Font Size by";
+            this.chkPreIncreaseFontSize.UseVisualStyleBackColor = true;
             // 
             // chkAlignCenter
             // 
@@ -396,16 +594,6 @@
             this.chkAlignCenter.TabIndex = 0;
             this.chkAlignCenter.Text = "Align &Center";
             this.chkAlignCenter.UseVisualStyleBackColor = true;
-            // 
-            // gbImageShack
-            // 
-            this.gbImageShack.Controls.Add(this.chkUploadFullScreenshot);
-            this.gbImageShack.Location = new System.Drawing.Point(20, 47);
-            this.gbImageShack.Name = "gbImageShack";
-            this.gbImageShack.Size = new System.Drawing.Size(250, 68);
-            this.gbImageShack.TabIndex = 2;
-            this.gbImageShack.TabStop = false;
-            this.gbImageShack.Text = "ImageShack";
             // 
             // chkUploadFullScreenshot
             // 
@@ -434,67 +622,19 @@
             this.chkOptImageShack.UseVisualStyleBackColor = true;
             this.chkOptImageShack.CheckedChanged += new System.EventHandler(this.chkOptImageShack_CheckedChanged);
             // 
-            // tmrStatus
-            // 
-            this.tmrStatus.Enabled = true;
-            this.tmrStatus.Interval = 1000;
-            this.tmrStatus.Tick += new System.EventHandler(this.tmrStatus_Tick);
-            // 
-            // btnPublish
-            // 
-            this.btnPublish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPublish.AutoSize = true;
-            this.btnPublish.Enabled = false;
-            this.btnPublish.Location = new System.Drawing.Point(599, 497);
-            this.btnPublish.Name = "btnPublish";
-            this.btnPublish.Size = new System.Drawing.Size(106, 23);
-            this.btnPublish.TabIndex = 5;
-            this.btnPublish.Text = "&Copy to Clipboard";
-            this.btnPublish.UseVisualStyleBackColor = true;
-            this.btnPublish.Click += new System.EventHandler(this.btnPublish_Click);
-            // 
-            // txtMediaFile
-            // 
-            this.txtMediaFile.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.txtMediaFile.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
-            this.txtMediaFile.Location = new System.Drawing.Point(26, 29);
-            this.txtMediaFile.Name = "txtMediaFile";
-            this.txtMediaFile.Size = new System.Drawing.Size(530, 20);
-            this.txtMediaFile.TabIndex = 6;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.btnBrowse);
-            this.groupBox4.Controls.Add(this.txtMediaFile);
-            this.groupBox4.Location = new System.Drawing.Point(32, 11);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(711, 70);
-            this.groupBox4.TabIndex = 7;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Analyze Media File...";
-            // 
-            // btnBrowse
-            // 
-            this.btnBrowse.AutoSize = true;
-            this.btnBrowse.Location = new System.Drawing.Point(567, 28);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(106, 23);
-            this.btnBrowse.TabIndex = 7;
-            this.btnBrowse.Text = "&Browse...";
-            this.btnBrowse.UseVisualStyleBackColor = true;
-            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
-            // 
             // frmMain
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
+            this.Controls.Add(this.gbSource);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.btnPublish);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(800, 600);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Torrent Description Maker";
@@ -525,6 +665,12 @@
             this.gbImageShack.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.gbSource.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudHeadingsText)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBodyText)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeIncr)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -536,9 +682,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtMtn;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox txtImageShackURL;
+        private System.Windows.Forms.TextBox txtScrFull;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button btnCopy;
+        private System.Windows.Forms.Button btnCopy1;
         private System.Windows.Forms.TextBox txtBBScrFull;
         private System.Windows.Forms.Label label5;
         private System.ComponentModel.BackgroundWorker bwApp;
@@ -570,6 +716,16 @@
         private System.Windows.Forms.CheckBox chkUploadFullScreenshot;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.CheckBox chkAlignCenter;
+        private System.Windows.Forms.CheckBox chkPre;
+        private System.Windows.Forms.NumericUpDown nudBodyText;
+        private System.Windows.Forms.NumericUpDown nudHeadingsText;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown nudFontSizeIncr;
+        private System.Windows.Forms.CheckBox chkPreIncreaseFontSize;
+        private System.Windows.Forms.GroupBox gbSource;
+        private System.Windows.Forms.ComboBox cboSource;
     }
 }
 

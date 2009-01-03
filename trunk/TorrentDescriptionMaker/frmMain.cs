@@ -50,7 +50,7 @@ namespace TorrentDescriptionMaker
             
             this.Text = string.Format("{0} - {1}", Resources.AppName, name);
 
-            txtImageShackURL.Text = "";
+            txtScrFull.Text = "";
             txtBBScrFull.Text = "";
             txtBBScrForums.Text = "";
 
@@ -80,6 +80,11 @@ namespace TorrentDescriptionMaker
             {
                 Settings.Default.MTNArgs.Add(cboMtnArgs.Text);
             }
+            if (!Settings.Default.Sources.Contains(cboSource.SelectedText))
+            {
+                Settings.Default.Sources.Add(cboSource.Text);
+            }
+
             Settings.Default.Save();
         }
 
@@ -93,7 +98,14 @@ namespace TorrentDescriptionMaker
             {
                 cboMtnArgs.Items.Add(arg);
             }
-            cboMtnArgs.SelectedIndex = 0;
+            cboMtnArgs.Text = Settings.Default.MTNArg;
+
+            cboSource.Items.Clear();
+            foreach (string src in Settings.Default.Sources)
+            {
+                cboSource.Items.Add(src);
+            }
+            //cboSource.SelectedText = Settings.Default.Source;
 
             Program.Status = "Ready.";
 
@@ -117,16 +129,16 @@ namespace TorrentDescriptionMaker
             if (mTInfo != null)
             {
 
-                txtImageShackURL.Text = mTInfo.ScreenshotURLFull;
+                txtScrFull.Text = mTInfo.ScreenshotURLFull;
                 txtBBScrForums.Text = mTInfo.ScreenshotURLForums;
 
                 BbCode bb = new BbCode();
-                if (!string.IsNullOrEmpty(txtImageShackURL.Text))
-                    txtBBScrFull.Text = bb.img(txtImageShackURL.Text);
+                if (!string.IsNullOrEmpty(txtScrFull.Text))
+                    txtBBScrFull.Text = bb.img(txtScrFull.Text);
 
-                btnCopy0.Enabled = true;
-                btnCopy.Enabled = true;
-                btnCopy2.Enabled = true;
+                btnCopy0.Enabled = !string.IsNullOrEmpty(txtScrFull.Text);
+                btnCopy1.Enabled = !string.IsNullOrEmpty(txtBBScrFull.Text);
+                btnCopy2.Enabled = !string.IsNullOrEmpty(txtBBScrForums.Text);
 
                 StringBuilder sbPublish = new StringBuilder();
                 sbPublish.AppendLine(mTInfo.MediaInfoForums1);
@@ -167,7 +179,7 @@ namespace TorrentDescriptionMaker
 
         private void btnCopy0_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(txtImageShackURL.Text);
+            Clipboard.SetText(txtScrFull.Text);
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
