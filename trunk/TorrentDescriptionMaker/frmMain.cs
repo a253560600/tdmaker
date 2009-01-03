@@ -44,7 +44,11 @@ namespace TorrentDescriptionMaker
         private void analyzeMedia(string p)
         {
 
-            this.Text = string.Format("{0} - {1}", Resources.AppName, Path.GetFileNameWithoutExtension(p));
+            // if it is a DVD, set the title to be name of the folder. 
+            string ext = Path.GetExtension(p).ToLower();
+            string name = (ext == ".vob" ? Path.GetDirectoryName(p) : Path.GetFileNameWithoutExtension(p));
+            
+            this.Text = string.Format("{0} - {1}", Resources.AppName, name);
 
             txtImageShackURL.Text = "";
             txtBBScrFull.Text = "";
@@ -171,7 +175,7 @@ namespace TorrentDescriptionMaker
 
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Title = "Browse for Media file...";
-            dlg.Filter = "Media Files|*.avi; *.vob; *.mkv";
+            dlg.Filter = "Media Files|*.avi; *.vob; *.mkv; *.divx";
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 txtMediaFile.Text = dlg.FileName;
