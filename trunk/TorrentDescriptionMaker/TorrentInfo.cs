@@ -266,7 +266,8 @@ namespace TorrentDescriptionMaker
 
                 int retry = 1;
                 List<ZSS.ImageUploader.ImageFile> lstScreenshots = new List<ImageFile>();
-                while (retry <= 3 && lstScreenshots.Count < 1)
+                while (retry <= 3 && lstScreenshots == null ||
+                   (retry <= 3 && lstScreenshots != null && lstScreenshots.Count < 1))
                 {
                     Program.Status = string.Format("Uploading screenshot to ImageShack... Attempt {0}", retry);
                     lstScreenshots = su.UploadImage(screenshot);

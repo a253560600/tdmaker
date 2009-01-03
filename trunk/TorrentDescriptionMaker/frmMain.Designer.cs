@@ -36,9 +36,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtMtn = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtScrFull = new System.Windows.Forms.LinkLabel();
             this.label4 = new System.Windows.Forms.Label();
             this.btnCopy0 = new System.Windows.Forms.Button();
-            this.txtScrFull = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnCopy2 = new System.Windows.Forms.Button();
@@ -74,12 +74,12 @@
             this.chkAlignCenter = new System.Windows.Forms.CheckBox();
             this.tmrStatus = new System.Windows.Forms.Timer(this.components);
             this.btnPublish = new System.Windows.Forms.Button();
-            this.txtMediaFile = new System.Windows.Forms.TextBox();
+            this.txtFilePath = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.gbSource = new System.Windows.Forms.GroupBox();
             this.cboSource = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAnalyze = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -153,15 +153,24 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtScrFull);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.btnCopy0);
-            this.groupBox2.Controls.Add(this.txtScrFull);
             this.groupBox2.Location = new System.Drawing.Point(16, 125);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(706, 79);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "URL for IRC/IM";
+            // 
+            // txtScrFull
+            // 
+            this.txtScrFull.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.txtScrFull.Location = new System.Drawing.Point(114, 32);
+            this.txtScrFull.Name = "txtScrFull";
+            this.txtScrFull.Size = new System.Drawing.Size(442, 20);
+            this.txtScrFull.TabIndex = 7;
+            this.txtScrFull.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.txtScrFull_LinkClicked);
             // 
             // label4
             // 
@@ -183,14 +192,6 @@
             this.btnCopy0.Text = "&Copy to Clipboard";
             this.btnCopy0.UseVisualStyleBackColor = true;
             this.btnCopy0.Click += new System.EventHandler(this.btnCopy0_Click);
-            // 
-            // txtScrFull
-            // 
-            this.txtScrFull.Location = new System.Drawing.Point(114, 33);
-            this.txtScrFull.Name = "txtScrFull";
-            this.txtScrFull.ReadOnly = true;
-            this.txtScrFull.Size = new System.Drawing.Size(442, 20);
-            this.txtScrFull.TabIndex = 0;
             // 
             // groupBox3
             // 
@@ -586,19 +587,19 @@
             this.btnPublish.UseVisualStyleBackColor = true;
             this.btnPublish.Click += new System.EventHandler(this.btnPublish_Click);
             // 
-            // txtMediaFile
+            // txtFilePath
             // 
-            this.txtMediaFile.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.txtMediaFile.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
-            this.txtMediaFile.Location = new System.Drawing.Point(26, 29);
-            this.txtMediaFile.Name = "txtMediaFile";
-            this.txtMediaFile.Size = new System.Drawing.Size(426, 20);
-            this.txtMediaFile.TabIndex = 6;
+            this.txtFilePath.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtFilePath.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
+            this.txtFilePath.Location = new System.Drawing.Point(26, 29);
+            this.txtFilePath.Name = "txtFilePath";
+            this.txtFilePath.Size = new System.Drawing.Size(426, 20);
+            this.txtFilePath.TabIndex = 6;
             // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.btnBrowse);
-            this.groupBox4.Controls.Add(this.txtMediaFile);
+            this.groupBox4.Controls.Add(this.txtFilePath);
             this.groupBox4.Location = new System.Drawing.Point(32, 11);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(550, 70);
@@ -638,16 +639,18 @@
             this.cboSource.TabIndex = 0;
             this.cboSource.Text = global::TDMaker.Properties.Settings.Default.Source;
             // 
-            // button1
+            // btnAnalyze
             // 
-            this.button1.AutoSize = true;
-            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button1.Location = new System.Drawing.Point(58, 497);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(84, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "&Analyze Again";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAnalyze.AutoSize = true;
+            this.btnAnalyze.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnAnalyze.Enabled = false;
+            this.btnAnalyze.Location = new System.Drawing.Point(58, 497);
+            this.btnAnalyze.Name = "btnAnalyze";
+            this.btnAnalyze.Size = new System.Drawing.Size(67, 23);
+            this.btnAnalyze.TabIndex = 9;
+            this.btnAnalyze.Text = "&Reanalyze";
+            this.btnAnalyze.UseVisualStyleBackColor = true;
+            this.btnAnalyze.Click += new System.EventHandler(this.btnAnalyze_Click);
             // 
             // frmMain
             // 
@@ -655,7 +658,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnAnalyze);
             this.Controls.Add(this.gbSource);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.btnPublish);
@@ -709,7 +712,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtMtn;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox txtScrFull;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btnCopy1;
         private System.Windows.Forms.TextBox txtBBScrFull;
@@ -734,7 +736,7 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TextBox txtPublish;
         private System.Windows.Forms.Button btnPublish;
-        private System.Windows.Forms.TextBox txtMediaFile;
+        private System.Windows.Forms.TextBox txtFilePath;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.TabPage tabPage4;
@@ -754,7 +756,8 @@
         private System.Windows.Forms.ComboBox cboSource;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.CheckBox chkKeepScreenshot;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAnalyze;
+        private System.Windows.Forms.LinkLabel txtScrFull;
     }
 }
 
