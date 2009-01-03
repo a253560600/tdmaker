@@ -43,11 +43,10 @@ namespace TorrentDescriptionMaker
 
         private void analyzeMedia(string p)
         {
-
             // if it is a DVD, set the title to be name of the folder. 
             string ext = Path.GetExtension(p).ToLower();
             string name = (ext == ".vob" ? Path.GetDirectoryName(p) : Path.GetFileNameWithoutExtension(p));
-            
+
             this.Text = string.Format("{0} - {1}", Resources.AppName, name);
 
             txtScrFull.Text = "";
@@ -56,6 +55,8 @@ namespace TorrentDescriptionMaker
 
             pBar.Style = ProgressBarStyle.Marquee;
             bwApp.RunWorkerAsync(p);
+
+            updateGuiControls();
         }
 
         private void frmMain_Shown(object sender, EventArgs e)
@@ -124,6 +125,15 @@ namespace TorrentDescriptionMaker
             mTInfo = new cTorrentInfo(bwApp, e.Argument.ToString());
         }
 
+        private void updateGuiControls()
+        {
+                btnAnalyze.Enabled = !string.IsNullOrEmpty(txtFilePath.Text);
+                btnCopy0.Enabled = !string.IsNullOrEmpty(txtScrFull.Text);
+                btnCopy1.Enabled = !string.IsNullOrEmpty(txtBBScrFull.Text);
+                btnCopy2.Enabled = !string.IsNullOrEmpty(txtBBScrForums.Text);
+                btnPublish.Enabled = !string.IsNullOrEmpty(txtPublish.Text);
+        }
+
         private void bwApp_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (mTInfo != null)
@@ -135,11 +145,7 @@ namespace TorrentDescriptionMaker
                 BbCode bb = new BbCode();
                 if (!string.IsNullOrEmpty(txtScrFull.Text))
                     txtBBScrFull.Text = bb.img(txtScrFull.Text);
-
-                btnCopy0.Enabled = !string.IsNullOrEmpty(txtScrFull.Text);
-                btnCopy1.Enabled = !string.IsNullOrEmpty(txtBBScrFull.Text);
-                btnCopy2.Enabled = !string.IsNullOrEmpty(txtBBScrForums.Text);
-
+                
                 StringBuilder sbPublish = new StringBuilder();
                 sbPublish.AppendLine(mTInfo.MediaInfoForums1);
 
@@ -155,9 +161,9 @@ namespace TorrentDescriptionMaker
 
                 // sbPublish.AppendLine("Get your Torrent Description like this using TDMaker: http://code.google.com/p/tdmaker");
 
-                txtPublish.Text = sbPublish.ToString();
+                txtPublish.Text = sbPublish.ToString();                
 
-                btnPublish.Enabled = true;
+                updateGuiControls();
 
             }
 
@@ -190,8 +196,8 @@ namespace TorrentDescriptionMaker
             dlg.Filter = "Media Files|*.avi; *.vob; *.mkv; *.divx";
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                txtMediaFile.Text = dlg.FileName;
-                analyzeMedia(txtMediaFile.Text);
+                txtFilePath.Text = dlg.FileName;
+                analyzeMedia(txtFilePath.Text);
 
             }
 
@@ -221,6 +227,18 @@ namespace TorrentDescriptionMaker
         private void chkOptImageShack_CheckedChanged(object sender, EventArgs e)
         {
             chkUploadFullScreenshot.Enabled = chkOptImageShack.Checked;
+        }
+
+        private void btnAnalyze_Click(object sender, EventArgs e)
+        {
+            if (File.Exists(txtFilePath.Text))
+                this.analyzeMedia(txtFilePath.Text);
+        }
+
+        private void txtScrFull_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtScrFull.Text))
+                System.Diagnostics.Process.Start(txtScrFull.Text);
         }
 
 
