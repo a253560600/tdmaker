@@ -127,11 +127,11 @@ namespace TorrentDescriptionMaker
 
         private void updateGuiControls()
         {
-                btnAnalyze.Enabled = !string.IsNullOrEmpty(txtFilePath.Text);
-                btnCopy0.Enabled = !string.IsNullOrEmpty(txtScrFull.Text);
-                btnCopy1.Enabled = !string.IsNullOrEmpty(txtBBScrFull.Text);
-                btnCopy2.Enabled = !string.IsNullOrEmpty(txtBBScrForums.Text);
-                btnPublish.Enabled = !string.IsNullOrEmpty(txtPublish.Text);
+                btnAnalyze.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtFilePath.Text);
+                btnCopy0.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtScrFull.Text);
+                btnCopy1.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtBBScrFull.Text);
+                btnCopy2.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtBBScrForums.Text);
+                btnPublish.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtPublish.Text);
         }
 
         private void bwApp_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
