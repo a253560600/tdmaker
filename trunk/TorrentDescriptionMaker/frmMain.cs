@@ -81,7 +81,7 @@ namespace TorrentDescriptionMaker
             {
                 Settings.Default.MTNArgs.Add(cboMtnArgs.Text);
             }
-            if (!Settings.Default.Sources.Contains(cboSource.SelectedText))
+            if (!Settings.Default.Sources.Contains(cboSource.Text))
             {
                 Settings.Default.Sources.Add(cboSource.Text);
             }

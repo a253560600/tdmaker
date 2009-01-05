@@ -376,7 +376,6 @@
             this.txtPublish.Location = new System.Drawing.Point(3, 3);
             this.txtPublish.Multiline = true;
             this.txtPublish.Name = "txtPublish";
-            this.txtPublish.ReadOnly = true;
             this.txtPublish.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtPublish.Size = new System.Drawing.Size(736, 367);
             this.txtPublish.TabIndex = 1;
@@ -665,7 +664,7 @@
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(800, 600);
+            this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Torrent Description Maker";
