@@ -106,13 +106,22 @@ namespace TorrentDescriptionMaker
 
                 for (int i = 0; i < subCount; i++)
                 {
+                    StringBuilder sbLang = new StringBuilder();
                     string lang = mMI.Get(StreamKind.Text, i, "Language/String");
                     if (!string.IsNullOrEmpty(lang))
                     {
                         // System.Windows.Forms.MessageBox.Show(lang);
-                        sbGeneral.Append(lang);
+                        sbLang.Append(lang);
                         if (i < subCount - 1)
-                            sbGeneral.Append(", ");
+                            sbLang.Append(", ");
+                    }
+                    if (!string.IsNullOrEmpty(sbLang.ToString()))
+                    {
+                        sbGeneral.Append(sbLang.ToString());
+                    }
+                    else
+                    {
+                        sbGeneral.Append("N/A");
                     }
                 }
             }

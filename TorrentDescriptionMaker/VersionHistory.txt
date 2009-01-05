@@ -1,3 +1,5 @@
+1.1.9.1 Subtitles field value was sometimes blank for Music Video VOB files
+1.1.9.0 Publish info is now not user editable for minor changes [Protech]
 1.1.8.0 Option to disable keeping screenshots Pictures\MTN [Protech]
 1.1.7.0 Added Source description to Publishing layout [Protech]
 1.1.6.0 Added support for optionally using pre text and ability to change font sizes [MiXiT]
