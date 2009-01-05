@@ -241,6 +241,15 @@ namespace TorrentDescriptionMaker
                 System.Diagnostics.Process.Start(txtScrFull.Text);
         }
 
+        private void cmsAppAbout_Click(object sender, EventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(Application.ProductName);
+            sb.AppendLine(string.Format("Version {0}", Application.ProductVersion));
+            MessageBox.Show(sb.ToString());
+
+        }
+
 
     }
 }
