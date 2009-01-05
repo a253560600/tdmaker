@@ -80,6 +80,8 @@
             this.gbSource = new System.Windows.Forms.GroupBox();
             this.cboSource = new System.Windows.Forms.ComboBox();
             this.btnAnalyze = new System.Windows.Forms.Button();
+            this.cmsApp = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsAppAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -97,10 +99,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeIncr)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.gbSource.SuspendLayout();
+            this.cmsApp.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.cboMtnArgs);
             this.groupBox1.Controls.Add(this.label1);
@@ -123,6 +128,8 @@
             // 
             // cboMtnArgs
             // 
+            this.cboMtnArgs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.cboMtnArgs.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "MTNArg", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cboMtnArgs.FormattingEnabled = true;
             this.cboMtnArgs.Location = new System.Drawing.Point(114, 54);
@@ -142,6 +149,8 @@
             // 
             // txtMtn
             // 
+            this.txtMtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMtn.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txtMtn.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
             this.txtMtn.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "MTNPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -153,6 +162,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.txtScrFull);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.btnCopy0);
@@ -165,6 +176,8 @@
             // 
             // txtScrFull
             // 
+            this.txtScrFull.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtScrFull.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.txtScrFull.Location = new System.Drawing.Point(114, 32);
             this.txtScrFull.Name = "txtScrFull";
@@ -183,6 +196,7 @@
             // 
             // btnCopy0
             // 
+            this.btnCopy0.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCopy0.AutoSize = true;
             this.btnCopy0.Enabled = false;
             this.btnCopy0.Location = new System.Drawing.Point(562, 31);
@@ -195,6 +209,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.btnCopy2);
             this.groupBox3.Controls.Add(this.txtBBScrForums);
@@ -219,6 +235,7 @@
             // 
             // btnCopy2
             // 
+            this.btnCopy2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCopy2.AutoSize = true;
             this.btnCopy2.Enabled = false;
             this.btnCopy2.Location = new System.Drawing.Point(562, 78);
@@ -231,6 +248,8 @@
             // 
             // txtBBScrForums
             // 
+            this.txtBBScrForums.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBBScrForums.Location = new System.Drawing.Point(114, 80);
             this.txtBBScrForums.Name = "txtBBScrForums";
             this.txtBBScrForums.ReadOnly = true;
@@ -248,6 +267,7 @@
             // 
             // btnCopy1
             // 
+            this.btnCopy1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCopy1.AutoSize = true;
             this.btnCopy1.Enabled = false;
             this.btnCopy1.Location = new System.Drawing.Point(562, 40);
@@ -260,6 +280,8 @@
             // 
             // txtBBScrFull
             // 
+            this.txtBBScrFull.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBBScrFull.Location = new System.Drawing.Point(114, 42);
             this.txtBBScrFull.Name = "txtBBScrFull";
             this.txtBBScrFull.ReadOnly = true;
@@ -588,6 +610,8 @@
             // 
             // txtFilePath
             // 
+            this.txtFilePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFilePath.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txtFilePath.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
             this.txtFilePath.Location = new System.Drawing.Point(26, 29);
@@ -597,6 +621,8 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.btnBrowse);
             this.groupBox4.Controls.Add(this.txtFilePath);
             this.groupBox4.Location = new System.Drawing.Point(32, 11);
@@ -608,6 +634,7 @@
             // 
             // btnBrowse
             // 
+            this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBrowse.AutoSize = true;
             this.btnBrowse.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnBrowse.Location = new System.Drawing.Point(469, 27);
@@ -620,6 +647,7 @@
             // 
             // gbSource
             // 
+            this.gbSource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.gbSource.Controls.Add(this.cboSource);
             this.gbSource.Location = new System.Drawing.Point(599, 12);
             this.gbSource.Name = "gbSource";
@@ -652,12 +680,27 @@
             this.btnAnalyze.UseVisualStyleBackColor = true;
             this.btnAnalyze.Click += new System.EventHandler(this.btnAnalyze_Click);
             // 
+            // cmsApp
+            // 
+            this.cmsApp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmsAppAbout});
+            this.cmsApp.Name = "cmsApp";
+            this.cmsApp.Size = new System.Drawing.Size(117, 26);
+            // 
+            // cmsAppAbout
+            // 
+            this.cmsAppAbout.Name = "cmsAppAbout";
+            this.cmsAppAbout.Size = new System.Drawing.Size(116, 22);
+            this.cmsAppAbout.Text = "&About...";
+            this.cmsAppAbout.Click += new System.EventHandler(this.cmsAppAbout_Click);
+            // 
             // frmMain
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
+            this.ContextMenuStrip = this.cmsApp;
             this.Controls.Add(this.btnAnalyze);
             this.Controls.Add(this.gbSource);
             this.Controls.Add(this.groupBox4);
@@ -701,6 +744,7 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.gbSource.ResumeLayout(false);
+            this.cmsApp.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -758,6 +802,8 @@
         private System.Windows.Forms.CheckBox chkKeepScreenshot;
         private System.Windows.Forms.Button btnAnalyze;
         private System.Windows.Forms.LinkLabel txtScrFull;
+        private System.Windows.Forms.ContextMenuStrip cmsApp;
+        private System.Windows.Forms.ToolStripMenuItem cmsAppAbout;
     }
 }
 
