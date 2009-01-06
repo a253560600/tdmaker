@@ -78,7 +78,8 @@ namespace TorrentDescriptionMaker
 
             BbCode bb = new BbCode();
 
-            mMediaInfo.Format = mMI.Get(StreamKind.General, 0, "Format");
+            if (string.IsNullOrEmpty(mMediaInfo.Format))
+                mMediaInfo.Format = mMI.Get(StreamKind.General, 0, "Format");
             mMediaInfo.FormatInfo = mMI.Get(StreamKind.General, 0, "Format/Info");
             StringBuilder sbMediaInfo = new StringBuilder();
 
@@ -97,9 +98,16 @@ namespace TorrentDescriptionMaker
                 sbGeneral.AppendLine(string.Format("       [u]Source:[/u] {0}", Settings.Default.Source));
             }
             // File Name
-            sbGeneral.AppendLine(string.Format("    [u]File Name:[/u] {0}.{1}",
-                mMI.Get(0, 0, "FileName"),
-                mMI.Get(0, 0, "FileExtension")));
+            if (!string.IsNullOrEmpty(mMediaInfo.FileName))
+            {
+                sbGeneral.AppendLine(string.Format("    [u]File Name:[/u] {0}", mMediaInfo.FileName));
+            }
+            else
+            {
+                sbGeneral.AppendLine(string.Format("    [u]File Name:[/u] {0}.{1}",
+                    mMI.Get(0, 0, "FileName"),
+                    mMI.Get(0, 0, "FileExtension")));
+            }
             // Format
             sbGeneral.Append(string.Format("       [u]Format:[/u] {0}", mMediaInfo.Format));
             if (!string.IsNullOrEmpty(mMediaInfo.FormatInfo))

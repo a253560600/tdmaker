@@ -34,9 +34,12 @@ namespace TorrentDescriptionMaker
         {
 
             string[] paths = (string[])e.Data.GetData(DataFormats.FileDrop, true);
-            if (paths.Length == 1 && File.Exists(paths[0]))
+            if (paths.Length == 1)
             {
-                analyzeMedia(paths[0]);
+                if (File.Exists(paths[0]) || Directory.Exists(paths[0]))
+                {
+                    analyzeMedia(paths[0]);
+                }
             }
 
         }
@@ -53,9 +56,11 @@ namespace TorrentDescriptionMaker
             else if (Directory.Exists(p))
             {
                 string name = Path.GetFileName(p);
+                if (name.ToUpper().Equals("VIDEO_TS"))
+                    name = Path.GetFileName(Path.GetDirectoryName(p));
                 this.Text = string.Format("{0} - {1}", Resources.AppName, name);
             }
-            
+
             txtScrFull.Text = "";
             txtBBScrFull.Text = "";
             txtBBScrForums.Text = "";
@@ -134,11 +139,11 @@ namespace TorrentDescriptionMaker
 
         private void updateGuiControls()
         {
-                btnAnalyze.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtFilePath.Text);
-                btnCopy0.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtScrFull.Text);
-                btnCopy1.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtBBScrFull.Text);
-                btnCopy2.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtBBScrForums.Text);
-                btnPublish.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtPublish.Text);
+            btnAnalyze.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtFilePath.Text);
+            btnCopy0.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtScrFull.Text);
+            btnCopy1.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtBBScrFull.Text);
+            btnCopy2.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtBBScrForums.Text);
+            btnPublish.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtPublish.Text);
         }
 
         private void bwApp_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -152,7 +157,7 @@ namespace TorrentDescriptionMaker
                 BbCode bb = new BbCode();
                 if (!string.IsNullOrEmpty(txtScrFull.Text))
                     txtBBScrFull.Text = bb.img(txtScrFull.Text);
-                
+
                 StringBuilder sbPublish = new StringBuilder();
                 sbPublish.AppendLine(mTInfo.MediaInfoForums1);
 
@@ -168,7 +173,7 @@ namespace TorrentDescriptionMaker
 
                 // sbPublish.AppendLine("Get your Torrent Description like this using TDMaker: http://code.google.com/p/tdmaker");
 
-                txtPublish.Text = sbPublish.ToString();                
+                txtPublish.Text = sbPublish.ToString();
 
                 updateGuiControls();
 
@@ -218,7 +223,7 @@ namespace TorrentDescriptionMaker
                     txtFilePath.Text = dlg.SelectedPath;
                     analyzeMedia(txtFilePath.Text);
                 }
-            }                       
+            }
 
         }
 
@@ -262,10 +267,11 @@ namespace TorrentDescriptionMaker
 
         private void cmsAppAbout_Click(object sender, EventArgs e)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine(Application.ProductName);
+            StringBuilder sb = new StringBuilder();            
             sb.AppendLine(string.Format("Version {0}", Application.ProductVersion));
-            MessageBox.Show(sb.ToString());
+            sb.AppendLine();
+            sb.AppendLine("Copyright © McoreD 2009");
+            MessageBox.Show(sb.ToString(), Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
 
