@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Torrent Description Maker")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("McoreD")]
-[assembly: AssemblyProduct("TorrentDescriptionMaker")]
+[assembly: AssemblyProduct("Torrent Description Maker")]
 [assembly: AssemblyCopyright("Copyright © McoreD 2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
