@@ -24,7 +24,7 @@ namespace TorrentDescriptionMaker
             mMI.Open(mMovieFilePath);
             mMI.Option("Complete");
             mBwApp.ReportProgress(0, mMI.Inform());
-            
+
             if (Settings.Default.UploadImageShack)
                 sGetScreenshot();
 
@@ -45,17 +45,17 @@ namespace TorrentDescriptionMaker
         /// </summary>      
         private void sGetMovieInfo()
         {
-            int fontSizeHeading = (int)(Settings.Default.LargerPreText == true ? 
-                Settings.Default.FontSizeHeading + Settings.Default.FontSizeIncr : 
+            int fontSizeHeading = (int)(Settings.Default.LargerPreText == true ?
+                Settings.Default.FontSizeHeading + Settings.Default.FontSizeIncr :
                 Settings.Default.FontSizeHeading);
 
             int fontSizeBody = (int)(Settings.Default.LargerPreText == true ?
                 Settings.Default.FontSizeBody + Settings.Default.FontSizeIncr :
                 Settings.Default.FontSizeBody);
-            
+
 
             BbCode bb = new BbCode();
-            
+
             MediaInfo myMovie = new MediaInfo();
             myMovie.Format = mMI.Get(StreamKind.General, 0, "Format");
             myMovie.FormatInfo = mMI.Get(StreamKind.General, 0, "Format/Info");
@@ -74,7 +74,7 @@ namespace TorrentDescriptionMaker
             if (!string.IsNullOrEmpty(Settings.Default.Source))
             {
                 sbGeneral.AppendLine(string.Format("       [u]Source:[/u] {0}", Settings.Default.Source));
-            }            
+            }
             // File Name
             sbGeneral.AppendLine(string.Format("    [u]File Name:[/u] {0}.{1}",
                 mMI.Get(0, 0, "FileName"),
@@ -98,15 +98,15 @@ namespace TorrentDescriptionMaker
                 mMI.Get(StreamKind.General, 0, "OverallBitRate/String")));
 
             int subCount = 0;
-            int.TryParse(mMI.Get(StreamKind.Text, 0, "Count"), out subCount);
+            int.TryParse(mMI.Get(StreamKind.Text, 0, "StreamCount"), out subCount);
 
             sbGeneral.Append("    [u]Subtitles:[/u] ");
             if (subCount > 0)
             {
 
+                StringBuilder sbLang = new StringBuilder();
                 for (int i = 0; i < subCount; i++)
                 {
-                    StringBuilder sbLang = new StringBuilder();
                     string lang = mMI.Get(StreamKind.Text, i, "Language/String");
                     if (!string.IsNullOrEmpty(lang))
                     {
@@ -115,14 +115,14 @@ namespace TorrentDescriptionMaker
                         if (i < subCount - 1)
                             sbLang.Append(", ");
                     }
-                    if (!string.IsNullOrEmpty(sbLang.ToString()))
-                    {
-                        sbGeneral.Append(sbLang.ToString());
-                    }
-                    else
-                    {
-                        sbGeneral.Append("N/A");
-                    }
+                }
+                if (!string.IsNullOrEmpty(sbLang.ToString()))
+                {
+                    sbGeneral.Append(sbLang.ToString());
+                }
+                else
+                {
+                    sbGeneral.Append("N/A");
                 }
             }
             else
@@ -257,7 +257,7 @@ namespace TorrentDescriptionMaker
             {
                 picPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "TDMaker");
             }
-            
+
             if (!Directory.Exists(picPath))
                 Directory.CreateDirectory(picPath);
 
