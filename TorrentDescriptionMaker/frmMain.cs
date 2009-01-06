@@ -44,11 +44,18 @@ namespace TorrentDescriptionMaker
         private void analyzeMedia(string p)
         {
             // if it is a DVD, set the title to be name of the folder. 
-            string ext = Path.GetExtension(p).ToLower();
-            string name = (ext == ".vob" ? Path.GetDirectoryName(p) : Path.GetFileNameWithoutExtension(p));
-
-            this.Text = string.Format("{0} - {1}", Resources.AppName, name);
-
+            if (File.Exists(p))
+            {
+                string ext = Path.GetExtension(p).ToLower();
+                string name = (ext == ".vob" ? Path.GetDirectoryName(p) : Path.GetFileNameWithoutExtension(p));
+                this.Text = string.Format("{0} - {1}", Resources.AppName, name);
+            }
+            else if (Directory.Exists(p))
+            {
+                string name = Path.GetFileName(p);
+                this.Text = string.Format("{0} - {1}", Resources.AppName, name);
+            }
+            
             txtScrFull.Text = "";
             txtBBScrFull.Text = "";
             txtBBScrForums.Text = "";
@@ -191,15 +198,27 @@ namespace TorrentDescriptionMaker
         private void btnBrowse_Click(object sender, EventArgs e)
         {
 
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Title = "Browse for Media file...";
-            dlg.Filter = "Media Files|*.avi; *.vob; *.mkv; *.divx";
-            if (dlg.ShowDialog() == DialogResult.OK)
+            if (rbFile.Checked)
             {
-                txtFilePath.Text = dlg.FileName;
-                analyzeMedia(txtFilePath.Text);
-
+                OpenFileDialog dlg = new OpenFileDialog();
+                dlg.Title = "Browse for Media file...";
+                dlg.Filter = "Media Files|*.avi; *.vob; *.mkv; *.divx";
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    txtFilePath.Text = dlg.FileName;
+                    analyzeMedia(txtFilePath.Text);
+                }
             }
+            else
+            {
+                FolderBrowserDialog dlg = new FolderBrowserDialog();
+                dlg.Description = "Browse for DVD folder...";
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    txtFilePath.Text = dlg.SelectedPath;
+                    analyzeMedia(txtFilePath.Text);
+                }
+            }                       
 
         }
 
