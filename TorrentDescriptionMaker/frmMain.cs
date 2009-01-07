@@ -12,7 +12,8 @@ namespace TorrentDescriptionMaker
 {
     public partial class frmMain : Form
     {
-        private cTorrentInfo mTInfo = null;
+        private TorrentInfo mTInfo = null;
+        private MediaInfo mMI = null;
         public frmMain()
         {
             InitializeComponent();
@@ -38,37 +39,58 @@ namespace TorrentDescriptionMaker
             {
                 if (File.Exists(paths[0]) || Directory.Exists(paths[0]))
                 {
-                    analyzeMedia(paths[0]);
+                    loadMedia(paths[0]);
                 }
             }
 
         }
 
-        private void analyzeMedia(string p)
+        private void loadMedia(string p)
         {
-            // if it is a DVD, set the title to be name of the folder. 
-            if (File.Exists(p))
-            {
-                string ext = Path.GetExtension(p).ToLower();
-                string name = (ext == ".vob" ? Path.GetDirectoryName(p) : Path.GetFileNameWithoutExtension(p));
-                this.Text = string.Format("{0} - {1}", Resources.AppName, name);
-            }
-            else if (Directory.Exists(p))
-            {
-                string name = Path.GetFileName(p);
-                if (name.ToUpper().Equals("VIDEO_TS"))
-                    name = Path.GetFileName(Path.GetDirectoryName(p));
-                this.Text = string.Format("{0} - {1}", Resources.AppName, name);
-            }
-
-            txtScrFull.Text = "";
-            txtBBScrFull.Text = "";
-            txtBBScrForums.Text = "";
-
-            pBar.Style = ProgressBarStyle.Marquee;
-            bwApp.RunWorkerAsync(p);
-
+            txtMediaLocation.Text = p;
             updateGuiControls();
+
+            if (Settings.Default.AnalyzeAuto)
+                analyzeMedia();
+        }
+
+        private void analyzeMedia()
+        {
+            if (File.Exists(txtMediaLocation.Text) || Directory.Exists(txtMediaLocation.Text))
+            {
+                mMI = new MediaInfo(txtMediaLocation.Text);
+                mMI.Source = cboSource.Text;
+                mMI.WebLink = txtWebLink.Text;
+
+                // if it is a DVD, set the title to be name of the folder. 
+                string p = mMI.Location;
+
+                if (File.Exists(p))
+                {
+                    string ext = Path.GetExtension(p).ToLower();
+                    string name = (ext == ".vob" ? Path.GetDirectoryName(p) : Path.GetFileNameWithoutExtension(p));
+                    this.Text = string.Format("{0} - {1}", Resources.AppName, name);
+                }
+                else if (Directory.Exists(p))
+                {
+                    string name = Path.GetFileName(p);
+                    if (name.ToUpper().Equals("VIDEO_TS"))
+                        name = Path.GetFileName(Path.GetDirectoryName(p));
+                    this.Text = string.Format("{0} - {1}", Resources.AppName, name);
+                }
+
+                txtScrFull.Text = "";
+                txtBBScrFull.Text = "";
+                txtBBScrForums.Text = "";
+
+                pBar.Style = ProgressBarStyle.Marquee;
+
+                if (!bwApp.IsBusy)
+                    bwApp.RunWorkerAsync();
+
+                updateGuiControls();
+
+            }
         }
 
         private void frmMain_Shown(object sender, EventArgs e)
@@ -133,13 +155,14 @@ namespace TorrentDescriptionMaker
 
         private void bwApp_DoWork(object sender, DoWorkEventArgs e)
         {
-            Program.Status = "Reading " + e.Argument.ToString();
-            mTInfo = new cTorrentInfo(bwApp, e.Argument.ToString());
+            Program.Status = "Reading " + mMI.Location;
+            mMI.ReadMedia();            
+            mTInfo = new TorrentInfo(bwApp, mMI);
         }
 
         private void updateGuiControls()
         {
-            btnAnalyze.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtFilePath.Text);
+            btnAnalyze.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtMediaLocation.Text);
             btnCopy0.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtScrFull.Text);
             btnCopy1.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtBBScrFull.Text);
             btnCopy2.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtBBScrForums.Text);
@@ -210,8 +233,7 @@ namespace TorrentDescriptionMaker
                 dlg.Filter = "Media Files|*.avi; *.vob; *.mkv; *.divx";
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    txtFilePath.Text = dlg.FileName;
-                    analyzeMedia(txtFilePath.Text);
+                    loadMedia(dlg.FileName);
                 }
             }
             else
@@ -220,8 +242,7 @@ namespace TorrentDescriptionMaker
                 dlg.Description = "Browse for DVD folder...";
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    txtFilePath.Text = dlg.SelectedPath;
-                    analyzeMedia(txtFilePath.Text);
+                    loadMedia(dlg.SelectedPath);
                 }
             }
 
@@ -255,8 +276,7 @@ namespace TorrentDescriptionMaker
 
         private void btnAnalyze_Click(object sender, EventArgs e)
         {
-            if (File.Exists(txtFilePath.Text))
-                this.analyzeMedia(txtFilePath.Text);
+            this.analyzeMedia();
         }
 
         private void txtScrFull_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -267,7 +287,7 @@ namespace TorrentDescriptionMaker
 
         private void cmsAppAbout_Click(object sender, EventArgs e)
         {
-            StringBuilder sb = new StringBuilder();            
+            StringBuilder sb = new StringBuilder();
             sb.AppendLine(string.Format("Version {0}", Application.ProductVersion));
             sb.AppendLine();
             sb.AppendLine("Copyright © McoreD 2009");

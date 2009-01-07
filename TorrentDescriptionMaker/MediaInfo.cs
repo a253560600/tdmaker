@@ -19,14 +19,17 @@ namespace TorrentDescriptionMaker
         /// Duration in hours:minutes:seconds
         /// </summary>
         public string DurationString { get; set; }
-        public string FileName { get; set; }
+        public string FileName { get; set; }        
         /// <summary>
         /// File Size in Bytes
         /// </summary>
         public string FileSize { get; set; }
         public string Format { get; set; }
         public string FormatInfo { get; set; }
+        public string Location { get; set; }
+        public string Source { get; set; }
         public string Subtitles { get; set; }
+        public string WebLink { get; set; }
 
         public List<AudioInfo> Audio { get; set; }
         public VideoInfo Video { get; set; }
@@ -35,31 +38,31 @@ namespace TorrentDescriptionMaker
 
         public MediaInfo(string p)
         {
+            this.Location = p;
+
             this.Audio = new List<AudioInfo>();
             this.Video = new VideoInfo();
-
-            sReadMovie(p);
 
         }
 
         /// <summary>
         /// Function to populate MediaInfo class
         /// </summary>
-        private void sReadMovie(string p)
+        public void ReadMedia()
         {
             // if a folder then read all media files 
             // append all the durations and save in Duration
 
-            if (Directory.Exists(p))
+            if (Directory.Exists(Location))
             {
 
                 // Guess File Name
-                this.FileName = Path.GetFileName(p);
+                this.FileName = Path.GetFileName(Location);
                 if (this.FileName.ToUpper().Equals("VIDEO_TS"))
-                    this.FileName = Path.GetFileName(Path.GetDirectoryName(p));
+                    this.FileName = Path.GetFileName(Path.GetDirectoryName(Location));
 
                 // Calculate Duration
-                string[] vobFiles = Directory.GetFiles(p, "*.vob", SearchOption.AllDirectories);               
+                string[] vobFiles = Directory.GetFiles(Location, "*.vob", SearchOption.AllDirectories);               
                 if (vobFiles.Length > 0)
                 {
                     long dura = 0;
@@ -87,7 +90,7 @@ namespace TorrentDescriptionMaker
                 
                 // Subtitles, Format
                 // VTS_01_0.IFO
-                string[] ifo = Directory.GetFiles(p, "VTS_01_0.IFO", SearchOption.AllDirectories);
+                string[] ifo = Directory.GetFiles(Location, "VTS_01_0.IFO", SearchOption.AllDirectories);
                 if (ifo.Length == 1)
                 {
                     MediaInfoLib.MediaInfo mi = new MediaInfoLib.MediaInfo();
