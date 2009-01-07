@@ -1,3 +1,4 @@
+1.1.12.1 Accurate file size for DVDs browsed as a folder
 1.1.12.0 Extended description to include WebLink field in Media Properties
 1.1.11.0 Option to disable processing media immediately after loading file or folder
 1.1.10.0 Ability to browse for DVD folder with better accuracy for Duration and Subtitles

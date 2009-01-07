@@ -1,4 +1,4 @@
-﻿Option to store screenshots temporarily in the local HDD
+﻿Filelist using TreeGUI
 
 Full Automation [tacoking]
 	User browses movie folder 

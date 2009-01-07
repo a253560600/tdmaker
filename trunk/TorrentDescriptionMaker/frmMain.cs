@@ -238,7 +238,7 @@ namespace TorrentDescriptionMaker
             }
             else
             {
-                FolderBrowserDialog dlg = new FolderBrowserDialog();
+                FolderBrowserDialog dlg = new FolderBrowserDialog();                
                 dlg.Description = "Browse for DVD folder...";
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
