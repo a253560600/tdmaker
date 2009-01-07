@@ -53,11 +53,14 @@
             this.pBar = new System.Windows.Forms.ToolStripProgressBar();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.gbProperties = new System.Windows.Forms.GroupBox();
+            this.txtWebLink = new System.Windows.Forms.TextBox();
+            this.chkWebLink = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.rbDir = new System.Windows.Forms.RadioButton();
             this.rbFile = new System.Windows.Forms.RadioButton();
             this.btnBrowse = new System.Windows.Forms.Button();
-            this.txtFilePath = new System.Windows.Forms.TextBox();
+            this.txtMediaLocation = new System.Windows.Forms.TextBox();
             this.gbSource = new System.Windows.Forms.GroupBox();
             this.cboSource = new System.Windows.Forms.ComboBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -66,6 +69,7 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.txtPublish = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.chkAnalyzeAuto = new System.Windows.Forms.CheckBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.chkKeepScreenshot = new System.Windows.Forms.CheckBox();
             this.chkOptImageShack = new System.Windows.Forms.CheckBox();
@@ -91,6 +95,7 @@
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            this.gbProperties.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.gbSource.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -320,7 +325,7 @@
             // sBar
             // 
             this.sBar.Name = "sBar";
-            this.sBar.Size = new System.Drawing.Size(628, 17);
+            this.sBar.Size = new System.Drawing.Size(659, 17);
             this.sBar.Spring = true;
             this.sBar.Text = "Ready";
             this.sBar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -348,6 +353,7 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.gbProperties);
             this.tabPage5.Controls.Add(this.groupBox4);
             this.tabPage5.Controls.Add(this.gbSource);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
@@ -357,6 +363,42 @@
             this.tabPage5.Text = "Media";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // gbProperties
+            // 
+            this.gbProperties.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbProperties.Controls.Add(this.txtWebLink);
+            this.gbProperties.Controls.Add(this.chkWebLink);
+            this.gbProperties.Location = new System.Drawing.Point(12, 111);
+            this.gbProperties.Name = "gbProperties";
+            this.gbProperties.Size = new System.Drawing.Size(714, 318);
+            this.gbProperties.TabIndex = 11;
+            this.gbProperties.TabStop = false;
+            this.gbProperties.Text = "Properties";
+            // 
+            // txtWebLink
+            // 
+            this.txtWebLink.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtWebLink.Location = new System.Drawing.Point(108, 20);
+            this.txtWebLink.Name = "txtWebLink";
+            this.txtWebLink.Size = new System.Drawing.Size(561, 20);
+            this.txtWebLink.TabIndex = 10;
+            // 
+            // chkWebLink
+            // 
+            this.chkWebLink.AutoSize = true;
+            this.chkWebLink.Checked = global::TDMaker.Properties.Settings.Default.WebLink;
+            this.chkWebLink.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkWebLink.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "WebLink", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkWebLink.Location = new System.Drawing.Point(22, 23);
+            this.chkWebLink.Name = "chkWebLink";
+            this.chkWebLink.Size = new System.Drawing.Size(75, 17);
+            this.chkWebLink.TabIndex = 9;
+            this.chkWebLink.Text = "&Web Link:";
+            this.chkWebLink.UseVisualStyleBackColor = true;
+            // 
             // groupBox4
             // 
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -364,13 +406,13 @@
             this.groupBox4.Controls.Add(this.rbDir);
             this.groupBox4.Controls.Add(this.rbFile);
             this.groupBox4.Controls.Add(this.btnBrowse);
-            this.groupBox4.Controls.Add(this.txtFilePath);
+            this.groupBox4.Controls.Add(this.txtMediaLocation);
             this.groupBox4.Location = new System.Drawing.Point(12, 12);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(550, 93);
             this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Analyze Media";
+            this.groupBox4.Text = "Location";
             // 
             // rbDir
             // 
@@ -407,16 +449,16 @@
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
-            // txtFilePath
+            // txtMediaLocation
             // 
-            this.txtFilePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.txtMediaLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFilePath.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.txtFilePath.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
-            this.txtFilePath.Location = new System.Drawing.Point(26, 50);
-            this.txtFilePath.Name = "txtFilePath";
-            this.txtFilePath.Size = new System.Drawing.Size(426, 20);
-            this.txtFilePath.TabIndex = 6;
+            this.txtMediaLocation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtMediaLocation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
+            this.txtMediaLocation.Location = new System.Drawing.Point(26, 50);
+            this.txtMediaLocation.Name = "txtMediaLocation";
+            this.txtMediaLocation.Size = new System.Drawing.Size(426, 20);
+            this.txtMediaLocation.TabIndex = 6;
             // 
             // gbSource
             // 
@@ -424,7 +466,7 @@
             this.gbSource.Controls.Add(this.cboSource);
             this.gbSource.Location = new System.Drawing.Point(571, 13);
             this.gbSource.Name = "gbSource";
-            this.gbSource.Size = new System.Drawing.Size(137, 92);
+            this.gbSource.Size = new System.Drawing.Size(155, 92);
             this.gbSource.TabIndex = 8;
             this.gbSource.TabStop = false;
             this.gbSource.Text = "Source";
@@ -502,6 +544,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.chkAnalyzeAuto);
             this.tabPage4.Controls.Add(this.groupBox7);
             this.tabPage4.Controls.Add(this.groupBox6);
             this.tabPage4.Controls.Add(this.groupBox5);
@@ -512,11 +555,23 @@
             this.tabPage4.Text = "Options";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // chkAnalyzeAuto
+            // 
+            this.chkAnalyzeAuto.AutoSize = true;
+            this.chkAnalyzeAuto.Checked = global::TDMaker.Properties.Settings.Default.AnalyzeAuto;
+            this.chkAnalyzeAuto.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "AnalyzeAuto", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkAnalyzeAuto.Location = new System.Drawing.Point(32, 17);
+            this.chkAnalyzeAuto.Name = "chkAnalyzeAuto";
+            this.chkAnalyzeAuto.Size = new System.Drawing.Size(260, 17);
+            this.chkAnalyzeAuto.TabIndex = 9;
+            this.chkAnalyzeAuto.Text = "&Process media immediately after loading file/folder";
+            this.chkAnalyzeAuto.UseVisualStyleBackColor = true;
+            // 
             // groupBox7
             // 
             this.groupBox7.Controls.Add(this.chkKeepScreenshot);
             this.groupBox7.Controls.Add(this.chkOptImageShack);
-            this.groupBox7.Location = new System.Drawing.Point(16, 16);
+            this.groupBox7.Location = new System.Drawing.Point(16, 45);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(431, 78);
             this.groupBox7.TabIndex = 8;
@@ -556,7 +611,7 @@
             this.groupBox6.Controls.Add(this.label7);
             this.groupBox6.Controls.Add(this.nudBodyText);
             this.groupBox6.Controls.Add(this.label3);
-            this.groupBox6.Location = new System.Drawing.Point(455, 99);
+            this.groupBox6.Location = new System.Drawing.Point(455, 128);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(190, 113);
             this.groupBox6.TabIndex = 7;
@@ -616,7 +671,7 @@
             this.groupBox5.Controls.Add(this.chkPre);
             this.groupBox5.Controls.Add(this.chkPreIncreaseFontSize);
             this.groupBox5.Controls.Add(this.chkAlignCenter);
-            this.groupBox5.Location = new System.Drawing.Point(16, 99);
+            this.groupBox5.Location = new System.Drawing.Point(16, 128);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(431, 113);
             this.groupBox5.TabIndex = 3;
@@ -714,9 +769,9 @@
             this.btnAnalyze.Enabled = false;
             this.btnAnalyze.Location = new System.Drawing.Point(58, 505);
             this.btnAnalyze.Name = "btnAnalyze";
-            this.btnAnalyze.Size = new System.Drawing.Size(67, 23);
+            this.btnAnalyze.Size = new System.Drawing.Size(104, 23);
             this.btnAnalyze.TabIndex = 9;
-            this.btnAnalyze.Text = "&Reanalyze";
+            this.btnAnalyze.Text = "&Create Description";
             this.btnAnalyze.UseVisualStyleBackColor = true;
             this.btnAnalyze.Click += new System.EventHandler(this.btnAnalyze_Click);
             // 
@@ -736,6 +791,7 @@
             // 
             // frmMain
             // 
+            this.AcceptButton = this.btnBrowse;
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -765,6 +821,8 @@
             this.statusStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
+            this.gbProperties.ResumeLayout(false);
+            this.gbProperties.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.gbSource.ResumeLayout(false);
@@ -774,6 +832,7 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.groupBox6.ResumeLayout(false);
@@ -819,7 +878,7 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TextBox txtPublish;
         private System.Windows.Forms.Button btnPublish;
-        private System.Windows.Forms.TextBox txtFilePath;
+        private System.Windows.Forms.TextBox txtMediaLocation;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.TabPage tabPage4;
@@ -846,6 +905,10 @@
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.RadioButton rbDir;
         private System.Windows.Forms.RadioButton rbFile;
+        private System.Windows.Forms.TextBox txtWebLink;
+        private System.Windows.Forms.CheckBox chkWebLink;
+        private System.Windows.Forms.GroupBox gbProperties;
+        private System.Windows.Forms.CheckBox chkAnalyzeAuto;
     }
 }
 

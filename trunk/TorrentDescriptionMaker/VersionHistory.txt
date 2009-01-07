@@ -1,9 +1,11 @@
+1.1.12.0 Extended description to include WebLink field in Media Properties
+1.1.11.0 Option to disable processing media immediately after loading file or folder
 1.1.10.0 Ability to browse for DVD folder with better accuracy for Duration and Subtitles
 1.1.09.2 Stream count for subtitles was incorrect
 1.1.09.1 Subtitles field value was sometimes blank for Music Video VOB files
 1.1.09.0 Publish info is now not user editable for minor changes [Protech]
 1.1.08.0 Option to disable keeping screenshots Pictures\MTN [Protech]
-1.1.07.0 Added Source description to Publishing layout [Protech]
+1.1.07.0 Extended description to include Source [Protech]
 1.1.06.0 Added support for optionally using pre text and ability to change font sizes [MiXiT]
 1.1.05.3 General body did not have the font size set [Protech]
 1.1.05.2 Retrying uploading to ImageShack did not work as expected [Protech]
@@ -13,6 +15,6 @@
 1.1.03.0 Option to disable ImageShack and choose between Full Image and Forum Thumbnail [nnnnnn]
 1.1.02.0 General, Video and Audio headings are in bold [cirrhosis]
 1.1.01.1 Missed pre tags to Movie Info
-1.1.01.0 Added Subtitles and Frame Rate info [cirrhosis]
-1.1.00.0 MediaInfo integration
+1.1.01.0 Extended description to include Subtitles and Frame Rate info [cirrhosis]
+1.1.00.0 Added MediaInfo integration
 1.0.00.0 Initial Release to publish screenshots using MTN to ImageShack

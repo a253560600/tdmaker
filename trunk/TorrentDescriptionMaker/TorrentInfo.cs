@@ -10,19 +10,21 @@ using System.ComponentModel;
 
 namespace TorrentDescriptionMaker
 {
-    class cTorrentInfo
+    class TorrentInfo
     {
         private string mMovieFilePath = string.Empty;
         private BackgroundWorker mBwApp = null;
         private MediaInfoLib.MediaInfo mMI = new MediaInfoLib.MediaInfo();
         MediaInfo mMediaInfo;
 
-        public cTorrentInfo(BackgroundWorker bwApp, string p)
+        public TorrentInfo(BackgroundWorker bwApp, MediaInfo mi)
         {
-            this.mBwApp = bwApp;
+            // load the MediaInfo object
+            mMediaInfo = mi;
 
-            // create a MediaInfo object
-            mMediaInfo = new MediaInfo(p);
+            string p = mi.Location;
+
+            this.mBwApp = bwApp;          
 
             // choose actions based on file or folder
             if (File.Exists(p))
@@ -91,7 +93,6 @@ namespace TorrentDescriptionMaker
 
             sbMediaInfo.AppendLine(bb.size(fontSizeHeading, bb.bolditalic("General:")));
             sbMediaInfo.AppendLine();
-
             // Source 
             if (!string.IsNullOrEmpty(Settings.Default.Source))
             {
@@ -115,7 +116,7 @@ namespace TorrentDescriptionMaker
                 sbGeneral.Append(string.Format(" ({0})", mMediaInfo.FormatInfo));
             }
             sbGeneral.Append(Environment.NewLine);
-
+            
             // File Size
             sbGeneral.AppendLine(string.Format("    [u]File Size:[/u] {0}",
                 mMI.Get(0, 0, "FileSize/String4")));
@@ -170,7 +171,13 @@ namespace TorrentDescriptionMaker
                     sbGeneral.Append("None");
                 }
             }
+
             sbGeneral.Append(Environment.NewLine);
+
+            if (Settings.Default.WebLink && !string.IsNullOrEmpty(mMediaInfo.WebLink))
+            {
+                sbGeneral.AppendLine(string.Format("     [u]Web Link:[/u] {0}", mMediaInfo.WebLink));
+            }
 
             sbMediaInfo.Append(bb.size(fontSizeBody, sbGeneral.ToString()));
 
