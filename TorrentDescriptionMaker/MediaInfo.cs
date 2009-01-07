@@ -23,7 +23,7 @@ namespace TorrentDescriptionMaker
         /// <summary>
         /// File Size in Bytes
         /// </summary>
-        public string FileSize { get; set; }
+        public double FileSize { get; set; }
         public string Format { get; set; }
         public string FormatInfo { get; set; }
         public string Location { get; set; }
@@ -66,6 +66,7 @@ namespace TorrentDescriptionMaker
                 if (vobFiles.Length > 0)
                 {
                     long dura = 0;
+                    double size = 0;
                     foreach (string vob in vobFiles)
                     {
                         MediaInfoLib.MediaInfo mi = new MediaInfoLib.MediaInfo();
@@ -77,7 +78,14 @@ namespace TorrentDescriptionMaker
                             long.TryParse(temp, out d);
                             dura += d;
                         }
+
+                        double sz = 0;
+                        double.TryParse(mi.Get(0, 0, "FileSize"), out sz);
+                        size += sz;
+
                     }
+
+                    this.FileSize = size;
                     this.Duration = dura / 1000;
 
                     long hours = this.Duration / 3600;

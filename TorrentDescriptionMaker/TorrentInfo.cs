@@ -118,8 +118,16 @@ namespace TorrentDescriptionMaker
             sbGeneral.Append(Environment.NewLine);
             
             // File Size
-            sbGeneral.AppendLine(string.Format("    [u]File Size:[/u] {0}",
-                mMI.Get(0, 0, "FileSize/String4")));
+            string fsz = "";
+            if (0 == mMediaInfo.FileSize)
+            {
+                fsz = mMI.Get(0, 0, "FileSize/String4");
+            }
+            else
+            {
+                fsz = string.Format("{0} MiB", (mMediaInfo.FileSize / 1024.0/1024.0).ToString("0.00"));
+            }
+            sbGeneral.AppendLine(string.Format("    [u]File Size:[/u] {0}", fsz));
             // Duration
             if (string.IsNullOrEmpty(mMediaInfo.DurationString))
             {
