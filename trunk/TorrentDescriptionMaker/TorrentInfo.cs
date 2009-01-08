@@ -159,7 +159,7 @@ namespace TorrentDescriptionMaker
 
                 StringBuilder sbAudio = new StringBuilder();
                 // Format
-                sbAudio.Append(string.Format("        [u]Format:[/u] {0}", ai.Format));
+                sbAudio.Append(string.Format("       [u]Format:[/u] {0}", ai.Format));
                 if (!string.IsNullOrEmpty(ai.FormatVersion))
                     sbAudio.Append(string.Format(" {0}", ai.FormatVersion));
                 if (!string.IsNullOrEmpty(ai.FormatProfile))
@@ -177,7 +177,7 @@ namespace TorrentDescriptionMaker
                 sbAudio.AppendLine(string.Format("[u]Sampling Rate:[/u] {0}", ai.SamplingRate));
                 // Resolution
                 if (!string.IsNullOrEmpty(ai.Resolution))
-                    sbAudio.AppendLine(string.Format(("  [u]Resolution:[/u] {0}"), ai.Resolution));
+                    sbAudio.AppendLine(string.Format(("   [u]Resolution:[/u] {0}"), ai.Resolution));
 
                 sbMediaInfo.Append(bb.size(fontSizeBody, sbAudio.ToString()));
 
