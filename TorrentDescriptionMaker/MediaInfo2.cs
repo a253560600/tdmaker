@@ -131,7 +131,9 @@ namespace TorrentDescriptionMaker
                         mi.Close();
                     }
 
-                    this.FileSize = size;
+                    this.FileSize = size; // override any previous file size
+                    this.FileSizeString = string.Format("{0} MiB", (this.FileSize / 1024.0 / 1024.0).ToString("0.00"));
+
                     this.Duration = dura / 1000.0;
 
                     long hours = (long)this.Duration / 3600;
@@ -217,8 +219,7 @@ namespace TorrentDescriptionMaker
                     this.FileSize = sz;
                 }
                 // fsz = mMI.Get(0, 0, "FileSize/String4");
-                this.FileSizeString = string.Format("{0} MiB", (this.FileSize / 1024.0 / 1024.0).ToString("0.00"));
-
+                
                 // Duration
                 if (string.IsNullOrEmpty(this.DurationString))
                     this.DurationString = mMI.Get(0, 0, "Duration/String2");
