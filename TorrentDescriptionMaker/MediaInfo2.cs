@@ -74,6 +74,7 @@ namespace TorrentDescriptionMaker
             if (File.Exists(Location))
             {
                 this.FilePath = Location;
+                this.FileName = Path.GetFileName(this.FilePath);
                 ReadFile();
             }
             else if (Directory.Exists(Location))
@@ -95,18 +96,21 @@ namespace TorrentDescriptionMaker
                         }
                     }
                     this.FilePath = maxPath;
+                    this.FileName = Path.GetFileName(this.FilePath);
                     ReadFile();
                 }
 
-                // Guess File Name
-                this.FileName = Path.GetFileName(Location);
-                if (this.FileName.ToUpper().Equals("VIDEO_TS"))
-                    this.FileName = Path.GetFileName(Path.GetDirectoryName(Location));
-
+                // DVD Video
                 // Calculate Duration and File Size
                 string[] vobFiles = Directory.GetFiles(Location, "*.vob", SearchOption.AllDirectories);
                 if (vobFiles.Length > 0)
                 {
+
+                    // Guess File Name
+                    this.FileName = Path.GetFileName(Location);
+                    if (this.FileName.ToUpper().Equals("VIDEO_TS"))
+                        this.FileName = Path.GetFileName(Path.GetDirectoryName(Location));
+
                     long dura = 0;
                     double size = 0;
                     foreach (string vob in vobFiles)
@@ -218,8 +222,11 @@ namespace TorrentDescriptionMaker
                     double.TryParse(mMI.Get(0, 0, "FileSize"), out sz);
                     this.FileSize = sz;
                 }
-                // fsz = mMI.Get(0, 0, "FileSize/String4");
-                
+                if (string.IsNullOrEmpty(FileSizeString))
+                {
+                    this.FileSizeString = string.Format("{0} MiB", (this.FileSize / 1024.0 / 1024.0).ToString("0.00"));
+                }
+
                 // Duration
                 if (string.IsNullOrEmpty(this.DurationString))
                     this.DurationString = mMI.Get(0, 0, "Duration/String2");
@@ -272,7 +279,12 @@ namespace TorrentDescriptionMaker
                 this.Video.Format = mMI.Get(StreamKind.Video, 0, "Format");
                 this.Video.FormatVersion = mMI.Get(StreamKind.Video, 0, "Format_Version");
 
-                this.Video.Codec = mMI.Get(StreamKind.Video, 0, "CodecID/Hint");
+                if (Path.GetExtension(this.FilePath).ToLower().Equals(".mkv"))
+                {
+                    this.Video.Codec = mMI.Get(StreamKind.Video, 0, "Encoded_Library");
+                }
+                if (string.IsNullOrEmpty(this.Video.Codec))
+                    this.Video.Codec = mMI.Get(StreamKind.Video, 0, "CodecID/Hint");
                 if (string.IsNullOrEmpty(this.Video.Codec))
                     this.Video.Codec = mMI.Get(StreamKind.Video, 0, "CodecID");
 

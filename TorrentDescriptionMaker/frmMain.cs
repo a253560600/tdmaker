@@ -258,18 +258,21 @@ namespace TorrentDescriptionMaker
 
         private void bwApp_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            string msg = e.UserState.ToString();
-            int perc = e.ProgressPercentage;
-
-            switch (perc)
+            if (e.UserState != null)
             {
-                case 0:
-                    txtMediaInfo.Text = msg;
-                    break;
-                case 1:
-                    break;
-            }
+                string msg = e.UserState.ToString();
+                int perc = e.ProgressPercentage;
 
+                switch (perc)
+                {
+                    case 0:
+                        txtMediaInfo.Text = msg;
+                        break;
+                    case 1:
+                        break;
+                }
+
+            }
         }
 
         private void chkOptImageShack_CheckedChanged(object sender, EventArgs e)
