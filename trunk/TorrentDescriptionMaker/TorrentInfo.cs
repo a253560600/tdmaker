@@ -22,9 +22,7 @@ namespace TorrentDescriptionMaker
 
             string p = mi.Location;
 
-            this.mBwApp = bwApp;
-
-            mBwApp.ReportProgress(0, mi.Summary);
+            this.mBwApp = bwApp;            
 
             if (Settings.Default.UploadImageShack)
                 sGetScreenshot(mi.FilePath);
