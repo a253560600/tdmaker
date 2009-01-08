@@ -11,8 +11,7 @@ using System.ComponentModel;
 namespace TorrentDescriptionMaker
 {
     class TorrentInfo
-    {
-        private string FilePath = string.Empty;
+    {       
         private BackgroundWorker mBwApp = null;
         MediaInfo2 mMediaInfo2;
 
@@ -126,7 +125,8 @@ namespace TorrentDescriptionMaker
             sbVideo.Append(Environment.NewLine);
 
             // Codec
-            sbVideo.AppendLine(string.Format("        [u]Codec:[/u] {0}", this.mMediaInfo2.Video.Codec));
+            if (!string.IsNullOrEmpty(vi.Codec))
+                sbVideo.AppendLine(string.Format("        [u]Codec:[/u] {0}", vi.Codec));
             // Bitrate
             sbVideo.AppendLine(string.Format("      [u]Bitrate:[/u] {0}", this.mMediaInfo2.Video.Bitrate));
             // Standard            
@@ -168,8 +168,9 @@ namespace TorrentDescriptionMaker
                     sbAudio.Append(string.Format(" {0}", ai.FormatProfile));
                 sbAudio.Append(Environment.NewLine);
 
-                // Codec                                
-                sbAudio.AppendLine(string.Format("        [u]Codec:[/u] {0}", ai.Codec));
+                // Codec     
+                if (!string.IsNullOrEmpty(ai.Codec))
+                    sbAudio.AppendLine(string.Format("        [u]Codec:[/u] {0}", ai.Codec));
                 // Bitrate
                 sbAudio.AppendLine(string.Format("      [u]Bitrate:[/u] {0} ({1})", ai.Bitrate, ai.BitrateMode));
                 // Channels
@@ -177,7 +178,8 @@ namespace TorrentDescriptionMaker
                 // Sampling Rate
                 sbAudio.AppendLine(string.Format("[u]Sampling Rate:[/u] {0}", ai.SamplingRate));
                 // Resolution
-                sbAudio.AppendLine(string.Format(("  [u]Resolution:[/u] {0}"), ai.Resolution));                
+                if (!string.IsNullOrEmpty(ai.Resolution))
+                    sbAudio.AppendLine(string.Format(("  [u]Resolution:[/u] {0}"), ai.Resolution));
 
                 sbMediaInfo.Append(bb.size(fontSizeBody, sbAudio.ToString()));
 
@@ -218,7 +220,7 @@ namespace TorrentDescriptionMaker
             psi.Arguments = string.Format("{0} -O \"{1}\" \"{2}\"",
                 Settings.Default.MTNArg,
                 picPath,
-                this.FilePath);
+                mediaFilePath);
 
             p.StartInfo = psi;
             p.Start();
