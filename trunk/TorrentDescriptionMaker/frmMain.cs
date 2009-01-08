@@ -13,7 +13,7 @@ namespace TorrentDescriptionMaker
     public partial class frmMain : Form
     {
         private TorrentInfo mTInfo = null;
-        private MediaInfo mMI = null;
+        private MediaInfo2 mMI = null;
         public frmMain()
         {
             InitializeComponent();
@@ -58,7 +58,7 @@ namespace TorrentDescriptionMaker
         {
             if (File.Exists(txtMediaLocation.Text) || Directory.Exists(txtMediaLocation.Text))
             {
-                mMI = new MediaInfo(txtMediaLocation.Text);
+                mMI = new MediaInfo2(txtMediaLocation.Text);
                 mMI.Source = cboSource.Text;
                 mMI.WebLink = txtWebLink.Text;
 
@@ -155,6 +155,8 @@ namespace TorrentDescriptionMaker
 
         private void bwApp_DoWork(object sender, DoWorkEventArgs e)
         {
+            // start of the magic :)
+
             Program.Status = "Reading " + mMI.Location;
             mMI.ReadMedia();            
             mTInfo = new TorrentInfo(bwApp, mMI);
