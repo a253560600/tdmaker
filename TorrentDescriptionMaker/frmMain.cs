@@ -17,7 +17,7 @@ namespace TorrentDescriptionMaker
         TrackerManager mTrackerManager = null;
 
         private TorrentInfo mTInfo = null;
-        private MediaInfo2 mMI = null;
+        private MediaFile mMI = null;
 
         public frmMain()
         {
@@ -94,7 +94,7 @@ namespace TorrentDescriptionMaker
         {
             if (File.Exists(txtMediaLocation.Text) || Directory.Exists(txtMediaLocation.Text))
             {
-                mMI = new MediaInfo2(txtMediaLocation.Text);
+                mMI = new MediaFile(txtMediaLocation.Text);
                 mMI.Source = cboSource.Text;
                 mMI.WebLink = txtWebLink.Text;
 
