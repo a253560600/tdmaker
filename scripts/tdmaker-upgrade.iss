@@ -42,9 +42,9 @@ end;
 [Setup]
 
 AppName=TDMaker
-AppVerName=TDMaker 1.2
-VersionInfoVersion=1.2.0.0
-VersionInfoTextVersion=1.2.0.0
+AppVerName=TDMaker 1.1.13
+VersionInfoVersion=1.1.13
+VersionInfoTextVersion=1.1.13
 VersionInfoCompany=BetaONE
 VersionInfoDescription=Torrent Description Maker
 AppPublisher=BetaONE
@@ -69,8 +69,8 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 ;Source: "manual\TDMaker-manual.pdf"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\TorrentDescriptionMaker\bin\Release\*.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\TorrentDescriptionMaker\bin\Release\*.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\dist\*.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\dist\*.dll"; DestDir: "{app}"; Flags: ignoreversion
+;Source: "..\..\dist\*.exe"; DestDir: "{app}"; Flags: ignoreversion
+;Source: "..\..\dist\*.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\TDMaker"; Filename: "{app}\TDMaker.exe"
