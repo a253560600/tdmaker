@@ -1,12 +1,13 @@
+1.2.00.0 Added support for creating Torrents using MonoTorrent
 1.1.13.0 Show Encoded_Library instead of Codec/ID for MKV files
 1.1.12.1 Accurate file size for DVDs browsed as a folder
 1.1.12.0 Extended description to include WebLink field in Media Properties
 1.1.11.0 Option to disable processing media immediately after loading file or folder
-
-Version 1.1.10 - 20080106
-
 1.1.10.0 Ability to browse for DVD folder with better accuracy for Duration and Subtitles
 1.1.09.2 Stream count for subtitles was incorrect
+
+Version 1.1.10 - 20080105
+
 1.1.09.1 Subtitles field value was sometimes blank for Music Video VOB files
 1.1.09.0 Publish info is now not user editable for minor changes [Protech]
 1.1.08.0 Option to disable keeping screenshots Pictures\MTN [Protech]

@@ -32,10 +32,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ImageUploader, Version=1.0.3296.13514, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\Users64\Mihajlo\Documents\Visual Studio 2008\Projects\ZScreen\trunk\ImageUploader\ImageUploader\bin\Debug\ImageUploader.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTorrent, Version=0.62.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MonoTorrent.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -76,8 +85,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Tracker.cs" />
+    <Compile Include="TrackerManager.cs" />
+    <Compile Include="TrackerManager2.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\DataSources\Tracker.datasource" />
     <None Include="Resources\info-16-xp.png" />
   </ItemGroup>
   <ItemGroup>
@@ -87,12 +100,6 @@
     </Content>
     <Content Include="TODO.txt" />
     <Content Include="VersionHistory.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\ZScreen\ImageUploader\ImageUploader\ImageUploader.csproj">
-      <Project>{223EC461-C070-4FF3-ADE7-92BC21AE66FC}</Project>
-      <Name>ImageUploader</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
