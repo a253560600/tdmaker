@@ -220,20 +220,6 @@ namespace TorrentDescriptionMaker
             // Trackers
             readTrackers1();
 
-
-            //DataSet ds = tm2.Read();
-            //if (ds != null)
-            //{
-            //    dgvTrackers.DataSource = ds.Tables[0];
-            //    if (dgvTrackers.Columns.Count > 0)
-            //    {
-            //        dgvTrackers.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            //        dgvTrackers.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            //    }
-            //    cboAnnounceURL.DataSource = dgvTrackers.DataSource;
-            //    cboAnnounceURL.DisplayMember = "Name";
-            //    cboAnnounceURL.ValueMember = "AnnounceURL";
-            //}
         }
 
         private void writeTrackers1()
@@ -550,6 +536,9 @@ namespace TorrentDescriptionMaker
         private Tracker getTracker()
         {
             Tracker t = new Tracker("Unknown Tracker", "");
+
+            if (Settings.Default.AnnounceURLIndex < 0)
+                Settings.Default.AnnounceURLIndex = 0;
 
             if (dgvTrackers.Rows.Count > Settings.Default.AnnounceURLIndex)
             {
