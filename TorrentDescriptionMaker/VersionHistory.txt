@@ -1,4 +1,4 @@
-Version 1.2.00 - 20090109
+Version 1.2.00 - 20090110
 
 1.2.01.2 Saving torrents to Custom folder setting still saved in default folder [tacoking] 
 1.2.01.1 TDMaker crashed with 32-bit MediaInfo.dll under Windows x64 [tacoking]
