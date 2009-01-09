@@ -60,7 +60,7 @@ namespace TorrentDescriptionMaker
 
             if (Settings.Default.CreateTorrent)
                 createTorrent(tp);
-   
+
             if (Settings.Default.AnalyzeAuto)
                 analyzeMedia();
 
@@ -109,6 +109,8 @@ namespace TorrentDescriptionMaker
 
                 pBar.Style = ProgressBarStyle.Marquee;
 
+                lbStatus.Items.Add("Analyzing Media using MediaInfo.");
+
                 if (!bwApp.IsBusy)
                     bwApp.RunWorkerAsync();
 
@@ -153,7 +155,7 @@ namespace TorrentDescriptionMaker
             Settings.Default.TorrentFolderDefault = rbTorrentDefaultFolder.Checked;
 
             Settings.Default.Save();
-        }     
+        }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
@@ -191,7 +193,7 @@ namespace TorrentDescriptionMaker
                     Directory.CreateDirectory(Settings.Default.TorrentsCustomDir);
             }
 
-            mTrackerManager = new TrackerManager();   
+            mTrackerManager = new TrackerManager();
 
         }
 
@@ -321,8 +323,14 @@ namespace TorrentDescriptionMaker
 
             }
 
-            pBar.Style = ProgressBarStyle.Continuous;
-            Program.Status = "Ready.";
+            if (!string.IsNullOrEmpty(txtScrFull.Text))
+                lbStatus.Items.Add("Uploaded Screenshot to ImageShack.");
+
+            if (mBwTorrent == null || !mBwTorrent.IsBusy)
+            {
+                pBar.Style = ProgressBarStyle.Continuous;
+                Program.Status = "Ready.";
+            }
         }
 
         private void tmrStatus_Tick(object sender, EventArgs e)
@@ -330,7 +338,8 @@ namespace TorrentDescriptionMaker
             sBar.Text = Program.Status;
             btnBrowse.Enabled = !bwApp.IsBusy;
             // btnBrowse.Text = (File.Exists(txtMediaFile.Text) ? "&Analyze" : "&Browse...");
-        }
+            lbStatus.SelectedIndex = lbStatus.Items.Count - 1;
+        }        
 
         private void btnCopy2_Click(object sender, EventArgs e)
         {
@@ -387,18 +396,22 @@ namespace TorrentDescriptionMaker
             {
                 case 0:
                     Program.Status = msg;
+                    lbStatus.Items.Add(msg);
                     pBar.Style = ProgressBarStyle.Continuous;
                     break;
                 case 1:
                     Program.Status = msg;
+                    lbStatus.Items.Add(msg);
                     pBar.Style = ProgressBarStyle.Marquee;
                     break;
             }
         }
 
+        BackgroundWorker mBwTorrent = null;
+
         void bwTorrent_DoWork(object sender, DoWorkEventArgs e)
         {
-            BackgroundWorker bw = (BackgroundWorker)sender;
+            mBwTorrent = (BackgroundWorker)sender;
             if (e.Argument != null)
             {
                 try
@@ -418,7 +431,7 @@ namespace TorrentDescriptionMaker
                     tc.Announces.Add(temp);
 
                     string torrentName = (File.Exists(p) ? Path.GetFileNameWithoutExtension(p) : Path.GetFileName(p));
-                    string torrentPath = "";                    
+                    string torrentPath = "";
 
                     if (!Settings.Default.TorrentFolderDefault &&
                         Directory.Exists(Settings.Default.TorrentsCustomDir))
@@ -426,7 +439,7 @@ namespace TorrentDescriptionMaker
 
                         if (Settings.Default.TorrentsOrganize)
                         {
-                            string subDir = Path.Combine(Settings.Default.TorrentsCustomDir, tp.Tracker.Name);                            
+                            string subDir = Path.Combine(Settings.Default.TorrentsCustomDir, tp.Tracker.Name);
                             torrentPath = Path.Combine(subDir, torrentName + ".torrent");
 
                         }
@@ -444,13 +457,13 @@ namespace TorrentDescriptionMaker
                     if (!Directory.Exists(Path.GetDirectoryName(torrentPath)))
                         Directory.CreateDirectory(Path.GetDirectoryName(torrentPath));
 
-                    bw.ReportProgress(1, string.Format("Creating {0}", torrentPath));
+                    mBwTorrent.ReportProgress(1, string.Format("Creating {0}", torrentPath));
                     tc.Create(torrentPath);
-                    bw.ReportProgress(0, string.Format("Created {0}", torrentPath));
+                    mBwTorrent.ReportProgress(0, string.Format("Created {0}", torrentPath));
                 }
                 catch (Exception ex)
                 {
-                    bw.ReportProgress(0, ex.Message);
+                    mBwTorrent.ReportProgress(0, ex.Message);
                 }
             }
         }
@@ -470,6 +483,7 @@ namespace TorrentDescriptionMaker
                 switch (perc)
                 {
                     case 0:
+                        lbStatus.Items.Add("Analyzed Media using MediaInfo");
                         txtMediaInfo.Text = msg;
                         break;
                     case 1:
