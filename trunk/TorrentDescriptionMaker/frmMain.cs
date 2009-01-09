@@ -386,28 +386,31 @@ namespace TorrentDescriptionMaker
             string p = tp.MediaLocation;
             if (File.Exists(p) || Directory.Exists(p))
             {
-                BackgroundWorker bw = new BackgroundWorker();
-                bw.DoWork += new DoWorkEventHandler(bw_DoWork);
-                bw.WorkerReportsProgress = true;
-                bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
-                bw.RunWorkerAsync(tp);
+                BackgroundWorker bwTorrent = new BackgroundWorker();
+                bwTorrent.DoWork += new DoWorkEventHandler(bwTorrent_DoWork);
+                bwTorrent.WorkerReportsProgress = true;
+                bwTorrent.ProgressChanged += new ProgressChangedEventHandler(bwTorrent_ProgressChanged);
+                bwTorrent.RunWorkerAsync(tp);
             }
         }
 
-        void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        void bwTorrent_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             string msg = e.UserState.ToString();
             switch (e.ProgressPercentage)
             {
                 case 0:
                     Program.Status = msg;
+                    pBar.Style = ProgressBarStyle.Continuous;
                     break;
                 case 1:
+                    Program.Status = msg;
+                    pBar.Style = ProgressBarStyle.Marquee;
                     break;
             }
         }
 
-        void bw_DoWork(object sender, DoWorkEventArgs e)
+        void bwTorrent_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker bw = (BackgroundWorker)sender;
             if (e.Argument != null)
@@ -455,7 +458,7 @@ namespace TorrentDescriptionMaker
                     if (!Directory.Exists(Path.GetDirectoryName(torrentPath)))
                         Directory.CreateDirectory(Path.GetDirectoryName(torrentPath));
 
-                    bw.ReportProgress(0, string.Format("Creating {0}", torrentPath));
+                    bw.ReportProgress(1, string.Format("Creating {0}", torrentPath));
                     tc.Create(torrentPath);
                     bw.ReportProgress(0, string.Format("Created {0}", torrentPath));
                 }

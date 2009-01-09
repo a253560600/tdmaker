@@ -61,12 +61,12 @@ namespace TorrentDescriptionMaker
             // Source 
             if (!string.IsNullOrEmpty(Settings.Default.Source))
             {
-                sbGeneral.AppendLine(string.Format("       [u]Source:[/u] {0}", Settings.Default.Source));
+                sbGeneral.AppendLine(string.Format("            [u]Source:[/u] {0}", Settings.Default.Source));
             }
             // File Name
             if (!string.IsNullOrEmpty(mMediaInfo2.FileName))
             {
-                sbGeneral.AppendLine(string.Format("    [u]File Name:[/u] {0}", mMediaInfo2.FileName));
+                sbGeneral.AppendLine(string.Format("         [u]File Name:[/u] {0}", mMediaInfo2.FileName));
             }
             //else
             //{
@@ -76,7 +76,7 @@ namespace TorrentDescriptionMaker
             //}
 
             // Format
-            sbGeneral.Append(string.Format("       [u]Format:[/u] {0}", mMediaInfo2.Format));
+            sbGeneral.Append(string.Format("            [u]Format:[/u] {0}", mMediaInfo2.Format));
             if (!string.IsNullOrEmpty(mMediaInfo2.FormatInfo))
             {
                 sbGeneral.Append(string.Format(" ({0})", mMediaInfo2.FormatInfo));
@@ -84,22 +84,21 @@ namespace TorrentDescriptionMaker
             sbGeneral.Append(Environment.NewLine);
 
             // File Size
-            sbGeneral.AppendLine(string.Format("    [u]File Size:[/u] {0}", mMediaInfo2.FileSizeString));
-
+            sbGeneral.AppendLine(string.Format("         [u]File Size:[/u] {0}", mMediaInfo2.FileSizeString));
             // Duration
-            sbGeneral.AppendLine(string.Format("     [u]Duration:[/u] {0}", mMediaInfo2.DurationString));
+            sbGeneral.AppendLine(string.Format("          [u]Duration:[/u] {0}", mMediaInfo2.DurationString));
             // Bitrate
-            sbGeneral.AppendLine(string.Format("      [u]Bitrate:[/u] {0}", mMediaInfo2.Bitrate));
+            sbGeneral.AppendLine(string.Format("           [u]Bitrate:[/u] {0}", mMediaInfo2.Bitrate));
 
             // Subtitles            
             if (!string.IsNullOrEmpty(mMediaInfo2.Subtitles))
             {
-                sbGeneral.AppendLine(string.Format("    [u]Subtitles:[/u] {0}", mMediaInfo2.Subtitles));
+                sbGeneral.AppendLine(string.Format("         [u]Subtitles:[/u] {0}", mMediaInfo2.Subtitles));
             }
 
             if (Settings.Default.WebLink && !string.IsNullOrEmpty(mMediaInfo2.WebLink))
             {
-                sbGeneral.AppendLine(string.Format("     [u]Web Link:[/u] {0}", mMediaInfo2.WebLink));
+                sbGeneral.AppendLine(string.Format("          [u]Web Link:[/u] {0}", mMediaInfo2.WebLink));
             }
 
             sbMediaInfo.Append(bb.size(fontSizeBody, sbGeneral.ToString()));
@@ -115,7 +114,7 @@ namespace TorrentDescriptionMaker
 
             StringBuilder sbVideo = new StringBuilder();
             // Format            
-            sbVideo.Append(string.Format("       [u]Format:[/u] {0}", this.mMediaInfo2.Video.Format));
+            sbVideo.Append(string.Format("            [u]Format:[/u] {0}", this.mMediaInfo2.Video.Format));
             if (!string.IsNullOrEmpty(this.mMediaInfo2.Video.FormatVersion))
             {
                 sbVideo.Append(string.Format(" {0}", this.mMediaInfo2.Video.FormatVersion));
@@ -124,20 +123,21 @@ namespace TorrentDescriptionMaker
 
             // Codec
             if (!string.IsNullOrEmpty(vi.Codec))
-                sbVideo.AppendLine(string.Format("        [u]Codec:[/u] {0}", vi.Codec));
+                sbVideo.AppendLine(string.Format("             [u]Codec:[/u] {0}", vi.Codec));
             // Bitrate
-            sbVideo.AppendLine(string.Format("      [u]Bitrate:[/u] {0}", this.mMediaInfo2.Video.Bitrate));
+            sbVideo.AppendLine(string.Format("           [u]Bitrate:[/u] {0}", this.mMediaInfo2.Video.Bitrate));
             // Standard            
             if (!string.IsNullOrEmpty(vi.Standard))
-                sbVideo.AppendLine(string.Format("     [u]Standard:[/u] {0}", this.mMediaInfo2.Video.Standard));
+                sbVideo.AppendLine(string.Format("          [u]Standard:[/u] {0}", this.mMediaInfo2.Video.Standard));
             // Frame Rate
-            sbVideo.AppendLine(string.Format("   [u]Frame Rate:[/u] {0}", vi.FrameRate));
+            sbVideo.AppendLine(string.Format("        [u]Frame Rate:[/u] {0}", vi.FrameRate));
 
             // Scan Type
-            sbVideo.AppendLine(string.Format("    [u]Scan Type:[/u] {0}", vi.ScanType));
+            sbVideo.AppendLine(string.Format("         [u]Scan Type:[/u] {0}", vi.ScanType));
+            sbVideo.AppendLine(string.Format("[u]Bits/(Pixel*Frame):[/u] {0}", vi.BitsPerPixelXFrame));
 
             // Resolution
-            sbVideo.AppendLine(string.Format("   [u]Resolution:[/u] {0}x{1}",
+            sbVideo.AppendLine(string.Format("        [u]Resolution:[/u] {0}x{1}",
                 vi.Width,
                 vi.Height));
 
@@ -159,7 +159,7 @@ namespace TorrentDescriptionMaker
 
                 StringBuilder sbAudio = new StringBuilder();
                 // Format
-                sbAudio.Append(string.Format("       [u]Format:[/u] {0}", ai.Format));
+                sbAudio.Append(string.Format("            [u]Format:[/u] {0}", ai.Format));
                 if (!string.IsNullOrEmpty(ai.FormatVersion))
                     sbAudio.Append(string.Format(" {0}", ai.FormatVersion));
                 if (!string.IsNullOrEmpty(ai.FormatProfile))
@@ -168,16 +168,16 @@ namespace TorrentDescriptionMaker
 
                 // Codec     
                 if (!string.IsNullOrEmpty(ai.Codec))
-                    sbAudio.AppendLine(string.Format("        [u]Codec:[/u] {0}", ai.Codec));
+                    sbAudio.AppendLine(string.Format("             [u]Codec:[/u] {0}", ai.Codec));
                 // Bitrate
-                sbAudio.AppendLine(string.Format("      [u]Bitrate:[/u] {0} ({1})", ai.Bitrate, ai.BitrateMode));
+                sbAudio.AppendLine(string.Format("           [u]Bitrate:[/u] {0} ({1})", ai.Bitrate, ai.BitrateMode));
                 // Channels
-                sbAudio.AppendLine(string.Format("     [u]Channels:[/u] {0}", ai.Channels));
+                sbAudio.AppendLine(string.Format("          [u]Channels:[/u] {0}", ai.Channels));
                 // Sampling Rate
-                sbAudio.AppendLine(string.Format("[u]Sampling Rate:[/u] {0}", ai.SamplingRate));
+                sbAudio.AppendLine(string.Format("     [u]Sampling Rate:[/u] {0}", ai.SamplingRate));
                 // Resolution
                 if (!string.IsNullOrEmpty(ai.Resolution))
-                    sbAudio.AppendLine(string.Format(("   [u]Resolution:[/u] {0}"), ai.Resolution));
+                    sbAudio.AppendLine(string.Format(("        [u]Resolution:[/u] {0}"), ai.Resolution));
 
                 sbMediaInfo.Append(bb.size(fontSizeBody, sbAudio.ToString()));
 

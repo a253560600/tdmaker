@@ -295,6 +295,7 @@ namespace TorrentDescriptionMaker
                 this.Video.Height = mMI.Get(StreamKind.Video, 0, "Height");
                 this.Video.Width = mMI.Get(StreamKind.Video, 0, "Width");
                 this.Video.Resolution = string.Format("{0}x{1}", this.Video.Width, this.Video.Height);
+                this.Video.BitsPerPixelXFrame = mMI.Get(StreamKind.Video, 0, "Bits-(Pixel*Frame)");
 
 
                 //*********************
@@ -354,12 +355,14 @@ namespace TorrentDescriptionMaker
     }
 
     public class VideoInfo : Info
-    {
-        // ScanType
+    {        
         public string FrameRate { get; set; }
         public string Height { get; set; }
         public string ScanType { get; set; }
         public string Width { get; set; }
+        public string BitsPerPixelXFrame { get; set; }
+        // Bits-(Pixel*Frame)
+
     }
 
 }
