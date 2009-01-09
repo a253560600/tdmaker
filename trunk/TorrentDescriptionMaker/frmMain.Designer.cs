@@ -32,7 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.cboMtnArgs = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtMtn = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtScrFull = new System.Windows.Forms.LinkLabel();
             this.label4 = new System.Windows.Forms.Label();
@@ -53,58 +55,57 @@
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.gbProperties = new System.Windows.Forms.GroupBox();
             this.txtWebLink = new System.Windows.Forms.TextBox();
+            this.chkWebLink = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.rbDir = new System.Windows.Forms.RadioButton();
             this.rbFile = new System.Windows.Forms.RadioButton();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.txtMediaLocation = new System.Windows.Forms.TextBox();
             this.gbSource = new System.Windows.Forms.GroupBox();
+            this.cboSource = new System.Windows.Forms.ComboBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.txtMediaInfo = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.txtPublish = new System.Windows.Forms.RichTextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.dgvTrackers = new System.Windows.Forms.DataGridView();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.tmrStatus = new System.Windows.Forms.Timer(this.components);
-            this.btnPublish = new System.Windows.Forms.Button();
-            this.btnAnalyze = new System.Windows.Forms.Button();
-            this.cmsApp = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cmsAppAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAnnounceURL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tcOptions = new System.Windows.Forms.TabControl();
-            this.tpScreenshots = new System.Windows.Forms.TabPage();
-            this.tpTorrents = new System.Windows.Forms.TabPage();
-            this.tpPublish = new System.Windows.Forms.TabPage();
             this.tpGeneral = new System.Windows.Forms.TabPage();
-            this.btnCreateTorrent = new System.Windows.Forms.Button();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.rbTorrentDefaultFolder = new System.Windows.Forms.RadioButton();
-            this.btnBrowseTorrentCustomFolder = new System.Windows.Forms.Button();
-            this.chkWebLink = new System.Windows.Forms.CheckBox();
-            this.cboSource = new System.Windows.Forms.ComboBox();
-            this.cboMtnArgs = new System.Windows.Forms.ComboBox();
-            this.txtMtn = new System.Windows.Forms.TextBox();
             this.chkAnalyzeAuto = new System.Windows.Forms.CheckBox();
+            this.tpScreenshots = new System.Windows.Forms.TabPage();
             this.chkKeepScreenshot = new System.Windows.Forms.CheckBox();
             this.chkOptImageShack = new System.Windows.Forms.CheckBox();
+            this.tpTorrents = new System.Windows.Forms.TabPage();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.chkTorrentOrganize = new System.Windows.Forms.CheckBox();
+            this.btnBrowseTorrentCustomFolder = new System.Windows.Forms.Button();
             this.txtTorrentCustomFolder = new System.Windows.Forms.TextBox();
             this.rbTorrentFolderCustom = new System.Windows.Forms.RadioButton();
+            this.rbTorrentDefaultFolder = new System.Windows.Forms.RadioButton();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.dgvTrackers = new System.Windows.Forms.DataGridView();
             this.cboAnnounceURL = new System.Windows.Forms.ComboBox();
             this.chkCreateTorrent = new System.Windows.Forms.CheckBox();
+            this.tpPublish = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.chkUploadFullScreenshot = new System.Windows.Forms.CheckBox();
             this.nudFontSizeIncr = new System.Windows.Forms.NumericUpDown();
             this.chkPre = new System.Windows.Forms.CheckBox();
             this.chkPreIncreaseFontSize = new System.Windows.Forms.CheckBox();
             this.chkAlignCenter = new System.Windows.Forms.CheckBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.nudHeadingsText = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
             this.nudBodyText = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tmrStatus = new System.Windows.Forms.Timer(this.components);
+            this.btnPublish = new System.Windows.Forms.Button();
+            this.btnAnalyze = new System.Windows.Forms.Button();
+            this.cmsApp = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsAppAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnCreateTorrent = new System.Windows.Forms.Button();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAnnounceURL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.trackerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -119,20 +120,20 @@
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTrackers)).BeginInit();
-            this.groupBox6.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.cmsApp.SuspendLayout();
             this.tcOptions.SuspendLayout();
+            this.tpGeneral.SuspendLayout();
             this.tpScreenshots.SuspendLayout();
             this.tpTorrents.SuspendLayout();
-            this.tpPublish.SuspendLayout();
-            this.tpGeneral.SuspendLayout();
-            this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTrackers)).BeginInit();
+            this.tpPublish.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeIncr)).BeginInit();
+            this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeadingsText)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBodyText)).BeginInit();
+            this.cmsApp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackerBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -160,6 +161,18 @@
             this.label6.TabIndex = 8;
             this.label6.Text = "Arguments:";
             // 
+            // cboMtnArgs
+            // 
+            this.cboMtnArgs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboMtnArgs.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "MTNArg", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cboMtnArgs.FormattingEnabled = true;
+            this.cboMtnArgs.Location = new System.Drawing.Point(114, 54);
+            this.cboMtnArgs.Name = "cboMtnArgs";
+            this.cboMtnArgs.Size = new System.Drawing.Size(442, 21);
+            this.cboMtnArgs.TabIndex = 7;
+            this.cboMtnArgs.Text = global::TDMaker.Properties.Settings.Default.MTNArg;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -168,6 +181,19 @@
             this.label1.Size = new System.Drawing.Size(51, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Location:";
+            // 
+            // txtMtn
+            // 
+            this.txtMtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMtn.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtMtn.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
+            this.txtMtn.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "MTNPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtMtn.Location = new System.Drawing.Point(114, 25);
+            this.txtMtn.Name = "txtMtn";
+            this.txtMtn.Size = new System.Drawing.Size(442, 20);
+            this.txtMtn.TabIndex = 0;
+            this.txtMtn.Text = global::TDMaker.Properties.Settings.Default.MTNPath;
             // 
             // groupBox2
             // 
@@ -386,6 +412,19 @@
             this.txtWebLink.Size = new System.Drawing.Size(561, 20);
             this.txtWebLink.TabIndex = 10;
             // 
+            // chkWebLink
+            // 
+            this.chkWebLink.AutoSize = true;
+            this.chkWebLink.Checked = global::TDMaker.Properties.Settings.Default.WebLink;
+            this.chkWebLink.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkWebLink.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "WebLink", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkWebLink.Location = new System.Drawing.Point(22, 23);
+            this.chkWebLink.Name = "chkWebLink";
+            this.chkWebLink.Size = new System.Drawing.Size(75, 17);
+            this.chkWebLink.TabIndex = 9;
+            this.chkWebLink.Text = "&Web Link:";
+            this.chkWebLink.UseVisualStyleBackColor = true;
+            // 
             // groupBox4
             // 
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -458,6 +497,16 @@
             this.gbSource.TabStop = false;
             this.gbSource.Text = "Source";
             // 
+            // cboSource
+            // 
+            this.cboSource.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "Source", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cboSource.FormattingEnabled = true;
+            this.cboSource.Location = new System.Drawing.Point(16, 49);
+            this.cboSource.Name = "cboSource";
+            this.cboSource.Size = new System.Drawing.Size(102, 21);
+            this.cboSource.TabIndex = 0;
+            this.cboSource.Text = global::TDMaker.Properties.Settings.Default.Source;
+            // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.txtMediaInfo);
@@ -529,129 +578,6 @@
             this.tabPage4.Text = "Options";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // dgvTrackers
-            // 
-            this.dgvTrackers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvTrackers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTrackers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colName,
-            this.colAnnounceURL});
-            this.dgvTrackers.Location = new System.Drawing.Point(6, 19);
-            this.dgvTrackers.Name = "dgvTrackers";
-            this.dgvTrackers.Size = new System.Drawing.Size(683, 148);
-            this.dgvTrackers.TabIndex = 1;
-            this.dgvTrackers.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTrackers_CellLeave);
-            this.dgvTrackers.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTrackers_CellMouseLeave);
-            this.dgvTrackers.Leave += new System.EventHandler(this.dgvTrackers_Leave);
-            this.dgvTrackers.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.dgvTrackers_CellParsing);
-            this.dgvTrackers.MouseLeave += new System.EventHandler(this.dgvTrackers_MouseLeave);
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.nudHeadingsText);
-            this.groupBox6.Controls.Add(this.label7);
-            this.groupBox6.Controls.Add(this.nudBodyText);
-            this.groupBox6.Controls.Add(this.label3);
-            this.groupBox6.Location = new System.Drawing.Point(455, 16);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(190, 113);
-            this.groupBox6.TabIndex = 7;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Font Size";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(66, 61);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(31, 13);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "Body";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(45, 35);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Headings";
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.chkUploadFullScreenshot);
-            this.groupBox5.Controls.Add(this.nudFontSizeIncr);
-            this.groupBox5.Controls.Add(this.chkPre);
-            this.groupBox5.Controls.Add(this.chkPreIncreaseFontSize);
-            this.groupBox5.Controls.Add(this.chkAlignCenter);
-            this.groupBox5.Location = new System.Drawing.Point(16, 16);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(431, 113);
-            this.groupBox5.TabIndex = 3;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Publish Template";
-            // 
-            // tmrStatus
-            // 
-            this.tmrStatus.Enabled = true;
-            this.tmrStatus.Interval = 1000;
-            this.tmrStatus.Tick += new System.EventHandler(this.tmrStatus_Tick);
-            // 
-            // btnPublish
-            // 
-            this.btnPublish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPublish.AutoSize = true;
-            this.btnPublish.Enabled = false;
-            this.btnPublish.Location = new System.Drawing.Point(599, 505);
-            this.btnPublish.Name = "btnPublish";
-            this.btnPublish.Size = new System.Drawing.Size(106, 23);
-            this.btnPublish.TabIndex = 5;
-            this.btnPublish.Text = "&Copy to Clipboard";
-            this.btnPublish.UseVisualStyleBackColor = true;
-            this.btnPublish.Click += new System.EventHandler(this.btnPublish_Click);
-            // 
-            // btnAnalyze
-            // 
-            this.btnAnalyze.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAnalyze.AutoSize = true;
-            this.btnAnalyze.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnAnalyze.Enabled = false;
-            this.btnAnalyze.Location = new System.Drawing.Point(28, 505);
-            this.btnAnalyze.Name = "btnAnalyze";
-            this.btnAnalyze.Size = new System.Drawing.Size(104, 23);
-            this.btnAnalyze.TabIndex = 9;
-            this.btnAnalyze.Text = "&Create Description";
-            this.btnAnalyze.UseVisualStyleBackColor = true;
-            this.btnAnalyze.Click += new System.EventHandler(this.btnAnalyze_Click);
-            // 
-            // cmsApp
-            // 
-            this.cmsApp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmsAppAbout});
-            this.cmsApp.Name = "cmsApp";
-            this.cmsApp.Size = new System.Drawing.Size(117, 26);
-            // 
-            // cmsAppAbout
-            // 
-            this.cmsAppAbout.Name = "cmsAppAbout";
-            this.cmsAppAbout.Size = new System.Drawing.Size(116, 22);
-            this.cmsAppAbout.Text = "&About...";
-            this.cmsAppAbout.Click += new System.EventHandler(this.cmsAppAbout_Click);
-            // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colName.HeaderText = "Name";
-            this.colName.Name = "colName";
-            this.colName.Width = 60;
-            // 
-            // colAnnounceURL
-            // 
-            this.colAnnounceURL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colAnnounceURL.HeaderText = "Announce URL";
-            this.colAnnounceURL.Name = "colAnnounceURL";
-            // 
             // tcOptions
             // 
             this.tcOptions.Controls.Add(this.tpGeneral);
@@ -665,44 +591,6 @@
             this.tcOptions.Size = new System.Drawing.Size(742, 453);
             this.tcOptions.TabIndex = 11;
             // 
-            // tpScreenshots
-            // 
-            this.tpScreenshots.Controls.Add(this.chkKeepScreenshot);
-            this.tpScreenshots.Controls.Add(this.chkOptImageShack);
-            this.tpScreenshots.Location = new System.Drawing.Point(4, 22);
-            this.tpScreenshots.Name = "tpScreenshots";
-            this.tpScreenshots.Padding = new System.Windows.Forms.Padding(3);
-            this.tpScreenshots.Size = new System.Drawing.Size(734, 427);
-            this.tpScreenshots.TabIndex = 0;
-            this.tpScreenshots.Text = "Screenshots";
-            this.tpScreenshots.UseVisualStyleBackColor = true;
-            // 
-            // tpTorrents
-            // 
-            this.tpTorrents.Controls.Add(this.groupBox8);
-            this.tpTorrents.Controls.Add(this.groupBox7);
-            this.tpTorrents.Controls.Add(this.cboAnnounceURL);
-            this.tpTorrents.Controls.Add(this.chkCreateTorrent);
-            this.tpTorrents.Location = new System.Drawing.Point(4, 22);
-            this.tpTorrents.Name = "tpTorrents";
-            this.tpTorrents.Padding = new System.Windows.Forms.Padding(3);
-            this.tpTorrents.Size = new System.Drawing.Size(734, 427);
-            this.tpTorrents.TabIndex = 1;
-            this.tpTorrents.Text = "Torrents";
-            this.tpTorrents.UseVisualStyleBackColor = true;
-            // 
-            // tpPublish
-            // 
-            this.tpPublish.Controls.Add(this.groupBox5);
-            this.tpPublish.Controls.Add(this.groupBox6);
-            this.tpPublish.Location = new System.Drawing.Point(4, 22);
-            this.tpPublish.Name = "tpPublish";
-            this.tpPublish.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPublish.Size = new System.Drawing.Size(734, 427);
-            this.tpPublish.TabIndex = 2;
-            this.tpPublish.Text = "Publish";
-            this.tpPublish.UseVisualStyleBackColor = true;
-            // 
             // tpGeneral
             // 
             this.tpGeneral.Controls.Add(this.chkAnalyzeAuto);
@@ -713,118 +601,6 @@
             this.tpGeneral.TabIndex = 3;
             this.tpGeneral.Text = "General";
             this.tpGeneral.UseVisualStyleBackColor = true;
-            // 
-            // btnCreateTorrent
-            // 
-            this.btnCreateTorrent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCreateTorrent.AutoSize = true;
-            this.btnCreateTorrent.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnCreateTorrent.Location = new System.Drawing.Point(138, 505);
-            this.btnCreateTorrent.Name = "btnCreateTorrent";
-            this.btnCreateTorrent.Size = new System.Drawing.Size(85, 23);
-            this.btnCreateTorrent.TabIndex = 10;
-            this.btnCreateTorrent.Text = "Create &Torrent";
-            this.btnCreateTorrent.UseVisualStyleBackColor = true;
-            this.btnCreateTorrent.Click += new System.EventHandler(this.btnCreateTorrent_Click);
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox7.Controls.Add(this.dgvTrackers);
-            this.groupBox7.Location = new System.Drawing.Point(17, 39);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(695, 180);
-            this.groupBox7.TabIndex = 3;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Tracker Manager";
-            // 
-            // groupBox8
-            // 
-            this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox8.Controls.Add(this.btnBrowseTorrentCustomFolder);
-            this.groupBox8.Controls.Add(this.txtTorrentCustomFolder);
-            this.groupBox8.Controls.Add(this.rbTorrentFolderCustom);
-            this.groupBox8.Controls.Add(this.rbTorrentDefaultFolder);
-            this.groupBox8.Location = new System.Drawing.Point(17, 225);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(695, 95);
-            this.groupBox8.TabIndex = 4;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Save Location";
-            // 
-            // rbTorrentDefaultFolder
-            // 
-            this.rbTorrentDefaultFolder.AutoSize = true;
-            this.rbTorrentDefaultFolder.Checked = global::TDMaker.Properties.Settings.Default.TorrentFolderDefault;
-            this.rbTorrentDefaultFolder.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "TorrentFolderDefault", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.rbTorrentDefaultFolder.Location = new System.Drawing.Point(19, 19);
-            this.rbTorrentDefaultFolder.Name = "rbTorrentDefaultFolder";
-            this.rbTorrentDefaultFolder.Size = new System.Drawing.Size(147, 17);
-            this.rbTorrentDefaultFolder.TabIndex = 0;
-            this.rbTorrentDefaultFolder.TabStop = true;
-            this.rbTorrentDefaultFolder.Text = "Parent folder of the Media";
-            this.rbTorrentDefaultFolder.UseVisualStyleBackColor = true;
-            // 
-            // btnBrowseTorrentCustomFolder
-            // 
-            this.btnBrowseTorrentCustomFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowseTorrentCustomFolder.Location = new System.Drawing.Point(593, 39);
-            this.btnBrowseTorrentCustomFolder.Name = "btnBrowseTorrentCustomFolder";
-            this.btnBrowseTorrentCustomFolder.Size = new System.Drawing.Size(75, 23);
-            this.btnBrowseTorrentCustomFolder.TabIndex = 3;
-            this.btnBrowseTorrentCustomFolder.Text = "&Browse";
-            this.btnBrowseTorrentCustomFolder.UseVisualStyleBackColor = true;
-            this.btnBrowseTorrentCustomFolder.Click += new System.EventHandler(this.btnBrowseTorrentCustomFolder_Click);
-            // 
-            // chkWebLink
-            // 
-            this.chkWebLink.AutoSize = true;
-            this.chkWebLink.Checked = global::TDMaker.Properties.Settings.Default.WebLink;
-            this.chkWebLink.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkWebLink.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "WebLink", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkWebLink.Location = new System.Drawing.Point(22, 23);
-            this.chkWebLink.Name = "chkWebLink";
-            this.chkWebLink.Size = new System.Drawing.Size(75, 17);
-            this.chkWebLink.TabIndex = 9;
-            this.chkWebLink.Text = "&Web Link:";
-            this.chkWebLink.UseVisualStyleBackColor = true;
-            // 
-            // cboSource
-            // 
-            this.cboSource.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "Source", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cboSource.FormattingEnabled = true;
-            this.cboSource.Location = new System.Drawing.Point(16, 49);
-            this.cboSource.Name = "cboSource";
-            this.cboSource.Size = new System.Drawing.Size(102, 21);
-            this.cboSource.TabIndex = 0;
-            this.cboSource.Text = global::TDMaker.Properties.Settings.Default.Source;
-            // 
-            // cboMtnArgs
-            // 
-            this.cboMtnArgs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboMtnArgs.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "MTNArg", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cboMtnArgs.FormattingEnabled = true;
-            this.cboMtnArgs.Location = new System.Drawing.Point(114, 54);
-            this.cboMtnArgs.Name = "cboMtnArgs";
-            this.cboMtnArgs.Size = new System.Drawing.Size(442, 21);
-            this.cboMtnArgs.TabIndex = 7;
-            this.cboMtnArgs.Text = global::TDMaker.Properties.Settings.Default.MTNArg;
-            // 
-            // txtMtn
-            // 
-            this.txtMtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMtn.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.txtMtn.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
-            this.txtMtn.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "MTNPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtMtn.Location = new System.Drawing.Point(114, 25);
-            this.txtMtn.Name = "txtMtn";
-            this.txtMtn.Size = new System.Drawing.Size(442, 20);
-            this.txtMtn.TabIndex = 0;
-            this.txtMtn.Text = global::TDMaker.Properties.Settings.Default.MTNPath;
             // 
             // chkAnalyzeAuto
             // 
@@ -837,6 +613,18 @@
             this.chkAnalyzeAuto.TabIndex = 9;
             this.chkAnalyzeAuto.Text = "&Process media immediately after loading file or folder";
             this.chkAnalyzeAuto.UseVisualStyleBackColor = true;
+            // 
+            // tpScreenshots
+            // 
+            this.tpScreenshots.Controls.Add(this.chkKeepScreenshot);
+            this.tpScreenshots.Controls.Add(this.chkOptImageShack);
+            this.tpScreenshots.Location = new System.Drawing.Point(4, 22);
+            this.tpScreenshots.Name = "tpScreenshots";
+            this.tpScreenshots.Padding = new System.Windows.Forms.Padding(3);
+            this.tpScreenshots.Size = new System.Drawing.Size(734, 427);
+            this.tpScreenshots.TabIndex = 0;
+            this.tpScreenshots.Text = "Screenshots";
+            this.tpScreenshots.UseVisualStyleBackColor = true;
             // 
             // chkKeepScreenshot
             // 
@@ -865,27 +653,121 @@
             this.chkOptImageShack.UseVisualStyleBackColor = true;
             this.chkOptImageShack.CheckedChanged += new System.EventHandler(this.chkOptImageShack_CheckedChanged);
             // 
+            // tpTorrents
+            // 
+            this.tpTorrents.Controls.Add(this.groupBox8);
+            this.tpTorrents.Controls.Add(this.groupBox7);
+            this.tpTorrents.Controls.Add(this.cboAnnounceURL);
+            this.tpTorrents.Controls.Add(this.chkCreateTorrent);
+            this.tpTorrents.Location = new System.Drawing.Point(4, 22);
+            this.tpTorrents.Name = "tpTorrents";
+            this.tpTorrents.Padding = new System.Windows.Forms.Padding(3);
+            this.tpTorrents.Size = new System.Drawing.Size(734, 427);
+            this.tpTorrents.TabIndex = 1;
+            this.tpTorrents.Text = "Torrents";
+            this.tpTorrents.UseVisualStyleBackColor = true;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox8.Controls.Add(this.chkTorrentOrganize);
+            this.groupBox8.Controls.Add(this.btnBrowseTorrentCustomFolder);
+            this.groupBox8.Controls.Add(this.txtTorrentCustomFolder);
+            this.groupBox8.Controls.Add(this.rbTorrentFolderCustom);
+            this.groupBox8.Controls.Add(this.rbTorrentDefaultFolder);
+            this.groupBox8.Location = new System.Drawing.Point(17, 225);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(695, 95);
+            this.groupBox8.TabIndex = 4;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Save Location";
+            // 
+            // chkTorrentOrganize
+            // 
+            this.chkTorrentOrganize.AutoSize = true;
+            this.chkTorrentOrganize.Checked = global::TDMaker.Properties.Settings.Default.TorrentsOrganize;
+            this.chkTorrentOrganize.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkTorrentOrganize.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "TorrentsOrganize", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkTorrentOrganize.Location = new System.Drawing.Point(114, 67);
+            this.chkTorrentOrganize.Name = "chkTorrentOrganize";
+            this.chkTorrentOrganize.Size = new System.Drawing.Size(293, 17);
+            this.chkTorrentOrganize.TabIndex = 4;
+            this.chkTorrentOrganize.Text = "Create torrents in sub-folders according to Tracker Name";
+            this.chkTorrentOrganize.UseVisualStyleBackColor = true;
+            // 
+            // btnBrowseTorrentCustomFolder
+            // 
+            this.btnBrowseTorrentCustomFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBrowseTorrentCustomFolder.Location = new System.Drawing.Point(590, 39);
+            this.btnBrowseTorrentCustomFolder.Name = "btnBrowseTorrentCustomFolder";
+            this.btnBrowseTorrentCustomFolder.Size = new System.Drawing.Size(75, 23);
+            this.btnBrowseTorrentCustomFolder.TabIndex = 3;
+            this.btnBrowseTorrentCustomFolder.Text = "&Browse";
+            this.btnBrowseTorrentCustomFolder.UseVisualStyleBackColor = true;
+            this.btnBrowseTorrentCustomFolder.Click += new System.EventHandler(this.btnBrowseTorrentCustomFolder_Click);
+            // 
             // txtTorrentCustomFolder
             // 
             this.txtTorrentCustomFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTorrentCustomFolder.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "TorrentCustomFolder", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtTorrentCustomFolder.Location = new System.Drawing.Point(117, 41);
+            this.txtTorrentCustomFolder.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "TorrentsCustomDir", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtTorrentCustomFolder.Location = new System.Drawing.Point(114, 41);
             this.txtTorrentCustomFolder.Name = "txtTorrentCustomFolder";
             this.txtTorrentCustomFolder.Size = new System.Drawing.Size(470, 20);
             this.txtTorrentCustomFolder.TabIndex = 2;
-            this.txtTorrentCustomFolder.Text = global::TDMaker.Properties.Settings.Default.TorrentCustomFolder;
+            this.txtTorrentCustomFolder.Text = global::TDMaker.Properties.Settings.Default.TorrentsCustomDir;
             // 
             // rbTorrentFolderCustom
             // 
             this.rbTorrentFolderCustom.AutoSize = true;
             this.rbTorrentFolderCustom.Location = new System.Drawing.Point(19, 42);
             this.rbTorrentFolderCustom.Name = "rbTorrentFolderCustom";
-            this.rbTorrentFolderCustom.Size = new System.Drawing.Size(92, 17);
+            this.rbTorrentFolderCustom.Size = new System.Drawing.Size(89, 17);
             this.rbTorrentFolderCustom.TabIndex = 1;
-            this.rbTorrentFolderCustom.Text = "Custom folder:";
+            this.rbTorrentFolderCustom.Text = "Custom folder";
             this.rbTorrentFolderCustom.UseVisualStyleBackColor = true;
             this.rbTorrentFolderCustom.CheckedChanged += new System.EventHandler(this.rbTorrentFolderCustom_CheckedChanged);
+            // 
+            // rbTorrentDefaultFolder
+            // 
+            this.rbTorrentDefaultFolder.AutoSize = true;
+            this.rbTorrentDefaultFolder.Checked = true;
+            this.rbTorrentDefaultFolder.Location = new System.Drawing.Point(19, 19);
+            this.rbTorrentDefaultFolder.Name = "rbTorrentDefaultFolder";
+            this.rbTorrentDefaultFolder.Size = new System.Drawing.Size(147, 17);
+            this.rbTorrentDefaultFolder.TabIndex = 0;
+            this.rbTorrentDefaultFolder.TabStop = true;
+            this.rbTorrentDefaultFolder.Text = "Parent folder of the Media";
+            this.rbTorrentDefaultFolder.UseVisualStyleBackColor = true;
+            
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox7.Controls.Add(this.dgvTrackers);
+            this.groupBox7.Location = new System.Drawing.Point(17, 39);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(695, 180);
+            this.groupBox7.TabIndex = 3;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Tracker Manager";
+            // 
+            // dgvTrackers
+            // 
+            this.dgvTrackers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvTrackers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTrackers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colName,
+            this.colAnnounceURL});
+            this.dgvTrackers.Location = new System.Drawing.Point(6, 19);
+            this.dgvTrackers.Name = "dgvTrackers";
+            this.dgvTrackers.Size = new System.Drawing.Size(683, 148);
+            this.dgvTrackers.TabIndex = 1;
+            this.dgvTrackers.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTrackers_CellMouseLeave);
+            this.dgvTrackers.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvTrackers_CellValidating);
             // 
             // cboAnnounceURL
             // 
@@ -899,6 +781,7 @@
             this.cboAnnounceURL.Size = new System.Drawing.Size(503, 21);
             this.cboAnnounceURL.TabIndex = 2;
             this.cboAnnounceURL.Text = global::TDMaker.Properties.Settings.Default.AnnounceURL;
+            this.cboAnnounceURL.SelectedIndexChanged += new System.EventHandler(this.cboAnnounceURL_SelectedIndexChanged);
             // 
             // chkCreateTorrent
             // 
@@ -911,6 +794,32 @@
             this.chkCreateTorrent.TabIndex = 0;
             this.chkCreateTorrent.Text = "Automatically create &torrent using";
             this.chkCreateTorrent.UseVisualStyleBackColor = true;
+            // 
+            // tpPublish
+            // 
+            this.tpPublish.Controls.Add(this.groupBox5);
+            this.tpPublish.Controls.Add(this.groupBox6);
+            this.tpPublish.Location = new System.Drawing.Point(4, 22);
+            this.tpPublish.Name = "tpPublish";
+            this.tpPublish.Padding = new System.Windows.Forms.Padding(3);
+            this.tpPublish.Size = new System.Drawing.Size(734, 427);
+            this.tpPublish.TabIndex = 2;
+            this.tpPublish.Text = "Publish";
+            this.tpPublish.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.chkUploadFullScreenshot);
+            this.groupBox5.Controls.Add(this.nudFontSizeIncr);
+            this.groupBox5.Controls.Add(this.chkPre);
+            this.groupBox5.Controls.Add(this.chkPreIncreaseFontSize);
+            this.groupBox5.Controls.Add(this.chkAlignCenter);
+            this.groupBox5.Location = new System.Drawing.Point(16, 16);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(431, 113);
+            this.groupBox5.TabIndex = 3;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Publish Template";
             // 
             // chkUploadFullScreenshot
             // 
@@ -976,6 +885,19 @@
             this.chkAlignCenter.Text = "Align &Center";
             this.chkAlignCenter.UseVisualStyleBackColor = true;
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.nudHeadingsText);
+            this.groupBox6.Controls.Add(this.label7);
+            this.groupBox6.Controls.Add(this.nudBodyText);
+            this.groupBox6.Controls.Add(this.label3);
+            this.groupBox6.Location = new System.Drawing.Point(455, 16);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(190, 113);
+            this.groupBox6.TabIndex = 7;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Font Size";
+            // 
             // nudHeadingsText
             // 
             this.nudHeadingsText.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TDMaker.Properties.Settings.Default, "FontSizeHeading", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -990,6 +912,15 @@
             this.nudHeadingsText.TabIndex = 4;
             this.nudHeadingsText.Value = global::TDMaker.Properties.Settings.Default.FontSizeHeading;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(66, 61);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(31, 13);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "Body";
+            // 
             // nudBodyText
             // 
             this.nudBodyText.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TDMaker.Properties.Settings.Default, "FontSizeBody", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -1003,6 +934,87 @@
             this.nudBodyText.Size = new System.Drawing.Size(55, 20);
             this.nudBodyText.TabIndex = 5;
             this.nudBodyText.Value = global::TDMaker.Properties.Settings.Default.FontSizeBody;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(45, 35);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(52, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Headings";
+            // 
+            // tmrStatus
+            // 
+            this.tmrStatus.Enabled = true;
+            this.tmrStatus.Interval = 1000;
+            this.tmrStatus.Tick += new System.EventHandler(this.tmrStatus_Tick);
+            // 
+            // btnPublish
+            // 
+            this.btnPublish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPublish.AutoSize = true;
+            this.btnPublish.Enabled = false;
+            this.btnPublish.Location = new System.Drawing.Point(599, 505);
+            this.btnPublish.Name = "btnPublish";
+            this.btnPublish.Size = new System.Drawing.Size(106, 23);
+            this.btnPublish.TabIndex = 5;
+            this.btnPublish.Text = "&Copy to Clipboard";
+            this.btnPublish.UseVisualStyleBackColor = true;
+            this.btnPublish.Click += new System.EventHandler(this.btnPublish_Click);
+            // 
+            // btnAnalyze
+            // 
+            this.btnAnalyze.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAnalyze.AutoSize = true;
+            this.btnAnalyze.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnAnalyze.Enabled = false;
+            this.btnAnalyze.Location = new System.Drawing.Point(28, 505);
+            this.btnAnalyze.Name = "btnAnalyze";
+            this.btnAnalyze.Size = new System.Drawing.Size(104, 23);
+            this.btnAnalyze.TabIndex = 9;
+            this.btnAnalyze.Text = "&Create Description";
+            this.btnAnalyze.UseVisualStyleBackColor = true;
+            this.btnAnalyze.Click += new System.EventHandler(this.btnAnalyze_Click);
+            // 
+            // cmsApp
+            // 
+            this.cmsApp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmsAppAbout});
+            this.cmsApp.Name = "cmsApp";
+            this.cmsApp.Size = new System.Drawing.Size(116, 26);
+            // 
+            // cmsAppAbout
+            // 
+            this.cmsAppAbout.Name = "cmsAppAbout";
+            this.cmsAppAbout.Size = new System.Drawing.Size(115, 22);
+            this.cmsAppAbout.Text = "&About...";
+            this.cmsAppAbout.Click += new System.EventHandler(this.cmsAppAbout_Click);
+            // 
+            // btnCreateTorrent
+            // 
+            this.btnCreateTorrent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCreateTorrent.AutoSize = true;
+            this.btnCreateTorrent.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCreateTorrent.Location = new System.Drawing.Point(138, 505);
+            this.btnCreateTorrent.Name = "btnCreateTorrent";
+            this.btnCreateTorrent.Size = new System.Drawing.Size(85, 23);
+            this.btnCreateTorrent.TabIndex = 10;
+            this.btnCreateTorrent.Text = "Create &Torrent";
+            this.btnCreateTorrent.UseVisualStyleBackColor = true;
+            this.btnCreateTorrent.Click += new System.EventHandler(this.btnCreateTorrent_Click);
+            // 
+            // colName
+            // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colName.HeaderText = "Tracker Name";
+            this.colName.Name = "colName";
+            // 
+            // colAnnounceURL
+            // 
+            this.colAnnounceURL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colAnnounceURL.HeaderText = "Announce URL";
+            this.colAnnounceURL.Name = "colAnnounceURL";
             // 
             // trackerBindingSource
             // 
@@ -1051,26 +1063,26 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTrackers)).EndInit();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.cmsApp.ResumeLayout(false);
             this.tcOptions.ResumeLayout(false);
+            this.tpGeneral.ResumeLayout(false);
+            this.tpGeneral.PerformLayout();
             this.tpScreenshots.ResumeLayout(false);
             this.tpScreenshots.PerformLayout();
             this.tpTorrents.ResumeLayout(false);
             this.tpTorrents.PerformLayout();
-            this.tpPublish.ResumeLayout(false);
-            this.tpGeneral.ResumeLayout(false);
-            this.tpGeneral.PerformLayout();
-            this.groupBox7.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTrackers)).EndInit();
+            this.tpPublish.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeIncr)).EndInit();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeadingsText)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBodyText)).EndInit();
+            this.cmsApp.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trackerBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1135,14 +1147,12 @@
         private System.Windows.Forms.TextBox txtWebLink;
         private System.Windows.Forms.CheckBox chkWebLink;
         private System.Windows.Forms.GroupBox gbProperties;
-        private System.Windows.Forms.CheckBox chkAnalyzeAuto;
+        private System.Windows.Forms.CheckBox chkAnalyzeAuto;        
         private System.Windows.Forms.RichTextBox txtPublish;
         private System.Windows.Forms.DataGridView dgvTrackers;
         private System.Windows.Forms.CheckBox chkCreateTorrent;
         private System.Windows.Forms.ComboBox cboAnnounceURL;
         private System.Windows.Forms.BindingSource trackerBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAnnounceURL;
         private System.Windows.Forms.TabControl tcOptions;
         private System.Windows.Forms.TabPage tpScreenshots;
         private System.Windows.Forms.TabPage tpTorrents;
@@ -1155,6 +1165,9 @@
         private System.Windows.Forms.RadioButton rbTorrentFolderCustom;
         private System.Windows.Forms.RadioButton rbTorrentDefaultFolder;
         private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.CheckBox chkTorrentOrganize;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAnnounceURL;
     }
 }
 

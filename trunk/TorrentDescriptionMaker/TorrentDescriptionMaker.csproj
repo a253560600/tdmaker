@@ -32,13 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ImageUploader, Version=1.0.3296.13514, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Users64\Mihajlo\Documents\Visual Studio 2008\Projects\ZScreen\trunk\ImageUploader\ImageUploader\bin\Debug\ImageUploader.dll</HintPath>
-    </Reference>
     <Reference Include="MonoTorrent, Version=0.62.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\MonoTorrent.dll</HintPath>
+      <HintPath>Lib\MonoTorrent.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -98,8 +94,15 @@
     <Content Include="MediaInfo.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Lib\MonoTorrent.dll" />
     <Content Include="TODO.txt" />
     <Content Include="VersionHistory.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\ZScreen\ImageUploader\ImageUploader\ImageUploader.csproj">
+      <Project>{223EC461-C070-4FF3-ADE7-92BC21AE66FC}</Project>
+      <Name>ImageUploader</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

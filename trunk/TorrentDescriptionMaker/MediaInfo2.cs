@@ -38,7 +38,7 @@ namespace TorrentDescriptionMaker
         /// <summary>
         /// FilePath or DirectoryPath of the Media
         /// </summary>
-        public string Location { get; set; }
+        public string Location { get; private set; }
         public string Source { get; set; }
         public string Subtitles { get; set; }
         /// <summary>

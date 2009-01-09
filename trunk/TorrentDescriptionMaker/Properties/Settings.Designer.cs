@@ -265,24 +265,48 @@ namespace TDMaker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string TorrentCustomFolder {
-            get {
-                return ((string)(this["TorrentCustomFolder"]));
-            }
-            set {
-                this["TorrentCustomFolder"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string AnnounceURL {
             get {
                 return ((string)(this["AnnounceURL"]));
             }
             set {
                 this["AnnounceURL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SettingsDir {
+            get {
+                return ((string)(this["SettingsDir"]));
+            }
+            set {
+                this["SettingsDir"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string TorrentsCustomDir {
+            get {
+                return ((string)(this["TorrentsCustomDir"]));
+            }
+            set {
+                this["TorrentsCustomDir"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool TorrentsOrganize {
+            get {
+                return ((bool)(this["TorrentsOrganize"]));
+            }
+            set {
+                this["TorrentsOrganize"] = value;
             }
         }
     }
