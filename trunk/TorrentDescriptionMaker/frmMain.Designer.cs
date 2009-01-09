@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnBrowseMTN = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.cboMtnArgs = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -107,7 +108,6 @@
             this.cmsAppAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.btnCreateTorrent = new System.Windows.Forms.Button();
             this.trackerBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btnBrowseMTN = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -152,6 +152,17 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Movie Thumbnailer Settings";
+            // 
+            // btnBrowseMTN
+            // 
+            this.btnBrowseMTN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBrowseMTN.Location = new System.Drawing.Point(577, 23);
+            this.btnBrowseMTN.Name = "btnBrowseMTN";
+            this.btnBrowseMTN.Size = new System.Drawing.Size(106, 23);
+            this.btnBrowseMTN.TabIndex = 9;
+            this.btnBrowseMTN.Text = "&Browse";
+            this.btnBrowseMTN.UseVisualStyleBackColor = true;
+            this.btnBrowseMTN.Visible = false;
             // 
             // label6
             // 
@@ -573,6 +584,7 @@
             // 
             // txtPublish
             // 
+            this.txtPublish.AutoWordSelection = true;
             this.txtPublish.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtPublish.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPublish.Location = new System.Drawing.Point(3, 3);
@@ -780,6 +792,7 @@
             this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colName.HeaderText = "Tracker Name";
             this.colName.Name = "colName";
+            this.colName.Width = 92;
             // 
             // colAnnounceURL
             // 
@@ -1025,17 +1038,6 @@
             // trackerBindingSource
             // 
             this.trackerBindingSource.DataSource = typeof(TDMaker.Tracker);
-            // 
-            // btnBrowseMTN
-            // 
-            this.btnBrowseMTN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowseMTN.Location = new System.Drawing.Point(577, 23);
-            this.btnBrowseMTN.Name = "btnBrowseMTN";
-            this.btnBrowseMTN.Size = new System.Drawing.Size(106, 23);
-            this.btnBrowseMTN.TabIndex = 9;
-            this.btnBrowseMTN.Text = "&Browse";
-            this.btnBrowseMTN.UseVisualStyleBackColor = true;
-            this.btnBrowseMTN.Visible = false;
             // 
             // frmMain
             // 

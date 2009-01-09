@@ -430,7 +430,7 @@ namespace TorrentDescriptionMaker
                     temp.Add(tp.Tracker.AnnounceURL);
                     tc.Announces.Add(temp);
 
-                    string torrentName = (File.Exists(p) ? Path.GetFileNameWithoutExtension(p) : Path.GetFileName(p));
+                    string torrentName = (File.Exists(p) ? Path.GetFileNameWithoutExtension(p) : this.getMediaName(p));
                     string torrentPath = "";
 
                     if (!Settings.Default.TorrentFolderDefault &&
@@ -445,7 +445,7 @@ namespace TorrentDescriptionMaker
                         }
                         else
                         {
-                            torrentPath = Path.Combine(Settings.Default.TorrentsCustomDir, Path.GetFileNameWithoutExtension(p) + ".torrent");
+                            torrentPath = Path.Combine(Settings.Default.TorrentsCustomDir, torrentName + ".torrent");
                         }
 
                     }
