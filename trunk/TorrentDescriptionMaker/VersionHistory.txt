@@ -1,5 +1,6 @@
 Version 1.2.00 - 20090109
 
+1.2.01.2 Saving torrents to Custom folder setting still saved in default folder [tacoking] 
 1.2.01.1 TDMaker crashed with 32-bit MediaInfo.dll under Windows x64 [tacoking]
 1.2.01.0 Extended description to include Bits-(Pixel*Frame) [davidonato]
 1.2.00.0 Added support for creating Torrents using MonoTorrent
