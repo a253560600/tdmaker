@@ -4,6 +4,7 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Runtime.Serialization.Formatters.Soap;
 using System.Runtime.Serialization;
+using TDMaker.Properties;
 
 namespace TDMaker
 {
@@ -13,20 +14,23 @@ namespace TDMaker
 
         public List<Tracker> Trackers { get; set; }
 
+        public string TrackersXML { get; private set; }
+
         public TrackerManager()
         {
             Trackers = new List<Tracker>();
+            this.TrackersXML = Path.Combine(Settings.Default.SettingsDir, "trackers.xml");
         }
 
         public List<Tracker> Read()
         {
-            if (File.Exists("trackers.xml"))
+            if (File.Exists(TrackersXML))
             {
 
                 object obj = new object();
                 try
                 {
-                    using (FileStream fs = new FileStream("trackers.xml", FileMode.Open, FileAccess.Read))
+                    using (FileStream fs = new FileStream(TrackersXML, FileMode.Open, FileAccess.Read))
                     {
 
                         XmlSerializer xs = new XmlSerializer(Trackers.GetType());
@@ -50,7 +54,7 @@ namespace TDMaker
 
 
                 //// Open the file containing the data that you want to deserialize.
-                //FileStream fs = new FileStream("trackers.xml", FileMode.Open);
+                //FileStream fs = new FileStream(TrackersXML, FileMode.Open);
                 //try
                 //{
                 //    SoapFormatter formatter = new SoapFormatter();
@@ -80,7 +84,7 @@ namespace TDMaker
             {
                 if (tr.Count > 0)
                 {
-                    using (FileStream fs = new FileStream("trackers.xml", FileMode.Create))
+                    using (FileStream fs = new FileStream(TrackersXML, FileMode.Create))
                     {
                         XmlSerializer xs = new XmlSerializer(tr.GetType());
                         xs.Serialize(fs, tr);
@@ -98,7 +102,7 @@ namespace TDMaker
             }
             
 
-            //FileStream fs = new FileStream("trackers.xml", FileMode.Create);
+            //FileStream fs = new FileStream(TrackersXML, FileMode.Create);
 
             //// Construct a SoapFormatter and use it 
             //// to serialize the data to the stream.

@@ -13,8 +13,12 @@ namespace TorrentDescriptionMaker
 {
     public partial class frmMain : Form
     {
+        List<Tracker> mTrackers = new List<Tracker>();
+        TrackerManager mTrackerManager = null;
+
         private TorrentInfo mTInfo = null;
         private MediaInfo2 mMI = null;
+
         public frmMain()
         {
             InitializeComponent();
@@ -49,12 +53,19 @@ namespace TorrentDescriptionMaker
         private void loadMedia(string p)
         {
             txtMediaLocation.Text = p;
-            if (Settings.Default.CreateTorrent)
-                createTorrent(p);
-            updateGuiControls();
 
+            TorrentPacket tp = new TorrentPacket();
+            tp.MediaLocation = p;
+            tp.Tracker = getTracker();
+
+            if (Settings.Default.CreateTorrent)
+                createTorrent(tp);
+   
             if (Settings.Default.AnalyzeAuto)
                 analyzeMedia();
+
+            updateGuiControls();
+
         }
 
         private string getMediaName(string p)
@@ -124,6 +135,8 @@ namespace TorrentDescriptionMaker
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            this.WindowState = FormWindowState.Minimized;
+
             if (!Settings.Default.MTNArgs.Contains(cboMtnArgs.Text))
             {
                 Settings.Default.MTNArgs.Add(cboMtnArgs.Text);
@@ -137,21 +150,48 @@ namespace TorrentDescriptionMaker
             writeTrackers1();
             Settings.Default.AnnounceURLIndex = cboAnnounceURL.SelectedIndex;
 
-            Settings.Default.Save();
-        }
+            Settings.Default.TorrentFolderDefault = rbTorrentDefaultFolder.Checked;
 
-        List<Tracker> trackers = new List<Tracker>();
-        TrackerManager tm = new TrackerManager();
-        TrackerManager2 tm2 = new TrackerManager2();
+            Settings.Default.Save();
+        }     
 
         private void frmMain_Load(object sender, EventArgs e)
         {
 
+            configureDirs();
             SettingsGet();
 
             Program.Status = "Ready.";
 
             this.Text = Resources.AppName + " - Drag and Drop a Movie file...";
+
+            updateGuiControls();
+
+        }
+
+        private void configureDirs()
+        {
+            string dir = Path.Combine("Applications", Application.ProductName);
+            if (string.IsNullOrEmpty(Settings.Default.SettingsDir) || !Directory.Exists(Settings.Default.SettingsDir))
+            {
+                Settings.Default.SettingsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), dir + "\\Settings");
+
+                if (!Directory.Exists(Settings.Default.SettingsDir))
+                    Directory.CreateDirectory(Settings.Default.SettingsDir);
+            }
+
+            if (string.IsNullOrEmpty(Settings.Default.TorrentsCustomDir) ||
+                !Directory.Exists(Settings.Default.TorrentsCustomDir))
+            {
+                Settings.Default.TorrentsCustomDir =
+                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                    dir + "\\Torrents");
+
+                if (!Directory.Exists(Settings.Default.TorrentsCustomDir))
+                    Directory.CreateDirectory(Settings.Default.TorrentsCustomDir);
+            }
+
+            mTrackerManager = new TrackerManager();   
 
         }
 
@@ -174,8 +214,10 @@ namespace TorrentDescriptionMaker
                 cboSource.Items.Add(src);
             }
 
-            // Trackers
+            rbTorrentDefaultFolder.Checked = Settings.Default.TorrentFolderDefault;
+            rbTorrentFolderCustom.Checked = !rbTorrentDefaultFolder.Checked;
 
+            // Trackers
             readTrackers1();
 
 
@@ -196,34 +238,35 @@ namespace TorrentDescriptionMaker
 
         private void writeTrackers1()
         {
-            trackers.Clear();
+            mTrackers.Clear();
             for (int i = 0; i < dgvTrackers.Rows.Count; i++)
             {
                 object name = dgvTrackers.Rows[i].Cells[0].Value;
                 object url = dgvTrackers.Rows[i].Cells[1].Value;
                 if (name != null && url != null)
-                    trackers.Add(new Tracker(name.ToString(), url.ToString()));
+                    mTrackers.Add(new Tracker(name.ToString(), url.ToString()));
 
             }
 
-            tm.Write(trackers);
+            mTrackerManager.Write(mTrackers);
 
         }
 
         private void readTrackers1()
         {
 
-            trackers = tm.Read();
+            mTrackers = mTrackerManager.Read();
 
-            for (int i = 0; i < trackers.Count; i++)
+            for (int i = 0; i < mTrackers.Count; i++)
             {
                 dgvTrackers.Rows.Add();
-                dgvTrackers.Rows[i].Cells[0].Value = trackers[i].Name;
-                dgvTrackers.Rows[i].Cells[1].Value = trackers[i].AnnounceURL;
+                dgvTrackers.Rows[i].Cells[0].Value = mTrackers[i].Name;
+                dgvTrackers.Rows[i].Cells[1].Value = mTrackers[i].AnnounceURL;
             }
 
             fillTrackersComboBox();
-            cboAnnounceURL.SelectedIndex = Settings.Default.AnnounceURLIndex;
+            if (cboAnnounceURL.Items.Count > 0)
+                cboAnnounceURL.SelectedIndex = Settings.Default.AnnounceURLIndex;
 
         }
 
@@ -244,11 +287,19 @@ namespace TorrentDescriptionMaker
 
         private void updateGuiControls()
         {
+            btnCreateTorrent.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtMediaLocation.Text);
             btnAnalyze.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtMediaLocation.Text);
+
             btnCopy0.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtScrFull.Text);
             btnCopy1.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtBBScrFull.Text);
             btnCopy2.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtBBScrForums.Text);
+
             btnPublish.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtPublish.Text);
+
+            txtTorrentCustomFolder.Enabled = rbTorrentFolderCustom.Checked;
+            btnBrowseTorrentCustomFolder.Enabled = rbTorrentFolderCustom.Checked;
+            chkTorrentOrganize.Enabled = rbTorrentFolderCustom.Checked;
+
         }
 
         private void bwApp_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -330,15 +381,16 @@ namespace TorrentDescriptionMaker
 
         }
 
-        private void createTorrent(string p)
+        private void createTorrent(TorrentPacket tp)
         {
+            string p = tp.MediaLocation;
             if (File.Exists(p) || Directory.Exists(p))
             {
                 BackgroundWorker bw = new BackgroundWorker();
                 bw.DoWork += new DoWorkEventHandler(bw_DoWork);
                 bw.WorkerReportsProgress = true;
                 bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
-                bw.RunWorkerAsync(p);
+                bw.RunWorkerAsync(tp);
             }
         }
 
@@ -362,7 +414,8 @@ namespace TorrentDescriptionMaker
             {
                 try
                 {
-                    string p = e.Argument.ToString();
+                    TorrentPacket tp = (TorrentPacket)e.Argument;
+                    string p = tp.MediaLocation;
 
                     MonoTorrent.Common.TorrentCreator tc = new MonoTorrent.Common.TorrentCreator();
                     tc.Private = true;
@@ -372,22 +425,39 @@ namespace TorrentDescriptionMaker
                     tc.Publisher = Application.ProductName;
                     tc.StoreMD5 = true;
                     List<string> temp = new List<string>();
-                    temp.Add(Settings.Default.AnnounceURL);
+                    temp.Add(tp.Tracker.AnnounceURL);
                     tc.Announces.Add(temp);
 
-                    string torrentPath = "";
-                    if (!Settings.Default.TorrentFolderDefault && Directory.Exists(Settings.Default.TorrentCustomFolder))
+                    string torrentName = (File.Exists(p) ? Path.GetFileNameWithoutExtension(p) : Path.GetFileName(p));
+                    string torrentPath = "";                    
+
+                    if (!Settings.Default.TorrentFolderDefault &&
+                        Directory.Exists(Settings.Default.TorrentsCustomDir))
                     {
-                        torrentPath = torrentPath = Path.Combine(Settings.Default.TorrentCustomFolder, Path.GetFileNameWithoutExtension(p) + ".torrent");
+
+                        if (Settings.Default.TorrentsOrganize)
+                        {
+                            string subDir = Path.Combine(Settings.Default.TorrentsCustomDir, tp.Tracker.Name);                            
+                            torrentPath = Path.Combine(subDir, torrentName + ".torrent");
+
+                        }
+                        else
+                        {
+                            torrentPath = Path.Combine(Settings.Default.TorrentsCustomDir, Path.GetFileNameWithoutExtension(p) + ".torrent");
+                        }
+
                     }
                     else
                     {
-                        torrentPath = Path.Combine(Path.GetDirectoryName(p), Path.GetFileNameWithoutExtension(p) + ".torrent");
+                        torrentPath = Path.Combine(Path.GetDirectoryName(p), torrentName + ".torrent");
                     }
-                    
-                    tc.Create(torrentPath);
 
-                    bw.ReportProgress(0, string.Format("{0} created.", torrentPath));
+                    if (!Directory.Exists(Path.GetDirectoryName(torrentPath)))
+                        Directory.CreateDirectory(Path.GetDirectoryName(torrentPath));
+
+                    bw.ReportProgress(0, string.Format("Creating {0}", torrentPath));
+                    tc.Create(torrentPath);
+                    bw.ReportProgress(0, string.Format("Created {0}", torrentPath));
                 }
                 catch (Exception ex)
                 {
@@ -446,30 +516,15 @@ namespace TorrentDescriptionMaker
 
         }
 
-        private void dgvTrackers_CellLeave(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dgvTrackers_Leave(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgvTrackers_MouseLeave(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgvTrackers_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
-        {
-
-        }
-
         private void dgvTrackers_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
         {
             int old = cboAnnounceURL.SelectedIndex;
             fillTrackersComboBox();
+
+            if (cboAnnounceURL.Items.Count > 0 && old < 0)
+            {
+                old = 0;
+            }
             if (cboAnnounceURL.Items.Count > old)
             {
                 cboAnnounceURL.SelectedIndex = old;
@@ -489,9 +544,32 @@ namespace TorrentDescriptionMaker
 
         }
 
+        private Tracker getTracker()
+        {
+            Tracker t = new Tracker("Unknown Tracker", "");
+
+            if (dgvTrackers.Rows.Count > Settings.Default.AnnounceURLIndex)
+            {
+
+                object obj1 = dgvTrackers.Rows[Settings.Default.AnnounceURLIndex].Cells[0].Value;
+                object obj2 = dgvTrackers.Rows[Settings.Default.AnnounceURLIndex].Cells[1].Value;
+
+                if (obj1 != null && obj2 != null)
+                {
+                    t.Name = obj1.ToString();
+                    t.AnnounceURL = obj2.ToString();
+                }
+
+            }
+            return t;
+        }
+
         private void btnCreateTorrent_Click(object sender, EventArgs e)
         {
-            createTorrent(txtMediaLocation.Text);
+            TorrentPacket tp = new TorrentPacket();
+            tp.Tracker = getTracker();
+            tp.MediaLocation = txtMediaLocation.Text;
+            createTorrent(tp);
         }
 
         private void btnBrowseTorrentCustomFolder_Click(object sender, EventArgs e)
@@ -503,11 +581,25 @@ namespace TorrentDescriptionMaker
             }
         }
 
+
         private void rbTorrentFolderCustom_CheckedChanged(object sender, EventArgs e)
         {
-            txtTorrentCustomFolder.Enabled = rbTorrentFolderCustom.Checked;
-            btnBrowseTorrentCustomFolder.Enabled = rbTorrentFolderCustom.Checked;
+            updateGuiControls();
         }
+
+        private void cboAnnounceURL_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Settings.Default.AnnounceURLIndex = cboAnnounceURL.SelectedIndex;
+        }
+
+        private void dgvTrackers_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (null == e.FormattedValue || string.IsNullOrEmpty(e.FormattedValue.ToString()))
+            {
+                MessageBox.Show(string.Format("{0} cannot be null.", dgvTrackers.Columns[e.ColumnIndex].HeaderText));
+            }
+        }
+
 
 
     }

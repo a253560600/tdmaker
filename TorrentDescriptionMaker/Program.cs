@@ -15,8 +15,19 @@ namespace TorrentDescriptionMaker
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmMain());
-        }
+        }     
 
         public static string Status { get; set; }
     }
+
+    struct TorrentPacket
+    {
+
+        public TDMaker.Tracker Tracker {get; set; }
+        public string MediaLocation { get; set; }
+        
+    }
+
+
+
 }
