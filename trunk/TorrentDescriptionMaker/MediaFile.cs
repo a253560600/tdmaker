@@ -9,7 +9,7 @@ namespace TorrentDescriptionMaker
     /// <summary>
     /// Class that holds all Media Info: Genernal, Audio 1 to n, Video
     /// </summary>
-    public class MediaInfo2
+    public class MediaFile
     {
         public string Bitrate { get; set; }
         /// <summary>
@@ -51,9 +51,8 @@ namespace TorrentDescriptionMaker
         public VideoInfo Video { get; private set; }
 
         private string[] mExt = new string[] { ".avi", ".divx", ".mkv", ".vob" };
-        private string mMovieFilePath = string.Empty;
 
-        public MediaInfo2(string p)
+        public MediaFile(string p)
         {
             // this could be a file path or a directory
             this.Location = p;
