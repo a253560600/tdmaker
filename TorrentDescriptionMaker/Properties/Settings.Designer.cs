@@ -225,5 +225,65 @@ namespace TDMaker.Properties {
                 this["AnalyzeAuto"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int AnnounceURLIndex {
+            get {
+                return ((int)(this["AnnounceURLIndex"]));
+            }
+            set {
+                this["AnnounceURLIndex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CreateTorrent {
+            get {
+                return ((bool)(this["CreateTorrent"]));
+            }
+            set {
+                this["CreateTorrent"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool TorrentFolderDefault {
+            get {
+                return ((bool)(this["TorrentFolderDefault"]));
+            }
+            set {
+                this["TorrentFolderDefault"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string TorrentCustomFolder {
+            get {
+                return ((string)(this["TorrentCustomFolder"]));
+            }
+            set {
+                this["TorrentCustomFolder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AnnounceURL {
+            get {
+                return ((string)(this["AnnounceURL"]));
+            }
+            set {
+                this["AnnounceURL"] = value;
+            }
+        }
     }
 }

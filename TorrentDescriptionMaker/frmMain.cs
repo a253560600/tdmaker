@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using TDMaker.Properties;
+using TDMaker;
 
 namespace TorrentDescriptionMaker
 {
@@ -48,10 +49,34 @@ namespace TorrentDescriptionMaker
         private void loadMedia(string p)
         {
             txtMediaLocation.Text = p;
+            if (Settings.Default.CreateTorrent)
+                createTorrent(p);
             updateGuiControls();
 
             if (Settings.Default.AnalyzeAuto)
                 analyzeMedia();
+        }
+
+        private string getMediaName(string p)
+        {
+
+            string name = "";
+
+            if (File.Exists(p))
+            {
+                string ext = Path.GetExtension(p).ToLower();
+                name = (ext == ".vob" ? Path.GetDirectoryName(p) : Path.GetFileNameWithoutExtension(p));
+            }
+            else if (Directory.Exists(p))
+            {
+                name = Path.GetFileName(p);
+                if (name.ToUpper().Equals("VIDEO_TS"))
+                    name = Path.GetFileName(Path.GetDirectoryName(p));
+
+            }
+
+            return name;
+
         }
 
         private void analyzeMedia()
@@ -65,19 +90,7 @@ namespace TorrentDescriptionMaker
                 // if it is a DVD, set the title to be name of the folder. 
                 string p = mMI.Location;
 
-                if (File.Exists(p))
-                {
-                    string ext = Path.GetExtension(p).ToLower();
-                    string name = (ext == ".vob" ? Path.GetDirectoryName(p) : Path.GetFileNameWithoutExtension(p));
-                    this.Text = string.Format("{0} - {1}", Resources.AppName, name);
-                }
-                else if (Directory.Exists(p))
-                {
-                    string name = Path.GetFileName(p);
-                    if (name.ToUpper().Equals("VIDEO_TS"))
-                        name = Path.GetFileName(Path.GetDirectoryName(p));
-                    this.Text = string.Format("{0} - {1}", Resources.AppName, name);
-                }
+                this.Text = string.Format("{0} - {1}", Resources.AppName, this.getMediaName(p));
 
                 txtScrFull.Text = "";
                 txtBBScrFull.Text = "";
@@ -120,11 +133,31 @@ namespace TorrentDescriptionMaker
                 Settings.Default.Sources.Add(cboSource.Text);
             }
 
+            // tm2.Write(dgvTrackers);
+            writeTrackers1();
+            Settings.Default.AnnounceURLIndex = cboAnnounceURL.SelectedIndex;
+
             Settings.Default.Save();
         }
 
+        List<Tracker> trackers = new List<Tracker>();
+        TrackerManager tm = new TrackerManager();
+        TrackerManager2 tm2 = new TrackerManager2();
+
         private void frmMain_Load(object sender, EventArgs e)
         {
+
+            SettingsGet();
+
+            Program.Status = "Ready.";
+
+            this.Text = Resources.AppName + " - Drag and Drop a Movie file...";
+
+        }
+
+        private void SettingsGet()
+        {
+
             if (string.IsNullOrEmpty(Settings.Default.MTNPath))
                 Settings.Default.MTNPath = Path.Combine(Application.StartupPath, "mtn.exe");
 
@@ -140,12 +173,58 @@ namespace TorrentDescriptionMaker
             {
                 cboSource.Items.Add(src);
             }
-            //cboSource.SelectedText = Settings.Default.Source;
 
-            Program.Status = "Ready.";
+            // Trackers
 
-            // tabControl1.TabPages.Remove(tabPage1);
-            this.Text = Resources.AppName + " - Drag and Drop a Movie file...";
+            readTrackers1();
+
+
+            //DataSet ds = tm2.Read();
+            //if (ds != null)
+            //{
+            //    dgvTrackers.DataSource = ds.Tables[0];
+            //    if (dgvTrackers.Columns.Count > 0)
+            //    {
+            //        dgvTrackers.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //        dgvTrackers.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //    }
+            //    cboAnnounceURL.DataSource = dgvTrackers.DataSource;
+            //    cboAnnounceURL.DisplayMember = "Name";
+            //    cboAnnounceURL.ValueMember = "AnnounceURL";
+            //}
+        }
+
+        private void writeTrackers1()
+        {
+            trackers.Clear();
+            for (int i = 0; i < dgvTrackers.Rows.Count; i++)
+            {
+                object name = dgvTrackers.Rows[i].Cells[0].Value;
+                object url = dgvTrackers.Rows[i].Cells[1].Value;
+                if (name != null && url != null)
+                    trackers.Add(new Tracker(name.ToString(), url.ToString()));
+
+            }
+
+            tm.Write(trackers);
+
+        }
+
+        private void readTrackers1()
+        {
+
+            trackers = tm.Read();
+
+            for (int i = 0; i < trackers.Count; i++)
+            {
+                dgvTrackers.Rows.Add();
+                dgvTrackers.Rows[i].Cells[0].Value = trackers[i].Name;
+                dgvTrackers.Rows[i].Cells[1].Value = trackers[i].AnnounceURL;
+            }
+
+            fillTrackersComboBox();
+            cboAnnounceURL.SelectedIndex = Settings.Default.AnnounceURLIndex;
+
         }
 
         private void btnCopy_Click(object sender, EventArgs e)
@@ -241,7 +320,7 @@ namespace TorrentDescriptionMaker
             }
             else
             {
-                FolderBrowserDialog dlg = new FolderBrowserDialog();                
+                FolderBrowserDialog dlg = new FolderBrowserDialog();
                 dlg.Description = "Browse for DVD folder...";
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
@@ -249,6 +328,72 @@ namespace TorrentDescriptionMaker
                 }
             }
 
+        }
+
+        private void createTorrent(string p)
+        {
+            if (File.Exists(p) || Directory.Exists(p))
+            {
+                BackgroundWorker bw = new BackgroundWorker();
+                bw.DoWork += new DoWorkEventHandler(bw_DoWork);
+                bw.WorkerReportsProgress = true;
+                bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
+                bw.RunWorkerAsync(p);
+            }
+        }
+
+        void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            string msg = e.UserState.ToString();
+            switch (e.ProgressPercentage)
+            {
+                case 0:
+                    Program.Status = msg;
+                    break;
+                case 1:
+                    break;
+            }
+        }
+
+        void bw_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker bw = (BackgroundWorker)sender;
+            if (e.Argument != null)
+            {
+                try
+                {
+                    string p = e.Argument.ToString();
+
+                    MonoTorrent.Common.TorrentCreator tc = new MonoTorrent.Common.TorrentCreator();
+                    tc.Private = true;
+                    tc.Comment = this.getMediaName(p);
+                    tc.Path = p;
+                    tc.PublisherUrl = "http://code.google.com/p/tdmaker";
+                    tc.Publisher = Application.ProductName;
+                    tc.StoreMD5 = true;
+                    List<string> temp = new List<string>();
+                    temp.Add(Settings.Default.AnnounceURL);
+                    tc.Announces.Add(temp);
+
+                    string torrentPath = "";
+                    if (!Settings.Default.TorrentFolderDefault && Directory.Exists(Settings.Default.TorrentCustomFolder))
+                    {
+                        torrentPath = torrentPath = Path.Combine(Settings.Default.TorrentCustomFolder, Path.GetFileNameWithoutExtension(p) + ".torrent");
+                    }
+                    else
+                    {
+                        torrentPath = Path.Combine(Path.GetDirectoryName(p), Path.GetFileNameWithoutExtension(p) + ".torrent");
+                    }
+                    
+                    tc.Create(torrentPath);
+
+                    bw.ReportProgress(0, string.Format("{0} created.", torrentPath));
+                }
+                catch (Exception ex)
+                {
+                    bw.ReportProgress(0, ex.Message);
+                }
+            }
         }
 
         private void btnPublish_Click(object sender, EventArgs e)
@@ -299,6 +444,69 @@ namespace TorrentDescriptionMaker
             sb.AppendLine("Copyright © McoreD 2009");
             MessageBox.Show(sb.ToString(), Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+        }
+
+        private void dgvTrackers_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvTrackers_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvTrackers_MouseLeave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvTrackers_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
+        {
+
+        }
+
+        private void dgvTrackers_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            int old = cboAnnounceURL.SelectedIndex;
+            fillTrackersComboBox();
+            if (cboAnnounceURL.Items.Count > old)
+            {
+                cboAnnounceURL.SelectedIndex = old;
+            }
+        }
+
+        private void fillTrackersComboBox()
+        {
+
+            cboAnnounceURL.Items.Clear();
+            for (int i = 0; i < dgvTrackers.Rows.Count; i++)
+            {
+                object val = dgvTrackers.Rows[i].Cells[1].Value;
+                if (val != null)
+                    cboAnnounceURL.Items.Add(dgvTrackers.Rows[i].Cells[1].Value);
+            }
+
+        }
+
+        private void btnCreateTorrent_Click(object sender, EventArgs e)
+        {
+            createTorrent(txtMediaLocation.Text);
+        }
+
+        private void btnBrowseTorrentCustomFolder_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dlg = new FolderBrowserDialog();
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                txtTorrentCustomFolder.Text = dlg.SelectedPath;
+            }
+        }
+
+        private void rbTorrentFolderCustom_CheckedChanged(object sender, EventArgs e)
+        {
+            txtTorrentCustomFolder.Enabled = rbTorrentFolderCustom.Checked;
+            btnBrowseTorrentCustomFolder.Enabled = rbTorrentFolderCustom.Checked;
         }
 
 
