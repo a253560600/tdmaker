@@ -1,5 +1,6 @@
 Version 1.2.00 - 20090109
 
+1.2.01.0 Extended description to include Bits-(Pixel*Frame) [davidonato]
 1.2.00.0 Added support for creating Torrents using MonoTorrent
 1.1.13.0 Show Encoded_Library instead of Codec/ID for MKV files
 1.1.12.1 Accurate file size for DVDs browsed as a folder
