@@ -125,13 +125,13 @@ namespace TDMaker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("3")]
-        public decimal FontSizeHeading {
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
+        public decimal FontSizeHeading2 {
             get {
-                return ((decimal)(this["FontSizeHeading"]));
+                return ((decimal)(this["FontSizeHeading2"]));
             }
             set {
-                this["FontSizeHeading"] = value;
+                this["FontSizeHeading2"] = value;
             }
         }
         
@@ -307,6 +307,30 @@ namespace TDMaker.Properties {
             }
             set {
                 this["TorrentsOrganize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public decimal FontSizeHeading1 {
+            get {
+                return ((decimal)(this["FontSizeHeading1"]));
+            }
+            set {
+                this["FontSizeHeading1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public decimal FontSizeHeading3 {
+            get {
+                return ((decimal)(this["FontSizeHeading3"]));
+            }
+            set {
+                this["FontSizeHeading3"] = value;
             }
         }
     }

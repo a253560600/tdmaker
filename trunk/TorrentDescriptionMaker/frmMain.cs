@@ -269,7 +269,7 @@ namespace TorrentDescriptionMaker
 
             Program.Status = "Reading " + mMI.Location;
             mMI.ReadMedia();
-            bwApp.ReportProgress(0, mMI.Summary);
+            bwApp.ReportProgress(0, mMI.MediaFiles[0].Summary);
             mTInfo = new TorrentInfo(bwApp, mMI);
         }
 

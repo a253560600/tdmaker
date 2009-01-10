@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using MediaInfoLib;
+using TDMaker;
 
 namespace TorrentDescriptionMaker
 {
@@ -11,58 +12,40 @@ namespace TorrentDescriptionMaker
     /// </summary>
     public class MediaInfo2
     {
-        public string Bitrate { get; set; }
         /// <summary>
-        /// Duration in seconds
+        /// Disc property is set to true if the media is found to be DVD, BD, HDDVD source
         /// </summary>
-        public double Duration { get; set; }
-        /// <summary>
-        /// Duration in hours:minutes:seconds
-        /// </summary>
-        public string DurationString { get; set; }
-        public string FileName { get; set; }
+        public bool IsDisc{ get; private set; }
+
         /// <summary>
         /// Always a File Path of Media
         /// </summary>
-        public string FilePath { get; set; }
-        /// <summary>
-        /// File Size in Bytes
-        /// </summary>
-        public double FileSize { get; set; }
-        /// <summary>
-        /// File Size in XX.X MiB
-        /// </summary>
-        public string FileSizeString { get; set; }
-        public string Format { get; set; }
-        public string FormatInfo { get; set; }
+        public string FilePath { get; private set; }
         /// <summary>
         /// FilePath or DirectoryPath of the Media
         /// </summary>
         public string Location { get; private set; }
         public string Source { get; set; }
-        public string Subtitles { get; set; }
-        /// <summary>
-        /// This is what you get for mi.Option("Complete");
-        /// </summary>
-        public string Summary { get; set; }
+ 
         public string WebLink { get; set; }
 
-        public List<AudioInfo> Audio { get; private set; }
-        public VideoInfo Video { get; private set; }      
+        private string[] mExt = new string[] { ".avi", ".divx", ".mkv", ".vob", ".mov" };
 
-        public MediaInfo2(string p)
+        public MediaFile Overall { get; set; }
+        public List<MediaFile> MediaFiles { get; set; }
+
+        public MediaInfo2(string loc)
         {
+            
+            MediaFiles = new List<MediaFile>();
+
             // this could be a file path or a directory
-            this.Location = p;
+            this.Location = loc;
 
-            if (File.Exists(p))
+            if (File.Exists(loc))
             {
-                this.FilePath = p;
-                this.FileName = Path.GetFileName(p);
+                this.FilePath = loc;
             }
-
-            this.Audio = new List<AudioInfo>();
-            this.Video = new VideoInfo();
 
         }
 
@@ -76,29 +59,52 @@ namespace TorrentDescriptionMaker
 
             if (File.Exists(Location))
             {
-                ReadFile();
+                this.Overall = ReadFile(Location);
+                this.MediaFiles.Add(this.Overall);
+                
             }
             else if (Directory.Exists(Location))
             {
 
                 // get largest file 
-                string[] files = Directory.GetFiles(Location, "*.*", SearchOption.AllDirectories);
-                if (files.Length > 0)
+                List<string> filePaths = new List<string>();
+                foreach (string ext in mExt)
+                {
+                    filePaths.AddRange(Directory.GetFiles(Location, "*" + ext, SearchOption.AllDirectories));
+                }
+
+                if (filePaths.Count  > 0)
                 {
                     string maxPath = "";
                     long maxSize = 0;
-                    for (int i = 0; i < files.Length; i++)
+
+                    for (int i = 0; i < filePaths.Count; i++)
                     {
-                        FileInfo fi = new FileInfo(files[i]);
-                        if (maxSize < fi.Length)
+                        string f = filePaths[i];
+
+                        if (!Path.GetFileName(f).ToLower().Contains("sample"))
                         {
-                            maxSize = fi.Length;
-                            maxPath = fi.FullName;
+
+                            FileInfo fi = new FileInfo(f);
+
+                            if (maxSize < fi.Length)
+                            {
+                                maxSize = fi.Length;
+                                maxPath = fi.FullName;
+                            }
+
+                            this.MediaFiles.Add(ReadFile(f));
                         }
                     }
+                    
                     this.FilePath = maxPath;
-                    this.FileName = Path.GetFileName(this.FilePath);
-                    ReadFile();
+                    this.Overall = ReadFile(maxPath);
+
+                    // Set Overall File Name                
+                    this.Overall.FileName = Path.GetFileName(Location);
+                    if (Overall.FileName.ToUpper().Equals("VIDEO_TS"))
+                        Overall.FileName = Path.GetFileName(Path.GetDirectoryName(Location));
+
                 }
 
                 // DVD Video
@@ -106,11 +112,7 @@ namespace TorrentDescriptionMaker
                 string[] vobFiles = Directory.GetFiles(Location, "*.vob", SearchOption.AllDirectories);
                 if (vobFiles.Length > 0)
                 {
-
-                    // Guess File Name
-                    this.FileName = Path.GetFileName(Location);
-                    if (this.FileName.ToUpper().Equals("VIDEO_TS"))
-                        this.FileName = Path.GetFileName(Path.GetDirectoryName(Location));
+                    this.IsDisc = true; 
 
                     long dura = 0;
                     double size = 0;
@@ -136,20 +138,12 @@ namespace TorrentDescriptionMaker
                         mi.Close();
                     }
 
-                    this.FileSize = size; // override any previous file size
-                    this.FileSizeString = string.Format("{0} MiB", (this.FileSize / 1024.0 / 1024.0).ToString("0.00"));
+                    this.Overall.FileSize = size; // override any previous file size
+                    this.Overall.FileSizeString = string.Format("{0} MiB", (this.Overall.FileSize / 1024.0 / 1024.0).ToString("0.00"));
 
-                    this.Duration = dura / 1000.0;
+                    this.Overall.Duration = dura;
+                    this.Overall.DurationString = Program.getDurationString(dura);
 
-                    long hours = (long)this.Duration / 3600;
-                    long secLeft = (long)this.Duration - hours * 3600;
-                    long mins = secLeft / 60;
-                    long sec = secLeft - mins * 60;
-
-                    this.DurationString = string.Format("{0}:{1}:{2}",
-                        hours.ToString("00"),
-                        mins.ToString("00"),
-                        sec.ToString("00"));
                 }
 
                 // Subtitles, Format: DVD Video using VTS_01_0.IFO
@@ -160,7 +154,7 @@ namespace TorrentDescriptionMaker
                     mi.Open(ifo[0]);
 
                     // most prolly this will be: DVD Video
-                    this.Format = mi.Get(StreamKind.General, 0, "Format");
+                    this.Overall.Format = mi.Get(StreamKind.General, 0, "Format");
 
                     int subCount = 0;
                     int.TryParse(mi.Get(StreamKind.Text, 0, "StreamCount"), out subCount);
@@ -187,7 +181,7 @@ namespace TorrentDescriptionMaker
                                 sbLangs.Append(", ");
                         }
 
-                        this.Subtitles = sbLangs.ToString();
+                        this.Overall.Subtitles = sbLangs.ToString();
                     }
 
                     // close ifo file
@@ -198,43 +192,50 @@ namespace TorrentDescriptionMaker
 
         }
 
-        public void ReadFile()
+        /// <summary>
+        /// Reads a media file and creates a MediaFile object
+        /// </summary>
+        /// <param name="fp">File Path of the Media File</param>
+        /// <returns>MediaFile object</returns>
+        private MediaFile ReadFile(string fp)
         {
-            if (File.Exists(FilePath))
+            MediaFile mf = new MediaFile(fp);
+            
+            if (File.Exists(fp))
             {
                 //*********************
                 //* General
                 //********************* 
 
                 MediaInfoLib.MediaInfo mMI = new MediaInfoLib.MediaInfo();
-                mMI.Open(FilePath);
+                mMI.Open(fp);
                 mMI.Option("Complete");
-                this.Summary = mMI.Inform();
+                mf.Summary = mMI.Inform();
 
                 // Format Info
-                if (string.IsNullOrEmpty(this.Format))
-                    this.Format = mMI.Get(StreamKind.General, 0, "Format");
-                this.FormatInfo = mMI.Get(StreamKind.General, 0, "Format/Info");
+                if (string.IsNullOrEmpty(mf.Format))
+                    mf.Format = mMI.Get(StreamKind.General, 0, "Format");
+                mf.FormatInfo = mMI.Get(StreamKind.General, 0, "Format/Info");
 
-                // this.FileName = mMI.Get(0, 0, "FileName");
-                if (0 == this.FileSize)
+                // mf.FileName = mMI.Get(0, 0, "FileName");
+                if (0 == mf.FileSize)
                 {
                     double sz;
                     double.TryParse(mMI.Get(0, 0, "FileSize"), out sz);
-                    this.FileSize = sz;
+                    mf.FileSize = sz;
                 }
-                if (string.IsNullOrEmpty(FileSizeString))
+                if (string.IsNullOrEmpty(mf.FileSizeString))
                 {
-                    this.FileSizeString = string.Format("{0} MiB", (this.FileSize / 1024.0 / 1024.0).ToString("0.00"));
+                    mf.FileSizeString = string.Format("{0} MiB", (mf.FileSize / 1024.0 / 1024.0).ToString("0.00"));
                 }
 
                 // Duration
-                if (string.IsNullOrEmpty(this.DurationString))
-                    this.DurationString = mMI.Get(0, 0, "Duration/String2");
+                if (string.IsNullOrEmpty(mf.DurationString))
+                    mf.DurationString = mMI.Get(0, 0, "Duration/String2");
 
-                this.Bitrate = mMI.Get(StreamKind.General, 0, "OverallBitRate/String");
+                mf.Bitrate = mMI.Get(StreamKind.General, 0, "OverallBitRate/String");
 
-                if (string.IsNullOrEmpty(this.Subtitles))
+                if (string.IsNullOrEmpty(mf.Subtitles))
                 {
                     StringBuilder sbSubs = new StringBuilder();
 
@@ -270,33 +271,33 @@ namespace TorrentDescriptionMaker
                         sbSubs.Append("None");
                     }
 
-                    this.Subtitles = sbSubs.ToString();
+                    mf.Subtitles = sbSubs.ToString();
 
                 }
 
                 //*********************
                 //* Video
                 //********************* 
-                this.Video.Format = mMI.Get(StreamKind.Video, 0, "Format");
-                this.Video.FormatVersion = mMI.Get(StreamKind.Video, 0, "Format_Version");
+                mf.Video.Format = mMI.Get(StreamKind.Video, 0, "Format");
+                mf.Video.FormatVersion = mMI.Get(StreamKind.Video, 0, "Format_Version");
 
-                if (Path.GetExtension(this.FilePath).ToLower().Equals(".mkv"))
+                if (Path.GetExtension(mf.FilePath).ToLower().Equals(".mkv"))
                 {
-                    this.Video.Codec = mMI.Get(StreamKind.Video, 0, "Encoded_Library");
+                    mf.Video.Codec = mMI.Get(StreamKind.Video, 0, "Encoded_Library");
                 }
-                if (string.IsNullOrEmpty(this.Video.Codec))
-                    this.Video.Codec = mMI.Get(StreamKind.Video, 0, "CodecID/Hint");
-                if (string.IsNullOrEmpty(this.Video.Codec))
-                    this.Video.Codec = mMI.Get(StreamKind.Video, 0, "CodecID");
+                if (string.IsNullOrEmpty(mf.Video.Codec))
+                    mf.Video.Codec = mMI.Get(StreamKind.Video, 0, "CodecID/Hint");
+                if (string.IsNullOrEmpty(mf.Video.Codec))
+                    mf.Video.Codec = mMI.Get(StreamKind.Video, 0, "CodecID");
 
-                this.Video.Bitrate = mMI.Get(StreamKind.Video, 0, "BitRate/String");
-                this.Video.Standard = mMI.Get(StreamKind.Video, 0, "Standard"); ;
-                this.Video.FrameRate = mMI.Get(StreamKind.Video, 0, "FrameRate/String");
-                this.Video.ScanType = mMI.Get(StreamKind.Video, 0, "ScanType/String");
-                this.Video.Height = mMI.Get(StreamKind.Video, 0, "Height");
-                this.Video.Width = mMI.Get(StreamKind.Video, 0, "Width");
-                this.Video.Resolution = string.Format("{0}x{1}", this.Video.Width, this.Video.Height);
-                this.Video.BitsPerPixelXFrame = mMI.Get(StreamKind.Video, 0, "Bits-(Pixel*Frame)");
+                mf.Video.Bitrate = mMI.Get(StreamKind.Video, 0, "BitRate/String");
+                mf.Video.Standard = mMI.Get(StreamKind.Video, 0, "Standard"); ;
+                mf.Video.FrameRate = mMI.Get(StreamKind.Video, 0, "FrameRate/String");
+                mf.Video.ScanType = mMI.Get(StreamKind.Video, 0, "ScanType/String");
+                mf.Video.Height = mMI.Get(StreamKind.Video, 0, "Height");
+                mf.Video.Width = mMI.Get(StreamKind.Video, 0, "Width");
+                mf.Video.Resolution = string.Format("{0}x{1}", mf.Video.Width, mf.Video.Height);
+                mf.Video.BitsPerPixelXFrame = mMI.Get(StreamKind.Video, 0, "Bits-(Pixel*Frame)");
 
 
                 //*********************
@@ -324,44 +325,16 @@ namespace TorrentDescriptionMaker
                     ai.SamplingRate = mMI.Get(StreamKind.Audio, a, "SamplingRate/String");
                     ai.Resolution = mMI.Get(StreamKind.Audio, a, "Resolution/String");
 
-                    this.Audio.Add(ai);
+                    mf.Audio.Add(ai);
 
                 }
 
                 mMI.Close();
 
             }
-        }
 
-    }
-
-    public class Info
-    {
-        public string Bitrate { get; set; }
-        public string Codec { get; set; }
-        public string Standard { get; set; }
-        public string Format { get; set; }
-        public string FormatProfile { get; set; }
-        public string FormatVersion { get; set; }
-        public string Resolution { get; set; }
-
-    }
-
-    public class AudioInfo : Info
-    {
-        //         
-        public string BitrateMode { get; set; }
-        public string Channels { get; set; }
-        public string SamplingRate { get; set; }
-    }
-
-    public class VideoInfo : Info
-    {
-        public string FrameRate { get; set; }
-        public string Height { get; set; }
-        public string ScanType { get; set; }
-        public string Width { get; set; }
-        public string BitsPerPixelXFrame { get; set; }
+            return mf;
+        }       
 
     }
 
