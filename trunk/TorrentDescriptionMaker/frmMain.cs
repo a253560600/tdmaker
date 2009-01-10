@@ -16,9 +16,6 @@ namespace TorrentDescriptionMaker
         List<Tracker> mTrackers = new List<Tracker>();
         TrackerManager mTrackerManager = null;
 
-        private TorrentInfo mTInfo = null;
-        private MediaInfo2 mMI = null;
-
         public frmMain()
         {
             InitializeComponent();
@@ -94,7 +91,7 @@ namespace TorrentDescriptionMaker
         {
             if (File.Exists(txtMediaLocation.Text) || Directory.Exists(txtMediaLocation.Text))
             {
-                mMI = new MediaInfo2(txtMediaLocation.Text);
+                MediaInfo2 mMI = new MediaInfo2(txtMediaLocation.Text);
                 mMI.Source = cboSource.Text;
                 mMI.WebLink = txtWebLink.Text;
 
@@ -112,7 +109,7 @@ namespace TorrentDescriptionMaker
                 lbStatus.Items.Add("Analyzing Media using MediaInfo.");
 
                 if (!bwApp.IsBusy)
-                    bwApp.RunWorkerAsync();
+                    bwApp.RunWorkerAsync(mMI);
 
                 updateGuiControls();
 
@@ -121,6 +118,12 @@ namespace TorrentDescriptionMaker
 
         private void frmMain_Shown(object sender, EventArgs e)
         {
+            if (!File.Exists(Settings.Default.MTNPath))
+            {
+                Settings.Default.MTNPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), @"TDMaker\mtn.exe");
+
+            }
+
             if (!File.Exists(Settings.Default.MTNPath))
             {
                 OpenFileDialog dlg = new OpenFileDialog();
@@ -267,10 +270,15 @@ namespace TorrentDescriptionMaker
         {
             // start of the magic :)
 
-            Program.Status = "Reading " + mMI.Location;
-            mMI.ReadMedia();
-            bwApp.ReportProgress(0, mMI.MediaFiles[0].Summary);
-            mTInfo = new TorrentInfo(bwApp, mMI);
+            MediaInfo2 mi = (MediaInfo2)e.Argument;
+
+            Program.Status = "Reading " + mi.Location;
+            mi.ReadMedia();
+
+            bwApp.ReportProgress(0, mi.MediaFiles[0].Summary);
+
+            TorrentInfo ti = new TorrentInfo(bwApp, mi);
+            e.Result = ti;
         }
 
         private void updateGuiControls()
@@ -292,18 +300,20 @@ namespace TorrentDescriptionMaker
 
         private void bwApp_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (mTInfo != null)
+            TorrentInfo ti = (TorrentInfo)e.Result;
+
+            if (ti != null)
             {
 
-                txtScrFull.Text = mTInfo.ScreenshotURLFull;
-                txtBBScrForums.Text = mTInfo.ScreenshotURLForums;
+                txtScrFull.Text = ti.ScreenshotURLFull;
+                txtBBScrForums.Text = ti.ScreenshotURLForums;
 
                 BbCode bb = new BbCode();
                 if (!string.IsNullOrEmpty(txtScrFull.Text))
                     txtBBScrFull.Text = bb.img(txtScrFull.Text);
 
                 StringBuilder sbPublish = new StringBuilder();
-                sbPublish.AppendLine(mTInfo.MediaInfoForums1);
+                sbPublish.AppendLine(ti.MediaInfoForums1);
 
                 sbPublish.AppendLine();
                 if (!string.IsNullOrEmpty(txtBBScrFull.Text) && Settings.Default.UseFullPicture)
@@ -339,7 +349,7 @@ namespace TorrentDescriptionMaker
             btnBrowse.Enabled = !bwApp.IsBusy;
             // btnBrowse.Text = (File.Exists(txtMediaFile.Text) ? "&Analyze" : "&Browse...");
             lbStatus.SelectedIndex = lbStatus.Items.Count - 1;
-        }        
+        }
 
         private void btnCopy2_Click(object sender, EventArgs e)
         {
