@@ -14,12 +14,11 @@ namespace TorrentDescriptionMaker
     class TorrentInfo
     {
         private BackgroundWorker mBwApp = null;
-        MediaInfo2 mMediaInfo2;
-
+        
         public TorrentInfo(BackgroundWorker bwApp, MediaInfo2 mi)
         {
             // load the MediaInfo object
-            mMediaInfo2 = mi;
+            MediaInfo2 = mi;
 
             string p = mi.Location;
 
@@ -56,27 +55,27 @@ namespace TorrentDescriptionMaker
             StringBuilder sbBody = new StringBuilder();
 
             // Show Overall Information if more than one Media File is found
-            if (mMediaInfo2.MediaFiles.Count > 1)
+            if (MediaInfo2.MediaFiles.Count > 1)
             {
-                sbBody.AppendLine(bb.size(fontSizeHeading1, bb.bold(mMediaInfo2.Overall.FileName)));
+                sbBody.AppendLine(bb.size(fontSizeHeading1, bb.bold(MediaInfo2.Overall.FileName)));
                 sbBody.AppendLine();
 
                 // is a DVD so need Overall Info only
-                if (mMediaInfo2.IsDisc)
+                if (MediaInfo2.IsDisc)
                 {
-                    sbBody.AppendLine(mMediaInfo2.Overall.ToString());
+                    sbBody.AppendLine(MediaInfo2.Overall.ToString());
                 }
             }
 
-            if (Settings.Default.WebLink && !string.IsNullOrEmpty(mMediaInfo2.WebLink))
+            if (Settings.Default.WebLink && !string.IsNullOrEmpty(MediaInfo2.WebLink))
             {
-                sbBody.AppendLine(string.Format("          [u]Web Link:[/u] {0}", mMediaInfo2.WebLink));
+                sbBody.AppendLine(string.Format("          [u]Web Link:[/u] {0}", MediaInfo2.WebLink));
             }
 
             // If the loaded folder is not a Disc but individual ripped files
-            if (!mMediaInfo2.IsDisc)
+            if (!MediaInfo2.IsDisc)
             {
-                foreach (MediaFile mf in mMediaInfo2.MediaFiles)
+                foreach (MediaFile mf in MediaInfo2.MediaFiles)
                 {
 
                     sbBody.AppendLine(bb.size(fontSizeHeading2, bb.bolditalic(mf.FileName)));
@@ -170,6 +169,7 @@ namespace TorrentDescriptionMaker
         public string ScreenshotURLForums { get; private set; }
         public string ScreenshotURLFull { get; private set; }
         public string MediaInfoForums1 { get; private set; }
+        public MediaInfo2 MediaInfo2 { get; private set; }
 
     }
 }
