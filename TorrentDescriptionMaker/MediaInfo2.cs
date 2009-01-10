@@ -9,7 +9,7 @@ namespace TorrentDescriptionMaker
     /// <summary>
     /// Class that holds all Media Info: Genernal, Audio 1 to n, Video
     /// </summary>
-    public class MediaFile
+    public class MediaInfo2
     {
         public string Bitrate { get; set; }
         /// <summary>
@@ -50,7 +50,7 @@ namespace TorrentDescriptionMaker
         public List<AudioInfo> Audio { get; private set; }
         public VideoInfo Video { get; private set; }      
 
-        public MediaFile(string p)
+        public MediaInfo2(string p)
         {
             // this could be a file path or a directory
             this.Location = p;
