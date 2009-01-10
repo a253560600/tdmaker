@@ -25,7 +25,9 @@ namespace TorrentDescriptionMaker
             this.mBwApp = bwApp;
 
             if (Settings.Default.UploadImageShack)
-                sGetScreenshot(mi.FilePath);
+            {
+                sGetScreenshot(mi.MediaFiles[mi.MediaFiles.Count-1].FilePath);
+            }
 
             sGetMovieInfo();
 
