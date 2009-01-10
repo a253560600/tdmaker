@@ -63,7 +63,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BbCode.cs" />
-    <Compile Include="MediaInfo2.cs" />
     <Compile Include="TorrentInfo.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
@@ -71,7 +70,7 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="MediaFile.cs" />
+    <Compile Include="MediaInfo2.cs" />
     <Compile Include="MediaInfoDLL.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
