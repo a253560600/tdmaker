@@ -22,7 +22,7 @@ namespace TDMaker
             this.TrackersXML = Path.Combine(Settings.Default.SettingsDir, "trackers.xml");
         }
 
-        public List<Tracker> Read()
+        public void Read()
         {
             if (File.Exists(TrackersXML))
             {
@@ -49,45 +49,19 @@ namespace TDMaker
                     Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
                     throw;
                 }
-
-                // Declare the hashtable reference.
-
-
-                //// Open the file containing the data that you want to deserialize.
-                //FileStream fs = new FileStream(TrackersXML, FileMode.Open);
-                //try
-                //{
-                //    SoapFormatter formatter = new SoapFormatter();
-
-                //    // Deserialize the hashtable from the file and 
-                //    // assign the reference to the local variable.
-                //    Trackers = (List<Tracker>)formatter.Deserialize(fs);
-                //}
-                //catch (SerializationException e)
-                //{
-                //    Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
-                //}
-
-                //finally
-                //{
-                //    fs.Close();
-                //}
-
             }
-
-            return Trackers;
         }
 
-        public void Write(List<Tracker> tr)
+        public void Write()
         {
             try
             {
-                if (tr.Count > 0)
+                if (Trackers.Count > 0)
                 {
                     using (FileStream fs = new FileStream(TrackersXML, FileMode.Create))
                     {
-                        XmlSerializer xs = new XmlSerializer(tr.GetType());
-                        xs.Serialize(fs, tr);
+                        XmlSerializer xs = new XmlSerializer(Trackers.GetType());
+                        xs.Serialize(fs, Trackers);
                     }
                 }
             }

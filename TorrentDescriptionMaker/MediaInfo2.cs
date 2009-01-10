@@ -17,6 +17,10 @@ namespace TorrentDescriptionMaker
         /// </summary>
         public bool IsDisc{ get; private set; }
         /// <summary>
+        /// Mode of taking screenshots for Media files
+        /// </summary>
+        public TakeScreenshotsMode TakeScreenshots { get; set; }
+        /// <summary>
         /// FilePath or DirectoryPath of the Media
         /// </summary>
         public string Location { get; private set; }
