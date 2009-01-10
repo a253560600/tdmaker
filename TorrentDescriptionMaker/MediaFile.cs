@@ -48,14 +48,18 @@ namespace TorrentDescriptionMaker
         public string WebLink { get; set; }
 
         public List<AudioInfo> Audio { get; private set; }
-        public VideoInfo Video { get; private set; }
-
-        private string[] mExt = new string[] { ".avi", ".divx", ".mkv", ".vob" };
+        public VideoInfo Video { get; private set; }      
 
         public MediaFile(string p)
         {
             // this could be a file path or a directory
             this.Location = p;
+
+            if (File.Exists(p))
+            {
+                this.FilePath = p;
+                this.FileName = Path.GetFileName(p);
+            }
 
             this.Audio = new List<AudioInfo>();
             this.Video = new VideoInfo();
@@ -72,8 +76,6 @@ namespace TorrentDescriptionMaker
 
             if (File.Exists(Location))
             {
-                this.FilePath = Location;
-                this.FileName = Path.GetFileName(this.FilePath);
                 ReadFile();
             }
             else if (Directory.Exists(Location))
@@ -196,7 +198,7 @@ namespace TorrentDescriptionMaker
 
         }
 
-        private void ReadFile()
+        public void ReadFile()
         {
             if (File.Exists(FilePath))
             {
@@ -354,13 +356,12 @@ namespace TorrentDescriptionMaker
     }
 
     public class VideoInfo : Info
-    {        
+    {
         public string FrameRate { get; set; }
         public string Height { get; set; }
         public string ScanType { get; set; }
         public string Width { get; set; }
         public string BitsPerPixelXFrame { get; set; }
-        // Bits-(Pixel*Frame)
 
     }
 

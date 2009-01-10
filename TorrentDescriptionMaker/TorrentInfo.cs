@@ -107,7 +107,7 @@ namespace TorrentDescriptionMaker
             //* Video
             //*********************    
             VideoInfo vi = mMediaInfo2.Video;
-
+            
             sbMediaInfo.AppendLine();
             sbMediaInfo.AppendLine(bb.size(fontSizeHeading, bb.bolditalic("Video:")));
             sbMediaInfo.AppendLine();
