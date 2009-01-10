@@ -16,11 +16,6 @@ namespace TorrentDescriptionMaker
         /// Disc property is set to true if the media is found to be DVD, BD, HDDVD source
         /// </summary>
         public bool IsDisc{ get; private set; }
-
-        /// <summary>
-        /// Always a File Path of Media
-        /// </summary>
-        public string FilePath { get; private set; }
         /// <summary>
         /// FilePath or DirectoryPath of the Media
         /// </summary>
@@ -41,11 +36,6 @@ namespace TorrentDescriptionMaker
 
             // this could be a file path or a directory
             this.Location = loc;
-
-            if (File.Exists(loc))
-            {
-                this.FilePath = loc;
-            }
 
         }
 
@@ -97,7 +87,6 @@ namespace TorrentDescriptionMaker
                         }
                     }
                     
-                    this.FilePath = maxPath;
                     this.Overall = ReadFile(maxPath);
 
                     // Set Overall File Name                
@@ -200,6 +189,7 @@ namespace TorrentDescriptionMaker
         private MediaFile ReadFile(string fp)
         {
             MediaFile mf = new MediaFile(fp);
+            mf.Source = this.Source;
             
             if (File.Exists(fp))
             {
