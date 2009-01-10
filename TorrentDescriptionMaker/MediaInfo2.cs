@@ -92,6 +92,8 @@ namespace TDMaker
                 this.Duration = this.MediaFiles[0].Duration;
                 this.DurationString = this.MediaFiles[0].DurationString;
                 this.FileName = this.MediaFiles[0].FileName;
+                this.FileSize = this.MediaFiles[0].FileSize;
+                this.FileSizeString = this.MediaFiles[0].FileSizeString;
             }
 
 
