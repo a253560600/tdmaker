@@ -12,8 +12,7 @@ using TDMaker;
 namespace TorrentDescriptionMaker
 {
     public partial class frmMain : Form
-    {
-        List<Tracker> mTrackers = new List<Tracker>();
+    {       
         TrackerManager mTrackerManager = null;
 
         public frmMain()
@@ -91,12 +90,18 @@ namespace TorrentDescriptionMaker
         {
             if (File.Exists(txtMediaLocation.Text) || Directory.Exists(txtMediaLocation.Text))
             {
-                MediaInfo2 mMI = new MediaInfo2(txtMediaLocation.Text);
-                mMI.Source = cboSource.Text;
-                mMI.WebLink = txtWebLink.Text;
+                MediaInfo2 mi = new MediaInfo2(txtMediaLocation.Text);
+                mi.Source = cboSource.Text;
+                mi.WebLink = txtWebLink.Text;
+
+                // Screenshots Mode
+                if (Settings.Default.UploadImageShack)
+                {
+                    mi.TakeScreenshots = TakeScreenshotsMode.TAKE_ONE_SCREENSHOT;
+                }
 
                 // if it is a DVD, set the title to be name of the folder. 
-                string p = mMI.Location;
+                string p = mi.Location;
 
                 this.Text = string.Format("{0} - {1}", Resources.AppName, this.getMediaName(p));
 
@@ -109,7 +114,7 @@ namespace TorrentDescriptionMaker
                 lbStatus.Items.Add("Analyzing Media using MediaInfo.");
 
                 if (!bwApp.IsBusy)
-                    bwApp.RunWorkerAsync(mMI);
+                    bwApp.RunWorkerAsync(mi);
 
                 updateGuiControls();
 
@@ -152,7 +157,7 @@ namespace TorrentDescriptionMaker
             }
 
             // tm2.Write(dgvTrackers);
-            writeTrackers1();
+            trackersWrite();
             Settings.Default.AnnounceURLIndex = cboAnnounceURL.SelectedIndex;
 
             Settings.Default.TorrentFolderDefault = rbTorrentDefaultFolder.Checked;
@@ -223,36 +228,37 @@ namespace TorrentDescriptionMaker
             rbTorrentFolderCustom.Checked = !rbTorrentDefaultFolder.Checked;
 
             // Trackers
-            readTrackers1();
+            trackersRead();
 
         }
 
-        private void writeTrackers1()
+        private void trackersWrite()
         {
-            mTrackers.Clear();
+            mTrackerManager.Trackers.Clear();
+
             for (int i = 0; i < dgvTrackers.Rows.Count; i++)
             {
                 object name = dgvTrackers.Rows[i].Cells[0].Value;
                 object url = dgvTrackers.Rows[i].Cells[1].Value;
                 if (name != null && url != null)
-                    mTrackers.Add(new Tracker(name.ToString(), url.ToString()));
+                    mTrackerManager.Trackers.Add(new Tracker(name.ToString(), url.ToString()));
 
             }
 
-            mTrackerManager.Write(mTrackers);
+            mTrackerManager.Write();
 
         }
 
-        private void readTrackers1()
+        private void trackersRead()
         {
 
-            mTrackers = mTrackerManager.Read();
+            mTrackerManager.Read();
 
-            for (int i = 0; i < mTrackers.Count; i++)
+            for (int i = 0; i < mTrackerManager.Trackers.Count; i++)
             {
                 dgvTrackers.Rows.Add();
-                dgvTrackers.Rows[i].Cells[0].Value = mTrackers[i].Name;
-                dgvTrackers.Rows[i].Cells[1].Value = mTrackers[i].AnnounceURL;
+                dgvTrackers.Rows[i].Cells[0].Value = mTrackerManager.Trackers[i].Name;
+                dgvTrackers.Rows[i].Cells[1].Value = mTrackerManager.Trackers[i].AnnounceURL;
             }
 
             fillTrackersComboBox();

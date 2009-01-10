@@ -75,7 +75,14 @@ namespace TorrentDescriptionMaker
 
     }
 
-    struct TorrentPacket
+    public enum TakeScreenshotsMode
+    {
+        NONE, 
+        TAKE_ALL_SCREENSHOTS,
+        TAKE_ONE_SCREENSHOT
+    }
+
+    public struct TorrentPacket
     {
 
         public TDMaker.Tracker Tracker {get; set; }
