@@ -7,11 +7,12 @@ using ZSS.ImageUploader;
 using MediaInfoLib;
 using System.Text;
 using System.ComponentModel;
+using TDMaker;
 
 namespace TorrentDescriptionMaker
 {
     class TorrentInfo
-    {       
+    {
         private BackgroundWorker mBwApp = null;
         MediaInfo2 mMediaInfo2;
 
@@ -22,7 +23,7 @@ namespace TorrentDescriptionMaker
 
             string p = mi.Location;
 
-            this.mBwApp = bwApp;            
+            this.mBwApp = bwApp;
 
             if (Settings.Default.UploadImageShack)
                 sGetScreenshot(mi.FilePath);
@@ -37,159 +38,61 @@ namespace TorrentDescriptionMaker
         /// </summary>      
         private void sGetMovieInfo()
         {
-            int fontSizeHeading = (int)(Settings.Default.LargerPreText == true ?
-                Settings.Default.FontSizeHeading + Settings.Default.FontSizeIncr :
-                Settings.Default.FontSizeHeading);
+            int fontSizeHeading1 = (int)(Settings.Default.PreText && Settings.Default.LargerPreText == true ?
+               Settings.Default.FontSizeHeading1 + Settings.Default.FontSizeIncr :
+               Settings.Default.FontSizeHeading1);
 
-            int fontSizeBody = (int)(Settings.Default.LargerPreText == true ?
+            int fontSizeHeading2 = (int)(Settings.Default.PreText && Settings.Default.LargerPreText == true ?
+                Settings.Default.FontSizeHeading2 + Settings.Default.FontSizeIncr :
+                Settings.Default.FontSizeHeading2);
+
+            int fontSizeBody = (int)(Settings.Default.PreText && Settings.Default.LargerPreText == true ?
                 Settings.Default.FontSizeBody + Settings.Default.FontSizeIncr :
                 Settings.Default.FontSizeBody);
 
 
             BbCode bb = new BbCode();
 
-            StringBuilder sbMediaInfo = new StringBuilder();
+            StringBuilder sbBody = new StringBuilder();
 
-            //*********************
-            //* General
-            //*********************    
-
-            StringBuilder sbGeneral = new StringBuilder();
-
-            sbMediaInfo.AppendLine(bb.size(fontSizeHeading, bb.bolditalic("General:")));
-            sbMediaInfo.AppendLine();
-            // Source 
-            if (!string.IsNullOrEmpty(Settings.Default.Source))
+            // Show Overall Information if more than one Media File is found
+            if (mMediaInfo2.MediaFiles.Count > 1)
             {
-                sbGeneral.AppendLine(string.Format("            [u]Source:[/u] {0}", Settings.Default.Source));
-            }
-            // File Name
-            if (!string.IsNullOrEmpty(mMediaInfo2.FileName))
-            {
-                sbGeneral.AppendLine(string.Format("         [u]File Name:[/u] {0}", mMediaInfo2.FileName));
-            }
-            //else
-            //{
-            //    sbGeneral.AppendLine(string.Format("    [u]File Name:[/u] {0}.{1}",
-            //        mMI.Get(0, 0, "FileName"),
-            //        mMI.Get(0, 0, "FileExtension")));
-            //}
+                sbBody.AppendLine(bb.size(fontSizeHeading1, bb.bold(mMediaInfo2.Overall.FileName)));
+                sbBody.AppendLine();
 
-            // Format
-            sbGeneral.Append(string.Format("            [u]Format:[/u] {0}", mMediaInfo2.Format));
-            if (!string.IsNullOrEmpty(mMediaInfo2.FormatInfo))
-            {
-                sbGeneral.Append(string.Format(" ({0})", mMediaInfo2.FormatInfo));
-            }
-            sbGeneral.Append(Environment.NewLine);
-
-            // File Size
-            sbGeneral.AppendLine(string.Format("         [u]File Size:[/u] {0}", mMediaInfo2.FileSizeString));
-            // Duration
-            sbGeneral.AppendLine(string.Format("          [u]Duration:[/u] {0}", mMediaInfo2.DurationString));
-            // Bitrate
-            sbGeneral.AppendLine(string.Format("           [u]Bitrate:[/u] {0}", mMediaInfo2.Bitrate));
-
-            // Subtitles            
-            if (!string.IsNullOrEmpty(mMediaInfo2.Subtitles))
-            {
-                sbGeneral.AppendLine(string.Format("         [u]Subtitles:[/u] {0}", mMediaInfo2.Subtitles));
+                // is a DVD so need Overall Info only
+                if (mMediaInfo2.IsDisc)
+                {
+                    sbBody.AppendLine(mMediaInfo2.Overall.ToString());
+                }
             }
 
             if (Settings.Default.WebLink && !string.IsNullOrEmpty(mMediaInfo2.WebLink))
             {
-                sbGeneral.AppendLine(string.Format("          [u]Web Link:[/u] {0}", mMediaInfo2.WebLink));
+                sbBody.AppendLine(string.Format("          [u]Web Link:[/u] {0}", mMediaInfo2.WebLink));
             }
 
-            sbMediaInfo.Append(bb.size(fontSizeBody, sbGeneral.ToString()));
-
-            //*********************
-            //* Video
-            //*********************    
-            VideoInfo vi = mMediaInfo2.Video;
-            
-            sbMediaInfo.AppendLine();
-            sbMediaInfo.AppendLine(bb.size(fontSizeHeading, bb.bolditalic("Video:")));
-            sbMediaInfo.AppendLine();
-
-            StringBuilder sbVideo = new StringBuilder();
-            // Format            
-            sbVideo.Append(string.Format("            [u]Format:[/u] {0}", this.mMediaInfo2.Video.Format));
-            if (!string.IsNullOrEmpty(this.mMediaInfo2.Video.FormatVersion))
+            // If the loaded folder is not a Disc but individual ripped files
+            if (!mMediaInfo2.IsDisc)
             {
-                sbVideo.Append(string.Format(" {0}", this.mMediaInfo2.Video.FormatVersion));
-            }
-            sbVideo.Append(Environment.NewLine);
+                foreach (MediaFile mf in mMediaInfo2.MediaFiles)
+                {
 
-            // Codec
-            if (!string.IsNullOrEmpty(vi.Codec))
-                sbVideo.AppendLine(string.Format("             [u]Codec:[/u] {0}", vi.Codec));
-            // Bitrate
-            sbVideo.AppendLine(string.Format("           [u]Bitrate:[/u] {0}", this.mMediaInfo2.Video.Bitrate));
-            // Standard            
-            if (!string.IsNullOrEmpty(vi.Standard))
-                sbVideo.AppendLine(string.Format("          [u]Standard:[/u] {0}", this.mMediaInfo2.Video.Standard));
-            // Frame Rate
-            sbVideo.AppendLine(string.Format("        [u]Frame Rate:[/u] {0}", vi.FrameRate));
+                    sbBody.AppendLine(bb.size(fontSizeHeading2, bb.bolditalic(mf.FileName)));
+                    sbBody.AppendLine();
+                    sbBody.AppendLine(mf.ToString());
 
-            // Scan Type
-            sbVideo.AppendLine(string.Format("         [u]Scan Type:[/u] {0}", vi.ScanType));
-            sbVideo.AppendLine(string.Format("[u]Bits/(Pixel*Frame):[/u] {0}", vi.BitsPerPixelXFrame));
-
-            // Resolution
-            sbVideo.AppendLine(string.Format("        [u]Resolution:[/u] {0}x{1}",
-                vi.Width,
-                vi.Height));
-
-            sbMediaInfo.Append(bb.size(fontSizeBody, sbVideo.ToString()));
-
-            //*********************
-            //* Audio
-            //*********************          
-
-            int audioCount = mMediaInfo2.Audio.Count;
-
-            for (int a = 0; a < audioCount; a++)
-            {
-                AudioInfo ai = mMediaInfo2.Audio[a];
-
-                sbMediaInfo.AppendLine();
-                sbMediaInfo.AppendLine(string.Format(bb.size(fontSizeHeading, bb.bolditalic("Audio #{0}:")), a + 1));
-                sbMediaInfo.AppendLine();
-
-                StringBuilder sbAudio = new StringBuilder();
-                // Format
-                sbAudio.Append(string.Format("            [u]Format:[/u] {0}", ai.Format));
-                if (!string.IsNullOrEmpty(ai.FormatVersion))
-                    sbAudio.Append(string.Format(" {0}", ai.FormatVersion));
-                if (!string.IsNullOrEmpty(ai.FormatProfile))
-                    sbAudio.Append(string.Format(" {0}", ai.FormatProfile));
-                sbAudio.Append(Environment.NewLine);
-
-                // Codec     
-                if (!string.IsNullOrEmpty(ai.Codec))
-                    sbAudio.AppendLine(string.Format("             [u]Codec:[/u] {0}", ai.Codec));
-                // Bitrate
-                sbAudio.AppendLine(string.Format("           [u]Bitrate:[/u] {0} ({1})", ai.Bitrate, ai.BitrateMode));
-                // Channels
-                sbAudio.AppendLine(string.Format("          [u]Channels:[/u] {0}", ai.Channels));
-                // Sampling Rate
-                sbAudio.AppendLine(string.Format("     [u]Sampling Rate:[/u] {0}", ai.SamplingRate));
-                // Resolution
-                if (!string.IsNullOrEmpty(ai.Resolution))
-                    sbAudio.AppendLine(string.Format(("        [u]Resolution:[/u] {0}"), ai.Resolution));
-
-                sbMediaInfo.Append(bb.size(fontSizeBody, sbAudio.ToString()));
-
+                }
             }
 
             if (Settings.Default.AlignCenter)
             {
-                this.MediaInfoForums1 = bb.alignCenter(sbMediaInfo.ToString());
+                this.MediaInfoForums1 = bb.alignCenter(sbBody.ToString());
             }
             else
             {
-                this.MediaInfoForums1 = sbMediaInfo.ToString();
+                this.MediaInfoForums1 = sbBody.ToString();
             }
 
             if (Settings.Default.PreText)

@@ -30,8 +30,8 @@
     <Setting Name="LargerPreText" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="FontSizeHeading" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">3</Value>
+    <Setting Name="FontSizeHeading2" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">4</Value>
     </Setting>
     <Setting Name="FontSizeBody" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">2</Value>
@@ -81,6 +81,12 @@
     </Setting>
     <Setting Name="TorrentsOrganize" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="FontSizeHeading1" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="FontSizeHeading3" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">3</Value>
     </Setting>
   </Settings>
 </SettingsFile>

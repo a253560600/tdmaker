@@ -1,3 +1,4 @@
+1.2.02.0 Support for publishing MediaInfo for each ripped movie file [Queo]
 
 Version 1.2.01 - 20090110
 

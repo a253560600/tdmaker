@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BbCode.cs" />
+    <Compile Include="MediaFile.cs" />
     <Compile Include="TorrentInfo.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
