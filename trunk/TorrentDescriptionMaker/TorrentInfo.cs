@@ -13,9 +13,9 @@ namespace TorrentDescriptionMaker
     class TorrentInfo
     {       
         private BackgroundWorker mBwApp = null;
-        MediaFile mMediaInfo2;
+        MediaInfo2 mMediaInfo2;
 
-        public TorrentInfo(BackgroundWorker bwApp, MediaFile mi)
+        public TorrentInfo(BackgroundWorker bwApp, MediaInfo2 mi)
         {
             // load the MediaInfo object
             mMediaInfo2 = mi;
