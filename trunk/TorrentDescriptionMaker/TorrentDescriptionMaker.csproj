@@ -111,7 +111,6 @@
     <Content Include="GenuineAdv.ico" />
     <Content Include="Lib\ImageUploader.dll" />
     <Content Include="MediaInfo.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Lib\MonoTorrent.dll" />
     <Content Include="TODO.txt" />

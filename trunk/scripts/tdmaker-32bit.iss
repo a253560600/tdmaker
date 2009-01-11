@@ -42,9 +42,9 @@ end;
 [Setup]
 
 AppName=TDMaker
-AppVerName=TDMaker 1.2
-VersionInfoVersion=1.2.1.2
-VersionInfoTextVersion=1.2.1.2
+AppVerName=TDMaker 1.2.2
+VersionInfoVersion=1.2.2.0
+VersionInfoTextVersion=1.2.2.0
 VersionInfoCompany=BetaONE
 VersionInfoDescription=Torrent Description Maker
 AppPublisher=BetaONE

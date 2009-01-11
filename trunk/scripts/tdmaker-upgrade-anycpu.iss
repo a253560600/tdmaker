@@ -7,9 +7,11 @@ function InitializeSetup(): Boolean;
 var
     ErrorCode: Integer;
     NetFrameWorkInstalled : Boolean;
+    MediaInfoDLLPath : String;
     Result1 : Boolean;
 begin
 
+ // .NET Framework
            NetFrameWorkInstalled := RegKeyExists(HKLM,'SOFTWARE\Microsoft\.NETFramework\policy\v3.0');
            if NetFrameWorkInstalled =true then
            begin
@@ -37,6 +39,17 @@ begin
                         end;
                end;
           end;
+    // Check IsWin64 before using a 64-bit-only feature to
+  // avoid an exception when running on 32-bit Windows.
+  if IsWin64 =true then
+  begin
+    MediaInfoDLLPath := "..\..\MediaInfo\x64\MediaInfo.dll";
+  end;
+  if IsWin64 = false then
+  begin
+    MediaInfoDLLPath := "..\..\MediaInfo\x86\MediaInfo.dll";
+  end;
+          
 end;
 
 [Setup]
