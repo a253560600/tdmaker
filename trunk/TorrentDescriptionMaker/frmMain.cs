@@ -740,6 +740,16 @@ namespace TorrentDescriptionMaker
             createQuickPublish();
         }
 
+        private void rbFile_CheckedChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void rbDir_CheckedChanged(object sender, EventArgs e)
+        {
+            gbDVD.Enabled = rbDir.Checked;
+        }
+
 
 
     }

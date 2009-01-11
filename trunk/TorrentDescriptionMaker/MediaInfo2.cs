@@ -118,8 +118,6 @@ namespace TorrentDescriptionMaker
                 string[] vobFiles = Directory.GetFiles(Location, "*.vob", SearchOption.AllDirectories);
                 if (vobFiles.Length > 0)
                 {
-                    this.IsDisc = true;
-
                     long dura = 0;
                     double size = 0;
                     foreach (string vob in vobFiles)
@@ -156,6 +154,7 @@ namespace TorrentDescriptionMaker
                 string[] ifo = Directory.GetFiles(Location, "VTS_01_0.IFO", SearchOption.AllDirectories);
                 if (ifo.Length == 1)
                 {
+                    this.IsDisc = true;
                     MediaInfoLib.MediaInfo mi = new MediaInfoLib.MediaInfo();
                     mi.Open(ifo[0]);
 
