@@ -123,5 +123,19 @@
     <Setting Name="WritePublish" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="DiscMenus" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;Intact&lt;/string&gt;
+  &lt;string&gt;Removed&lt;/string&gt;
+  &lt;string&gt;Shrunk&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="DiscMenu" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Intact</Value>
+    </Setting>
+    <Setting Name="bDiscMenu" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

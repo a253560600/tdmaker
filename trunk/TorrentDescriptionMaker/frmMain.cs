@@ -95,6 +95,7 @@ namespace TorrentDescriptionMaker
                 MediaInfo2 mi = new MediaInfo2(txtMediaLocation.Text);
                 mi.Extras = cboExtras.Text;
                 mi.Source = cboSource.Text;
+                mi.Menu = cboDiscMenu.Text;
                 mi.Authoring = cboAuthoring.Text;
                 mi.WebLink = txtWebLink.Text;
                 mi.TorrentInfo = new TorrentPacket(getTracker(), txtMediaLocation.Text);

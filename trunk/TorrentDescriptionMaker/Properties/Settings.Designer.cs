@@ -438,5 +438,44 @@ namespace TDMaker.Properties {
                 this["WritePublish"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>Intact</string>\r\n  <string>Removed</string>\r\n  <string>Shrunk</string>\r\n</" +
+            "ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection DiscMenus {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["DiscMenus"]));
+            }
+            set {
+                this["DiscMenus"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Intact")]
+        public string DiscMenu {
+            get {
+                return ((string)(this["DiscMenu"]));
+            }
+            set {
+                this["DiscMenu"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool bDiscMenu {
+            get {
+                return ((bool)(this["bDiscMenu"]));
+            }
+            set {
+                this["bDiscMenu"] = value;
+            }
+        }
     }
 }
