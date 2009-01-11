@@ -11,5 +11,3 @@ Full Automation [tacoking]
 	
 
 Support for syntax based custom formats for Publishing torrent info
-Use AudioInfo, VideoInfo and MediaInfo classes to create public properties
-Get TorrentInfo to use MediaInfo
