@@ -4,6 +4,7 @@ using System.Text;
 using System.IO;
 using MediaInfoLib;
 using TDMaker;
+using TDMaker.Properties;
 
 namespace TorrentDescriptionMaker
 {
@@ -15,17 +16,26 @@ namespace TorrentDescriptionMaker
         /// <summary>
         /// Disc property is set to true if the media is found to be DVD, BD, HDDVD source
         /// </summary>
-        public bool IsDisc{ get; private set; }
+        public bool IsDisc { get; private set; }
         /// <summary>
         /// Mode of taking screenshots for Media files
         /// </summary>
         public TakeScreenshotsMode TakeScreenshots { get; set; }
         /// <summary>
+        /// Packet that contains Tracker Information 
+        /// </summary>
+        public TorrentPacket TorrentInfo { get; set; }
+        /// <summary>
         /// FilePath or DirectoryPath of the Media
         /// </summary>
         public string Location { get; private set; }
+        /// <summary>
+        /// Title is same as Overall.FileName
+        /// </summary>
+        public string Title { get; private set; }
         public string Source { get; set; }
- 
+        public string Authoring { get; set; }
+        public string Extras { get; set; }
         public string WebLink { get; set; }
 
         private string[] mExt = new string[] { ".avi", ".divx", ".mkv", ".vob", ".mov" };
@@ -35,7 +45,7 @@ namespace TorrentDescriptionMaker
 
         public MediaInfo2(string loc)
         {
-            
+
             MediaFiles = new List<MediaFile>();
 
             // this could be a file path or a directory
@@ -54,8 +64,9 @@ namespace TorrentDescriptionMaker
             if (File.Exists(Location))
             {
                 this.Overall = ReadFile(Location);
+                this.Title = this.Overall.FileName;
                 this.MediaFiles.Add(this.Overall);
-                
+
             }
             else if (Directory.Exists(Location))
             {
@@ -67,7 +78,7 @@ namespace TorrentDescriptionMaker
                     filePaths.AddRange(Directory.GetFiles(Location, "*" + ext, SearchOption.AllDirectories));
                 }
 
-                if (filePaths.Count  > 0)
+                if (filePaths.Count > 0)
                 {
                     string maxPath = "";
                     long maxSize = 0;
@@ -90,13 +101,14 @@ namespace TorrentDescriptionMaker
                             this.MediaFiles.Add(ReadFile(f));
                         }
                     }
-                    
+
                     this.Overall = ReadFile(maxPath);
 
                     // Set Overall File Name                
                     this.Overall.FileName = Path.GetFileName(Location);
                     if (Overall.FileName.ToUpper().Equals("VIDEO_TS"))
                         Overall.FileName = Path.GetFileName(Path.GetDirectoryName(Location));
+                    this.Title = this.Overall.FileName;
 
                 }
 
@@ -105,7 +117,7 @@ namespace TorrentDescriptionMaker
                 string[] vobFiles = Directory.GetFiles(Location, "*.vob", SearchOption.AllDirectories);
                 if (vobFiles.Length > 0)
                 {
-                    this.IsDisc = true; 
+                    this.IsDisc = true;
 
                     long dura = 0;
                     double size = 0;
@@ -194,7 +206,7 @@ namespace TorrentDescriptionMaker
         {
             MediaFile mf = new MediaFile(fp);
             mf.Source = this.Source;
-            
+
             if (File.Exists(fp))
             {
                 //*********************
@@ -328,7 +340,79 @@ namespace TorrentDescriptionMaker
             }
 
             return mf;
-        }       
+        }
+
+        /// <summary>
+        /// Default Publish String Representation
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+
+            int fontSizeHeading1 = (int)(Settings.Default.PreText && Settings.Default.LargerPreText == true ?
+       Settings.Default.FontSizeHeading1 + Settings.Default.FontSizeIncr :
+       Settings.Default.FontSizeHeading1);
+
+            int fontSizeHeading2 = (int)(Settings.Default.PreText && Settings.Default.LargerPreText == true ?
+                Settings.Default.FontSizeHeading2 + Settings.Default.FontSizeIncr :
+                Settings.Default.FontSizeHeading2);
+
+            int fontSizeBody = (int)(Settings.Default.PreText && Settings.Default.LargerPreText == true ?
+                Settings.Default.FontSizeBody + Settings.Default.FontSizeIncr :
+                Settings.Default.FontSizeBody);
+
+
+            BbCode bb = new BbCode();
+
+            StringBuilder sbBody = new StringBuilder();
+
+            // Show Title
+            sbBody.AppendLine(bb.size(fontSizeHeading1, bb.bold(this.Overall.FileName)));
+            sbBody.AppendLine();
+
+            // Source 
+            if (!string.IsNullOrEmpty(Settings.Default.Source))
+            {
+                sbBody.AppendLine(string.Format("            [u]Source:[/u] {0}", this.Source));
+            }
+            // Authoring
+            if (Settings.Default.bVideoEdits && !string.IsNullOrEmpty(this.Authoring))
+            {
+                sbBody.AppendLine(string.Format("         [u]Authoring:[/u] {0}", this.Authoring));
+            }
+            // Extras
+            if (Settings.Default.bExtras && !string.IsNullOrEmpty(this.Extras))
+            {
+                sbBody.AppendLine(string.Format("            [u]Extras:[/u] {0}", this.Extras));
+            }
+            // WebLink
+            if (Settings.Default.WebLink && !string.IsNullOrEmpty(this.WebLink))
+            {
+                sbBody.AppendLine(string.Format("          [u]Web Link:[/u] {0}", this.WebLink));
+            }
+            sbBody.AppendLine();
+
+            if (this.MediaFiles.Count > 1 && this.IsDisc)
+            // is a DVD so need Overall Info only
+            {
+                sbBody.AppendLine(this.Overall.ToString());
+            }
+            else
+            // If the loaded folder is not a Disc but individual ripped files
+            {
+                foreach (MediaFile mf in this.MediaFiles)
+                {
+
+                    sbBody.AppendLine(bb.size(fontSizeHeading2, bb.bolditalic(mf.FileName)));
+                    sbBody.AppendLine();
+                    sbBody.AppendLine(mf.ToString());
+
+                }
+            }
+
+            return sbBody.ToString();
+
+        }
 
     }
 

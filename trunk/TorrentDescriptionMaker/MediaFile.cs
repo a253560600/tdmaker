@@ -89,11 +89,6 @@ namespace TDMaker
 
             sbBody.AppendLine(bb.size(fontSizeHeading3, bb.bolditalic("General:")));
             sbBody.AppendLine();
-            // Source 
-            if (!string.IsNullOrEmpty(Settings.Default.Source))
-            {
-                sbGeneral.AppendLine(string.Format("            [u]Source:[/u] {0}", Settings.Default.Source));
-            }
             // File Name
             if (!string.IsNullOrEmpty(this.FileName))
             {

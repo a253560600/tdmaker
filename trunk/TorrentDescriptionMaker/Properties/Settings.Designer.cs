@@ -352,5 +352,91 @@ namespace TDMaker.Properties {
                 this["Extras"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>Untouched</string>\r\n  <string>Shrunk</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection SourceEdits {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["SourceEdits"]));
+            }
+            set {
+                this["SourceEdits"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Untouched")]
+        public string SourceEdit {
+            get {
+                return ((string)(this["SourceEdit"]));
+            }
+            set {
+                this["SourceEdit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Intact")]
+        public string ExtrasMode {
+            get {
+                return ((string)(this["ExtrasMode"]));
+            }
+            set {
+                this["ExtrasMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool bVideoEdits {
+            get {
+                return ((bool)(this["bVideoEdits"]));
+            }
+            set {
+                this["bVideoEdits"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool bExtras {
+            get {
+                return ((bool)(this["bExtras"]));
+            }
+            set {
+                this["bExtras"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool bSource {
+            get {
+                return ((bool)(this["bSource"]));
+            }
+            set {
+                this["bSource"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool WritePublish {
+            get {
+                return ((bool)(this["WritePublish"]));
+            }
+            set {
+                this["WritePublish"] = value;
+            }
+        }
     }
 }

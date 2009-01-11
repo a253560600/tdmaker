@@ -1,7 +1,10 @@
 ﻿Write Publish info to Text Files (same location as torrent)
 
 Support Templates using Syntax
-	TDM reads a template.txt file with syntax
+	TDM reads 3 template files with syntax
+		Title.txt
+		DiscInfo.txt
+		FileInfo.txt
 	TDM replaces all syntax with relevant MediaInfo details 
 	TDM shows this in Publis tab
 

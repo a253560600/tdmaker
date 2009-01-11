@@ -54,9 +54,7 @@ namespace TorrentDescriptionMaker
         {
             txtMediaLocation.Text = p;
 
-            TorrentPacket tp = new TorrentPacket();
-            tp.MediaLocation = p;
-            tp.Tracker = getTracker();
+            TorrentPacket tp = new TorrentPacket(getTracker(), p);
 
             if (Settings.Default.CreateTorrent)
                 createTorrent(tp);
@@ -95,8 +93,11 @@ namespace TorrentDescriptionMaker
             if (File.Exists(txtMediaLocation.Text) || Directory.Exists(txtMediaLocation.Text))
             {
                 MediaInfo2 mi = new MediaInfo2(txtMediaLocation.Text);
+                mi.Extras = cboExtras.Text;
                 mi.Source = cboSource.Text;
+                mi.Authoring = cboAuthoring.Text;
                 mi.WebLink = txtWebLink.Text;
+                mi.TorrentInfo = new TorrentPacket(getTracker(), txtMediaLocation.Text);
 
                 // Screenshots Mode
                 if (Settings.Default.UploadImageShack)
@@ -151,13 +152,25 @@ namespace TorrentDescriptionMaker
         {
             this.WindowState = FormWindowState.Minimized;
 
+            // MTN Args
             if (!Settings.Default.MTNArgs.Contains(cboMtnArgs.Text))
             {
                 Settings.Default.MTNArgs.Add(cboMtnArgs.Text);
             }
+            // Source
             if (!Settings.Default.Sources.Contains(cboSource.Text))
             {
                 Settings.Default.Sources.Add(cboSource.Text);
+            }
+            // Source Edits
+            if (!Settings.Default.SourceEdits.Contains(cboAuthoring.Text))
+            {
+                Settings.Default.Sources.Add(cboAuthoring.Text);
+            }
+            // Extras
+            if (!Settings.Default.Extras.Contains(cboExtras.Text))
+            {
+                Settings.Default.Sources.Add(cboExtras.Text);
             }
 
             // tm2.Write(dgvTrackers);
@@ -220,13 +233,26 @@ namespace TorrentDescriptionMaker
             {
                 cboMtnArgs.Items.Add(arg);
             }
-            cboMtnArgs.Text = Settings.Default.MTNArg;
+            // cboMtnArgs.Text = Settings.Default.MTNArg;
 
             cboSource.Items.Clear();
             foreach (string src in Settings.Default.Sources)
             {
                 cboSource.Items.Add(src);
             }
+
+            cboAuthoring.Items.Clear();
+            foreach (string ed in Settings.Default.SourceEdits)
+            {
+                cboAuthoring.Items.Add(ed);
+            }
+
+            cboExtras.Items.Clear();
+            foreach (string ex in Settings.Default.Extras)
+            {
+                cboExtras.Items.Add(ex);
+            }
+
 
             rbTorrentDefaultFolder.Checked = Settings.Default.TorrentFolderDefault;
             rbTorrentFolderCustom.Checked = !rbTorrentDefaultFolder.Checked;
@@ -288,6 +314,31 @@ namespace TorrentDescriptionMaker
             bwApp.ReportProgress(0, mi.MediaFiles[0].Summary);
 
             TorrentInfo ti = new TorrentInfo(bwApp, mi);
+
+            PublishOptionsPacket pop = new PublishOptionsPacket();
+            pop.AlignCenter = Settings.Default.AlignCenter;
+            pop.FullPicture = Settings.Default.UploadImageShack && Settings.Default.UseFullPicture;
+            pop.PreformattedText = Settings.Default.PreText;
+
+            ti.PublishOptions = pop;
+            ti.PublishString = createPublish(ti, pop);
+
+            if (Settings.Default.WritePublish)
+            {
+                // create textFiles of MediaInfo           
+                string txtPath = Path.Combine(mi.TorrentInfo.TorrentFolder, mi.Title) + ".txt";
+
+                if (!Directory.Exists(mi.TorrentInfo.TorrentFolder))
+                {
+                    Directory.CreateDirectory(mi.TorrentInfo.TorrentFolder);
+                }
+
+                using (StreamWriter sw = new StreamWriter(txtPath))
+                {
+                    sw.WriteLine(ti.PublishString);
+                }
+            }
+
             e.Result = ti;
         }
 
@@ -308,25 +359,30 @@ namespace TorrentDescriptionMaker
 
         }
 
-
+        /// <summary>
+        /// This method is BackgroundWorker friendly
+        /// </summary>
+        /// <param name="ti"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
         private string createPublish(TorrentInfo ti, PublishOptionsPacket options)
         {
 
             StringBuilder sbPublish = new StringBuilder();
 
             if (ti != null)
-            {                
+            {
                 string p = "";
 
                 BbCode bb = new BbCode();
 
                 if (options.AlignCenter)
                 {
-                    p = bb.alignCenter(ti.MediaInfoForums1);
+                    p = bb.alignCenter(ti.MediaInfo2.ToString());
                 }
                 else
                 {
-                    p = ti.MediaInfoForums1;
+                    p = ti.MediaInfo2.ToString();
                 }
 
                 if (options.PreformattedText)
@@ -367,17 +423,14 @@ namespace TorrentDescriptionMaker
                 if (!string.IsNullOrEmpty(txtScrFull.Text))
                     txtBBScrFull.Text = string.Format("[img]{0}[/img]", txtScrFull.Text);
 
-                PublishOptionsPacket pop = new PublishOptionsPacket();
-                pop.AlignCenter = Settings.Default.AlignCenter;
-                pop.FullPicture = Settings.Default.UseFullPicture;
-                pop.PreformattedText = Settings.Default.PreText;
+                PublishOptionsPacket pop = mTorrentInfo.PublishOptions;
 
                 // initialize quick publish checkboxes
                 chkQuickAlignCenter.Checked = pop.AlignCenter;
                 chkQuickFullPicture.Checked = pop.FullPicture;
                 chkQuickPre.Checked = pop.PreformattedText;
 
-                txtPublish.Text = createPublish(mTorrentInfo, pop);
+                txtPublish.Text = mTorrentInfo.PublishString; 
 
                 // sbPublish.AppendLine("Get your Torrent Description like this using TDMaker: http://code.google.com/p/tdmaker");
 
@@ -492,31 +545,10 @@ namespace TorrentDescriptionMaker
                     temp.Add(tp.Tracker.AnnounceURL);
                     tc.Announces.Add(temp);
 
-                    string torrentName = (File.Exists(p) ? Path.GetFileNameWithoutExtension(p) : this.getMediaName(p));
-                    string torrentPath = "";
+                    string torrentFileName = (File.Exists(p) ? Path.GetFileNameWithoutExtension(p) : this.getMediaName(p)) + ".torrent";
+                    string torrentPath = Path.Combine(tp.TorrentFolder, torrentFileName);
 
-                    if (!Settings.Default.TorrentFolderDefault &&
-                        Directory.Exists(Settings.Default.TorrentsCustomDir))
-                    {
-
-                        if (Settings.Default.TorrentsOrganize)
-                        {
-                            string subDir = Path.Combine(Settings.Default.TorrentsCustomDir, tp.Tracker.Name);
-                            torrentPath = Path.Combine(subDir, torrentName + ".torrent");
-
-                        }
-                        else
-                        {
-                            torrentPath = Path.Combine(Settings.Default.TorrentsCustomDir, torrentName + ".torrent");
-                        }
-
-                    }
-                    else
-                    {
-                        torrentPath = Path.Combine(Path.GetDirectoryName(p), torrentName + ".torrent");
-                    }
-
-                    if (!Directory.Exists(Path.GetDirectoryName(torrentPath)))
+                    if (!Directory.Exists(tp.TorrentFolder))
                         Directory.CreateDirectory(Path.GetDirectoryName(torrentPath));
 
                     mBwTorrent.ReportProgress(1, string.Format("Creating {0}", torrentPath));
@@ -634,9 +666,7 @@ namespace TorrentDescriptionMaker
 
         private void btnCreateTorrent_Click(object sender, EventArgs e)
         {
-            TorrentPacket tp = new TorrentPacket();
-            tp.Tracker = getTracker();
-            tp.MediaLocation = txtMediaLocation.Text;
+            TorrentPacket tp = new TorrentPacket(getTracker(), txtMediaLocation.Text);
             createTorrent(tp);
         }
 
