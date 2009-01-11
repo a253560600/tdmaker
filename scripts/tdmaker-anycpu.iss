@@ -10,6 +10,7 @@ var
     Result1 : Boolean;
 begin
 
+ // .NET Framework
            NetFrameWorkInstalled := RegKeyExists(HKLM,'SOFTWARE\Microsoft\.NETFramework\policy\v3.0');
            if NetFrameWorkInstalled =true then
            begin
@@ -42,9 +43,9 @@ end;
 [Setup]
 
 AppName=TDMaker
-AppVerName=TDMaker 1.2
-VersionInfoVersion=1.2.0.0
-VersionInfoTextVersion=1.2.0.0
+AppVerName=TDMaker 1.2.2
+VersionInfoVersion=1.2.2
+VersionInfoTextVersion=1.2.2
 VersionInfoCompany=BetaONE
 VersionInfoDescription=Torrent Description Maker
 AppPublisher=BetaONE
@@ -60,17 +61,19 @@ Compression=lzma
 SolidCompression=yes
 ;PrivilegesRequired=none
 OutputDir=..\..\Output\
+ArchitecturesInstallIn64BitMode=x64 ia64
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-;Source: "manual\TDMaker-manual.pdf"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\TorrentDescriptionMaker\bin\Release\*.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\TorrentDescriptionMaker\bin\Release\TDMaker.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\TorrentDescriptionMaker\bin\Release\*.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\dist\*.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\dist\*.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\MTN\*.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\MTN\*.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\MediaInfo\x86\MediaInfo.dll"; DestDir: "{app}"; Flags: ignoreversion;
+Source: "..\..\MediaInfo\x64\MediaInfo.dll"; DestDir: "{app}"; Flags: ignoreversion; Check: IsWin64
 
 [Icons]
 Name: "{group}\TDMaker"; Filename: "{app}\TDMaker.exe"

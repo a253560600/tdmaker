@@ -7,7 +7,6 @@ function InitializeSetup(): Boolean;
 var
     ErrorCode: Integer;
     NetFrameWorkInstalled : Boolean;
-    MediaInfoDLLPath : String;
     Result1 : Boolean;
 begin
 
@@ -39,17 +38,6 @@ begin
                         end;
                end;
           end;
-    // Check IsWin64 before using a 64-bit-only feature to
-  // avoid an exception when running on 32-bit Windows.
-  if IsWin64 =true then
-  begin
-    MediaInfoDLLPath := "..\..\MediaInfo\x64\MediaInfo.dll";
-  end;
-  if IsWin64 = false then
-  begin
-    MediaInfoDLLPath := "..\..\MediaInfo\x86\MediaInfo.dll";
-  end;
-          
 end;
 
 [Setup]
@@ -73,17 +61,17 @@ Compression=lzma
 SolidCompression=yes
 ;PrivilegesRequired=none
 OutputDir=..\..\Output\
+ArchitecturesInstallIn64BitMode=x64 ia64
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-;Source: "manual\TDMaker-manual.pdf"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\TorrentDescriptionMaker\bin\x86\Release\*.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\TorrentDescriptionMaker\bin\x86\Release\*.dll"; DestDir: "{app}"; Flags: ignoreversion
-;Source: "..\..\dist\*.exe"; DestDir: "{app}"; Flags: ignoreversion
-;Source: "..\..\dist\*.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\TorrentDescriptionMaker\bin\Release\TDMaker.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\TorrentDescriptionMaker\bin\Release\*.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\MediaInfo\x86\MediaInfo.dll"; DestDir: "{app}"; Flags: ignoreversion;
+Source: "..\..\MediaInfo\x64\MediaInfo.dll"; DestDir: "{app}"; Flags: ignoreversion; Check: IsWin64
 
 [Icons]
 Name: "{group}\TDMaker"; Filename: "{app}\TDMaker.exe"

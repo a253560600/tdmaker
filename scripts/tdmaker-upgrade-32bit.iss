@@ -70,7 +70,7 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 Source: "..\TorrentDescriptionMaker\bin\x86\Release\*.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\TorrentDescriptionMaker\bin\x86\Release\*.dll"; DestDir: "{app}"; Flags: ignoreversion
 ;Source: "..\..\dist\*.exe"; DestDir: "{app}"; Flags: ignoreversion
-;Source: "..\..\dist\*.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\MediaInfo\x86\MediaInfo.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\TDMaker"; Filename: "{app}\TDMaker.exe"
