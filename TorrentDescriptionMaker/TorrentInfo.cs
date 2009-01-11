@@ -29,66 +29,6 @@ namespace TorrentDescriptionMaker
                 sGetScreenshot(mi.MediaFiles[mi.MediaFiles.Count-1].FilePath);
             }
 
-            sGetMovieInfo();
-
-        }
-
-
-        /// <summary>
-        /// Function to launch GSpot or MovieInfo to generate Movie Info
-        /// </summary>      
-        private void sGetMovieInfo()
-        {
-            int fontSizeHeading1 = (int)(Settings.Default.PreText && Settings.Default.LargerPreText == true ?
-               Settings.Default.FontSizeHeading1 + Settings.Default.FontSizeIncr :
-               Settings.Default.FontSizeHeading1);
-
-            int fontSizeHeading2 = (int)(Settings.Default.PreText && Settings.Default.LargerPreText == true ?
-                Settings.Default.FontSizeHeading2 + Settings.Default.FontSizeIncr :
-                Settings.Default.FontSizeHeading2);
-
-            int fontSizeBody = (int)(Settings.Default.PreText && Settings.Default.LargerPreText == true ?
-                Settings.Default.FontSizeBody + Settings.Default.FontSizeIncr :
-                Settings.Default.FontSizeBody);
-
-
-            BbCode bb = new BbCode();
-
-            StringBuilder sbBody = new StringBuilder();
-
-            // Show Overall Information if more than one Media File is found
-            if (MediaInfo2.MediaFiles.Count > 1)
-            {
-                sbBody.AppendLine(bb.size(fontSizeHeading1, bb.bold(MediaInfo2.Overall.FileName)));
-                sbBody.AppendLine();
-
-                // is a DVD so need Overall Info only
-                if (MediaInfo2.IsDisc)
-                {
-                    sbBody.AppendLine(MediaInfo2.Overall.ToString());
-                }
-            }
-
-            if (Settings.Default.WebLink && !string.IsNullOrEmpty(MediaInfo2.WebLink))
-            {
-                sbBody.AppendLine(string.Format("          [u]Web Link:[/u] {0}", MediaInfo2.WebLink));
-            }
-
-            // If the loaded folder is not a Disc but individual ripped files
-            if (!MediaInfo2.IsDisc)
-            {
-                foreach (MediaFile mf in MediaInfo2.MediaFiles)
-                {
-
-                    sbBody.AppendLine(bb.size(fontSizeHeading2, bb.bolditalic(mf.FileName)));
-                    sbBody.AppendLine();
-                    sbBody.AppendLine(mf.ToString());
-
-                }
-            }
-
-            this.MediaInfoForums1 = sbBody.ToString();
-
         }
 
         private void sGetScreenshot(String mediaFilePath)
@@ -158,8 +98,15 @@ namespace TorrentDescriptionMaker
 
         public string ScreenshotURLForums { get; private set; }
         public string ScreenshotURLFull { get; private set; }
-        public string MediaInfoForums1 { get; private set; }
         public MediaInfo2 MediaInfo2 { get; private set; }
+        /// <summary>
+        /// String Representation of Publish tab
+        /// </summary>
+        public string PublishString { get; set; }
+        /// <summary>
+        /// Options for Publishing
+        /// </summary>
+        public PublishOptionsPacket PublishOptions { get; set; }
 
     }
 }
