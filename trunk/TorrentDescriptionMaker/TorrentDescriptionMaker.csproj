@@ -101,7 +101,6 @@
     </Compile>
     <Compile Include="Tracker.cs" />
     <Compile Include="TrackerManager.cs" />
-    <Compile Include="TrackerManager2.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\DataSources\Tracker.datasource" />
