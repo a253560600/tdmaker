@@ -87,19 +87,7 @@ namespace TorrentDescriptionMaker
                 }
             }
 
-            if (Settings.Default.AlignCenter)
-            {
-                this.MediaInfoForums1 = bb.alignCenter(sbBody.ToString());
-            }
-            else
-            {
-                this.MediaInfoForums1 = sbBody.ToString();
-            }
-
-            if (Settings.Default.PreText)
-            {
-                this.MediaInfoForums1 = bb.pre(this.MediaInfoForums1);
-            }
+            this.MediaInfoForums1 = sbBody.ToString();
 
         }
 

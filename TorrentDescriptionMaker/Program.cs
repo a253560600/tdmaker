@@ -90,6 +90,15 @@ namespace TorrentDescriptionMaker
         
     }
 
+    /// <summary>
+    /// Options regard Publish
+    /// </summary>
+    public struct PublishOptionsPacket
+    {
+        public bool AlignCenter { get; set; }
+        public bool PreformattedText { get; set; }
+        public bool FullPicture { get; set; }
+    }
 
 
 }

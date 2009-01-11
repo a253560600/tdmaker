@@ -168,6 +168,7 @@ namespace TDMaker.Properties {
   <string>VHS</string>
   <string>HDTV</string>
   <string>SDTV</string>
+  <string>LD</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection Sources {
             get {
@@ -331,6 +332,24 @@ namespace TDMaker.Properties {
             }
             set {
                 this["FontSizeHeading3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>Intact</string>
+  <string>Shrunk</string>
+  <string>Removed</string>
+  <string>None on Source</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection Extras {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["Extras"]));
+            }
+            set {
+                this["Extras"] = value;
             }
         }
     }

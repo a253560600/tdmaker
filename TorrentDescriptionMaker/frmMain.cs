@@ -12,8 +12,12 @@ using TDMaker;
 namespace TorrentDescriptionMaker
 {
     public partial class frmMain : Form
-    {       
-        TrackerManager mTrackerManager = null;
+    {
+        private TrackerManager mTrackerManager = null;
+        /// <summary>
+        /// Global TorrentInfo for Using Quick Pre/Align Center commands
+        /// </summary>
+        private TorrentInfo mTorrentInfo = null;
 
         public frmMain()
         {
@@ -304,36 +308,78 @@ namespace TorrentDescriptionMaker
 
         }
 
-        private void bwApp_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+
+        private string createPublish(TorrentInfo ti, PublishOptionsPacket options)
         {
-            TorrentInfo ti = (TorrentInfo)e.Result;
+
+            StringBuilder sbPublish = new StringBuilder();
 
             if (ti != null)
-            {
-
-                txtScrFull.Text = ti.ScreenshotURLFull;
-                txtBBScrForums.Text = ti.ScreenshotURLForums;
+            {                
+                string p = "";
 
                 BbCode bb = new BbCode();
-                if (!string.IsNullOrEmpty(txtScrFull.Text))
-                    txtBBScrFull.Text = bb.img(txtScrFull.Text);
 
-                StringBuilder sbPublish = new StringBuilder();
-                sbPublish.AppendLine(ti.MediaInfoForums1);
+                if (options.AlignCenter)
+                {
+                    p = bb.alignCenter(ti.MediaInfoForums1);
+                }
+                else
+                {
+                    p = ti.MediaInfoForums1;
+                }
+
+                if (options.PreformattedText)
+                {
+                    sbPublish.AppendLine(bb.pre(p));
+                }
+                else
+                {
+                    sbPublish.AppendLine(p);
+                }
 
                 sbPublish.AppendLine();
-                if (!string.IsNullOrEmpty(txtBBScrFull.Text) && Settings.Default.UseFullPicture)
+
+                if (!string.IsNullOrEmpty(ti.ScreenshotURLFull) && options.FullPicture)
                 {
-                    sbPublish.AppendLine(txtBBScrFull.Text);
+                    sbPublish.AppendLine(bb.img(ti.ScreenshotURLFull));
                 }
-                else if (!string.IsNullOrEmpty(txtBBScrForums.Text))
+                else if (!string.IsNullOrEmpty(ti.ScreenshotURLForums))
                 {
-                    sbPublish.AppendLine(txtBBScrForums.Text);
+                    sbPublish.AppendLine(ti.ScreenshotURLForums);
                 }
+            }
+
+            return sbPublish.ToString();
+
+        }
+
+        private void bwApp_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            mTorrentInfo = (TorrentInfo)e.Result;
+
+            if (mTorrentInfo != null)
+            {
+
+                txtScrFull.Text = mTorrentInfo.ScreenshotURLFull;
+                txtBBScrForums.Text = mTorrentInfo.ScreenshotURLForums;
+
+                if (!string.IsNullOrEmpty(txtScrFull.Text))
+                    txtBBScrFull.Text = string.Format("[img]{0}[/img]", txtScrFull.Text);
+
+                PublishOptionsPacket pop = new PublishOptionsPacket();
+                pop.AlignCenter = Settings.Default.AlignCenter;
+                pop.FullPicture = Settings.Default.UseFullPicture;
+                pop.PreformattedText = Settings.Default.PreText;
+
+                // initialize quick publish checkboxes
+                chkQuickAlignCenter.Checked = pop.AlignCenter;
+                chkQuickFullPicture.Checked = pop.FullPicture;
+                chkQuickPre.Checked = pop.PreformattedText;
+
+                txtPublish.Text = createPublish(mTorrentInfo, pop);
 
                 // sbPublish.AppendLine("Get your Torrent Description like this using TDMaker: http://code.google.com/p/tdmaker");
-
-                txtPublish.Text = sbPublish.ToString();
 
                 updateGuiControls();
 
@@ -620,6 +666,32 @@ namespace TorrentDescriptionMaker
             {
                 MessageBox.Show(string.Format("{0} cannot be null.", dgvTrackers.Columns[e.ColumnIndex].HeaderText));
             }
+        }
+
+        private void createQuickPublish()
+        {
+            PublishOptionsPacket pop = new PublishOptionsPacket();
+            pop.AlignCenter = chkQuickAlignCenter.Checked;
+            pop.FullPicture = chkQuickFullPicture.Checked;
+            pop.PreformattedText = chkQuickPre.Checked;
+
+            txtPublish.Text = createPublish(mTorrentInfo, pop);
+
+        }
+
+        private void chkQuickPre_CheckedChanged(object sender, EventArgs e)
+        {
+            createQuickPublish();
+        }
+
+        private void chkQuickAlignCenter_CheckedChanged(object sender, EventArgs e)
+        {
+            createQuickPublish();
+        }
+
+        private void chkQuickFullPicture_CheckedChanged(object sender, EventArgs e)
+        {
+            createQuickPublish();
         }
 
 
