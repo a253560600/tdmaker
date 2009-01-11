@@ -35,6 +35,7 @@ namespace TorrentDescriptionMaker
         public string Title { get; private set; }
         public string Source { get; set; }
         public string Authoring { get; set; }
+        public string Menu { get; set; }
         public string Extras { get; set; }
         public string WebLink { get; set; }
 
@@ -375,21 +376,30 @@ namespace TorrentDescriptionMaker
             {
                 sbBody.AppendLine(string.Format("            [u]Source:[/u] {0}", this.Source));
             }
-            // Authoring
-            if (Settings.Default.bVideoEdits && !string.IsNullOrEmpty(this.Authoring))
+
+            if (IsDisc)
             {
-                sbBody.AppendLine(string.Format("         [u]Authoring:[/u] {0}", this.Authoring));
+                // Authoring
+                if (Settings.Default.bVideoEdits && !string.IsNullOrEmpty(this.Authoring))
+                {
+                    sbBody.AppendLine(string.Format("         [u]Authoring:[/u] {0}", this.Authoring));
+                }
+                if (Settings.Default.bDiscMenu && !string.IsNullOrEmpty(this.Menu))
+                {
+                    sbBody.AppendLine(string.Format("              [u]Menu:[/u] {0}", this.Menu));
+                }
+                // Extras
+                if (Settings.Default.bExtras && !string.IsNullOrEmpty(this.Extras))
+                {
+                    sbBody.AppendLine(string.Format("            [u]Extras:[/u] {0}", this.Extras));
+                }
+                // WebLink
+                if (Settings.Default.WebLink && !string.IsNullOrEmpty(this.WebLink))
+                {
+                    sbBody.AppendLine(string.Format("          [u]Web Link:[/u] {0}", this.WebLink));
+                }
             }
-            // Extras
-            if (Settings.Default.bExtras && !string.IsNullOrEmpty(this.Extras))
-            {
-                sbBody.AppendLine(string.Format("            [u]Extras:[/u] {0}", this.Extras));
-            }
-            // WebLink
-            if (Settings.Default.WebLink && !string.IsNullOrEmpty(this.WebLink))
-            {
-                sbBody.AppendLine(string.Format("          [u]Web Link:[/u] {0}", this.WebLink));
-            }
+
             sbBody.AppendLine();
 
             if (this.MediaFiles.Count > 1 && this.IsDisc)

@@ -26,7 +26,7 @@ namespace TorrentDescriptionMaker
 
             if (Settings.Default.UploadImageShack)
             {
-                sGetScreenshot(mi.MediaFiles[mi.MediaFiles.Count-1].FilePath);
+                sGetScreenshot(mi.Overall.FilePath);
             }
 
         }
