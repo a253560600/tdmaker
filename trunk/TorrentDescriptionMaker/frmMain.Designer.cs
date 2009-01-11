@@ -80,6 +80,8 @@
             this.tpPublish = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tmrStatus = new System.Windows.Forms.Timer(this.components);
@@ -88,8 +90,9 @@
             this.cmsApp = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsAppAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.btnCreateTorrent = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.trackerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gbQuickPublish = new System.Windows.Forms.GroupBox();
+            this.chkQuickPre = new System.Windows.Forms.CheckBox();
+            this.chkQuickAlignCenter = new System.Windows.Forms.CheckBox();
             this.chkWebLink = new System.Windows.Forms.CheckBox();
             this.cboSource = new System.Windows.Forms.ComboBox();
             this.chkAnalyzeAuto = new System.Windows.Forms.CheckBox();
@@ -107,11 +110,12 @@
             this.chkPre = new System.Windows.Forms.CheckBox();
             this.chkPreIncreaseFontSize = new System.Windows.Forms.CheckBox();
             this.chkAlignCenter = new System.Windows.Forms.CheckBox();
+            this.nudFontSizeHeading1 = new System.Windows.Forms.NumericUpDown();
             this.nudHeading2Size = new System.Windows.Forms.NumericUpDown();
             this.nudHeading3Size = new System.Windows.Forms.NumericUpDown();
             this.nudBodyText = new System.Windows.Forms.NumericUpDown();
-            this.nudFontSizeHeading1 = new System.Windows.Forms.NumericUpDown();
-            this.label9 = new System.Windows.Forms.Label();
+            this.chkQuickFullPicture = new System.Windows.Forms.CheckBox();
+            this.trackerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -135,12 +139,13 @@
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.cmsApp.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackerBindingSource)).BeginInit();
+            this.gbQuickPublish.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeIncr)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeHeading1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeading2Size)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeading3Size)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBodyText)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeHeading1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackerBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -529,6 +534,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.gbQuickPublish);
             this.tabPage3.Controls.Add(this.txtPublish);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
@@ -541,13 +547,15 @@
             // txtPublish
             // 
             this.txtPublish.AcceptsReturn = true;
-            this.txtPublish.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtPublish.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPublish.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPublish.Location = new System.Drawing.Point(3, 3);
             this.txtPublish.Multiline = true;
             this.txtPublish.Name = "txtPublish";
             this.txtPublish.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtPublish.Size = new System.Drawing.Size(754, 455);
+            this.txtPublish.Size = new System.Drawing.Size(613, 455);
             this.txtPublish.TabIndex = 0;
             // 
             // tabPage4
@@ -722,6 +730,24 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Font Size";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(44, 32);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(56, 13);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "Heading 1";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(44, 57);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(56, 13);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "Heading 2";
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -800,18 +826,40 @@
             this.btnCreateTorrent.UseVisualStyleBackColor = true;
             this.btnCreateTorrent.Click += new System.EventHandler(this.btnCreateTorrent_Click);
             // 
-            // label8
+            // gbQuickPublish
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(44, 57);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(56, 13);
-            this.label8.TabIndex = 7;
-            this.label8.Text = "Heading 2";
+            this.gbQuickPublish.Controls.Add(this.chkQuickFullPicture);
+            this.gbQuickPublish.Controls.Add(this.chkQuickAlignCenter);
+            this.gbQuickPublish.Controls.Add(this.chkQuickPre);
+            this.gbQuickPublish.Dock = System.Windows.Forms.DockStyle.Right;
+            this.gbQuickPublish.Location = new System.Drawing.Point(625, 3);
+            this.gbQuickPublish.Name = "gbQuickPublish";
+            this.gbQuickPublish.Size = new System.Drawing.Size(132, 455);
+            this.gbQuickPublish.TabIndex = 1;
+            this.gbQuickPublish.TabStop = false;
+            this.gbQuickPublish.Text = "Options";
             // 
-            // trackerBindingSource
+            // chkQuickPre
             // 
-            this.trackerBindingSource.DataSource = typeof(TDMaker.Tracker);
+            this.chkQuickPre.AutoSize = true;
+            this.chkQuickPre.Location = new System.Drawing.Point(15, 35);
+            this.chkQuickPre.Name = "chkQuickPre";
+            this.chkQuickPre.Size = new System.Drawing.Size(110, 17);
+            this.chkQuickPre.TabIndex = 0;
+            this.chkQuickPre.Text = "&Preformatted Text";
+            this.chkQuickPre.UseVisualStyleBackColor = true;
+            this.chkQuickPre.CheckedChanged += new System.EventHandler(this.chkQuickPre_CheckedChanged);
+            // 
+            // chkQuickAlignCenter
+            // 
+            this.chkQuickAlignCenter.AutoSize = true;
+            this.chkQuickAlignCenter.Location = new System.Drawing.Point(15, 58);
+            this.chkQuickAlignCenter.Name = "chkQuickAlignCenter";
+            this.chkQuickAlignCenter.Size = new System.Drawing.Size(83, 17);
+            this.chkQuickAlignCenter.TabIndex = 1;
+            this.chkQuickAlignCenter.Text = "Align &Center";
+            this.chkQuickAlignCenter.UseVisualStyleBackColor = true;
+            this.chkQuickAlignCenter.CheckedChanged += new System.EventHandler(this.chkQuickAlignCenter_CheckedChanged);
             // 
             // chkWebLink
             // 
@@ -1027,6 +1075,20 @@
             this.chkAlignCenter.Text = "Align &Center";
             this.chkAlignCenter.UseVisualStyleBackColor = true;
             // 
+            // nudFontSizeHeading1
+            // 
+            this.nudFontSizeHeading1.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TDMaker.Properties.Settings.Default, "FontSizeHeading1", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nudFontSizeHeading1.Location = new System.Drawing.Point(106, 30);
+            this.nudFontSizeHeading1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudFontSizeHeading1.Name = "nudFontSizeHeading1";
+            this.nudFontSizeHeading1.Size = new System.Drawing.Size(55, 20);
+            this.nudFontSizeHeading1.TabIndex = 10;
+            this.nudFontSizeHeading1.Value = global::TDMaker.Properties.Settings.Default.FontSizeHeading1;
+            // 
             // nudHeading2Size
             // 
             this.nudHeading2Size.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TDMaker.Properties.Settings.Default, "FontSizeHeading2", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -1069,28 +1131,20 @@
             this.nudBodyText.TabIndex = 5;
             this.nudBodyText.Value = global::TDMaker.Properties.Settings.Default.FontSizeBody;
             // 
-            // nudFontSizeHeading1
+            // chkQuickFullPicture
             // 
-            this.nudFontSizeHeading1.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TDMaker.Properties.Settings.Default, "FontSizeHeading1", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.nudFontSizeHeading1.Location = new System.Drawing.Point(106, 30);
-            this.nudFontSizeHeading1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudFontSizeHeading1.Name = "nudFontSizeHeading1";
-            this.nudFontSizeHeading1.Size = new System.Drawing.Size(55, 20);
-            this.nudFontSizeHeading1.TabIndex = 10;
-            this.nudFontSizeHeading1.Value = global::TDMaker.Properties.Settings.Default.FontSizeHeading1;
+            this.chkQuickFullPicture.AutoSize = true;
+            this.chkQuickFullPicture.Location = new System.Drawing.Point(15, 81);
+            this.chkQuickFullPicture.Name = "chkQuickFullPicture";
+            this.chkQuickFullPicture.Size = new System.Drawing.Size(78, 17);
+            this.chkQuickFullPicture.TabIndex = 2;
+            this.chkQuickFullPicture.Text = "Full &Picture";
+            this.chkQuickFullPicture.UseVisualStyleBackColor = true;
+            this.chkQuickFullPicture.CheckedChanged += new System.EventHandler(this.chkQuickFullPicture_CheckedChanged);
             // 
-            // label9
+            // trackerBindingSource
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(44, 32);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(56, 13);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "Heading 1";
+            this.trackerBindingSource.DataSource = typeof(TDMaker.Tracker);
             // 
             // frmMain
             // 
@@ -1152,12 +1206,14 @@
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.cmsApp.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.trackerBindingSource)).EndInit();
+            this.gbQuickPublish.ResumeLayout(false);
+            this.gbQuickPublish.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeIncr)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeHeading1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeading2Size)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeading3Size)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBodyText)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeHeading1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackerBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1247,6 +1303,10 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown nudFontSizeHeading1;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.GroupBox gbQuickPublish;
+        private System.Windows.Forms.CheckBox chkQuickAlignCenter;
+        private System.Windows.Forms.CheckBox chkQuickPre;
+        private System.Windows.Forms.CheckBox chkQuickFullPicture;
     }
 }
 
