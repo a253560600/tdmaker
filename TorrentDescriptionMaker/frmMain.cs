@@ -149,10 +149,8 @@ namespace TorrentDescriptionMaker
             }
         }
 
-        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        private void SettingsWrite()
         {
-            this.WindowState = FormWindowState.Minimized;
-
             // MTN Args
             if (!Settings.Default.MTNArgs.Contains(cboMtnArgs.Text))
             {
@@ -167,6 +165,11 @@ namespace TorrentDescriptionMaker
             if (!Settings.Default.SourceEdits.Contains(cboAuthoring.Text))
             {
                 Settings.Default.Sources.Add(cboAuthoring.Text);
+            }
+            // Menus
+            if (!Settings.Default.DiscMenus.Contains(cboDiscMenu.Text))
+            {
+                Settings.Default.DiscMenus.Add(cboDiscMenu.Text);
             }
             // Extras
             if (!Settings.Default.Extras.Contains(cboExtras.Text))
@@ -183,11 +186,17 @@ namespace TorrentDescriptionMaker
             Settings.Default.Save();
         }
 
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+            SettingsWrite();
+        }
+
         private void frmMain_Load(object sender, EventArgs e)
         {
 
             configureDirs();
-            SettingsGet();
+            SettingsRead();
 
             Program.Status = "Ready.";
 
@@ -223,7 +232,7 @@ namespace TorrentDescriptionMaker
 
         }
 
-        private void SettingsGet()
+        private void SettingsRead()
         {
 
             if (string.IsNullOrEmpty(Settings.Default.MTNPath))
@@ -246,6 +255,12 @@ namespace TorrentDescriptionMaker
             foreach (string ed in Settings.Default.SourceEdits)
             {
                 cboAuthoring.Items.Add(ed);
+            }
+
+            cboDiscMenu.Items.Clear();
+            foreach (string ex in Settings.Default.DiscMenus)
+            {
+                cboDiscMenu.Items.Add(ex);
             }
 
             cboExtras.Items.Clear();
