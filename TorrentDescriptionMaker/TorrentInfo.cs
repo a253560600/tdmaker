@@ -97,7 +97,20 @@ namespace TorrentDescriptionMaker
         }
 
         /// <summary>
-        /// This method is BackgroundWorker friendly
+        /// Create Publish based on a Template
+        /// </summary>
+        /// <param name="tr"></param>
+        /// <returns></returns>
+        public string CreatePublish(TemplateReader tr)
+        {
+            
+
+            return "";
+        }
+
+        /// <summary>
+        /// Create Publish based on Default (built-in) Template. 
+        /// Uses ToString() method of MediaInfo2
         /// </summary>
         /// <param name="ti"></param>
         /// <param name="options"></param>

@@ -4,6 +4,7 @@
 	ToString will give PublishString
 		TorrentInfo has MediaInfo2 and Screenshots 
 		Syntax replacing will take care of values
+		Support for syntax based custom formats for Publishing torrent info
 
 Support for Multi-Disc DVDs
 	Tiesto DVD
@@ -29,6 +30,3 @@ Full Automation [tacoking]
 	TDMaker creates torrent from the folder using http://mktorrent.sourceforge.net/
 	TDMaker uploads the torrent to the site
 	
-
-Support for syntax based custom formats for Publishing torrent info
-
