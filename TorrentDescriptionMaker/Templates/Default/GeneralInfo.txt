@@ -1,6 +1,5 @@
 ﻿[size=%FontSize_Heading3%][b][i]General:[/i][/b][/size]
-[size=%FontSize_Body%]
-         [u]File Name:[/u] %FileName%
+[size=%FontSize_Body%]         
             [u]Format:[/u] %General_Format%
          [u]File Size:[/u] %General_FileSize%
           [u]Duration:[/u] %Duration%
