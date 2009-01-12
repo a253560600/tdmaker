@@ -54,6 +54,8 @@
             this.pBar = new System.Windows.Forms.ToolStripProgressBar();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.cboSource = new System.Windows.Forms.ComboBox();
             this.gbDVD = new System.Windows.Forms.GroupBox();
             this.cboDiscMenu = new System.Windows.Forms.ComboBox();
             this.chkDiscMenu = new System.Windows.Forms.CheckBox();
@@ -61,15 +63,14 @@
             this.chkExtras = new System.Windows.Forms.CheckBox();
             this.cboAuthoring = new System.Windows.Forms.ComboBox();
             this.chkSourceEdit = new System.Windows.Forms.CheckBox();
-            this.cboSource = new System.Windows.Forms.ComboBox();
-            this.txtWebLink = new System.Windows.Forms.TextBox();
-            this.lbStatus = new System.Windows.Forms.ListBox();
-            this.chkWebLink = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.rbDir = new System.Windows.Forms.RadioButton();
             this.rbFile = new System.Windows.Forms.RadioButton();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.txtMediaLocation = new System.Windows.Forms.TextBox();
+            this.txtWebLink = new System.Windows.Forms.TextBox();
+            this.chkWebLink = new System.Windows.Forms.CheckBox();
+            this.lbStatus = new System.Windows.Forms.ListBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.txtMediaInfo = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -121,7 +122,6 @@
             this.cmsApp = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsAppAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.btnCreateTorrent = new System.Windows.Forms.Button();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.trackerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -129,6 +129,7 @@
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.gbDVD.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -151,7 +152,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudHeading3Size)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBodyText)).BeginInit();
             this.cmsApp.SuspendLayout();
-            this.groupBox9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackerBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -422,6 +422,27 @@
             this.tabPage5.Text = "Media";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // groupBox9
+            // 
+            this.groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox9.Controls.Add(this.cboSource);
+            this.groupBox9.Location = new System.Drawing.Point(596, 12);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(153, 93);
+            this.groupBox9.TabIndex = 12;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Source";
+            // 
+            // cboSource
+            // 
+            this.cboSource.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "Source", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cboSource.FormattingEnabled = true;
+            this.cboSource.Location = new System.Drawing.Point(17, 47);
+            this.cboSource.Name = "cboSource";
+            this.cboSource.Size = new System.Drawing.Size(121, 21);
+            this.cboSource.TabIndex = 0;
+            this.cboSource.Text = global::TDMaker.Properties.Settings.Default.Source;
+            // 
             // gbDVD
             // 
             this.gbDVD.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -509,52 +530,6 @@
             this.chkSourceEdit.Text = "Authoring:";
             this.chkSourceEdit.UseVisualStyleBackColor = true;
             // 
-            // cboSource
-            // 
-            this.cboSource.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "Source", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cboSource.FormattingEnabled = true;
-            this.cboSource.Location = new System.Drawing.Point(17, 47);
-            this.cboSource.Name = "cboSource";
-            this.cboSource.Size = new System.Drawing.Size(121, 21);
-            this.cboSource.TabIndex = 0;
-            this.cboSource.Text = global::TDMaker.Properties.Settings.Default.Source;
-            // 
-            // txtWebLink
-            // 
-            this.txtWebLink.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtWebLink.Location = new System.Drawing.Point(138, 263);
-            this.txtWebLink.Name = "txtWebLink";
-            this.txtWebLink.Size = new System.Drawing.Size(513, 20);
-            this.txtWebLink.TabIndex = 10;
-            // 
-            // lbStatus
-            // 
-            this.lbStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbStatus.BackColor = System.Drawing.SystemColors.Control;
-            this.lbStatus.FormattingEnabled = true;
-            this.lbStatus.Location = new System.Drawing.Point(32, 320);
-            this.lbStatus.Name = "lbStatus";
-            this.lbStatus.ScrollAlwaysVisible = true;
-            this.lbStatus.Size = new System.Drawing.Size(670, 56);
-            this.lbStatus.TabIndex = 11;
-            this.lbStatus.Visible = false;
-            // 
-            // chkWebLink
-            // 
-            this.chkWebLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkWebLink.AutoSize = true;
-            this.chkWebLink.Checked = global::TDMaker.Properties.Settings.Default.WebLink;
-            this.chkWebLink.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkWebLink.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "WebLink", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkWebLink.Location = new System.Drawing.Point(43, 264);
-            this.chkWebLink.Name = "chkWebLink";
-            this.chkWebLink.Size = new System.Drawing.Size(75, 17);
-            this.chkWebLink.TabIndex = 9;
-            this.chkWebLink.Text = "&Web Link:";
-            this.chkWebLink.UseVisualStyleBackColor = true;
-            // 
             // groupBox4
             // 
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -616,6 +591,42 @@
             this.txtMediaLocation.Name = "txtMediaLocation";
             this.txtMediaLocation.Size = new System.Drawing.Size(454, 20);
             this.txtMediaLocation.TabIndex = 6;
+            // 
+            // txtWebLink
+            // 
+            this.txtWebLink.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtWebLink.Location = new System.Drawing.Point(138, 263);
+            this.txtWebLink.Name = "txtWebLink";
+            this.txtWebLink.Size = new System.Drawing.Size(513, 20);
+            this.txtWebLink.TabIndex = 10;
+            // 
+            // chkWebLink
+            // 
+            this.chkWebLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkWebLink.AutoSize = true;
+            this.chkWebLink.Checked = global::TDMaker.Properties.Settings.Default.WebLink;
+            this.chkWebLink.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkWebLink.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "WebLink", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkWebLink.Location = new System.Drawing.Point(43, 264);
+            this.chkWebLink.Name = "chkWebLink";
+            this.chkWebLink.Size = new System.Drawing.Size(75, 17);
+            this.chkWebLink.TabIndex = 9;
+            this.chkWebLink.Text = "&Web Link:";
+            this.chkWebLink.UseVisualStyleBackColor = true;
+            // 
+            // lbStatus
+            // 
+            this.lbStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbStatus.BackColor = System.Drawing.SystemColors.Control;
+            this.lbStatus.FormattingEnabled = true;
+            this.lbStatus.Location = new System.Drawing.Point(32, 320);
+            this.lbStatus.Name = "lbStatus";
+            this.lbStatus.ScrollAlwaysVisible = true;
+            this.lbStatus.Size = new System.Drawing.Size(670, 56);
+            this.lbStatus.TabIndex = 11;
+            this.lbStatus.Visible = false;
             // 
             // tabPage1
             // 
@@ -936,6 +947,7 @@
             this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colName.HeaderText = "Tracker Name";
             this.colName.Name = "colName";
+            this.colName.Width = 92;
             // 
             // colAnnounceURL
             // 
@@ -993,7 +1005,7 @@
             this.groupBox5.Size = new System.Drawing.Size(431, 148);
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Publish Template";
+            this.groupBox5.Text = "Default Publish Template";
             // 
             // chkUploadFullScreenshot
             // 
@@ -1228,17 +1240,6 @@
             this.btnCreateTorrent.UseVisualStyleBackColor = true;
             this.btnCreateTorrent.Click += new System.EventHandler(this.btnCreateTorrent_Click);
             // 
-            // groupBox9
-            // 
-            this.groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox9.Controls.Add(this.cboSource);
-            this.groupBox9.Location = new System.Drawing.Point(596, 12);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(153, 93);
-            this.groupBox9.TabIndex = 12;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Source";
-            // 
             // trackerBindingSource
             // 
             this.trackerBindingSource.DataSource = typeof(TDMaker.Tracker);
@@ -1277,6 +1278,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
             this.gbDVD.ResumeLayout(false);
             this.gbDVD.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -1310,7 +1312,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudHeading3Size)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBodyText)).EndInit();
             this.cmsApp.ResumeLayout(false);
-            this.groupBox9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trackerBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
