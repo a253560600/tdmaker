@@ -13,6 +13,9 @@ namespace TDMaker
     /// </summary>
     public class MediaFile
     {
+        public bool HasAudio { get; set; }
+        public bool HasVideo { get; set; }
+
         public string Bitrate { get; set; }
         /// <summary>
         /// Duration in seconds

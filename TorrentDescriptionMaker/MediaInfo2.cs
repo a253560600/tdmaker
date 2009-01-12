@@ -37,8 +37,8 @@ namespace TorrentDescriptionMaker
         public string Menu { get; set; }
         public string Extras { get; set; }
         public string WebLink { get; set; }
-
-        private string[] mExt = new string[] { ".avi", ".divx", ".mkv", ".vob", ".mov" };
+        
+        private string[] mExt = new string[] { ".*" }; // { ".avi", ".divx", ".mkv", ".vob", ".mov" };
 
         public MediaFile Overall { get; set; }
         public List<MediaFile> MediaFiles { get; set; }
@@ -51,6 +51,18 @@ namespace TorrentDescriptionMaker
             // this could be a file path or a directory
             this.Location = loc;
 
+        }
+
+        /// <summary>
+        /// Add Media to the Media List if the file has Audio or Video
+        /// </summary>
+        /// <param name="mf"></param>
+        private void AddMedia(MediaFile mf){
+
+            if (mf.HasVideo || mf.HasAudio)
+            {
+                this.MediaFiles.Add(mf);
+            }
         }
 
         /// <summary>
@@ -97,8 +109,8 @@ namespace TorrentDescriptionMaker
                                 maxSize = fi.Length;
                                 maxPath = fi.FullName;
                             }
-
-                            this.MediaFiles.Add(ReadFile(f));
+                             
+                            AddMedia(ReadFile(f));
                         }
                     }
 
@@ -287,6 +299,11 @@ namespace TorrentDescriptionMaker
                 //*********************
                 //* Video
                 //********************* 
+
+                int videoCount;
+                int.TryParse(mMI.Get(StreamKind.General, 0, "VideoCount"), out videoCount);
+                mf.HasVideo = videoCount > 0;
+
                 mf.Video.Format = mMI.Get(StreamKind.Video, 0, "Format");
                 mf.Video.FormatVersion = mMI.Get(StreamKind.Video, 0, "Format_Version");
 
@@ -314,6 +331,7 @@ namespace TorrentDescriptionMaker
                 //*********************  
                 int audioCount;
                 int.TryParse(mMI.Get(StreamKind.General, 0, "AudioCount"), out audioCount);
+                mf.HasAudio = audioCount > 0;
 
                 for (int a = 0; a < audioCount; a++)
                 {
