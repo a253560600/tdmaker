@@ -13,6 +13,13 @@ namespace TDMaker
      class TemplateReader
     {
         /// <summary>
+        /// Location of the Template
+        /// </summary>
+        public string Location { get; private set; }
+        public TorrentInfo TorrentInfo { get; private set; }
+        public string PublishInfo { get; private set; }
+
+        /// <summary>
         /// Constructure of TemplateReader
         /// </summary>
         /// <param name="loc">Directory Path of the Template</param>
@@ -23,11 +30,42 @@ namespace TDMaker
             this.TorrentInfo = ti;
         }
 
-        /// <summary>
-        /// Location of the Template
-        /// </summary>
-        public string Location { get; private set; }
-        public TorrentInfo TorrentInfo { get; private set; }
+        public void CreateInfo()
+        {
+            if (TorrentInfo.MediaInfo2.IsDisc)
+            {
+                PublishInfo = CreateDiscInfo(TorrentInfo.MediaInfo2.Overall);
+            }
+            else
+            {
+                PublishInfo = CreateFileInfo(TorrentInfo.MediaInfo2);
+            }
+        }
 
-    }
+        private string GeneralInfo(MediaFile mf)
+        {
+            return "";
+        }
+
+        private string VideoInfo(MediaFile mf)
+        {
+            return "";
+        }
+
+        private string AudioInfo(MediaFile mf)
+        {
+            return "";
+        }
+
+        private string CreateFileInfo(MediaInfo2 mi)
+        {
+            return "";
+        }
+
+        private string CreateDiscInfo(MediaFile mf)
+        {
+            return "";
+        }
+
+     }
 }
