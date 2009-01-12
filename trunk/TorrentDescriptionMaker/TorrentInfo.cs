@@ -149,7 +149,7 @@ namespace TorrentDescriptionMaker
         /// </summary>
         /// <returns>Publish String</returns>
         public override string ToString()
-        {
+        {            
             PublishString = CreatePublish(this.PublishOptions);
             return PublishString;
         }
@@ -161,7 +161,7 @@ namespace TorrentDescriptionMaker
         /// String Representation of Publish tab
         /// ToString() should be called at least once
         /// </summary>
-        public string PublishString { get; private set; }
+        public string PublishString { get; set; }
         /// <summary>
         /// Options for Publishing
         /// </summary>

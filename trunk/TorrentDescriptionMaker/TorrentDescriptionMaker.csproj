@@ -113,6 +113,7 @@
     <Content Include="Templates\Default\AudioInfo.txt" />
     <Content Include="Templates\Default\Disc.txt" />
     <Content Include="Templates\Default\File.txt" />
+    <Content Include="Templates\Default\GeneralInfo.txt" />
     <Content Include="Templates\Default\VideoInfo.txt" />
     <Content Include="TODO.txt" />
     <Content Include="VersionHistory.txt" />
