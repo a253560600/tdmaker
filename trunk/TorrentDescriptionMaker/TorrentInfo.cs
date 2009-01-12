@@ -14,7 +14,7 @@ namespace TorrentDescriptionMaker
     class TorrentInfo
     {
         private BackgroundWorker mBwApp = null;
-        
+
         public TorrentInfo(BackgroundWorker bwApp, MediaInfo2 mi)
         {
             // load the MediaInfo object
@@ -26,12 +26,12 @@ namespace TorrentDescriptionMaker
 
             if (Settings.Default.UploadImageShack)
             {
-                sGetScreenshot(mi.Overall.FilePath);
+                UploadScreenshot(mi.Overall.FilePath);
             }
 
         }
 
-        private void sGetScreenshot(String mediaFilePath)
+        private void UploadScreenshot(String mediaFilePath)
         {
 
             Process p = new Process();
@@ -96,13 +96,72 @@ namespace TorrentDescriptionMaker
 
         }
 
+        /// <summary>
+        /// This method is BackgroundWorker friendly
+        /// </summary>
+        /// <param name="ti"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public string CreatePublish(PublishOptionsPacket options)
+        {
+
+            StringBuilder sbPublish = new StringBuilder();
+
+            string p = "";
+
+            BbCode bb = new BbCode();
+
+            if (options.AlignCenter)
+            {
+                p = bb.alignCenter(this.MediaInfo2.ToString());
+            }
+            else
+            {
+                p = this.MediaInfo2.ToString();
+            }
+
+            if (options.PreformattedText)
+            {
+                sbPublish.AppendLine(bb.pre(p));
+            }
+            else
+            {
+                sbPublish.AppendLine(p);
+            }
+
+            sbPublish.AppendLine();
+
+            if (!string.IsNullOrEmpty(this.ScreenshotURLFull) && options.FullPicture)
+            {
+                sbPublish.AppendLine(bb.img(this.ScreenshotURLFull));
+            }
+            else if (!string.IsNullOrEmpty(this.ScreenshotURLForums))
+            {
+                sbPublish.AppendLine(this.ScreenshotURLForums);
+            }
+
+            return sbPublish.ToString();
+
+        }
+
+        /// <summary>
+        /// Default Publish String representation of a Torrent
+        /// </summary>
+        /// <returns>Publish String</returns>
+        public override string ToString()
+        {
+            PublishString = CreatePublish(this.PublishOptions);
+            return PublishString;
+        }
+
         public string ScreenshotURLForums { get; private set; }
         public string ScreenshotURLFull { get; private set; }
         public MediaInfo2 MediaInfo2 { get; private set; }
         /// <summary>
         /// String Representation of Publish tab
+        /// ToString() should be called at least once
         /// </summary>
-        public string PublishString { get; set; }
+        public string PublishString { get; private set; }
         /// <summary>
         /// Options for Publishing
         /// </summary>

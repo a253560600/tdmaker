@@ -327,7 +327,7 @@ namespace TorrentDescriptionMaker
             Program.Status = "Reading " + mi.Location;
             mi.ReadMedia();
 
-            bwApp.ReportProgress(0, mi.MediaFiles[0].Summary);
+            bwApp.ReportProgress(0, mi.Overall.Summary);
 
             TorrentInfo ti = new TorrentInfo(bwApp, mi);
 
@@ -337,7 +337,6 @@ namespace TorrentDescriptionMaker
             pop.PreformattedText = Settings.Default.PreText;
 
             ti.PublishOptions = pop;
-            ti.PublishString = createPublish(ti, pop);
 
             if (Settings.Default.WritePublish)
             {
@@ -351,7 +350,7 @@ namespace TorrentDescriptionMaker
 
                 using (StreamWriter sw = new StreamWriter(txtPath))
                 {
-                    sw.WriteLine(ti.PublishString);
+                    sw.WriteLine(ti.ToString());
                 }
             }
 
@@ -372,57 +371,6 @@ namespace TorrentDescriptionMaker
             txtTorrentCustomFolder.Enabled = rbTorrentFolderCustom.Checked;
             btnBrowseTorrentCustomFolder.Enabled = rbTorrentFolderCustom.Checked;
             chkTorrentOrganize.Enabled = rbTorrentFolderCustom.Checked;
-
-        }
-
-        /// <summary>
-        /// This method is BackgroundWorker friendly
-        /// </summary>
-        /// <param name="ti"></param>
-        /// <param name="options"></param>
-        /// <returns></returns>
-        private string createPublish(TorrentInfo ti, PublishOptionsPacket options)
-        {
-
-            StringBuilder sbPublish = new StringBuilder();
-
-            if (ti != null)
-            {
-                string p = "";
-
-                BbCode bb = new BbCode();
-
-                if (options.AlignCenter)
-                {
-                    p = bb.alignCenter(ti.MediaInfo2.ToString());
-                }
-                else
-                {
-                    p = ti.MediaInfo2.ToString();
-                }
-
-                if (options.PreformattedText)
-                {
-                    sbPublish.AppendLine(bb.pre(p));
-                }
-                else
-                {
-                    sbPublish.AppendLine(p);
-                }
-
-                sbPublish.AppendLine();
-
-                if (!string.IsNullOrEmpty(ti.ScreenshotURLFull) && options.FullPicture)
-                {
-                    sbPublish.AppendLine(bb.img(ti.ScreenshotURLFull));
-                }
-                else if (!string.IsNullOrEmpty(ti.ScreenshotURLForums))
-                {
-                    sbPublish.AppendLine(ti.ScreenshotURLForums);
-                }
-            }
-
-            return sbPublish.ToString();
 
         }
 
@@ -468,7 +416,7 @@ namespace TorrentDescriptionMaker
         {
             sBar.Text = Program.Status;
             btnBrowse.Enabled = !bwApp.IsBusy;
-            // btnBrowse.Text = (File.Exists(txtMediaFile.Text) ? "&Analyze" : "&Browse...");
+            btnAnalyze.Enabled = !bwApp.IsBusy && (File.Exists(txtMediaLocation.Text) || Directory.Exists(txtMediaLocation.Text));
             lbStatus.SelectedIndex = lbStatus.Items.Count - 1;
         }
 
@@ -716,13 +664,17 @@ namespace TorrentDescriptionMaker
 
         private void createQuickPublish()
         {
-            PublishOptionsPacket pop = new PublishOptionsPacket();
-            pop.AlignCenter = chkQuickAlignCenter.Checked;
-            pop.FullPicture = chkQuickFullPicture.Checked;
-            pop.PreformattedText = chkQuickPre.Checked;
+            if (mTorrentInfo != null)
+            {
+                PublishOptionsPacket pop = new PublishOptionsPacket();
+                pop.AlignCenter = chkQuickAlignCenter.Checked;
+                pop.FullPicture = chkQuickFullPicture.Checked;
+                pop.PreformattedText = chkQuickPre.Checked;
 
-            txtPublish.Text = createPublish(mTorrentInfo, pop);
+                mTorrentInfo.PublishOptions = pop;
+                txtPublish.Text = mTorrentInfo.ToString();
 
+            }
         }
 
         private void chkQuickPre_CheckedChanged(object sender, EventArgs e)
