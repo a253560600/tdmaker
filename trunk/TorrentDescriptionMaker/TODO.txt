@@ -1,7 +1,4 @@
-﻿Commit
-	Combine FilesSize and Duration (internally) only if IsDisc is true (faster processing for multiple VOB files which does not make a DVD)
-
-TemplateReader
+﻿TemplateReader
 	New Instance to provide filepath of DiscInfo.txt and FileInfo.txt
 	Set TorrentInfo
 	ToString will give PublishString
