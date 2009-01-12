@@ -1,4 +1,6 @@
-﻿TemplateReader
+﻿Batch create description and torrent 
+
+TemplateReader
 	New Instance to provide filepath of DiscInfo.txt and FileInfo.txt
 	Set TorrentInfo
 	ToString will give PublishString
