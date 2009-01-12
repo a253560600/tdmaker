@@ -10,7 +10,7 @@ namespace TDMaker
     /// A Template Directory has 5 files: 
     /// GeneralInfo.txt; VideoInfo.txt; AudioInfo.txt; Disc.txt; File.txt
     /// </summary>
-    public class TemplateReader
+     class TemplateReader
     {
         /// <summary>
         /// Constructure of TemplateReader
