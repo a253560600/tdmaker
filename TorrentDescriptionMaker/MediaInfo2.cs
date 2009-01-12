@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using MediaInfoLib;
@@ -113,43 +112,6 @@ namespace TorrentDescriptionMaker
 
                 }
 
-                // DVD Video
-                // Calculate Duration and File Size
-                string[] vobFiles = Directory.GetFiles(Location, "*.vob", SearchOption.AllDirectories);
-                if (vobFiles.Length > 0)
-                {
-                    long dura = 0;
-                    double size = 0;
-                    foreach (string vob in vobFiles)
-                    {
-                        MediaInfoLib.MediaInfo mi = new MediaInfoLib.MediaInfo();
-                        mi.Open(vob);
-                        string temp = mi.Get(0, 0, "Duration");
-                        if (!string.IsNullOrEmpty(temp))
-                        {
-                            long d = 0;
-                            long.TryParse(temp, out d);
-                            dura += d;
-                        }
-
-                        // we are interested in combined file size only for VOB files 
-                        // thats why we dont calculate FileSize in FileInfo while determining largest file
-                        double sz = 0;
-                        double.TryParse(mi.Get(0, 0, "FileSize"), out sz);
-                        size += sz;
-
-                        // close vob file
-                        mi.Close();
-                    }
-
-                    this.Overall.FileSize = size; // override any previous file size
-                    this.Overall.FileSizeString = string.Format("{0} MiB", (this.Overall.FileSize / 1024.0 / 1024.0).ToString("0.00"));
-
-                    this.Overall.Duration = dura;
-                    this.Overall.DurationString = Program.getDurationString(dura);
-
-                }
-
                 // Subtitles, Format: DVD Video using VTS_01_0.IFO
                 string[] ifo = Directory.GetFiles(Location, "VTS_01_0.IFO", SearchOption.AllDirectories);
                 if (ifo.Length == 1)
@@ -191,6 +153,47 @@ namespace TorrentDescriptionMaker
 
                     // close ifo file
                     mi.Close();
+                }
+
+                // DVD Video
+                // Combined Duration and File Size
+                if (IsDisc)
+                {
+                    string[] vobFiles = Directory.GetFiles(Location, "*.vob", SearchOption.AllDirectories);
+                    if (vobFiles.Length > 0)
+                    {
+                        long dura = 0;
+                        double size = 0;
+                        foreach (string vob in vobFiles)
+                        {
+                            MediaInfoLib.MediaInfo mi = new MediaInfoLib.MediaInfo();
+                            mi.Open(vob);
+                            string temp = mi.Get(0, 0, "Duration");
+                            if (!string.IsNullOrEmpty(temp))
+                            {
+                                long d = 0;
+                                long.TryParse(temp, out d);
+                                dura += d;
+                            }
+
+                            // we are interested in combined file size only for VOB files 
+                            // thats why we dont calculate FileSize in FileInfo while determining largest file
+                            double sz = 0;
+                            double.TryParse(mi.Get(0, 0, "FileSize"), out sz);
+                            size += sz;
+
+                            // close vob file
+                            mi.Close();
+                        }
+
+                        this.Overall.FileSize = size; // override any previous file size
+                        this.Overall.FileSizeString = string.Format("{0} MiB", (this.Overall.FileSize / 1024.0 / 1024.0).ToString("0.00"));
+
+                        this.Overall.Duration = dura;
+                        this.Overall.DurationString = Program.getDurationString(dura);
+
+                    }
+
                 }
 
             } // if Location is a directory

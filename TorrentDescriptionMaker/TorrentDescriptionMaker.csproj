@@ -110,6 +110,10 @@
     <Content Include="GenuineAdv.ico" />
     <Content Include="Lib\ImageUploader.dll" />
     <Content Include="Lib\MonoTorrent.dll" />
+    <Content Include="Templates\Default\AudioInfo.txt" />
+    <Content Include="Templates\Default\Disc.txt" />
+    <Content Include="Templates\Default\File.txt" />
+    <Content Include="Templates\Default\VideoInfo.txt" />
     <Content Include="TODO.txt" />
     <Content Include="VersionHistory.txt" />
   </ItemGroup>

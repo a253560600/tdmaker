@@ -1,4 +1,17 @@
-﻿Write Publish info to Text Files (same location as torrent)
+﻿Commit
+	Combine FilesSize and Duration (internally) only if IsDisc is true (faster processing for multiple VOB files which does not make a DVD)
+
+TemplateReader
+	New Instance to provide filepath of DiscInfo.txt and FileInfo.txt
+	Set TorrentInfo
+	ToString will give PublishString
+		TorrentInfo has MediaInfo2 and Screenshots 
+		Syntax replacing will take care of values
+
+Support for Multi-Disc DVDs
+	Tiesto DVD
+		DVD1
+		DVD2
 
 Support Templates using Syntax
 	TDM reads 3 template files with syntax
@@ -21,3 +34,4 @@ Full Automation [tacoking]
 	
 
 Support for syntax based custom formats for Publishing torrent info
+

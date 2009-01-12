@@ -1,0 +1,19 @@
+﻿[size=%FontSize_Heading1%][b]%Title%[/b][/size]
+
+            [u]Source:[/u] %Source%
+
+[size=%FontSize_Heading2%][b][i]Part 3.VOB[/i][/b][/size]
+
+[size=%FontSize_Heading3%][b][i]General:[/i][/b][/size]
+[size=%FontSize_Body%]
+         [u]File Name:[/u] %FileName%
+            [u]Format:[/u] %General_Format%
+         [u]File Size:[/u] %General_FileSize%
+          [u]Duration:[/u] %Duration%
+           [u]Bitrate:[/u] %Bitrate%
+         [u]Subtitles:[/u] %Subtitles%
+[/size]
+
+%VideoInfo%
+
+%AudioInfo%
