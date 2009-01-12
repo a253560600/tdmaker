@@ -90,8 +90,12 @@ namespace TorrentDescriptionMaker
                     Program.Status = "Failed uploading screenshot to ImageShack. Try again later.";
                 }
 
-                // delete if option set to temporary location 
-                File.Delete(screenshot);
+                if (!Settings.Default.KeepScreenshot)
+                {
+                    // delete if option set to temporary location 
+                    File.Delete(screenshot);
+                }
+
             }
 
         }

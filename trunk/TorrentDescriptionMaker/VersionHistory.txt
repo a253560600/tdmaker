@@ -1,4 +1,6 @@
+1.3.02.1 The screenshot MTN created, was deleted regardless of the setting
 1.3.02.0 Added ability to process any media that MediaInfo supports
+1.3.01.2 Crashed when a particular media file extention was not handled [surround]
 
 Version 1.3.01 - 20090112
 
