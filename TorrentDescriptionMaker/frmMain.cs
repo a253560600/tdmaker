@@ -337,6 +337,7 @@ namespace TorrentDescriptionMaker
             pop.PreformattedText = Settings.Default.PreText;
 
             ti.PublishOptions = pop;
+            ti.PublishString = ti.ToString();
 
             if (Settings.Default.WritePublish)
             {
@@ -350,7 +351,7 @@ namespace TorrentDescriptionMaker
 
                 using (StreamWriter sw = new StreamWriter(txtPath))
                 {
-                    sw.WriteLine(ti.ToString());
+                    sw.WriteLine(ti.PublishString);
                 }
             }
 
