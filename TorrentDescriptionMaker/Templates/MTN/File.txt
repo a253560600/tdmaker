@@ -1,2 +1,3 @@
-﻿%Video_Info%
+﻿%General_Info%
+%Video_Info%
 %Audio_Info%
