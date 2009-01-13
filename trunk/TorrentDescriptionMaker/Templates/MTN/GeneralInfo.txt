@@ -1,0 +1,1 @@
+﻿[b]General: [/b] %FileSize% - %Duration% - %Bitrate%

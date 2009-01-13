@@ -118,7 +118,11 @@
     <Content Include="Templates\Default\GeneralInfo.txt" />
     <Content Include="Templates\Default\VideoInfo.txt" />
     <Content Include="Templates\MTN\Disc.txt" />
+    <Content Include="Templates\MTN\DiscAudioInfo.txt" />
     <Content Include="Templates\MTN\File.txt" />
+    <Content Include="Templates\MTN\FileAudioInfo.txt" />
+    <Content Include="Templates\MTN\GeneralInfo.txt" />
+    <Content Include="Templates\MTN\VideoInfo.txt" />
     <Content Include="TODO.txt" />
     <Content Include="VersionHistory.txt" />
   </ItemGroup>
