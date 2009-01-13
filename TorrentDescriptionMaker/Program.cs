@@ -61,14 +61,20 @@ namespace TorrentDescriptionMaker
             if (File.Exists(p))
             {
                 string ext = Path.GetExtension(p).ToLower();
-                name = (ext == ".vob" ? Path.GetDirectoryName(p) : Path.GetFileNameWithoutExtension(p));
+                if (ext == ".vob" && Path.GetFileName(Path.GetDirectoryName(p)) == "VIDEO_TS")
+                {
+                    name = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(p)));
+                }
+                else
+                {
+                    name = Path.GetFileNameWithoutExtension(p);
+                }
             }
             else if (Directory.Exists(p))
             {
                 name = Path.GetFileName(p);
                 if (name.ToUpper().Equals("VIDEO_TS"))
                     name = Path.GetFileName(Path.GetDirectoryName(p));
-
             }
 
             return name;
@@ -82,6 +88,13 @@ namespace TorrentDescriptionMaker
         NONE,
         TAKE_ALL_SCREENSHOTS,
         TAKE_ONE_SCREENSHOT
+    }
+
+    public enum ProgressMode
+    {
+        INCREMENT_PROGRESS_WITH_MSG,
+        REPORT_MEDIAINFO_SUMMARY,
+        UPDATE_PROGRESSBAR_MAX
     }
 
     public class TorrentPacket

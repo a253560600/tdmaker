@@ -735,6 +735,7 @@
             this.txtPublish.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtPublish.Size = new System.Drawing.Size(613, 455);
             this.txtPublish.TabIndex = 0;
+            this.txtPublish.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPublish_KeyPress);
             // 
             // tabPage4
             // 
@@ -947,7 +948,6 @@
             this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colName.HeaderText = "Tracker Name";
             this.colName.Name = "colName";
-            this.colName.Width = 92;
             // 
             // colAnnounceURL
             // 
@@ -1218,12 +1218,12 @@
             this.cmsApp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmsAppAbout});
             this.cmsApp.Name = "cmsApp";
-            this.cmsApp.Size = new System.Drawing.Size(116, 26);
+            this.cmsApp.Size = new System.Drawing.Size(117, 26);
             // 
             // cmsAppAbout
             // 
             this.cmsAppAbout.Name = "cmsAppAbout";
-            this.cmsAppAbout.Size = new System.Drawing.Size(115, 22);
+            this.cmsAppAbout.Size = new System.Drawing.Size(116, 22);
             this.cmsAppAbout.Text = "&About...";
             this.cmsAppAbout.Click += new System.EventHandler(this.cmsAppAbout_Click);
             // 

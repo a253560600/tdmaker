@@ -40,91 +40,101 @@ namespace TorrentDescriptionMaker
         {
 
             string[] paths = (string[])e.Data.GetData(DataFormats.FileDrop, true);
-            if (paths.Length == 1)
+            loadMedia(paths);
+
+            //if (paths.Length == 1)
+            //{
+            //    if (File.Exists(paths[0]) || Directory.Exists(paths[0]))
+            //    {
+
+            //    }
+            //}
+
+        }
+
+        private void loadMedia(string[] ps)
+        {
+            foreach (string p in ps)
             {
-                if (File.Exists(paths[0]) || Directory.Exists(paths[0]))
+                if (File.Exists(p) || Directory.Exists(p))
                 {
-                    loadMedia(paths[0]);
+                    txtMediaLocation.Text = p;
+
+                    TorrentPacket tp = new TorrentPacket(getTracker(), p);
+
+                    if (Settings.Default.CreateTorrent)
+                        createTorrent(tp);
+
+                    updateGuiControls();
                 }
             }
 
-        }
-
-        private void loadMedia(string p)
-        {
-            txtMediaLocation.Text = p;
-
-            TorrentPacket tp = new TorrentPacket(getTracker(), p);
-
-            if (Settings.Default.CreateTorrent)
-                createTorrent(tp);
-
             if (Settings.Default.AnalyzeAuto)
-                analyzeMedia();
-
-            updateGuiControls();
-
+                analyzeMedia(ps);
         }
 
-        private string getMediaName(string p)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p">File or Folder</param>
+        /// <returns></returns>
+        private List<string> CreateFileList(string p)
         {
-
-            string name = "";
-
+            List<string> fl = new List<string>();
             if (File.Exists(p))
             {
-                string ext = Path.GetExtension(p).ToLower();
-                name = (ext == ".vob" ? Path.GetDirectoryName(p) : Path.GetFileNameWithoutExtension(p));
+                fl.Add(p);
             }
             else if (Directory.Exists(p))
             {
-                name = Path.GetFileName(p);
-                if (name.ToUpper().Equals("VIDEO_TS"))
-                    name = Path.GetFileName(Path.GetDirectoryName(p));
 
             }
-
-            return name;
-
+            return fl;
         }
 
-        private void analyzeMedia()
+        private void analyzeMedia(string[] ps)
         {
-            if (File.Exists(txtMediaLocation.Text) || Directory.Exists(txtMediaLocation.Text))
+            List<MediaInfo2> miList = new List<MediaInfo2>();
+
+            foreach (string p in ps)
             {
-                MediaInfo2 mi = new MediaInfo2(txtMediaLocation.Text);
-                mi.Extras = cboExtras.Text;
-                mi.Source = cboSource.Text;
-                mi.Menu = cboDiscMenu.Text;
-                mi.Authoring = cboAuthoring.Text;
-                mi.WebLink = txtWebLink.Text;
-                mi.TorrentInfo = new TorrentPacket(getTracker(), txtMediaLocation.Text);
-
-                // Screenshots Mode
-                if (Settings.Default.UploadImageShack)
+                if (File.Exists(p) || Directory.Exists(p))
                 {
-                    mi.TakeScreenshots = TakeScreenshotsMode.TAKE_ONE_SCREENSHOT;
+                    MediaInfo2 mi = new MediaInfo2(p);
+                    mi.Extras = cboExtras.Text;
+                    mi.Source = cboSource.Text;
+                    mi.Menu = cboDiscMenu.Text;
+                    mi.Authoring = cboAuthoring.Text;
+                    mi.WebLink = txtWebLink.Text;
+                    mi.TorrentInfo = new TorrentPacket(getTracker(), p);
+
+                    // Screenshots Mode
+                    if (Settings.Default.UploadImageShack)
+                    {
+                        mi.TakeScreenshots = TakeScreenshotsMode.TAKE_ONE_SCREENSHOT;
+                    }
+
+                    // if it is a DVD, set the title to be name of the folder. 
+                    this.Text = string.Format("{0} - {1}", Resources.AppName, Program.getMediaName(mi.Location));
+
+                    txtScrFull.Text = "";
+                    txtBBScrFull.Text = "";
+                    txtBBScrForums.Text = "";
+
+                    // pBar.Style = ProgressBarStyle.Marquee;
+
+                    // lbStatus.Items.Add("Analyzing Media using MediaInfo.");
+
+                    miList.Add(mi);
+
                 }
-
-                // if it is a DVD, set the title to be name of the folder. 
-                string p = mi.Location;
-
-                this.Text = string.Format("{0} - {1}", Resources.AppName, this.getMediaName(p));
-
-                txtScrFull.Text = "";
-                txtBBScrFull.Text = "";
-                txtBBScrForums.Text = "";
-
-                pBar.Style = ProgressBarStyle.Marquee;
-
-                lbStatus.Items.Add("Analyzing Media using MediaInfo.");
-
-                if (!bwApp.IsBusy)
-                    bwApp.RunWorkerAsync(mi);
-
-                updateGuiControls();
-
             }
+
+            if (!bwApp.IsBusy)
+                bwApp.RunWorkerAsync(miList);
+
+            updateGuiControls();
+
         }
 
         private void frmMain_Shown(object sender, EventArgs e)
@@ -188,7 +198,7 @@ namespace TorrentDescriptionMaker
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.WindowState = FormWindowState.Minimized;
+            // this.WindowState = FormWindowState.Minimized;
             SettingsWrite();
         }
 
@@ -322,40 +332,51 @@ namespace TorrentDescriptionMaker
         {
             // start of the magic :)
 
-            MediaInfo2 mi = (MediaInfo2)e.Argument;
+            List<MediaInfo2> miList = (List<MediaInfo2>)e.Argument;
+            List<TorrentInfo> tiList = new List<TorrentInfo>();
 
-            Program.Status = "Reading " + mi.Location;
-            mi.ReadMedia();
+            bwApp.ReportProgress((int)ProgressMode.UPDATE_PROGRESSBAR_MAX, miList.Count);
 
-            bwApp.ReportProgress(0, mi.Overall.Summary);
-
-            TorrentInfo ti = new TorrentInfo(bwApp, mi);
-
-            PublishOptionsPacket pop = new PublishOptionsPacket();
-            pop.AlignCenter = Settings.Default.AlignCenter;
-            pop.FullPicture = Settings.Default.UploadImageShack && Settings.Default.UseFullPicture;
-            pop.PreformattedText = Settings.Default.PreText;
-
-            ti.PublishOptions = pop;
-            ti.PublishString = ti.ToString();
-
-            if (Settings.Default.WritePublish)
+            foreach (MediaInfo2 mi in miList)
             {
-                // create textFiles of MediaInfo           
-                string txtPath = Path.Combine(mi.TorrentInfo.TorrentFolder, mi.Title) + ".txt";
+                Program.Status = "Reading " + mi.Location;
+                mi.ReadMedia();
 
-                if (!Directory.Exists(mi.TorrentInfo.TorrentFolder))
+                bwApp.ReportProgress((int)ProgressMode.REPORT_MEDIAINFO_SUMMARY, mi.Overall.Summary);
+
+                TorrentInfo ti = new TorrentInfo(bwApp, mi);
+
+                PublishOptionsPacket pop = new PublishOptionsPacket();
+                pop.AlignCenter = Settings.Default.AlignCenter;
+                pop.FullPicture = Settings.Default.UploadImageShack && Settings.Default.UseFullPicture;
+                pop.PreformattedText = Settings.Default.PreText;
+
+                ti.PublishOptions = pop;
+                ti.PublishString = ti.ToString();
+
+                if (Settings.Default.WritePublish)
                 {
-                    Directory.CreateDirectory(mi.TorrentInfo.TorrentFolder);
+                    // create textFiles of MediaInfo           
+                    string txtPath = Path.Combine(mi.TorrentInfo.TorrentFolder, mi.Overall.FileName) + ".txt";
+
+                    if (!Directory.Exists(mi.TorrentInfo.TorrentFolder))
+                    {
+                        Directory.CreateDirectory(mi.TorrentInfo.TorrentFolder);
+                    }
+
+                    using (StreamWriter sw = new StreamWriter(txtPath))
+                    {
+                        sw.WriteLine(ti.PublishString);
+                    }
                 }
 
-                using (StreamWriter sw = new StreamWriter(txtPath))
-                {
-                    sw.WriteLine(ti.PublishString);
-                }
+                tiList.Add(ti);
+
+                bwApp.ReportProgress((int)ProgressMode.INCREMENT_PROGRESS_WITH_MSG, mi.Title);
+
             }
 
-            e.Result = ti;
+            e.Result = tiList;
         }
 
         private void updateGuiControls()
@@ -377,40 +398,47 @@ namespace TorrentDescriptionMaker
 
         private void bwApp_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            mTorrentInfo = (TorrentInfo)e.Result;
+            List<TorrentInfo> tiList = (List<TorrentInfo>)e.Result;
 
-            if (mTorrentInfo != null)
+            foreach (TorrentInfo ti in tiList)
             {
+                mTorrentInfo = ti;
 
-                txtScrFull.Text = mTorrentInfo.ScreenshotURLFull;
-                txtBBScrForums.Text = mTorrentInfo.ScreenshotURLForums;
+                if (mTorrentInfo != null)
+                {
+
+                    txtScrFull.Text = mTorrentInfo.ScreenshotURLFull;
+                    txtBBScrForums.Text = mTorrentInfo.ScreenshotURLForums;
+
+                    if (!string.IsNullOrEmpty(txtScrFull.Text))
+                        txtBBScrFull.Text = string.Format("[img]{0}[/img]", txtScrFull.Text);
+
+                    PublishOptionsPacket pop = mTorrentInfo.PublishOptions;
+
+                    // initialize quick publish checkboxes
+                    chkQuickAlignCenter.Checked = pop.AlignCenter;
+                    chkQuickFullPicture.Checked = pop.FullPicture;
+                    chkQuickPre.Checked = pop.PreformattedText;
+
+                    txtPublish.Text = mTorrentInfo.PublishString;
+
+                    // sbPublish.AppendLine("Get your Torrent Description like this using TDMaker: http://code.google.com/p/tdmaker");
+
+                    updateGuiControls();
+
+                }
 
                 if (!string.IsNullOrEmpty(txtScrFull.Text))
-                    txtBBScrFull.Text = string.Format("[img]{0}[/img]", txtScrFull.Text);
-
-                PublishOptionsPacket pop = mTorrentInfo.PublishOptions;
-
-                // initialize quick publish checkboxes
-                chkQuickAlignCenter.Checked = pop.AlignCenter;
-                chkQuickFullPicture.Checked = pop.FullPicture;
-                chkQuickPre.Checked = pop.PreformattedText;
-
-                txtPublish.Text = mTorrentInfo.PublishString; 
-
-                // sbPublish.AppendLine("Get your Torrent Description like this using TDMaker: http://code.google.com/p/tdmaker");
-
-                updateGuiControls();
+                    lbStatus.Items.Add("Uploaded Screenshot to ImageShack.");
 
             }
-
-            if (!string.IsNullOrEmpty(txtScrFull.Text))
-                lbStatus.Items.Add("Uploaded Screenshot to ImageShack.");
 
             if (mBwTorrent == null || !mBwTorrent.IsBusy)
             {
                 pBar.Style = ProgressBarStyle.Continuous;
                 Program.Status = "Ready.";
             }
+
         }
 
         private void tmrStatus_Tick(object sender, EventArgs e)
@@ -437,11 +465,12 @@ namespace TorrentDescriptionMaker
             if (rbFile.Checked)
             {
                 OpenFileDialog dlg = new OpenFileDialog();
+                dlg.Multiselect = true;
                 dlg.Title = "Browse for Media file...";
                 dlg.Filter = "Media Files|*.avi; *.vob; *.mkv; *.divx";
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    loadMedia(dlg.FileName);
+                    loadMedia(dlg.FileNames);
                 }
             }
             else
@@ -450,7 +479,7 @@ namespace TorrentDescriptionMaker
                 dlg.Description = "Browse for DVD folder...";
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    loadMedia(dlg.SelectedPath);
+                    loadMedia(new string[] { dlg.SelectedPath });
                 }
             }
 
@@ -501,7 +530,7 @@ namespace TorrentDescriptionMaker
 
                     MonoTorrent.Common.TorrentCreator tc = new MonoTorrent.Common.TorrentCreator();
                     tc.Private = true;
-                    tc.Comment = this.getMediaName(p);
+                    tc.Comment = Program.getMediaName(p);
                     tc.Path = p;
                     tc.PublisherUrl = "http://code.google.com/p/tdmaker";
                     tc.Publisher = Application.ProductName;
@@ -510,7 +539,7 @@ namespace TorrentDescriptionMaker
                     temp.Add(tp.Tracker.AnnounceURL);
                     tc.Announces.Add(temp);
 
-                    string torrentFileName = (File.Exists(p) ? Path.GetFileNameWithoutExtension(p) : this.getMediaName(p)) + ".torrent";
+                    string torrentFileName = (File.Exists(p) ? Path.GetFileName(p) : Program.getMediaName(p)) + ".torrent";
                     string torrentPath = Path.Combine(tp.TorrentFolder, torrentFileName);
 
                     if (!Directory.Exists(tp.TorrentFolder))
@@ -537,15 +566,24 @@ namespace TorrentDescriptionMaker
             if (e.UserState != null)
             {
                 string msg = e.UserState.ToString();
-                int perc = e.ProgressPercentage;
+                ProgressMode perc = (ProgressMode)e.ProgressPercentage;
 
                 switch (perc)
                 {
-                    case 0:
+                    case ProgressMode.INCREMENT_PROGRESS_WITH_MSG:
+                        pBar.Style = ProgressBarStyle.Continuous;
+                        pBar.Increment(1);
+                        sBar.Text = msg;
+                        break;
+
+                    case ProgressMode.REPORT_MEDIAINFO_SUMMARY:
                         lbStatus.Items.Add("Analyzed Media using MediaInfo");
                         txtMediaInfo.Text = msg;
                         break;
-                    case 1:
+
+                    case ProgressMode.UPDATE_PROGRESSBAR_MAX:
+                        pBar.Style = ProgressBarStyle.Continuous;
+                        pBar.Maximum = (int)e.UserState;
                         break;
                 }
 
@@ -559,7 +597,7 @@ namespace TorrentDescriptionMaker
 
         private void btnAnalyze_Click(object sender, EventArgs e)
         {
-            this.analyzeMedia();
+            this.analyzeMedia(new string[] { txtMediaLocation.Text });
         }
 
         private void txtScrFull_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -695,12 +733,23 @@ namespace TorrentDescriptionMaker
 
         private void rbFile_CheckedChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void rbDir_CheckedChanged(object sender, EventArgs e)
         {
             gbDVD.Enabled = rbDir.Checked;
+        }
+
+        private void txtPublish_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(1))
+            {
+                TextBox tb = (TextBox)sender;
+                tb.SelectAll();
+                e.Handled = true;
+
+            }
         }
 
 

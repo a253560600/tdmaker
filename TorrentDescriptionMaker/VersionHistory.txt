@@ -1,3 +1,6 @@
+1.4.00.1 Torrent file name was the same for identical file names in the same folder but different file formats 
+1.4.00.0 Added support to select multiple files for batch creation [surround]
+1.3.02.2 Menu, Authoring and Extras information of a Disc did not inherit Font Styles
 1.3.02.1 The screenshot MTN created, was deleted regardless of the setting
 1.3.02.0 Added ability to process any media that MediaInfo supports
 1.3.01.2 Crashed when a particular media file extention was not handled [surround]
