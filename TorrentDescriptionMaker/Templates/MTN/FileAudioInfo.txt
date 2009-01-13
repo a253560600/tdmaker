@@ -1,0 +1,1 @@
+﻿[b]Audio %AudioID%:[/b] %Audio_%Format% %Audio_Bitrate% %Audio_Channels% %Audio_SamplingRate% %Audio_Resolution%[/size]
