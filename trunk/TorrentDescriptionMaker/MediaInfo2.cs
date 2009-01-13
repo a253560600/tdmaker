@@ -76,7 +76,7 @@ namespace TorrentDescriptionMaker
             if (File.Exists(Location))
             {
                 this.Overall = ReadFile(Location);
-                this.Title = this.Overall.FileName;
+                this.Title = Path.GetFileNameWithoutExtension(this.Overall.FilePath); // this.Overall.FileName;
                 this.MediaFiles.Add(this.Overall);
 
             }
@@ -388,13 +388,15 @@ namespace TorrentDescriptionMaker
             StringBuilder sbBody = new StringBuilder();
 
             // Show Title
-            sbBody.AppendLine(bb.size(fontSizeHeading1, bb.bold(this.Overall.FileName)));
+            sbBody.AppendLine(bb.size(fontSizeHeading1, bb.bold(this.Title)));
             sbBody.AppendLine();
+
+            StringBuilder sbTitleInfo = new StringBuilder();
 
             // Source 
             if (!string.IsNullOrEmpty(Settings.Default.Source))
             {
-                sbBody.AppendLine(string.Format("            [u]Source:[/u] {0}", this.Source));
+                sbTitleInfo.AppendLine(string.Format("[u]Source:[/u] {0}", this.Source));
             }
 
             if (IsDisc)
@@ -402,24 +404,25 @@ namespace TorrentDescriptionMaker
                 // Authoring
                 if (Settings.Default.bVideoEdits && !string.IsNullOrEmpty(this.Authoring))
                 {
-                    sbBody.AppendLine(string.Format("         [u]Authoring:[/u] {0}", this.Authoring));
+                    sbTitleInfo.AppendLine(string.Format("[u]Authoring:[/u] {0}", this.Authoring));
                 }
                 if (Settings.Default.bDiscMenu && !string.IsNullOrEmpty(this.Menu))
                 {
-                    sbBody.AppendLine(string.Format("              [u]Menu:[/u] {0}", this.Menu));
+                    sbTitleInfo.AppendLine(string.Format("[u]Menu:[/u] {0}", this.Menu));
                 }
                 // Extras
                 if (Settings.Default.bExtras && !string.IsNullOrEmpty(this.Extras))
                 {
-                    sbBody.AppendLine(string.Format("            [u]Extras:[/u] {0}", this.Extras));
+                    sbTitleInfo.AppendLine(string.Format("[u]Extras:[/u] {0}", this.Extras));
                 }
                 // WebLink
                 if (Settings.Default.WebLink && !string.IsNullOrEmpty(this.WebLink))
                 {
-                    sbBody.AppendLine(string.Format("          [u]Web Link:[/u] {0}", this.WebLink));
+                    sbTitleInfo.AppendLine(string.Format("[u]Web Link:[/u] {0}", this.WebLink));
                 }
             }
 
+            sbBody.AppendLine(bb.size(fontSizeBody, sbTitleInfo.ToString()));
             sbBody.AppendLine();
 
             if (this.MediaFiles.Count > 1 && this.IsDisc)
