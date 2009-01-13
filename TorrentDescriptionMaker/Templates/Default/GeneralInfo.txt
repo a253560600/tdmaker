@@ -1,7 +1,7 @@
 ﻿[size=%FontSize_Heading3%][b][i]General:[/i][/b][/size]
 [size=%FontSize_Body%]         
-            [u]Format:[/u] %General_Format%
-         [u]File Size:[/u] %General_FileSize%
+            [u]Format:[/u] %Format%
+         [u]File Size:[/u] %FileSize%
           [u]Duration:[/u] %Duration%
            [u]Bitrate:[/u] %Bitrate%
          [u]Subtitles:[/u] %Subtitles%

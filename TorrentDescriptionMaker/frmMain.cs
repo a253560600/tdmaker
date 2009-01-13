@@ -367,8 +367,8 @@ namespace TorrentDescriptionMaker
                 pop.PreformattedText = Settings.Default.PreText;
 
                 ti.PublishOptions = pop;
-                ti.PublishString = ti.ToString();
-                // ti.PublishString = ti.CreatePublish(new TemplateReader(Settings.Default.TemplatesDir + @"\Default", ti)); 
+                // ti.PublishString = ti.ToString();
+                ti.PublishString = ti.CreatePublish(new TemplateReader(Settings.Default.TemplatesDir + @"\Default", ti)); 
 
 
                 if (Settings.Default.WritePublish)
