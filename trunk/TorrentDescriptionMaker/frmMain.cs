@@ -368,7 +368,7 @@ namespace TorrentDescriptionMaker
 
                 ti.PublishOptions = pop;
 
-                string templateDefault = Settings.Default.TemplatesDir + @"\Default";
+                string templateDefault = Settings.Default.TemplatesDir + @"\MTN";
                 if (Directory.Exists(templateDefault))
                 {
                     ti.PublishString = ti.CreatePublish(new TemplateReader(templateDefault, ti));
