@@ -111,7 +111,8 @@
     <Content Include="GenuineAdv.ico" />
     <Content Include="Lib\ImageUploader.dll" />
     <Content Include="Lib\MonoTorrent.dll" />
-    <Content Include="Templates\Default\AudioInfo.txt" />
+    <Content Include="Templates\Default\DiscAudioInfo.txt" />
+    <Content Include="Templates\Default\FileAudioInfo.txt" />
     <Content Include="Templates\Default\Disc.txt" />
     <Content Include="Templates\Default\File.txt" />
     <Content Include="Templates\Default\GeneralInfo.txt" />
