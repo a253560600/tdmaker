@@ -219,13 +219,28 @@ namespace TorrentDescriptionMaker
         private void configureDirs()
         {
             string dir = Path.Combine("Applications", Application.ProductName);
-            if (string.IsNullOrEmpty(Settings.Default.SettingsDir) || !Directory.Exists(Settings.Default.SettingsDir))
+            if (string.IsNullOrEmpty(Settings.Default.SettingsDir) || 
+                !Directory.Exists(Settings.Default.SettingsDir))
             {
-                Settings.Default.SettingsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), dir + "\\Settings");
+                Settings.Default.SettingsDir = 
+                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), 
+                    dir + "\\Settings");
 
                 if (!Directory.Exists(Settings.Default.SettingsDir))
                     Directory.CreateDirectory(Settings.Default.SettingsDir);
             }
+
+            if (string.IsNullOrEmpty(Settings.Default.TemplatesDir) ||
+                !Directory.Exists(Settings.Default.TemplatesDir))
+            {
+                Settings.Default.TemplatesDir = 
+                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), 
+                    dir + "\\Templates");
+
+                if (!Directory.Exists(Settings.Default.TemplatesDir))
+                    Directory.CreateDirectory(Settings.Default.TemplatesDir);
+            }
+
 
             if (string.IsNullOrEmpty(Settings.Default.TorrentsCustomDir) ||
                 !Directory.Exists(Settings.Default.TorrentsCustomDir))
@@ -353,6 +368,8 @@ namespace TorrentDescriptionMaker
 
                 ti.PublishOptions = pop;
                 ti.PublishString = ti.ToString();
+                // ti.PublishString = ti.CreatePublish(new TemplateReader(Settings.Default.TemplatesDir + @"\Default", ti)); 
+
 
                 if (Settings.Default.WritePublish)
                 {

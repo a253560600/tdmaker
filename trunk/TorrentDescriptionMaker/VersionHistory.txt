@@ -1,3 +1,5 @@
+Version 1.4.00 
+
 1.4.00.1 Torrent file name was the same for identical file names in the same folder but different file formats 
 1.4.00.0 Added support to select multiple files for batch creation [surround]
 1.3.02.2 Menu, Authoring and Extras information of a Disc did not inherit Font Styles

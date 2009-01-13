@@ -107,9 +107,8 @@ namespace TorrentDescriptionMaker
         /// <returns></returns>
         public string CreatePublish(TemplateReader tr)
         {
-            
-
-            return "";
+            tr.CreateInfo();
+            return tr.PublishInfo;
         }
 
         /// <summary>
