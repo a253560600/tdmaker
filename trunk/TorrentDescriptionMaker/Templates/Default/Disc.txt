@@ -1,10 +1,10 @@
 ﻿[size=%FontSize_Heading1%][b]%Title%[/b][/size]
-
+[size=%FontSize_Body%]
             [u]Source:[/u] %Source%
          [u]Authoring:[/u] %Disc_Authoring%
               [u]Menu:[/u] %Disc_Menu%
             [u]Extras:[/u] %Disc_Extras%            
-
+[/size]
 [size=%FontSize_Heading2%][b][i]%FileName%[/i][/b][/size]
 
 %General_Info%
