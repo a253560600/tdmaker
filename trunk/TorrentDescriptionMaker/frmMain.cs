@@ -219,11 +219,11 @@ namespace TorrentDescriptionMaker
         private void configureDirs()
         {
             string dir = Path.Combine("Applications", Application.ProductName);
-            if (string.IsNullOrEmpty(Settings.Default.SettingsDir) || 
+            if (string.IsNullOrEmpty(Settings.Default.SettingsDir) ||
                 !Directory.Exists(Settings.Default.SettingsDir))
             {
-                Settings.Default.SettingsDir = 
-                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), 
+                Settings.Default.SettingsDir =
+                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                     dir + "\\Settings");
 
                 if (!Directory.Exists(Settings.Default.SettingsDir))
@@ -233,8 +233,8 @@ namespace TorrentDescriptionMaker
             if (string.IsNullOrEmpty(Settings.Default.TemplatesDir) ||
                 !Directory.Exists(Settings.Default.TemplatesDir))
             {
-                Settings.Default.TemplatesDir = 
-                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), 
+                Settings.Default.TemplatesDir =
+                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                     dir + "\\Templates");
 
                 if (!Directory.Exists(Settings.Default.TemplatesDir))
@@ -367,9 +367,16 @@ namespace TorrentDescriptionMaker
                 pop.PreformattedText = Settings.Default.PreText;
 
                 ti.PublishOptions = pop;
-                // ti.PublishString = ti.ToString();
-                ti.PublishString = ti.CreatePublish(new TemplateReader(Settings.Default.TemplatesDir + @"\Default", ti)); 
 
+                string templateDefault = Settings.Default.TemplatesDir + @"\Default";
+                if (Directory.Exists(templateDefault))
+                {
+                    ti.PublishString = ti.CreatePublish(new TemplateReader(templateDefault, ti));
+                }
+                else
+                {
+                    ti.PublishString = ti.ToString();
+                }
 
                 if (Settings.Default.WritePublish)
                 {
