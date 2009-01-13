@@ -69,14 +69,21 @@ namespace TDMaker
 
         public void CreateInfo()
         {
+
+            string pattern = "";
+
             if (TorrentInfo.MediaInfo2.IsDisc)
             {
-                PublishInfo = CreateDiscInfo(TorrentInfo.MediaInfo2.Overall);
+                pattern = CreateDiscInfo(TorrentInfo.MediaInfo2);
             }
             else
             {
-                PublishInfo = CreateFileInfo(TorrentInfo.MediaInfo2);
+                pattern = CreateFileInfo(TorrentInfo.MediaInfo2);
             }
+
+            pattern = GetSourceInfo(pattern, TorrentInfo.MediaInfo2);
+
+            PublishInfo = pattern;
         }
 
         private string GeneralInfo(MediaFile mf)
@@ -85,30 +92,103 @@ namespace TDMaker
             return "";
         }
 
-        private string VideoInfo(MediaFile mf)
+        private string GetVideoInfo(MediaFile mf)
         {
-            return "";
+            string pattern = mVideoInfo;
+
+            pattern = Regex.Replace(pattern, "%Video_Format%", mf.Video.Format);
+            pattern = Regex.Replace(pattern, "%Video_Bitrate%", mf.Video.Bitrate);
+            pattern = Regex.Replace(pattern, "%Video_Standard%", mf.Video.Standard);
+            pattern = Regex.Replace(pattern, "%Video_FrameRate%", mf.Video.FrameRate);
+            pattern = Regex.Replace(pattern, "%Video_ScanType%", mf.Video.ScanType);
+            pattern = Regex.Replace(pattern, "%Video_BitsPerPixelFrame%", mf.Video.BitsPerPixelXFrame);
+            pattern = Regex.Replace(pattern, "%Video_Width%", mf.Video.Width);
+            pattern = Regex.Replace(pattern, "%Video_Height%", mf.Video.Height);
+
+            return pattern;
         }
 
-        private string AudioInfo(MediaFile mf)
+        private string GetAudioInfo(MediaFile mf)
         {
+            StringBuilder sbAudio = new StringBuilder();
+            for (int i = 0; i < mf.Audio.Count; i++)
+            {
+                AudioInfo ai = mf.Audio[i];
+                string pattern = mAudioInfo;
 
-            return "";
+                pattern = Regex.Replace(pattern, "%AudioID%", (i + 1).ToString(), RegexOptions.IgnoreCase);
+                pattern = GetStringFromAudio(pattern, ai);
+                sbAudio.AppendLine(pattern);
+            }
+
+            return sbAudio.ToString();
+        }
+
+        private string GetStringFromAudio(string pattern, AudioInfo ai)
+        {
+            pattern = Regex.Replace(pattern, "%Audio_%Format%", ai.Format, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Audio_Bitrate%", ai.Bitrate, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Audio_Channels%", ai.Channels, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Audio_SamplingRate%", ai.SamplingRate, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Audio_Resolution%", ai.Resolution, RegexOptions.IgnoreCase);
+
+            return pattern;
+
         }
 
         private string CreateFileInfo(MediaInfo2 mi)
         {
+            StringBuilder sb = new StringBuilder();
 
+            for (int i = 0; i < mi.MediaFiles.Count; i++)
+            {
+                MediaFile mf = mi.MediaFiles[i];
 
-            return "";
+                string pattern = mFileInfo;
+                string vi = GetVideoInfo(mf); // this is our %Video_Info%
+                string ai = GetAudioInfo(mf); // this is our %Audio_Info%
+
+                pattern = Regex.Replace(pattern, "%Video_Info%", vi, RegexOptions.IgnoreCase);
+                pattern = Regex.Replace(pattern, "%Audio_Info%", ai, RegexOptions.IgnoreCase);
+
+                pattern = GetStyles(pattern); // apply any formatting
+
+                sb.AppendLine(pattern);
+            }
+
+            return sb.ToString();
         }
 
-        private string CreateDiscInfo(MediaFile mf)
+        private string GetSourceInfo(string pattern, MediaInfo2 mi)
         {
-            return "";
+            pattern = Regex.Replace(pattern, "%Title%", mi.Title);
+            pattern = Regex.Replace(pattern, "%Source%", mi.Source);
+            pattern = Regex.Replace(pattern, "%Disc_Menu%", mi.Menu);
+            pattern = Regex.Replace(pattern, "%Disc_Extras%", mi.Extras);
+            pattern = Regex.Replace(pattern, "%Disc_Authoring%", mi.Authoring);
+
+            return pattern;
         }
 
-        private string GetStringFromPattern(string pattern, MediaFile mf)
+        private string CreateDiscInfo(MediaInfo2 mi)
+        {
+            return GetMediaInfo(mDiscInfo, mi.Overall);
+        }
+
+        private string GetMediaInfo(string pattern, MediaFile mf)
+        {
+            string vi = GetVideoInfo(mf);
+            string ai = GetAudioInfo(mf);
+
+            pattern = Regex.Replace(pattern, "%Video_Info%", vi, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Audio_Info%", ai, RegexOptions.IgnoreCase);
+
+            pattern = GetStyles(pattern); // apply any formatting
+
+            return pattern; 
+        }
+
+        private string GetStyles(string pattern)
         {
 
             int fontSizeHeading1 = (int)(Settings.Default.PreText && Settings.Default.LargerPreText == true ?
@@ -127,8 +207,6 @@ namespace TDMaker
             pattern = Regex.Replace(pattern, "%FontSize_Heading1%", fontSizeHeading1.ToString(), RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%FontSize_Heading2%", fontSizeHeading2.ToString(), RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%FontSize_Heading3%", fontSizeHeading3.ToString(), RegexOptions.IgnoreCase);
-
-
 
             return pattern;
 
