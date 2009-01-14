@@ -221,7 +221,7 @@ namespace TorrentDescriptionMaker
         }
 
         private void configureDirs()
-        {            
+        {
             string dir = Path.Combine("Applications", Application.ProductName);
 
             // configure Settings folder
@@ -293,7 +293,7 @@ namespace TorrentDescriptionMaker
 
                 if (!Directory.Exists(Settings.Default.TorrentsCustomDir))
                     Directory.CreateDirectory(Settings.Default.TorrentsCustomDir);
-            }            
+            }
             mTrackerManager = new TrackerManager();
 
         }
@@ -375,7 +375,7 @@ namespace TorrentDescriptionMaker
 
             fillTrackersComboBox();
             if (cboAnnounceURL.Items.Count > 0)
-                cboAnnounceURL.SelectedIndex = Settings.Default.AnnounceURLIndex;
+                cboAnnounceURL.SelectedIndex = Math.Min(Settings.Default.AnnounceURLIndex, 0);
 
         }
 
@@ -814,6 +814,11 @@ namespace TorrentDescriptionMaker
                 e.Handled = true;
 
             }
+        }
+
+        private void chkTemplatesMode_CheckedChanged(object sender, EventArgs e)
+        {
+            gbTemplatesInternal.Enabled = chkTemplatesMode.Checked;
         }
 
 
