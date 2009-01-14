@@ -458,6 +458,8 @@ namespace TorrentDescriptionMaker
             btnBrowseTorrentCustomFolder.Enabled = rbTorrentFolderCustom.Checked;
             chkTorrentOrganize.Enabled = rbTorrentFolderCustom.Checked;
 
+            gbTemplatesInternal.Enabled = !chkTemplatesMode.Checked;
+
         }
 
         private void bwApp_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
