@@ -10,11 +10,16 @@ Templates are located in
 
 By default there will 3 Templates installed: Default, Minimal and MTN. 
 
-
-
 = Supported Syntax =
 
-== Disc.txt == 
+== Styles == 
+
+%FontSize_Heading1%
+%FontSize_Heading2%
+%FontSize_Heading3%
+%FontSize_Body%
+
+== Disc.txt and File.txt == 
 
  * *%Source%* = Place holder for Source
  * *%Disc_Authoring%* = Place holder 
@@ -26,13 +31,13 @@ By default there will 3 Templates installed: Default, Minimal and MTN.
  * *%Audio_Info%* = Place holder for DiscAudioInfo.txt
  * *%Video_Info%* = Place holder for FileVideoInfo.txt or DiscVideoInfo.txt
 
-== File.txt == 
+Apart from these syntaxes both files support all the syntaxes listed below. However when Audio syntaxes are used, the syntaxes match to the first available audio stream of the media file.
 
- * *%General_Info%* = Place holder for GeneralInfo.txt
- * *%Audio_Info%* = Place holder for FileAudioInfo.txt or DiscAudioInfo.txt
- * *%Video_Info%* = Place holder for FileVideoInfo.txt or DiscVideoInfo.txt
-
-
+ * *%Audio_Format%*
+ * *%Audio_Bitrate%*
+ * *%Audio_Channels%*
+ * *%Audio_SamplingRate%*
+ * *%Audio_Resolution%*
 
 == FileAudioInfo.txt and DiscAudioInfo.txt ==
 
@@ -44,6 +49,20 @@ By default there will 3 Templates installed: Default, Minimal and MTN.
  * *%Audio_SamplingRate%*
  * *%Audio_Resolution%*
 
+ * *%Video_Format%*
+ * *%Video_Bitrate%*
+ * *%Video_Standard%*
+ * *%Video_FrameRate%*
+ * *%Video_ScanType%*
+ * *%Video_BitsPerPixelFrame%*
+ * *%Video_Width%*
+ * *%Video_Height%*
+
+ * *%Format%*
+ * *%Bitrate%*
+ * *%FileSize%*
+ * *%Subtitles%*
+ * *%Duration%*
 
 == FileVideoInfo.txt and DiscVideoInfo.txt ==
 
@@ -55,3 +74,11 @@ By default there will 3 Templates installed: Default, Minimal and MTN.
  * *%Video_BitsPerPixelFrame%*
  * *%Video_Width%*
  * *%Video_Height%*
+
+== GeneralInfo.txt ==
+
+ * *%Format%*
+ * *%Bitrate%*
+ * *%FileSize%*
+ * *%Subtitles%*
+ * *%Duration%*
