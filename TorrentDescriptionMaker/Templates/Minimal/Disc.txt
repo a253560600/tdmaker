@@ -7,7 +7,5 @@ Extras: %Disc_Extras%
 Web Link: %WebLink%            
 
 %General_Info%
-
 %Video_Info%
-
 %Audio_Info%

@@ -24,3 +24,5 @@ Full Automation [tacoking]
 	TDMaker creates torrent from the folder using http://mktorrent.sourceforge.net/
 	TDMaker uploads the torrent to the site
 	
+	
+Image Hosting: achumpatoxford.com and hdimage.org , both really fast and reliable
