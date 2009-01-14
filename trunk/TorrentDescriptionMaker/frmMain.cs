@@ -107,6 +107,10 @@ namespace TorrentDescriptionMaker
                     mi.Authoring = cboAuthoring.Text;
                     mi.WebLink = txtWebLink.Text;
                     mi.TorrentInfo = new TorrentPacket(getTracker(), p);
+                    if (Settings.Default.TemplatesMode)
+                    {
+                        mi.TemplateLocation = Path.Combine(Settings.Default.TemplatesDir, cboTemplate.Text);
+                    }
 
                     // Screenshots Mode
                     if (Settings.Default.UploadImageShack)
@@ -240,7 +244,36 @@ namespace TorrentDescriptionMaker
                 if (!Directory.Exists(Settings.Default.TemplatesDir))
                     Directory.CreateDirectory(Settings.Default.TemplatesDir);
             }
+            else if (Directory.Exists(Settings.Default.TemplatesDir))
+            {
+                string[] dirs = Directory.GetDirectories(Settings.Default.TemplatesDir);
+                string[] templateNames = new string[dirs.Length];
+                for (int i = 0; i < templateNames.Length; i++)
+                {
+                    templateNames[i] = Path.GetFileName(dirs[i]);
+                }
+                cboTemplate.Items.Clear();
+                cboTemplate.Items.AddRange(templateNames);
+            }
 
+            // Copy Default Template to Templates folder
+            string prefix = "Templates.Default.";
+            string tDefaultDir = Path.Combine(Settings.Default.TemplatesDir, "Default");
+            if (!Directory.Exists(tDefaultDir))
+            {
+                Directory.CreateDirectory(tDefaultDir);
+                string[] files = new string[] { "Disc.txt", "File.txt", "DiscAudioInfo.txt", "FileAudioInfo.txt", "GeneralInfo.txt", "VideoInfo.txt" };
+                foreach (string fn in files)
+                {
+                    using (StreamWriter sw = new StreamWriter(Path.Combine(tDefaultDir, fn)))
+                    {
+                        sw.WriteLine(Program.GetText(prefix + fn));
+                    }
+                }
+            }
+
+            if (cboTemplate.Items.Count > 0)
+                cboTemplate.SelectedIndex = Settings.Default.LastTemplateIndex;
 
             if (string.IsNullOrEmpty(Settings.Default.TorrentsCustomDir) ||
                 !Directory.Exists(Settings.Default.TorrentsCustomDir))
@@ -252,7 +285,7 @@ namespace TorrentDescriptionMaker
                 if (!Directory.Exists(Settings.Default.TorrentsCustomDir))
                     Directory.CreateDirectory(Settings.Default.TorrentsCustomDir);
             }
-
+   
             mTrackerManager = new TrackerManager();
 
         }
@@ -368,10 +401,9 @@ namespace TorrentDescriptionMaker
 
                 ti.PublishOptions = pop;
 
-                string templateDefault = Settings.Default.TemplatesDir + @"\MTN";
-                if (Directory.Exists(templateDefault))
+                if (Settings.Default.TemplatesMode && Directory.Exists(mi.TemplateLocation))
                 {
-                    ti.PublishString = ti.CreatePublish(new TemplateReader(templateDefault, ti));
+                    ti.PublishString = ti.CreatePublish(new TemplateReader(mi.TemplateLocation, ti));
                 }
                 else
                 {
