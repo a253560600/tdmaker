@@ -186,6 +186,7 @@ namespace TDMaker
         /// <returns></returns>
         private string GetStringFromAnyPattern(string pattern, MediaFile mf)
         {
+
             pattern = Regex.Replace(pattern, "%FileName%", mf.FileName);
 
             return pattern;
@@ -215,8 +216,7 @@ namespace TDMaker
             pattern = Regex.Replace(pattern, "%Video_Info%", vi, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Audio_Info%", ai, RegexOptions.IgnoreCase);
 
-            pattern = Regex.Replace(pattern, "%FileName%", mi.Overall.FileName);
-
+            pattern = GetStringFromAnyPattern(pattern, mi.Overall);
             pattern = GetStyles(pattern); // apply any formatting
 
             return pattern;

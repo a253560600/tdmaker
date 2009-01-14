@@ -111,6 +111,7 @@ namespace TorrentDescriptionMaker
 
             StringBuilder sbPublish = new StringBuilder();
             sbPublish.Append(tr.PublishInfo);
+            sbPublish.AppendLine();
             sbPublish.Append(GetScreenshotString(options));
 
             return sbPublish.ToString();
