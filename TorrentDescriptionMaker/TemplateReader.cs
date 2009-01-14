@@ -132,7 +132,7 @@ namespace TDMaker
                 AudioInfo ai = mf.Audio[i];
                 info = Regex.Replace(info, "%AudioID%", (i + 1).ToString(), RegexOptions.IgnoreCase);
                 info = GetStringFromAudio(info, ai);
-                sbAudio.AppendLine(info);
+                sbAudio.Append(info);
             }
 
             return sbAudio.ToString();
@@ -201,6 +201,8 @@ namespace TDMaker
             pattern = Regex.Replace(pattern, "%General_Info%", gi, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Video_Info%", vi, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Audio_Info%", ai, RegexOptions.IgnoreCase);
+
+            pattern = Regex.Replace(pattern, "%FileName%", mi.Overall.FileName);
 
             pattern = GetStyles(pattern); // apply any formatting
 

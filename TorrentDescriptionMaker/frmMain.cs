@@ -214,7 +214,7 @@ namespace TorrentDescriptionMaker
 
             Program.Status = "Ready.";
 
-            this.Text = Resources.AppName + " - Drag and Drop a Movie file...";
+            this.Text = Resources.AppName + " - Drag and Drop a Movie file or folder...";
 
             updateGuiControls();
 
@@ -248,24 +248,31 @@ namespace TorrentDescriptionMaker
                     Directory.CreateDirectory(Settings.Default.TemplatesDir);
             }
 
-            // Copy Default Template to Templates folder
-            string prefix = "Templates.Default.";
-            string tDefaultDir = Path.Combine(Settings.Default.TemplatesDir, "Default");
-            if (!Directory.Exists(tDefaultDir))
+
+            string[] tNames = new string[] { "Default", "MTN" };
+            foreach (string name in tNames)
             {
-                Directory.CreateDirectory(tDefaultDir);
-            }
-            string[] files = new string[] { "Disc.txt", "File.txt", "DiscAudioInfo.txt", "FileAudioInfo.txt", "GeneralInfo.txt", "FileVideoInfo.txt", "DiscVideoInfo.txt" };
-            foreach (string fn in files)
-            {
-                string dFile = Path.Combine(tDefaultDir, fn);
-                if (!File.Exists(dFile))
+                // Copy Default Templates to Templates folder
+                string dPrefix = string.Format("Templates.{0}.", name);
+                string tDir = Path.Combine(Settings.Default.TemplatesDir, name);
+                if (!Directory.Exists(tDir))
                 {
-                    using (StreamWriter sw = new StreamWriter(dFile))
+                    Directory.CreateDirectory(tDir);
+                }
+                string[] tFiles = new string[] { "Disc.txt", "File.txt", "DiscAudioInfo.txt", "FileAudioInfo.txt", "GeneralInfo.txt", "FileVideoInfo.txt", "DiscVideoInfo.txt" };
+
+                foreach (string fn in tFiles)
+                {
+                    string dFile = Path.Combine(tDir, fn);
+                    if (!File.Exists(dFile))
                     {
-                        sw.WriteLine(Program.GetText(prefix + fn));
+                        using (StreamWriter sw = new StreamWriter(dFile))
+                        {
+                            sw.WriteLine(Program.GetText(dPrefix + fn));
+                        }
                     }
                 }
+
             }
 
             // Read Templates to GUI
@@ -560,8 +567,14 @@ namespace TorrentDescriptionMaker
                 bwTorrent.DoWork += new DoWorkEventHandler(bwTorrent_DoWork);
                 bwTorrent.WorkerReportsProgress = true;
                 bwTorrent.ProgressChanged += new ProgressChangedEventHandler(bwTorrent_ProgressChanged);
+                bwTorrent.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bwTorrent_RunWorkerCompleted);
                 bwTorrent.RunWorkerAsync(tp);
             }
+        }
+
+        void bwTorrent_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            btnCreateTorrent.Enabled = true;
         }
 
         void bwTorrent_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -737,6 +750,7 @@ namespace TorrentDescriptionMaker
         {
             TorrentPacket tp = new TorrentPacket(getTracker(), txtMediaLocation.Text);
             createTorrent(tp);
+            btnCreateTorrent.Enabled = false;
         }
 
         private void btnBrowseTorrentCustomFolder_Click(object sender, EventArgs e)
