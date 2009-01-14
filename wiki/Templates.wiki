@@ -1,4 +1,4 @@
-#summary How to use Templates
+#summary How to create and use Templates
 
 = Supported Syntax =
 
@@ -7,4 +7,3 @@
  * *%General_Info%* = Place holder for GeneralInfo.txt
  * *%Audio_Info%* = Place holder for FileAudioInfo.txt or DiscAudioInfo.txt
  * *%Video_Info%* = Place holder for FileVideoInfo.txt or DiscVideoInfo.txt
-
