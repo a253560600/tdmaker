@@ -1,0 +1,1 @@
+﻿[b]Video:[/b] %Video_Bitrate% %Video_Standard% %Video_Width%x%Video_Height% %Video_FrameRate% %Video_ScanType%
