@@ -82,3 +82,9 @@ Apart from these syntaxes both files support all the syntaxes listed below. Howe
  * *%FileSize%*
  * *%Subtitles%*
  * *%Duration%*
+
+= Creating a new Template =
+
+ # Easiest way to do is to copy one of the existing folders in Templates folder. 
+ # Rename the folder to reflect the description of the new template you are creating.
+ # Edit each file to suit your needs.
