@@ -818,7 +818,7 @@ namespace TorrentDescriptionMaker
 
         private void chkTemplatesMode_CheckedChanged(object sender, EventArgs e)
         {
-            gbTemplatesInternal.Enabled = chkTemplatesMode.Checked;
+            gbTemplatesInternal.Enabled = !chkTemplatesMode.Checked;
         }
 
 
