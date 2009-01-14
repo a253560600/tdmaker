@@ -1,4 +1,16 @@
 #summary How to create and use Templates
+#labels Featured
+
+= Introduction =
+
+Templates are located in 
+{{{
+\%UserName%\Documents\Applications\Torrent Description Maker\Templates
+}}}
+
+By default there will 3 Templates installed: Default, Minimal and MTN. 
+
+
 
 = Supported Syntax =
 
