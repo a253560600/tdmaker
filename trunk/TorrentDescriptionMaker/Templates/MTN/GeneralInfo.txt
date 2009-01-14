@@ -1,1 +1,1 @@
-﻿[b]General: [/b] %FileSize% - %Duration% - %Bitrate%
+﻿Size: %FileSize%, Duration: %Duration%, Average Bitrate: %Bitrate%

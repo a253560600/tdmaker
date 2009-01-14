@@ -1,3 +1,4 @@
-﻿%General_Info%
+﻿File: %FileName%
+%General_Info%
 %Video_Info%
 %Audio_Info%
