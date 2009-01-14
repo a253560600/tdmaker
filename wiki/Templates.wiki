@@ -14,10 +14,10 @@ By default there will 3 Templates installed: Default, Minimal and MTN.
 
 == Styles == 
 
-%FontSize_Heading1%
-%FontSize_Heading2%
-%FontSize_Heading3%
-%FontSize_Body%
+ * %FontSize_Heading1%
+ * %FontSize_Heading2%
+ * %FontSize_Heading3%
+ * %FontSize_Body%
 
 == Disc.txt and File.txt == 
 
