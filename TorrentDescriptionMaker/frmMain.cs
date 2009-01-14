@@ -221,8 +221,10 @@ namespace TorrentDescriptionMaker
         }
 
         private void configureDirs()
-        {
+        {            
             string dir = Path.Combine("Applications", Application.ProductName);
+
+            // configure Settings folder
             if (string.IsNullOrEmpty(Settings.Default.SettingsDir) ||
                 !Directory.Exists(Settings.Default.SettingsDir))
             {
@@ -234,6 +236,7 @@ namespace TorrentDescriptionMaker
                     Directory.CreateDirectory(Settings.Default.SettingsDir);
             }
 
+            // configure Templates folder
             if (string.IsNullOrEmpty(Settings.Default.TemplatesDir) ||
                 !Directory.Exists(Settings.Default.TemplatesDir))
             {
@@ -251,16 +254,21 @@ namespace TorrentDescriptionMaker
             if (!Directory.Exists(tDefaultDir))
             {
                 Directory.CreateDirectory(tDefaultDir);
-                string[] files = new string[] { "Disc.txt", "File.txt", "DiscAudioInfo.txt", "FileAudioInfo.txt", "GeneralInfo.txt", "VideoInfo.txt" };
-                foreach (string fn in files)
+            }
+            string[] files = new string[] { "Disc.txt", "File.txt", "DiscAudioInfo.txt", "FileAudioInfo.txt", "GeneralInfo.txt", "FileVideoInfo.txt", "DiscVideoInfo.txt" };
+            foreach (string fn in files)
+            {
+                string dFile = Path.Combine(tDefaultDir, fn);
+                if (!File.Exists(dFile))
                 {
-                    using (StreamWriter sw = new StreamWriter(Path.Combine(tDefaultDir, fn)))
+                    using (StreamWriter sw = new StreamWriter(dFile))
                     {
                         sw.WriteLine(Program.GetText(prefix + fn));
                     }
                 }
             }
 
+            // Read Templates to GUI
             if (Directory.Exists(Settings.Default.TemplatesDir))
             {
                 string[] dirs = Directory.GetDirectories(Settings.Default.TemplatesDir);
@@ -272,10 +280,10 @@ namespace TorrentDescriptionMaker
                 cboTemplate.Items.Clear();
                 cboTemplate.Items.AddRange(templateNames);
             }
-
             if (cboTemplate.Items.Count > 0)
                 cboTemplate.SelectedIndex = Settings.Default.LastTemplateIndex;
 
+            // Configure Torrents folder
             if (string.IsNullOrEmpty(Settings.Default.TorrentsCustomDir) ||
                 !Directory.Exists(Settings.Default.TorrentsCustomDir))
             {
@@ -285,8 +293,7 @@ namespace TorrentDescriptionMaker
 
                 if (!Directory.Exists(Settings.Default.TorrentsCustomDir))
                     Directory.CreateDirectory(Settings.Default.TorrentsCustomDir);
-            }
-   
+            }            
             mTrackerManager = new TrackerManager();
 
         }

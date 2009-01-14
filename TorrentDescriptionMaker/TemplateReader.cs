@@ -23,8 +23,9 @@ namespace TDMaker
         public string PublishInfo { get; private set; }
 
         private string mDiscAudioInfo = "";
+        private string mDiscVideoInfo = "";
         private string mFileAudioInfo = "";
-        private string mVideoInfo = "";
+        private string mFileVideoInfo = "";
         private string mGeneralInfo = "";
         private string mDiscInfo = "";
         private string mFileInfo = "";
@@ -62,8 +63,11 @@ namespace TDMaker
                         case "GeneralInfo":
                             mGeneralInfo = sw.ReadToEnd();
                             break;
-                        case "VideoInfo":
-                            mVideoInfo = sw.ReadToEnd();
+                        case "FileVideoInfo":
+                            mFileVideoInfo = sw.ReadToEnd();
+                            break;
+                        case "DiscVideoInfo":
+                            mDiscVideoInfo = sw.ReadToEnd();
                             break;
                     }
                 }
@@ -103,10 +107,8 @@ namespace TDMaker
             return pattern;
         }
 
-        private string GetVideoInfo(MediaFile mf)
+        private string GetVideoInfo(string pattern, MediaFile mf)
         {
-            string pattern = mVideoInfo;
-
             pattern = Regex.Replace(pattern, "%Video_Format%", mf.Video.Format);
             pattern = Regex.Replace(pattern, "%Video_Bitrate%", mf.Video.Bitrate);
             pattern = Regex.Replace(pattern, "%Video_Standard%", mf.Video.Standard);
@@ -159,7 +161,7 @@ namespace TDMaker
                 string pattern = mFileInfo;
 
                 string gi = GetGeneralInfo(mf);
-                string vi = GetVideoInfo(mf); // this is our %Video_Info%
+                string vi = GetVideoInfo(mFileVideoInfo, mf); // this is our %Video_Info%
                 string ai = GetAudioInfo(mFileAudioInfo, mf); // this is our %Audio_Info%
 
                 pattern = Regex.Replace(pattern, "%General_Info%", gi, RegexOptions.IgnoreCase);
@@ -193,7 +195,7 @@ namespace TDMaker
             string pattern = mDiscInfo;
 
             string gi = GetGeneralInfo(mi.Overall);
-            string vi = GetVideoInfo(mi.Overall);
+            string vi = GetVideoInfo(mDiscVideoInfo, mi.Overall);
             string ai = GetAudioInfo(mDiscAudioInfo, mi.Overall);
 
             pattern = Regex.Replace(pattern, "%General_Info%", gi, RegexOptions.IgnoreCase);

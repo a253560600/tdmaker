@@ -116,13 +116,15 @@
     <EmbeddedResource Include="Templates\Default\Disc.txt" />
     <EmbeddedResource Include="Templates\Default\File.txt" />
     <EmbeddedResource Include="Templates\Default\GeneralInfo.txt" />
-    <EmbeddedResource Include="Templates\Default\VideoInfo.txt" />
+    <EmbeddedResource Include="Templates\Default\DiscVideoInfo.txt" />
     <EmbeddedResource Include="Templates\MTN\Disc.txt" />
     <EmbeddedResource Include="Templates\MTN\DiscAudioInfo.txt" />
     <EmbeddedResource Include="Templates\MTN\File.txt" />
     <EmbeddedResource Include="Templates\MTN\FileAudioInfo.txt" />
     <EmbeddedResource Include="Templates\MTN\GeneralInfo.txt" />
-    <EmbeddedResource Include="Templates\MTN\VideoInfo.txt" />
+    <EmbeddedResource Include="Templates\MTN\DiscVideoInfo.txt" />
+    <EmbeddedResource Include="Templates\Default\FileVideoInfo.txt" />
+    <EmbeddedResource Include="Templates\MTN\FileVideoInfo.txt" />
     <Content Include="TODO.txt" />
     <Content Include="VersionHistory.txt" />
   </ItemGroup>

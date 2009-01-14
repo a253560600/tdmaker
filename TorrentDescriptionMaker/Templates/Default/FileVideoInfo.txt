@@ -1,0 +1,9 @@
+﻿[size=%FontSize_Heading2%][b][i]Video:[/i][/b][/size]
+[size=%FontSize_Heading3%]
+            [u]Format:[/u] %Video_Format%
+           [u]Bitrate:[/u] %Video_Bitrate%
+        [u]Frame Rate:[/u] %Video_FrameRate%
+         [u]Scan Type:[/u] %Video_ScanType%
+[u]Bits/(Pixel*Frame):[/u] %Video_BitsPerPixelFrame%
+        [u]Resolution:[/u] %Video_Width%x%Video_Height%
+[/size]
