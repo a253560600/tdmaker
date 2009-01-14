@@ -250,7 +250,7 @@ namespace TorrentDescriptionMaker
             }
 
 
-            string[] tNames = new string[] { "Default", "MTN" };
+            string[] tNames = new string[] { "Default", "MTN", "Minimal" };
             foreach (string name in tNames)
             {
                 // Copy Default Templates to Templates folder

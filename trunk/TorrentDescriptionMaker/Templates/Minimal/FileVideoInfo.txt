@@ -1,0 +1,7 @@
+[b][u]Video:[/u][/b] 
+Format: %Video_Format%
+Bitrate: %Video_Bitrate%
+Frame Rate: %Video_FrameRate%
+Scan Type: %Video_ScanType%
+Bits/(Pixel*Frame): %Video_BitsPerPixelFrame%
+Resolution: %Video_Width%x%Video_Height%
