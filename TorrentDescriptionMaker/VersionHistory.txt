@@ -1,4 +1,8 @@
-Version 1.5.00
+1.5.00.3 Internal Template was used on the first run disregarding external template choice [sleepyb]
+1.5.00.2 Last used Template was not remembered [surround]
+1.5.00.1 Screenshot was not appended into Publish when used Templates [sleepyb]
+
+Version 1.5.00 - 20090114
 
 1.5.00.0 Added Template Support: http://code.google.com/p/tdmaker/wiki/Templates
 1.4.00.1 Torrent file name was the same for identical file names in the same folder but different file formats 

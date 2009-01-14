@@ -1,12 +1,4 @@
-﻿Batch create description and torrent 
-
-TemplateReader
-	New Instance to provide filepath of DiscInfo.txt and FileInfo.txt
-	Set TorrentInfo
-	ToString will give PublishString
-		TorrentInfo has MediaInfo2 and Screenshots 
-		Syntax replacing will take care of values
-		Support for syntax based custom formats for Publishing torrent info
+﻿-w 0 -c 1 -r 3 -keeeeee -f "H:\windows\fonts\arial.ttf" -g8 -F 000000:12 -L4:2 -j 97
 
 Support for Multi-Disc DVDs
 	Tiesto DVD

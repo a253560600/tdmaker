@@ -105,10 +105,15 @@ namespace TorrentDescriptionMaker
         /// </summary>
         /// <param name="tr"></param>
         /// <returns></returns>
-        public string CreatePublish(TemplateReader tr)
+        public string CreatePublish(PublishOptionsPacket options, TemplateReader tr)
         {
             tr.CreateInfo();
-            return tr.PublishInfo;
+
+            StringBuilder sbPublish = new StringBuilder();
+            sbPublish.Append(tr.PublishInfo);
+            sbPublish.Append(GetScreenshotString(options));
+
+            return sbPublish.ToString();
         }
 
         /// <summary>
@@ -147,6 +152,17 @@ namespace TorrentDescriptionMaker
 
             sbPublish.AppendLine();
 
+            sbPublish.Append(GetScreenshotString(options));
+
+            return sbPublish.ToString();
+
+        }
+
+        public string GetScreenshotString(PublishOptionsPacket options)
+        {
+            StringBuilder sbPublish = new StringBuilder();
+            BbCode bb = new BbCode();
+
             if (!string.IsNullOrEmpty(this.ScreenshotURLFull) && options.FullPicture)
             {
                 sbPublish.AppendLine(bb.img(this.ScreenshotURLFull));
@@ -157,7 +173,6 @@ namespace TorrentDescriptionMaker
             }
 
             return sbPublish.ToString();
-
         }
 
         /// <summary>
@@ -165,9 +180,8 @@ namespace TorrentDescriptionMaker
         /// </summary>
         /// <returns>Publish String</returns>
         public override string ToString()
-        {            
-            PublishString = CreatePublish(this.PublishOptions);
-            return PublishString;
+        {
+            return CreatePublish(this.PublishOptions); 
         }
 
         public string ScreenshotURLForums { get; private set; }

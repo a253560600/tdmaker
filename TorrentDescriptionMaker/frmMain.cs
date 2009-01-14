@@ -194,6 +194,7 @@ namespace TorrentDescriptionMaker
             // tm2.Write(dgvTrackers);
             trackersWrite();
             Settings.Default.AnnounceURLIndex = cboAnnounceURL.SelectedIndex;
+            Settings.Default.TemplateIndex = cboTemplate.SelectedIndex;
 
             Settings.Default.TorrentFolderDefault = rbTorrentDefaultFolder.Checked;
 
@@ -288,7 +289,7 @@ namespace TorrentDescriptionMaker
                 cboTemplate.Items.AddRange(templateNames);
             }
             if (cboTemplate.Items.Count > 0)
-                cboTemplate.SelectedIndex = Settings.Default.LastTemplateIndex;
+                cboTemplate.SelectedIndex = Math.Max(Settings.Default.TemplateIndex, 0);
 
             // Configure Torrents folder
             if (string.IsNullOrEmpty(Settings.Default.TorrentsCustomDir) ||
@@ -307,6 +308,8 @@ namespace TorrentDescriptionMaker
 
         private void SettingsRead()
         {
+
+            rbFile.Checked = !Settings.Default.BrowseDir; 
 
             if (string.IsNullOrEmpty(Settings.Default.MTNPath))
                 Settings.Default.MTNPath = Path.Combine(Application.StartupPath, "mtn.exe");
@@ -382,7 +385,7 @@ namespace TorrentDescriptionMaker
 
             fillTrackersComboBox();
             if (cboAnnounceURL.Items.Count > 0)
-                cboAnnounceURL.SelectedIndex = Math.Min(Settings.Default.AnnounceURLIndex, 0);
+                cboAnnounceURL.SelectedIndex = Math.Max(Settings.Default.AnnounceURLIndex, 0);
 
         }
 
@@ -418,7 +421,8 @@ namespace TorrentDescriptionMaker
 
                 if (Settings.Default.TemplatesMode && Directory.Exists(mi.TemplateLocation))
                 {
-                    ti.PublishString = ti.CreatePublish(new TemplateReader(mi.TemplateLocation, ti));
+                    string txt = ti.CreatePublish(pop, new TemplateReader(mi.TemplateLocation, ti));
+                    ti.PublishString = txt;
                 }
                 else
                 {

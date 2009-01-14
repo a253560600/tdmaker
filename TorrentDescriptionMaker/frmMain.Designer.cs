@@ -550,7 +550,8 @@
             // rbDir
             // 
             this.rbDir.AutoSize = true;
-            this.rbDir.Checked = true;
+            this.rbDir.Checked = global::TDMaker.Properties.Settings.Default.BrowseDir;
+            this.rbDir.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "BrowseDir", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.rbDir.Location = new System.Drawing.Point(232, 27);
             this.rbDir.Name = "rbDir";
             this.rbDir.Size = new System.Drawing.Size(80, 17);
