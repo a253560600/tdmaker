@@ -244,17 +244,6 @@ namespace TorrentDescriptionMaker
                 if (!Directory.Exists(Settings.Default.TemplatesDir))
                     Directory.CreateDirectory(Settings.Default.TemplatesDir);
             }
-            else if (Directory.Exists(Settings.Default.TemplatesDir))
-            {
-                string[] dirs = Directory.GetDirectories(Settings.Default.TemplatesDir);
-                string[] templateNames = new string[dirs.Length];
-                for (int i = 0; i < templateNames.Length; i++)
-                {
-                    templateNames[i] = Path.GetFileName(dirs[i]);
-                }
-                cboTemplate.Items.Clear();
-                cboTemplate.Items.AddRange(templateNames);
-            }
 
             // Copy Default Template to Templates folder
             string prefix = "Templates.Default.";
@@ -270,6 +259,18 @@ namespace TorrentDescriptionMaker
                         sw.WriteLine(Program.GetText(prefix + fn));
                     }
                 }
+            }
+
+            if (Directory.Exists(Settings.Default.TemplatesDir))
+            {
+                string[] dirs = Directory.GetDirectories(Settings.Default.TemplatesDir);
+                string[] templateNames = new string[dirs.Length];
+                for (int i = 0; i < templateNames.Length; i++)
+                {
+                    templateNames[i] = Path.GetFileName(dirs[i]);
+                }
+                cboTemplate.Items.Clear();
+                cboTemplate.Items.AddRange(templateNames);
             }
 
             if (cboTemplate.Items.Count > 0)
