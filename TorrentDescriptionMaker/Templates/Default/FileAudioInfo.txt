@@ -1,6 +1,6 @@
 ﻿[size=%FontSize_Heading2%][b][i]Audio #%AudioID%:[/i][/b][/size]
 [size=%FontSize_Heading3%]
-            [u]Format:[/u] %Audio_%Format%
+            [u]Format:[/u] %Audio_Format%
            [u]Bitrate:[/u] %Audio_Bitrate%
           [u]Channels:[/u] %Audio_Channels%
      [u]Sampling Rate:[/u] %Audio_SamplingRate%
