@@ -38,7 +38,7 @@ By default there will 3 Templates installed: Default, Minimal and MTN.
 
  * *%AudioID%* = Stream number of Audio - useful for sources with multiple audio
 
- * *%Audio_%Format%*
+ * *%Audio_Format%*
  * *%Audio_Bitrate%*
  * *%Audio_Channels%*
  * *%Audio_SamplingRate%*
@@ -55,4 +55,3 @@ By default there will 3 Templates installed: Default, Minimal and MTN.
  * *%Video_BitsPerPixelFrame%*
  * *%Video_Width%*
  * *%Video_Height%*
-
