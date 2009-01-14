@@ -41,16 +41,6 @@ Apart from these syntaxes both files support all the syntaxes listed below. Howe
  * *%Audio_SamplingRate%*
  * *%Audio_Resolution%*
 
-== FileAudioInfo.txt and DiscAudioInfo.txt ==
-
- * *%AudioID%* = Stream number of Audio - useful for sources with multiple audio
-
- * *%Audio_Format%*
- * *%Audio_Bitrate%*
- * *%Audio_Channels%*
- * *%Audio_SamplingRate%*
- * *%Audio_Resolution%*
-
  * *%Video_Format%*
  * *%Video_Bitrate%*
  * *%Video_Standard%*
@@ -65,6 +55,16 @@ Apart from these syntaxes both files support all the syntaxes listed below. Howe
  * *%FileSize%*
  * *%Subtitles%*
  * *%Duration%*
+
+== FileAudioInfo.txt and DiscAudioInfo.txt ==
+
+ * *%AudioID%* = Stream number of Audio - useful for sources with multiple audio
+
+ * *%Audio_Format%*
+ * *%Audio_Bitrate%*
+ * *%Audio_Channels%*
+ * *%Audio_SamplingRate%*
+ * *%Audio_Resolution%*
 
 == FileVideoInfo.txt and DiscVideoInfo.txt ==
 
