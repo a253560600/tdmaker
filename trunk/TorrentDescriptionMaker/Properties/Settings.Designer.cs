@@ -506,12 +506,24 @@ namespace TDMaker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int LastTemplateIndex {
+        public int TemplateIndex {
             get {
-                return ((int)(this["LastTemplateIndex"]));
+                return ((int)(this["TemplateIndex"]));
             }
             set {
-                this["LastTemplateIndex"] = value;
+                this["TemplateIndex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool BrowseDir {
+            get {
+                return ((bool)(this["BrowseDir"]));
+            }
+            set {
+                this["BrowseDir"] = value;
             }
         }
     }

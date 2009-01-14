@@ -97,8 +97,8 @@ namespace TDMaker
         private string GetGeneralInfo(MediaFile mf)
         {
             string pattern = mGeneralInfo;
-    
-            pattern = Regex.Replace(pattern, "%Format%", mf.Format);            
+
+            pattern = Regex.Replace(pattern, "%Format%", mf.Format);
             pattern = Regex.Replace(pattern, "%Bitrate%", mf.Bitrate);
             pattern = Regex.Replace(pattern, "%FileSize%", mf.FileSizeString);
             pattern = Regex.Replace(pattern, "%Subtitles%", mf.Subtitles);
@@ -168,14 +168,27 @@ namespace TDMaker
                 pattern = Regex.Replace(pattern, "%Video_Info%", vi, RegexOptions.IgnoreCase);
                 pattern = Regex.Replace(pattern, "%Audio_Info%", ai, RegexOptions.IgnoreCase);
 
-                pattern = Regex.Replace(pattern, "%FileName%", mf.FileName);
-
+                pattern = GetStringFromAnyPattern(pattern, mf);
                 pattern = GetStyles(pattern); // apply any formatting
 
                 sb.AppendLine(pattern);
             }
 
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// Returns the string replacing all the syntax supported. 
+        /// Audio syntax defaults to first audio stream.
+        /// </summary>
+        /// <param name="pattern"></param>
+        /// <param name="mf"></param>
+        /// <returns></returns>
+        private string GetStringFromAnyPattern(string pattern, MediaFile mf)
+        {
+            pattern = Regex.Replace(pattern, "%FileName%", mf.FileName);
+
+            return pattern;
         }
 
         private string GetSourceInfo(string pattern, MediaInfo2 mi)
@@ -186,7 +199,7 @@ namespace TDMaker
             pattern = Regex.Replace(pattern, "%Disc_Extras%", mi.Extras);
             pattern = Regex.Replace(pattern, "%Disc_Authoring%", mi.Authoring);
             pattern = Regex.Replace(pattern, "%WebLink%", mi.WebLink);
-            
+
             return pattern;
         }
 
@@ -206,7 +219,7 @@ namespace TDMaker
 
             pattern = GetStyles(pattern); // apply any formatting
 
-            return pattern; 
+            return pattern;
         }
 
         private string GetStyles(string pattern)
