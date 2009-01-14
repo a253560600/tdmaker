@@ -1,13 +1,10 @@
 #summary How to use Templates
 
-= Introduction =
+= Supported Syntax =
 
-Add your content here.
+== File.txt == 
 
+ * *%General_Info%* = Place holder for GeneralInfo.txt
+ * *%Audio_Info%* = Place holder for FileAudioInfo.txt or DiscAudioInfo.txt
+ * *%Video_Info%* = Place holder for FileVideoInfo.txt or DiscVideoInfo.txt
 
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
