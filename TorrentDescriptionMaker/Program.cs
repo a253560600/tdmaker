@@ -81,6 +81,30 @@ namespace TorrentDescriptionMaker
 
         }
 
+        public static string GetText(string name)
+        {
+            string text = "";
+
+            try
+            {
+                System.Reflection.Assembly oAsm = System.Reflection.Assembly.GetExecutingAssembly();
+                Stream oStrm = oAsm.GetManifestResourceStream(oAsm.GetName().Name + "." + name);
+
+                for (int i = 0; i< oAsm.GetManifestResourceNames().Length; i++)
+                {
+                    Console.WriteLine(oAsm.GetManifestResourceNames()[i].ToString());
+                }
+                StreamReader oRdr = new StreamReader(oStrm);
+                text = oRdr.ReadToEnd();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
+            return text;
+        }
+
     }
 
     public enum TakeScreenshotsMode

@@ -42,6 +42,10 @@ namespace TorrentDescriptionMaker
 
         public MediaFile Overall { get; set; }
         public List<MediaFile> MediaFiles { get; set; }
+        /// <summary>
+        /// Folder Path of the Template
+        /// </summary>
+        public string TemplateLocation { get; set; }
 
         public MediaInfo2(string loc)
         {

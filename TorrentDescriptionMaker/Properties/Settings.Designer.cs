@@ -490,5 +490,29 @@ namespace TDMaker.Properties {
                 this["TemplatesDir"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool TemplatesMode {
+            get {
+                return ((bool)(this["TemplatesMode"]));
+            }
+            set {
+                this["TemplatesMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int LastTemplateIndex {
+            get {
+                return ((int)(this["LastTemplateIndex"]));
+            }
+            set {
+                this["LastTemplateIndex"] = value;
+            }
+        }
     }
 }
