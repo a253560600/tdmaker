@@ -10,7 +10,7 @@ namespace TDMaker
 {
     /// <summary>
     /// Class responsible for reading Template Directories. 
-    /// A Template Directory has 5 files: 
+    /// A Template Directory has 7 files: 
     /// GeneralInfo.txt; VideoInfo.txt; AudioInfo.txt; Disc.txt; File.txt
     /// </summary>
     class TemplateReader
@@ -94,10 +94,8 @@ namespace TDMaker
             PublishInfo = pattern;
         }
 
-        private string GetGeneralInfo(MediaFile mf)
+        private string GetGeneralInfo(string pattern, MediaFile mf)
         {
-            string pattern = mGeneralInfo;
-
             pattern = Regex.Replace(pattern, "%Format%", mf.Format);
             pattern = Regex.Replace(pattern, "%Bitrate%", mf.Bitrate);
             pattern = Regex.Replace(pattern, "%FileSize%", mf.FileSizeString);
@@ -160,7 +158,7 @@ namespace TDMaker
 
                 string pattern = mFileInfo;
 
-                string gi = GetGeneralInfo(mf);
+                string gi = GetGeneralInfo(mGeneralInfo, mf);
                 string vi = GetVideoInfo(mFileVideoInfo, mf); // this is our %Video_Info%
                 string ai = GetAudioInfo(mFileAudioInfo, mf); // this is our %Audio_Info%
 
@@ -186,7 +184,12 @@ namespace TDMaker
         /// <returns></returns>
         private string GetStringFromAnyPattern(string pattern, MediaFile mf)
         {
-
+            pattern = GetGeneralInfo(pattern, mf);
+            pattern = GetVideoInfo(pattern, mf);
+            if (mf.Audio.Count > 0)
+            {
+                pattern = GetStringFromAudio(pattern, mf.Audio[0]);
+            }
             pattern = Regex.Replace(pattern, "%FileName%", mf.FileName);
 
             return pattern;
@@ -208,7 +211,7 @@ namespace TDMaker
         {
             string pattern = mDiscInfo;
 
-            string gi = GetGeneralInfo(mi.Overall);
+            string gi = GetGeneralInfo(mGeneralInfo, mi.Overall);
             string vi = GetVideoInfo(mDiscVideoInfo, mi.Overall);
             string ai = GetAudioInfo(mDiscAudioInfo, mi.Overall);
 

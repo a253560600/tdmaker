@@ -1,0 +1,13 @@
+[b]%Title%[/b]
+
+Source: %Source%
+Authoring: %Disc_Authoring%
+Menu: %Disc_Menu%
+Extras: %Disc_Extras%            
+Web Link: %WebLink%            
+
+%General_Info%
+
+%Video_Info%
+
+%Audio_Info%
