@@ -47,7 +47,7 @@ By default there will 3 Templates installed: Default, Minimal and MTN.
 
 == FileVideoInfo.txt and DiscVideoInfo.txt ==
 
- * *%Video_%Format%*
+ * *%Video_Format%*
  * *%Video_Bitrate%*
  * *%Video_Standard%*
  * *%Video_FrameRate%*
