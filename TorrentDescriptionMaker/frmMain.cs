@@ -309,7 +309,7 @@ namespace TorrentDescriptionMaker
         private void SettingsRead()
         {
 
-            rbFile.Checked = !Settings.Default.BrowseDir; 
+            rbFile.Checked = !Settings.Default.BrowseDir;
 
             if (string.IsNullOrEmpty(Settings.Default.MTNPath))
                 Settings.Default.MTNPath = Path.Combine(Application.StartupPath, "mtn.exe");
@@ -418,16 +418,7 @@ namespace TorrentDescriptionMaker
                 pop.PreformattedText = Settings.Default.PreText;
 
                 ti.PublishOptions = pop;
-
-                if (Settings.Default.TemplatesMode && Directory.Exists(mi.TemplateLocation))
-                {
-                    string txt = ti.CreatePublish(pop, new TemplateReader(mi.TemplateLocation, ti));
-                    ti.PublishString = txt;
-                }
-                else
-                {
-                    ti.PublishString = ti.ToString();
-                }
+                ti.PublishString = CreatePublish(ti, pop);
 
                 if (Settings.Default.WritePublish)
                 {
@@ -452,6 +443,22 @@ namespace TorrentDescriptionMaker
             }
 
             e.Result = tiList;
+        }
+
+        private string CreatePublish(TorrentInfo ti, PublishOptionsPacket pop)
+        {
+            string pt = "";
+
+            if (Settings.Default.TemplatesMode && Directory.Exists(mi.TemplateLocation))
+            {
+                pt = ti.CreatePublish(pop, new TemplateReader(mi.TemplateLocation, ti));
+            }
+            else
+            {
+                pt = ti.ToString();
+            }
+
+            return pt;
         }
 
         private void updateGuiControls()
@@ -794,9 +801,7 @@ namespace TorrentDescriptionMaker
                 pop.FullPicture = chkQuickFullPicture.Checked;
                 pop.PreformattedText = chkQuickPre.Checked;
 
-                mTorrentInfo.PublishOptions = pop;
-                txtPublish.Text = mTorrentInfo.ToString();
-
+                txtPublish.Text = CreatePublish(mTorrentInfo, pop);
             }
         }
 
