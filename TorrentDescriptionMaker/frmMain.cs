@@ -544,7 +544,7 @@ namespace TorrentDescriptionMaker
                 OpenFileDialog dlg = new OpenFileDialog();
                 dlg.Multiselect = true;
                 dlg.Title = "Browse for Media file...";
-                dlg.Filter = "Media Files|*.avi; *.vob; *.mkv; *.divx";
+                //dlg.Filter = "Media Files|*.avi; *.divx; *.mkv; *.ogm; *.vob;";
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     loadMedia(dlg.FileNames);
