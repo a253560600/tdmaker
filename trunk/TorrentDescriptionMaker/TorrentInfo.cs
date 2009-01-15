@@ -38,25 +38,24 @@ namespace TorrentDescriptionMaker
             ProcessStartInfo psi = new ProcessStartInfo(Settings.Default.MTNPath);
             psi.WindowStyle = ProcessWindowStyle.Minimized;
 
-            string picPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "MTN");
             if (!Settings.Default.KeepScreenshot)
             {
-                picPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "TDMaker");
+                Program.ScreenshotsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "TDMaker");
             }
 
-            if (!Directory.Exists(picPath))
-                Directory.CreateDirectory(picPath);
+            if (!Directory.Exists(Program.ScreenshotsDir))
+                Directory.CreateDirectory(Program.ScreenshotsDir);
 
             psi.Arguments = string.Format("{0} -O \"{1}\" \"{2}\"",
                 Settings.Default.MTNArg,
-                picPath,
+                Program.ScreenshotsDir,
                 mediaFilePath);
 
             p.StartInfo = psi;
             p.Start();
             p.WaitForExit();
 
-            string screenshot = Path.Combine(picPath, Path.GetFileNameWithoutExtension(mediaFilePath) + "_s.jpg");
+            string screenshot = Path.Combine(Program.ScreenshotsDir, Path.GetFileNameWithoutExtension(mediaFilePath) + "_s.jpg");
 
             if (File.Exists(screenshot))
             {
@@ -110,7 +109,7 @@ namespace TorrentDescriptionMaker
             tr.CreateInfo();
 
             StringBuilder sbPublish = new StringBuilder();
-            sbPublish.Append(tr.PublishInfo);
+            sbPublish.Append(GetMediaInfo(tr.PublishInfo, options));
             sbPublish.AppendLine();
             sbPublish.Append(GetScreenshotString(options));
 
@@ -129,17 +128,22 @@ namespace TorrentDescriptionMaker
 
             StringBuilder sbPublish = new StringBuilder();
 
-            string p = "";
+            sbPublish.Append(GetMediaInfo(this.MediaInfo2.ToString(), options));
+            sbPublish.AppendLine();
+            sbPublish.Append(GetScreenshotString(options));
 
+            return sbPublish.ToString();
+
+        }
+
+        public string GetMediaInfo(string p, PublishOptionsPacket options)
+        {
+            StringBuilder sbPublish = new StringBuilder();
             BbCode bb = new BbCode();
 
             if (options.AlignCenter)
             {
-                p = bb.alignCenter(this.MediaInfo2.ToString());
-            }
-            else
-            {
-                p = this.MediaInfo2.ToString();
+                p = bb.alignCenter(p);
             }
 
             if (options.PreformattedText)
@@ -150,10 +154,6 @@ namespace TorrentDescriptionMaker
             {
                 sbPublish.AppendLine(p);
             }
-
-            sbPublish.AppendLine();
-
-            sbPublish.Append(GetScreenshotString(options));
 
             return sbPublish.ToString();
 
@@ -182,7 +182,7 @@ namespace TorrentDescriptionMaker
         /// <returns>Publish String</returns>
         public override string ToString()
         {
-            return CreatePublish(this.PublishOptions); 
+            return CreatePublish(this.PublishOptions);
         }
 
         public string ScreenshotURLForums { get; private set; }
