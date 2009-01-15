@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.IO;
 using TDMaker.Properties;
 using TDMaker;
+using System.Diagnostics;
 
 namespace TorrentDescriptionMaker
 {
@@ -449,9 +450,9 @@ namespace TorrentDescriptionMaker
         {
             string pt = "";
 
-            if (Settings.Default.TemplatesMode && Directory.Exists(mi.TemplateLocation))
+            if (Settings.Default.TemplatesMode && Directory.Exists(ti.MediaInfo2.TemplateLocation))
             {
-                pt = ti.CreatePublish(pop, new TemplateReader(mi.TemplateLocation, ti));
+                pt = ti.CreatePublish(pop, new TemplateReader(ti.MediaInfo2.TemplateLocation, ti));
             }
             else
             {
@@ -846,7 +847,26 @@ namespace TorrentDescriptionMaker
             gbTemplatesInternal.Enabled = !chkTemplatesMode.Checked;
         }
 
+        private void btnMTNHelp_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://moviethumbnail.sourceforge.net/usage.en.html");
+        }
 
+        private void tsmTorrentsDir_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(Settings.Default.TorrentsCustomDir))
+            {
+                Process.Start(Settings.Default.TorrentsCustomDir);
+            }
+        }
+
+        private void tsmScreenshots_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(Program.ScreenshotsDir))
+            {
+                Process.Start(Program.ScreenshotsDir);
+            }
+        }
 
     }
 }

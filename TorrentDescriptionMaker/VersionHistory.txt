@@ -1,8 +1,10 @@
-Version 1.5.00 - 20090114
-
+1.5.1.00 Added shortcuts to Torrents and Screenshot folders in Context Menu
 1.5.0.07 Quick Publish checkBoxes always returned PublishString of built-in template [Protech]
 1.5.0.06 Use Full Picture instead of Thumbnail checkBox was not accessible if External Templates were used
 1.5.0.05 Removed file filter when browsing for video files to handle all files [Vaare]
+
+Version 1.5.00 - 20090114
+
 1.5.0.04 Fixed incorrect syntax %Audio_%Format% to %Audio_Format%
 1.5.0.03 Internal Template was used on the first run disregarding external template choice [sleepyb]
 1.5.0.02 Last used Template was not remembered [surround]

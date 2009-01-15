@@ -21,6 +21,7 @@ namespace TorrentDescriptionMaker
         }
 
         public static string Status { get; set; }
+        public static string ScreenshotsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "MTN");
 
         public static string getFileSizeString(double size)
         {

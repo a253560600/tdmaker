@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnBrowseMTN = new System.Windows.Forms.Button();
@@ -125,6 +128,11 @@
             this.cmsAppAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.btnCreateTorrent = new System.Windows.Forms.Button();
             this.trackerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.btnMTNHelp = new System.Windows.Forms.Button();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.foldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmTorrentsDir = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmScreenshots = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -161,6 +169,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.btnMTNHelp);
             this.groupBox1.Controls.Add(this.btnBrowseMTN);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.cboMtnArgs);
@@ -178,7 +187,7 @@
             this.btnBrowseMTN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBrowseMTN.Location = new System.Drawing.Point(577, 23);
             this.btnBrowseMTN.Name = "btnBrowseMTN";
-            this.btnBrowseMTN.Size = new System.Drawing.Size(106, 23);
+            this.btnBrowseMTN.Size = new System.Drawing.Size(82, 23);
             this.btnBrowseMTN.TabIndex = 9;
             this.btnBrowseMTN.Text = "&Browse";
             this.btnBrowseMTN.UseVisualStyleBackColor = true;
@@ -935,12 +944,36 @@
             // 
             this.dgvTrackers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTrackers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvTrackers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTrackers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colName,
             this.colAnnounceURL});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvTrackers.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvTrackers.Location = new System.Drawing.Point(6, 19);
             this.dgvTrackers.Name = "dgvTrackers";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTrackers.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvTrackers.Size = new System.Drawing.Size(701, 148);
             this.dgvTrackers.TabIndex = 1;
             this.dgvTrackers.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTrackers_CellMouseLeave);
@@ -1244,14 +1277,16 @@
             // cmsApp
             // 
             this.cmsApp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmsAppAbout});
+            this.cmsAppAbout,
+            this.toolStripSeparator1,
+            this.foldersToolStripMenuItem});
             this.cmsApp.Name = "cmsApp";
-            this.cmsApp.Size = new System.Drawing.Size(117, 26);
+            this.cmsApp.Size = new System.Drawing.Size(153, 76);
             // 
             // cmsAppAbout
             // 
             this.cmsAppAbout.Name = "cmsAppAbout";
-            this.cmsAppAbout.Size = new System.Drawing.Size(116, 22);
+            this.cmsAppAbout.Size = new System.Drawing.Size(152, 22);
             this.cmsAppAbout.Text = "&About...";
             this.cmsAppAbout.Click += new System.EventHandler(this.cmsAppAbout_Click);
             // 
@@ -1271,6 +1306,44 @@
             // trackerBindingSource
             // 
             this.trackerBindingSource.DataSource = typeof(TDMaker.Tracker);
+            // 
+            // btnMTNHelp
+            // 
+            this.btnMTNHelp.Location = new System.Drawing.Point(577, 52);
+            this.btnMTNHelp.Name = "btnMTNHelp";
+            this.btnMTNHelp.Size = new System.Drawing.Size(82, 23);
+            this.btnMTNHelp.TabIndex = 10;
+            this.btnMTNHelp.Text = "&Usage...";
+            this.btnMTNHelp.UseVisualStyleBackColor = true;
+            this.btnMTNHelp.Click += new System.EventHandler(this.btnMTNHelp_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // foldersToolStripMenuItem
+            // 
+            this.foldersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmScreenshots,
+            this.tsmTorrentsDir});
+            this.foldersToolStripMenuItem.Name = "foldersToolStripMenuItem";
+            this.foldersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.foldersToolStripMenuItem.Text = "&Folders";
+            // 
+            // tsmTorrentsDir
+            // 
+            this.tsmTorrentsDir.Name = "tsmTorrentsDir";
+            this.tsmTorrentsDir.Size = new System.Drawing.Size(152, 22);
+            this.tsmTorrentsDir.Text = "&Torrents...";
+            this.tsmTorrentsDir.Click += new System.EventHandler(this.tsmTorrentsDir_Click);
+            // 
+            // tsmScreenshots
+            // 
+            this.tsmScreenshots.Name = "tsmScreenshots";
+            this.tsmScreenshots.Size = new System.Drawing.Size(152, 22);
+            this.tsmScreenshots.Text = "&Screenshots...";
+            this.tsmScreenshots.Click += new System.EventHandler(this.tsmScreenshots_Click);
             // 
             // frmMain
             // 
@@ -1444,6 +1517,11 @@
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.CheckBox chkTemplatesMode;
         private System.Windows.Forms.ComboBox cboTemplate;
+        private System.Windows.Forms.Button btnMTNHelp;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem foldersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmTorrentsDir;
+        private System.Windows.Forms.ToolStripMenuItem tsmScreenshots;
     }
 }
 
