@@ -132,6 +132,7 @@
     <EmbeddedResource Include="Templates\Minimal\FileAudioInfo.txt" />
     <EmbeddedResource Include="Templates\Minimal\FileVideoInfo.txt" />
     <EmbeddedResource Include="Templates\Minimal\GeneralInfo.txt" />
+    <Content Include="ReleaseInfo.txt" />
     <Content Include="TODO.txt" />
     <Content Include="VersionHistory.txt" />
   </ItemGroup>
