@@ -5,14 +5,6 @@ Support for Multi-Disc DVDs
 		DVD1
 		DVD2
 
-Support Templates using Syntax
-	TDM reads 3 template files with syntax
-		Title.txt
-		DiscInfo.txt
-		FileInfo.txt
-	TDM replaces all syntax with relevant MediaInfo details 
-	TDM shows this in Publis tab
-
 Filelist using TreeGUI
 
 Full Automation [tacoking]
