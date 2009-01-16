@@ -128,14 +128,14 @@
             this.btnAnalyze = new System.Windows.Forms.Button();
             this.cmsApp = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsAppAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmUpdatesCheck = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.foldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmScreenshots = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmTemplates = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmTorrentsDir = new System.Windows.Forms.ToolStripMenuItem();
             this.btnCreateTorrent = new System.Windows.Forms.Button();
-            this.tsmTemplates = new System.Windows.Forms.ToolStripMenuItem();
             this.trackerBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tsmUpdatesCheck = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -1305,12 +1305,12 @@
             // cmsApp
             // 
             this.cmsApp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmsAppAbout,
-            this.tsmUpdatesCheck,
+            this.foldersToolStripMenuItem,
             this.toolStripSeparator1,
-            this.foldersToolStripMenuItem});
+            this.tsmUpdatesCheck,
+            this.cmsAppAbout});
             this.cmsApp.Name = "cmsApp";
-            this.cmsApp.Size = new System.Drawing.Size(181, 98);
+            this.cmsApp.Size = new System.Drawing.Size(181, 76);
             // 
             // cmsAppAbout
             // 
@@ -1318,6 +1318,13 @@
             this.cmsAppAbout.Size = new System.Drawing.Size(180, 22);
             this.cmsAppAbout.Text = "&About...";
             this.cmsAppAbout.Click += new System.EventHandler(this.cmsAppAbout_Click);
+            // 
+            // tsmUpdatesCheck
+            // 
+            this.tsmUpdatesCheck.Name = "tsmUpdatesCheck";
+            this.tsmUpdatesCheck.Size = new System.Drawing.Size(180, 22);
+            this.tsmUpdatesCheck.Text = "Check for &Updates...";
+            this.tsmUpdatesCheck.Click += new System.EventHandler(this.tsmUpdatesCheck_Click);
             // 
             // toolStripSeparator1
             // 
@@ -1341,6 +1348,13 @@
             this.tsmScreenshots.Text = "&Screenshots...";
             this.tsmScreenshots.Click += new System.EventHandler(this.tsmScreenshots_Click);
             // 
+            // tsmTemplates
+            // 
+            this.tsmTemplates.Name = "tsmTemplates";
+            this.tsmTemplates.Size = new System.Drawing.Size(152, 22);
+            this.tsmTemplates.Text = "Templates...";
+            this.tsmTemplates.Click += new System.EventHandler(this.tsmTemplates_Click);
+            // 
             // tsmTorrentsDir
             // 
             this.tsmTorrentsDir.Name = "tsmTorrentsDir";
@@ -1361,23 +1375,9 @@
             this.btnCreateTorrent.UseVisualStyleBackColor = true;
             this.btnCreateTorrent.Click += new System.EventHandler(this.btnCreateTorrent_Click);
             // 
-            // tsmTemplates
-            // 
-            this.tsmTemplates.Name = "tsmTemplates";
-            this.tsmTemplates.Size = new System.Drawing.Size(152, 22);
-            this.tsmTemplates.Text = "Templates...";
-            this.tsmTemplates.Click += new System.EventHandler(this.tsmTemplates_Click);
-            // 
             // trackerBindingSource
             // 
             this.trackerBindingSource.DataSource = typeof(TDMaker.Tracker);
-            // 
-            // tsmUpdatesCheck
-            // 
-            this.tsmUpdatesCheck.Name = "tsmUpdatesCheck";
-            this.tsmUpdatesCheck.Size = new System.Drawing.Size(180, 22);
-            this.tsmUpdatesCheck.Text = "Check for &Updates...";
-            this.tsmUpdatesCheck.Click += new System.EventHandler(this.tsmUpdatesCheck_Click);
             // 
             // frmMain
             // 

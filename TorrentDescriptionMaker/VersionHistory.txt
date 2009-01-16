@@ -1,3 +1,5 @@
+1.6.1.00 Support for new syntaxes: %ScreenshotFull% and %ScreenshotForums% [memories]
+
 Version 1.6 - 20090117
 
 1.6.0.00 Added Automatic Update Checker [tacoking]

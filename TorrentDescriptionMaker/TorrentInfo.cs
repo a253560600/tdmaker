@@ -98,11 +98,11 @@ namespace TorrentDescriptionMaker
                     {
                         if (imf.Type == ImageFile.ImageType.FULLIMAGE)
                         {
-                            this.ScreenshotURLFull = imf.URI;
+                            MediaInfo2.ScreenshotFull = imf.URI;
                         }
                         else if (imf.Type == ImageFile.ImageType.THUMBNAIL_FORUMS1)
                         {
-                            this.ScreenshotURLForums = imf.URI;
+                            MediaInfo2.ScreenshotForums = imf.URI;
                         }
                     }
                 }
@@ -128,12 +128,11 @@ namespace TorrentDescriptionMaker
         /// <returns></returns>
         public string CreatePublish(PublishOptionsPacket options, TemplateReader tr)
         {
+            tr.SetFullScreenshot(options.FullPicture);
             tr.CreateInfo();
-
+          
             StringBuilder sbPublish = new StringBuilder();
             sbPublish.Append(GetMediaInfo(tr.PublishInfo, options));
-            sbPublish.AppendLine();
-            sbPublish.Append(GetScreenshotString(options));
 
             return sbPublish.ToString();
         }
@@ -186,13 +185,13 @@ namespace TorrentDescriptionMaker
             StringBuilder sbPublish = new StringBuilder();
             BbCode bb = new BbCode();
 
-            if (!string.IsNullOrEmpty(this.ScreenshotURLFull) && options.FullPicture)
+            if (!string.IsNullOrEmpty(MediaInfo2.ScreenshotFull) && options.FullPicture)
             {
-                sbPublish.AppendLine(bb.Img(this.ScreenshotURLFull));
+                sbPublish.AppendLine(bb.Img(MediaInfo2.ScreenshotFull));
             }
-            else if (!string.IsNullOrEmpty(this.ScreenshotURLForums))
+            else if (!string.IsNullOrEmpty(MediaInfo2.ScreenshotForums))
             {
-                sbPublish.AppendLine(this.ScreenshotURLForums);
+                sbPublish.AppendLine(MediaInfo2.ScreenshotForums);
             }
 
             return sbPublish.ToString();
@@ -207,8 +206,6 @@ namespace TorrentDescriptionMaker
             return CreatePublish(this.PublishOptions);
         }
 
-        public string ScreenshotURLForums { get; private set; }
-        public string ScreenshotURLFull { get; private set; }
         public MediaInfo2 MediaInfo2 { get; private set; }
         /// <summary>
         /// String Representation of Publish tab

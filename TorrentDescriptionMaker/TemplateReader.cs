@@ -75,6 +75,20 @@ namespace TDMaker
 
         }
 
+        public void SetFullScreenshot(bool arg)
+        {
+            if (arg)
+            {
+                this.mFileInfo = Regex.Replace(this.mFileInfo, "%ScreenshotForums%", "%ScreenshotFull%");
+                this.mDiscInfo = Regex.Replace(this.mDiscInfo, "%ScreenshotForums%", "%ScreenshotFull%");
+            }
+            else
+            {
+                this.mFileInfo = Regex.Replace(this.mFileInfo, "%ScreenshotFull%", "%ScreenshotForums%", RegexOptions.IgnoreCase);
+                this.mDiscInfo = Regex.Replace(this.mDiscInfo, "%ScreenshotFull%", "%ScreenshotForums%");
+            }
+        }
+
         public void CreateInfo()
         {
 
@@ -90,8 +104,17 @@ namespace TDMaker
             }
 
             pattern = GetSourceInfo(pattern, TorrentInfo.MediaInfo2);
+            pattern = GetScreenshotInfo(ref pattern, TorrentInfo.MediaInfo2);
 
             PublishInfo = pattern;
+        }
+
+        private string GetScreenshotInfo(ref string pattern, MediaInfo2 mi)
+        {
+            pattern = Regex.Replace(pattern, "%ScreenshotFull%", mi.ScreenshotFull);
+            pattern = Regex.Replace(pattern, "%ScreenshotForums%", mi.ScreenshotForums);
+
+            return pattern;
         }
 
         private string GetGeneralInfo(string pattern, MediaFile mf)

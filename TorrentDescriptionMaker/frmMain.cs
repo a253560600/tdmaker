@@ -495,8 +495,8 @@ namespace TorrentDescriptionMaker
                 if (mTorrentInfo != null)
                 {
 
-                    txtScrFull.Text = mTorrentInfo.ScreenshotURLFull;
-                    txtBBScrForums.Text = mTorrentInfo.ScreenshotURLForums;
+                    txtScrFull.Text = mTorrentInfo.MediaInfo2.ScreenshotFull;
+                    txtBBScrForums.Text = mTorrentInfo.MediaInfo2.ScreenshotForums;
 
                     if (!string.IsNullOrEmpty(txtScrFull.Text))
                         txtBBScrFull.Text = string.Format("[img]{0}[/img]", txtScrFull.Text);
