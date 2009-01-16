@@ -5,7 +5,5 @@
 [size=%FontSize_Heading2%][b][i]%FileName%[/i][/b][/size]
 
 %General_Info%
-
 %Video_Info%
-
 %Audio_Info%

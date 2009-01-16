@@ -37,6 +37,12 @@ namespace TorrentDescriptionMaker
         public string Menu { get; set; }
         public string Extras { get; set; }
         public string WebLink { get; set; }
+
+        /// <summary>
+        /// Clickable Thumbnail to get full screenshot
+        /// </summary>
+        public string ScreenshotForums { get; set; }
+        public string ScreenshotFull { get; set; }
         
         private string[] mExt = new string[] { ".*" }; // { ".avi", ".divx", ".mkv", ".vob", ".mov" };
 
