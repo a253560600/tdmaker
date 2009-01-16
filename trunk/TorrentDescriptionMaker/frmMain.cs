@@ -19,6 +19,7 @@ namespace TorrentDescriptionMaker
         /// Global TorrentInfo for Using Quick Pre/Align Center commands
         /// </summary>
         private TorrentInfo mTorrentInfo = null;
+        private McoreSystem.AppInfo mAppInfo = new McoreSystem.AppInfo(Application.ProductName, Application.ProductVersion, McoreSystem.AppInfo.SoftwareCycle.FINAL);
 
         public frmMain()
         {
@@ -42,14 +43,6 @@ namespace TorrentDescriptionMaker
 
             string[] paths = (string[])e.Data.GetData(DataFormats.FileDrop, true);
             loadMedia(paths);
-
-            //if (paths.Length == 1)
-            //{
-            //    if (File.Exists(paths[0]) || Directory.Exists(paths[0]))
-            //    {
-
-            //    }
-            //}
 
         }
 
@@ -214,9 +207,11 @@ namespace TorrentDescriptionMaker
             configureDirs();
             SettingsRead();
 
-            Program.Status = "Ready.";
+            Program.Status = string.Format("Ready.");
 
-            this.Text = Resources.AppName + " - Drag and Drop a Movie file or folder...";
+            this.Text = mAppInfo.GetApplicationTitle(Application.ProductName, Application.ProductVersion, 
+                McoreSystem.AppInfo.VersionDepth.MajorMinorBuild) + 
+                " - Drag and Drop a Movie file or folder...";
 
             updateGuiControls();
 
@@ -873,7 +868,7 @@ namespace TorrentDescriptionMaker
 
         private void chkScreenshot_CheckedChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void tsmTemplates_Click(object sender, EventArgs e)
