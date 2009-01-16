@@ -143,12 +143,12 @@ namespace TorrentDescriptionMaker
 
             if (options.AlignCenter)
             {
-                p = bb.alignCenter(p);
+                p = bb.AlignCenter(p);
             }
 
             if (options.PreformattedText)
             {
-                sbPublish.AppendLine(bb.pre(p));
+                sbPublish.AppendLine(bb.Pre(p));
             }
             else
             {
@@ -166,7 +166,7 @@ namespace TorrentDescriptionMaker
 
             if (!string.IsNullOrEmpty(this.ScreenshotURLFull) && options.FullPicture)
             {
-                sbPublish.AppendLine(bb.img(this.ScreenshotURLFull));
+                sbPublish.AppendLine(bb.Img(this.ScreenshotURLFull));
             }
             else if (!string.IsNullOrEmpty(this.ScreenshotURLForums))
             {
