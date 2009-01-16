@@ -35,12 +35,18 @@ namespace TDMaker
 
             bwUpdate.DoWork += new DoWorkEventHandler(bwUpdate_DoWork);
             bwUpdate.ProgressChanged += new ProgressChangedEventHandler(bwUpdate_ProgressChanged);
+            bwUpdate.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bwUpdate_RunWorkerCompleted);
 
+        }
+
+        void bwUpdate_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            sBarTrack.Text = "Done with Checking Updates...";
         }
 
         void bwUpdate_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-
+            sBarTrack.Text = "Checking for updates...";
         }
 
         void bwUpdate_DoWork(object sender, DoWorkEventArgs e)
@@ -72,20 +78,6 @@ namespace TDMaker
             bwUpdate.RunWorkerAsync();
         }
 
-
-        //private void // ERROR: Handles clauses are not supported in C# bwApp_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
-        //{
-
-        //    sBarTrack.Text = mfUpdateStatusBarText("Checking for updates...", true);
-
-        //}
-
-        //private void // ERROR: Handles clauses are not supported in C# bwApp_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        //{
-
-        //    sBarTrack.Text = mfUpdateStatusBarText("Done with Checking Updates...", true);
-
-        //}
     }
 
 }
