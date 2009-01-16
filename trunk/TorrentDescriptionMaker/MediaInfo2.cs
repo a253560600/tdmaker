@@ -392,7 +392,7 @@ namespace TorrentDescriptionMaker
             StringBuilder sbBody = new StringBuilder();
 
             // Show Title
-            sbBody.AppendLine(bb.size(fontSizeHeading1, bb.bold(this.Title)));
+            sbBody.AppendLine(bb.Size(fontSizeHeading1, bb.Bold(this.Title)));
             sbBody.AppendLine();
 
             StringBuilder sbTitleInfo = new StringBuilder();
@@ -426,7 +426,7 @@ namespace TorrentDescriptionMaker
                 }
             }
 
-            sbBody.AppendLine(bb.size(fontSizeBody, sbTitleInfo.ToString()));
+            sbBody.AppendLine(bb.Size(fontSizeBody, sbTitleInfo.ToString()));
             sbBody.AppendLine();
 
             if (this.MediaFiles.Count > 1 && this.IsDisc)
@@ -440,7 +440,7 @@ namespace TorrentDescriptionMaker
                 foreach (MediaFile mf in this.MediaFiles)
                 {
 
-                    sbBody.AppendLine(bb.size(fontSizeHeading2, bb.bolditalic(mf.FileName)));
+                    sbBody.AppendLine(bb.Size(fontSizeHeading2, bb.BoldItalic(mf.FileName)));
                     sbBody.AppendLine();
                     sbBody.AppendLine(mf.ToString());
 

@@ -74,26 +74,7 @@ namespace TDMaker
             {
                // fs.Close();
             }
-            
-
-            //FileStream fs = new FileStream(TrackersXML, FileMode.Create);
-
-            //// Construct a SoapFormatter and use it 
-            //// to serialize the data to the stream.
-            //SoapFormatter formatter = new SoapFormatter();
-            //try
-            //{
-            //    formatter.Serialize(fs, Trackers);
-            //}
-            //catch (SerializationException e)
-            //{
-            //    Console.WriteLine("Failed to serialize. Reason: " + e.Message);
-            //    throw;
-            //}
-            //finally
-            //{
-            //    fs.Close();
-            //}
+          
             
         }
 

@@ -90,7 +90,7 @@ namespace TDMaker
             //*********************   
             StringBuilder sbGeneral = new StringBuilder();
 
-            sbBody.AppendLine(bb.size(fontSizeHeading3, bb.bolditalic("General:")));
+            sbBody.AppendLine(bb.Size(fontSizeHeading3, bb.BoldItalic("General:")));
             sbBody.AppendLine();
             //// File Name
             //if (!string.IsNullOrEmpty(this.FileName))
@@ -120,7 +120,7 @@ namespace TDMaker
             }
 
 
-            sbBody.Append(bb.size(fontSizeBody, sbGeneral.ToString()));
+            sbBody.Append(bb.Size(fontSizeBody, sbGeneral.ToString()));
 
             //*********************
             //* Video
@@ -128,7 +128,7 @@ namespace TDMaker
             VideoInfo vi = this.Video;
 
             sbBody.AppendLine();
-            sbBody.AppendLine(bb.size(fontSizeHeading3, bb.bolditalic("Video:")));
+            sbBody.AppendLine(bb.Size(fontSizeHeading3, bb.BoldItalic("Video:")));
             sbBody.AppendLine();
 
             StringBuilder sbVideo = new StringBuilder();
@@ -160,7 +160,7 @@ namespace TDMaker
                 vi.Width,
                 vi.Height));
 
-            sbBody.Append(bb.size(fontSizeBody, sbVideo.ToString()));
+            sbBody.Append(bb.Size(fontSizeBody, sbVideo.ToString()));
 
             //*********************
             //* Audio
@@ -173,7 +173,7 @@ namespace TDMaker
                 AudioInfo ai = this.Audio[a];
 
                 sbBody.AppendLine();
-                sbBody.AppendLine(string.Format(bb.size(fontSizeHeading3, bb.bolditalic("Audio #{0}:")), a + 1));
+                sbBody.AppendLine(string.Format(bb.Size(fontSizeHeading3, bb.BoldItalic("Audio #{0}:")), a + 1));
                 sbBody.AppendLine();
 
                 StringBuilder sbAudio = new StringBuilder();
@@ -198,7 +198,7 @@ namespace TDMaker
                 if (!string.IsNullOrEmpty(ai.Resolution))
                     sbAudio.AppendLine(string.Format(("        [u]Resolution:[/u] {0}"), ai.Resolution));
 
-                sbBody.Append(bb.size(fontSizeBody, sbAudio.ToString()));
+                sbBody.Append(bb.Size(fontSizeBody, sbAudio.ToString()));
                 sbBody.AppendLine();
             }
 
