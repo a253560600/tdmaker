@@ -34,6 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnMTNHelp = new System.Windows.Forms.Button();
             this.btnBrowseMTN = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.cboMtnArgs = new System.Windows.Forms.ComboBox();
@@ -84,6 +85,7 @@
             this.chkQuickPre = new System.Windows.Forms.CheckBox();
             this.txtPublish = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.chkScreenshot = new System.Windows.Forms.CheckBox();
             this.chkAnalyzeAuto = new System.Windows.Forms.CheckBox();
             this.tcOptions = new System.Windows.Forms.TabControl();
             this.tpScreenshots = new System.Windows.Forms.TabPage();
@@ -104,9 +106,9 @@
             this.cboAnnounceURL = new System.Windows.Forms.ComboBox();
             this.chkCreateTorrent = new System.Windows.Forms.CheckBox();
             this.tpPublish = new System.Windows.Forms.TabPage();
+            this.chkUploadFullScreenshot = new System.Windows.Forms.CheckBox();
             this.cboTemplate = new System.Windows.Forms.ComboBox();
             this.gbTemplatesInternal = new System.Windows.Forms.GroupBox();
-            this.chkUploadFullScreenshot = new System.Windows.Forms.CheckBox();
             this.nudFontSizeIncr = new System.Windows.Forms.NumericUpDown();
             this.chkPre = new System.Windows.Forms.CheckBox();
             this.chkPreIncreaseFontSize = new System.Windows.Forms.CheckBox();
@@ -126,13 +128,14 @@
             this.btnAnalyze = new System.Windows.Forms.Button();
             this.cmsApp = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsAppAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnCreateTorrent = new System.Windows.Forms.Button();
-            this.trackerBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btnMTNHelp = new System.Windows.Forms.Button();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.foldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmTorrentsDir = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmScreenshots = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmTorrentsDir = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnCreateTorrent = new System.Windows.Forms.Button();
+            this.tsmTemplates = new System.Windows.Forms.ToolStripMenuItem();
+            this.trackerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tsmUpdatesCheck = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -175,12 +178,22 @@
             this.groupBox1.Controls.Add(this.cboMtnArgs);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtMtn);
-            this.groupBox1.Location = new System.Drawing.Point(15, 68);
+            this.groupBox1.Location = new System.Drawing.Point(15, 49);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(720, 94);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Movie Thumbnailer Settings";
+            // 
+            // btnMTNHelp
+            // 
+            this.btnMTNHelp.Location = new System.Drawing.Point(577, 52);
+            this.btnMTNHelp.Name = "btnMTNHelp";
+            this.btnMTNHelp.Size = new System.Drawing.Size(82, 23);
+            this.btnMTNHelp.TabIndex = 10;
+            this.btnMTNHelp.Text = "&Usage...";
+            this.btnMTNHelp.UseVisualStyleBackColor = true;
+            this.btnMTNHelp.Click += new System.EventHandler(this.btnMTNHelp_Click);
             // 
             // btnBrowseMTN
             // 
@@ -751,6 +764,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.chkScreenshot);
             this.tabPage4.Controls.Add(this.chkAnalyzeAuto);
             this.tabPage4.Controls.Add(this.tcOptions);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
@@ -760,12 +774,26 @@
             this.tabPage4.Text = "Options";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // chkScreenshot
+            // 
+            this.chkScreenshot.AutoSize = true;
+            this.chkScreenshot.Checked = global::TDMaker.Properties.Settings.Default.TakeScreenshot;
+            this.chkScreenshot.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkScreenshot.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "TakeScreenshot", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkScreenshot.Location = new System.Drawing.Point(397, 15);
+            this.chkScreenshot.Name = "chkScreenshot";
+            this.chkScreenshot.Size = new System.Drawing.Size(114, 17);
+            this.chkScreenshot.TabIndex = 11;
+            this.chkScreenshot.Text = "&Create Screenshot";
+            this.chkScreenshot.UseVisualStyleBackColor = true;
+            this.chkScreenshot.CheckedChanged += new System.EventHandler(this.chkScreenshot_CheckedChanged);
+            // 
             // chkAnalyzeAuto
             // 
             this.chkAnalyzeAuto.AutoSize = true;
             this.chkAnalyzeAuto.Checked = global::TDMaker.Properties.Settings.Default.AnalyzeAuto;
             this.chkAnalyzeAuto.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "AnalyzeAuto", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkAnalyzeAuto.Location = new System.Drawing.Point(12, 15);
+            this.chkAnalyzeAuto.Location = new System.Drawing.Point(19, 15);
             this.chkAnalyzeAuto.Name = "chkAnalyzeAuto";
             this.chkAnalyzeAuto.Size = new System.Drawing.Size(270, 17);
             this.chkAnalyzeAuto.TabIndex = 9;
@@ -805,7 +833,7 @@
             this.chkKeepScreenshot.Checked = global::TDMaker.Properties.Settings.Default.KeepScreenshot;
             this.chkKeepScreenshot.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkKeepScreenshot.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "KeepScreenshot", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkKeepScreenshot.Location = new System.Drawing.Point(16, 39);
+            this.chkKeepScreenshot.Location = new System.Drawing.Point(15, 16);
             this.chkKeepScreenshot.Name = "chkKeepScreenshot";
             this.chkKeepScreenshot.Size = new System.Drawing.Size(189, 17);
             this.chkKeepScreenshot.TabIndex = 1;
@@ -818,7 +846,7 @@
             this.chkOptImageShack.Checked = global::TDMaker.Properties.Settings.Default.UploadImageShack;
             this.chkOptImageShack.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkOptImageShack.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "UploadImageShack", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkOptImageShack.Location = new System.Drawing.Point(16, 16);
+            this.chkOptImageShack.Location = new System.Drawing.Point(393, 16);
             this.chkOptImageShack.Name = "chkOptImageShack";
             this.chkOptImageShack.Size = new System.Drawing.Size(192, 17);
             this.chkOptImageShack.TabIndex = 0;
@@ -1033,6 +1061,19 @@
             this.tpPublish.Text = "Publish";
             this.tpPublish.UseVisualStyleBackColor = true;
             // 
+            // chkUploadFullScreenshot
+            // 
+            this.chkUploadFullScreenshot.AutoSize = true;
+            this.chkUploadFullScreenshot.Checked = global::TDMaker.Properties.Settings.Default.UseFullPicture;
+            this.chkUploadFullScreenshot.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkUploadFullScreenshot.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "UseFullPicture", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkUploadFullScreenshot.Location = new System.Drawing.Point(16, 41);
+            this.chkUploadFullScreenshot.Name = "chkUploadFullScreenshot";
+            this.chkUploadFullScreenshot.Size = new System.Drawing.Size(200, 17);
+            this.chkUploadFullScreenshot.TabIndex = 1;
+            this.chkUploadFullScreenshot.Text = "Use &Full Image instead of Thumbnail ";
+            this.chkUploadFullScreenshot.UseVisualStyleBackColor = true;
+            // 
             // cboTemplate
             // 
             this.cboTemplate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1054,19 +1095,6 @@
             this.gbTemplatesInternal.TabIndex = 3;
             this.gbTemplatesInternal.TabStop = false;
             this.gbTemplatesInternal.Text = "Internal Template Settings";
-            // 
-            // chkUploadFullScreenshot
-            // 
-            this.chkUploadFullScreenshot.AutoSize = true;
-            this.chkUploadFullScreenshot.Checked = global::TDMaker.Properties.Settings.Default.UseFullPicture;
-            this.chkUploadFullScreenshot.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUploadFullScreenshot.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "UseFullPicture", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkUploadFullScreenshot.Location = new System.Drawing.Point(16, 41);
-            this.chkUploadFullScreenshot.Name = "chkUploadFullScreenshot";
-            this.chkUploadFullScreenshot.Size = new System.Drawing.Size(200, 17);
-            this.chkUploadFullScreenshot.TabIndex = 1;
-            this.chkUploadFullScreenshot.Text = "Use &Full Image instead of Thumbnail ";
-            this.chkUploadFullScreenshot.UseVisualStyleBackColor = true;
             // 
             // nudFontSizeIncr
             // 
@@ -1278,17 +1306,47 @@
             // 
             this.cmsApp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmsAppAbout,
+            this.tsmUpdatesCheck,
             this.toolStripSeparator1,
             this.foldersToolStripMenuItem});
             this.cmsApp.Name = "cmsApp";
-            this.cmsApp.Size = new System.Drawing.Size(153, 76);
+            this.cmsApp.Size = new System.Drawing.Size(181, 98);
             // 
             // cmsAppAbout
             // 
             this.cmsAppAbout.Name = "cmsAppAbout";
-            this.cmsAppAbout.Size = new System.Drawing.Size(152, 22);
+            this.cmsAppAbout.Size = new System.Drawing.Size(180, 22);
             this.cmsAppAbout.Text = "&About...";
             this.cmsAppAbout.Click += new System.EventHandler(this.cmsAppAbout_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            // 
+            // foldersToolStripMenuItem
+            // 
+            this.foldersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmScreenshots,
+            this.tsmTemplates,
+            this.tsmTorrentsDir});
+            this.foldersToolStripMenuItem.Name = "foldersToolStripMenuItem";
+            this.foldersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.foldersToolStripMenuItem.Text = "&Folders";
+            // 
+            // tsmScreenshots
+            // 
+            this.tsmScreenshots.Name = "tsmScreenshots";
+            this.tsmScreenshots.Size = new System.Drawing.Size(152, 22);
+            this.tsmScreenshots.Text = "&Screenshots...";
+            this.tsmScreenshots.Click += new System.EventHandler(this.tsmScreenshots_Click);
+            // 
+            // tsmTorrentsDir
+            // 
+            this.tsmTorrentsDir.Name = "tsmTorrentsDir";
+            this.tsmTorrentsDir.Size = new System.Drawing.Size(152, 22);
+            this.tsmTorrentsDir.Text = "&Torrents...";
+            this.tsmTorrentsDir.Click += new System.EventHandler(this.tsmTorrentsDir_Click);
             // 
             // btnCreateTorrent
             // 
@@ -1303,47 +1361,23 @@
             this.btnCreateTorrent.UseVisualStyleBackColor = true;
             this.btnCreateTorrent.Click += new System.EventHandler(this.btnCreateTorrent_Click);
             // 
+            // tsmTemplates
+            // 
+            this.tsmTemplates.Name = "tsmTemplates";
+            this.tsmTemplates.Size = new System.Drawing.Size(152, 22);
+            this.tsmTemplates.Text = "Templates...";
+            this.tsmTemplates.Click += new System.EventHandler(this.tsmTemplates_Click);
+            // 
             // trackerBindingSource
             // 
             this.trackerBindingSource.DataSource = typeof(TDMaker.Tracker);
             // 
-            // btnMTNHelp
+            // tsmUpdatesCheck
             // 
-            this.btnMTNHelp.Location = new System.Drawing.Point(577, 52);
-            this.btnMTNHelp.Name = "btnMTNHelp";
-            this.btnMTNHelp.Size = new System.Drawing.Size(82, 23);
-            this.btnMTNHelp.TabIndex = 10;
-            this.btnMTNHelp.Text = "&Usage...";
-            this.btnMTNHelp.UseVisualStyleBackColor = true;
-            this.btnMTNHelp.Click += new System.EventHandler(this.btnMTNHelp_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
-            // 
-            // foldersToolStripMenuItem
-            // 
-            this.foldersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmScreenshots,
-            this.tsmTorrentsDir});
-            this.foldersToolStripMenuItem.Name = "foldersToolStripMenuItem";
-            this.foldersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.foldersToolStripMenuItem.Text = "&Folders";
-            // 
-            // tsmTorrentsDir
-            // 
-            this.tsmTorrentsDir.Name = "tsmTorrentsDir";
-            this.tsmTorrentsDir.Size = new System.Drawing.Size(152, 22);
-            this.tsmTorrentsDir.Text = "&Torrents...";
-            this.tsmTorrentsDir.Click += new System.EventHandler(this.tsmTorrentsDir_Click);
-            // 
-            // tsmScreenshots
-            // 
-            this.tsmScreenshots.Name = "tsmScreenshots";
-            this.tsmScreenshots.Size = new System.Drawing.Size(152, 22);
-            this.tsmScreenshots.Text = "&Screenshots...";
-            this.tsmScreenshots.Click += new System.EventHandler(this.tsmScreenshots_Click);
+            this.tsmUpdatesCheck.Name = "tsmUpdatesCheck";
+            this.tsmUpdatesCheck.Size = new System.Drawing.Size(180, 22);
+            this.tsmUpdatesCheck.Text = "Check for &Updates...";
+            this.tsmUpdatesCheck.Click += new System.EventHandler(this.tsmUpdatesCheck_Click);
             // 
             // frmMain
             // 
@@ -1522,6 +1556,9 @@
         private System.Windows.Forms.ToolStripMenuItem foldersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsmTorrentsDir;
         private System.Windows.Forms.ToolStripMenuItem tsmScreenshots;
+        private System.Windows.Forms.CheckBox chkScreenshot;
+        private System.Windows.Forms.ToolStripMenuItem tsmTemplates;
+        private System.Windows.Forms.ToolStripMenuItem tsmUpdatesCheck;
     }
 }
 

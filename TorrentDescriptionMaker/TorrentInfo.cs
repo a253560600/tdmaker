@@ -24,36 +24,58 @@ namespace TorrentDescriptionMaker
 
             this.mBwApp = bwApp;
 
-            if (Settings.Default.UploadImageShack)
+            if (Settings.Default.TakeScreenshot)
             {
-                UploadScreenshot(mi.Overall.FilePath);
+                if (TakeScreenshot(mi.Overall.FilePath) && 
+                    Settings.Default.UploadImageShack)
+                {
+                    UploadScreenshot(mi.Overall.FilePath);
+                }
             }
+
+        }
+
+        private bool TakeScreenshot(String mediaFilePath)
+        {
+            bool succes = true;
+
+            try
+            {
+                Process p = new Process();
+                ProcessStartInfo psi = new ProcessStartInfo(Settings.Default.MTNPath);
+                psi.WindowStyle = ProcessWindowStyle.Minimized;
+
+                if (!Settings.Default.KeepScreenshot)
+                {
+                    Program.ScreenshotsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "TDMaker");
+                }
+
+                if (!Directory.Exists(Program.ScreenshotsDir))
+                    Directory.CreateDirectory(Program.ScreenshotsDir);
+
+                psi.Arguments = string.Format("{0} -O \"{1}\" \"{2}\"",
+                    Settings.Default.MTNArg,
+                    Program.ScreenshotsDir,
+                    mediaFilePath);
+
+                p.StartInfo = psi;
+                p.Start();
+                p.WaitForExit();
+            }
+            catch (Exception ex)
+            {
+                succes = false;
+                Program.Status = ex.Message;
+            }
+
+            return succes;
 
         }
 
         private void UploadScreenshot(String mediaFilePath)
         {
 
-            Process p = new Process();
-            ProcessStartInfo psi = new ProcessStartInfo(Settings.Default.MTNPath);
-            psi.WindowStyle = ProcessWindowStyle.Minimized;
 
-            if (!Settings.Default.KeepScreenshot)
-            {
-                Program.ScreenshotsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "TDMaker");
-            }
-
-            if (!Directory.Exists(Program.ScreenshotsDir))
-                Directory.CreateDirectory(Program.ScreenshotsDir);
-
-            psi.Arguments = string.Format("{0} -O \"{1}\" \"{2}\"",
-                Settings.Default.MTNArg,
-                Program.ScreenshotsDir,
-                mediaFilePath);
-
-            p.StartInfo = psi;
-            p.Start();
-            p.WaitForExit();
 
             string screenshot = Path.Combine(Program.ScreenshotsDir, Path.GetFileNameWithoutExtension(mediaFilePath) + "_s.jpg");
 
