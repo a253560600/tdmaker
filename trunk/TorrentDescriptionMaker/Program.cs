@@ -20,6 +20,7 @@ namespace TorrentDescriptionMaker
             Application.Run(new frmMain());
         }
 
+        public const string APP_ABBR_NAME_IT = "TDMaker"; 
         public static string Status { get; set; }
         public static string ScreenshotsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "MTN");
 

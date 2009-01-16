@@ -1,5 +1,7 @@
-Version 1.5.1 
+Version 1.6 - 20090117
 
+1.6.0.00 Added Automatic Update Checker [tacoking]
+1.5.2.00 Take screenshots using MTN and save in local hard drive without having to upload [Vaare]
 1.5.1.00 Added shortcuts to Torrents and Screenshot folders in Context Menu
 1.5.0.07 Quick Publish checkBoxes always returned PublishString of built-in template [Protech]
 1.5.0.06 Use Full Picture instead of Thumbnail checkBox was not accessible if External Templates were used

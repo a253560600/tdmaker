@@ -220,6 +220,9 @@ namespace TorrentDescriptionMaker
 
             updateGuiControls();
 
+            UpdateChecker uc = new UpdateChecker(this.Icon, Resources.GenuineAdv, sBar, false);
+            uc.CheckUpdates();
+
         }
 
         private void configureDirs()
@@ -866,6 +869,25 @@ namespace TorrentDescriptionMaker
             {
                 Process.Start(Program.ScreenshotsDir);
             }
+        }
+
+        private void chkScreenshot_CheckedChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void tsmTemplates_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(Settings.Default.TemplatesDir))
+            {
+                Process.Start(Settings.Default.TemplatesDir);
+            }
+        }
+
+        private void tsmUpdatesCheck_Click(object sender, EventArgs e)
+        {
+            UpdateChecker uc = new UpdateChecker(this.Icon, Resources.GenuineAdv, sBar, true);
+            uc.CheckUpdates();
         }
 
     }

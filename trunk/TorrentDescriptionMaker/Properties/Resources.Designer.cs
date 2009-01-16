@@ -69,6 +69,13 @@ namespace TDMaker.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap GenuineAdv {
+            get {
+                object obj = ResourceManager.GetObject("GenuineAdv", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap info_16_xp {
             get {
                 object obj = ResourceManager.GetObject("info-16-xp", resourceCulture);

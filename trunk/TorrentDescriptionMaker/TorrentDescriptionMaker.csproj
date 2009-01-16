@@ -49,6 +49,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ImageUploader, Version=1.0.3289.40785, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="McoreSystem, Version=1.13.2.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="MonoTorrent, Version=0.62.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Lib\MonoTorrent.dll</HintPath>
@@ -102,6 +103,7 @@
     </Compile>
     <Compile Include="Tracker.cs" />
     <Compile Include="TrackerManager.cs" />
+    <Compile Include="UpdateChecker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\DataSources\Tracker.datasource" />
@@ -110,6 +112,7 @@
   <ItemGroup>
     <Content Include="GenuineAdv.ico" />
     <Content Include="Lib\ImageUploader.dll" />
+    <Content Include="Lib\McoreSystem.dll" />
     <Content Include="Lib\MonoTorrent.dll" />
     <EmbeddedResource Include="Templates\Default\DiscAudioInfo.txt" />
     <EmbeddedResource Include="Templates\Default\FileAudioInfo.txt" />
@@ -133,6 +136,7 @@
     <EmbeddedResource Include="Templates\Minimal\FileVideoInfo.txt" />
     <EmbeddedResource Include="Templates\Minimal\GeneralInfo.txt" />
     <Content Include="ReleaseInfo.txt" />
+    <Content Include="Resources\GenuineAdv.png" />
     <Content Include="TODO.txt" />
     <Content Include="VersionHistory.txt" />
   </ItemGroup>
