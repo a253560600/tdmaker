@@ -1,5 +1,5 @@
 ﻿[size=%FontSize_Heading2%][b][i]Video:[/i][/b][/size]
-[size=%FontSize_Heading3%]
+[size=%FontSize_Body%]
             [u]Format:[/u] %Video_Format%
            [u]Bitrate:[/u] %Video_Bitrate%
           [u]Standard:[/u] %Video_Standard%
