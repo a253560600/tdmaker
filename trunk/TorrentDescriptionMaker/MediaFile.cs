@@ -46,7 +46,8 @@ namespace TDMaker
         /// </summary>
         public string Location { get; private set; }
         public string Source { get; set; }
-        public string Subtitles { get; set; }
+        private string mSubtitles = "None";
+        public string Subtitles { get { return mSubtitles; } set { mSubtitles = value; } }
         /// <summary>
         /// This is what you get for mi.Option("Complete");
         /// </summary>

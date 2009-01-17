@@ -19,7 +19,7 @@ namespace TorrentDescriptionMaker
         /// <summary>
         /// Mode of taking screenshots for Media files
         /// </summary>
-        public TakeScreenshotsMode TakeScreenshots { get; set; }
+        public TakeScreenshotsType TakeScreenshots { get; set; }
         /// <summary>
         /// Packet that contains Tracker Information 
         /// </summary>

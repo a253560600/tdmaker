@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using TDMaker.Properties;
 using System.IO;
-using ZSS.ImageUploader;
 using MediaInfoLib;
 using System.Text;
 using System.ComponentModel;
 using TDMaker;
+using ZSS.ImageUploader;
 
 namespace TorrentDescriptionMaker
 {
@@ -26,8 +26,8 @@ namespace TorrentDescriptionMaker
 
             if (Settings.Default.TakeScreenshot)
             {
-                if (TakeScreenshot(mi.Overall.FilePath) && 
-                    Settings.Default.UploadImageShack)
+                if (TakeScreenshot(mi.Overall.FilePath) &&
+                    Settings.Default.UploadScreenshot)
                 {
                     UploadScreenshot(mi.Overall.FilePath);
                 }
@@ -72,24 +72,51 @@ namespace TorrentDescriptionMaker
 
         }
 
+        private List<ImageFile> UploadImageShack(string screenshot)
+        {
+            List<ZSS.ImageUploader.ImageFile> lstScreenshots = new List<ImageFile>();
+            int retry = 1;
+            ImageShackUploader su = new ImageShackUploader();
+            while (retry <= 3 && lstScreenshots == null ||
+               (retry <= 3 && lstScreenshots != null && lstScreenshots.Count < 1))
+            {
+                Program.Status = string.Format("Uploading screenshot to ImageShack... Attempt {0}", retry);
+                lstScreenshots = su.UploadImage(screenshot);
+            }
+            return lstScreenshots;
+        }
+
+        private List<ImageFile> UploadTinyPic(string screenshot)
+        {
+            List<ZSS.ImageUploader.ImageFile> lstScreenshots = new List<ImageFile>();
+            int retry = 1;
+            TinyPicUploader tpu = new TinyPicUploader("e2aabb8d555322fa", "00a68ed73ddd54da52dc2d5803fa35ee");
+            while (retry <= 3 && lstScreenshots == null ||
+               (retry <= 3 && lstScreenshots != null && lstScreenshots.Count < 1))
+            {
+                Program.Status = string.Format("Uploading screenshot to TinyPic... Attempt {0}", retry);
+                lstScreenshots = tpu.UploadImage(screenshot);
+            }
+            return lstScreenshots;
+        }
+
         private void UploadScreenshot(String mediaFilePath)
         {
-
-
 
             string screenshot = Path.Combine(Program.ScreenshotsDir, Path.GetFileNameWithoutExtension(mediaFilePath) + "_s.jpg");
 
             if (File.Exists(screenshot))
             {
-                ImageShackUploader su = new ImageShackUploader();
-
-                int retry = 1;
                 List<ZSS.ImageUploader.ImageFile> lstScreenshots = new List<ImageFile>();
-                while (retry <= 3 && lstScreenshots == null ||
-                   (retry <= 3 && lstScreenshots != null && lstScreenshots.Count < 1))
+
+                switch ((ScreenshotDestType)Settings.Default.ScreenshotDestIndex)
                 {
-                    Program.Status = string.Format("Uploading screenshot to ImageShack... Attempt {0}", retry);
-                    lstScreenshots = su.UploadImage(screenshot);
+                    case ScreenshotDestType.IMAGESHACK:
+                        lstScreenshots = UploadImageShack(screenshot);
+                        break;
+                    case ScreenshotDestType.TINYPIC:
+                        lstScreenshots = UploadTinyPic(screenshot);
+                        break;
                 }
 
                 if (lstScreenshots != null && lstScreenshots.Count > 0)
@@ -130,7 +157,7 @@ namespace TorrentDescriptionMaker
         {
             tr.SetFullScreenshot(options.FullPicture);
             tr.CreateInfo();
-          
+
             StringBuilder sbPublish = new StringBuilder();
             sbPublish.Append(GetMediaInfo(tr.PublishInfo, options));
 

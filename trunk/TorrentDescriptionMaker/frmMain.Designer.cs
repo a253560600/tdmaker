@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnMTNHelp = new System.Windows.Forms.Button();
             this.btnBrowseMTN = new System.Windows.Forms.Button();
@@ -89,6 +89,7 @@
             this.chkAnalyzeAuto = new System.Windows.Forms.CheckBox();
             this.tcOptions = new System.Windows.Forms.TabControl();
             this.tpScreenshots = new System.Windows.Forms.TabPage();
+            this.cboScreenshotDest = new System.Windows.Forms.ComboBox();
             this.chkKeepScreenshot = new System.Windows.Forms.CheckBox();
             this.chkOptImageShack = new System.Windows.Forms.CheckBox();
             this.tpTorrents = new System.Windows.Forms.TabPage();
@@ -127,13 +128,13 @@
             this.btnPublish = new System.Windows.Forms.Button();
             this.btnAnalyze = new System.Windows.Forms.Button();
             this.cmsApp = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cmsAppAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmUpdatesCheck = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.foldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmScreenshots = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmTemplates = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmTorrentsDir = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmUpdatesCheck = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsAppAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.btnCreateTorrent = new System.Windows.Forms.Button();
             this.trackerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
@@ -398,7 +399,7 @@
             // 
             // sbarIcon
             // 
-            this.sbarIcon.Image = global::TDMaker.Properties.Resources.info_16_xp;
+            this.sbarIcon.Image = ((System.Drawing.Image)(resources.GetObject("sbarIcon.Image")));
             this.sbarIcon.Name = "sbarIcon";
             this.sbarIcon.Size = new System.Drawing.Size(16, 17);
             // 
@@ -816,6 +817,7 @@
             // 
             // tpScreenshots
             // 
+            this.tpScreenshots.Controls.Add(this.cboScreenshotDest);
             this.tpScreenshots.Controls.Add(this.chkKeepScreenshot);
             this.tpScreenshots.Controls.Add(this.chkOptImageShack);
             this.tpScreenshots.Controls.Add(this.groupBox1);
@@ -826,6 +828,19 @@
             this.tpScreenshots.TabIndex = 0;
             this.tpScreenshots.Text = "Screenshots";
             this.tpScreenshots.UseVisualStyleBackColor = true;
+            // 
+            // cboScreenshotDest
+            // 
+            this.cboScreenshotDest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboScreenshotDest.FormattingEnabled = true;
+            this.cboScreenshotDest.Items.AddRange(new object[] {
+            "ImageShack",
+            "TinyPic"});
+            this.cboScreenshotDest.Location = new System.Drawing.Point(528, 14);
+            this.cboScreenshotDest.Name = "cboScreenshotDest";
+            this.cboScreenshotDest.Size = new System.Drawing.Size(121, 21);
+            this.cboScreenshotDest.TabIndex = 2;
+            this.cboScreenshotDest.SelectedIndexChanged += new System.EventHandler(this.cboScreenshotDest_SelectedIndexChanged);
             // 
             // chkKeepScreenshot
             // 
@@ -843,14 +858,14 @@
             // chkOptImageShack
             // 
             this.chkOptImageShack.AutoSize = true;
-            this.chkOptImageShack.Checked = global::TDMaker.Properties.Settings.Default.UploadImageShack;
+            this.chkOptImageShack.Checked = global::TDMaker.Properties.Settings.Default.UploadScreenshot;
             this.chkOptImageShack.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkOptImageShack.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "UploadImageShack", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkOptImageShack.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "UploadScreenshot", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkOptImageShack.Location = new System.Drawing.Point(393, 16);
             this.chkOptImageShack.Name = "chkOptImageShack";
-            this.chkOptImageShack.Size = new System.Drawing.Size(192, 17);
+            this.chkOptImageShack.Size = new System.Drawing.Size(129, 17);
             this.chkOptImageShack.TabIndex = 0;
-            this.chkOptImageShack.Text = "Upload Screenshot to &ImageShack";
+            this.chkOptImageShack.Text = "Upload Screenshot to";
             this.chkOptImageShack.UseVisualStyleBackColor = true;
             this.chkOptImageShack.CheckedChanged += new System.EventHandler(this.chkOptImageShack_CheckedChanged);
             // 
@@ -1312,25 +1327,6 @@
             this.cmsApp.Name = "cmsApp";
             this.cmsApp.Size = new System.Drawing.Size(181, 76);
             // 
-            // cmsAppAbout
-            // 
-            this.cmsAppAbout.Name = "cmsAppAbout";
-            this.cmsAppAbout.Size = new System.Drawing.Size(180, 22);
-            this.cmsAppAbout.Text = "&About...";
-            this.cmsAppAbout.Click += new System.EventHandler(this.cmsAppAbout_Click);
-            // 
-            // tsmUpdatesCheck
-            // 
-            this.tsmUpdatesCheck.Name = "tsmUpdatesCheck";
-            this.tsmUpdatesCheck.Size = new System.Drawing.Size(180, 22);
-            this.tsmUpdatesCheck.Text = "Check for &Updates...";
-            this.tsmUpdatesCheck.Click += new System.EventHandler(this.tsmUpdatesCheck_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
-            // 
             // foldersToolStripMenuItem
             // 
             this.foldersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1344,23 +1340,42 @@
             // tsmScreenshots
             // 
             this.tsmScreenshots.Name = "tsmScreenshots";
-            this.tsmScreenshots.Size = new System.Drawing.Size(152, 22);
+            this.tsmScreenshots.Size = new System.Drawing.Size(146, 22);
             this.tsmScreenshots.Text = "&Screenshots...";
             this.tsmScreenshots.Click += new System.EventHandler(this.tsmScreenshots_Click);
             // 
             // tsmTemplates
             // 
             this.tsmTemplates.Name = "tsmTemplates";
-            this.tsmTemplates.Size = new System.Drawing.Size(152, 22);
+            this.tsmTemplates.Size = new System.Drawing.Size(146, 22);
             this.tsmTemplates.Text = "Templates...";
             this.tsmTemplates.Click += new System.EventHandler(this.tsmTemplates_Click);
             // 
             // tsmTorrentsDir
             // 
             this.tsmTorrentsDir.Name = "tsmTorrentsDir";
-            this.tsmTorrentsDir.Size = new System.Drawing.Size(152, 22);
+            this.tsmTorrentsDir.Size = new System.Drawing.Size(146, 22);
             this.tsmTorrentsDir.Text = "&Torrents...";
             this.tsmTorrentsDir.Click += new System.EventHandler(this.tsmTorrentsDir_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            // 
+            // tsmUpdatesCheck
+            // 
+            this.tsmUpdatesCheck.Name = "tsmUpdatesCheck";
+            this.tsmUpdatesCheck.Size = new System.Drawing.Size(180, 22);
+            this.tsmUpdatesCheck.Text = "Check for &Updates...";
+            this.tsmUpdatesCheck.Click += new System.EventHandler(this.tsmUpdatesCheck_Click);
+            // 
+            // cmsAppAbout
+            // 
+            this.cmsAppAbout.Name = "cmsAppAbout";
+            this.cmsAppAbout.Size = new System.Drawing.Size(180, 22);
+            this.cmsAppAbout.Text = "&About...";
+            this.cmsAppAbout.Click += new System.EventHandler(this.cmsAppAbout_Click);
             // 
             // btnCreateTorrent
             // 
@@ -1559,6 +1574,7 @@
         private System.Windows.Forms.CheckBox chkScreenshot;
         private System.Windows.Forms.ToolStripMenuItem tsmTemplates;
         private System.Windows.Forms.ToolStripMenuItem tsmUpdatesCheck;
+        private System.Windows.Forms.ComboBox cboScreenshotDest;
     }
 }
 
