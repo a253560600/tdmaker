@@ -9,6 +9,7 @@
 
 %General_Info%
 
-%Video_Info%
+[img]%ScreenshotFull%[/img]
 
+%Video_Info%
 %Audio_Info%

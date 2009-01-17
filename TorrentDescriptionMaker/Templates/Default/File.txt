@@ -5,5 +5,8 @@
 [size=%FontSize_Heading2%][b][i]%FileName%[/i][/b][/size]
 
 %General_Info%
+
+[img]%ScreenshotFull%[/img]
+
 %Video_Info%
 %Audio_Info%
