@@ -1,5 +1,5 @@
 ﻿[size=%FontSize_Heading2%][b][i]Audio #%AudioID%:[/i][/b][/size]
-[size=%FontSize_Heading3%]
+[size=%FontSize_Body%]
             [u]Format:[/u] %Audio_Format%
            [u]Bitrate:[/u] %Audio_Bitrate%
           [u]Channels:[/u] %Audio_Channels%
