@@ -1,4 +1,7 @@
 ﻿File: %FileName%
 %General_Info%
+
+[img]%ScreenshotFull%[/img]
+
 %Audio_Info%
 %Video_Info%
