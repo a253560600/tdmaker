@@ -109,18 +109,24 @@ namespace TorrentDescriptionMaker
 
     }
 
-    public enum TakeScreenshotsMode
+    public enum TakeScreenshotsType
     {
         NONE,
         TAKE_ALL_SCREENSHOTS,
         TAKE_ONE_SCREENSHOT
     }
 
-    public enum ProgressMode
+    public enum ProgressType
     {
         INCREMENT_PROGRESS_WITH_MSG,
         REPORT_MEDIAINFO_SUMMARY,
         UPDATE_PROGRESSBAR_MAX
+    }
+
+    public enum ScreenshotDestType
+    {
+        IMAGESHACK, 
+        TINYPIC
     }
 
     public class TorrentPacket

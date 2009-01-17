@@ -67,12 +67,12 @@ namespace TDMaker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool UploadImageShack {
+        public bool UploadScreenshot {
             get {
-                return ((bool)(this["UploadImageShack"]));
+                return ((bool)(this["UploadScreenshot"]));
             }
             set {
-                this["UploadImageShack"] = value;
+                this["UploadScreenshot"] = value;
             }
         }
         
@@ -548,6 +548,18 @@ namespace TDMaker.Properties {
             }
             set {
                 this["AutoCheckUpdates"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int ScreenshotDestIndex {
+            get {
+                return ((int)(this["ScreenshotDestIndex"]));
+            }
+            set {
+                this["ScreenshotDestIndex"] = value;
             }
         }
     }

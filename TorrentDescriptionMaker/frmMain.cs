@@ -19,6 +19,13 @@ namespace TorrentDescriptionMaker
         /// Global TorrentInfo for Using Quick Pre/Align Center commands
         /// </summary>
         private TorrentInfo mTorrentInfo = null;
+        /// <summary>
+        /// Background Worker responsible for Creating Torrents
+        /// </summary>
+        private BackgroundWorker mBwTorrent = new BackgroundWorker();
+        /// <summary>
+        /// Application Version
+        /// </summary>
         private McoreSystem.AppInfo mAppInfo = new McoreSystem.AppInfo(Application.ProductName, Application.ProductVersion, McoreSystem.AppInfo.SoftwareCycle.FINAL);
 
         public frmMain()
@@ -59,7 +66,7 @@ namespace TorrentDescriptionMaker
                     if (Settings.Default.CreateTorrent)
                         createTorrent(tp);
 
-                    updateGuiControls();
+                    UpdateGuiControls();
                 }
             }
 
@@ -107,9 +114,9 @@ namespace TorrentDescriptionMaker
                     }
 
                     // Screenshots Mode
-                    if (Settings.Default.UploadImageShack)
+                    if (Settings.Default.UploadScreenshot)
                     {
-                        mi.TakeScreenshots = TakeScreenshotsMode.TAKE_ONE_SCREENSHOT;
+                        mi.TakeScreenshots = TakeScreenshotsType.TAKE_ONE_SCREENSHOT;
                     }
 
                     // if it is a DVD, set the title to be name of the folder. 
@@ -131,7 +138,7 @@ namespace TorrentDescriptionMaker
             if (!bwApp.IsBusy)
                 bwApp.RunWorkerAsync(miList);
 
-            updateGuiControls();
+            UpdateGuiControls();
 
         }
 
@@ -192,6 +199,8 @@ namespace TorrentDescriptionMaker
 
             Settings.Default.TorrentFolderDefault = rbTorrentDefaultFolder.Checked;
 
+            Settings.Default.ScreenshotDestIndex = cboScreenshotDest.SelectedIndex;
+
             Settings.Default.Save();
         }
 
@@ -213,8 +222,8 @@ namespace TorrentDescriptionMaker
                 McoreSystem.AppInfo.VersionDepth.MajorMinorBuild) + 
                 " - Drag and Drop a Movie file or folder...";
 
-            updateGuiControls();
-
+            UpdateGuiControls();
+            
             UpdateChecker uc = new UpdateChecker(this.Icon, Resources.GenuineAdv, sBar, false);
             uc.CheckUpdates();
 
@@ -310,6 +319,8 @@ namespace TorrentDescriptionMaker
 
             rbFile.Checked = !Settings.Default.BrowseDir;
 
+            cboScreenshotDest.SelectedIndex = Settings.Default.ScreenshotDestIndex;
+
             if (string.IsNullOrEmpty(Settings.Default.MTNPath))
                 Settings.Default.MTNPath = Path.Combine(Application.StartupPath, "mtn.exe");
 
@@ -400,20 +411,20 @@ namespace TorrentDescriptionMaker
             List<MediaInfo2> miList = (List<MediaInfo2>)e.Argument;
             List<TorrentInfo> tiList = new List<TorrentInfo>();
 
-            bwApp.ReportProgress((int)ProgressMode.UPDATE_PROGRESSBAR_MAX, miList.Count);
+            bwApp.ReportProgress((int)ProgressType.UPDATE_PROGRESSBAR_MAX, miList.Count);
 
             foreach (MediaInfo2 mi in miList)
             {
                 Program.Status = "Reading " + mi.Location;
                 mi.ReadMedia();
 
-                bwApp.ReportProgress((int)ProgressMode.REPORT_MEDIAINFO_SUMMARY, mi.Overall.Summary);
+                bwApp.ReportProgress((int)ProgressType.REPORT_MEDIAINFO_SUMMARY, mi.Overall.Summary);
 
                 TorrentInfo ti = new TorrentInfo(bwApp, mi);
 
                 PublishOptionsPacket pop = new PublishOptionsPacket();
                 pop.AlignCenter = Settings.Default.AlignCenter;
-                pop.FullPicture = Settings.Default.UploadImageShack && Settings.Default.UseFullPicture;
+                pop.FullPicture = Settings.Default.UploadScreenshot && Settings.Default.UseFullPicture;
                 pop.PreformattedText = Settings.Default.PreText;
 
                 ti.PublishOptions = pop;
@@ -437,7 +448,7 @@ namespace TorrentDescriptionMaker
 
                 tiList.Add(ti);
 
-                bwApp.ReportProgress((int)ProgressMode.INCREMENT_PROGRESS_WITH_MSG, mi.Title);
+                bwApp.ReportProgress((int)ProgressType.INCREMENT_PROGRESS_WITH_MSG, mi.Title);
 
             }
 
@@ -460,9 +471,9 @@ namespace TorrentDescriptionMaker
             return pt;
         }
 
-        private void updateGuiControls()
+        private void UpdateGuiControls()
         {
-            btnCreateTorrent.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtMediaLocation.Text);
+            btnCreateTorrent.Enabled = !mBwTorrent.IsBusy && !bwApp.IsBusy && !string.IsNullOrEmpty(txtMediaLocation.Text);
             btnAnalyze.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtMediaLocation.Text);
 
             btnCopy0.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtScrFull.Text);
@@ -507,7 +518,7 @@ namespace TorrentDescriptionMaker
 
                     // sbPublish.AppendLine("Get your Torrent Description like this using TDMaker: http://code.google.com/p/tdmaker");
 
-                    updateGuiControls();
+                    UpdateGuiControls();
 
                 }
 
@@ -605,7 +616,6 @@ namespace TorrentDescriptionMaker
             }
         }
 
-        BackgroundWorker mBwTorrent = null;
 
         void bwTorrent_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -655,22 +665,22 @@ namespace TorrentDescriptionMaker
             if (e.UserState != null)
             {
                 string msg = e.UserState.ToString();
-                ProgressMode perc = (ProgressMode)e.ProgressPercentage;
+                ProgressType perc = (ProgressType)e.ProgressPercentage;
 
                 switch (perc)
                 {
-                    case ProgressMode.INCREMENT_PROGRESS_WITH_MSG:
+                    case ProgressType.INCREMENT_PROGRESS_WITH_MSG:
                         pBar.Style = ProgressBarStyle.Continuous;
                         pBar.Increment(1);
                         sBar.Text = msg;
                         break;
 
-                    case ProgressMode.REPORT_MEDIAINFO_SUMMARY:
+                    case ProgressType.REPORT_MEDIAINFO_SUMMARY:
                         lbStatus.Items.Add("Analyzed Media using MediaInfo");
                         txtMediaInfo.Text = msg;
                         break;
 
-                    case ProgressMode.UPDATE_PROGRESSBAR_MAX:
+                    case ProgressType.UPDATE_PROGRESSBAR_MAX:
                         pBar.Style = ProgressBarStyle.Continuous;
                         pBar.Maximum = (int)e.UserState;
                         break;
@@ -775,7 +785,7 @@ namespace TorrentDescriptionMaker
 
         private void rbTorrentFolderCustom_CheckedChanged(object sender, EventArgs e)
         {
-            updateGuiControls();
+            UpdateGuiControls();
         }
 
         private void cboAnnounceURL_SelectedIndexChanged(object sender, EventArgs e)
@@ -883,6 +893,11 @@ namespace TorrentDescriptionMaker
         {
             UpdateChecker uc = new UpdateChecker(this.Icon, Resources.GenuineAdv, sBar, true);
             uc.CheckUpdates();
+        }
+
+        private void cboScreenshotDest_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Settings.Default.ScreenshotDestIndex = cboScreenshotDest.SelectedIndex;
         }
 
     }
