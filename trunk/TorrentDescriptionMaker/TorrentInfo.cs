@@ -50,9 +50,6 @@ namespace TorrentDescriptionMaker
                     Program.ScreenshotsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "TDMaker");
                 }
 
-                if (!Directory.Exists(Program.ScreenshotsDir))
-                    Directory.CreateDirectory(Program.ScreenshotsDir);
-
                 psi.Arguments = string.Format("{0} -O \"{1}\" \"{2}\"",
                     Settings.Default.MTNArg,
                     Program.ScreenshotsDir,
@@ -77,13 +74,17 @@ namespace TorrentDescriptionMaker
             List<ZSS.ImageUploader.ImageFile> lstScreenshots = new List<ImageFile>();
             int retry = 1;
             ImageShackUploader su = new ImageShackUploader();
+            su.RandomizeFileName = Settings.Default.ImageShakeRandomizeFileName;
+
             while (retry <= 3 && lstScreenshots == null ||
                (retry <= 3 && lstScreenshots != null && lstScreenshots.Count < 1))
             {
                 Program.Status = string.Format("Uploading screenshot to ImageShack... Attempt {0}", retry);
                 lstScreenshots = su.UploadImage(screenshot);
+                retry++;
             }
             return lstScreenshots;
+
         }
 
         private List<ImageFile> UploadTinyPic(string screenshot)
@@ -96,6 +97,7 @@ namespace TorrentDescriptionMaker
             {
                 Program.Status = string.Format("Uploading screenshot to TinyPic... Attempt {0}", retry);
                 lstScreenshots = tpu.UploadImage(screenshot);
+                retry++;
             }
             return lstScreenshots;
         }

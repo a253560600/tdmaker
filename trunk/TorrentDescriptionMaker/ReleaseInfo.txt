@@ -2,7 +2,7 @@
 
 1.5.0.04 Fixed incorrect syntax %Audio_%Format% to %Audio_Format%
 
-Please delete the Default and Minimal folder in: 
+If you have not done this step before, please delete the Default and Minimal folder in: 
 
 \%UserName%\Documents\Applications\Torrent Description Maker\Templates
 

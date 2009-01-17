@@ -562,5 +562,29 @@ namespace TDMaker.Properties {
                 this["ScreenshotDestIndex"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UpdateCheckAuto {
+            get {
+                return ((bool)(this["UpdateCheckAuto"]));
+            }
+            set {
+                this["UpdateCheckAuto"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ImageShakeRandomizeFileName {
+            get {
+                return ((bool)(this["ImageShakeRandomizeFileName"]));
+            }
+            set {
+                this["ImageShakeRandomizeFileName"] = value;
+            }
+        }
     }
 }

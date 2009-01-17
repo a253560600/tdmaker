@@ -1,4 +1,5 @@
-1.7.0.00 Added support to upload screenshots to TinyPic
+1.7.1.00 Option to Randomize File Name for screenshots uploaded to ImageShack [Tegan]
+1.7.0.00 Added support to upload screenshots to TinyPic. Need .NET Framework 3.5
 1.6.2.00 Faster uploading to ImageShack using updated version of ImageUploader.dll
 1.6.1.00 Support for new syntaxes: %ScreenshotFull% and %ScreenshotForums% [memories]
 
