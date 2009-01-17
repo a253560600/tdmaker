@@ -49,25 +49,25 @@ namespace TDMaker
                     switch (Path.GetFileNameWithoutExtension(f))
                     {
                         case "Disc":
-                            mDiscInfo = sw.ReadToEnd();
+                            mDiscInfo = sw.ReadToEnd().Trim();
                             break;
                         case "DiscAudioInfo":
-                            mDiscAudioInfo = sw.ReadToEnd();
+                            mDiscAudioInfo = sw.ReadToEnd().Trim();
                             break;
                         case "File":
-                            mFileInfo = sw.ReadToEnd();
+                            mFileInfo = sw.ReadToEnd().Trim();
                             break;
                         case "FileAudioInfo":
-                            mFileAudioInfo = sw.ReadToEnd();
+                            mFileAudioInfo = sw.ReadToEnd().Trim();
                             break;
                         case "GeneralInfo":
-                            mGeneralInfo = sw.ReadToEnd();
+                            mGeneralInfo = sw.ReadToEnd().Trim();
                             break;
                         case "FileVideoInfo":
-                            mFileVideoInfo = sw.ReadToEnd();
+                            mFileVideoInfo = sw.ReadToEnd().Trim();
                             break;
                         case "DiscVideoInfo":
-                            mDiscVideoInfo = sw.ReadToEnd();
+                            mDiscVideoInfo = sw.ReadToEnd().Trim();
                             break;
                     }
                 }
@@ -111,33 +111,33 @@ namespace TDMaker
 
         private string GetScreenshotInfo(ref string pattern, MediaInfo2 mi)
         {
-            pattern = Regex.Replace(pattern, "%ScreenshotFull%", mi.ScreenshotFull);
-            pattern = Regex.Replace(pattern, "%ScreenshotForums%", mi.ScreenshotForums);
+            pattern = Regex.Replace(pattern, "%ScreenshotFull%", mi.ScreenshotFull, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%ScreenshotForums%", mi.ScreenshotForums, RegexOptions.IgnoreCase);
 
             return pattern;
         }
 
         private string GetGeneralInfo(string pattern, MediaFile mf)
-        {
-            pattern = Regex.Replace(pattern, "%Format%", mf.Format);
-            pattern = Regex.Replace(pattern, "%Bitrate%", mf.Bitrate);
-            pattern = Regex.Replace(pattern, "%FileSize%", mf.FileSizeString);
-            pattern = Regex.Replace(pattern, "%Subtitles%", mf.Subtitles);
-            pattern = Regex.Replace(pattern, "%Duration%", mf.DurationString);
+        {            
+            pattern = Regex.Replace(pattern, "%Format%", mf.Format, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Bitrate%", mf.Bitrate, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%FileSize%", mf.FileSizeString, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Subtitles%", mf.Subtitles, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Duration%", mf.DurationString,RegexOptions.IgnoreCase);
 
             return pattern;
         }
 
         private string GetVideoInfo(string pattern, MediaFile mf)
         {
-            pattern = Regex.Replace(pattern, "%Video_Format%", mf.Video.Format);
-            pattern = Regex.Replace(pattern, "%Video_Bitrate%", mf.Video.Bitrate);
-            pattern = Regex.Replace(pattern, "%Video_Standard%", mf.Video.Standard);
-            pattern = Regex.Replace(pattern, "%Video_FrameRate%", mf.Video.FrameRate);
-            pattern = Regex.Replace(pattern, "%Video_ScanType%", mf.Video.ScanType);
-            pattern = Regex.Replace(pattern, "%Video_BitsPerPixelFrame%", mf.Video.BitsPerPixelXFrame);
-            pattern = Regex.Replace(pattern, "%Video_Width%", mf.Video.Width);
-            pattern = Regex.Replace(pattern, "%Video_Height%", mf.Video.Height);
+            pattern = Regex.Replace(pattern, "%Video_Format%", mf.Video.Format, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Video_Bitrate%", mf.Video.Bitrate, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Video_Standard%", mf.Video.Standard, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Video_FrameRate%", mf.Video.FrameRate, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Video_ScanType%", mf.Video.ScanType, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Video_BitsPerPixelFrame%", mf.Video.BitsPerPixelXFrame, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Video_Width%", mf.Video.Width, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Video_Height%", mf.Video.Height, RegexOptions.IgnoreCase);
 
             return pattern;
         }

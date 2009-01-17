@@ -223,15 +223,22 @@ namespace TorrentDescriptionMaker
                 " - Drag and Drop a Movie file or folder...";
 
             UpdateGuiControls();
-            
-            UpdateChecker uc = new UpdateChecker(this.Icon, Resources.GenuineAdv, sBar, false);
-            uc.CheckUpdates();
+
+            if (Settings.Default.UpdateCheckAuto)
+            {
+                UpdateChecker uc = new UpdateChecker(this.Icon, Resources.GenuineAdv, sBar, false);
+                uc.CheckUpdates();
+            }
 
         }
 
         private void configureDirs()
         {
             string dir = Path.Combine("Applications", Application.ProductName);
+
+            // configure Screenshots folder
+            if (!Directory.Exists(Program.ScreenshotsDir))
+                Directory.CreateDirectory(Program.ScreenshotsDir);
 
             // configure Settings folder
             if (string.IsNullOrEmpty(Settings.Default.SettingsDir) ||
@@ -709,6 +716,8 @@ namespace TorrentDescriptionMaker
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(string.Format("Version {0}", Application.ProductVersion));
+            sb.AppendLine();
+            sb.AppendLine(string.Format("Running from {0}", Application.ExecutablePath));
             sb.AppendLine();
             sb.AppendLine("Copyright © McoreD 2009");
             MessageBox.Show(sb.ToString(), Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
