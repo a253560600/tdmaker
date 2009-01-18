@@ -159,7 +159,7 @@ namespace TorrentDescriptionMaker
         INCREMENT_PROGRESS_WITH_MSG,
         REPORT_MEDIAINFO_SUMMARY,
         UPDATE_PROGRESSBAR_MAX,
-        UPDATE_STATUSBAR_MSG
+        UPDATE_STATUSBAR_DEBUG
     }
 
     public enum TaskType

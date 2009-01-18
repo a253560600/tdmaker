@@ -82,7 +82,7 @@ namespace TorrentDescriptionMaker
             {
                 if (retry > 1)
                     Thread.Sleep(1000);
-                mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_MSG, string.Format("Uploading {0} to ImageShack... Attempt {1}", Path.GetFileName(screenshot), retry));
+                mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploading {0} to ImageShack... Attempt {1}", Path.GetFileName(screenshot), retry));
                 lstScreenshots = su.UploadImage(screenshot);
             }
             return lstScreenshots;
@@ -99,7 +99,7 @@ namespace TorrentDescriptionMaker
             {
                 if (retry > 1)
                     Thread.Sleep(1000);
-                mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_MSG, string.Format("Uploading {0} to TinyPic... Attempt {1}", Path.GetFileName(screenshot), retry));
+                mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploading {0} to TinyPic... Attempt {1}", Path.GetFileName(screenshot), retry));
                 lstScreenshots = tpu.UploadImage(screenshot);
             }
             return lstScreenshots;
@@ -178,7 +178,6 @@ namespace TorrentDescriptionMaker
         /// <returns></returns>
         public string CreatePublish(PublishOptionsPacket options)
         {
-
             StringBuilder sbPublish = new StringBuilder();
 
             sbPublish.Append(GetMediaInfo(this.MediaInfo2.ToString(), options));

@@ -439,12 +439,13 @@ namespace TorrentDescriptionMaker
             foreach (MediaInfo2 mi in miList)
             {
 
-                bwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_MSG, "Reading " + mi.Title + " using MediaInfo...");
+                bwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, "Reading " + Path.GetFileName(mi.Location) + " using MediaInfo...");
                 mi.ReadMedia();
 
                 if (mi.Overall != null)
                 {
                     bwApp.ReportProgress((int)ProgressType.REPORT_MEDIAINFO_SUMMARY, mi.Overall.Summary);
+                    Program.WriteDebugLog();
 
                     TorrentInfo ti = new TorrentInfo(bwApp, mi);
 
@@ -485,7 +486,6 @@ namespace TorrentDescriptionMaker
 
             }
 
-
             return tiList;
 
         }
@@ -514,9 +514,9 @@ namespace TorrentDescriptionMaker
                 if (!Directory.Exists(tp.TorrentFolder))
                     Directory.CreateDirectory(Path.GetDirectoryName(torrentPath));
 
-                bwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_MSG, string.Format("Creating {0}", torrentPath));
+                bwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Creating {0}", torrentPath));
                 tc.Create(torrentPath);
-                bwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_MSG, string.Format("Created {0}", torrentPath));
+                bwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Created {0}", torrentPath));
             }
 
             return success;
@@ -533,7 +533,7 @@ namespace TorrentDescriptionMaker
             }
             catch (Exception ex)
             {
-                bwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_MSG, ex.Message);
+                bwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, ex.Message);
             }
 
             return null;
@@ -566,7 +566,7 @@ namespace TorrentDescriptionMaker
             }
             else
             {
-                pt = ti.ToString();
+                pt = ti.CreatePublish(pop);
             }
 
             return pt;
@@ -702,9 +702,10 @@ namespace TorrentDescriptionMaker
                         pBar.Maximum = (int)e.UserState;
                         break;
 
-                    case ProgressType.UPDATE_STATUSBAR_MSG:
+                    case ProgressType.UPDATE_STATUSBAR_DEBUG:
                         sBar.Text = msg;
                         lbStatus.Items.Add(msg);
+                        Program.AppendDebug(msg);
                         break;
                 }
 
