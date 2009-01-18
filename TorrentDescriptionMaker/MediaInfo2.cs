@@ -41,8 +41,7 @@ namespace TorrentDescriptionMaker
         /// <summary>
         /// Clickable Thumbnail to get full screenshot
         /// </summary>
-        public string ScreenshotForums { get; set; }
-        public string ScreenshotFull { get; set; }
+        public ScreenshotsPacket Screenshot { get; set; }
         
         private string[] mExt = new string[] { ".*" }; // { ".avi", ".divx", ".mkv", ".vob", ".mov" };
 
