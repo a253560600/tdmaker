@@ -46,14 +46,9 @@ namespace TorrentDescriptionMaker
                 ProcessStartInfo psi = new ProcessStartInfo(Settings.Default.MTNPath);
                 psi.WindowStyle = ProcessWindowStyle.Hidden;
 
-                if (!Settings.Default.KeepScreenshot)
-                {
-                    Program.ScreenshotsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "TDMaker");
-                }
-
                 psi.Arguments = string.Format("{0} -O \"{1}\" \"{2}\"",
                     Settings.Default.MTNArg,
-                    Program.ScreenshotsDir,
+                    (Settings.Default.KeepScreenshot?  Program.ScreenshotsDir : Program.ScreenshotsTempDir),
                     mediaFilePath);
 
                 p.StartInfo = psi;
@@ -145,12 +140,6 @@ namespace TorrentDescriptionMaker
                 else
                 {
                     Program.Status = "Failed uploading screenshot to ImageShack. Try again later.";
-                }
-
-                if (!Settings.Default.KeepScreenshot)
-                {
-                    // delete if option set to temporary location 
-                    File.Delete(screenshot);
                 }
 
             }

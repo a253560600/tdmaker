@@ -62,14 +62,14 @@ namespace TDMaker
 
                 if (appInfo.isUpdated(mcUpdateCheckUrl))
                 {
-                    appInfo.CheckUpdates(mcUpdateCheckUrl, mcUpdateDownloadDir, Program.APP_ABBR_NAME_IT, McoreSystem.AppInfo.OutdatedMsgStyle.NewVersionOfAppAvailable);
+                    appInfo.CheckUpdates(mcUpdateCheckUrl, mcUpdateDownloadDir, Program.APP_NAME, McoreSystem.AppInfo.OutdatedMsgStyle.NewVersionOfAppAvailable);
                 }
             }
 
             else if (mIsManualCheckUpdate)
             {
 
-                appInfo.CheckUpdates(mcUpdateCheckUrl, mcUpdateDownloadDir, Program.APP_ABBR_NAME_IT, McoreSystem.AppInfo.OutdatedMsgStyle.NewVersionOfAppAvailable);
+                appInfo.CheckUpdates(mcUpdateCheckUrl, mcUpdateDownloadDir, Program.APP_NAME, McoreSystem.AppInfo.OutdatedMsgStyle.NewVersionOfAppAvailable);
             }
         }
 

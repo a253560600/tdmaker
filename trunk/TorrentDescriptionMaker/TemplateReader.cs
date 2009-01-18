@@ -111,9 +111,11 @@ namespace TDMaker
 
         private string GetScreenshotInfo(ref string pattern, MediaInfo2 mi)
         {
-            pattern = Regex.Replace(pattern, "%ScreenshotFull%", mi.Screenshot.Full, RegexOptions.IgnoreCase);
-            pattern = Regex.Replace(pattern, "%ScreenshotForums%", mi.Screenshot.LinkedThumbnail, RegexOptions.IgnoreCase);
-
+            if (!string.IsNullOrEmpty(mi.Screenshot.Full) && !string.IsNullOrEmpty(mi.Screenshot.LinkedThumbnail))
+            {
+                pattern = Regex.Replace(pattern, "%ScreenshotFull%", mi.Screenshot.Full, RegexOptions.IgnoreCase);
+                pattern = Regex.Replace(pattern, "%ScreenshotForums%", mi.Screenshot.LinkedThumbnail, RegexOptions.IgnoreCase);
+            }
             return pattern;
         }
 
@@ -130,6 +132,7 @@ namespace TDMaker
 
         private string GetVideoInfo(string pattern, MediaFile mf)
         {
+            pattern = Regex.Replace(pattern, "%Video_Codec%", mf.Video.Codec, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Video_Format%", mf.Video.Format, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Video_Bitrate%", mf.Video.Bitrate, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Video_Standard%", mf.Video.Standard, RegexOptions.IgnoreCase);

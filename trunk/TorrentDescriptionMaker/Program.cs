@@ -21,10 +21,11 @@ namespace TorrentDescriptionMaker
             Application.Run(new frmMain());
         }
 
-        public const string APP_ABBR_NAME_IT = "TDMaker";
+        public const string APP_NAME = "TDMaker";
         public static TaskType CurrentTask { get; set; }
         public static string Status { get; set; }
-        public static string ScreenshotsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "MTN");
+        public readonly static string ScreenshotsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "MTN");
+        public readonly static string ScreenshotsTempDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), APP_NAME);
         public static string LogsDir { get; set; }
         public static string DebugLogFilePath { get; set; }
         private static StringBuilder mSbDebug = new StringBuilder(); 
