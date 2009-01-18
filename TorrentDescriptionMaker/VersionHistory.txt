@@ -1,3 +1,6 @@
+1.7.2.00 Use of ListBox for multiple files instead of a TextBox
+1.7.1.01 Create torrents in a sequence to prevent HDD thrashing
+1.7.1.01 Object reference not set to an instance of an object error for Empty folders [tacoking]
 1.7.1.00 Option to Randomize File Name for screenshots uploaded to ImageShack [Tegan]
 1.7.0.00 Added support to upload screenshots to TinyPic. Need .NET Framework 3.5
 1.6.2.00 Faster uploading to ImageShack using updated version of ImageUploader.dll

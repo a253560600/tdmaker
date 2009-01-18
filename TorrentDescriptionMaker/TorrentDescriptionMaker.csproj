@@ -48,7 +48,6 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ImageUploader, Version=1.0.3304.37892, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="McoreSystem, Version=1.13.2.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="MonoTorrent, Version=0.62.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -107,6 +106,7 @@
     <Compile Include="Tracker.cs" />
     <Compile Include="TrackerManager.cs" />
     <Compile Include="UpdateChecker.cs" />
+    <Compile Include="WorkerTask.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\DataSources\Tracker.datasource" />
@@ -142,6 +142,12 @@
     <Content Include="Resources\GenuineAdv.png" />
     <Content Include="TODO.txt" />
     <Content Include="VersionHistory.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\ZScreen\ImageUploader\ImageUploader\ImageUploader.csproj">
+      <Project>{223EC461-C070-4FF3-ADE7-92BC21AE66FC}</Project>
+      <Name>ImageUploader</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
