@@ -20,10 +20,6 @@ namespace TorrentDescriptionMaker
         /// </summary>
         private TorrentInfo mTorrentInfo = null;
         /// <summary>
-        /// Background Worker responsible for Creating Torrents
-        /// </summary>
-        private BackgroundWorker mBwTorrent = new BackgroundWorker();
-        /// <summary>
         /// Application Version
         /// </summary>
         private McoreSystem.AppInfo mAppInfo = new McoreSystem.AppInfo(Application.ProductName, Application.ProductVersion, McoreSystem.AppInfo.SoftwareCycle.FINAL);
@@ -49,29 +45,37 @@ namespace TorrentDescriptionMaker
         {
 
             string[] paths = (string[])e.Data.GetData(DataFormats.FileDrop, true);
-            loadMedia(paths);
+            LoadMedia(paths);
 
         }
 
-        private void loadMedia(string[] ps)
+        private void LoadMedia(string[] ps)
         {
+            List<TorrentPacket> tps = new List<TorrentPacket>();
+
+            lbFiles.Items.Clear();
+
             foreach (string p in ps)
             {
                 if (File.Exists(p) || Directory.Exists(p))
                 {
-                    txtMediaLocation.Text = p;
-
+                    // txtMediaLocation.Text = p;
+                    Program.AppendDebug(string.Format("Queued {0} to create a torrent", p));
+                    lbFiles.Items.Add(p);
                     TorrentPacket tp = new TorrentPacket(getTracker(), p);
-
-                    if (Settings.Default.CreateTorrent)
-                        createTorrent(tp);
+                    tps.Add(tp);
 
                     UpdateGuiControls();
                 }
             }
 
             if (Settings.Default.AnalyzeAuto)
-                analyzeMedia(ps);
+            {
+                WorkerTask wt = new WorkerTask(TaskType.ANALYZE_MEDIA);
+                wt.FilePaths = ps;
+                analyzeMedia(wt);
+            }
+
         }
 
         /// <summary>
@@ -93,11 +97,11 @@ namespace TorrentDescriptionMaker
             return fl;
         }
 
-        private void analyzeMedia(string[] ps)
+        private void analyzeMedia(WorkerTask wt)
         {
             List<MediaInfo2> miList = new List<MediaInfo2>();
 
-            foreach (string p in ps)
+            foreach (string p in wt.FilePaths)
             {
                 if (File.Exists(p) || Directory.Exists(p))
                 {
@@ -107,7 +111,7 @@ namespace TorrentDescriptionMaker
                     mi.Menu = cboDiscMenu.Text;
                     mi.Authoring = cboAuthoring.Text;
                     mi.WebLink = txtWebLink.Text;
-                    mi.TorrentInfo = new TorrentPacket(getTracker(), p);
+                    mi.TorrentPacketInfo = new TorrentPacket(getTracker(), p);
                     if (Settings.Default.TemplatesMode)
                     {
                         mi.TemplateLocation = Path.Combine(Settings.Default.TemplatesDir, cboTemplate.Text);
@@ -136,7 +140,10 @@ namespace TorrentDescriptionMaker
             }
 
             if (!bwApp.IsBusy)
-                bwApp.RunWorkerAsync(miList);
+            {
+                wt.MediaFiles = miList;
+                bwApp.RunWorkerAsync(wt);
+            }
 
             UpdateGuiControls();
 
@@ -208,6 +215,7 @@ namespace TorrentDescriptionMaker
         {
             // this.WindowState = FormWindowState.Minimized;
             SettingsWrite();
+            Program.WriteDebugLog();
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -218,8 +226,8 @@ namespace TorrentDescriptionMaker
 
             Program.Status = string.Format("Ready.");
 
-            this.Text = mAppInfo.GetApplicationTitle(Application.ProductName, Application.ProductVersion, 
-                McoreSystem.AppInfo.VersionDepth.MajorMinorBuild) + 
+            this.Text = mAppInfo.GetApplicationTitle(Application.ProductName, Application.ProductVersion,
+                McoreSystem.AppInfo.VersionDepth.MajorMinorBuild) +
                 " - Drag and Drop a Movie file or folder...";
 
             UpdateGuiControls();
@@ -235,6 +243,16 @@ namespace TorrentDescriptionMaker
         private void configureDirs()
         {
             string dir = Path.Combine("Applications", Application.ProductName);
+
+            // configure Logs folder
+            Program.LogsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                    dir + "\\Logs");
+            if (!Directory.Exists(Program.LogsDir))
+            {
+                Directory.CreateDirectory(Program.LogsDir);
+            }
+            Program.DebugLogFilePath = String.Format(Path.Combine(Program.LogsDir, "debug-{0}-log.txt"), DateTime.Now.ToString("yyyyMMdd"));
+
 
             // configure Screenshots folder
             if (!Directory.Exists(Program.ScreenshotsDir))
@@ -411,55 +429,131 @@ namespace TorrentDescriptionMaker
             Clipboard.SetText(txtBBScrFull.Text);
         }
 
-        private void bwApp_DoWork(object sender, DoWorkEventArgs e)
+        private object WorkerAnalyzeMedia(WorkerTask wt)
         {
-            // start of the magic :)
-
-            List<MediaInfo2> miList = (List<MediaInfo2>)e.Argument;
+            List<MediaInfo2> miList = wt.MediaFiles;
             List<TorrentInfo> tiList = new List<TorrentInfo>();
 
             bwApp.ReportProgress((int)ProgressType.UPDATE_PROGRESSBAR_MAX, miList.Count);
 
             foreach (MediaInfo2 mi in miList)
             {
-                Program.Status = "Reading " + mi.Location;
+
+                bwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_MSG, "Reading " + mi.Title + " using MediaInfo...");
                 mi.ReadMedia();
 
-                bwApp.ReportProgress((int)ProgressType.REPORT_MEDIAINFO_SUMMARY, mi.Overall.Summary);
-
-                TorrentInfo ti = new TorrentInfo(bwApp, mi);
-
-                PublishOptionsPacket pop = new PublishOptionsPacket();
-                pop.AlignCenter = Settings.Default.AlignCenter;
-                pop.FullPicture = Settings.Default.UploadScreenshot && Settings.Default.UseFullPicture;
-                pop.PreformattedText = Settings.Default.PreText;
-
-                ti.PublishOptions = pop;
-                ti.PublishString = CreatePublish(ti, pop);
-
-                if (Settings.Default.WritePublish)
+                if (mi.Overall != null)
                 {
-                    // create textFiles of MediaInfo           
-                    string txtPath = Path.Combine(mi.TorrentInfo.TorrentFolder, mi.Overall.FileName) + ".txt";
+                    bwApp.ReportProgress((int)ProgressType.REPORT_MEDIAINFO_SUMMARY, mi.Overall.Summary);
 
-                    if (!Directory.Exists(mi.TorrentInfo.TorrentFolder))
+                    TorrentInfo ti = new TorrentInfo(bwApp, mi);
+
+                    PublishOptionsPacket pop = new PublishOptionsPacket();
+                    pop.AlignCenter = Settings.Default.AlignCenter;
+                    pop.FullPicture = Settings.Default.UploadScreenshot && Settings.Default.UseFullPicture;
+                    pop.PreformattedText = Settings.Default.PreText;
+
+                    ti.PublishOptions = pop;
+                    ti.PublishString = CreatePublish(ti, pop);
+
+                    if (Settings.Default.WritePublish)
                     {
-                        Directory.CreateDirectory(mi.TorrentInfo.TorrentFolder);
+                        // create textFiles of MediaInfo           
+                        string txtPath = Path.Combine(mi.TorrentPacketInfo.TorrentFolder, mi.Overall.FileName) + ".txt";
+
+                        if (!Directory.Exists(mi.TorrentPacketInfo.TorrentFolder))
+                        {
+                            Directory.CreateDirectory(mi.TorrentPacketInfo.TorrentFolder);
+                        }
+
+                        using (StreamWriter sw = new StreamWriter(txtPath))
+                        {
+                            sw.WriteLine(ti.PublishString);
+                        }
                     }
 
-                    using (StreamWriter sw = new StreamWriter(txtPath))
+                    tiList.Add(ti);
+
+                    if (Settings.Default.CreateTorrent)
                     {
-                        sw.WriteLine(ti.PublishString);
+                        WorkerCreateTorrent(mi.TorrentPacketInfo);
                     }
+
                 }
-
-                tiList.Add(ti);
 
                 bwApp.ReportProgress((int)ProgressType.INCREMENT_PROGRESS_WITH_MSG, mi.Title);
 
             }
 
-            e.Result = tiList;
+
+            return tiList;
+
+        }
+
+        private bool WorkerCreateTorrent(TorrentPacket tp)
+        {
+            bool success = true;
+
+            string p = tp.MediaLocation;
+            if (File.Exists(p) || Directory.Exists(p))
+            {
+                MonoTorrent.Common.TorrentCreator tc = new MonoTorrent.Common.TorrentCreator();
+                tc.Private = true;
+                tc.Comment = Program.getMediaName(p);
+                tc.Path = p;
+                tc.PublisherUrl = "http://code.google.com/p/tdmaker";
+                tc.Publisher = Application.ProductName;
+                tc.StoreMD5 = true;
+                List<string> temp = new List<string>();
+                temp.Add(tp.Tracker.AnnounceURL);
+                tc.Announces.Add(temp);
+
+                string torrentFileName = (File.Exists(p) ? Path.GetFileName(p) : Program.getMediaName(p)) + ".torrent";
+                string torrentPath = Path.Combine(tp.TorrentFolder, torrentFileName);
+
+                if (!Directory.Exists(tp.TorrentFolder))
+                    Directory.CreateDirectory(Path.GetDirectoryName(torrentPath));
+
+                bwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_MSG, string.Format("Creating {0}", torrentPath));
+                tc.Create(torrentPath);
+                bwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_MSG, string.Format("Created {0}", torrentPath));
+            }
+
+            return success;
+        }
+
+        private object WorkerCreateTorrents(List<TorrentPacket> tps)
+        {
+            try
+            {
+                foreach (TorrentPacket tp in tps)
+                {
+                    WorkerCreateTorrent(tp);
+                }
+            }
+            catch (Exception ex)
+            {
+                bwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_MSG, ex.Message);
+            }
+
+            return null;
+        }
+
+        private void bwApp_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // start of the magic :)
+
+            WorkerTask wt = (WorkerTask)e.Argument;
+
+            switch (wt.Task)
+            {
+                case TaskType.ANALYZE_MEDIA:
+                    e.Result = (List<TorrentInfo>)WorkerAnalyzeMedia(wt);
+                    break;
+                case TaskType.CREATE_TORRENT:
+                    WorkerCreateTorrents(wt.TorrentPackets);
+                    break;
+            }
         }
 
         private string CreatePublish(TorrentInfo ti, PublishOptionsPacket pop)
@@ -480,8 +574,8 @@ namespace TorrentDescriptionMaker
 
         private void UpdateGuiControls()
         {
-            btnCreateTorrent.Enabled = !mBwTorrent.IsBusy && !bwApp.IsBusy && !string.IsNullOrEmpty(txtMediaLocation.Text);
-            btnAnalyze.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtMediaLocation.Text);
+            btnCreateTorrent.Enabled = !bwApp.IsBusy && lbFiles.Items.Count > 0;
+            btnAnalyze.Enabled = !bwApp.IsBusy && lbFiles.Items.Count > 0;
 
             btnCopy0.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtScrFull.Text);
             btnCopy1.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtBBScrFull.Text);
@@ -529,24 +623,17 @@ namespace TorrentDescriptionMaker
 
                 }
 
-                if (!string.IsNullOrEmpty(txtScrFull.Text))
-                    lbStatus.Items.Add("Uploaded Screenshot to ImageShack.");
-
             }
-
-            if (mBwTorrent == null || !mBwTorrent.IsBusy)
-            {
-                pBar.Style = ProgressBarStyle.Continuous;
-                Program.Status = "Ready.";
-            }
+            pBar.Style = ProgressBarStyle.Continuous;
+            sBar.Text = "Ready.";
 
         }
 
         private void tmrStatus_Tick(object sender, EventArgs e)
         {
-            sBar.Text = Program.Status;
+            // sBar.Text = Program.Status;
             btnBrowse.Enabled = !bwApp.IsBusy;
-            btnAnalyze.Enabled = !bwApp.IsBusy && (File.Exists(txtMediaLocation.Text) || Directory.Exists(txtMediaLocation.Text));
+            btnAnalyze.Enabled = !bwApp.IsBusy && lbFiles.Items.Count > 0;
             lbStatus.SelectedIndex = lbStatus.Items.Count - 1;
         }
 
@@ -571,7 +658,7 @@ namespace TorrentDescriptionMaker
                 //dlg.Filter = "Media Files|*.avi; *.divx; *.mkv; *.ogm; *.vob;";
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    loadMedia(dlg.FileNames);
+                    LoadMedia(dlg.FileNames);
                 }
             }
             else
@@ -580,86 +667,10 @@ namespace TorrentDescriptionMaker
                 dlg.Description = "Browse for DVD folder...";
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    loadMedia(new string[] { dlg.SelectedPath });
+                    LoadMedia(new string[] { dlg.SelectedPath });
                 }
             }
 
-        }
-
-        private void createTorrent(TorrentPacket tp)
-        {
-            string p = tp.MediaLocation;
-            if (File.Exists(p) || Directory.Exists(p))
-            {
-                BackgroundWorker bwTorrent = new BackgroundWorker();
-                bwTorrent.DoWork += new DoWorkEventHandler(bwTorrent_DoWork);
-                bwTorrent.WorkerReportsProgress = true;
-                bwTorrent.ProgressChanged += new ProgressChangedEventHandler(bwTorrent_ProgressChanged);
-                bwTorrent.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bwTorrent_RunWorkerCompleted);
-                bwTorrent.RunWorkerAsync(tp);
-            }
-        }
-
-        void bwTorrent_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            btnCreateTorrent.Enabled = true;
-        }
-
-        void bwTorrent_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            string msg = e.UserState.ToString();
-            switch (e.ProgressPercentage)
-            {
-                case 0:
-                    Program.Status = msg;
-                    lbStatus.Items.Add(msg);
-                    pBar.Style = ProgressBarStyle.Continuous;
-                    break;
-                case 1:
-                    Program.Status = msg;
-                    lbStatus.Items.Add(msg);
-                    pBar.Style = ProgressBarStyle.Marquee;
-                    break;
-            }
-        }
-
-
-        void bwTorrent_DoWork(object sender, DoWorkEventArgs e)
-        {
-            mBwTorrent = (BackgroundWorker)sender;
-            if (e.Argument != null)
-            {
-                try
-                {
-                    TorrentPacket tp = (TorrentPacket)e.Argument;
-                    string p = tp.MediaLocation;
-
-                    MonoTorrent.Common.TorrentCreator tc = new MonoTorrent.Common.TorrentCreator();
-                    tc.Private = true;
-                    tc.Comment = Program.getMediaName(p);
-                    tc.Path = p;
-                    tc.PublisherUrl = "http://code.google.com/p/tdmaker";
-                    tc.Publisher = Application.ProductName;
-                    tc.StoreMD5 = true;
-                    List<string> temp = new List<string>();
-                    temp.Add(tp.Tracker.AnnounceURL);
-                    tc.Announces.Add(temp);
-
-                    string torrentFileName = (File.Exists(p) ? Path.GetFileName(p) : Program.getMediaName(p)) + ".torrent";
-                    string torrentPath = Path.Combine(tp.TorrentFolder, torrentFileName);
-
-                    if (!Directory.Exists(tp.TorrentFolder))
-                        Directory.CreateDirectory(Path.GetDirectoryName(torrentPath));
-
-                    mBwTorrent.ReportProgress(1, string.Format("Creating {0}", torrentPath));
-                    tc.Create(torrentPath);
-                    mBwTorrent.ReportProgress(0, string.Format("Created {0}", torrentPath));
-                }
-                catch (Exception ex)
-                {
-                    mBwTorrent.ReportProgress(0, ex.Message);
-                }
-            }
         }
 
         private void btnPublish_Click(object sender, EventArgs e)
@@ -683,13 +694,17 @@ namespace TorrentDescriptionMaker
                         break;
 
                     case ProgressType.REPORT_MEDIAINFO_SUMMARY:
-                        lbStatus.Items.Add("Analyzed Media using MediaInfo");
                         txtMediaInfo.Text = msg;
                         break;
 
                     case ProgressType.UPDATE_PROGRESSBAR_MAX:
                         pBar.Style = ProgressBarStyle.Continuous;
                         pBar.Maximum = (int)e.UserState;
+                        break;
+
+                    case ProgressType.UPDATE_STATUSBAR_MSG:
+                        sBar.Text = msg;
+                        lbStatus.Items.Add(msg);
                         break;
                 }
 
@@ -703,7 +718,14 @@ namespace TorrentDescriptionMaker
 
         private void btnAnalyze_Click(object sender, EventArgs e)
         {
-            this.analyzeMedia(new string[] { txtMediaLocation.Text });
+            string[] files = new string[lbFiles.Items.Count];
+            for (int i = 0; i < lbFiles.Items.Count; i++)
+            {
+                files[i] = lbFiles.Items[i].ToString();
+            }
+            WorkerTask wt = new WorkerTask(TaskType.ANALYZE_MEDIA);
+            wt.FilePaths = files;
+            this.analyzeMedia(wt);
         }
 
         private void txtScrFull_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -777,9 +799,22 @@ namespace TorrentDescriptionMaker
 
         private void btnCreateTorrent_Click(object sender, EventArgs e)
         {
-            TorrentPacket tp = new TorrentPacket(getTracker(), txtMediaLocation.Text);
-            createTorrent(tp);
-            btnCreateTorrent.Enabled = false;
+            if (!bwApp.IsBusy)
+            {
+                List<TorrentPacket> tps = new List<TorrentPacket>();
+                string[] files = new string[lbFiles.Items.Count];
+                for (int i = 0; i < lbFiles.Items.Count; i++)
+                {
+                    files[i] = lbFiles.Items[i].ToString();
+                    tps.Add(new TorrentPacket(getTracker(), files[i]));
+                }
+
+                WorkerTask wt = new WorkerTask(TaskType.CREATE_TORRENT);
+                wt.TorrentPackets = tps;
+                bwApp.RunWorkerAsync(wt);
+
+                btnCreateTorrent.Enabled = false;
+            }
         }
 
         private void btnBrowseTorrentCustomFolder_Click(object sender, EventArgs e)
@@ -907,6 +942,14 @@ namespace TorrentDescriptionMaker
         private void cboScreenshotDest_SelectedIndexChanged(object sender, EventArgs e)
         {
             Settings.Default.ScreenshotDestIndex = cboScreenshotDest.SelectedIndex;
+        }
+
+        private void tsmLogsDir_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(Program.LogsDir))
+            {
+                Process.Start(Program.LogsDir);
+            }
         }
 
     }

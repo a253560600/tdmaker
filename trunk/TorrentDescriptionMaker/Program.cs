@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.IO;
 using TDMaker;
 using TDMaker.Properties;
+using System.Text;
 
 namespace TorrentDescriptionMaker
 {
@@ -23,7 +24,10 @@ namespace TorrentDescriptionMaker
         public const string APP_ABBR_NAME_IT = "TDMaker"; 
         public static string Status { get; set; }
         public static string ScreenshotsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "MTN");
-
+        public static string LogsDir { get; set; }
+        public static string DebugLogFilePath { get; set; }
+        private static StringBuilder mSbDebug = new StringBuilder(); 
+        
         public static string getFileSizeString(double size)
         {
 
@@ -107,6 +111,40 @@ namespace TorrentDescriptionMaker
             return text;
         }
 
+        public static void WriteDebugLog()
+        {
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(DebugLogFilePath, true))
+                {
+                    sw.WriteLine(mSbDebug.ToString());
+                }
+                mSbDebug = new System.Text.StringBuilder();
+                // clear
+                GC.Collect();
+            }
+            catch (Exception ex)
+            {
+               // msAppendWarnings(ex.Message);
+            }
+        }
+
+
+        public static void AppendDebug(string msg)
+        {
+
+            if (mSbDebug.Length < mSbDebug.MaxCapacity)
+            {
+                mSbDebug.AppendLine(DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss") + " " + msg);
+            }
+
+            if (mSbDebug.Length > 100000)
+            {
+                WriteDebugLog();
+            }
+
+        }
+
     }
 
     public enum TakeScreenshotsType
@@ -120,7 +158,14 @@ namespace TorrentDescriptionMaker
     {
         INCREMENT_PROGRESS_WITH_MSG,
         REPORT_MEDIAINFO_SUMMARY,
-        UPDATE_PROGRESSBAR_MAX
+        UPDATE_PROGRESSBAR_MAX,
+        UPDATE_STATUSBAR_MSG
+    }
+
+    public enum TaskType
+    {
+        ANALYZE_MEDIA,
+        CREATE_TORRENT
     }
 
     public enum ScreenshotDestType

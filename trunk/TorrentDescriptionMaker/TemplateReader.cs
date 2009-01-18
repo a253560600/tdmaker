@@ -118,12 +118,12 @@ namespace TDMaker
         }
 
         private string GetGeneralInfo(string pattern, MediaFile mf)
-        {            
+        {
             pattern = Regex.Replace(pattern, "%Format%", mf.Format, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Bitrate%", mf.Bitrate, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%FileSize%", mf.FileSizeString, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Subtitles%", mf.Subtitles, RegexOptions.IgnoreCase);
-            pattern = Regex.Replace(pattern, "%Duration%", mf.DurationString,RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Duration%", mf.DurationString, RegexOptions.IgnoreCase);
 
             return pattern;
         }
@@ -236,17 +236,19 @@ namespace TDMaker
         {
             string pattern = mDiscInfo;
 
-            string gi = GetGeneralInfo(mGeneralInfo, mi.Overall);
-            string vi = GetVideoInfo(mDiscVideoInfo, mi.Overall);
-            string ai = GetAudioInfo(mDiscAudioInfo, mi.Overall);
+            if (mi.Overall != null)
+            {
+                string gi = GetGeneralInfo(mGeneralInfo, mi.Overall);
+                string vi = GetVideoInfo(mDiscVideoInfo, mi.Overall);
+                string ai = GetAudioInfo(mDiscAudioInfo, mi.Overall);
 
-            pattern = Regex.Replace(pattern, "%General_Info%", gi, RegexOptions.IgnoreCase);
-            pattern = Regex.Replace(pattern, "%Video_Info%", vi, RegexOptions.IgnoreCase);
-            pattern = Regex.Replace(pattern, "%Audio_Info%", ai, RegexOptions.IgnoreCase);
+                pattern = Regex.Replace(pattern, "%General_Info%", gi, RegexOptions.IgnoreCase);
+                pattern = Regex.Replace(pattern, "%Video_Info%", vi, RegexOptions.IgnoreCase);
+                pattern = Regex.Replace(pattern, "%Audio_Info%", ai, RegexOptions.IgnoreCase);
 
-            pattern = GetStringFromAnyPattern(pattern, mi.Overall);
-            pattern = GetStyles(pattern); // apply any formatting
-
+                pattern = GetStringFromAnyPattern(pattern, mi.Overall);
+                pattern = GetStyles(pattern); // apply any formatting
+            }
             return pattern;
         }
 

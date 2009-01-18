@@ -23,7 +23,7 @@ namespace TorrentDescriptionMaker
         /// <summary>
         /// Packet that contains Tracker Information 
         /// </summary>
-        public TorrentPacket TorrentInfo { get; set; }
+        public TorrentPacket TorrentPacketInfo { get; set; }
         /// <summary>
         /// FilePath or DirectoryPath of the Media
         /// </summary>
@@ -57,7 +57,7 @@ namespace TorrentDescriptionMaker
         {
 
             MediaFiles = new List<MediaFile>();
-
+            
             // this could be a file path or a directory
             this.Location = loc;
 
