@@ -1,3 +1,5 @@
+1.8.2.00 Screenshots of multiple files or folders analyzed as part of a batch will be in the Screenshots ListBox
+1.8.1.03 Object reference not set to an instance of an object error when using Create Torrent button
 1.8.1.02 Source was not excluded for built-in template if Source was not selected
 1.8.1.01 Randomize Filename checkBox was not disabled if ImageShack is not selected [Lam3rD]
 1.8.1.00 Include percentage of progress next to Progress Bar

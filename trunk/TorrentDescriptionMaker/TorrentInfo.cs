@@ -43,7 +43,7 @@ namespace TorrentDescriptionMaker
             try
             {
                 Process p = new Process();
-                ProcessStartInfo psi = new ProcessStartInfo(Settings.Default.MTNPath);                
+                ProcessStartInfo psi = new ProcessStartInfo(Settings.Default.MTNPath);
                 psi.WindowStyle = ProcessWindowStyle.Hidden;
 
                 if (!Settings.Default.KeepScreenshot)
@@ -126,17 +126,21 @@ namespace TorrentDescriptionMaker
 
                 if (lstScreenshots != null && lstScreenshots.Count > 0)
                 {
+                    ScreenshotsPacket sp = new ScreenshotsPacket(); 
+
                     foreach (ImageFile imf in lstScreenshots)
                     {
                         if (imf.Type == ImageFile.ImageType.FULLIMAGE)
                         {
-                            MediaInfo2.ScreenshotFull = imf.URI;
+                            sp.Full = imf.URI;
                         }
                         else if (imf.Type == ImageFile.ImageType.THUMBNAIL_FORUMS1)
                         {
-                            MediaInfo2.ScreenshotForums = imf.URI;
+                            sp.LinkedThumbnail = imf.URI;
                         }
                     }
+
+                    MediaInfo2.Screenshot = sp;
                 }
                 else
                 {
@@ -216,13 +220,13 @@ namespace TorrentDescriptionMaker
             StringBuilder sbPublish = new StringBuilder();
             BbCode bb = new BbCode();
 
-            if (!string.IsNullOrEmpty(MediaInfo2.ScreenshotFull) && options.FullPicture)
+            if (!string.IsNullOrEmpty(MediaInfo2.Screenshot.Full) && options.FullPicture)
             {
-                sbPublish.AppendLine(bb.Img(MediaInfo2.ScreenshotFull));
+                sbPublish.AppendLine(bb.Img(MediaInfo2.Screenshot.Full));
             }
-            else if (!string.IsNullOrEmpty(MediaInfo2.ScreenshotForums))
+            else if (!string.IsNullOrEmpty(MediaInfo2.Screenshot.LinkedThumbnail))
             {
-                sbPublish.AppendLine(MediaInfo2.ScreenshotForums);
+                sbPublish.AppendLine(MediaInfo2.Screenshot.LinkedThumbnail);
             }
 
             return sbPublish.ToString();
@@ -237,7 +241,7 @@ namespace TorrentDescriptionMaker
             return CreatePublish(this.PublishOptions);
         }
 
-        public MediaInfo2 MediaInfo2 { get; private set; }
+        public MediaInfo2 MediaInfo2 { get; set; }
         /// <summary>
         /// String Representation of Publish tab
         /// ToString() should be called at least once

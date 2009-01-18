@@ -21,7 +21,8 @@ namespace TorrentDescriptionMaker
             Application.Run(new frmMain());
         }
 
-        public const string APP_ABBR_NAME_IT = "TDMaker"; 
+        public const string APP_ABBR_NAME_IT = "TDMaker";
+        public static TaskType CurrentTask { get; set; }
         public static string Status { get; set; }
         public static string ScreenshotsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "MTN");
         public static string LogsDir { get; set; }
@@ -159,6 +160,7 @@ namespace TorrentDescriptionMaker
         INCREMENT_PROGRESS_WITH_MSG,
         REPORT_MEDIAINFO_SUMMARY,
         UPDATE_PROGRESSBAR_MAX,
+        UPDATE_SCREENSHOTS_LIST,
         UPDATE_STATUSBAR_DEBUG
     }
 
@@ -214,6 +216,12 @@ namespace TorrentDescriptionMaker
 
         }
 
+    }
+
+    public struct ScreenshotsPacket
+    {
+        public string Full { get; set; }
+        public string LinkedThumbnail { get; set; }
     }
 
     /// <summary>

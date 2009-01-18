@@ -62,6 +62,7 @@ namespace TorrentDescriptionMaker
             List<TorrentPacket> tps = new List<TorrentPacket>();
 
             lbFiles.Items.Clear();
+            lbScreenshots.Items.Clear();
 
             foreach (string p in ps)
             {
@@ -455,6 +456,7 @@ namespace TorrentDescriptionMaker
                     bwApp.ReportProgress((int)ProgressType.REPORT_MEDIAINFO_SUMMARY, mi.Overall.Summary);
                     Program.WriteDebugLog();
 
+                    // creates screenshot
                     TorrentInfo ti = new TorrentInfo(bwApp, mi);
 
                     PublishOptionsPacket pop = new PublishOptionsPacket();
@@ -464,6 +466,8 @@ namespace TorrentDescriptionMaker
 
                     ti.PublishOptions = pop;
                     ti.PublishString = CreatePublish(ti, pop);
+
+                    bwApp.ReportProgress((int)ProgressType.UPDATE_SCREENSHOTS_LIST, ti.MediaInfo2.Screenshot);
 
                     if (Settings.Default.WritePublish)
                     {
@@ -552,6 +556,7 @@ namespace TorrentDescriptionMaker
             // start of the magic :)
 
             WorkerTask wt = (WorkerTask)e.Argument;
+            Program.CurrentTask = wt.Task;
 
             switch (wt.Task)
             {
@@ -601,37 +606,40 @@ namespace TorrentDescriptionMaker
 
         private void bwApp_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            List<TorrentInfo> tiList = (List<TorrentInfo>)e.Result;
-
-            foreach (TorrentInfo ti in tiList)
+            if (e.Result != null)
             {
-                mTorrentInfo = ti;
-
-                if (mTorrentInfo != null)
+                switch (Program.CurrentTask)
                 {
+                    case TaskType.ANALYZE_MEDIA:
 
-                    txtScrFull.Text = mTorrentInfo.MediaInfo2.ScreenshotFull;
-                    txtBBScrForums.Text = mTorrentInfo.MediaInfo2.ScreenshotForums;
+                        List<TorrentInfo> tiList = (List<TorrentInfo>)e.Result;
+                        if (tiList.Count > 0)
+                        {
+                            mTorrentInfo = tiList[tiList.Count - 1];
+                        }
+                        if (mTorrentInfo != null)
+                        {
+                            txtScrFull.Text = mTorrentInfo.MediaInfo2.Screenshot.Full;
+                            txtBBScrForums.Text = mTorrentInfo.MediaInfo2.Screenshot.LinkedThumbnail;
 
-                    if (!string.IsNullOrEmpty(txtScrFull.Text))
-                        txtBBScrFull.Text = string.Format("[img]{0}[/img]", txtScrFull.Text);
+                            if (!string.IsNullOrEmpty(txtScrFull.Text))
+                                txtBBScrFull.Text = string.Format("[img]{0}[/img]", txtScrFull.Text);
 
-                    PublishOptionsPacket pop = mTorrentInfo.PublishOptions;
+                            PublishOptionsPacket pop = mTorrentInfo.PublishOptions;
 
-                    // initialize quick publish checkboxes
-                    chkQuickAlignCenter.Checked = pop.AlignCenter;
-                    chkQuickFullPicture.Checked = pop.FullPicture;
-                    chkQuickPre.Checked = pop.PreformattedText;
+                            // initialize quick publish checkboxes
+                            chkQuickAlignCenter.Checked = pop.AlignCenter;
+                            chkQuickFullPicture.Checked = pop.FullPicture;
+                            chkQuickPre.Checked = pop.PreformattedText;
 
-                    txtPublish.Text = mTorrentInfo.PublishString;
+                            txtPublish.Text = mTorrentInfo.PublishString;
 
-                    // sbPublish.AppendLine("Get your Torrent Description like this using TDMaker: http://code.google.com/p/tdmaker");
-
-                    UpdateGuiControls();
-
+                        }
+                        break;
                 }
-
             }
+
+            UpdateGuiControls();
             pBar.Style = ProgressBarStyle.Continuous;
             sBar.Text = "Ready.";
 
@@ -640,7 +648,7 @@ namespace TorrentDescriptionMaker
         private void tmrStatus_Tick(object sender, EventArgs e)
         {
 
-            tssPerc.Text = (bwApp.IsBusy ? string.Format("{0}%", (100.0*(double)pBar.Value / (double)pBar.Maximum).ToString("0.0")) : "");
+            tssPerc.Text = (bwApp.IsBusy ? string.Format("{0}%", (100.0 * (double)pBar.Value / (double)pBar.Maximum).ToString("0.0")) : "");
 
             btnBrowse.Enabled = !bwApp.IsBusy;
             btnAnalyze.Enabled = !bwApp.IsBusy && lbFiles.Items.Count > 0;
@@ -690,9 +698,14 @@ namespace TorrentDescriptionMaker
 
         private void bwApp_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
+            string msg = "";
+            if (e.UserState.GetType() == typeof(string))
+            {
+                msg = e.UserState.ToString();
+            }
+
             if (e.UserState != null)
             {
-                string msg = e.UserState.ToString();
                 ProgressType perc = (ProgressType)e.ProgressPercentage;
 
                 switch (perc)
@@ -712,6 +725,10 @@ namespace TorrentDescriptionMaker
                         pBar.Maximum = (int)e.UserState;
                         break;
 
+                    case ProgressType.UPDATE_SCREENSHOTS_LIST:
+                        ScreenshotsPacket sp = (ScreenshotsPacket)e.UserState;
+                        lbScreenshots.Items.Add(sp.Full);
+                        break;
                     case ProgressType.UPDATE_STATUSBAR_DEBUG:
                         sBar.Text = msg;
                         lbStatus.Items.Add(msg);
@@ -963,6 +980,18 @@ namespace TorrentDescriptionMaker
                 Process.Start(Program.LogsDir);
             }
         }
+
+        private void lbScreenshots_DoubleClick(object sender, EventArgs e)
+        {
+            Process.Start(lbScreenshots.SelectedItem.ToString());
+        }
+
+        private void lbScreenshots_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lbScreenshots.SelectedItem != null)
+                txtScrFull.Text = lbScreenshots.SelectedItem.ToString();
+        }
+
 
     }
 }
