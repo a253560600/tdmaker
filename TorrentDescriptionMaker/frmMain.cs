@@ -225,6 +225,25 @@ namespace TorrentDescriptionMaker
             // this.WindowState = FormWindowState.Minimized;
             SettingsWrite();
             Program.WriteDebugLog();
+
+            if (!Settings.Default.KeepScreenshot)
+            {
+                // delete if option set to temporary location 
+                string[] files = Directory.GetFiles(Program.ScreenshotsTempDir, "*.*", SearchOption.AllDirectories);
+                foreach (string screenshot in files)
+                {
+                    try
+                    {
+                        File.Delete(screenshot);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+
+            }
+
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -746,6 +765,7 @@ namespace TorrentDescriptionMaker
 
         private void btnAnalyze_Click(object sender, EventArgs e)
         {
+            lbScreenshots.Items.Clear();
             string[] files = new string[lbFiles.Items.Count];
             for (int i = 0; i < lbFiles.Items.Count; i++)
             {
