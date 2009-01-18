@@ -311,31 +311,7 @@ namespace TorrentDescriptionMaker
             }
 
 
-            string[] tNames = new string[] { "Default", "MTN", "Minimal" };
-            foreach (string name in tNames)
-            {
-                // Copy Default Templates to Templates folder
-                string dPrefix = string.Format("Templates.{0}.", name);
-                string tDir = Path.Combine(Settings.Default.TemplatesDir, name);
-                if (!Directory.Exists(tDir))
-                {
-                    Directory.CreateDirectory(tDir);
-                }
-                string[] tFiles = new string[] { "Disc.txt", "File.txt", "DiscAudioInfo.txt", "FileAudioInfo.txt", "GeneralInfo.txt", "FileVideoInfo.txt", "DiscVideoInfo.txt" };
-
-                foreach (string fn in tFiles)
-                {
-                    string dFile = Path.Combine(tDir, fn);
-                    if (!File.Exists(dFile))
-                    {
-                        using (StreamWriter sw = new StreamWriter(dFile))
-                        {
-                            sw.WriteLine(Program.GetText(dPrefix + fn));
-                        }
-                    }
-                }
-
-            }
+            Program.WriteTemplates(false);
 
             // Read Templates to GUI
             if (Directory.Exists(Settings.Default.TemplatesDir))
@@ -1010,6 +986,14 @@ namespace TorrentDescriptionMaker
         {
             if (lbScreenshots.SelectedItem != null)
                 txtScrFull.Text = lbScreenshots.SelectedItem.ToString();
+        }
+
+        private void btnTemplatesRewrite_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("This will rewrite old copies of TDMaker created Templates. Your own templates will not be affected. \n\nAre you sure?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Program.WriteTemplates(true);
+            }
         }
 
 
