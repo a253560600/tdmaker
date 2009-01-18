@@ -1,6 +1,10 @@
+1.8.1.02 Source was not excluded for built-in template if Source was not selected
+1.8.1.01 Randomize Filename checkBox was not disabled if ImageShack is not selected [Lam3rD]
+1.8.1.00 Include percentage of progress next to Progress Bar
+
 Version 1.8 - 20090118
 
-1.8.0.00 Added debugging to File procedures
+1.8.0.00 Added debugging to File facilities
 1.7.2.00 Use of ListBox for multiple files instead of a TextBox
 1.7.1.02 Create torrents in a sequence to prevent HDD thrashing
 1.7.1.01 Object reference not set to an instance of an object error for Empty folders [tacoking]

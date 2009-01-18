@@ -404,7 +404,7 @@ namespace TorrentDescriptionMaker
             StringBuilder sbTitleInfo = new StringBuilder();
 
             // Source 
-            if (!string.IsNullOrEmpty(Settings.Default.Source))
+            if (Settings.Default.bSource && !string.IsNullOrEmpty(Settings.Default.Source))
             {
                 sbTitleInfo.AppendLine(string.Format("[u]Source:[/u] {0}", this.Source));
             }
