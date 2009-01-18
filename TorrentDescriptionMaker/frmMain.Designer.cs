@@ -460,9 +460,9 @@
             this.groupBox10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox10.Controls.Add(this.lbStatus);
-            this.groupBox10.Location = new System.Drawing.Point(12, 349);
+            this.groupBox10.Location = new System.Drawing.Point(12, 331);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(726, 98);
+            this.groupBox10.Size = new System.Drawing.Size(726, 116);
             this.groupBox10.TabIndex = 13;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Progress";
@@ -473,10 +473,10 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.lbStatus.BackColor = System.Drawing.SystemColors.Control;
             this.lbStatus.FormattingEnabled = true;
-            this.lbStatus.Location = new System.Drawing.Point(26, 25);
+            this.lbStatus.Location = new System.Drawing.Point(26, 30);
             this.lbStatus.Name = "lbStatus";
             this.lbStatus.ScrollAlwaysVisible = true;
-            this.lbStatus.Size = new System.Drawing.Size(678, 56);
+            this.lbStatus.Size = new System.Drawing.Size(678, 69);
             this.lbStatus.TabIndex = 11;
             // 
             // groupBox9
