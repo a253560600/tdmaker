@@ -51,6 +51,14 @@ namespace TorrentDescriptionMaker
 
         private void LoadMedia(string[] ps)
         {
+            if (!Settings.Default.WritePublish && ps.Length > 0)
+            {
+                if (MessageBox.Show("Writing Publish info to File is recommended when analysing multiple files or folders. \n\nWould you like to turn this feature on?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Settings.Default.WritePublish = true;
+                }
+            }
+
             List<TorrentPacket> tps = new List<TorrentPacket>();
 
             lbFiles.Items.Clear();
@@ -631,7 +639,9 @@ namespace TorrentDescriptionMaker
 
         private void tmrStatus_Tick(object sender, EventArgs e)
         {
-            // sBar.Text = Program.Status;
+
+            tssPerc.Text = (bwApp.IsBusy ? string.Format("{0}%", (100.0*(double)pBar.Value / (double)pBar.Maximum).ToString("0.0")) : "");
+
             btnBrowse.Enabled = !bwApp.IsBusy;
             btnAnalyze.Enabled = !bwApp.IsBusy && lbFiles.Items.Count > 0;
             lbStatus.SelectedIndex = lbStatus.Items.Count - 1;
@@ -943,6 +953,7 @@ namespace TorrentDescriptionMaker
         private void cboScreenshotDest_SelectedIndexChanged(object sender, EventArgs e)
         {
             Settings.Default.ScreenshotDestIndex = cboScreenshotDest.SelectedIndex;
+            chkRandomizeFileNameImageShack.Enabled = cboScreenshotDest.SelectedIndex == 0;
         }
 
         private void tsmLogsDir_Click(object sender, EventArgs e)
