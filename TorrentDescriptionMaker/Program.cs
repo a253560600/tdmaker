@@ -28,7 +28,38 @@ namespace TorrentDescriptionMaker
         public readonly static string ScreenshotsTempDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), APP_NAME);
         public static string LogsDir { get; set; }
         public static string DebugLogFilePath { get; set; }
-        private static StringBuilder mSbDebug = new StringBuilder(); 
+        private static StringBuilder mSbDebug = new StringBuilder();
+
+        public static void WriteTemplates(bool rewrite)
+        {
+            string[] tNames = new string[] { "Default", "MTN", "Minimal" };
+            foreach (string name in tNames)
+            {
+                // Copy Default Templates to Templates folder
+                string dPrefix = string.Format("Templates.{0}.", name);
+                string tDir = Path.Combine(Settings.Default.TemplatesDir, name);
+                if (!Directory.Exists(tDir))
+                {
+                    Directory.CreateDirectory(tDir);
+                }
+                string[] tFiles = new string[] { "Disc.txt", "File.txt", "DiscAudioInfo.txt", "FileAudioInfo.txt", "GeneralInfo.txt", "FileVideoInfo.txt", "DiscVideoInfo.txt" };
+
+                foreach (string fn in tFiles)
+                {
+                    string dFile = Path.Combine(tDir, fn);
+                    bool write = !File.Exists(dFile) || (File.Exists(dFile) && rewrite);
+                    if (write)
+                    {
+                        using (StreamWriter sw = new StreamWriter(dFile))
+                        {
+                            sw.WriteLine(Program.GetText(dPrefix + fn));
+                        }
+                    }
+                }
+
+            }
+
+        }
         
         public static string getFileSizeString(double size)
         {
@@ -218,6 +249,8 @@ namespace TorrentDescriptionMaker
         }
 
     }
+
+
 
     public struct ScreenshotsPacket
     {
