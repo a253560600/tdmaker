@@ -67,7 +67,7 @@ namespace TorrentDescriptionMaker
 
         }
 
-        private List<ImageFile> UploadImageShack(string screenshot)
+        private List<ImageFile> UploadImageShack(string screenshot, bool linq)
         {
             List<ZSS.ImageUploader.ImageFile> lstScreenshots = new List<ImageFile>();
             int retry = 0;
@@ -87,7 +87,14 @@ namespace TorrentDescriptionMaker
                 if (retry > 1)
                     Thread.Sleep(1000);
                 mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploading {0} to ImageShack... Attempt {1}", Path.GetFileName(screenshot), retry));
-                lstScreenshots = su.UploadImage(screenshot);
+                if (linq)
+                {
+                    lstScreenshots = su.UploadImage(screenshot);
+                }
+                else
+                {
+                    lstScreenshots = su.UploadImageLegacy(screenshot);
+                }
             }
             return lstScreenshots;
 
@@ -121,10 +128,13 @@ namespace TorrentDescriptionMaker
                 switch ((ScreenshotDestType)Settings.Default.ScreenshotDestIndex)
                 {
                     case ScreenshotDestType.IMAGESHACK:
-                        lstScreenshots = UploadImageShack(screenshot);
+                        lstScreenshots = UploadImageShack(screenshot, true);
                         break;
                     case ScreenshotDestType.TINYPIC:
                         lstScreenshots = UploadTinyPic(screenshot);
+                        break;
+                    case ScreenshotDestType.IMAGESHACK_LEGACY_METHOD:
+                        lstScreenshots = UploadImageShack(screenshot, false);
                         break;
                 }
 
@@ -149,7 +159,7 @@ namespace TorrentDescriptionMaker
                 }
                 else
                 {                    
-                    mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Failed uploading {0}. Try again later{0}.", Path.GetFileName(screenshot)));
+                    mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Failed uploading {0}. Try again later.", Path.GetFileName(screenshot)));
                 }
 
             }

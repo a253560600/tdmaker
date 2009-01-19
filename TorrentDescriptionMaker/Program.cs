@@ -68,9 +68,9 @@ namespace TorrentDescriptionMaker
 
         public static string GetConfigFilePath()
         {
-
+            
             System.Configuration.Configuration config =
-                ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
+                ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);           
             return config.FilePath;
 
         }
@@ -219,7 +219,8 @@ namespace TorrentDescriptionMaker
     public enum ScreenshotDestType
     {
         IMAGESHACK, 
-        TINYPIC
+        TINYPIC, 
+        IMAGESHACK_LEGACY_METHOD
     }
 
     public class TorrentPacket

@@ -213,7 +213,6 @@ namespace TorrentDescriptionMaker
             Settings.Default.TorrentFolderDefault = rbTorrentDefaultFolder.Checked;
 
             Settings.Default.ScreenshotDestIndex = cboScreenshotDest.SelectedIndex;
-
             Settings.Default.Save();
         }
 
