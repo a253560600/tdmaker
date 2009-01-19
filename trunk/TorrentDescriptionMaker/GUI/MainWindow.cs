@@ -47,7 +47,7 @@ namespace TorrentDescriptionMaker
 
         private void LoadMedia(string[] ps)
         {
-            if (!Settings.Default.WritePublish && ps.Length > 0)
+            if (!Settings.Default.WritePublish && ps.Length > 1)
             {
                 if (MessageBox.Show("Writing Publish info to File is recommended when analysing multiple files or folders. \n\nWould you like to turn this feature on?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
@@ -965,7 +965,7 @@ namespace TorrentDescriptionMaker
         private void cboScreenshotDest_SelectedIndexChanged(object sender, EventArgs e)
         {
             Settings.Default.ScreenshotDestIndex = cboScreenshotDest.SelectedIndex;
-            chkRandomizeFileNameImageShack.Enabled = cboScreenshotDest.SelectedIndex == 0;
+            tpHostingImageShack.Enabled = cboScreenshotDest.SelectedIndex == 0;
         }
 
         private void tsmLogsDir_Click(object sender, EventArgs e)

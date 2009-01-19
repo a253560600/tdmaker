@@ -43,8 +43,8 @@ namespace TorrentDescriptionMaker
             try
             {
                 Process p = new Process();
-                ProcessStartInfo psi = new ProcessStartInfo(Settings.Default.MTNPath);
-                psi.WindowStyle = ProcessWindowStyle.Hidden;
+                ProcessStartInfo psi = new ProcessStartInfo(Settings.Default.MTNPath);                
+                psi.WindowStyle = (Settings.Default.ShowMTNWindow ? ProcessWindowStyle.Normal : ProcessWindowStyle.Hidden);
 
                 psi.Arguments = string.Format("{0} -O \"{1}\" \"{2}\"",
                     Settings.Default.MTNArg,
@@ -70,6 +70,13 @@ namespace TorrentDescriptionMaker
             List<ZSS.ImageUploader.ImageFile> lstScreenshots = new List<ImageFile>();
             int retry = 0;
             ImageShackUploader su = new ImageShackUploader();
+            su.DeveloperKey = "16BCFGWY58707bec94f7b0a773d0aa8bbf301900";
+            if (Settings.Default.UseImageShackRegCode && !string.IsNullOrEmpty(Settings.Default.ImageShackRegCode))
+            {
+               su.RegistrationCode = Settings.Default.ImageShackRegCode;
+            }
+            su.Public = false;
+
             su.RandomizeFileName = Settings.Default.ImageShakeRandomizeFileName;
 
             while (retry <= 3 && lstScreenshots == null ||

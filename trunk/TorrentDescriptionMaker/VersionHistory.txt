@@ -1,3 +1,6 @@
+1.8.5.00 Extended support for using ImageShack Registration Code to store images in your own account
+1.8.4.00 Option to show MTN Window for debugging purposes. Remove argument -P to prevent mtn.exe from quitting
+1.8.3.02 Recommended writing publish info to file even for one file [memories]
 1.8.3.01 Value cannot be null error while adding screenshot to ListBox [Queo]
 1.8.3.00 Option to rewrite old copies of TDMaker created Templates
 1.8.2.02 Exposed missing syntax %Video_Codec% for Templates [sleepyb]
