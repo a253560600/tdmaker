@@ -40,6 +40,8 @@ namespace TorrentDescriptionMaker
         {
             bool succes = true;
 
+            mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, "Taking Screenshot for " + Path.GetFileName(mediaFilePath));
+
             try
             {
                 Process p = new Process();
@@ -53,7 +55,7 @@ namespace TorrentDescriptionMaker
 
                 p.StartInfo = psi;
                 p.Start();
-                p.WaitForExit();
+                p.WaitForExit(1000*30);
             }
             catch (Exception ex)
             {
