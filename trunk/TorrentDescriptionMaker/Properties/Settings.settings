@@ -73,9 +73,6 @@
     <Setting Name="TorrentFolderDefault" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="AnnounceURL" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="SettingsDir" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
@@ -134,7 +131,7 @@
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="DiscMenu" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Intact</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="bDiscMenu" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -177,6 +174,9 @@
     </Setting>
     <Setting Name="UseImageShackRegCode" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Setting" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

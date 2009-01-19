@@ -79,13 +79,13 @@ namespace TDMaker
         {
             if (arg)
             {
-                this.mFileInfo = Regex.Replace(this.mFileInfo, "%ScreenshotForums%", "%ScreenshotFull%");
-                this.mDiscInfo = Regex.Replace(this.mDiscInfo, "%ScreenshotForums%", "%ScreenshotFull%");
+                this.mFileInfo = Regex.Replace(this.mFileInfo, "%ScreenshotForums%", "%ScreenshotFull%", RegexOptions.IgnoreCase);
+                this.mDiscInfo = Regex.Replace(this.mDiscInfo, "%ScreenshotForums%", "%ScreenshotFull%", RegexOptions.IgnoreCase);
             }
             else
             {
                 this.mFileInfo = Regex.Replace(this.mFileInfo, "%ScreenshotFull%", "%ScreenshotForums%", RegexOptions.IgnoreCase);
-                this.mDiscInfo = Regex.Replace(this.mDiscInfo, "%ScreenshotFull%", "%ScreenshotForums%");
+                this.mDiscInfo = Regex.Replace(this.mDiscInfo, "%ScreenshotFull%", "%ScreenshotForums%", RegexOptions.IgnoreCase);
             }
         }
 
@@ -225,12 +225,12 @@ namespace TDMaker
 
         private string GetSourceInfo(string pattern, MediaInfo2 mi)
         {
-            pattern = Regex.Replace(pattern, "%Title%", mi.Title);
-            pattern = Regex.Replace(pattern, "%Source%", mi.Source);
-            pattern = Regex.Replace(pattern, "%Disc_Menu%", mi.Menu);
-            pattern = Regex.Replace(pattern, "%Disc_Extras%", mi.Extras);
-            pattern = Regex.Replace(pattern, "%Disc_Authoring%", mi.Authoring);
-            pattern = Regex.Replace(pattern, "%WebLink%", mi.WebLink);
+            pattern = Regex.Replace(pattern, "%Title%", mi.Title, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Source%", mi.Source, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Disc_Menu%", mi.Menu, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Disc_Extras%", mi.Extras, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Disc_Authoring%", mi.Authoring, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%WebLink%", mi.WebLink, RegexOptions.IgnoreCase);
 
             return pattern;
         }

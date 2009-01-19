@@ -268,18 +268,6 @@ namespace TDMaker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string AnnounceURL {
-            get {
-                return ((string)(this["AnnounceURL"]));
-            }
-            set {
-                this["AnnounceURL"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string SettingsDir {
             get {
                 return ((string)(this["SettingsDir"]));
@@ -458,7 +446,7 @@ namespace TDMaker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Intact")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string DiscMenu {
             get {
                 return ((string)(this["DiscMenu"]));
@@ -633,6 +621,18 @@ namespace TDMaker.Properties {
             }
             set {
                 this["UseImageShackRegCode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Setting {
+            get {
+                return ((string)(this["Setting"]));
+            }
+            set {
+                this["Setting"] = value;
             }
         }
     }
