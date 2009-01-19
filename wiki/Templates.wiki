@@ -33,6 +33,9 @@ By default there will 3 Templates installed: Default, Minimal and MTN.
  * *%Audio_Info%* = Place holder for DiscAudioInfo.txt
  * *%Video_Info%* = Place holder for FileVideoInfo.txt or DiscVideoInfo.txt
 
+ * *%ScreenshotFull%* = Place holder for Full Screenshot
+ * *%ScreenshotForums%* = Place holder for Linked Thumbnail Screenshot
+
 Apart from these syntaxes both files support all the syntaxes listed below. However when Audio syntaxes are used, the syntaxes match to the first available audio stream of the media file.
 
  * *%Audio_Format%*
