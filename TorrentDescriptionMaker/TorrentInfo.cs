@@ -49,7 +49,7 @@ namespace TorrentDescriptionMaker
                 psi.WindowStyle = (Settings.Default.ShowMTNWindow ? ProcessWindowStyle.Normal : ProcessWindowStyle.Hidden);
 
                 psi.Arguments = string.Format("{0} -O \"{1}\" \"{2}\"",
-                    Settings.Default.MTNArg,
+                    Settings.Default.MTNArg.Trim(),
                     (Settings.Default.KeepScreenshot ? Program.ScreenshotsDir : Program.ScreenshotsTempDir),
                     mediaFilePath);
 
