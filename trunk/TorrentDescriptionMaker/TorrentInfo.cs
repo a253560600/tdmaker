@@ -93,7 +93,7 @@ namespace TorrentDescriptionMaker
                (++retry <= 3 && lstScreenshots != null && lstScreenshots.Count < 1))
             {
                 if (retry > 1)
-                    Thread.Sleep(1000);
+                    Thread.Sleep(2000);
                 mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploading {0} to TinyPic... Attempt {1}", Path.GetFileName(screenshot), retry));
                 lstScreenshots = tpu.UploadImage(screenshot);
             }
