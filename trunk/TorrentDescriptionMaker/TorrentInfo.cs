@@ -45,22 +45,22 @@ namespace TorrentDescriptionMaker
             try
             {
                 Process p = new Process();
-                ProcessStartInfo psi = new ProcessStartInfo(Settings.Default.MTNPath);                
+                ProcessStartInfo psi = new ProcessStartInfo(Settings.Default.MTNPath);
                 psi.WindowStyle = (Settings.Default.ShowMTNWindow ? ProcessWindowStyle.Normal : ProcessWindowStyle.Hidden);
 
                 psi.Arguments = string.Format("{0} -O \"{1}\" \"{2}\"",
                     Settings.Default.MTNArg,
-                    (Settings.Default.KeepScreenshot?  Program.ScreenshotsDir : Program.ScreenshotsTempDir),
+                    (Settings.Default.KeepScreenshot ? Program.ScreenshotsDir : Program.ScreenshotsTempDir),
                     mediaFilePath);
 
                 p.StartInfo = psi;
                 p.Start();
-                p.WaitForExit(1000*30);
+                p.WaitForExit(1000 * 30);
             }
             catch (Exception ex)
             {
                 succes = false;
-                Program.Status = ex.Message;
+                mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, ex.Message + " for " + Path.GetFileName(mediaFilePath));                
             }
 
             return succes;
@@ -75,7 +75,7 @@ namespace TorrentDescriptionMaker
             su.DeveloperKey = "16BCFGWY58707bec94f7b0a773d0aa8bbf301900";
             if (Settings.Default.UseImageShackRegCode && !string.IsNullOrEmpty(Settings.Default.ImageShackRegCode))
             {
-               su.RegistrationCode = Settings.Default.ImageShackRegCode;
+                su.RegistrationCode = Settings.Default.ImageShackRegCode;
             }
             su.Public = false;
 
@@ -130,7 +130,7 @@ namespace TorrentDescriptionMaker
 
                 if (lstScreenshots != null && lstScreenshots.Count > 0)
                 {
-                    ScreenshotsPacket sp = new ScreenshotsPacket(); 
+                    ScreenshotsPacket sp = new ScreenshotsPacket();
 
                     foreach (ImageFile imf in lstScreenshots)
                     {
@@ -144,11 +144,12 @@ namespace TorrentDescriptionMaker
                         }
                     }
 
+                    mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploaded {0}.", Path.GetFileName(screenshot)));
                     MediaInfo2.Screenshot = sp;
                 }
                 else
-                {
-                    Program.Status = "Failed uploading screenshot to ImageShack. Try again later.";
+                {                    
+                    mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Failed uploading {0}. Try again later{0}.", Path.GetFileName(screenshot)));
                 }
 
             }

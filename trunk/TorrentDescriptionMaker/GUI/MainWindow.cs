@@ -9,6 +9,7 @@ using System.IO;
 using TDMaker.Properties;
 using TDMaker;
 using System.Diagnostics;
+using ZSS;
 
 namespace TorrentDescriptionMaker
 {
@@ -248,7 +249,7 @@ namespace TorrentDescriptionMaker
             configureDirs();
             SettingsRead();
 
-            Program.Status = string.Format("Ready.");
+            sBar.Text = string.Format("Ready.");
 
             this.Text = Program.gAppInfo.GetApplicationTitle(Application.ProductName, Application.ProductVersion,
                 McoreSystem.AppInfo.VersionDepth.MajorMinorBuild) +
@@ -638,9 +639,7 @@ namespace TorrentDescriptionMaker
 
         private void tmrStatus_Tick(object sender, EventArgs e)
         {
-
             tssPerc.Text = (bwApp.IsBusy ? string.Format("{0}%", (100.0 * (double)pBar.Value / (double)pBar.Maximum).ToString("0.0")) : "");
-
             btnBrowse.Enabled = !bwApp.IsBusy;
             btnAnalyze.Enabled = !bwApp.IsBusy && lbFiles.Items.Count > 0;
             lbStatus.SelectedIndex = lbStatus.Items.Count - 1;
@@ -759,13 +758,16 @@ namespace TorrentDescriptionMaker
 
         private void cmsAppAbout_Click(object sender, EventArgs e)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine(string.Format("Version {0}", Application.ProductVersion));
-            sb.AppendLine();
-            sb.AppendLine(string.Format("Running from {0}", Application.ExecutablePath));
-            sb.AppendLine();
-            sb.AppendLine("Copyright © McoreD 2009");
-            MessageBox.Show(sb.ToString(), Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //StringBuilder sb = new StringBuilder();
+            //sb.AppendLine(string.Format("Version {0}", Application.ProductVersion));
+            //sb.AppendLine();
+            //sb.AppendLine(string.Format("Running from {0}", Application.ExecutablePath));
+            //sb.AppendLine();
+            //sb.AppendLine("Copyright © McoreD 2009");
+            //MessageBox.Show(sb.ToString(), Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            TDMaker.GUI.AboutBox ab = new TDMaker.GUI.AboutBox();
+            ab.ShowDialog();
 
         }
 
@@ -992,6 +994,29 @@ namespace TorrentDescriptionMaker
             if (MessageBox.Show("This will rewrite old copies of TDMaker created Templates. Your own templates will not be affected. \n\nAre you sure?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Program.WriteTemplates(true);
+            }
+        }
+
+        private void btnImageShackRegCode_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://my.imageshack.us/registration/");
+        }
+
+        private void btnImageShackImages_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://my.imageshack.us/v_images.php");
+        }
+
+        private void tmsVersionHistory_Click(object sender, EventArgs e)
+        {
+            string h = Program.GetText("VersionHistory.txt");
+
+            if (h != string.Empty)
+            {
+                frmTextViewer v = new frmTextViewer(string.Format("{0} - {1}",
+                    Application.ProductName, "Version History"), h);
+                v.Icon = this.Icon;
+                v.ShowDialog();
             }
         }
 
