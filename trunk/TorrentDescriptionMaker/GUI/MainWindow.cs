@@ -19,10 +19,6 @@ namespace TorrentDescriptionMaker
         /// Global TorrentInfo for Using Quick Pre/Align Center commands
         /// </summary>
         private TorrentInfo mTorrentInfo = null;
-        /// <summary>
-        /// Application Version
-        /// </summary>
-        private McoreSystem.AppInfo mAppInfo = new McoreSystem.AppInfo(Application.ProductName, Application.ProductVersion, McoreSystem.AppInfo.SoftwareCycle.FINAL);
 
         public frmMain()
         {
@@ -133,7 +129,7 @@ namespace TorrentDescriptionMaker
                     }
 
                     // if it is a DVD, set the title to be name of the folder. 
-                    this.Text = string.Format("{0} - {1}", Resources.AppName, Program.getMediaName(mi.Location));
+                    this.Text = string.Format("{0} - {1}", Program.gAppInfo.GetApplicationTitle(Application.ProductName, Application.ProductVersion, McoreSystem.AppInfo.VersionDepth.MajorMinorBuild), Program.getMediaName(mi.Location));
 
                     txtScrFull.Text = "";
                     txtBBScrFull.Text = "";
@@ -254,7 +250,7 @@ namespace TorrentDescriptionMaker
 
             Program.Status = string.Format("Ready.");
 
-            this.Text = mAppInfo.GetApplicationTitle(Application.ProductName, Application.ProductVersion,
+            this.Text = Program.gAppInfo.GetApplicationTitle(Application.ProductName, Application.ProductVersion,
                 McoreSystem.AppInfo.VersionDepth.MajorMinorBuild) +
                 " - Drag and Drop a Movie file or folder...";
 

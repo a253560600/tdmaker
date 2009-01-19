@@ -21,6 +21,11 @@ namespace TorrentDescriptionMaker
             Application.Run(new frmMain());
         }
 
+        /// <summary>
+        /// Application Version
+        /// </summary>
+        public static McoreSystem.AppInfo gAppInfo = new McoreSystem.AppInfo(Application.ProductName, Application.ProductVersion, McoreSystem.AppInfo.SoftwareCycle.FINAL);
+        
         public const string APP_NAME = "TDMaker";
         public static TaskType CurrentTask { get; set; }
         public static string Status { get; set; }
