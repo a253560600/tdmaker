@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("TDMaker")]
-[assembly: AssemblyDescription("Torrent Description Maker")]
+[assembly: AssemblyDescription("Program used to create a Media Description, Screenshot and a Torrent of a Media file")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("McoreD")]
 [assembly: AssemblyProduct("Torrent Description Maker")]

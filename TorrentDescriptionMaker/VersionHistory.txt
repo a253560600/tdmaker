@@ -1,7 +1,6 @@
-1.8.5.01 When -P was not used in MTN arguments, TDMaker waited indefinitely until mtn.exe terminated
-
 Version 1.8.5
 
+1.8.5.01 When -P was not used in MTN arguments, TDMaker waited indefinitely until mtn.exe terminated
 1.8.5.00 Extended support for using ImageShack Registration Code to store images in your own account
 1.8.4.00 Option to show MTN Window for debugging purposes. Remove argument -P to prevent mtn.exe from quitting
 1.8.3.02 Recommended writing publish info to file even for one file [memories]

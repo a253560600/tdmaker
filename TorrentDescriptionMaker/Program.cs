@@ -5,6 +5,7 @@ using System.IO;
 using TDMaker;
 using TDMaker.Properties;
 using System.Text;
+using System.Configuration;
 
 namespace TorrentDescriptionMaker
 {
@@ -27,8 +28,7 @@ namespace TorrentDescriptionMaker
         public static McoreSystem.AppInfo gAppInfo = new McoreSystem.AppInfo(Application.ProductName, Application.ProductVersion, McoreSystem.AppInfo.SoftwareCycle.FINAL);
         
         public const string APP_NAME = "TDMaker";
-        public static TaskType CurrentTask { get; set; }
-        public static string Status { get; set; }
+        public static TaskType CurrentTask { get; set; }        
         public readonly static string ScreenshotsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "MTN");
         public readonly static string ScreenshotsTempDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), APP_NAME);
         public static string LogsDir { get; set; }
@@ -63,6 +63,15 @@ namespace TorrentDescriptionMaker
                 }
 
             }
+
+        }
+
+        public static string GetConfigFilePath()
+        {
+
+            System.Configuration.Configuration config =
+                ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
+            return config.FilePath;
 
         }
         
