@@ -1,6 +1,6 @@
 #summary A collection of user templates
 #labels Featured
-<wiki:toc max_depth="0" />
+<wiki:toc max_depth="1" />
 
 = Minimal =
 by SleepyB
