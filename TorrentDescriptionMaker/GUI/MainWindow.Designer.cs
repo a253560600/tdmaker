@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chkShowMTN = new System.Windows.Forms.CheckBox();
             this.btnMTNHelp = new System.Windows.Forms.Button();
@@ -41,12 +41,12 @@
             this.cboMtnArgs = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtMtn = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gbScreenshotFull = new System.Windows.Forms.GroupBox();
             this.lbScreenshots = new System.Windows.Forms.ListBox();
             this.txtScrFull = new System.Windows.Forms.LinkLabel();
             this.label4 = new System.Windows.Forms.Label();
             this.btnCopy0 = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.gbScreenshotForums = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnCopy2 = new System.Windows.Forms.Button();
             this.txtBBScrForums = new System.Windows.Forms.TextBox();
@@ -85,6 +85,7 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.gbQuickPublish = new System.Windows.Forms.GroupBox();
+            this.cboQuickTemplate = new System.Windows.Forms.ComboBox();
             this.chkQuickFullPicture = new System.Windows.Forms.CheckBox();
             this.chkQuickAlignCenter = new System.Windows.Forms.CheckBox();
             this.chkQuickPre = new System.Windows.Forms.CheckBox();
@@ -154,10 +155,9 @@
             this.tmsVersionHistory = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsAppAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.btnCreateTorrent = new System.Windows.Forms.Button();
-            this.cboQuickTemplate = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.gbScreenshotFull.SuspendLayout();
+            this.gbScreenshotForums.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage5.SuspendLayout();
@@ -285,20 +285,20 @@
             this.txtMtn.TabIndex = 0;
             this.txtMtn.Text = global::TDMaker.Properties.Settings.Default.MTNPath;
             // 
-            // groupBox2
+            // gbScreenshotFull
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.gbScreenshotFull.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.lbScreenshots);
-            this.groupBox2.Controls.Add(this.txtScrFull);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.btnCopy0);
-            this.groupBox2.Location = new System.Drawing.Point(16, 16);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(724, 171);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "URL for IRC/IM";
+            this.gbScreenshotFull.Controls.Add(this.lbScreenshots);
+            this.gbScreenshotFull.Controls.Add(this.txtScrFull);
+            this.gbScreenshotFull.Controls.Add(this.label4);
+            this.gbScreenshotFull.Controls.Add(this.btnCopy0);
+            this.gbScreenshotFull.Location = new System.Drawing.Point(20, 50);
+            this.gbScreenshotFull.Name = "gbScreenshotFull";
+            this.gbScreenshotFull.Size = new System.Drawing.Size(724, 171);
+            this.gbScreenshotFull.TabIndex = 1;
+            this.gbScreenshotFull.TabStop = false;
+            this.gbScreenshotFull.Text = "URL for IRC/IM";
             // 
             // lbScreenshots
             // 
@@ -345,22 +345,22 @@
             this.btnCopy0.UseVisualStyleBackColor = true;
             this.btnCopy0.Click += new System.EventHandler(this.btnCopy0_Click);
             // 
-            // groupBox3
+            // gbScreenshotForums
             // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.gbScreenshotForums.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Controls.Add(this.btnCopy2);
-            this.groupBox3.Controls.Add(this.txtBBScrForums);
-            this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Controls.Add(this.btnCopy1);
-            this.groupBox3.Controls.Add(this.txtBBScrFull);
-            this.groupBox3.Location = new System.Drawing.Point(16, 203);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(724, 124);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "URL for Forums";
+            this.gbScreenshotForums.Controls.Add(this.label2);
+            this.gbScreenshotForums.Controls.Add(this.btnCopy2);
+            this.gbScreenshotForums.Controls.Add(this.txtBBScrForums);
+            this.gbScreenshotForums.Controls.Add(this.label5);
+            this.gbScreenshotForums.Controls.Add(this.btnCopy1);
+            this.gbScreenshotForums.Controls.Add(this.txtBBScrFull);
+            this.gbScreenshotForums.Location = new System.Drawing.Point(20, 238);
+            this.gbScreenshotForums.Name = "gbScreenshotForums";
+            this.gbScreenshotForums.Size = new System.Drawing.Size(724, 124);
+            this.gbScreenshotForums.TabIndex = 2;
+            this.gbScreenshotForums.TabStop = false;
+            this.gbScreenshotForums.Text = "URL for Forums";
             // 
             // label2
             // 
@@ -757,8 +757,9 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.groupBox3);
-            this.tabPage2.Controls.Add(this.groupBox2);
+            this.tabPage2.Controls.Add(this.gbScreenshotForums);
+            this.tabPage2.Controls.Add(this.gbScreenshotFull);
+            this.tabPage2.Controls.Add(this.chkScreenshot);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -792,6 +793,16 @@
             this.gbQuickPublish.TabIndex = 1;
             this.gbQuickPublish.TabStop = false;
             this.gbQuickPublish.Text = "Options";
+            // 
+            // cboQuickTemplate
+            // 
+            this.cboQuickTemplate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboQuickTemplate.FormattingEnabled = true;
+            this.cboQuickTemplate.Location = new System.Drawing.Point(15, 104);
+            this.cboQuickTemplate.Name = "cboQuickTemplate";
+            this.cboQuickTemplate.Size = new System.Drawing.Size(121, 21);
+            this.cboQuickTemplate.TabIndex = 3;
+            this.cboQuickTemplate.SelectedIndexChanged += new System.EventHandler(this.cboQuickTemplate_SelectedIndexChanged);
             // 
             // chkQuickFullPicture
             // 
@@ -867,7 +878,6 @@
             // tpGeneral
             // 
             this.tpGeneral.Controls.Add(this.chkUpdateCheck);
-            this.tpGeneral.Controls.Add(this.chkScreenshot);
             this.tpGeneral.Controls.Add(this.chkAnalyzeAuto);
             this.tpGeneral.Location = new System.Drawing.Point(4, 22);
             this.tpGeneral.Name = "tpGeneral";
@@ -883,7 +893,7 @@
             this.chkUpdateCheck.Checked = global::TDMaker.Properties.Settings.Default.UpdateCheckAuto;
             this.chkUpdateCheck.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkUpdateCheck.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "UpdateCheckAuto", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkUpdateCheck.Location = new System.Drawing.Point(20, 66);
+            this.chkUpdateCheck.Location = new System.Drawing.Point(20, 43);
             this.chkUpdateCheck.Name = "chkUpdateCheck";
             this.chkUpdateCheck.Size = new System.Drawing.Size(180, 17);
             this.chkUpdateCheck.TabIndex = 12;
@@ -896,7 +906,7 @@
             this.chkScreenshot.Checked = global::TDMaker.Properties.Settings.Default.TakeScreenshot;
             this.chkScreenshot.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkScreenshot.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "TakeScreenshot", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkScreenshot.Location = new System.Drawing.Point(20, 43);
+            this.chkScreenshot.Location = new System.Drawing.Point(122, 16);
             this.chkScreenshot.Name = "chkScreenshot";
             this.chkScreenshot.Size = new System.Drawing.Size(114, 17);
             this.chkScreenshot.TabIndex = 11;
@@ -1417,36 +1427,36 @@
             // 
             this.dgvTrackers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTrackers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTrackers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvTrackers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTrackers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colName,
             this.colAnnounceURL});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvTrackers.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvTrackers.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvTrackers.Location = new System.Drawing.Point(6, 19);
             this.dgvTrackers.Name = "dgvTrackers";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTrackers.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTrackers.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvTrackers.Size = new System.Drawing.Size(701, 148);
             this.dgvTrackers.TabIndex = 1;
             this.dgvTrackers.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTrackers_CellMouseLeave);
@@ -1611,16 +1621,6 @@
             this.btnCreateTorrent.UseVisualStyleBackColor = true;
             this.btnCreateTorrent.Click += new System.EventHandler(this.btnCreateTorrent_Click);
             // 
-            // cboQuickTemplate
-            // 
-            this.cboQuickTemplate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboQuickTemplate.FormattingEnabled = true;
-            this.cboQuickTemplate.Location = new System.Drawing.Point(15, 104);
-            this.cboQuickTemplate.Name = "cboQuickTemplate";
-            this.cboQuickTemplate.Size = new System.Drawing.Size(121, 21);
-            this.cboQuickTemplate.TabIndex = 3;
-            this.cboQuickTemplate.SelectedIndexChanged += new System.EventHandler(this.cboQuickTemplate_SelectedIndexChanged);
-            // 
             // frmMain
             // 
             this.AcceptButton = this.btnBrowse;
@@ -1646,10 +1646,10 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.gbScreenshotFull.ResumeLayout(false);
+            this.gbScreenshotFull.PerformLayout();
+            this.gbScreenshotForums.ResumeLayout(false);
+            this.gbScreenshotForums.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -1664,6 +1664,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.gbQuickPublish.ResumeLayout(false);
@@ -1706,8 +1707,8 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtMtn;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox gbScreenshotFull;
+        private System.Windows.Forms.GroupBox gbScreenshotForums;
         private System.Windows.Forms.Button btnCopy1;
         private System.Windows.Forms.TextBox txtBBScrFull;
         private System.Windows.Forms.Label label5;

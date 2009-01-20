@@ -236,7 +236,7 @@ namespace TorrentDescriptionMaker
         private void frmMain_Load(object sender, EventArgs e)
         {
 
-            configureDirs();
+            ConfigureDirs();
             SettingsRead();
 
             sBar.Text = string.Format("Ready.");
@@ -255,13 +255,12 @@ namespace TorrentDescriptionMaker
 
         }
 
-        private void configureDirs()
+        private void ConfigureDirs()
         {
             string dir = Path.Combine("Applications", Application.ProductName);
 
             // configure Logs folder
-            Program.LogsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                    dir + "\\Logs");
+            Program.LogsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Path.Combine(dir, "Logs"));
             if (!Directory.Exists(Program.LogsDir))
             {
                 Directory.CreateDirectory(Program.LogsDir);
@@ -278,8 +277,7 @@ namespace TorrentDescriptionMaker
                 !Directory.Exists(Settings.Default.SettingsDir))
             {
                 Settings.Default.SettingsDir =
-                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                    dir + "\\Settings");
+                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Path.Combine(dir, "Settings"));
 
                 if (!Directory.Exists(Settings.Default.SettingsDir))
                     Directory.CreateDirectory(Settings.Default.SettingsDir);
@@ -290,8 +288,7 @@ namespace TorrentDescriptionMaker
                 !Directory.Exists(Settings.Default.TemplatesDir))
             {
                 Settings.Default.TemplatesDir =
-                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                    dir + "\\Templates");
+                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Path.Combine(dir, "Templates"));
 
                 if (!Directory.Exists(Settings.Default.TemplatesDir))
                     Directory.CreateDirectory(Settings.Default.TemplatesDir);
@@ -326,8 +323,7 @@ namespace TorrentDescriptionMaker
                 !Directory.Exists(Settings.Default.TorrentsCustomDir))
             {
                 Settings.Default.TorrentsCustomDir =
-                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                    dir + "\\Torrents");
+                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Path.Combine(dir, "Torrents"));
 
                 if (!Directory.Exists(Settings.Default.TorrentsCustomDir))
                     Directory.CreateDirectory(Settings.Default.TorrentsCustomDir);
@@ -437,7 +433,7 @@ namespace TorrentDescriptionMaker
             {
 
                 bwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, "Reading " + Path.GetFileName(mi.Location) + " using MediaInfo...");
-                mi.ReadMedia();
+                 mi.ReadMedia();
 
                 if (mi.Overall != null)
                 {
@@ -968,7 +964,8 @@ namespace TorrentDescriptionMaker
 
         private void chkScreenshot_CheckedChanged(object sender, EventArgs e)
         {
-
+            gbScreenshotForums.Enabled = chkScreenshot.Checked;
+            gbScreenshotFull.Enabled = chkScreenshot.Checked;
         }
 
         private void tsmTemplates_Click(object sender, EventArgs e)

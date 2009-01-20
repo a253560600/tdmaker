@@ -42,7 +42,7 @@ namespace TorrentDescriptionMaker
         /// Clickable Thumbnail to get full screenshot
         /// </summary>
         public ScreenshotsPacket Screenshot { get; set; }
-        
+
         private string[] mExt = new string[] { ".*" }; // { ".avi", ".divx", ".mkv", ".vob", ".mov" };
 
         public MediaFile Overall { get; set; }
@@ -56,7 +56,7 @@ namespace TorrentDescriptionMaker
         {
 
             MediaFiles = new List<MediaFile>();
-            
+
             // this could be a file path or a directory
             this.Location = loc;
 
@@ -66,7 +66,8 @@ namespace TorrentDescriptionMaker
         /// Add Media to the Media List if the file has Audio or Video
         /// </summary>
         /// <param name="mf"></param>
-        private void AddMedia(MediaFile mf){
+        private void AddMedia(MediaFile mf)
+        {
 
             if (mf.HasVideo || mf.HasAudio)
             {
@@ -118,7 +119,7 @@ namespace TorrentDescriptionMaker
                                 maxSize = fi.Length;
                                 maxPath = fi.FullName;
                             }
-                             
+
                             AddMedia(ReadFile(f));
                         }
                     }
@@ -236,6 +237,11 @@ namespace TorrentDescriptionMaker
                 //*********************
                 //* General
                 //********************* 
+
+                System.Console.WriteLine("Current Dir1: " + System.Environment.CurrentDirectory);
+                System.Environment.CurrentDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                System.Console.WriteLine("Current Dir2: " + System.Environment.CurrentDirectory);
+                System.Console.WriteLine("OSVersion: {0}", System.Environment.OSVersion.ToString());
 
                 MediaInfoLib.MediaInfo mMI = new MediaInfoLib.MediaInfo();
                 mMI.Open(fp);
