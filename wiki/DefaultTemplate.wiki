@@ -1,4 +1,4 @@
-#summary Default Template
+#summary Default Template by McoreD
 #labels Phase-Support
 
 = Disc.txt =
