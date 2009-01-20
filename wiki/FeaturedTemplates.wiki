@@ -6,4 +6,4 @@
 MinimalTemplate by SleeyB
 
 =MTN=
-MTNTemplate by McoreD
+[MTNTemplate] by McoreD
