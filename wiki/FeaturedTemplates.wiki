@@ -1,5 +1,5 @@
 #summary A collection of user templates
-#labels Featured
+#labels Phase-Support
 <wiki:toc max_depth="1" />
 
 =Minimal=
