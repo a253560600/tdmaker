@@ -2,6 +2,9 @@
 #labels Phase-Support
 <wiki:toc max_depth="1" />
 
+=Default=
+DefaultTemplate
+
 =Minimal=
 MinimalTemplate by SleeyB
 
