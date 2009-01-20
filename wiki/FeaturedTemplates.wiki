@@ -6,7 +6,7 @@
 DefaultTemplate
 
 =Minimal=
-MinimalTemplate by SleeyB
+MinimalTemplate by SleepyB
 
 =MTN=
 [MTNTemplate] by McoreD
