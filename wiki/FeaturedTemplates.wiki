@@ -3,26 +3,7 @@
 <wiki:toc max_depth="1" />
 
 =Minimal=
-MinimalTemplate
+MinimalTemplate by SleeyB
 
 =MTN=
-by McoreD
-==Disc.txt==
-{{{
-File: %FileName%
-%General_Info%
-
-[img]%ScreenshotFull%[/img]
-
-%Video_Info%
-%Audio_Info%
-}}}
-
-==DiscAudioInfo.txt==
-{{{
-[b][u]Audio %AudioID%:[/u][/b]
-Format: %Audio_Format%
-Bitrate: %Audio_Bitrate%
-Channels: %Audio_Channels%
-Sampling Rate: %Audio_SamplingRate%%NewLine%
-}}}
+MTNTemplate by McoreD
