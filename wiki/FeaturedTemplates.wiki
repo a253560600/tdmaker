@@ -1,0 +1,24 @@
+#summary A collection of user templates
+#labels Featured
+
+= Minimal =
+by SleepyB
+
+== Disc.txt==
+{{{
+[b]%Title%[/b]
+
+Source: %Source%
+Authoring: %Disc_Authoring%
+Menu: %Disc_Menu%
+Extras: %Disc_Extras%            
+Web Link: %WebLink%            
+
+%General_Info%
+
+[img]%ScreenshotFull%[/img]
+
+%Video_Info%
+
+%Audio_Info%
+}}}
