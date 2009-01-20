@@ -4,6 +4,10 @@
 
 Using Mono this Wiki page shows attempts taken to run TDMaker in Linux. 
 
+[http://i33.tinypic.com/30lykog.png]
+
+To map MediaInfo.dll to the relevant Linux library, you need to create a TDMaker.exe.config file and have the following:
+
 == TDMaker.exe.config==
 
 [http://i36.tinypic.com/246kidz.png]
