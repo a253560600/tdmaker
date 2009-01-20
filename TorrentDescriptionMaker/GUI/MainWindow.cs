@@ -46,8 +46,17 @@ namespace TorrentDescriptionMaker
 
         }
 
+        private void MakeGUIReadyForAnalysis()
+        {
+            lbScreenshots.Items.Clear();
+            pBar.Value = 0;
+        }
+
         private void LoadMedia(string[] ps)
         {
+
+            lbFiles.Items.Clear();
+
             if (!Settings.Default.WritePublish && ps.Length > 1)
             {
                 if (MessageBox.Show("Writing Publish info to File is recommended when analysing multiple files or folders. \n\nWould you like to turn this feature on?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -57,9 +66,6 @@ namespace TorrentDescriptionMaker
             }
 
             List<TorrentPacket> tps = new List<TorrentPacket>();
-
-            lbFiles.Items.Clear();
-            lbScreenshots.Items.Clear();
 
             foreach (string p in ps)
             {
@@ -79,7 +85,7 @@ namespace TorrentDescriptionMaker
             {
                 WorkerTask wt = new WorkerTask(TaskType.ANALYZE_MEDIA);
                 wt.FilePaths = ps;
-                analyzeMedia(wt);
+                AnalyzeMedia(wt);
             }
 
         }
@@ -103,7 +109,7 @@ namespace TorrentDescriptionMaker
             return fl;
         }
 
-        private void analyzeMedia(WorkerTask wt)
+        private void AnalyzeMedia(WorkerTask wt)
         {
             List<MediaInfo2> miList = new List<MediaInfo2>();
 
@@ -111,6 +117,9 @@ namespace TorrentDescriptionMaker
             {
                 if (File.Exists(p) || Directory.Exists(p))
                 {
+
+                    MakeGUIReadyForAnalysis();
+
                     MediaInfo2 mi = new MediaInfo2(p);
                     mi.Extras = cboExtras.Text;
                     mi.Source = cboSource.Text;
@@ -743,7 +752,7 @@ namespace TorrentDescriptionMaker
             }
             WorkerTask wt = new WorkerTask(TaskType.ANALYZE_MEDIA);
             wt.FilePaths = files;
-            this.analyzeMedia(wt);
+            this.AnalyzeMedia(wt);
         }
 
         private void txtScrFull_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -873,14 +882,15 @@ namespace TorrentDescriptionMaker
                 PublishOptionsPacket pop = new PublishOptionsPacket();
                 pop.AlignCenter = chkQuickAlignCenter.Checked;
                 pop.FullPicture = chkQuickFullPicture.Checked;
-                pop.PreformattedText = chkQuickPre.Checked;                
-                if (sender.GetType() == typeof (ComboBox)){
+                pop.PreformattedText = chkQuickPre.Checked;
+                if (sender.GetType() == typeof(ComboBox))
+                {
                     if (((ComboBox)sender).Name == cboQuickTemplate.Name)
                     {
                         pop.TemplatesMode = true;
                         pop.TemplateLocation = Path.Combine(Settings.Default.TemplatesDir, cboQuickTemplate.Text);
                     }
-                }                
+                }
                 txtPublish.Text = CreatePublish(mTorrentInfo, pop);
             }
         }

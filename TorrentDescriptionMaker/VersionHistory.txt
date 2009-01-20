@@ -1,10 +1,12 @@
-Version 1.8.8
+Version 1.8.8 - 20090120
 
 1.8.8.0 Added %NewLine% syntax for creating a new line
 1.8.7.0 Support for quickly changing Templates without having to reupload screenshots
 1.8.6.2 Added missing %Audio_BitrateMode% for external templates [memories]
 1.8.6.1 Screenshots were not uploaded when screenshots were not saved to Pictures\MTN [memories]
 1.8.6.0 Support ImageShack (Legacy Method) for systems that failed uploading screenshots
+
+Version 1.8.5 - 20090119
 
 1.8.5.01 When -P was not used in MTN arguments, TDMaker waited indefinitely until mtn.exe terminated
 1.8.5.00 Extended support for using ImageShack Registration Code to store images in your own account
