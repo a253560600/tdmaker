@@ -1,0 +1,14 @@
+#summary Knowledgebase for getting TDMaker to work in Linux/Mac using Mono
+
+= Introduction =
+
+Using Mono this Wiki page shows attempts taken to run TDMaker in Linux. 
+
+== TDMaker.exe.config==
+
+[http://i36.tinypic.com/246kidz.png]
+
+== Screenshots ==
+[http://i36.tinypic.com/msj8es.png]
+
+[http://i35.tinypic.com/htfl10.png]
