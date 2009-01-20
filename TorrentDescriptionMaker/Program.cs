@@ -26,14 +26,40 @@ namespace TorrentDescriptionMaker
         /// Application Version
         /// </summary>
         public static McoreSystem.AppInfo gAppInfo = new McoreSystem.AppInfo(Application.ProductName, Application.ProductVersion, McoreSystem.AppInfo.SoftwareCycle.FINAL);
-        
+
         public const string APP_NAME = "TDMaker";
-        public static TaskType CurrentTask { get; set; }        
-        public readonly static string ScreenshotsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "MTN");
-        public readonly static string ScreenshotsTempDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), APP_NAME);
+        public static TaskType CurrentTask { get; set; }
+        private readonly static string ScreenshotsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "MTN");
+        private readonly static string ScreenshotsTempDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), APP_NAME);
         public static string LogsDir { get; set; }
         public static string DebugLogFilePath { get; set; }
         private static StringBuilder mSbDebug = new StringBuilder();
+
+        public static string GetScreenShotsDir()
+        {
+            return (Settings.Default.KeepScreenshot ? Program.ScreenshotsDir : Program.ScreenshotsTempDir);
+        }
+
+        public static void ClearScreenshots()
+        {
+            if (!Settings.Default.KeepScreenshot)
+            {
+                // delete if option set to temporary location 
+                string[] files = Directory.GetFiles(Program.ScreenshotsTempDir, "*.*", SearchOption.AllDirectories);
+                foreach (string screenshot in files)
+                {
+                    try
+                    {
+                        File.Delete(screenshot);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+
+            }
+        }
 
         public static void WriteTemplates(bool rewrite)
         {
@@ -68,13 +94,13 @@ namespace TorrentDescriptionMaker
 
         public static string GetConfigFilePath()
         {
-            
+
             System.Configuration.Configuration config =
-                ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);           
+                ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
             return config.FilePath;
 
         }
-        
+
         public static string getFileSizeString(double size)
         {
 
@@ -143,7 +169,7 @@ namespace TorrentDescriptionMaker
                 System.Reflection.Assembly oAsm = System.Reflection.Assembly.GetExecutingAssembly();
                 Stream oStrm = oAsm.GetManifestResourceStream(oAsm.GetName().Name + "." + name);
 
-                for (int i = 0; i< oAsm.GetManifestResourceNames().Length; i++)
+                for (int i = 0; i < oAsm.GetManifestResourceNames().Length; i++)
                 {
                     Console.WriteLine(oAsm.GetManifestResourceNames()[i].ToString());
                 }
@@ -154,7 +180,7 @@ namespace TorrentDescriptionMaker
             {
                 Console.WriteLine(ex.Message);
             }
-            
+
             return text;
         }
 
@@ -172,7 +198,7 @@ namespace TorrentDescriptionMaker
             }
             catch (Exception ex)
             {
-               // msAppendWarnings(ex.Message);
+                // msAppendWarnings(ex.Message);
             }
         }
 
@@ -218,8 +244,8 @@ namespace TorrentDescriptionMaker
 
     public enum ScreenshotDestType
     {
-        IMAGESHACK, 
-        TINYPIC, 
+        IMAGESHACK,
+        TINYPIC,
         IMAGESHACK_LEGACY_METHOD
     }
 
@@ -281,6 +307,8 @@ namespace TorrentDescriptionMaker
         public bool AlignCenter { get; set; }
         public bool PreformattedText { get; set; }
         public bool FullPicture { get; set; }
+        public bool TemplatesMode { get; set; }
+        public string TemplateLocation { get; set; }        
     }
 
 

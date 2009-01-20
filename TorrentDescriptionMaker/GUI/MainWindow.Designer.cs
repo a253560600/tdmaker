@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chkShowMTN = new System.Windows.Forms.CheckBox();
             this.btnMTNHelp = new System.Windows.Forms.Button();
@@ -92,11 +92,11 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tcOptions = new System.Windows.Forms.TabControl();
             this.tpGeneral = new System.Windows.Forms.TabPage();
-            this.btnTemplatesRewrite = new System.Windows.Forms.Button();
             this.chkUpdateCheck = new System.Windows.Forms.CheckBox();
             this.chkScreenshot = new System.Windows.Forms.CheckBox();
             this.chkAnalyzeAuto = new System.Windows.Forms.CheckBox();
             this.tpPublish = new System.Windows.Forms.TabPage();
+            this.btnTemplatesRewrite = new System.Windows.Forms.Button();
             this.chkUploadFullScreenshot = new System.Windows.Forms.CheckBox();
             this.cboTemplate = new System.Windows.Forms.ComboBox();
             this.gbTemplatesInternal = new System.Windows.Forms.GroupBox();
@@ -154,6 +154,7 @@
             this.tmsVersionHistory = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsAppAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.btnCreateTorrent = new System.Windows.Forms.Button();
+            this.cboQuickTemplate = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -780,13 +781,14 @@
             // 
             // gbQuickPublish
             // 
+            this.gbQuickPublish.Controls.Add(this.cboQuickTemplate);
             this.gbQuickPublish.Controls.Add(this.chkQuickFullPicture);
             this.gbQuickPublish.Controls.Add(this.chkQuickAlignCenter);
             this.gbQuickPublish.Controls.Add(this.chkQuickPre);
             this.gbQuickPublish.Dock = System.Windows.Forms.DockStyle.Right;
-            this.gbQuickPublish.Location = new System.Drawing.Point(625, 3);
+            this.gbQuickPublish.Location = new System.Drawing.Point(606, 3);
             this.gbQuickPublish.Name = "gbQuickPublish";
-            this.gbQuickPublish.Size = new System.Drawing.Size(132, 455);
+            this.gbQuickPublish.Size = new System.Drawing.Size(151, 455);
             this.gbQuickPublish.TabIndex = 1;
             this.gbQuickPublish.TabStop = false;
             this.gbQuickPublish.Text = "Options";
@@ -835,7 +837,7 @@
             this.txtPublish.Multiline = true;
             this.txtPublish.Name = "txtPublish";
             this.txtPublish.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtPublish.Size = new System.Drawing.Size(613, 455);
+            this.txtPublish.Size = new System.Drawing.Size(597, 455);
             this.txtPublish.TabIndex = 0;
             this.txtPublish.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPublish_KeyPress);
             // 
@@ -874,17 +876,6 @@
             this.tpGeneral.TabIndex = 3;
             this.tpGeneral.Text = "General";
             this.tpGeneral.UseVisualStyleBackColor = true;
-            // 
-            // btnTemplatesRewrite
-            // 
-            this.btnTemplatesRewrite.AutoSize = true;
-            this.btnTemplatesRewrite.Location = new System.Drawing.Point(16, 233);
-            this.btnTemplatesRewrite.Name = "btnTemplatesRewrite";
-            this.btnTemplatesRewrite.Size = new System.Drawing.Size(151, 23);
-            this.btnTemplatesRewrite.TabIndex = 13;
-            this.btnTemplatesRewrite.Text = "&Rewrite Default Templates...";
-            this.btnTemplatesRewrite.UseVisualStyleBackColor = true;
-            this.btnTemplatesRewrite.Click += new System.EventHandler(this.btnTemplatesRewrite_Click);
             // 
             // chkUpdateCheck
             // 
@@ -940,6 +931,17 @@
             this.tpPublish.TabIndex = 2;
             this.tpPublish.Text = "Publish Templates";
             this.tpPublish.UseVisualStyleBackColor = true;
+            // 
+            // btnTemplatesRewrite
+            // 
+            this.btnTemplatesRewrite.AutoSize = true;
+            this.btnTemplatesRewrite.Location = new System.Drawing.Point(16, 233);
+            this.btnTemplatesRewrite.Name = "btnTemplatesRewrite";
+            this.btnTemplatesRewrite.Size = new System.Drawing.Size(151, 23);
+            this.btnTemplatesRewrite.TabIndex = 13;
+            this.btnTemplatesRewrite.Text = "&Rewrite Default Templates...";
+            this.btnTemplatesRewrite.UseVisualStyleBackColor = true;
+            this.btnTemplatesRewrite.Click += new System.EventHandler(this.btnTemplatesRewrite_Click);
             // 
             // chkUploadFullScreenshot
             // 
@@ -1415,36 +1417,36 @@
             // 
             this.dgvTrackers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTrackers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTrackers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvTrackers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTrackers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colName,
             this.colAnnounceURL});
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvTrackers.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvTrackers.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvTrackers.Location = new System.Drawing.Point(6, 19);
             this.dgvTrackers.Name = "dgvTrackers";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTrackers.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTrackers.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvTrackers.Size = new System.Drawing.Size(701, 148);
             this.dgvTrackers.TabIndex = 1;
             this.dgvTrackers.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTrackers_CellMouseLeave);
@@ -1608,6 +1610,16 @@
             this.btnCreateTorrent.Text = "Create &Torrent";
             this.btnCreateTorrent.UseVisualStyleBackColor = true;
             this.btnCreateTorrent.Click += new System.EventHandler(this.btnCreateTorrent_Click);
+            // 
+            // cboQuickTemplate
+            // 
+            this.cboQuickTemplate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboQuickTemplate.FormattingEnabled = true;
+            this.cboQuickTemplate.Location = new System.Drawing.Point(15, 104);
+            this.cboQuickTemplate.Name = "cboQuickTemplate";
+            this.cboQuickTemplate.Size = new System.Drawing.Size(121, 21);
+            this.cboQuickTemplate.TabIndex = 3;
+            this.cboQuickTemplate.SelectedIndexChanged += new System.EventHandler(this.cboQuickTemplate_SelectedIndexChanged);
             // 
             // frmMain
             // 
@@ -1812,6 +1824,7 @@
         private System.Windows.Forms.Button btnImageShackRegCode;
         private System.Windows.Forms.Button btnImageShackImages;
         private System.Windows.Forms.ToolStripMenuItem tmsVersionHistory;
+        private System.Windows.Forms.ComboBox cboQuickTemplate;
     }
 }
 
