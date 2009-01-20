@@ -3,5 +3,5 @@
 
 [img]%ScreenshotFull%[/img]
 
-%Audio_Info%
 %Video_Info%
+%Audio_Info%

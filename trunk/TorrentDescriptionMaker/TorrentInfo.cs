@@ -50,7 +50,7 @@ namespace TorrentDescriptionMaker
 
                 psi.Arguments = string.Format("{0} -O \"{1}\" \"{2}\"",
                     Settings.Default.MTNArg.Trim(),
-                    (Settings.Default.KeepScreenshot ? Program.ScreenshotsDir : Program.ScreenshotsTempDir),
+                    Program.GetScreenShotsDir(),
                     mediaFilePath);
 
                 p.StartInfo = psi;
@@ -72,14 +72,17 @@ namespace TorrentDescriptionMaker
             List<ZSS.ImageUploader.ImageFile> lstScreenshots = new List<ImageFile>();
             int retry = 0;
             ImageShackUploader su = new ImageShackUploader();
-            su.DeveloperKey = "16BCFGWY58707bec94f7b0a773d0aa8bbf301900";
-            if (Settings.Default.UseImageShackRegCode && !string.IsNullOrEmpty(Settings.Default.ImageShackRegCode))
-            {
-                su.RegistrationCode = Settings.Default.ImageShackRegCode;
-            }
-            su.Public = false;
 
-            su.RandomizeFileName = Settings.Default.ImageShakeRandomizeFileName;
+            if (linq)
+            {
+                su.DeveloperKey = "16BCFGWY58707bec94f7b0a773d0aa8bbf301900";
+                if (Settings.Default.UseImageShackRegCode && !string.IsNullOrEmpty(Settings.Default.ImageShackRegCode))
+                {
+                    su.RegistrationCode = Settings.Default.ImageShackRegCode;
+                }
+                su.Public = false;
+                su.RandomizeFileName = Settings.Default.ImageShakeRandomizeFileName;
+            }                        
 
             while (retry <= 3 && lstScreenshots == null ||
                (++retry <= 3 && lstScreenshots != null && lstScreenshots.Count < 1))
@@ -119,7 +122,7 @@ namespace TorrentDescriptionMaker
         private void UploadScreenshot(String mediaFilePath)
         {
 
-            string screenshot = Path.Combine(Program.ScreenshotsDir, Path.GetFileNameWithoutExtension(mediaFilePath) + "_s.jpg");
+            string screenshot = Path.Combine(Program.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + "_s.jpg");
 
             if (File.Exists(screenshot))
             {

@@ -221,25 +221,7 @@ namespace TorrentDescriptionMaker
             // this.WindowState = FormWindowState.Minimized;
             SettingsWrite();
             Program.WriteDebugLog();
-
-            if (!Settings.Default.KeepScreenshot)
-            {
-                // delete if option set to temporary location 
-                string[] files = Directory.GetFiles(Program.ScreenshotsTempDir, "*.*", SearchOption.AllDirectories);
-                foreach (string screenshot in files)
-                {
-                    try
-                    {
-                        File.Delete(screenshot);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
-                }
-
-            }
-
+            Program.ClearScreenshots();
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -279,8 +261,8 @@ namespace TorrentDescriptionMaker
 
 
             // configure Screenshots folder
-            if (!Directory.Exists(Program.ScreenshotsDir))
-                Directory.CreateDirectory(Program.ScreenshotsDir);
+            if (!Directory.Exists(Program.GetScreenShotsDir()))
+                Directory.CreateDirectory(Program.GetScreenShotsDir());
 
             // configure Settings folder
             if (string.IsNullOrEmpty(Settings.Default.SettingsDir) ||
@@ -319,10 +301,16 @@ namespace TorrentDescriptionMaker
                     templateNames[i] = Path.GetFileName(dirs[i]);
                 }
                 cboTemplate.Items.Clear();
+                cboQuickTemplate.Items.Clear();
                 cboTemplate.Items.AddRange(templateNames);
+                cboQuickTemplate.Items.AddRange(templateNames);
+
             }
             if (cboTemplate.Items.Count > 0)
+            {
                 cboTemplate.SelectedIndex = Math.Max(Settings.Default.TemplateIndex, 0);
+                cboQuickTemplate.SelectedIndex = Math.Max(Settings.Default.TemplateIndex, 0);
+            }
 
             // Configure Torrents folder
             if (string.IsNullOrEmpty(Settings.Default.TorrentsCustomDir) ||
@@ -454,6 +442,7 @@ namespace TorrentDescriptionMaker
                     pop.AlignCenter = Settings.Default.AlignCenter;
                     pop.FullPicture = Settings.Default.UploadScreenshot && Settings.Default.UseFullPicture;
                     pop.PreformattedText = Settings.Default.PreText;
+                    pop.TemplatesMode = Settings.Default.TemplatesMode;
 
                     ti.PublishOptions = pop;
                     ti.PublishString = CreatePublish(ti, pop);
@@ -564,9 +553,16 @@ namespace TorrentDescriptionMaker
         {
             string pt = "";
 
-            if (Settings.Default.TemplatesMode && Directory.Exists(ti.MediaInfo2.TemplateLocation))
+            if (pop.TemplatesMode)
             {
-                pt = ti.CreatePublish(pop, new TemplateReader(ti.MediaInfo2.TemplateLocation, ti));
+                if (Directory.Exists(pop.TemplateLocation))
+                {
+                    pt = ti.CreatePublish(pop, new TemplateReader(pop.TemplateLocation, ti));
+                }
+                else if (Directory.Exists(ti.MediaInfo2.TemplateLocation))
+                {
+                    pt = ti.CreatePublish(pop, new TemplateReader(ti.MediaInfo2.TemplateLocation, ti));
+                }
             }
             else
             {
@@ -622,6 +618,7 @@ namespace TorrentDescriptionMaker
                             chkQuickAlignCenter.Checked = pop.AlignCenter;
                             chkQuickFullPicture.Checked = pop.FullPicture;
                             chkQuickPre.Checked = pop.PreformattedText;
+                            cboQuickTemplate.SelectedIndex = cboTemplate.SelectedIndex;
 
                             txtPublish.Text = mTorrentInfo.PublishString;
 
@@ -869,32 +866,38 @@ namespace TorrentDescriptionMaker
             }
         }
 
-        private void createQuickPublish()
+        private void createQuickPublish(object sender)
         {
             if (mTorrentInfo != null)
             {
                 PublishOptionsPacket pop = new PublishOptionsPacket();
                 pop.AlignCenter = chkQuickAlignCenter.Checked;
                 pop.FullPicture = chkQuickFullPicture.Checked;
-                pop.PreformattedText = chkQuickPre.Checked;
-
+                pop.PreformattedText = chkQuickPre.Checked;                
+                if (sender.GetType() == typeof (ComboBox)){
+                    if (((ComboBox)sender).Name == cboQuickTemplate.Name)
+                    {
+                        pop.TemplatesMode = true;
+                        pop.TemplateLocation = Path.Combine(Settings.Default.TemplatesDir, cboQuickTemplate.Text);
+                    }
+                }                
                 txtPublish.Text = CreatePublish(mTorrentInfo, pop);
             }
         }
 
         private void chkQuickPre_CheckedChanged(object sender, EventArgs e)
         {
-            createQuickPublish();
+            createQuickPublish(sender);
         }
 
         private void chkQuickAlignCenter_CheckedChanged(object sender, EventArgs e)
         {
-            createQuickPublish();
+            createQuickPublish(sender);
         }
 
         private void chkQuickFullPicture_CheckedChanged(object sender, EventArgs e)
         {
-            createQuickPublish();
+            createQuickPublish(sender);
         }
 
         private void rbFile_CheckedChanged(object sender, EventArgs e)
@@ -938,9 +941,9 @@ namespace TorrentDescriptionMaker
 
         private void tsmScreenshots_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(Program.ScreenshotsDir))
+            if (Directory.Exists(Program.GetScreenShotsDir()))
             {
-                Process.Start(Program.ScreenshotsDir);
+                Process.Start(Program.GetScreenShotsDir());
             }
         }
 
@@ -1017,6 +1020,12 @@ namespace TorrentDescriptionMaker
                 v.Icon = this.Icon;
                 v.ShowDialog();
             }
+        }
+
+        private void cboQuickTemplate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            createQuickPublish(sender);
+
         }
 
 

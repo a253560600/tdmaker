@@ -94,19 +94,24 @@ namespace TDMaker
 
             string pattern = "";
 
-            if (TorrentInfo.MediaInfo2.IsDisc)
+            if (TorrentInfo.MediaInfo2 != null)
             {
-                pattern = CreateDiscInfo(TorrentInfo.MediaInfo2);
-            }
-            else
-            {
-                pattern = CreateFileInfo(TorrentInfo.MediaInfo2);
-            }
 
-            pattern = GetSourceInfo(pattern, TorrentInfo.MediaInfo2);
-            pattern = GetScreenshotInfo(ref pattern, TorrentInfo.MediaInfo2);
+                if (TorrentInfo.MediaInfo2.IsDisc)
+                {
+                    pattern = CreateDiscInfo(TorrentInfo.MediaInfo2);
+                }
+                else
+                {
+                    pattern = CreateFileInfo(TorrentInfo.MediaInfo2);
+                }
 
-            PublishInfo = pattern;
+                pattern = GetSourceInfo(pattern, TorrentInfo.MediaInfo2);
+                pattern = GetScreenshotInfo(ref pattern, TorrentInfo.MediaInfo2);
+                pattern = Regex.Replace(pattern, "%NewLine%", Environment.NewLine);
+
+                PublishInfo = pattern.Trim();
+            }
         }
 
         private string GetScreenshotInfo(ref string pattern, MediaInfo2 mi)
@@ -156,7 +161,7 @@ namespace TDMaker
                 AudioInfo ai = mf.Audio[i];
                 info = Regex.Replace(info, "%AudioID%", (i + 1).ToString(), RegexOptions.IgnoreCase);
                 info = GetStringFromAudio(info, ai);
-                sbAudio.Append(info);
+                sbAudio.AppendLine(info);
             }
 
             return sbAudio.ToString();
@@ -168,6 +173,7 @@ namespace TDMaker
             pattern = Regex.Replace(pattern, "%Audio_%Format%", ai.Format, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Audio_Format%", ai.Format, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Audio_Bitrate%", ai.Bitrate, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Audio_BitrateMode%", ai.BitrateMode, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Audio_Channels%", ai.Channels, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Audio_SamplingRate%", ai.SamplingRate, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Audio_Resolution%", ai.Resolution, RegexOptions.IgnoreCase);
