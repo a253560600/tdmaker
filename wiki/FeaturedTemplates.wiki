@@ -1,5 +1,6 @@
-#summary A collection of user templates
 #labels Featured
+<wiki:toc max_depth="0" />
+#summary A collection of user templates
 
 = Minimal =
 by SleepyB
@@ -21,4 +22,15 @@ Web Link: %WebLink%
 %Video_Info%
 
 %Audio_Info%
+}}}
+
+==DiscAudioInfo.txt==
+{{{
+[size=%FontSize_Heading2%][b][i]Audio %AudioID%:[/i][/b][/size]
+[size=%FontSize_Body%]
+            [u]Format:[/u] %Audio_%Format%
+           [u]Bitrate:[/u] %Audio_Bitrate%
+          [u]Channels:[/u] %Audio_Channels%
+     [u]Sampling Rate:[/u] %Audio_SamplingRate%
+[/size]
 }}}
