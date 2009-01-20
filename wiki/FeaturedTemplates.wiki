@@ -2,7 +2,8 @@
 #labels Featured
 <wiki:toc max_depth="1" />
 
-=MinimalTemplate=
+=Minimal=
+MinimalTemplate
 
 =MTN=
 by McoreD
