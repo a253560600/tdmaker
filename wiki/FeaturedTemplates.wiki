@@ -1,4 +1,4 @@
-#summary A collection of user templates
+#summary A collection of User Templates
 #labels Phase-Support
 <wiki:toc max_depth="1" />
 
