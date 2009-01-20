@@ -883,14 +883,23 @@ namespace TorrentDescriptionMaker
                 pop.AlignCenter = chkQuickAlignCenter.Checked;
                 pop.FullPicture = chkQuickFullPicture.Checked;
                 pop.PreformattedText = chkQuickPre.Checked;
-                if (sender.GetType() == typeof(ComboBox))
-                {
-                    if (((ComboBox)sender).Name == cboQuickTemplate.Name)
-                    {
-                        pop.TemplatesMode = true;
-                        pop.TemplateLocation = Path.Combine(Settings.Default.TemplatesDir, cboQuickTemplate.Text);
-                    }
-                }
+
+                pop.TemplatesMode = true;
+                pop.TemplateLocation = Path.Combine(Settings.Default.TemplatesDir, cboQuickTemplate.Text);
+
+                //if (sender.GetType() == typeof(ComboBox))
+                //{
+                //    if (((ComboBox)sender).Name == cboQuickTemplate.Name)
+                //    {
+                //        pop.TemplatesMode = true;
+                //        pop.TemplateLocation = Path.Combine(Settings.Default.TemplatesDir, cboQuickTemplate.Text);
+                //    }
+                //}
+                //else
+                //{
+                //    pop.TemplatesMode = Settings.Default.TemplatesMode;
+                //}
+
                 txtPublish.Text = CreatePublish(mTorrentInfo, pop);
             }
         }

@@ -116,9 +116,12 @@ namespace TDMaker
 
         private string GetScreenshotInfo(ref string pattern, MediaInfo2 mi)
         {
-            if (!string.IsNullOrEmpty(mi.Screenshot.Full) && !string.IsNullOrEmpty(mi.Screenshot.LinkedThumbnail))
+            if (!string.IsNullOrEmpty(mi.Screenshot.Full))
             {
-                pattern = Regex.Replace(pattern, "%ScreenshotFull%", mi.Screenshot.Full, RegexOptions.IgnoreCase);
+                pattern = Regex.Replace(pattern, "%ScreenshotFull%", mi.Screenshot.Full, RegexOptions.IgnoreCase);             
+            }
+            if (!string.IsNullOrEmpty(mi.Screenshot.LinkedThumbnail))
+            {
                 pattern = Regex.Replace(pattern, "%ScreenshotForums%", mi.Screenshot.LinkedThumbnail, RegexOptions.IgnoreCase);
             }
             return pattern;
