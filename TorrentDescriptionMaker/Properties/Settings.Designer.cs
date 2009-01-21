@@ -207,7 +207,7 @@ namespace TDMaker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool WebLink {
             get {
                 return ((bool)(this["WebLink"]));
@@ -633,6 +633,18 @@ namespace TDMaker.Properties {
             }
             set {
                 this["Setting"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool bTitle {
+            get {
+                return ((bool)(this["bTitle"]));
+            }
+            set {
+                this["bTitle"] = value;
             }
         }
     }

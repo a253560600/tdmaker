@@ -18,5 +18,10 @@ namespace TDMaker
         {
             this.Task = task;
         }
+
+        public bool IsSingleTask()
+        {
+            return FilePaths.Length == 1;
+        }
     }
 }
