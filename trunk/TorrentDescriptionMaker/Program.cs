@@ -101,7 +101,7 @@ namespace TorrentDescriptionMaker
 
         }
 
-        public static string getFileSizeString(double size)
+        public static string GetFileSizeString(double size)
         {
 
             return string.Format("{0} MiB", (size / 1024.0 / 1024.0).ToString("0.00"));
@@ -113,7 +113,7 @@ namespace TorrentDescriptionMaker
         /// </summary>
         /// <param name="dura">Duration in Milliseconds</param>
         /// <returns>DuratingString in HH:mm:ss</returns>
-        public static string getDurationString(double dura)
+        public static string GetDurationString(double dura)
         {
 
             double duraSec = dura / 1000.0;
@@ -132,7 +132,7 @@ namespace TorrentDescriptionMaker
 
         }
 
-        public static string getMediaName(string p)
+        public static string GetMediaName(string p)
         {
 
             string name = "";

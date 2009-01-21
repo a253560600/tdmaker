@@ -22,13 +22,27 @@ namespace TDMaker.Torrents
 
         public struct RequestInfo
         {
-
-            public string TorrentFilePath { get; set; }
-            public string Name { get; set; }
-            public string NFO { get; set; }
-            public string URL { get; set; }
+            /// <summary>
+            /// Torrent Description
+            /// </summary>
             public string Description { get; set; }
+            /// <summary>
+            /// File Path of the Torrent file with .torrent extension
+            /// </summary>
+            public string FilePath { get; set; }
+            /// <summary>
+            /// Name of the Release
+            /// </summary>
+            public string Name { get; set; }
+            /// <summary>
+            /// File Path of the NFO file
+            /// </summary>
+            public string NFO { get; set; }            
             public string Type { get; set; }
+            /// <summary>
+            /// URL of the Release
+            /// </summary>
+            public string URL { get; set; }
 
         }
 
@@ -48,7 +62,7 @@ namespace TDMaker.Torrents
 
                 HttpWebMultipartRequest request = new HttpWebMultipartRequest(this.UploadURL, this.userCookie);
                 request.AddField("MAX_FILE_SIZE", "1048576");
-                request.AddFile("file", ri.TorrentFilePath, "application/x-bittorrent", new FileInfo(ri.TorrentFilePath).OpenRead());
+                request.AddFile("file", ri.FilePath, "application/x-bittorrent", new FileInfo(ri.FilePath).OpenRead());
                 request.AddField("name", ri.Name);
                 request.AddFile("nfo", ri.NFO, "application/octet-stream", new FileInfo(ri.NFO).OpenRead());
                 request.AddField("url", ri.URL);
@@ -63,7 +77,7 @@ namespace TDMaker.Torrents
                 //{
                 //    request.AddField("upas", "anon");
                 //}
-                new FileInfo(ri.TorrentFilePath).Delete();
+                new FileInfo(ri.FilePath).Delete();
                 string htmlCode = new StreamReader(request.GetResponse().GetResponseStream()).ReadToEnd();
                 if (!htmlCode.Contains("Successfully uploaded!"))
                 {
@@ -80,12 +94,12 @@ namespace TDMaker.Torrents
                     request2.Method = "GET";
                     request2.ContentType = "application/x-www-form-urlencoded";
                     HttpWebResponse response = (HttpWebResponse)request2.GetResponse();
-                    FileStream writeStream = new FileStream(ri.TorrentFilePath, FileMode.Create);
+                    FileStream writeStream = new FileStream(ri.FilePath, FileMode.Create);
                     this.ReadWriteStream(response.GetResponseStream(), writeStream);
                     writeStream.Close();
                     //Process.Start(Path[Path.Length - 1] + ".torrent");
                     this.Status = "Status: Upload complete";
-                   // this.button2.Enabled = false;
+                    // this.button2.Enabled = false;
                 }
             }
         }

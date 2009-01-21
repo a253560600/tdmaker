@@ -115,7 +115,7 @@ namespace TorrentDescriptionMaker
 
             if (wt.IsSingleTask() && string.IsNullOrEmpty(txtTitle.Text))
             {
-                txtTitle.Text = Program.getMediaName(wt.FilePaths[0]);
+                txtTitle.Text = Program.GetMediaName(wt.FilePaths[0]);
             }
 
             foreach (string p in wt.FilePaths)
@@ -149,7 +149,7 @@ namespace TorrentDescriptionMaker
                     }
 
                     // if it is a DVD, set the title to be name of the folder. 
-                    this.Text = string.Format("{0} - {1}", Program.gAppInfo.GetApplicationTitle(Application.ProductName, Application.ProductVersion, McoreSystem.AppInfo.VersionDepth.MajorMinorBuild), Program.getMediaName(mi.Location));
+                    this.Text = string.Format("{0} - {1}", Program.gAppInfo.GetApplicationTitle(Application.ProductName, Application.ProductVersion, McoreSystem.AppInfo.VersionDepth.MajorMinorBuild), Program.GetMediaName(mi.Location));
 
                     txtScrFull.Text = "";
                     txtBBScrFull.Text = "";
@@ -506,7 +506,7 @@ namespace TorrentDescriptionMaker
             {
                 MonoTorrent.Common.TorrentCreator tc = new MonoTorrent.Common.TorrentCreator();
                 tc.Private = true;
-                tc.Comment = Program.getMediaName(p);
+                tc.Comment = Program.GetMediaName(p);
                 tc.Path = p;
                 tc.PublisherUrl = "http://code.google.com/p/tdmaker";
                 tc.Publisher = Application.ProductName;
@@ -515,7 +515,7 @@ namespace TorrentDescriptionMaker
                 temp.Add(tp.Tracker.AnnounceURL);
                 tc.Announces.Add(temp);
 
-                string torrentFileName = (File.Exists(p) ? Path.GetFileName(p) : Program.getMediaName(p)) + ".torrent";
+                string torrentFileName = (File.Exists(p) ? Path.GetFileName(p) : Program.GetMediaName(p)) + ".torrent";
                 string torrentPath = Path.Combine(tp.TorrentFolder, torrentFileName);
 
                 if (!Directory.Exists(tp.TorrentFolder))
