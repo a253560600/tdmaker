@@ -250,30 +250,41 @@ namespace TorrentDescriptionMaker
                 //* General
                 //********************* 
 
-                System.Console.WriteLine("Current Dir1: " + System.Environment.CurrentDirectory);
-                System.Environment.CurrentDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                System.Console.WriteLine("Current Dir2: " + System.Environment.CurrentDirectory);
+                //System.Console.WriteLine("Current Dir1: " + System.Environment.CurrentDirectory);
+                //System.Environment.CurrentDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                //System.Console.WriteLine("Current Dir2: " + System.Environment.CurrentDirectory);
                 
                 MediaInfoLib.MediaInfo mMI = null;
                 try
                 {
-                    Console.WriteLine("Loaded MediaInfo.dll");
+                    Console.WriteLine("Loading MediaInfo.dll");                    
                     mMI = new MediaInfoLib.MediaInfo();
-                    Console.WriteLine("Loading MediaInfo.dll");
+                    Console.WriteLine("Loaded MediaInfo.dll");
+
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.ToString());
+                }
+
+                if (Program.IsUNIX)
+                {
+                    Console.WriteLine(mMI.ToString());
                 }
 
                 if (mMI != null)
                 {
-                    Console.WriteLine(string.Format("Opening {0}", fp));
+                    Console.WriteLine(string.Format("MediaInfo Opening {0}", fp));
                     mMI.Open(fp);
-                    Console.WriteLine(string.Format("Opened {0}", fp));
+                    Console.WriteLine(string.Format("MediaInfo Opened {0}", fp));
                     mMI.Option("Complete");
                     mf.Summary = mMI.Inform();
-                    // Console.WriteLine(string.Format("Summary: {0}", mf.Summary));
+
+                    if (Program.IsUNIX)
+                    {
+                        Console.WriteLine(string.Format("MediaInfo Summary Length: {0}", mf.Summary.Length.ToString()));
+                        Console.WriteLine(string.Format("MediaInfo Summary: {0}", mf.Summary));
+                    }
 
                     // Format Info
                     if (string.IsNullOrEmpty(mf.Format))
