@@ -57,6 +57,15 @@ namespace TorrentDescriptionMaker
 
             lbFiles.Items.Clear();
 
+            if (1 == ps.Length)                                
+            {
+                txtTitle.Text = Program.GetMediaName(ps[0]);
+                if (cboSource.Text == "DVD")
+                {
+                    cboSource.Text = Program.GetDVDString(ps[0]);
+                }
+            }
+           
             if (!Settings.Default.WritePublish && ps.Length > 1)
             {
                 if (MessageBox.Show("Writing Publish info to File is recommended when analysing multiple files or folders. \n\nWould you like to turn this feature on?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -113,11 +122,6 @@ namespace TorrentDescriptionMaker
         {
             List<MediaInfo2> miList = new List<MediaInfo2>();
 
-            if (wt.IsSingleTask() && string.IsNullOrEmpty(txtTitle.Text))
-            {
-                txtTitle.Text = Program.GetMediaName(wt.FilePaths[0]);
-            }
-
             foreach (string p in wt.FilePaths)
             {
                 if (File.Exists(p) || Directory.Exists(p))
@@ -131,7 +135,14 @@ namespace TorrentDescriptionMaker
                         mi.SetTitle(txtTitle.Text);
                     }
                     mi.Extras = cboExtras.Text;
-                    mi.Source = cboSource.Text;
+                    if (cboSource.Text == "DVD")
+                    {
+                        mi.Source = Program.GetDVDString(p); 
+                    }
+                    else
+                    {
+                        mi.Source = cboSource.Text;
+                    }                    
                     mi.Menu = cboDiscMenu.Text;
                     mi.Authoring = cboAuthoring.Text;
                     mi.WebLink = txtWebLink.Text;

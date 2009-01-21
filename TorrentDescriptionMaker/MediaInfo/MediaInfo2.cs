@@ -274,7 +274,7 @@ namespace TorrentDescriptionMaker
                     Console.WriteLine(string.Format("Opened {0}", fp));
                     mMI.Option("Complete");
                     mf.Summary = mMI.Inform();
-                    Console.WriteLine(string.Format("Summary: {0}", mf.Summary));
+                    // Console.WriteLine(string.Format("Summary: {0}", mf.Summary));
 
                     // Format Info
                     if (string.IsNullOrEmpty(mf.Format))

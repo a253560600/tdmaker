@@ -40,6 +40,44 @@ namespace TorrentDescriptionMaker
             return (Settings.Default.KeepScreenshot ? Program.ScreenshotsDir : Program.ScreenshotsTempDir);
         }
 
+        public static bool IsDisc(string p)
+        {
+            bool disc = Directory.Exists(p);
+
+            if (disc)
+            {
+                string[] ifo = Directory.GetFiles(p, "VTS_01_0.IFO", SearchOption.AllDirectories);
+                string[] vob = Directory.GetFiles(p, "*.VOB", SearchOption.AllDirectories);
+                disc = ifo.Length > 0 && vob.Length > 0;
+            }
+
+            return disc;
+        }
+
+        /// <summary>
+        /// Function to determine DVD-5 or DVD-9
+        /// </summary>
+        /// <returns>DVD-5 or DVD-9</returns>
+        public static string GetDVDString(string p)
+        {
+            string ss = "";
+            double size = 0.0;      // size in Bytes
+            if (IsDisc(p))
+            {
+                string[] files = Directory.GetFiles(p, "*.*", SearchOption.AllDirectories);
+                foreach (string f in files)
+                {
+                    FileInfo fi = new FileInfo(f);
+                    size += fi.Length;
+                }
+                if (size > 0.0)
+                {
+                    ss = (size > 4.7 * 1000.0 * 1000.0 * 1000.0 ? "DVD-9" : "DVD-5");
+                }
+            }
+            return ss;
+        }
+
         public static void ClearScreenshots()
         {
             if (!Settings.Default.KeepScreenshot)
@@ -308,7 +346,7 @@ namespace TorrentDescriptionMaker
         public bool PreformattedText { get; set; }
         public bool FullPicture { get; set; }
         public bool TemplatesMode { get; set; }
-        public string TemplateLocation { get; set; }        
+        public string TemplateLocation { get; set; }
     }
 
 
