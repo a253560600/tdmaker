@@ -1,3 +1,4 @@
+1.8.10.0 Automatically determine DVD-5 or DVD-9 if source is set to DVD
 1.8.09.0 Added ability to override Title for single media files [memories]
 
 Version 1.8.8 - 20090120

@@ -44,6 +44,7 @@
     <Setting Name="Sources" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;DVD&lt;/string&gt;
   &lt;string&gt;DVD-5&lt;/string&gt;
   &lt;string&gt;DVD-9&lt;/string&gt;
   &lt;string&gt;VHS&lt;/string&gt;
@@ -53,7 +54,7 @@
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="Source" Type="System.String" Scope="User">
-      <Value Profile="(Default)">DVD-5</Value>
+      <Value Profile="(Default)">DVD</Value>
     </Setting>
     <Setting Name="KeepScreenshot" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
