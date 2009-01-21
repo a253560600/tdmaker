@@ -9,11 +9,11 @@ Using Mono this Wiki page shows attempts taken to run TDMaker in Linux and Mac O
 [http://i33.tinypic.com/30lykog.png]
 
 ==What's working so far?==
- * Creating Torrents
+ * Creating Torrents using MonoTorrent
+ * Taking screenshots using MTN
 
 ==What's not working so far?==
  * MediaInfo
- * Taking screenshots
 
 = Getting Started = 
  * Download Mono Framework from http://www.go-mono.com/mono-downloads/download.html
