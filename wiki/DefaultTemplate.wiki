@@ -1,5 +1,6 @@
 #summary Default Template by McoreD
 #labels Phase-Support
+<wiki:toc max_depth="1" />
 
 = Disc.txt =
 {{{
