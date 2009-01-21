@@ -1,4 +1,6 @@
-﻿Override Title
+﻿Command Line Interface
+Fonts dropdown menu for MTN
+Override Title
 	If one file is choosen, auto populate the Title and set mi.Title
 	If multiple files are chosen, do not auto populate but leave the option to the user to override or not
 		If not IsNullOrEmpty then use the title orelse use internally determined title
