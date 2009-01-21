@@ -39,7 +39,7 @@ To map MediaInfo.dll to the relevant Linux library, you need to create a TDMaker
 mono --debug TDMaker.exe
 }}}
 
-== MTN ==
+== Troubleshooting MTN ==
 If mtn does not execute properly then in Terminal, try:
 {{{
 chmod +x mtn
