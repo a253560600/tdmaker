@@ -23,15 +23,19 @@ Using Mono this Wiki page shows attempts taken to run TDMaker in Linux.
 mono --debug TDMaker.exe
 }}}
 
-=Attempts=
-
 To map MediaInfo.dll to the relevant Linux library, you need to create a TDMaker.exe.config file and have the following:
 
 == TDMaker.exe.config==
 
 [http://i36.tinypic.com/246kidz.png]
 
-== Screenshots ==
+= Screenshots =
+
+== Ubuntu 8.10 ==
 [http://i36.tinypic.com/msj8es.png]
 
 [http://i35.tinypic.com/htfl10.png]
+
+== Mac OS X ==
+Thanks to ameeps:
+[http://img172.imageshack.us/img172/4189/picture1cv5.png] 
