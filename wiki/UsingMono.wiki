@@ -41,3 +41,7 @@ To map MediaInfo.dll to the relevant Linux library, you need to create a TDMaker
 === Main Window ===
 Thanks to ameeps:
 [http://img172.imageshack.us/img172/4189/picture1cv5.png] 
+
+== IRC ==
+Server: irc.what.cd
+Channel: #TDMaker
