@@ -253,8 +253,7 @@ namespace TorrentDescriptionMaker
                 System.Console.WriteLine("Current Dir1: " + System.Environment.CurrentDirectory);
                 System.Environment.CurrentDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
                 System.Console.WriteLine("Current Dir2: " + System.Environment.CurrentDirectory);
-                System.Console.WriteLine("OSVersion: {0}", System.Environment.OSVersion.ToString());
-
+                
                 MediaInfoLib.MediaInfo mMI = null;
                 try
                 {

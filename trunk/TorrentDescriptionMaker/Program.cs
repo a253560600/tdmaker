@@ -17,6 +17,11 @@ namespace TorrentDescriptionMaker
         [STAThread]
         static void Main()
         {
+            string os = System.Environment.OSVersion.ToString();
+            bool b = os.Contains("Unix") || os.Contains("Mac");
+            IsUNIX = b;
+            System.Console.WriteLine("OSVersion: {0}", os);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmMain());
@@ -32,6 +37,7 @@ namespace TorrentDescriptionMaker
         private readonly static string ScreenshotsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "MTN");
         private readonly static string ScreenshotsTempDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), APP_NAME);
         public static string LogsDir { get; set; }
+        public static bool IsUNIX { get; private set; }
         public static string DebugLogFilePath { get; set; }
         private static StringBuilder mSbDebug = new StringBuilder();
 
