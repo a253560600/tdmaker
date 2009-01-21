@@ -17,7 +17,13 @@ Using Mono this Wiki page shows attempts taken to run TDMaker in Linux and Mac O
 
 = Getting Started = 
  * Download Mono Framework from http://www.go-mono.com/mono-downloads/download.html
+
+== TDMaker ==
  * Download http://tdmaker.googlecode.com/files/TDMaker-1.8.10-ubuntu-bin.zip
+ * Extract it to somewhere like: 
+{{{
+~\Applications\TDMaker
+}}}
 
 == !MediaInfo ==
  * Download appropriate MediaInfo libmediainfo0 and its dependencies from http://mediainfo.sourceforge.net/en/Download
