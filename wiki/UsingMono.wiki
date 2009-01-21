@@ -32,10 +32,12 @@ To map MediaInfo.dll to the relevant Linux library, you need to create a TDMaker
 = Screenshots =
 
 == Ubuntu 8.10 ==
+=== Publish tab ===
+[http://i35.tinypic.com/htfl10.png]
+=== About Window ===
 [http://i36.tinypic.com/msj8es.png]
 
-[http://i35.tinypic.com/htfl10.png]
-
 == Mac OS X ==
+=== Main Window ===
 Thanks to ameeps:
 [http://img172.imageshack.us/img172/4189/picture1cv5.png] 
