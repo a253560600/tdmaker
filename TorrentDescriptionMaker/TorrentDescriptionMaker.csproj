@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{F3519E2C-4C9F-4EED-8EDA-78FED87BC10F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -122,6 +122,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Torrents\HttpWebMultipartRequest.cs" />
+    <Compile Include="Torrents\TorrentUploader.cs" />
     <Compile Include="Tracker.cs" />
     <Compile Include="TrackerManager.cs" />
     <Compile Include="UpdateChecker.cs" />
