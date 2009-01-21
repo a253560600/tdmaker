@@ -46,11 +46,20 @@ Execute TDMaker:
 mono --debug TDMaker.exe
 }}}
 
-== Troubleshooting MTN ==
-If mtn does not execute properly then in Terminal, try:
+== Troubleshooting ==
+ * If mtn does not execute properly then in Terminal, try:
 {{{
 chmod +x mtn
 }}}
+ * If you get the following error: 
+{{{
+** (TDMaker.exe:29543): WARNING **: The following assembly referenced from /home/ajt/Downloads/TDMAKER/TDMaker.exe could not be loaded:
+ Assembly:   System.Windows.Forms    (assemblyref_index=1)
+ Version:    2.0.0.0
+ Public Key: b77a5c561934e089
+ The assembly was not found in the Global Assembly Cache, a path listed in the MONO_PATH environment variable, or in the location of the executing assembly (/home/ajt/Downloads/TDMAKER/).
+}}}
+try installing *libmono-winforms2.0-cil*
 
 = Screenshots =
 
