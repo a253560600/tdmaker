@@ -18,6 +18,9 @@ Using Mono this Wiki page shows attempts taken to run TDMaker in Linux and Mac O
 = Getting Started = 
  * Download Mono Framework from http://www.go-mono.com/mono-downloads/download.html
  * Have yourself all the files typically in C:\Program Files\TDMaker
+ * Download appropriate MediaInfo libmediainfo0 and its dependencies from http://mediainfo.sourceforge.net/en/Download
+  # http://downloads.sourceforge.net/mediainfo/libmediainfo0_0.7.8-1_i386.Debian_Etch.deb
+  # http://downloads.sourceforge.net/zenlib/libzen0_0.3.5-1_i386.Debian_Etch.deb
  * Execute TDMaker: 
 {{{
 mono --debug TDMaker.exe
@@ -26,12 +29,19 @@ mono --debug TDMaker.exe
 To map MediaInfo.dll to the relevant Linux library, you need to create a TDMaker.exe.config file and have the following:
 
 == TDMaker.exe.config==
+The following file needs to be in the same directory TDMaker.exe is in. 
 {{{
     <configuration>
             <dllmap dll="MediaInfo.dll" target="libmediainfo.so.0"/>
     </configuration>
 }}}
 [http://i36.tinypic.com/246kidz.png]
+
+== MTN ==
+If mtn does not execute properly then in Terminal, try:
+{{{
+chmod +x mtn
+}}}
 
 = Screenshots =
 
