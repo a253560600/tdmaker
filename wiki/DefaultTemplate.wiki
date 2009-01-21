@@ -20,7 +20,7 @@
 %Video_Info%
 %Audio_Info%
 }}}
-= DiscAudioInfo.txt =
+= !DiscAudioInfo.txt =
 {{{
 [size=%FontSize_Heading2%][b][i]Audio %AudioID%:[/i][/b][/size]
 [size=%FontSize_Body%]
@@ -61,7 +61,7 @@
 %Audio_Info%
 }}}
 
-= FileAudioInfo.txt=
+= !FileAudioInfo.txt=
 {{{
 [size=%FontSize_Heading2%][b][i]Audio #%AudioID%:[/i][/b][/size]
 [size=%FontSize_Body%]
@@ -73,7 +73,7 @@
 [/size]
 }}}
 
-= FileVideoInfo.txt = 
+= !FileVideoInfo.txt = 
 {{{
 [size=%FontSize_Heading2%][b][i]Video:[/i][/b][/size]
 [size=%FontSize_Body%]
@@ -87,7 +87,7 @@
 [/size]
 }}}
 
-= GeneralInfo.txt =
+= !GeneralInfo.txt =
 {{{
 [size=%FontSize_Heading3%][b][i]General:[/i][/b][/size]
 [size=%FontSize_Body%]         
