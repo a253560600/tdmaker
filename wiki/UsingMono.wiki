@@ -13,7 +13,7 @@ Using Mono this Wiki page shows attempts taken to run TDMaker in Linux and Mac O
  * Taking screenshots using MTN
 
 ==What's not working so far?==
- * MediaInfo
+ * !MediaInfo
 
 = Getting Started = 
  * Download Mono Framework from http://www.go-mono.com/mono-downloads/download.html
