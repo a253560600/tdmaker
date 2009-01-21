@@ -224,7 +224,7 @@ namespace TorrentDescriptionMaker
                         this.Overall.FileSizeString = string.Format("{0} MiB", (this.Overall.FileSize / 1024.0 / 1024.0).ToString("0.00"));
 
                         this.Overall.Duration = dura;
-                        this.Overall.DurationString = Program.getDurationString(dura);
+                        this.Overall.DurationString = Program.GetDurationString(dura);
 
                     }
 
