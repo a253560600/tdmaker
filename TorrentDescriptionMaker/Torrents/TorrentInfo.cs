@@ -39,19 +39,38 @@ namespace TorrentDescriptionMaker
         private bool TakeScreenshot(String mediaFilePath)
         {
             bool succes = true;
-
+            Console.WriteLine("Taking Screenshot for " + Path.GetFileName(mediaFilePath));
             mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, "Taking Screenshot for " + Path.GetFileName(mediaFilePath));
 
             try
             {
+                Console.WriteLine("Creating a MTN process...");
+                
+                string assemblyMTN = Settings.Default.MTNPath;
+                string args = string.Format("{0} -O \"{1}\" \"{2}\"", Settings.Default.MTNArg.Trim(), Program.GetScreenShotsDir(), mediaFilePath);
+
+                if (Program.IsUNIX)
+                {
+                    assemblyMTN = Settings.Default.MTNPath.Replace(".exe", "");
+                    args = args.Replace("-f arial.ttf", "-i -t");
+                }
+
                 Process p = new Process();
-                ProcessStartInfo psi = new ProcessStartInfo(Settings.Default.MTNPath);
+                ProcessStartInfo psi = new ProcessStartInfo(assemblyMTN);
+
+                if (Program.IsUNIX)
+                {
+                    psi.UseShellExecute = false;
+                }
+
+                Console.WriteLine("MTN Path: " + assemblyMTN);
+                Console.WriteLine("MTN Args: " + args);
+
+                Environment.CurrentDirectory = Path.GetDirectoryName(assemblyMTN);
+                               
                 psi.WindowStyle = (Settings.Default.ShowMTNWindow ? ProcessWindowStyle.Normal : ProcessWindowStyle.Hidden);
 
-                psi.Arguments = string.Format("{0} -O \"{1}\" \"{2}\"",
-                    Settings.Default.MTNArg.Trim(),
-                    Program.GetScreenShotsDir(),
-                    mediaFilePath);
+                psi.Arguments = args;
 
                 p.StartInfo = psi;
                 p.Start();
@@ -60,6 +79,7 @@ namespace TorrentDescriptionMaker
             catch (Exception ex)
             {
                 succes = false;
+                Console.WriteLine(ex.ToString());
                 mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, ex.Message + " for " + Path.GetFileName(mediaFilePath));                
             }
 
