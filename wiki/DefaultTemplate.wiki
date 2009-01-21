@@ -30,7 +30,7 @@
      [u]Sampling Rate:[/u] %Audio_SamplingRate%
 [/size]
 }}}
-= DiscVideoInfo.txt =
+= !DiscVideoInfo.txt =
 {{{
 [size=%FontSize_Heading2%][b][i]Video:[/i][/b][/size]
 [size=%FontSize_Body%]
