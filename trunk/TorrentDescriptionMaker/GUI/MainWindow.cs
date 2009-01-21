@@ -113,6 +113,11 @@ namespace TorrentDescriptionMaker
         {
             List<MediaInfo2> miList = new List<MediaInfo2>();
 
+            if (wt.IsSingleTask() && string.IsNullOrEmpty(txtTitle.Text))
+            {
+                txtTitle.Text = Program.getMediaName(wt.FilePaths[0]);
+            }
+
             foreach (string p in wt.FilePaths)
             {
                 if (File.Exists(p) || Directory.Exists(p))
@@ -121,12 +126,17 @@ namespace TorrentDescriptionMaker
                     MakeGUIReadyForAnalysis();
 
                     MediaInfo2 mi = new MediaInfo2(p);
+                    if (wt.IsSingleTask() && !string.IsNullOrEmpty(txtTitle.Text))
+                    {
+                        mi.SetTitle(txtTitle.Text);
+                    }
                     mi.Extras = cboExtras.Text;
                     mi.Source = cboSource.Text;
                     mi.Menu = cboDiscMenu.Text;
                     mi.Authoring = cboAuthoring.Text;
                     mi.WebLink = txtWebLink.Text;
                     mi.TorrentPacketInfo = new TorrentPacket(getTracker(), p);
+
                     if (Settings.Default.TemplatesMode)
                     {
                         mi.TemplateLocation = Path.Combine(Settings.Default.TemplatesDir, cboTemplate.Text);
