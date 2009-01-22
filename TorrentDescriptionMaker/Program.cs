@@ -46,7 +46,7 @@ namespace TorrentDescriptionMaker
             return (Settings.Default.KeepScreenshot ? Program.ScreenshotsDir : Program.ScreenshotsTempDir);
         }
 
-        public static bool IsDisc(string p)
+        public static bool MediaIsDisc(string p)
         {
             bool disc = Directory.Exists(p);
 
@@ -68,7 +68,7 @@ namespace TorrentDescriptionMaker
         {
             string ss = "";
             double size = 0.0;      // size in Bytes
-            if (IsDisc(p))
+            if (MediaIsDisc(p))
             {
                 string[] files = Directory.GetFiles(p, "*.*", SearchOption.AllDirectories);
                 foreach (string f in files)
