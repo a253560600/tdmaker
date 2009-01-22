@@ -21,7 +21,7 @@ By default there will 3 Templates installed: Default, Minimal and MTN.
  * %FontSize_Heading3%
  * %FontSize_Body%
 
-== Disc.txt and File.txt == 
+== !Disc.txt and !File.txt == 
 
  * *%Title%* = Place holder for Title
  * *%Source%* = Place holder for Source
@@ -60,7 +60,7 @@ Apart from these syntaxes both files support all the syntaxes listed below. Howe
  * *%Subtitles%*
  * *%Duration%*
 
-== FileAudioInfo.txt and DiscAudioInfo.txt ==
+== !FileAudioInfo.txt and !DiscAudioInfo.txt ==
 
  * *%AudioID%* = Stream number of Audio - useful for sources with multiple audio
 
@@ -70,7 +70,7 @@ Apart from these syntaxes both files support all the syntaxes listed below. Howe
  * *%Audio_SamplingRate%*
  * *%Audio_Resolution%*
 
-== FileVideoInfo.txt and DiscVideoInfo.txt ==
+== !FileVideoInfo.txt and !DiscVideoInfo.txt ==
 
  * *%Video_Format%*
  * *%Video_Bitrate%*
@@ -81,7 +81,7 @@ Apart from these syntaxes both files support all the syntaxes listed below. Howe
  * *%Video_Width%*
  * *%Video_Height%*
 
-== GeneralInfo.txt ==
+== !GeneralInfo.txt ==
 
  * *%Format%*
  * *%Bitrate%*
