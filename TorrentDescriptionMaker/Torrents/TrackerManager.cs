@@ -43,13 +43,16 @@ namespace TDMaker
                     {
                         Trackers = (List<Tracker>)obj;
                     }
+
+                    Console.WriteLine("Done reading trackers.xml");
+
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
                     throw;
                 }
-            }
+            }            
         }
 
         public void Write()

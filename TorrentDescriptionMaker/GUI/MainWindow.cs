@@ -57,7 +57,7 @@ namespace TorrentDescriptionMaker
 
             lbFiles.Items.Clear();
 
-            if (1 == ps.Length)                                
+            if (1 == ps.Length)
             {
                 txtTitle.Text = Program.GetMediaName(ps[0]);
                 if (cboSource.Text == "DVD")
@@ -65,7 +65,7 @@ namespace TorrentDescriptionMaker
                     cboSource.Text = Program.GetDVDString(ps[0]);
                 }
             }
-           
+
             if (!Settings.Default.WritePublish && ps.Length > 1)
             {
                 if (MessageBox.Show("Writing Publish info to File is recommended when analysing multiple files or folders. \n\nWould you like to turn this feature on?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -137,12 +137,12 @@ namespace TorrentDescriptionMaker
                     mi.Extras = cboExtras.Text;
                     if (cboSource.Text == "DVD")
                     {
-                        mi.Source = Program.GetDVDString(p); 
+                        mi.Source = Program.GetDVDString(p);
                     }
                     else
                     {
                         mi.Source = cboSource.Text;
-                    }                    
+                    }
                     mi.Menu = cboDiscMenu.Text;
                     mi.Authoring = cboAuthoring.Text;
                     mi.WebLink = txtWebLink.Text;
@@ -264,11 +264,28 @@ namespace TorrentDescriptionMaker
         }
 
         private void frmMain_Load(object sender, EventArgs e)
-        {          
+        {
 
             ConfigureDirs();
             ConfigureGUIForUnix();
             SettingsRead();
+
+            // Logo
+            string logo = Path.Combine(Application.StartupPath, "logo.png");
+            if (File.Exists(logo))
+            {
+                //gbLocation.BackgroundImage = Image.FromFile(logo);
+                //gbLocation.BackgroundImageLayout = ImageLayout.Stretch;
+                //this.BackgroundImage = Image.FromFile(logo);
+                //this.BackgroundImageLayout = ImageLayout.Tile;
+                //tpMedia.BackgroundImage = Image.FromFile(logo);
+                //tpMedia.BackgroundImageLayout = ImageLayout.None;
+                pbLogo.BackgroundImage = Image.FromFile(logo);
+                pbLogo.BackgroundImageLayout = ImageLayout.Stretch;
+                pbLogo.BackColor = System.Drawing.SystemColors.ControlDark;
+                this.BackColor = System.Drawing.SystemColors.ControlDark;
+
+            }
 
             sBar.Text = string.Format("Ready.");
 
@@ -409,7 +426,7 @@ namespace TorrentDescriptionMaker
             rbTorrentFolderCustom.Checked = !rbTorrentDefaultFolder.Checked;
 
             // Trackers
-            trackersRead();
+            TrackersRead();
 
         }
 
@@ -430,21 +447,30 @@ namespace TorrentDescriptionMaker
 
         }
 
-        private void trackersRead()
+        private void TrackersRead()
         {
-
+            Console.WriteLine("Reading trackers.xml");
             mTrackerManager.Read();
-
-            for (int i = 0; i < mTrackerManager.Trackers.Count; i++)
+            Console.WriteLine(string.Format("Read {0} trackers", mTrackerManager.Trackers.Count.ToString()));
+            try
             {
-                dgvTrackers.Rows.Add();
-                dgvTrackers.Rows[i].Cells[0].Value = mTrackerManager.Trackers[i].Name;
-                dgvTrackers.Rows[i].Cells[1].Value = mTrackerManager.Trackers[i].AnnounceURL;
-            }
 
-            fillTrackersComboBox();
-            if (cboAnnounceURL.Items.Count > 0)
-                cboAnnounceURL.SelectedIndex = Math.Max(Settings.Default.AnnounceURLIndex, 0);
+                for (int i = 0; i < mTrackerManager.Trackers.Count; i++)
+                {
+                    dgvTrackers.Rows.Add();
+                    Console.WriteLine(string.Format("Adding {0}", mTrackerManager.Trackers[i].Name));
+                    dgvTrackers.Rows[i].Cells[0].Value = mTrackerManager.Trackers[i].Name;
+                    dgvTrackers.Rows[i].Cells[1].Value = mTrackerManager.Trackers[i].AnnounceURL;
+                }
+
+                FillTrackersComboBox();
+                if (cboAnnounceURL.Items.Count > 0)
+                    cboAnnounceURL.SelectedIndex = Math.Max(Settings.Default.AnnounceURLIndex, 0);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
 
         }
 
@@ -464,7 +490,7 @@ namespace TorrentDescriptionMaker
             {
 
                 bwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, "Reading " + Path.GetFileName(mi.Location) + " using MediaInfo...");
-                 mi.ReadMedia();
+                mi.ReadMedia();
 
                 if (mi.Overall != null)
                 {
@@ -790,13 +816,6 @@ namespace TorrentDescriptionMaker
 
         private void cmsAppAbout_Click(object sender, EventArgs e)
         {
-            //StringBuilder sb = new StringBuilder();
-            //sb.AppendLine(string.Format("Version {0}", Application.ProductVersion));
-            //sb.AppendLine();
-            //sb.AppendLine(string.Format("Running from {0}", Application.ExecutablePath));
-            //sb.AppendLine();
-            //sb.AppendLine("Copyright © McoreD 2009");
-            //MessageBox.Show(sb.ToString(), Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             TDMaker.GUI.AboutBox ab = new TDMaker.GUI.AboutBox();
             ab.ShowDialog();
@@ -805,28 +824,46 @@ namespace TorrentDescriptionMaker
 
         private void dgvTrackers_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
         {
-            int old = cboAnnounceURL.SelectedIndex;
-            fillTrackersComboBox();
+            if (!Program.IsUNIX)
+            {
+                try
+                {
+                    int old = cboAnnounceURL.SelectedIndex;
+                    FillTrackersComboBox();
 
-            if (cboAnnounceURL.Items.Count > 0 && old < 0)
-            {
-                old = 0;
-            }
-            if (cboAnnounceURL.Items.Count > old)
-            {
-                cboAnnounceURL.SelectedIndex = old;
+                    if (cboAnnounceURL.Items.Count > 0 && old < 0)
+                    {
+                        old = 0;
+                    }
+                    if (cboAnnounceURL.Items.Count > old)
+                    {
+                        cboAnnounceURL.SelectedIndex = old;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("dgvTrackers_CellMouseLeave fails");
+                    Console.WriteLine(ex.ToString());
+                }
             }
         }
 
-        private void fillTrackersComboBox()
+        private void FillTrackersComboBox()
         {
-
-            cboAnnounceURL.Items.Clear();
-            for (int i = 0; i < dgvTrackers.Rows.Count; i++)
+            try
             {
-                object val = dgvTrackers.Rows[i].Cells[1].Value;
-                if (val != null)
-                    cboAnnounceURL.Items.Add(dgvTrackers.Rows[i].Cells[1].Value);
+                cboAnnounceURL.Items.Clear();
+                for (int i = 0; i < dgvTrackers.Rows.Count; i++)
+                {
+                    object val = dgvTrackers.Rows[i].Cells[1].Value;
+                    if (val != null)
+                        cboAnnounceURL.Items.Add(dgvTrackers.Rows[i].Cells[1].Value);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("fillTrackersComboBox() fails...");
+                Console.WriteLine(ex.ToString());
             }
 
         }
@@ -1060,6 +1097,14 @@ namespace TorrentDescriptionMaker
         {
             createQuickPublish(sender);
 
+        }
+
+        private void frmMain_Resize(object sender, EventArgs e)
+        {
+            //int midGap = this.Width - btnCreateTorrent.Location.X - btnCreateTorrent.Width - (this.Width - btnPublish.Location.X);
+
+            //Point p = new Point(midGap/2+btnCreateTorrent.Location.X+btnCreateTorrent.Width, pbLogo.Location.Y);
+            //pbLogo.Location = p;
         }
 
 
