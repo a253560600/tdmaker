@@ -21,7 +21,7 @@ By default there will 3 Templates installed: Default, Minimal and MTN.
  * %FontSize_Heading3%
  * %FontSize_Body%
 
-== !Disc.txt and !File.txt == 
+== Disc.txt and File.txt == 
 
  * *%Title%* = Place holder for Title
  * *%Source%* = Place holder for Source
