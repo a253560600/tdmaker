@@ -11,6 +11,7 @@ Using Mono this Wiki page shows attempts taken to run TDMaker in Linux and Mac O
 ==What's working so far?==
  * Creating Torrents using MonoTorrent
  * Taking screenshots using MTN
+ * Creating Description using MTN
 
 ==What's not working so far?==
  * MediaInfo (workaround: using MTN info)
