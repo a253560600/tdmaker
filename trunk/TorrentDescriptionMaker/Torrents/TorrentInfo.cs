@@ -52,7 +52,7 @@ namespace TorrentDescriptionMaker
                 if (Program.IsUNIX)
                 {
                     assemblyMTN = Settings.Default.MTNPath.Replace(".exe", "");
-                    args = args.Replace("-f arial.ttf", "-i -t");
+                    args = args.Replace("-f arial.ttf", "-i -t -N _s.txt");
                 }
 
                 Process p = new Process();
@@ -75,6 +75,21 @@ namespace TorrentDescriptionMaker
                 p.StartInfo = psi;
                 p.Start();
                 p.WaitForExit(1000 * 30);
+
+                if (Program.IsUNIX)
+                {
+                    // Save _s.txt to MediaInfo2.Overall object
+                    if (string.IsNullOrEmpty(MediaInfo2.Overall.Summary))
+                    {
+                        string info = Path.Combine(Program.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + "_s.txt");
+
+                        using (StreamReader sr = new StreamReader(info))
+                        {
+                            MediaInfo2.Overall.Summary = sr.ReadToEnd();
+                        }
+                    }
+                }
+
             }
             catch (Exception ex)
             {
@@ -215,8 +230,9 @@ namespace TorrentDescriptionMaker
         public string CreatePublish(PublishOptionsPacket options)
         {
             StringBuilder sbPublish = new StringBuilder();
+            string info = (Program.IsUNIX ? this.MediaInfo2.Overall.Summary : this.MediaInfo2.ToString());
 
-            sbPublish.Append(GetMediaInfo(this.MediaInfo2.ToString(), options));
+            sbPublish.Append(GetMediaInfo(info, options));
             sbPublish.AppendLine();
             sbPublish.Append(GetScreenshotString(options));
 

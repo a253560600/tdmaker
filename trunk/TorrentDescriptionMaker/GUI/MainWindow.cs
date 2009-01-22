@@ -254,10 +254,20 @@ namespace TorrentDescriptionMaker
             Program.ClearScreenshots();
         }
 
+        private void ConfigureGUIForUnix()
+        {
+            gbQuickPublish.Enabled = !Program.IsUNIX;
+            if (Program.IsUNIX)
+            {
+                tcMain.TabPages.Remove(tpMediaInfo);
+            }
+        }
+
         private void frmMain_Load(object sender, EventArgs e)
         {          
 
             ConfigureDirs();
+            ConfigureGUIForUnix();
             SettingsRead();
 
             sBar.Text = string.Format("Ready.");
@@ -903,19 +913,6 @@ namespace TorrentDescriptionMaker
 
                 pop.TemplatesMode = true;
                 pop.TemplateLocation = Path.Combine(Settings.Default.TemplatesDir, cboQuickTemplate.Text);
-
-                //if (sender.GetType() == typeof(ComboBox))
-                //{
-                //    if (((ComboBox)sender).Name == cboQuickTemplate.Name)
-                //    {
-                //        pop.TemplatesMode = true;
-                //        pop.TemplateLocation = Path.Combine(Settings.Default.TemplatesDir, cboQuickTemplate.Text);
-                //    }
-                //}
-                //else
-                //{
-                //    pop.TemplatesMode = Settings.Default.TemplatesMode;
-                //}
 
                 txtPublish.Text = CreatePublish(mTorrentInfo, pop);
             }
