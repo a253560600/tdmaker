@@ -6,14 +6,14 @@
 
 Using Mono this Wiki page shows attempts taken to run TDMaker in Linux and Mac OS X. 
 
-[http://i33.tinypic.com/30lykog.png]
+[http://i34.tinypic.com/73jp6g.png]
 
 ==What's working so far?==
  * Creating Torrents using MonoTorrent
  * Taking screenshots using MTN
 
 ==What's not working so far?==
- * MediaInfo
+ * MediaInfo (workaround: using MTN info)
 
 = Getting Started = 
  * Download Mono Framework from http://www.go-mono.com/mono-downloads/download.html
@@ -65,6 +65,9 @@ try installing *libmono-winforms2.0-cil*
 
 == Ubuntu 8.10 ==
 === Publish tab ===
+==== Using MTN info ====
+[http://i35.tinypic.com/2n82zxe.png]
+==== Using MediaInfo ====
 [http://i35.tinypic.com/htfl10.png]
 === Screenshots tab ===
 [http://i36.tinypic.com/29dk0ug.png]
