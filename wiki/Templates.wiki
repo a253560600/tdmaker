@@ -23,6 +23,7 @@ By default there will 3 Templates installed: Default, Minimal and MTN.
 
 == Disc.txt and File.txt == 
 
+ * *%Title%* = Place holder for Title
  * *%Source%* = Place holder for Source
  * *%Disc_Authoring%* = Place holder 
  * *%Disc_Menu%* = Place holder for 
