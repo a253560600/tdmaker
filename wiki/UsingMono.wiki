@@ -73,7 +73,9 @@ try installing *libmono-winforms2.0-cil*
 === Screenshots tab ===
 [http://i36.tinypic.com/29dk0ug.png]
 === About Window ===
-[http://i36.tinypic.com/msj8es.png]
+[http://img259.imageshack.us/img259/1637/screenshotabouttdmakerrh2.png]
+===Version History===
+[http://i37.tinypic.com/263fu2w.png]
 
 == Mac OS X ==
 === Main Window ===
