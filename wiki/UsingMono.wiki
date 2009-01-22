@@ -15,6 +15,7 @@ Using Mono this Wiki page shows attempts taken to run TDMaker in Linux and Mac O
 
 ==What's not working so far?==
  * MediaInfo (workaround: using MTN info)
+ * Tracker URLs are not saved. If you add a Tracker, TDMaker won't load again. You need to delete ~/Applications/TDMaker/Settings/trackers.xml if this happens.
 
 = Getting Started = 
  * Download Mono Framework from http://www.go-mono.com/mono-downloads/download.html
