@@ -38,7 +38,7 @@ if this happens.
    # http://downloads.sourceforge.net/mediainfo/libmediainfo0_0.7.8-1_i386.Debian_Etch.deb
 
 == Setting up TDMaker.exe.config==
-To map MediaInfo.dll to the relevant Linux library, you need to create a TDMaker.exe.config file and have the following. The following file needs to be in the same directory TDMaker.exe is in. 
+To map MediaInfo.dll to the relevant Linux library, you need to create a TDMaker.exe.config file and have the following. The following file needs to be in the same directory TDMaker.exe is in. This file is already included in the zip file downloaded. So extracting all files would have this file in the right place.
 {{{
     <configuration>
             <dllmap dll="MediaInfo.dll" target="libmediainfo.so.0"/>
