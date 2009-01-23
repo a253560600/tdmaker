@@ -26,7 +26,7 @@ namespace TDMaker.MediaInfo {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string a_AspectRatio {
+        private string a_AspectRatio {
             get {
                 return ((string)(this["a_AspectRatio"]));
             }

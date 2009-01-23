@@ -19,7 +19,7 @@ namespace TorrentDescriptionMaker
         public TorrentInfo(BackgroundWorker bwApp, MediaInfo2 mi)
         {
             // load the MediaInfo object
-            MediaInfo2 = mi;
+            Media = mi;
 
             string p = mi.Location;
 
@@ -79,13 +79,13 @@ namespace TorrentDescriptionMaker
                 if (Program.IsUNIX)
                 {
                     // Save _s.txt to MediaInfo2.Overall object
-                    if (string.IsNullOrEmpty(MediaInfo2.Overall.Summary))
+                    if (string.IsNullOrEmpty(Media.Overall.Summary))
                     {
                         string info = Path.Combine(Program.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + "_s.txt");
 
                         using (StreamReader sr = new StreamReader(info))
                         {
-                            MediaInfo2.Overall.Summary = sr.ReadToEnd();
+                            Media.Overall.Summary = sr.ReadToEnd();
                         }
                     }
                 }
@@ -178,22 +178,21 @@ namespace TorrentDescriptionMaker
 
                 if (lstScreenshots != null && lstScreenshots.Count > 0)
                 {
-                    ScreenshotsPacket sp = new ScreenshotsPacket();
 
                     foreach (ImageFile imf in lstScreenshots)
                     {
                         if (imf.Type == ImageFile.ImageType.FULLIMAGE)
                         {
-                            sp.Full = imf.URI;
+                           Media.Screenshot.Full = imf.URI;
                         }
                         else if (imf.Type == ImageFile.ImageType.THUMBNAIL_FORUMS1)
                         {
-                            sp.LinkedThumbnail = imf.URI;
+                            Media.Screenshot.LinkedThumbnail = imf.URI;
                         }
                     }
 
                     mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploaded {0}.", Path.GetFileName(screenshot)));
-                    MediaInfo2.Screenshot = sp;
+
                 }
                 else
                 {                    
@@ -230,7 +229,7 @@ namespace TorrentDescriptionMaker
         public string CreatePublish(PublishOptionsPacket options)
         {
             StringBuilder sbPublish = new StringBuilder();
-            string info = (Program.IsUNIX ? this.MediaInfo2.Overall.Summary : this.MediaInfo2.ToString());
+            string info = (Program.IsUNIX ? this.Media.Overall.Summary : this.Media.ToString());
 
             sbPublish.Append(GetMediaInfo(info, options));
             sbPublish.AppendLine();
@@ -268,13 +267,13 @@ namespace TorrentDescriptionMaker
             StringBuilder sbPublish = new StringBuilder();
             BbCode bb = new BbCode();
 
-            if (!string.IsNullOrEmpty(MediaInfo2.Screenshot.Full) && options.FullPicture)
+            if (!string.IsNullOrEmpty(Media.Screenshot.Full) && options.FullPicture)
             {
-                sbPublish.AppendLine(bb.Img(MediaInfo2.Screenshot.Full));
+                sbPublish.AppendLine(bb.Img(Media.Screenshot.Full));
             }
-            else if (!string.IsNullOrEmpty(MediaInfo2.Screenshot.LinkedThumbnail))
+            else if (!string.IsNullOrEmpty(Media.Screenshot.LinkedThumbnail))
             {
-                sbPublish.AppendLine(MediaInfo2.Screenshot.LinkedThumbnail);
+                sbPublish.AppendLine(Media.Screenshot.LinkedThumbnail);
             }
 
             return sbPublish.ToString();
@@ -289,7 +288,10 @@ namespace TorrentDescriptionMaker
             return CreatePublish(this.PublishOptions);
         }
 
-        public MediaInfo2 MediaInfo2 { get; set; }
+        /// <summary>
+        /// MediaInfo2 Object
+        /// </summary>
+        public MediaInfo2 Media { get; set; }
         /// <summary>
         /// String Representation of Publish tab
         /// ToString() should be called at least once
