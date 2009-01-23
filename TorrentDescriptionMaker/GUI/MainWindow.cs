@@ -157,6 +157,7 @@ namespace TorrentDescriptionMaker
                     if (Settings.Default.UploadScreenshot)
                     {
                         mi.TakeScreenshots = TakeScreenshotsType.TAKE_ONE_SCREENSHOT;
+
                     }
 
                     // if it is a DVD, set the title to be name of the folder. 
@@ -271,20 +272,24 @@ namespace TorrentDescriptionMaker
             SettingsRead();
 
             // Logo
-            string logo = Path.Combine(Application.StartupPath, "logo.png");
-            if (File.Exists(logo))
+            string logo1 = Path.Combine(Application.StartupPath, "logo1.png");
+            string logo2 = Path.Combine(Application.StartupPath, "logo.png");
+
+            if (File.Exists(logo1))
             {
-                //gbLocation.BackgroundImage = Image.FromFile(logo);
-                //gbLocation.BackgroundImageLayout = ImageLayout.Stretch;
+                gbLocation.BackgroundImage = Image.FromFile(logo1);
+                gbLocation.BackgroundImageLayout = ImageLayout.Stretch;
+            }
+            else if (File.Exists(logo2))
+            {               
                 //this.BackgroundImage = Image.FromFile(logo);
                 //this.BackgroundImageLayout = ImageLayout.Tile;
                 //tpMedia.BackgroundImage = Image.FromFile(logo);
                 //tpMedia.BackgroundImageLayout = ImageLayout.None;
-                pbLogo.BackgroundImage = Image.FromFile(logo);
+                pbLogo.BackgroundImage = Image.FromFile(logo2);
                 pbLogo.BackgroundImageLayout = ImageLayout.Stretch;
                 pbLogo.BackColor = System.Drawing.SystemColors.ControlDark;
                 this.BackColor = System.Drawing.SystemColors.ControlDark;
-
             }
 
             sBar.Text = string.Format("Ready.");

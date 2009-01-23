@@ -274,6 +274,7 @@ namespace TorrentDescriptionMaker
     public enum ProgressType
     {
         INCREMENT_PROGRESS_WITH_MSG,
+        PREVIEW_SCREENSHOT,
         REPORT_MEDIAINFO_SUMMARY,
         UPDATE_PROGRESSBAR_MAX,
         UPDATE_SCREENSHOTS_LIST,

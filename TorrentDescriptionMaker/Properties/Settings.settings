@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="MTNPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">mtn.exe</Value>
     </Setting>
     <Setting Name="MTNArg" Type="System.String" Scope="User">
       <Value Profile="(Default)">-P -w 0 -c 1 -r 3 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97</Value>
@@ -132,7 +132,7 @@
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="DiscMenu" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">Intact</Value>
     </Setting>
     <Setting Name="bDiscMenu" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -176,11 +176,14 @@
     <Setting Name="UseImageShackRegCode" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="Setting" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="bTitle" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="MTNFont" Type="System.String" Scope="User">
+      <Value Profile="(Default)">arial.ttf</Value>
+    </Setting>
+    <Setting Name="MTNFonts" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

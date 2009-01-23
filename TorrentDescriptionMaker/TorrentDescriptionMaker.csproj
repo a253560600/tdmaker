@@ -48,7 +48,7 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ImageUploader, Version=1.0.3308.30721, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="ImageUploader, Version=1.0.3310.36943, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="McoreSystem, Version=1.13.2.1, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="MonoTorrent, Version=0.62.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -87,13 +87,20 @@
       <DependentUpon>TextViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="MediaInfo\MediaFile.cs" />
+    <Compile Include="MediaInfo\Screenshot.cs" />
+    <Compile Include="MediaInfo\ScreenshotSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>ScreenshotSettings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Helpers\TemplateReader.cs" />
-    <Compile Include="Torrents\TorrentInfo.cs" />
+    <Compile Include="Torrents\TorrentInfo.cs">
+    </Compile>
     <Compile Include="GUI\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,7 +138,10 @@
     <Compile Include="Helpers\WorkerTask.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\DataSources\Tracker.datasource" />
+    <None Include="MediaInfo\ScreenshotSettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>ScreenshotSettings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Resources\info-16-xp.png" />
   </ItemGroup>
   <ItemGroup>
