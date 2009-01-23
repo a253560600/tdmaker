@@ -25,7 +25,7 @@ namespace TDMaker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("mtn.exe")]
         public string MTNPath {
             get {
                 return ((string)(this["MTNPath"]));
@@ -447,7 +447,7 @@ namespace TDMaker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Intact")]
         public string DiscMenu {
             get {
                 return ((string)(this["DiscMenu"]));
@@ -627,18 +627,6 @@ namespace TDMaker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Setting {
-            get {
-                return ((string)(this["Setting"]));
-            }
-            set {
-                this["Setting"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool bTitle {
             get {
@@ -646,6 +634,29 @@ namespace TDMaker.Properties {
             }
             set {
                 this["bTitle"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("arial.ttf")]
+        public string MTNFont {
+            get {
+                return ((string)(this["MTNFont"]));
+            }
+            set {
+                this["MTNFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection MTNFonts {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["MTNFonts"]));
+            }
+            set {
+                this["MTNFonts"] = value;
             }
         }
     }
