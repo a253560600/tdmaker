@@ -336,14 +336,6 @@ namespace TorrentDescriptionMaker
 
     }
 
-
-
-    public struct ScreenshotsPacket
-    {
-        public string Full { get; set; }
-        public string LinkedThumbnail { get; set; }
-    }
-
     /// <summary>
     /// Options regard Publish
     /// </summary>

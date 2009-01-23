@@ -10,6 +10,7 @@ using TDMaker.Properties;
 using TDMaker;
 using System.Diagnostics;
 using ZSS;
+using TDMaker.MediaInfo;
 
 namespace TorrentDescriptionMaker
 {
@@ -118,6 +119,44 @@ namespace TorrentDescriptionMaker
             return fl;
         }
 
+        private MediaInfo2 PrepareNewMedia(string p)
+        {
+            MediaInfo2 mi = new MediaInfo2(p);
+            mi.Extras = cboExtras.Text;
+            if (cboSource.Text == "DVD")
+            {
+                mi.Source = Program.GetDVDString(p);
+            }
+            else
+            {
+                mi.Source = cboSource.Text;
+            }
+            mi.Menu = cboDiscMenu.Text;
+            mi.Authoring = cboAuthoring.Text;
+            mi.WebLink = txtWebLink.Text;
+            mi.TorrentPacketInfo = new TorrentPacket(getTracker(), p);
+
+            if (Settings.Default.TemplatesMode)
+            {
+                mi.TemplateLocation = Path.Combine(Settings.Default.TemplatesDir, cboTemplate.Text);
+            }
+
+            if (Settings.Default.TakeScreenshot)
+            {
+                // Fill Screenshot object
+                mi.Screenshot.Settings.c_Columns = (int)nudMTNColumns.Value;
+                mi.Screenshot.Settings.r_Rows = (int)nudMTNRows.Value;
+
+                // Screenshots Mode
+                if (Settings.Default.UploadScreenshot)
+                {
+                    mi.TakeScreenshots = TakeScreenshotsType.TAKE_ONE_SCREENSHOT;
+
+                }
+            }
+            return mi;
+        }
+
         private void AnalyzeMedia(WorkerTask wt)
         {
             List<MediaInfo2> miList = new List<MediaInfo2>();
@@ -129,37 +168,12 @@ namespace TorrentDescriptionMaker
 
                     MakeGUIReadyForAnalysis();
 
-                    MediaInfo2 mi = new MediaInfo2(p);
+                    MediaInfo2 mi = this.PrepareNewMedia(p);
                     if (wt.IsSingleTask() && !string.IsNullOrEmpty(txtTitle.Text))
                     {
                         mi.SetTitle(txtTitle.Text);
                     }
-                    mi.Extras = cboExtras.Text;
-                    if (cboSource.Text == "DVD")
-                    {
-                        mi.Source = Program.GetDVDString(p);
-                    }
-                    else
-                    {
-                        mi.Source = cboSource.Text;
-                    }
-                    mi.Menu = cboDiscMenu.Text;
-                    mi.Authoring = cboAuthoring.Text;
-                    mi.WebLink = txtWebLink.Text;
-                    mi.TorrentPacketInfo = new TorrentPacket(getTracker(), p);
-
-                    if (Settings.Default.TemplatesMode)
-                    {
-                        mi.TemplateLocation = Path.Combine(Settings.Default.TemplatesDir, cboTemplate.Text);
-                    }
-
-                    // Screenshots Mode
-                    if (Settings.Default.UploadScreenshot)
-                    {
-                        mi.TakeScreenshots = TakeScreenshotsType.TAKE_ONE_SCREENSHOT;
-
-                    }
-
+                    
                     // if it is a DVD, set the title to be name of the folder. 
                     this.Text = string.Format("{0} - {1}", Program.gAppInfo.GetApplicationTitle(Application.ProductName, Application.ProductVersion, McoreSystem.AppInfo.VersionDepth.MajorMinorBuild), Program.GetMediaName(mi.Location));
 
@@ -237,7 +251,7 @@ namespace TorrentDescriptionMaker
             }
 
             // tm2.Write(dgvTrackers);
-            trackersWrite();
+            TrackersWrite();
             Settings.Default.AnnounceURLIndex = cboAnnounceURL.SelectedIndex;
             Settings.Default.TemplateIndex = cboTemplate.SelectedIndex;
 
@@ -281,7 +295,7 @@ namespace TorrentDescriptionMaker
                 gbLocation.BackgroundImageLayout = ImageLayout.Stretch;
             }
             else if (File.Exists(logo2))
-            {               
+            {
                 //this.BackgroundImage = Image.FromFile(logo);
                 //this.BackgroundImageLayout = ImageLayout.Tile;
                 //tpMedia.BackgroundImage = Image.FromFile(logo);
@@ -435,7 +449,7 @@ namespace TorrentDescriptionMaker
 
         }
 
-        private void trackersWrite()
+        private void TrackersWrite()
         {
             mTrackerManager.Trackers.Clear();
 
@@ -514,7 +528,7 @@ namespace TorrentDescriptionMaker
                     ti.PublishOptions = pop;
                     ti.PublishString = CreatePublish(ti, pop);
 
-                    bwApp.ReportProgress((int)ProgressType.UPDATE_SCREENSHOTS_LIST, ti.MediaInfo2.Screenshot);
+                    bwApp.ReportProgress((int)ProgressType.UPDATE_SCREENSHOTS_LIST, ti.Media.Screenshot);
 
                     if (Settings.Default.WritePublish)
                     {
@@ -626,9 +640,9 @@ namespace TorrentDescriptionMaker
                 {
                     pt = ti.CreatePublish(pop, new TemplateReader(pop.TemplateLocation, ti));
                 }
-                else if (Directory.Exists(ti.MediaInfo2.TemplateLocation))
+                else if (Directory.Exists(ti.Media.TemplateLocation))
                 {
-                    pt = ti.CreatePublish(pop, new TemplateReader(ti.MediaInfo2.TemplateLocation, ti));
+                    pt = ti.CreatePublish(pop, new TemplateReader(ti.Media.TemplateLocation, ti));
                 }
             }
             else
@@ -673,8 +687,8 @@ namespace TorrentDescriptionMaker
                         }
                         if (mTorrentInfo != null)
                         {
-                            txtScrFull.Text = mTorrentInfo.MediaInfo2.Screenshot.Full;
-                            txtBBScrForums.Text = mTorrentInfo.MediaInfo2.Screenshot.LinkedThumbnail;
+                            txtScrFull.Text = mTorrentInfo.Media.Screenshot.Full;
+                            txtBBScrForums.Text = mTorrentInfo.Media.Screenshot.LinkedThumbnail;
 
                             if (!string.IsNullOrEmpty(txtScrFull.Text))
                                 txtBBScrFull.Text = string.Format("[img]{0}[/img]", txtScrFull.Text);
@@ -779,7 +793,7 @@ namespace TorrentDescriptionMaker
                         break;
 
                     case ProgressType.UPDATE_SCREENSHOTS_LIST:
-                        ScreenshotsPacket sp = (ScreenshotsPacket)e.UserState;
+                        Screenshot sp = (Screenshot)e.UserState;
                         if (sp.Full != null)
                         {
                             lbScreenshots.Items.Add(sp.Full);

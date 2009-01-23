@@ -5,6 +5,7 @@ using MediaInfoLib;
 using TDMaker;
 using TDMaker.Properties;
 using System;
+using TDMaker.MediaInfo;
 
 namespace TorrentDescriptionMaker
 {
@@ -42,7 +43,7 @@ namespace TorrentDescriptionMaker
         /// <summary>
         /// Clickable Thumbnail to get full screenshot
         /// </summary>
-        public ScreenshotsPacket Screenshot { get; set; }
+        public Screenshot Screenshot { get; set; }
 
         private string[] mExt = new string[] { ".*" }; // { ".avi", ".divx", ".mkv", ".vob", ".mov" };
 
@@ -57,6 +58,7 @@ namespace TorrentDescriptionMaker
         {
 
             MediaFiles = new List<MediaFile>();
+            Screenshot = new Screenshot();
 
             // this could be a file path or a directory
             this.Location = loc;

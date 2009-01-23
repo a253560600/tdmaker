@@ -10,9 +10,10 @@ namespace TDMaker.MediaInfo
     /// </summary>
     public class Screenshot
     {
-        public string FontPath { get; set; }
-        public string InputFilePath { get; set; }
-        public string OutputFilePath { get; set; }
+        /// <summary>
+        /// Screenshot Settings
+        /// </summary>
+        internal ScreenshotSettings Settings { get; set; }
 
         /// <summary>
         /// URL of Full Image
@@ -22,6 +23,11 @@ namespace TDMaker.MediaInfo
         /// URL of Linked Thumbnail
         /// </summary>
         public string LinkedThumbnail { get; set; }
+
+        public Screenshot()
+        {
+            this.Settings = new ScreenshotSettings();
+        }
 
     }
 
