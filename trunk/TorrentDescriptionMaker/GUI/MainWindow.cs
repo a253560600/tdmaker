@@ -119,6 +119,11 @@ namespace TorrentDescriptionMaker
             return fl;
         }
 
+        /// <summary>
+        /// Gets new MediaInfo2 object from settings based on GUI Controls
+        /// </summary>
+        /// <param name="p">File or Folder path of the Media</param>
+        /// <returns>MediaInfo2 object</returns>
         private MediaInfo2 PrepareNewMedia(string p)
         {
             MediaInfo2 mi = new MediaInfo2(p);
@@ -143,9 +148,14 @@ namespace TorrentDescriptionMaker
 
             if (Settings.Default.TakeScreenshot)
             {
-                // Fill Screenshot object
-                mi.Screenshot.Settings.c_Columns = (int)nudMTNColumns.Value;
-                mi.Screenshot.Settings.r_Rows = (int)nudMTNRows.Value;
+                // Fill Screenshot object : coded parameters in alphabetical order
+                mi.Screenshot.Settings.c_Columns = (int)nudMTN_c_Columns.Value;
+                mi.Screenshot.Settings.j_JpgQuality = (int)nudMTN_j_JPEGQuality.Value;
+                mi.Screenshot.Settings.F_FontStyle = string.Format("{0}:{1}", cboMTN_F_FontColor.Text, nudMTN_F_FontSize.Value);
+                mi.Screenshot.Settings.L_InfoLocation = string.Format("{0}:{1}", cboMTN_L_LocInfo.SelectedIndex, cboMTN_L_LocTimestamp.SelectedIndex);
+                mi.Screenshot.Settings.P_QuitAfterDone = chkMTN_P_QuitAfterDone.Checked;
+                mi.Screenshot.Settings.r_Rows = (int)nudMTN_r_Rows.Value;
+                mi.Screenshot.Settings.w_Width = (int)nudMTN_w_Width.Value;
 
                 // Screenshots Mode
                 if (Settings.Default.UploadScreenshot)
@@ -173,7 +183,7 @@ namespace TorrentDescriptionMaker
                     {
                         mi.SetTitle(txtTitle.Text);
                     }
-                    
+
                     // if it is a DVD, set the title to be name of the folder. 
                     this.Text = string.Format("{0} - {1}", Program.gAppInfo.GetApplicationTitle(Application.ProductName, Application.ProductVersion, McoreSystem.AppInfo.VersionDepth.MajorMinorBuild), Program.GetMediaName(mi.Location));
 
@@ -229,6 +239,9 @@ namespace TorrentDescriptionMaker
             {
                 Settings.Default.MTNArgs.Add(cboMtnArgs.Text);
             }
+            cboMTN_L_LocInfo.SelectedIndex = ScreenshotSettings.Default.InfoTextIndex;
+            cboMTN_L_LocTimestamp.SelectedIndex = ScreenshotSettings.Default.InfoTimestampIndex;
+
             // Source
             if (!Settings.Default.Sources.Contains(cboSource.Text))
             {
@@ -258,7 +271,9 @@ namespace TorrentDescriptionMaker
             Settings.Default.TorrentFolderDefault = rbTorrentDefaultFolder.Checked;
 
             Settings.Default.ScreenshotDestIndex = cboScreenshotDest.SelectedIndex;
+            ScreenshotSettings.Default.Save();
             Settings.Default.Save();
+
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -280,7 +295,7 @@ namespace TorrentDescriptionMaker
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-
+            
             ConfigureDirs();
             ConfigureGUIForUnix();
             SettingsRead();
@@ -414,7 +429,8 @@ namespace TorrentDescriptionMaker
             {
                 cboMtnArgs.Items.Add(arg);
             }
-            // cboMtnArgs.Text = Settings.Default.MTNArg;
+            cboMTN_L_LocInfo.SelectedIndex = ScreenshotSettings.Default.InfoTextIndex;
+            cboMTN_L_LocTimestamp.SelectedIndex = ScreenshotSettings.Default.InfoTimestampIndex;
 
             cboSource.Items.Clear();
             foreach (string src in Settings.Default.Sources)

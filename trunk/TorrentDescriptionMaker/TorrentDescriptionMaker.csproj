@@ -88,7 +88,7 @@
     </Compile>
     <Compile Include="MediaInfo\MediaFile.cs" />
     <Compile Include="MediaInfo\Screenshot.cs" />
-    <Compile Include="MediaInfo\ScreenshotSettings.Designer.cs">
+    <Compile Include="Properties\ScreenshotSettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>ScreenshotSettings.settings</DependentUpon>
@@ -138,7 +138,7 @@
     <Compile Include="Helpers\WorkerTask.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="MediaInfo\ScreenshotSettings.settings">
+    <None Include="Properties\ScreenshotSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>ScreenshotSettings.Designer.cs</LastGenOutput>
     </None>
