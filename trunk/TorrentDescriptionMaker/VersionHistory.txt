@@ -1,3 +1,4 @@
+1.9.00.0 Revamped MTN Configuration supportting more options
 1.8.12.0 Included Logo support [Queo] TDMaker will load an existing logo.png in the application directory
 1.8.11.0 Added limited support for Unix via Mono: http://code.google.com/p/tdmaker/wiki/UsingMono#Getting_Started
 1.8.10.0 Automatically determine DVD-5 or DVD-9 if source is set to DVD

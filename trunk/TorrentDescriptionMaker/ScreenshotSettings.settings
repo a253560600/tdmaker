@@ -53,7 +53,7 @@
     <Setting Name="N_InfoSuffix" Type="System.String" Scope="User">
       <Value Profile="(Default)">_s.txt</Value>
     </Setting>
-    <Setting Name="o_ScreenshotSuffix" Type="System.String" Scope="User">
+    <Setting Name="o_OutputSuffix" Type="System.String" Scope="User">
       <Value Profile="(Default)">_s.jpg</Value>
     </Setting>
     <Setting Name="O_OutputDir" Type="System.String" Scope="User">
@@ -72,7 +72,7 @@
       <Value Profile="(Default)">120</Value>
     </Setting>
     <Setting Name="t_TimeStamp" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="T_Text" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

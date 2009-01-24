@@ -94,20 +94,20 @@ namespace TDMaker
 
             string pattern = "";
 
-            if (TorrentInfo.Media != null)
+            if (TorrentInfo.TorrentMedia != null)
             {
 
-                if (TorrentInfo.Media.IsDisc)
+                if (TorrentInfo.TorrentMedia.IsDisc)
                 {
-                    pattern = CreateDiscInfo(TorrentInfo.Media);
+                    pattern = CreateDiscInfo(TorrentInfo.TorrentMedia);
                 }
                 else
                 {
-                    pattern = CreateFileInfo(TorrentInfo.Media);
+                    pattern = CreateFileInfo(TorrentInfo.TorrentMedia);
                 }
 
-                pattern = GetSourceInfo(pattern, TorrentInfo.Media);
-                pattern = GetScreenshotInfo(ref pattern, TorrentInfo.Media);
+                pattern = GetSourceInfo(pattern, TorrentInfo.TorrentMedia);
+                pattern = GetScreenshotInfo(ref pattern, TorrentInfo.TorrentMedia);
                 pattern = Regex.Replace(pattern, "%NewLine%", Environment.NewLine);
 
                 PublishInfo = pattern.Trim();
