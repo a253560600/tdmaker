@@ -33,9 +33,9 @@ winxpsp2_title=Windows XP Service Pack 2
 
 [Setup]
 AppName=TDMaker
-AppVerName=TDMaker 1.8.8
-VersionInfoVersion=1.8.8.0
-VersionInfoTextVersion=1.8.8.0
+AppVerName=TDMaker 1.9
+VersionInfoVersion=1.9.0.0
+VersionInfoTextVersion=1.9.0.0
 VersionInfoCompany=BetaONE
 VersionInfoDescription=Torrent Description Maker
 AppPublisher=BetaONE
