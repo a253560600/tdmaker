@@ -220,7 +220,7 @@ namespace TDMaker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool AnalyzeAuto {
             get {
                 return ((bool)(this["AnalyzeAuto"]));
@@ -639,18 +639,9 @@ namespace TDMaker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("arial.ttf")]
-        public string MTNFont {
-            get {
-                return ((string)(this["MTNFont"]));
-            }
-            set {
-                this["MTNFont"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>arial.ttf</string>\r\n  <string>tahomabd.ttf</string>\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection MTNFonts {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["MTNFonts"]));
@@ -671,6 +662,5 @@ namespace TDMaker.Properties {
                 this["UpgradeSettings"] = value;
             }
         }
-
     }
 }
