@@ -3,7 +3,7 @@
 #include "scripts\products\winversion.iss"
 #include "scripts\products\fileversion.iss"
 //#include "scripts\products\iis.iss"
-#include "scripts\products\kb835732.iss"
+//#include "scripts\products\kb835732.iss"
 
 #include "scripts\products\msi20.iss"
 #include "scripts\products\msi31.iss"
@@ -33,9 +33,9 @@ winxpsp2_title=Windows XP Service Pack 2
 
 [Setup]
 AppName=TDMaker
-AppVerName=TDMaker 1.8.8
-VersionInfoVersion=1.8.8.0
-VersionInfoTextVersion=1.8.8.0
+AppVerName=TDMaker 1.7
+VersionInfoVersion=1.7.1.0
+VersionInfoTextVersion=1.7.1.0
 VersionInfoCompany=BetaONE
 VersionInfoDescription=Torrent Description Maker
 AppPublisher=BetaONE
@@ -46,7 +46,7 @@ DefaultDirName={pf}\TDMaker
 DefaultGroupName=BetaONE\TDMaker
 AllowNoIcons=yes
 InfoBeforeFile=..\TorrentDescriptionMaker\VersionHistory.txt
-;InfoAfterFile=..\TorrentDescriptionMaker\ReleaseInfo.txt
+InfoAfterFile=..\TorrentDescriptionMaker\ReleaseInfo.txt
 SolidCompression=yes
 ;PrivilegesRequired=none
 OutputDir=..\..\Output\
@@ -115,7 +115,7 @@ begin
 	//dotnetfx11lp();
 	//dotnetfx11sp1();
 	
-	kb835732();
+//	kb835732();
 	
 	if (minwinversion(5, 0) and minspversion(5, 0, 4)) then begin
 		dotnetfx20sp1();
@@ -126,7 +126,7 @@ begin
 	end;
 	
 dotnetfx35();
-	//dotnetfx35lp();
+// dotnetfx35lp();
 	//dotnetfx35sp1();
 	//dotnetfx35sp1lp();
 	
