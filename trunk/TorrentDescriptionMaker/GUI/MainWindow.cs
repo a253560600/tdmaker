@@ -148,14 +148,56 @@ namespace TorrentDescriptionMaker
 
             if (Settings.Default.TakeScreenshot)
             {
+
+                // Create MTN Arg
+
                 // Fill Screenshot object : coded parameters in alphabetical order
-                mi.Screenshot.Settings.c_Columns = (int)nudMTN_c_Columns.Value;
-                mi.Screenshot.Settings.j_JpgQuality = (int)nudMTN_j_JPEGQuality.Value;
-                mi.Screenshot.Settings.F_FontStyle = string.Format("{0}:{1}", cboMTN_F_FontColor.Text, nudMTN_F_FontSize.Value);
-                mi.Screenshot.Settings.L_InfoLocation = string.Format("{0}:{1}", cboMTN_L_LocInfo.SelectedIndex, cboMTN_L_LocTimestamp.SelectedIndex);
-                mi.Screenshot.Settings.P_QuitAfterDone = chkMTN_P_QuitAfterDone.Checked;
-                mi.Screenshot.Settings.r_Rows = (int)nudMTN_r_Rows.Value;
-                mi.Screenshot.Settings.w_Width = (int)nudMTN_w_Width.Value;
+                StringBuilder sbMTNArgs = new StringBuilder();
+                if (chkMTN_P_QuitAfterDone.Checked)
+                {
+                    sbMTNArgs.Append("-P ");
+                }
+                sbMTNArgs.Append(string.Format("-w{0} ", nudMTN_w_Width.Value));
+                sbMTNArgs.Append(string.Format("-c{0} ", nudMTN_c_Columns.Value));
+                sbMTNArgs.Append(string.Format("-r{0} ", nudMTN_r_Rows.Value));
+                if (chkMTN_F_FontColor.Checked)
+                {
+                    sbMTNArgs.Append(string.Format("-k{0} ", cboMTN_k_ColorBkgrd.Text));
+                }
+                if (!Program.IsUNIX)
+                {
+                    if (chkMTNFont.Checked)
+                    {
+                        sbMTNArgs.Append(string.Format("-f {0} ", cboMTN_f_FontType.Text));
+                    }
+                    if (chkMTN_k_ColorBackground.Checked && chkMTN_F_FontSize.Checked)
+                    {
+                        sbMTNArgs.Append(string.Format("-F{0}:{1} ", cboMTN_F_FontColor.Text, nudMTN_F_FontSize.Value));
+                    }
+                    if (chkMTN_L_LocInfo.Checked && chkMTN_L_LocTimestamp.Checked)
+                    {
+                        sbMTNArgs.Append(string.Format("-L{0}:{1} ", cboMTN_L_LocInfo.SelectedIndex + 1, cboMTN_L_LocTimestamp.SelectedIndex + 1));
+                    }
+                }
+                if (chkMTN_g_Gap.Checked)
+                {
+                    sbMTNArgs.Append(string.Format("-g{0} ", nudMTN_g_Gap.Value));
+                }
+                if (chkMTN_j_JPEGQuality.Checked)
+                {
+                    sbMTNArgs.Append(string.Format("-j{0} ", nudMTN_j_JPEGQuality.Value));
+                }
+                sbMTNArgs.Append(string.Format("-O \"{0}\" ", Program.GetScreenShotsDir()));
+
+                mi.Screenshot.MTNArgs = sbMTNArgs.ToString();
+
+                //mi.Screenshot.Settings.c_Columns = (int)nudMTN_c_Columns.Value;
+                //mi.Screenshot.Settings.j_JpgQuality = (int)nudMTN_j_JPEGQuality.Value;
+                //mi.Screenshot.FontStyle = string.Format("{0}:{1}", cboMTN_F_FontColor.Text, nudMTN_F_FontSize.Value);
+                //mi.Screenshot.Settings.L_InfoLocation = string.Format("{0}:{1}", cboMTN_L_LocInfo.SelectedIndex, cboMTN_L_LocTimestamp.SelectedIndex);
+                //mi.Screenshot.Settings.P_QuitAfterDone = chkMTN_P_QuitAfterDone.Checked;
+                //mi.Screenshot.Settings.r_Rows = (int)nudMTN_r_Rows.Value;
+                //mi.Screenshot.Settings.w_Width = (int)nudMTN_w_Width.Value;
 
                 // Screenshots Mode
                 if (Settings.Default.UploadScreenshot)
@@ -271,13 +313,12 @@ namespace TorrentDescriptionMaker
             Settings.Default.TorrentFolderDefault = rbTorrentDefaultFolder.Checked;
 
             Settings.Default.ScreenshotDestIndex = cboScreenshotDest.SelectedIndex;
-            ScreenshotSettings.Default.Save();
-            // Settings.Default.Save();
+
             Program.Save();
 
         }
 
-        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
             // this.WindowState = FormWindowState.Minimized;
             SettingsWrite();
@@ -296,10 +337,11 @@ namespace TorrentDescriptionMaker
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            
+
             ConfigureDirs();
             ConfigureGUIForUnix();
             SettingsRead();
+
 
             // Logo
             string logo1 = Path.Combine(Application.StartupPath, "logo1.png");
@@ -1141,6 +1183,41 @@ namespace TorrentDescriptionMaker
 
             //Point p = new Point(midGap/2+btnCreateTorrent.Location.X+btnCreateTorrent.Width, pbLogo.Location.Y);
             //pbLogo.Location = p;
+        }
+
+        private string GetHexColor()
+        {
+            string hexColor = "";
+            ColorDialog cd = new ColorDialog();
+            if (cd.ShowDialog() == DialogResult.OK)
+            {
+                hexColor = string.Format("0x{0:X8}", cd.Color.ToArgb());
+                hexColor = hexColor.Substring(hexColor.Length - 6, 6);
+            }
+            return hexColor;
+        }
+
+        private void SetComboBoxTextColor(ref ComboBox cbo)
+        {
+            string hexColor = "";
+            ColorDialog cd = new ColorDialog();
+            if (cd.ShowDialog() == DialogResult.OK)
+            {
+                hexColor = string.Format("0x{0:X8}", cd.Color.ToArgb());
+                hexColor = hexColor.Substring(hexColor.Length - 6, 6);
+                cbo.Text = hexColor;
+                cbo.BackColor = cd.Color;
+            }
+        }
+
+        private void cboMTN_k_ColorBkgrd_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.SetComboBoxTextColor(ref cboMTN_k_ColorBkgrd);
+        }
+
+        private void cboMTN_F_FontColor_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.SetComboBoxTextColor(ref cboMTN_F_FontColor);
         }
 
 

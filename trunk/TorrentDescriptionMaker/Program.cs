@@ -26,8 +26,6 @@ namespace TorrentDescriptionMaker
         public static string DebugLogFilePath { get; set; }
         private static StringBuilder mSbDebug = new StringBuilder();
 
-        public static Settings AppSettings { get; set; }
-
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
@@ -38,75 +36,74 @@ namespace TorrentDescriptionMaker
             IsUNIX = b;
             System.Console.WriteLine("OSVersion: {0}", os);
 
+            if (!Settings.Default.UpgradeSettings)
+            {
+                Settings.Default.Upgrade();
+                Settings.Default.UpgradeSettings = true;
+            }
+
+            Load();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Program.AppSettings = Settings.Default;
             Application.Run(new frmMain());
         }
 
 
         #region I/O Methods
-        public static void Save(string filePath)
+
+        /// <summary>
+        /// Load Settings from Default Path.
+        /// user.config from Application directory is supported
+        /// </summary>
+        public static void Load()
+        {
+            LoadAs(GetConfigFilePath());
+        }
+
+        /// <summary>
+        /// Load Settings from a file
+        /// </summary>
+        /// <param name="filePath"></param>
+        public static void LoadAs(string filePath)
         {
             try
             {
-                if (!Directory.Exists(Path.GetDirectoryName(filePath)))
-                    Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+                System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
+                File.Copy(filePath, config.FilePath, true);
+                Settings.Default.Reload();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
 
-                //Write XML file
-                XmlSerializer serial = new XmlSerializer(typeof(Settings));
-                FileStream fs = new FileStream(filePath, FileMode.Create);
-                serial.Serialize(fs, Settings.Default);
-                fs.Close();
+        /// <summary>
+        /// Save Settings to a file
+        /// </summary>
+        /// <param name="filePath"></param>
+        public static void SaveAs(string filePath)
+        {
+            try
+            {
+                ScreenshotSettings.Default.Save();
+                Settings.Default.Save();
 
-                serial = null;
-                fs = null;
+                System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
+                config.SaveAs(filePath);
             }
             catch (Exception e)
             {
-                System.Windows.Forms.MessageBox.Show(e.ToString());
+                Console.WriteLine(e.ToString());
             }
         }
 
         public static void Save()
         {
-            Save(GetConfigFilePath());
+            SaveAs(GetConfigFilePath());
         }
 
-        public static Settings Read(string filePath)
-        {
-            if (!Directory.Exists(Path.GetDirectoryName(filePath)))
-                Directory.CreateDirectory(Path.GetDirectoryName(filePath));
-
-
-            if (File.Exists(filePath))
-            {
-                try
-                {
-                    //Read XML file
-                    XmlSerializer serial = new XmlSerializer(typeof(Settings));
-                    FileStream fs = new FileStream(filePath, FileMode.Open);
-                    Program.AppSettings = (Settings)serial.Deserialize(fs);
-                    fs.Close();
-
-                    serial = null;
-                    fs = null;
-
-                    return Program.AppSettings;
-                }
-                catch
-                {
-                    //just return blank settings
-                }
-            }
-
-            return new Settings();
-        }
-
-        public static Settings Read()
-        {
-            return Read(Program.GetConfigFilePath());
-        }
         #endregion
 
 
