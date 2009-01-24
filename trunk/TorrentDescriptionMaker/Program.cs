@@ -91,7 +91,10 @@ namespace TorrentDescriptionMaker
                 Settings.Default.Save();
 
                 System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
-                config.SaveAs(filePath);
+                if (filePath != config.FilePath)
+                {
+                    config.SaveAs(filePath);
+                }
             }
             catch (Exception e)
             {

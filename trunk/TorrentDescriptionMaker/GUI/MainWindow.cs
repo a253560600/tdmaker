@@ -356,6 +356,12 @@ namespace TorrentDescriptionMaker
                 Settings.Default.Sources.Add(cboExtras.Text);
             }
 
+            // Fonts
+            if (!Settings.Default.MTNFonts.Contains(cboMTN_f_FontType.Text))
+            {
+                Settings.Default.MTNFonts.Add(cboMTN_f_FontType.Text);
+            }
+
             // tm2.Write(dgvTrackers);
             TrackersWrite();
             Settings.Default.AnnounceURLIndex = cboAnnounceURL.SelectedIndex;
@@ -545,6 +551,11 @@ namespace TorrentDescriptionMaker
                 cboExtras.Items.Add(ex);
             }
 
+            cboMTN_f_FontType.Items.Clear();
+            foreach (string s in Settings.Default.MTNFonts)
+            {
+                cboMTN_f_FontType.Items.Add(s);
+            }
 
             rbTorrentDefaultFolder.Checked = Settings.Default.TorrentFolderDefault;
             rbTorrentFolderCustom.Checked = !rbTorrentDefaultFolder.Checked;
