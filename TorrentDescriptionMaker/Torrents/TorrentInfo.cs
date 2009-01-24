@@ -19,7 +19,7 @@ namespace TorrentDescriptionMaker
         public TorrentInfo(BackgroundWorker bwApp, MediaInfo2 mi)
         {
             // load the MediaInfo object
-            Media = mi;
+            TorrentMedia = mi;
 
             string p = mi.Location;
 
@@ -47,13 +47,7 @@ namespace TorrentDescriptionMaker
                 Console.WriteLine("Creating a MTN process...");
                 
                 string assemblyMTN = Settings.Default.MTNPath;
-                string args = string.Format("{0} \"{1}\"", Media.Screenshot.MTNArgs.Trim(), mediaFilePath);
-
-                if (Program.IsUNIX)
-                {
-                    assemblyMTN = Settings.Default.MTNPath.Replace(".exe", "");
-                    args = args.Replace("-f arial.ttf", "-i -t -N _s.txt");
-                }
+                string args = string.Format("{0} \"{1}\"", TorrentMedia.Screenshot.MTNArgs.Trim(), mediaFilePath);
 
                 Process p = new Process();
                 ProcessStartInfo psi = new ProcessStartInfo(assemblyMTN);
@@ -79,13 +73,13 @@ namespace TorrentDescriptionMaker
                 if (Program.IsUNIX)
                 {
                     // Save _s.txt to MediaInfo2.Overall object
-                    if (string.IsNullOrEmpty(Media.Overall.Summary))
+                    if (string.IsNullOrEmpty(TorrentMedia.Overall.Summary))
                     {
                         string info = Path.Combine(Program.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + "_s.txt");
 
                         using (StreamReader sr = new StreamReader(info))
                         {
-                            Media.Overall.Summary = sr.ReadToEnd();
+                            TorrentMedia.Overall.Summary = sr.ReadToEnd();
                         }
                     }
                 }
@@ -157,7 +151,7 @@ namespace TorrentDescriptionMaker
         private void UploadScreenshot(String mediaFilePath)
         {
 
-            string screenshot = Path.Combine(Program.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + "_s.jpg");
+            string screenshot = Path.Combine(Program.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + TorrentMedia.Screenshot.Settings.o_OutputSuffix);
 
             if (File.Exists(screenshot))
             {
@@ -183,11 +177,11 @@ namespace TorrentDescriptionMaker
                     {
                         if (imf.Type == ImageFile.ImageType.FULLIMAGE)
                         {
-                           Media.Screenshot.Full = imf.URI;
+                           TorrentMedia.Screenshot.Full = imf.URI;
                         }
                         else if (imf.Type == ImageFile.ImageType.THUMBNAIL_FORUMS1)
                         {
-                            Media.Screenshot.LinkedThumbnail = imf.URI;
+                            TorrentMedia.Screenshot.LinkedThumbnail = imf.URI;
                         }
                     }
 
@@ -229,7 +223,7 @@ namespace TorrentDescriptionMaker
         public string CreatePublish(PublishOptionsPacket options)
         {
             StringBuilder sbPublish = new StringBuilder();
-            string info = (Program.IsUNIX ? this.Media.Overall.Summary : this.Media.ToString());
+            string info = (Program.IsUNIX ? this.TorrentMedia.Overall.Summary : this.TorrentMedia.ToString());
 
             sbPublish.Append(GetMediaInfo(info, options));
             sbPublish.AppendLine();
@@ -267,13 +261,13 @@ namespace TorrentDescriptionMaker
             StringBuilder sbPublish = new StringBuilder();
             BbCode bb = new BbCode();
 
-            if (!string.IsNullOrEmpty(Media.Screenshot.Full) && options.FullPicture)
+            if (!string.IsNullOrEmpty(TorrentMedia.Screenshot.Full) && options.FullPicture)
             {
-                sbPublish.AppendLine(bb.Img(Media.Screenshot.Full));
+                sbPublish.AppendLine(bb.Img(TorrentMedia.Screenshot.Full));
             }
-            else if (!string.IsNullOrEmpty(Media.Screenshot.LinkedThumbnail))
+            else if (!string.IsNullOrEmpty(TorrentMedia.Screenshot.LinkedThumbnail))
             {
-                sbPublish.AppendLine(Media.Screenshot.LinkedThumbnail);
+                sbPublish.AppendLine(TorrentMedia.Screenshot.LinkedThumbnail);
             }
 
             return sbPublish.ToString();
@@ -291,7 +285,7 @@ namespace TorrentDescriptionMaker
         /// <summary>
         /// MediaInfo2 Object
         /// </summary>
-        public MediaInfo2 Media { get; set; }
+        public MediaInfo2 TorrentMedia { get; set; }
         /// <summary>
         /// String Representation of Publish tab
         /// ToString() should be called at least once

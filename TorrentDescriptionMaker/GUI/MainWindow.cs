@@ -158,35 +158,90 @@ namespace TorrentDescriptionMaker
                     sbMTNArgs.Append("-P ");
                 }
                 sbMTNArgs.Append(string.Format("-w{0} ", nudMTN_w_Width.Value));
+                if (chkMTN_h_Height.Checked)
+                {
+                    sbMTNArgs.Append(string.Format("-h{0} ", nudMTN_h_HeightMin.Value));
+                }
                 sbMTNArgs.Append(string.Format("-c{0} ", nudMTN_c_Columns.Value));
                 sbMTNArgs.Append(string.Format("-r{0} ", nudMTN_r_Rows.Value));
                 if (chkMTN_F_FontColor.Checked)
                 {
                     sbMTNArgs.Append(string.Format("-k{0} ", cboMTN_k_ColorBkgrd.Text));
                 }
-                if (!Program.IsUNIX)
+
+                if (chkMTN_i_MediaInfoTurnOff.Checked || Program.IsUNIX)
                 {
-                    if (chkMTNFont.Checked)
+                    sbMTNArgs.Append("-i ");
+                }
+                else if (!Program.IsUNIX)
+                {
+                    if (chkMTN_f_Font.Checked)
                     {
                         sbMTNArgs.Append(string.Format("-f {0} ", cboMTN_f_FontType.Text));
                     }
                     if (chkMTN_k_ColorBackground.Checked && chkMTN_F_FontSize.Checked)
                     {
-                        sbMTNArgs.Append(string.Format("-F{0}:{1} ", cboMTN_F_FontColor.Text, nudMTN_F_FontSize.Value));
-                    }
-                    if (chkMTN_L_LocInfo.Checked && chkMTN_L_LocTimestamp.Checked)
-                    {
-                        sbMTNArgs.Append(string.Format("-L{0}:{1} ", cboMTN_L_LocInfo.SelectedIndex + 1, cboMTN_L_LocTimestamp.SelectedIndex + 1));
+                        sbMTNArgs.Append(string.Format("-F {0}:{1} ", cboMTN_F_FontColor.Text, nudMTN_F_FontSize.Value));
                     }
                 }
+                if (!chkMTN_tL_LocTimestamp.Checked || Program.IsUNIX)
+                {
+                    sbMTNArgs.Append("-t ");
+                }
+                else if (!Program.IsUNIX)
+                {
+                    if (chkMTN_L_LocInfo.Checked && chkMTN_tL_LocTimestamp.Checked)
+                    {
+                        sbMTNArgs.Append(string.Format("-L {0}:{1} ", cboMTN_L_LocInfo.SelectedIndex + 1, cboMTN_L_LocTimestamp.SelectedIndex + 1));
+                    }
+                }
+
                 if (chkMTN_g_Gap.Checked)
                 {
-                    sbMTNArgs.Append(string.Format("-g{0} ", nudMTN_g_Gap.Value));
+                    sbMTNArgs.Append(string.Format("-g {0} ", nudMTN_g_Gap.Value));
                 }
                 if (chkMTN_j_JPEGQuality.Checked)
                 {
-                    sbMTNArgs.Append(string.Format("-j{0} ", nudMTN_j_JPEGQuality.Value));
+                    sbMTNArgs.Append(string.Format("-j {0} ", nudMTN_j_JPEGQuality.Value));
                 }
+                if (chkMTN_s_TimeStep.Checked)
+                {
+                    sbMTNArgs.Append(string.Format("-s {0} ", nudMTN_s_TimeStep.Value));
+                }
+
+                // Not supported in MTN 2.45
+                //if (chkMTN_z_SeekMode.Checked)
+                //{
+                //    sbMTNArgs.Append("-z ");
+                //}
+                //else
+                //{
+                //    sbMTNArgs.Append("-Z ");
+                //}
+
+                if (chkMTN_N_WriteInfo.Checked || Program.IsUNIX)
+                {
+                    sbMTNArgs.Append(string.Format("-N {0} ", txtMTN_N_InfoSuffix.Text));
+                }
+
+                if (chkMTN_o_OutputSuffix.Checked)
+                {
+                    sbMTNArgs.Append(string.Format("-o {0} ", txtMTN_o_OutputSuffix.Text));
+                    mi.Screenshot.Settings.o_OutputSuffix = txtMTN_o_OutputSuffix.Text;
+                }
+                if (chkMTN_v_Verbose.Checked)
+                {
+                    sbMTNArgs.Append("-v ");
+                }
+                if (chkMTN_T_Title.Checked)
+                {
+                    if (txtMTN_T_Title.Text == "%Title%")
+                    {
+                        txtMTN_T_Title.Text = txtTitle.Text;
+                    }
+                    sbMTNArgs.Append(string.Format("-T \"{0}\" ", txtMTN_T_Title.Text));
+                }
+
                 sbMTNArgs.Append(string.Format("-O \"{0}\" ", Program.GetScreenShotsDir()));
 
                 mi.Screenshot.MTNArgs = sbMTNArgs.ToString();
@@ -277,10 +332,6 @@ namespace TorrentDescriptionMaker
         private void SettingsWrite()
         {
             // MTN Args
-            if (!Settings.Default.MTNArgs.Contains(cboMtnArgs.Text))
-            {
-                Settings.Default.MTNArgs.Add(cboMtnArgs.Text);
-            }
             cboMTN_L_LocInfo.SelectedIndex = ScreenshotSettings.Default.InfoTextIndex;
             cboMTN_L_LocTimestamp.SelectedIndex = ScreenshotSettings.Default.InfoTimestampIndex;
 
@@ -467,11 +518,6 @@ namespace TorrentDescriptionMaker
             if (string.IsNullOrEmpty(Settings.Default.MTNPath))
                 Settings.Default.MTNPath = Path.Combine(Application.StartupPath, "mtn.exe");
 
-            cboMtnArgs.Items.Clear();
-            foreach (string arg in Settings.Default.MTNArgs)
-            {
-                cboMtnArgs.Items.Add(arg);
-            }
             cboMTN_L_LocInfo.SelectedIndex = ScreenshotSettings.Default.InfoTextIndex;
             cboMTN_L_LocTimestamp.SelectedIndex = ScreenshotSettings.Default.InfoTimestampIndex;
 
@@ -587,7 +633,7 @@ namespace TorrentDescriptionMaker
                     ti.PublishOptions = pop;
                     ti.PublishString = CreatePublish(ti, pop);
 
-                    bwApp.ReportProgress((int)ProgressType.UPDATE_SCREENSHOTS_LIST, ti.Media.Screenshot);
+                    bwApp.ReportProgress((int)ProgressType.UPDATE_SCREENSHOTS_LIST, ti.TorrentMedia.Screenshot);
 
                     if (Settings.Default.WritePublish)
                     {
@@ -699,9 +745,9 @@ namespace TorrentDescriptionMaker
                 {
                     pt = ti.CreatePublish(pop, new TemplateReader(pop.TemplateLocation, ti));
                 }
-                else if (Directory.Exists(ti.Media.TemplateLocation))
+                else if (Directory.Exists(ti.TorrentMedia.TemplateLocation))
                 {
-                    pt = ti.CreatePublish(pop, new TemplateReader(ti.Media.TemplateLocation, ti));
+                    pt = ti.CreatePublish(pop, new TemplateReader(ti.TorrentMedia.TemplateLocation, ti));
                 }
             }
             else
@@ -746,8 +792,8 @@ namespace TorrentDescriptionMaker
                         }
                         if (mTorrentInfo != null)
                         {
-                            txtScrFull.Text = mTorrentInfo.Media.Screenshot.Full;
-                            txtBBScrForums.Text = mTorrentInfo.Media.Screenshot.LinkedThumbnail;
+                            txtScrFull.Text = mTorrentInfo.TorrentMedia.Screenshot.Full;
+                            txtBBScrForums.Text = mTorrentInfo.TorrentMedia.Screenshot.LinkedThumbnail;
 
                             if (!string.IsNullOrEmpty(txtScrFull.Text))
                                 txtBBScrFull.Text = string.Format("[img]{0}[/img]", txtScrFull.Text);
@@ -1201,6 +1247,9 @@ namespace TorrentDescriptionMaker
         {
             string hexColor = "";
             ColorDialog cd = new ColorDialog();
+            cd.FullOpen = true;
+            cd.AnyColor = true;
+
             if (cd.ShowDialog() == DialogResult.OK)
             {
                 hexColor = string.Format("0x{0:X8}", cd.Color.ToArgb());
@@ -1219,6 +1268,12 @@ namespace TorrentDescriptionMaker
         {
             this.SetComboBoxTextColor(ref cboMTN_F_FontColor);
         }
+
+        private void chkMTN_i_MediaInfo_CheckedChanged(object sender, EventArgs e)
+        {
+            gbMTN_i_MediaInfo.Enabled = !chkMTN_i_MediaInfoTurnOff.Checked;
+        }
+
 
 
     }

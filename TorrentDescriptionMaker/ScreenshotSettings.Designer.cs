@@ -230,12 +230,12 @@ namespace TDMaker {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("_s.jpg")]
-        public string o_ScreenshotSuffix {
+        public string o_OutputSuffix {
             get {
-                return ((string)(this["o_ScreenshotSuffix"]));
+                return ((string)(this["o_OutputSuffix"]));
             }
             set {
-                this["o_ScreenshotSuffix"] = value;
+                this["o_OutputSuffix"] = value;
             }
         }
         
@@ -301,7 +301,7 @@ namespace TDMaker {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool t_TimeStamp {
             get {
                 return ((bool)(this["t_TimeStamp"]));

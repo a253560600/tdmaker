@@ -25,3 +25,20 @@ Full Automation [tacoking]
 	
 	
 Image Hosting: achumpatoxford.com and hdimage.org , both really fast and reliable
+
+
+Full Implementation of MTN Usage:
+  
+  -b 0.80 : skip if % blank is higher; 0:skip all 1:skip really blank >1:off
+  -B 0.0 : omit this seconds from the beginning  
+  -C -1 : cut movie and thumbnails not more than the specified seconds; <=0:off
+  -D 12 : edge detection; 0:off >0:on; higher detects more; try -D4 -D6 or -D8
+  -E 0.0 : omit this seconds at the end
+     
+Not Implemented:
+
+-a aspect_ratio : override input file's display aspect ratio
+-p : pause before exiting; default on in win32    
+-n : run at normal priority
+-I : save individual shots too
+-W : dont overwrite existing files, i.e. update mode
