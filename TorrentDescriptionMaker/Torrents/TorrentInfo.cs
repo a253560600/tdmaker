@@ -47,7 +47,7 @@ namespace TorrentDescriptionMaker
                 Console.WriteLine("Creating a MTN process...");
                 
                 string assemblyMTN = Settings.Default.MTNPath;
-                string args = string.Format("{0} -O \"{1}\" \"{2}\"", Settings.Default.MTNArg.Trim(), Program.GetScreenShotsDir(), mediaFilePath);
+                string args = string.Format("{0} \"{1}\"", Media.Screenshot.MTNArgs.Trim(), mediaFilePath);
 
                 if (Program.IsUNIX)
                 {

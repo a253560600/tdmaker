@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TDMaker.Properties" GeneratedClassName="ScreenshotSettings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TDMaker" GeneratedClassName="ScreenshotSettings">
   <Profiles />
   <Settings>
     <Setting Name="a_AspectRatio" Type="System.String" Scope="User">
@@ -11,13 +11,13 @@
     <Setting Name="B_OmitBegin" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="c_Columns" Type="System.Int32" Scope="User">
+    <Setting Name="c_Columns" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="C_CutMovie" Type="System.Int32" Scope="User">
+    <Setting Name="C_CutMovie" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="D_EdgeDetection" Type="System.Int32" Scope="User">
+    <Setting Name="D_EdgeDetection" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="E_OmitEnd" Type="System.String" Scope="User">
@@ -26,13 +26,13 @@
     <Setting Name="f_Font" Type="System.String" Scope="User">
       <Value Profile="(Default)">tahomabd.ttf</Value>
     </Setting>
-    <Setting Name="F_ColorInfo" Type="System.String" Scope="User">
+    <Setting Name="F_FontColor" Type="System.String" Scope="User">
       <Value Profile="(Default)">000000</Value>
     </Setting>
-    <Setting Name="g_GapBetweenShots" Type="System.String" Scope="User">
-      <Value Profile="(Default)">0</Value>
+    <Setting Name="g_GapBetweenShots" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">8</Value>
     </Setting>
-    <Setting Name="h_MinHeight" Type="System.Int32" Scope="User">
+    <Setting Name="h_MinHeight" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">150</Value>
     </Setting>
     <Setting Name="i_InfoOff" Type="System.Boolean" Scope="User">
@@ -41,7 +41,7 @@
     <Setting Name="I_IndivScreens" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="j_JpgQuality" Type="System.Int32" Scope="User">
+    <Setting Name="j_JpgQuality" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">97</Value>
     </Setting>
     <Setting Name="k_ColorBackground" Type="System.String" Scope="User">
@@ -65,10 +65,10 @@
     <Setting Name="P_QuitAfterDone" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="r_Rows" Type="System.Int32" Scope="User">
+    <Setting Name="r_Rows" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">3</Value>
     </Setting>
-    <Setting Name="s_TimeStep" Type="System.Int32" Scope="User">
+    <Setting Name="s_TimeStep" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">120</Value>
     </Setting>
     <Setting Name="t_TimeStamp" Type="System.Boolean" Scope="User">
@@ -80,7 +80,7 @@
     <Setting Name="v_Verbose" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="w_Width" Type="System.Int32" Scope="User">
+    <Setting Name="w_Width" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="W_Update" Type="System.Boolean" Scope="User">
@@ -92,9 +92,6 @@
     <Setting Name="Z_NonSeek" Type="System.String" Scope="User">
       <Value Profile="(Default)">false</Value>
     </Setting>
-    <Setting Name="F_FontStyle" Type="System.String" Scope="User">
-      <Value Profile="(Default)">000000:12</Value>
-    </Setting>
     <Setting Name="L_InfoLocation" Type="System.String" Scope="User">
       <Value Profile="(Default)">4:2</Value>
     </Setting>
@@ -103,6 +100,9 @@
     </Setting>
     <Setting Name="InfoTimestampIndex" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="F_FontSize" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">12</Value>
     </Setting>
   </Settings>
 </SettingsFile>

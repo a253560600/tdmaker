@@ -8,12 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TDMaker.Properties {
+namespace TDMaker {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "9.0.0.0")]
-    internal sealed partial class ScreenshotSettings : global::System.Configuration.ApplicationSettingsBase {
+    public sealed partial class ScreenshotSettings : global::System.Configuration.ApplicationSettingsBase {
         
         private static ScreenshotSettings defaultInstance = ((ScreenshotSettings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new ScreenshotSettings())));
         
@@ -62,9 +62,9 @@ namespace TDMaker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int c_Columns {
+        public decimal c_Columns {
             get {
-                return ((int)(this["c_Columns"]));
+                return ((decimal)(this["c_Columns"]));
             }
             set {
                 this["c_Columns"] = value;
@@ -74,9 +74,9 @@ namespace TDMaker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int C_CutMovie {
+        public decimal C_CutMovie {
             get {
-                return ((int)(this["C_CutMovie"]));
+                return ((decimal)(this["C_CutMovie"]));
             }
             set {
                 this["C_CutMovie"] = value;
@@ -86,9 +86,9 @@ namespace TDMaker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int D_EdgeDetection {
+        public decimal D_EdgeDetection {
             get {
-                return ((int)(this["D_EdgeDetection"]));
+                return ((decimal)(this["D_EdgeDetection"]));
             }
             set {
                 this["D_EdgeDetection"] = value;
@@ -122,21 +122,21 @@ namespace TDMaker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("000000")]
-        public string F_ColorInfo {
+        public string F_FontColor {
             get {
-                return ((string)(this["F_ColorInfo"]));
+                return ((string)(this["F_FontColor"]));
             }
             set {
-                this["F_ColorInfo"] = value;
+                this["F_FontColor"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public string g_GapBetweenShots {
+        [global::System.Configuration.DefaultSettingValueAttribute("8")]
+        public decimal g_GapBetweenShots {
             get {
-                return ((string)(this["g_GapBetweenShots"]));
+                return ((decimal)(this["g_GapBetweenShots"]));
             }
             set {
                 this["g_GapBetweenShots"] = value;
@@ -146,9 +146,9 @@ namespace TDMaker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("150")]
-        public int h_MinHeight {
+        public decimal h_MinHeight {
             get {
-                return ((int)(this["h_MinHeight"]));
+                return ((decimal)(this["h_MinHeight"]));
             }
             set {
                 this["h_MinHeight"] = value;
@@ -182,9 +182,9 @@ namespace TDMaker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("97")]
-        public int j_JpgQuality {
+        public decimal j_JpgQuality {
             get {
-                return ((int)(this["j_JpgQuality"]));
+                return ((decimal)(this["j_JpgQuality"]));
             }
             set {
                 this["j_JpgQuality"] = value;
@@ -278,9 +278,9 @@ namespace TDMaker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("3")]
-        public int r_Rows {
+        public decimal r_Rows {
             get {
-                return ((int)(this["r_Rows"]));
+                return ((decimal)(this["r_Rows"]));
             }
             set {
                 this["r_Rows"] = value;
@@ -290,9 +290,9 @@ namespace TDMaker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("120")]
-        public int s_TimeStep {
+        public decimal s_TimeStep {
             get {
-                return ((int)(this["s_TimeStep"]));
+                return ((decimal)(this["s_TimeStep"]));
             }
             set {
                 this["s_TimeStep"] = value;
@@ -338,9 +338,9 @@ namespace TDMaker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int w_Width {
+        public decimal w_Width {
             get {
-                return ((int)(this["w_Width"]));
+                return ((decimal)(this["w_Width"]));
             }
             set {
                 this["w_Width"] = value;
@@ -385,18 +385,6 @@ namespace TDMaker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("000000:12")]
-        public string F_FontStyle {
-            get {
-                return ((string)(this["F_FontStyle"]));
-            }
-            set {
-                this["F_FontStyle"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("4:2")]
         public string L_InfoLocation {
             get {
@@ -428,6 +416,18 @@ namespace TDMaker.Properties {
             }
             set {
                 this["InfoTimestampIndex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("12")]
+        public decimal F_FontSize {
+            get {
+                return ((decimal)(this["F_FontSize"]));
+            }
+            set {
+                this["F_FontSize"] = value;
             }
         }
     }
