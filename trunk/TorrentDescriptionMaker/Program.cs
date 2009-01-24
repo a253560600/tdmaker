@@ -6,27 +6,12 @@ using TDMaker;
 using TDMaker.Properties;
 using System.Text;
 using System.Configuration;
+using System.Xml.Serialization;
 
 namespace TorrentDescriptionMaker
 {
     static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main()
-        {
-            string os = System.Environment.OSVersion.ToString();
-            bool b = os.Contains("Unix") || os.Contains("Mac");
-            IsUNIX = b;
-            System.Console.WriteLine("OSVersion: {0}", os);
-
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
-        }
-
         /// <summary>
         /// Application Version
         /// </summary>
@@ -40,6 +25,90 @@ namespace TorrentDescriptionMaker
         public static bool IsUNIX { get; private set; }
         public static string DebugLogFilePath { get; set; }
         private static StringBuilder mSbDebug = new StringBuilder();
+
+        public static Settings AppSettings { get; set; }
+
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            string os = System.Environment.OSVersion.ToString();
+            bool b = os.Contains("Unix") || os.Contains("Mac");
+            IsUNIX = b;
+            System.Console.WriteLine("OSVersion: {0}", os);
+
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Program.AppSettings = Settings.Default;
+            Application.Run(new frmMain());
+        }
+
+
+        #region I/O Methods
+        public static void Save(string filePath)
+        {
+            try
+            {
+                if (!Directory.Exists(Path.GetDirectoryName(filePath)))
+                    Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+
+                //Write XML file
+                XmlSerializer serial = new XmlSerializer(typeof(Settings));
+                FileStream fs = new FileStream(filePath, FileMode.Create);
+                serial.Serialize(fs, Settings.Default);
+                fs.Close();
+
+                serial = null;
+                fs = null;
+            }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.ToString());
+            }
+        }
+
+        public static void Save()
+        {
+            Save(GetConfigFilePath());
+        }
+
+        public static Settings Read(string filePath)
+        {
+            if (!Directory.Exists(Path.GetDirectoryName(filePath)))
+                Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+
+
+            if (File.Exists(filePath))
+            {
+                try
+                {
+                    //Read XML file
+                    XmlSerializer serial = new XmlSerializer(typeof(Settings));
+                    FileStream fs = new FileStream(filePath, FileMode.Open);
+                    Program.AppSettings = (Settings)serial.Deserialize(fs);
+                    fs.Close();
+
+                    serial = null;
+                    fs = null;
+
+                    return Program.AppSettings;
+                }
+                catch
+                {
+                    //just return blank settings
+                }
+            }
+
+            return new Settings();
+        }
+
+        public static Settings Read()
+        {
+            return Read(Program.GetConfigFilePath());
+        }
+        #endregion
+
 
         public static string GetScreenShotsDir()
         {
@@ -138,10 +207,11 @@ namespace TorrentDescriptionMaker
 
         public static string GetConfigFilePath()
         {
+            string p = Path.Combine(Application.StartupPath, "user.config");
 
             System.Configuration.Configuration config =
                 ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
-            return config.FilePath;
+            return (File.Exists(p) ? p : config.FilePath);
 
         }
 
@@ -335,6 +405,7 @@ namespace TorrentDescriptionMaker
         }
 
     }
+
 
     /// <summary>
     /// Options regard Publish

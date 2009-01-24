@@ -272,7 +272,8 @@ namespace TorrentDescriptionMaker
 
             Settings.Default.ScreenshotDestIndex = cboScreenshotDest.SelectedIndex;
             ScreenshotSettings.Default.Save();
-            Settings.Default.Save();
+            // Settings.Default.Save();
+            Program.Save();
 
         }
 
