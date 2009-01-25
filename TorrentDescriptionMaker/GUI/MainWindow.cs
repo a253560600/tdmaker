@@ -206,7 +206,7 @@ namespace TorrentDescriptionMaker
                 }
                 if (chkMTN_s_TimeStep.Checked)
                 {
-                    sbMTNArgs.Append(string.Format("-s {0} ", nudMTN_s_TimeStep.Value));
+                    sbMTNArgs.Append(string.Format("-s {0} ", nudMTN_s_TimeStep.Value));                    
                 }
 
                 // Not supported in MTN 2.45
@@ -222,6 +222,7 @@ namespace TorrentDescriptionMaker
                 if (chkMTN_N_WriteInfo.Checked || Program.IsUNIX)
                 {
                     sbMTNArgs.Append(string.Format("-N {0} ", txtMTN_N_InfoSuffix.Text));
+                    mi.Screenshot.Settings.N_InfoSuffix = txtMTN_N_InfoSuffix.Text;
                 }
 
                 if (chkMTN_o_OutputSuffix.Checked)
@@ -644,7 +645,7 @@ namespace TorrentDescriptionMaker
                     ti.PublishOptions = pop;
                     ti.PublishString = CreatePublish(ti, pop);
 
-                    bwApp.ReportProgress((int)ProgressType.UPDATE_SCREENSHOTS_LIST, ti.TorrentMedia.Screenshot);
+                    bwApp.ReportProgress((int)ProgressType.UPDATE_SCREENSHOTS_LIST, ti.MyMedia.Screenshot);
 
                     if (Settings.Default.WritePublish)
                     {
@@ -756,9 +757,9 @@ namespace TorrentDescriptionMaker
                 {
                     pt = ti.CreatePublish(pop, new TemplateReader(pop.TemplateLocation, ti));
                 }
-                else if (Directory.Exists(ti.TorrentMedia.TemplateLocation))
+                else if (Directory.Exists(ti.MyMedia.TemplateLocation))
                 {
-                    pt = ti.CreatePublish(pop, new TemplateReader(ti.TorrentMedia.TemplateLocation, ti));
+                    pt = ti.CreatePublish(pop, new TemplateReader(ti.MyMedia.TemplateLocation, ti));
                 }
             }
             else
@@ -803,8 +804,8 @@ namespace TorrentDescriptionMaker
                         }
                         if (mTorrentInfo != null)
                         {
-                            txtScrFull.Text = mTorrentInfo.TorrentMedia.Screenshot.Full;
-                            txtBBScrForums.Text = mTorrentInfo.TorrentMedia.Screenshot.LinkedThumbnail;
+                            txtScrFull.Text = mTorrentInfo.MyMedia.Screenshot.Full;
+                            txtBBScrForums.Text = mTorrentInfo.MyMedia.Screenshot.LinkedThumbnail;
 
                             if (!string.IsNullOrEmpty(txtScrFull.Text))
                                 txtBBScrFull.Text = string.Format("[img]{0}[/img]", txtScrFull.Text);
