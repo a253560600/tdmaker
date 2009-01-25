@@ -209,6 +209,21 @@ namespace TorrentDescriptionMaker
                     sbMTNArgs.Append(string.Format("-s {0} ", nudMTN_s_TimeStep.Value));                    
                 }
 
+                if (chkMTN_D_EdgeDetection.Checked)
+                {
+                    sbMTNArgs.Append(string.Format("-D {0} ", nudMTN_D_EdgeDetection.Value));                    
+                }
+
+                if (chkMTN_B_OmitBegin.Checked)
+                {
+                    sbMTNArgs.Append(string.Format("-B {0} ", nudMTN_B_OmitStart.Value));                    
+                }
+
+                if (chkMTN_E_OmitEnd.Checked)
+                {
+                    sbMTNArgs.Append(string.Format("-E {0} ", nudMTN_E_OmitEnd.Value));                    
+                }
+
                 // Not supported in MTN 2.45
                 //if (chkMTN_z_SeekMode.Checked)
                 //{
