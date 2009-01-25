@@ -77,8 +77,6 @@ try installing *libmono-winforms2.0-cil*
 [http://i34.tinypic.com/2ivk9kj.png]
 ==== Using MTN info ====
 [http://i35.tinypic.com/2n82zxe.png]
-==== Using MediaInfo ====
-[http://i35.tinypic.com/htfl10.png]
 === Screenshots tab ===
 [http://i36.tinypic.com/29dk0ug.png]
 === About Window ===
