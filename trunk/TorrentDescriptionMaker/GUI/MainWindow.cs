@@ -384,20 +384,20 @@ namespace TorrentDescriptionMaker
             Program.ClearScreenshots();
         }
 
-        private void ConfigureGUIForUnix()
-        {
-            gbQuickPublish.Enabled = !Program.IsUNIX;
-            if (Program.IsUNIX)
-            {
-                tcMain.TabPages.Remove(tpMediaInfo);
-            }
-        }
+        //private void ConfigureGUIForUnix()
+        //{
+        //    gbQuickPublish.Enabled = !Program.IsUNIX;
+        //    if (Program.IsUNIX)
+        //    {
+        //        tcMain.TabPages.Remove(tpMediaInfo);
+        //    }
+        //}
 
         private void frmMain_Load(object sender, EventArgs e)
         {
 
             ConfigureDirs();
-            ConfigureGUIForUnix();
+            // ConfigureGUIForUnix();
             SettingsRead();
 
 

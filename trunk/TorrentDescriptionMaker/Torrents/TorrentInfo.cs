@@ -224,7 +224,7 @@ namespace TorrentDescriptionMaker
         public string CreatePublish(PublishOptionsPacket options)
         {
             StringBuilder sbPublish = new StringBuilder();
-            string info = (Program.IsUNIX ? this.MyMedia.Overall.Summary : this.MyMedia.ToString());
+            string info = this.MyMedia.ToString();
 
             sbPublish.Append(GetMediaInfo(info, options));
             sbPublish.AppendLine();

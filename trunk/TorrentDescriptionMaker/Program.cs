@@ -32,7 +32,7 @@ namespace TorrentDescriptionMaker
         static void Main()
         {
             string os = System.Environment.OSVersion.ToString();
-            bool b = os.Contains("Unix") || os.Contains("Mac");
+            bool b = os.Contains("Unix");
             IsUNIX = b;
             System.Console.WriteLine("OSVersion: {0}", os);
 
