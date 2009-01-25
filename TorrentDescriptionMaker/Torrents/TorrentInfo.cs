@@ -60,11 +60,9 @@ namespace TorrentDescriptionMaker
 
                 Console.WriteLine("MTN Path: " + assemblyMTN);
                 Console.WriteLine("MTN Args: " + args);
-
-                Environment.CurrentDirectory = Path.GetDirectoryName(assemblyMTN);
-
+         
                 psi.WindowStyle = (Settings.Default.ShowMTNWindow ? ProcessWindowStyle.Normal : ProcessWindowStyle.Hidden);
-
+                Console.WriteLine("MTN Window: " + psi.WindowStyle.ToString());
                 psi.Arguments = args;
 
                 p.StartInfo = psi;
@@ -84,6 +82,7 @@ namespace TorrentDescriptionMaker
                         }
                     }
                 }
+
             }
             catch (Exception ex)
             {
