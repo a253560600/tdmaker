@@ -269,11 +269,6 @@ namespace TorrentDescriptionMaker
                     Console.WriteLine(ex.ToString());
                 }
 
-                if (Program.IsUNIX)
-                {
-                    Console.WriteLine(mMI.ToString());
-                }
-
                 if (mMI != null)
                 {
                     Console.WriteLine(string.Format("MediaInfo Opening {0}", fp));

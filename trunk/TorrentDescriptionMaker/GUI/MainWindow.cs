@@ -956,33 +956,7 @@ namespace TorrentDescriptionMaker
             TDMaker.GUI.AboutBox ab = new TDMaker.GUI.AboutBox();
             ab.ShowDialog();
 
-        }
-
-        private void dgvTrackers_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
-        {
-            if (!Program.IsUNIX)
-            {
-                try
-                {
-                    int old = cboAnnounceURL.SelectedIndex;
-                    FillTrackersComboBox();
-
-                    if (cboAnnounceURL.Items.Count > 0 && old < 0)
-                    {
-                        old = 0;
-                    }
-                    if (cboAnnounceURL.Items.Count > old)
-                    {
-                        cboAnnounceURL.SelectedIndex = old;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("dgvTrackers_CellMouseLeave fails");
-                    Console.WriteLine(ex.ToString());
-                }
-            }
-        }
+        }   
 
         private void FillTrackersComboBox()
         {
@@ -1284,6 +1258,25 @@ namespace TorrentDescriptionMaker
         private void chkMTN_i_MediaInfo_CheckedChanged(object sender, EventArgs e)
         {
             gbMTN_i_MediaInfo.Enabled = !chkMTN_i_MediaInfoTurnOff.Checked;
+        }
+
+        private void btnRefreshTrackers_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int old = cboAnnounceURL.SelectedIndex;
+                FillTrackersComboBox();
+                if (cboAnnounceURL.Items.Count > 0)
+                {
+                    if (old < 0) old = 0;
+                    cboAnnounceURL.SelectedIndex = Math.Min(old, cboAnnounceURL.Items.Count - 1);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
 
 
