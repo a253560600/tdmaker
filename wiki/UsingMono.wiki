@@ -14,11 +14,10 @@ Using Mono this Wiki page shows attempts taken to run TDMaker in Linux and Mac O
  * Creating Description using MediaInfo (or MTN)
 
 ==What's not working so far?==
- * Tracker URLs are not saved. If you add a Tracker, TDMaker won't load again. You need to delete
+ * Tracker URLs are not saved. If you add a Tracker, TDMaker won't load again. You need to delete the following file if this happens.
 {{{
 ~/Applications/TDMaker/Settings/trackers.xml
 }}}
-if this happens.
 
 = Getting Started = 
  * Download Mono Framework from http://www.go-mono.com/mono-downloads/download.html
@@ -57,7 +56,7 @@ mono --debug TDMaker.exe
 {{{
 chmod +x mtn
 }}}
- * If you get the following error: 
+ * If you get the following error try installing *libmono-winforms2.0-cil*: 
 {{{
 ** (TDMaker.exe:29543): WARNING **: The following assembly referenced from /home/ajt/Downloads/TDMAKER/TDMaker.exe could not be loaded:
  Assembly:   System.Windows.Forms    (assemblyref_index=1)
@@ -65,7 +64,6 @@ chmod +x mtn
  Public Key: b77a5c561934e089
  The assembly was not found in the Global Assembly Cache, a path listed in the MONO_PATH environment variable, or in the location of the executing assembly (/home/ajt/Downloads/TDMAKER/).
 }}}
-try installing *libmono-winforms2.0-cil*
 
 = Screenshots =
 
