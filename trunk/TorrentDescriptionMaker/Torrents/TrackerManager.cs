@@ -8,7 +8,6 @@ using TDMaker.Properties;
 
 namespace TDMaker
 {
-    [Serializable]
    public class TrackerManager
     {
 

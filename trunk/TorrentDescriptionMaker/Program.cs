@@ -70,8 +70,11 @@ namespace TorrentDescriptionMaker
             try
             {
                 System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
-                File.Copy(filePath, config.FilePath, true);
-                Settings.Default.Reload();
+                if (filePath != config.FilePath)
+                {
+                    File.Copy(filePath, config.FilePath, true);
+                    Settings.Default.Reload();
+                }
             }
             catch (Exception ex)
             {
