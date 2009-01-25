@@ -5,11 +5,11 @@
     <Setting Name="a_AspectRatio" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="b_SkipBlank" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="b_SkipBlank" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">0.0</Value>
     </Setting>
-    <Setting Name="B_OmitBegin" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="B_OmitBegin" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">0.0</Value>
     </Setting>
     <Setting Name="c_Columns" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">1</Value>
@@ -20,8 +20,8 @@
     <Setting Name="D_EdgeDetection" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="E_OmitEnd" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="E_OmitEnd" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">0.0</Value>
     </Setting>
     <Setting Name="f_Font" Type="System.String" Scope="User">
       <Value Profile="(Default)">tahomabd.ttf</Value>

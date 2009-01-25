@@ -37,10 +37,10 @@ namespace TDMaker {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string b_SkipBlank {
+        [global::System.Configuration.DefaultSettingValueAttribute("0.0")]
+        public decimal b_SkipBlank {
             get {
-                return ((string)(this["b_SkipBlank"]));
+                return ((decimal)(this["b_SkipBlank"]));
             }
             set {
                 this["b_SkipBlank"] = value;
@@ -49,10 +49,10 @@ namespace TDMaker {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string B_OmitBegin {
+        [global::System.Configuration.DefaultSettingValueAttribute("0.0")]
+        public decimal B_OmitBegin {
             get {
-                return ((string)(this["B_OmitBegin"]));
+                return ((decimal)(this["B_OmitBegin"]));
             }
             set {
                 this["B_OmitBegin"] = value;
@@ -97,10 +97,10 @@ namespace TDMaker {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string E_OmitEnd {
+        [global::System.Configuration.DefaultSettingValueAttribute("0.0")]
+        public decimal E_OmitEnd {
             get {
-                return ((string)(this["E_OmitEnd"]));
+                return ((decimal)(this["E_OmitEnd"]));
             }
             set {
                 this["E_OmitEnd"] = value;

@@ -5,7 +5,6 @@ Support for audio using taglib-sharp
 Profiles support
 
 Run Once Wizard
--w 0 -c 1 -r 3 -keeeeee -f "H:\windows\fonts\arial.ttf" -g8 -F 000000:12 -L4:2 -j 97
 
 Support for Multi-Disc DVDs
 	Tiesto DVD
@@ -29,11 +28,8 @@ Image Hosting: achumpatoxford.com and hdimage.org , both really fast and reliabl
 
 Full Implementation of MTN Usage:
   
-  -b 0.80 : skip if % blank is higher; 0:skip all 1:skip really blank >1:off
-  -B 0.0 : omit this seconds from the beginning  
-  -C -1 : cut movie and thumbnails not more than the specified seconds; <=0:off
-  -D 12 : edge detection; 0:off >0:on; higher detects more; try -D4 -D6 or -D8
-  -E 0.0 : omit this seconds at the end
+  -b 0.80 : skip if % blank is higher; 0:skip all 1:skip really blank >1:off  
+  -C -1 : cut movie and thumbnails not more than the specified seconds; <=0:off  
      
 Not Implemented:
 
