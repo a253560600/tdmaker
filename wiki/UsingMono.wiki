@@ -23,6 +23,7 @@ if this happens.
 
 = Getting Started = 
  * Download Mono Framework from http://www.go-mono.com/mono-downloads/download.html
+  * Mac OS X: the assemblies will be in /Library/Frameworks/Mono.framework
 
 == TDMaker ==
  * Download latest zip file for Linux: http://code.google.com/p/tdmaker/downloads/list?q=label:OpSys-Linux  
