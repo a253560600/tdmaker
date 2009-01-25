@@ -146,6 +146,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="GenuineAdv.ico" />
+    <Content Include="Lib\32-bit\MediaInfo.dll" />
+    <Content Include="Lib\64-bit\MediaInfo.dll" />
     <Content Include="Lib\ImageUploader.dll" />
     <Content Include="Lib\McoreSystem.dll" />
     <Content Include="Lib\MonoTorrent.dll" />

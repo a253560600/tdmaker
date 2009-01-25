@@ -84,7 +84,6 @@ namespace TorrentDescriptionMaker
                         }
                     }
                 }
-
             }
             catch (Exception ex)
             {
