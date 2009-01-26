@@ -97,7 +97,7 @@ namespace TorrentDescriptionMaker
 
             if (File.Exists(Location))
             {
-                this.Overall = ReadFile(Location);
+                this.Overall = new MediaFile(this.Location, this.Source);
                 if (string.IsNullOrEmpty(Title))
                     this.Title = Path.GetFileNameWithoutExtension(this.Overall.FilePath); // this.Overall.FileName;
                 this.MediaFiles.Add(this.Overall);
@@ -133,11 +133,11 @@ namespace TorrentDescriptionMaker
                                 maxPath = fi.FullName;
                             }
 
-                            AddMedia(ReadFile(f));
+                            this.AddMedia(new MediaFile(f, this.Source));
                         }
                     }
 
-                    this.Overall = ReadFile(maxPath);
+                    this.Overall = new MediaFile(maxPath, this.Source);
 
                     // Set Overall File Name                
                     this.Overall.FileName = Path.GetFileName(Location);
@@ -234,193 +234,6 @@ namespace TorrentDescriptionMaker
 
             } // if Location is a directory
 
-        }
-
-        /// <summary>
-        /// Reads a media file and creates a MediaFile object
-        /// </summary>
-        /// <param name="fp">File Path of the Media File</param>
-        /// <returns>MediaFile object</returns>
-        private MediaFile ReadFile(string fp)
-        {
-            MediaFile mf = new MediaFile(fp);
-            mf.Source = this.Source;
-
-            if (File.Exists(fp))
-            {
-                //*********************
-                //* General
-                //********************* 
-
-                //System.Console.WriteLine("Current Dir1: " + System.Environment.CurrentDirectory);
-                //System.Environment.CurrentDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                //System.Console.WriteLine("Current Dir2: " + System.Environment.CurrentDirectory);
-
-                MediaInfoLib.MediaInfo mMI = null;
-                try
-                {
-                    Console.WriteLine("Loading MediaInfo.dll");
-                    mMI = new MediaInfoLib.MediaInfo();
-                    Console.WriteLine("Loaded MediaInfo.dll");
-
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.ToString());
-                }
-
-                if (mMI != null)
-                {
-                    Console.WriteLine(string.Format("MediaInfo Opening {0}", fp));
-                    mMI.Open(fp);
-                    Console.WriteLine(string.Format("MediaInfo Opened {0}", fp));
-                    mMI.Option("Complete");
-                    mf.Summary = mMI.Inform();
-
-                    if (Program.IsUNIX)
-                    {
-                        Console.WriteLine(string.Format("MediaInfo Summary Length: {0}", mf.Summary.Length.ToString()));
-                        Console.WriteLine(string.Format("MediaInfo Summary: {0}", mf.Summary));
-                    }
-
-                    // Format Info
-                    if (string.IsNullOrEmpty(mf.Format))
-                        mf.Format = mMI.Get(StreamKind.General, 0, "Format");
-                    mf.FormatInfo = mMI.Get(StreamKind.General, 0, "Format/Info");
-
-                    // mf.FileName = mMI.Get(0, 0, "FileName");
-                    if (0 == mf.FileSize)
-                    {
-                        double sz;
-                        double.TryParse(mMI.Get(0, 0, "FileSize"), out sz);
-                        mf.FileSize = sz;
-                    }
-                    if (string.IsNullOrEmpty(mf.FileSizeString))
-                    {
-                        mf.FileSizeString = string.Format("{0} MiB", (mf.FileSize / 1024.0 / 1024.0).ToString("0.00"));
-                    }
-
-                    // Duration
-                    if (string.IsNullOrEmpty(mf.DurationString))
-                        mf.DurationString = mMI.Get(0, 0, "Duration/String2");
-
-                    mf.Bitrate = mMI.Get(StreamKind.General, 0, "OverallBitRate/String");
-
-                    if (string.IsNullOrEmpty(mf.Subtitles))
-                    {
-                        StringBuilder sbSubs = new StringBuilder();
-
-                        int subCount = 0;
-                        int.TryParse(mMI.Get(StreamKind.Text, 0, "StreamCount"), out subCount);
-
-                        if (subCount > 0)
-                        {
-
-                            StringBuilder sbLang = new StringBuilder();
-                            for (int i = 0; i < subCount; i++)
-                            {
-                                string lang = mMI.Get(StreamKind.Text, i, "Language/String");
-                                if (!string.IsNullOrEmpty(lang))
-                                {
-                                    // System.Windows.Forms.MessageBox.Show(lang);
-                                    sbLang.Append(lang);
-                                    if (i < subCount - 1)
-                                        sbLang.Append(", ");
-                                }
-                            }
-                            if (!string.IsNullOrEmpty(sbLang.ToString()))
-                            {
-                                sbSubs.Append(sbLang.ToString());
-                            }
-                            else
-                            {
-                                sbSubs.Append("N/A");
-                            }
-                        }
-                        else
-                        {
-                            sbSubs.Append("None");
-                        }
-
-                        mf.Subtitles = sbSubs.ToString();
-
-                    }
-
-                    //*********************
-                    //* Video
-                    //********************* 
-
-                    int videoCount;
-                    int.TryParse(mMI.Get(StreamKind.General, 0, "VideoCount"), out videoCount);
-                    mf.HasVideo = videoCount > 0;
-
-                    mf.Video.Format = mMI.Get(StreamKind.Video, 0, "Format");
-                    mf.Video.FormatVersion = mMI.Get(StreamKind.Video, 0, "Format_Version");
-
-                    if (Path.GetExtension(mf.FilePath).ToLower().Equals(".mkv"))
-                    {
-                        mf.Video.Codec = mMI.Get(StreamKind.Video, 0, "Encoded_Library");
-                    }
-                    if (string.IsNullOrEmpty(mf.Video.Codec))
-                        mf.Video.Codec = mMI.Get(StreamKind.Video, 0, "CodecID/Hint");
-                    if (string.IsNullOrEmpty(mf.Video.Codec))
-                        mf.Video.Codec = mMI.Get(StreamKind.Video, 0, "CodecID");
-
-                    mf.Video.Bitrate = mMI.Get(StreamKind.Video, 0, "BitRate/String");
-                    mf.Video.Standard = mMI.Get(StreamKind.Video, 0, "Standard"); ;
-                    mf.Video.FrameRate = mMI.Get(StreamKind.Video, 0, "FrameRate/String");
-                    mf.Video.ScanType = mMI.Get(StreamKind.Video, 0, "ScanType/String");
-                    mf.Video.Height = mMI.Get(StreamKind.Video, 0, "Height");
-                    mf.Video.Width = mMI.Get(StreamKind.Video, 0, "Width");
-                    mf.Video.Resolution = string.Format("{0}x{1}", mf.Video.Width, mf.Video.Height);
-                    mf.Video.BitsPerPixelXFrame = mMI.Get(StreamKind.Video, 0, "Bits-(Pixel*Frame)");
-
-
-                    //*********************
-                    //* Audio
-                    //*********************  
-                    int audioCount;
-                    int.TryParse(mMI.Get(StreamKind.General, 0, "AudioCount"), out audioCount);
-                    mf.HasAudio = audioCount > 0;
-
-                    for (int a = 0; a < audioCount; a++)
-                    {
-                        AudioInfo ai = new AudioInfo();
-
-                        ai.Format = mMI.Get(StreamKind.Audio, a, "Format");
-                        ai.FormatVersion = mMI.Get(StreamKind.Audio, 0, "Format_Version");
-                        ai.FormatProfile = mMI.Get(StreamKind.Audio, 0, "Format_Profile");
-
-                        ai.Codec = mMI.Get(StreamKind.Audio, 0, "CodecID/Hint");
-                        if (string.IsNullOrEmpty(ai.Codec))
-                            ai.Codec = mMI.Get(StreamKind.Audio, 0, "CodecID");
-
-                        ai.Bitrate = mMI.Get(StreamKind.Audio, a, "BitRate/String");
-                        ai.BitrateMode = mMI.Get(StreamKind.Audio, a, "BitRate_Mode/String");
-
-                        ai.Channels = mMI.Get(StreamKind.Audio, a, "Channel(s)/String");
-                        ai.SamplingRate = mMI.Get(StreamKind.Audio, a, "SamplingRate/String");
-                        ai.Resolution = mMI.Get(StreamKind.Audio, a, "Resolution/String");
-
-                        mf.Audio.Add(ai);
-
-                    }
-
-                    mMI.Close();
-
-                    // Analyse Audio only files using TagLib
-
-                    if (mf.HasAudio && !mf.HasVideo)
-                    {
-                        TagLib.File f = TagLib.File.Create(mf.FilePath);
-                        mf.TagLibFile = f;
-                    }
-
-                }
-
-            }
-
-            return mf;
         }
 
         /// <summary>
