@@ -1,5 +1,6 @@
 #summary Frequently Asked Questions
 #labels Featured
+<wiki:toc max_depth="1" />
 
 = When I use it with an iso file it comes out incomplete. Missing fields, no screenshots, etc. Help? =
 
