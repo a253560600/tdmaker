@@ -41,10 +41,6 @@ namespace TDMaker
         public string FileSizeString { get; set; }
         public string Format { get; set; }
         public string FormatInfo { get; set; }
-        /// <summary>
-        /// FilePath or DirectoryPath of the Media
-        /// </summary>
-        public string Location { get; private set; }
         public string Source { get; set; }
         private string mSubtitles = "None";
         public string Subtitles { get { return mSubtitles; } set { mSubtitles = value; } }
@@ -52,6 +48,7 @@ namespace TDMaker
         /// This is what you get for mi.Option("Complete");
         /// </summary>
         public string Summary { get; set; }
+        public TagLib.File TagLibFile { get; set; }
 
         public List<AudioInfo> Audio { get; set; }
         public VideoInfo Video { get; set; }

@@ -49,6 +49,7 @@
     <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="taglib-sharp, Version=2.0.3.0, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\BbCode.cs" />
@@ -168,6 +169,7 @@
     <EmbeddedResource Include="Templates\Minimal\FileAudioInfo.txt" />
     <EmbeddedResource Include="Templates\Minimal\FileVideoInfo.txt" />
     <EmbeddedResource Include="Templates\Minimal\GeneralInfo.txt" />
+    <Content Include="Lib\taglib-sharp.dll" />
     <Content Include="ReleaseInfo.txt" />
     <Content Include="Resources\GenuineAdv.png" />
     <Content Include="TODO.txt" />
