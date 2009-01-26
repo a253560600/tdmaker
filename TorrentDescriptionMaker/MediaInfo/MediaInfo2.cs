@@ -255,11 +255,11 @@ namespace TorrentDescriptionMaker
                 //System.Console.WriteLine("Current Dir1: " + System.Environment.CurrentDirectory);
                 //System.Environment.CurrentDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
                 //System.Console.WriteLine("Current Dir2: " + System.Environment.CurrentDirectory);
-                
+
                 MediaInfoLib.MediaInfo mMI = null;
                 try
                 {
-                    Console.WriteLine("Loading MediaInfo.dll");                    
+                    Console.WriteLine("Loading MediaInfo.dll");
                     mMI = new MediaInfoLib.MediaInfo();
                     Console.WriteLine("Loaded MediaInfo.dll");
 
@@ -407,6 +407,14 @@ namespace TorrentDescriptionMaker
                     }
 
                     mMI.Close();
+
+                    // Analyse Audio only files using TagLib
+
+                    if (mf.HasAudio && !mf.HasVideo)
+                    {
+                        TagLib.File f = TagLib.File.Create(mf.FilePath);
+                        mf.TagLibFile = f;
+                    }
 
                 }
 

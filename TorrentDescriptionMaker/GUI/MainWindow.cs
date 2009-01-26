@@ -409,7 +409,16 @@ namespace TorrentDescriptionMaker
 
             // Logo
             string logo1 = Path.Combine(Application.StartupPath, "logo1.png");
+            if (!File.Exists(logo1))
+            {
+                logo1 = Path.Combine(Settings.Default.SettingsDir, "logo1.png");
+            }
+
             string logo2 = Path.Combine(Application.StartupPath, "logo.png");
+            if (!File.Exists(logo2))
+            {
+                logo2 = Path.Combine(Settings.Default.SettingsDir, "logo.png");
+            }
 
             if (File.Exists(logo1))
             {
@@ -1282,6 +1291,14 @@ namespace TorrentDescriptionMaker
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+            }
+        }
+
+        private void tsmSettingsDir_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(Settings.Default.SettingsDir))
+            {
+                Process.Start(Settings.Default.SettingsDir);
             }
         }
 
