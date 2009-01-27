@@ -1,5 +1,10 @@
-﻿Command Line Interface
-Fonts dropdown menu for MTN with full path for font internally
+﻿Finalize Menu System 
+Reorganize Code to isoloate methods from MainWindow.cs
+If Audio Format contains WMA and Description is not null then use Description of the codec
+Cancel Button to abort BackgroundWorker
+	
+Command Line Interface
+
 Support for audio using taglib-sharp
 
 Profiles support

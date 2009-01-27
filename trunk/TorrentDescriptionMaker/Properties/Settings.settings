@@ -47,10 +47,12 @@
   &lt;string&gt;DVD&lt;/string&gt;
   &lt;string&gt;DVD-5&lt;/string&gt;
   &lt;string&gt;DVD-9&lt;/string&gt;
-  &lt;string&gt;VHS&lt;/string&gt;
   &lt;string&gt;HDTV&lt;/string&gt;
   &lt;string&gt;SDTV&lt;/string&gt;
-  &lt;string&gt;LD&lt;/string&gt;
+  &lt;string&gt;Blu-ray Disc&lt;/string&gt;
+  &lt;string&gt;HD DVD&lt;/string&gt;
+  &lt;string&gt;Laser Disc&lt;/string&gt;
+  &lt;string&gt;VHS&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="Source" Type="System.String" Scope="User">

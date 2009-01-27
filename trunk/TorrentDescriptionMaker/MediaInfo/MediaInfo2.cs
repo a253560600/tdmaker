@@ -284,8 +284,11 @@ namespace TorrentDescriptionMaker
             StringBuilder sbBody = new StringBuilder();
 
             // Show Title
-            sbBody.AppendLine(bb.Size(fontSizeHeading1, bb.Bold(this.Title)));
-            sbBody.AppendLine();
+            if (Settings.Default.bTitle)
+            {
+                sbBody.AppendLine(bb.Size(fontSizeHeading1, bb.Bold(this.Title)));
+                sbBody.AppendLine();
+            }
 
             StringBuilder sbTitleInfo = new StringBuilder();
 
@@ -318,8 +321,11 @@ namespace TorrentDescriptionMaker
                 }
             }
 
-            sbBody.AppendLine(bb.Size(fontSizeBody, sbTitleInfo.ToString()));
-            sbBody.AppendLine();
+            if (!string.IsNullOrEmpty(sbTitleInfo.ToString()))
+            {
+                sbBody.AppendLine(bb.Size(fontSizeBody, sbTitleInfo.ToString()));
+                sbBody.AppendLine();
+            }
 
             if (this.MediaFiles.Count > 1 && this.MediaType == MediaType.MEDIA_DISC)
             // is a DVD so need Overall Info only
@@ -360,8 +366,8 @@ namespace TorrentDescriptionMaker
                     str = ToStringAudio();
                     break;
             }
-  
-            return str; 
+
+            return str;
 
         }
 

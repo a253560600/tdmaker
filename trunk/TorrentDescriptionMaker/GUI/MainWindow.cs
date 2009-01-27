@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -11,6 +10,7 @@ using TDMaker;
 using System.Diagnostics;
 using ZSS;
 using TDMaker.MediaInfo;
+using TDMaker.Helpers;
 
 namespace TorrentDescriptionMaker
 {
@@ -399,7 +399,7 @@ namespace TorrentDescriptionMaker
             Program.ClearScreenshots();
         }
 
-        private void frmMain_Load(object sender, EventArgs e)
+        private void MainWindow_Load(object sender, EventArgs e)
         {
 
             ConfigureDirs();
@@ -449,6 +449,13 @@ namespace TorrentDescriptionMaker
             {
                 UpdateChecker uc = new UpdateChecker(this.Icon, Resources.GenuineAdv, sBar, false);
                 uc.CheckUpdates();
+            }
+
+            string[] args = Environment.GetCommandLineArgs();
+            if (args.Length > 1)
+            {
+                // we process the args
+                lbStatus.Items.Add(Environment.CommandLine);                
             }
 
         }
@@ -662,7 +669,7 @@ namespace TorrentDescriptionMaker
 
                 if (mi.Overall != null)
                 {
-                    bwApp.ReportProgress((int)ProgressType.REPORT_MEDIAINFO_SUMMARY, mi.Overall.Summary);
+                    bwApp.ReportProgress((int)ProgressType.REPORT_MEDIAINFO_SUMMARY, mi);
                     Program.WriteDebugLog();
 
                     // creates screenshot
@@ -925,7 +932,9 @@ namespace TorrentDescriptionMaker
                         break;
 
                     case ProgressType.REPORT_MEDIAINFO_SUMMARY:
-                        txtMediaInfo.Text = msg;
+                        MediaInfo2 mi = (MediaInfo2)e.UserState;
+                        gbDVD.Enabled = (mi.MediaType == MediaType.MEDIA_DISC);
+                        txtMediaInfo.Text = mi.Overall.Summary;
                         break;
 
                     case ProgressType.UPDATE_PROGRESSBAR_MAX:
@@ -974,11 +983,16 @@ namespace TorrentDescriptionMaker
                 System.Diagnostics.Process.Start(txtScrFull.Text);
         }
 
-        private void cmsAppAbout_Click(object sender, EventArgs e)
+        private void ShowAboutWindow()
         {
-
             TDMaker.GUI.AboutBox ab = new TDMaker.GUI.AboutBox();
             ab.ShowDialog();
+
+        }
+
+        private void cmsAppAbout_Click(object sender, EventArgs e)
+        {
+            ShowAboutWindow();
 
         }
 
@@ -1025,7 +1039,7 @@ namespace TorrentDescriptionMaker
             return t;
         }
 
-        private void btnCreateTorrent_Click(object sender, EventArgs e)
+        private void CreateTorrentButton()
         {
             if (!bwApp.IsBusy)
             {
@@ -1037,12 +1051,21 @@ namespace TorrentDescriptionMaker
                     tps.Add(new TorrentPacket(getTracker(), files[i]));
                 }
 
-                WorkerTask wt = new WorkerTask(TaskType.CREATE_TORRENT);
-                wt.TorrentPackets = tps;
-                bwApp.RunWorkerAsync(wt);
+                if (files.Length > 0)
+                {
+                    WorkerTask wt = new WorkerTask(TaskType.CREATE_TORRENT);
+                    wt.TorrentPackets = tps;
+                    bwApp.RunWorkerAsync(wt);
 
-                btnCreateTorrent.Enabled = false;
+                    btnCreateTorrent.Enabled = false;
+                }
             }
+
+        }
+
+        private void btnCreateTorrent_Click(object sender, EventArgs e)
+        {
+            CreateTorrentButton();
         }
 
         private void btnBrowseTorrentCustomFolder_Click(object sender, EventArgs e)
@@ -1349,7 +1372,64 @@ namespace TorrentDescriptionMaker
             createPublishUser();
         }
 
+        private void WriteMediaInfo(string info)
+        {
+            if (mTorrentInfo != null)
+            {
+                SaveFileDialog dlg = new SaveFileDialog();
+                dlg.Filter = "Text Files (*.txt)|*.txt";
+                dlg.FileName = mTorrentInfo.MyMedia.Title;
 
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    using (StreamWriter sw = new StreamWriter(dlg.FileName))
+                    {
+                        sw.WriteLine(info);
+                    }
+                }
+            }
+        }
+
+        private void miFileSaveInfoAs_Click(object sender, EventArgs e)
+        {
+            string info = "";
+            if (tcMain.SelectedTab == tpMainMediaInfo)
+            {
+                info = txtMediaInfo.Text;
+            }
+            else
+            {
+                info = txtPublish.Text;
+            }
+            WriteMediaInfo(info);
+        }
+
+        private void miFileExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void tcMain_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tcMain.SelectedTab == tpMainMediaInfo)
+            {
+                miFileSaveInfoAs.Text = "&Save Media Info As...";
+            }
+            else
+            {
+                miFileSaveInfoAs.Text = "&Save Publish Info As...";
+            }
+        }
+
+        private void miFileSaveTorrent_Click(object sender, EventArgs e)
+        {
+            CreateTorrentButton();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowAboutWindow();
+        }
 
     }
 }
