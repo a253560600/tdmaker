@@ -206,22 +206,22 @@ namespace TorrentDescriptionMaker
                 }
                 if (chkMTN_s_TimeStep.Checked)
                 {
-                    sbMTNArgs.Append(string.Format("-s {0} ", nudMTN_s_TimeStep.Value));                    
+                    sbMTNArgs.Append(string.Format("-s {0} ", nudMTN_s_TimeStep.Value));
                 }
 
                 if (chkMTN_D_EdgeDetection.Checked)
                 {
-                    sbMTNArgs.Append(string.Format("-D {0} ", nudMTN_D_EdgeDetection.Value));                    
+                    sbMTNArgs.Append(string.Format("-D {0} ", nudMTN_D_EdgeDetection.Value));
                 }
 
                 if (chkMTN_B_OmitBegin.Checked)
                 {
-                    sbMTNArgs.Append(string.Format("-B {0} ", nudMTN_B_OmitStart.Value));                    
+                    sbMTNArgs.Append(string.Format("-B {0} ", nudMTN_B_OmitStart.Value));
                 }
 
                 if (chkMTN_E_OmitEnd.Checked)
                 {
-                    sbMTNArgs.Append(string.Format("-E {0} ", nudMTN_E_OmitEnd.Value));                    
+                    sbMTNArgs.Append(string.Format("-E {0} ", nudMTN_E_OmitEnd.Value));
                 }
 
                 // Not supported in MTN 2.45
@@ -534,6 +534,8 @@ namespace TorrentDescriptionMaker
         {
 
             rbFile.Checked = !Settings.Default.BrowseDir;
+            rbTExt.Checked = chkTemplatesMode.Checked;
+            rbTInt.Checked = !rbTExt.Checked;
 
             cboScreenshotDest.SelectedIndex = Settings.Default.ScreenshotDestIndex;
 
@@ -630,6 +632,21 @@ namespace TorrentDescriptionMaker
             Clipboard.SetText(txtBBScrFull.Text);
         }
 
+        private string CreatePublishInitial(ref TorrentInfo ti)
+        {
+
+            PublishOptionsPacket pop = new PublishOptionsPacket();
+            pop.AlignCenter = Settings.Default.AlignCenter;
+            pop.FullPicture = Settings.Default.UploadScreenshot && Settings.Default.UseFullPicture;
+            pop.PreformattedText = Settings.Default.PreText;
+            pop.TemplatesMode = Settings.Default.TemplatesMode;
+
+            ti.PublishOptions = pop;
+
+            return CreatePublish(ti, pop);
+
+        }
+
         private object WorkerAnalyzeMedia(WorkerTask wt)
         {
             List<MediaInfo2> miList = wt.MediaFiles;
@@ -650,15 +667,7 @@ namespace TorrentDescriptionMaker
 
                     // creates screenshot
                     TorrentInfo ti = new TorrentInfo(bwApp, mi);
-
-                    PublishOptionsPacket pop = new PublishOptionsPacket();
-                    pop.AlignCenter = Settings.Default.AlignCenter;
-                    pop.FullPicture = Settings.Default.UploadScreenshot && Settings.Default.UseFullPicture;
-                    pop.PreformattedText = Settings.Default.PreText;
-                    pop.TemplatesMode = Settings.Default.TemplatesMode;
-
-                    ti.PublishOptions = pop;
-                    ti.PublishString = CreatePublish(ti, pop);
+                    ti.PublishString = CreatePublishInitial(ref ti);
 
                     bwApp.ReportProgress((int)ProgressType.UPDATE_SCREENSHOTS_LIST, ti.MyMedia.Screenshot);
 
@@ -833,7 +842,7 @@ namespace TorrentDescriptionMaker
                             chkQuickPre.Checked = pop.PreformattedText;
                             cboQuickTemplate.SelectedIndex = cboTemplate.SelectedIndex;
 
-                            txtPublish.Text = mTorrentInfo.PublishString;
+                            this.UpdatePublish(mTorrentInfo);
 
                         }
                         break;
@@ -971,7 +980,7 @@ namespace TorrentDescriptionMaker
             TDMaker.GUI.AboutBox ab = new TDMaker.GUI.AboutBox();
             ab.ShowDialog();
 
-        }   
+        }
 
         private void FillTrackersComboBox()
         {
@@ -1064,7 +1073,7 @@ namespace TorrentDescriptionMaker
             }
         }
 
-        private void createQuickPublish(object sender)
+        private void createPublishUser()
         {
             if (mTorrentInfo != null)
             {
@@ -1073,7 +1082,7 @@ namespace TorrentDescriptionMaker
                 pop.FullPicture = chkQuickFullPicture.Checked;
                 pop.PreformattedText = chkQuickPre.Checked;
 
-                pop.TemplatesMode = true;
+                pop.TemplatesMode = rbTExt.Checked;
                 pop.TemplateLocation = Path.Combine(Settings.Default.TemplatesDir, cboQuickTemplate.Text);
 
                 txtPublish.Text = CreatePublish(mTorrentInfo, pop);
@@ -1082,17 +1091,17 @@ namespace TorrentDescriptionMaker
 
         private void chkQuickPre_CheckedChanged(object sender, EventArgs e)
         {
-            createQuickPublish(sender);
+            createPublishUser();
         }
 
         private void chkQuickAlignCenter_CheckedChanged(object sender, EventArgs e)
         {
-            createQuickPublish(sender);
+            createPublishUser();
         }
 
         private void chkQuickFullPicture_CheckedChanged(object sender, EventArgs e)
         {
-            createQuickPublish(sender);
+            createPublishUser();
         }
 
         private void rbFile_CheckedChanged(object sender, EventArgs e)
@@ -1220,7 +1229,7 @@ namespace TorrentDescriptionMaker
 
         private void cboQuickTemplate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            createQuickPublish(sender);
+            createPublishUser();
 
         }
 
@@ -1300,6 +1309,44 @@ namespace TorrentDescriptionMaker
             {
                 Process.Start(Settings.Default.SettingsDir);
             }
+        }
+
+
+        private void UpdatePublish()
+        {
+            this.UpdatePublish(mTorrentInfo);
+        }
+
+        private void UpdatePublish(TorrentInfo ti)
+        {
+            if (ti != null)
+            {
+                txtPublish.Text = CreatePublishInitial(ref ti);
+
+                if (ti.MyMedia.MediaType == MediaType.MUSIC_AUDIO_ALBUM)
+                {
+                    txtPublish.BackColor = System.Drawing.Color.Black;
+                    txtPublish.ForeColor = System.Drawing.Color.White;
+                }
+                else
+                {
+                    txtPublish.BackColor = System.Drawing.SystemColors.Window;
+                    txtPublish.ForeColor = System.Drawing.SystemColors.WindowText;
+                }
+            }
+        }
+
+
+
+        private void rbTInt_CheckedChanged(object sender, EventArgs e)
+        {
+            cboQuickTemplate.Enabled = rbTExt.Checked;
+            UpdatePublish();
+        }
+
+        private void rbTExt_CheckedChanged(object sender, EventArgs e)
+        {
+            createPublishUser();
         }
 
 

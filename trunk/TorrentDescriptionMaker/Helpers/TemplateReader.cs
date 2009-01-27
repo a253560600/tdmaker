@@ -97,7 +97,7 @@ namespace TDMaker
             if (TorrentInfo.MyMedia != null)
             {
 
-                if (TorrentInfo.MyMedia.IsDisc)
+                if (TorrentInfo.MyMedia.MediaType == MediaType.MEDIA_DISC)
                 {
                     pattern = CreateDiscInfo(TorrentInfo.MyMedia);
                 }

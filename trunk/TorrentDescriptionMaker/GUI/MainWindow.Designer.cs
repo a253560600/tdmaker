@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnBrowseMTN = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -87,6 +87,8 @@
             this.chkScreenshot = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.gbQuickPublish = new System.Windows.Forms.GroupBox();
+            this.rbTExt = new System.Windows.Forms.RadioButton();
+            this.rbTInt = new System.Windows.Forms.RadioButton();
             this.cboQuickTemplate = new System.Windows.Forms.ComboBox();
             this.chkQuickFullPicture = new System.Windows.Forms.CheckBox();
             this.chkQuickAlignCenter = new System.Windows.Forms.CheckBox();
@@ -194,9 +196,11 @@
             this.cmsApp = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.foldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmScreenshots = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmLogsDir = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmTemplates = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmTorrentsDir = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmLogsDir = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmSettingsDir = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmTemplates = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmUpdatesCheck = new System.Windows.Forms.ToolStripMenuItem();
             this.tmsVersionHistory = new System.Windows.Forms.ToolStripMenuItem();
@@ -204,8 +208,6 @@
             this.btnCreateTorrent = new System.Windows.Forms.Button();
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.ttApp = new System.Windows.Forms.ToolTip(this.components);
-            this.tsmSettingsDir = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.groupBox1.SuspendLayout();
             this.gbScreenshotFull.SuspendLayout();
             this.gbScreenshotForums.SuspendLayout();
@@ -885,6 +887,8 @@
             // 
             // gbQuickPublish
             // 
+            this.gbQuickPublish.Controls.Add(this.rbTExt);
+            this.gbQuickPublish.Controls.Add(this.rbTInt);
             this.gbQuickPublish.Controls.Add(this.cboQuickTemplate);
             this.gbQuickPublish.Controls.Add(this.chkQuickFullPicture);
             this.gbQuickPublish.Controls.Add(this.chkQuickAlignCenter);
@@ -897,11 +901,35 @@
             this.gbQuickPublish.TabStop = false;
             this.gbQuickPublish.Text = "Options";
             // 
+            // rbTExt
+            // 
+            this.rbTExt.AutoSize = true;
+            this.rbTExt.Location = new System.Drawing.Point(15, 127);
+            this.rbTExt.Name = "rbTExt";
+            this.rbTExt.Size = new System.Drawing.Size(110, 17);
+            this.rbTExt.TabIndex = 6;
+            this.rbTExt.TabStop = true;
+            this.rbTExt.Text = "E&xternal Template";
+            this.rbTExt.UseVisualStyleBackColor = true;
+            this.rbTExt.CheckedChanged += new System.EventHandler(this.rbTExt_CheckedChanged);
+            // 
+            // rbTInt
+            // 
+            this.rbTInt.AutoSize = true;
+            this.rbTInt.Location = new System.Drawing.Point(15, 104);
+            this.rbTInt.Name = "rbTInt";
+            this.rbTInt.Size = new System.Drawing.Size(107, 17);
+            this.rbTInt.TabIndex = 5;
+            this.rbTInt.TabStop = true;
+            this.rbTInt.Text = "&Internal Template";
+            this.rbTInt.UseVisualStyleBackColor = true;
+            this.rbTInt.CheckedChanged += new System.EventHandler(this.rbTInt_CheckedChanged);
+            // 
             // cboQuickTemplate
             // 
             this.cboQuickTemplate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboQuickTemplate.FormattingEnabled = true;
-            this.cboQuickTemplate.Location = new System.Drawing.Point(15, 104);
+            this.cboQuickTemplate.Location = new System.Drawing.Point(15, 150);
             this.cboQuickTemplate.Name = "cboQuickTemplate";
             this.cboQuickTemplate.Size = new System.Drawing.Size(121, 21);
             this.cboQuickTemplate.TabIndex = 3;
@@ -910,7 +938,7 @@
             // chkQuickFullPicture
             // 
             this.chkQuickFullPicture.AutoSize = true;
-            this.chkQuickFullPicture.Location = new System.Drawing.Point(15, 81);
+            this.chkQuickFullPicture.Location = new System.Drawing.Point(15, 71);
             this.chkQuickFullPicture.Name = "chkQuickFullPicture";
             this.chkQuickFullPicture.Size = new System.Drawing.Size(78, 17);
             this.chkQuickFullPicture.TabIndex = 2;
@@ -921,7 +949,7 @@
             // chkQuickAlignCenter
             // 
             this.chkQuickAlignCenter.AutoSize = true;
-            this.chkQuickAlignCenter.Location = new System.Drawing.Point(15, 58);
+            this.chkQuickAlignCenter.Location = new System.Drawing.Point(15, 48);
             this.chkQuickAlignCenter.Name = "chkQuickAlignCenter";
             this.chkQuickAlignCenter.Size = new System.Drawing.Size(83, 17);
             this.chkQuickAlignCenter.TabIndex = 1;
@@ -932,7 +960,7 @@
             // chkQuickPre
             // 
             this.chkQuickPre.AutoSize = true;
-            this.chkQuickPre.Location = new System.Drawing.Point(15, 35);
+            this.chkQuickPre.Location = new System.Drawing.Point(15, 25);
             this.chkQuickPre.Name = "chkQuickPre";
             this.chkQuickPre.Size = new System.Drawing.Size(110, 17);
             this.chkQuickPre.TabIndex = 0;
@@ -2069,36 +2097,36 @@
             // 
             this.dgvTrackers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTrackers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTrackers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvTrackers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTrackers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colName,
             this.colAnnounceURL});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvTrackers.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvTrackers.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvTrackers.Location = new System.Drawing.Point(6, 19);
             this.dgvTrackers.Name = "dgvTrackers";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTrackers.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTrackers.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvTrackers.Size = new System.Drawing.Size(693, 148);
             this.dgvTrackers.TabIndex = 1;
             this.dgvTrackers.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvTrackers_CellValidating);
@@ -2217,7 +2245,7 @@
             this.tmsVersionHistory,
             this.cmsAppAbout});
             this.cmsApp.Name = "cmsApp";
-            this.cmsApp.Size = new System.Drawing.Size(176, 120);
+            this.cmsApp.Size = new System.Drawing.Size(176, 98);
             // 
             // foldersToolStripMenuItem
             // 
@@ -2235,30 +2263,42 @@
             // tsmScreenshots
             // 
             this.tsmScreenshots.Name = "tsmScreenshots";
-            this.tsmScreenshots.Size = new System.Drawing.Size(152, 22);
+            this.tsmScreenshots.Size = new System.Drawing.Size(145, 22);
             this.tsmScreenshots.Text = "&Screenshots...";
             this.tsmScreenshots.Click += new System.EventHandler(this.tsmScreenshots_Click);
-            // 
-            // tsmLogsDir
-            // 
-            this.tsmLogsDir.Name = "tsmLogsDir";
-            this.tsmLogsDir.Size = new System.Drawing.Size(152, 22);
-            this.tsmLogsDir.Text = "&Logs...";
-            this.tsmLogsDir.Click += new System.EventHandler(this.tsmLogsDir_Click);
-            // 
-            // tsmTemplates
-            // 
-            this.tsmTemplates.Name = "tsmTemplates";
-            this.tsmTemplates.Size = new System.Drawing.Size(152, 22);
-            this.tsmTemplates.Text = "Templates...";
-            this.tsmTemplates.Click += new System.EventHandler(this.tsmTemplates_Click);
             // 
             // tsmTorrentsDir
             // 
             this.tsmTorrentsDir.Name = "tsmTorrentsDir";
-            this.tsmTorrentsDir.Size = new System.Drawing.Size(152, 22);
+            this.tsmTorrentsDir.Size = new System.Drawing.Size(145, 22);
             this.tsmTorrentsDir.Text = "&Torrents...";
             this.tsmTorrentsDir.Click += new System.EventHandler(this.tsmTorrentsDir_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(142, 6);
+            // 
+            // tsmLogsDir
+            // 
+            this.tsmLogsDir.Name = "tsmLogsDir";
+            this.tsmLogsDir.Size = new System.Drawing.Size(145, 22);
+            this.tsmLogsDir.Text = "&Logs...";
+            this.tsmLogsDir.Click += new System.EventHandler(this.tsmLogsDir_Click);
+            // 
+            // tsmSettingsDir
+            // 
+            this.tsmSettingsDir.Name = "tsmSettingsDir";
+            this.tsmSettingsDir.Size = new System.Drawing.Size(145, 22);
+            this.tsmSettingsDir.Text = "&Settings...";
+            this.tsmSettingsDir.Click += new System.EventHandler(this.tsmSettingsDir_Click);
+            // 
+            // tsmTemplates
+            // 
+            this.tsmTemplates.Name = "tsmTemplates";
+            this.tsmTemplates.Size = new System.Drawing.Size(145, 22);
+            this.tsmTemplates.Text = "Templates...";
+            this.tsmTemplates.Click += new System.EventHandler(this.tsmTemplates_Click);
             // 
             // toolStripSeparator1
             // 
@@ -2307,18 +2347,6 @@
             this.pbLogo.Size = new System.Drawing.Size(356, 40);
             this.pbLogo.TabIndex = 11;
             this.pbLogo.TabStop = false;
-            // 
-            // tsmSettingsDir
-            // 
-            this.tsmSettingsDir.Name = "tsmSettingsDir";
-            this.tsmSettingsDir.Size = new System.Drawing.Size(152, 22);
-            this.tsmSettingsDir.Text = "&Settings...";
-            this.tsmSettingsDir.Click += new System.EventHandler(this.tsmSettingsDir_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // frmMain
             // 
@@ -2596,6 +2624,8 @@
         private System.Windows.Forms.CheckBox chkMTN_B_OmitBegin;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem tsmSettingsDir;
+        private System.Windows.Forms.RadioButton rbTExt;
+        private System.Windows.Forms.RadioButton rbTInt;
     }
 }
 

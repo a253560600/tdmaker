@@ -1,3 +1,6 @@
+
+1.09.1.0 Two new radioButtons to enable/disable built-in template preview
+
 Version 1.9.0 - 20090126
 
 1.9.00.0 Revamped MTN Configuration supporting more options
