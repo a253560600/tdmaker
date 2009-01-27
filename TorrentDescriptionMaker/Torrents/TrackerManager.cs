@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml.Serialization;
-using System.Runtime.Serialization.Formatters.Soap;
-using System.Runtime.Serialization;
 using TDMaker.Properties;
+using System.Xml.Serialization;
 
 namespace TDMaker
 {

@@ -168,10 +168,12 @@ namespace TDMaker.Properties {
   <string>DVD</string>
   <string>DVD-5</string>
   <string>DVD-9</string>
-  <string>VHS</string>
   <string>HDTV</string>
   <string>SDTV</string>
-  <string>LD</string>
+  <string>Blu-ray Disc</string>
+  <string>HD DVD</string>
+  <string>Laser Disc</string>
+  <string>VHS</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection Sources {
             get {

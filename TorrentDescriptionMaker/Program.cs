@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
+using System.Configuration;
 using System.IO;
+using System.Text;
+using System.Windows.Forms;
 using TDMaker;
 using TDMaker.Properties;
-using System.Text;
-using System.Configuration;
-using System.Xml.Serialization;
 
 namespace TorrentDescriptionMaker
 {
@@ -29,7 +27,7 @@ namespace TorrentDescriptionMaker
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             string os = System.Environment.OSVersion.ToString();
             bool b = os.Contains("Unix");
@@ -41,12 +39,19 @@ namespace TorrentDescriptionMaker
                 Settings.Default.Upgrade();
                 Settings.Default.UpgradeSettings = true;
             }
+            LoadConfig();
 
-            Load();
-
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
+            if (args.Length > 1 && Program.IsUNIX)
+            {
+                // we process the args
+                Console.WriteLine(Environment.CommandLine);
+            }
+            else
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new frmMain());
+            }
         }
 
 
@@ -56,7 +61,7 @@ namespace TorrentDescriptionMaker
         /// Load Settings from Default Path.
         /// user.config from Application directory is supported
         /// </summary>
-        public static void Load()
+        public static void LoadConfig()
         {
             LoadAs(GetConfigFilePath());
         }
@@ -339,7 +344,7 @@ namespace TorrentDescriptionMaker
 
     public enum MediaType
     {
-        SINGLE_MEDIA_FILE, 
+        SINGLE_MEDIA_FILE,
         MEDIA_DISC,
         MUSIC_AUDIO_ALBUM
     }
