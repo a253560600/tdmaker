@@ -4,7 +4,6 @@ using System.IO;
 using MediaInfoLib;
 using TDMaker;
 using TDMaker.Properties;
-using System;
 using TDMaker.MediaInfo;
 
 namespace TorrentDescriptionMaker

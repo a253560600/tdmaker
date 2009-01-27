@@ -228,6 +228,8 @@ namespace TDMaker
 
                         ai.Codec = mMI.Get(StreamKind.Audio, 0, "CodecID/Hint");
                         if (string.IsNullOrEmpty(ai.Codec))
+                            ai.Codec = mMI.Get(StreamKind.Audio, 0, "CodecID/Info");
+                        if (string.IsNullOrEmpty(ai.Codec))
                             ai.Codec = mMI.Get(StreamKind.Audio, 0, "CodecID");
 
                         ai.Bitrate = mMI.Get(StreamKind.Audio, a, "BitRate/String");
