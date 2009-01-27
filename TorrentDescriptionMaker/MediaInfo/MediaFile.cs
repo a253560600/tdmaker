@@ -243,21 +243,38 @@ namespace TDMaker
 
                     mMI.Close();
 
-                    // Analyse Audio only files using TagLib
+                    //// Analyse Audio only files using TagLib
 
-                    if (this.HasAudio && !this.HasVideo)
-                    {
-                        TagLib.File f = TagLib.File.Create(this.FilePath);
-                        this.TagLibFile = f;
-                    }
+                    //if (this.HasAudio && !this.HasVideo)
+                    //{
+                    //    TagLib.File f = TagLib.File.Create(this.FilePath);
+                    //    this.TagLibFile = f;
+                    //}
 
                 }
 
             }
         }
+        /// <summary>
+        /// Method to determine if the Media File is actually an audio file
+        /// </summary>
+        /// <returns></returns>
+        public bool IsAudioFile()
+        {
+            return this.HasAudio && !this.HasVideo;
+        }
 
         /// <summary>
-        /// Returns a Publish layout of Media Info
+        /// String representation of an Audio file
+        /// </summary>
+        /// <returns></returns>
+        public string ToStringAudio()
+        {
+            return "";
+        }
+
+        /// <summary>
+        /// Returns a Publish layout of Media Info that has Audio and Video
         /// </summary>
         /// <returns></returns>
         public override string ToString()
@@ -283,11 +300,6 @@ namespace TDMaker
 
             sbBody.AppendLine(bb.Size(fontSizeHeading3, bb.BoldItalic("General:")));
             sbBody.AppendLine();
-            //// File Name
-            //if (!string.IsNullOrEmpty(this.FileName))
-            //{
-            //    sbGeneral.AppendLine(string.Format("         [u]File Name:[/u] {0}", this.FileName));
-            //}
 
             // Format
             sbGeneral.Append(string.Format("            [u]Format:[/u] {0}", this.Format));

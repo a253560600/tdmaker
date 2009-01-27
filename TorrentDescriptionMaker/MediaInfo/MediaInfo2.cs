@@ -17,7 +17,8 @@ namespace TorrentDescriptionMaker
         /// <summary>
         /// Disc property is set to true if the media is found to be DVD, BD, HDDVD source
         /// </summary>
-        public bool IsDisc { get; private set; }
+        public MediaType MediaType { get; private set; }
+
         /// <summary>
         /// Mode of taking screenshots for Media files
         /// </summary>
@@ -152,7 +153,7 @@ namespace TorrentDescriptionMaker
                 string[] ifo = Directory.GetFiles(Location, "VTS_01_0.IFO", SearchOption.AllDirectories);
                 if (ifo.Length == 1)
                 {
-                    this.IsDisc = true;
+                    this.MediaType = MediaType.MEDIA_DISC;
                     MediaInfoLib.MediaInfo mi = new MediaInfoLib.MediaInfo();
                     mi.Open(ifo[0]);
 
@@ -193,7 +194,7 @@ namespace TorrentDescriptionMaker
 
                 // DVD Video
                 // Combined Duration and File Size
-                if (IsDisc)
+                if (MediaType == MediaType.MEDIA_DISC)
                 {
                     string[] vobFiles = Directory.GetFiles(Location, "*.vob", SearchOption.AllDirectories);
                     if (vobFiles.Length > 0)
@@ -234,18 +235,41 @@ namespace TorrentDescriptionMaker
 
             } // if Location is a directory
 
-        }
+            // Set Media Type
+            bool allAudio = true;
+            foreach (MediaFile mf in MediaFiles)
+            {
+                allAudio = mf.IsAudioFile() && allAudio;
+            }
+            if (allAudio)
+            {
+                this.MediaType = MediaType.MUSIC_AUDIO_ALBUM;
+            }
+
+        } // Read Media
 
         /// <summary>
-        /// Default Publish String Representation
+        /// Tracklist of all the Audio files in the MediaInfo. Also accessible using %Tracklist%
         /// </summary>
-        /// <returns></returns>
-        public override string ToString()
+        /// <returns>String representation of Tracklist</returns>
+        public string ToStringAudio()
         {
+            List<string> lstAudioFiles = new List<string>();
+            foreach (MediaFile mf in MediaFiles)
+            {
+                if (mf.IsAudioFile())
+                {
+                    lstAudioFiles.Add(mf.FilePath);
+                }
+            }
+            return new NfoReport(this.Location, null).ToString();
+        }
 
+        private string ToStringMedia()
+        {
             int fontSizeHeading1 = (int)(Settings.Default.PreText && Settings.Default.LargerPreText == true ?
-       Settings.Default.FontSizeHeading1 + Settings.Default.FontSizeIncr :
-       Settings.Default.FontSizeHeading1);
+        Settings.Default.FontSizeHeading1 + Settings.Default.FontSizeIncr :
+        Settings.Default.FontSizeHeading1);
 
             int fontSizeHeading2 = (int)(Settings.Default.PreText && Settings.Default.LargerPreText == true ?
                 Settings.Default.FontSizeHeading2 + Settings.Default.FontSizeIncr :
@@ -272,7 +296,7 @@ namespace TorrentDescriptionMaker
                 sbTitleInfo.AppendLine(string.Format("[u]Source:[/u] {0}", this.Source));
             }
 
-            if (IsDisc)
+            if (MediaType == MediaType.MEDIA_DISC)
             {
                 // Authoring
                 if (Settings.Default.bVideoEdits && !string.IsNullOrEmpty(this.Authoring))
@@ -298,7 +322,7 @@ namespace TorrentDescriptionMaker
             sbBody.AppendLine(bb.Size(fontSizeBody, sbTitleInfo.ToString()));
             sbBody.AppendLine();
 
-            if (this.MediaFiles.Count > 1 && this.IsDisc)
+            if (this.MediaFiles.Count > 1 && this.MediaType == MediaType.MEDIA_DISC)
             // is a DVD so need Overall Info only
             {
                 sbBody.AppendLine(this.Overall.ToString());
@@ -317,6 +341,28 @@ namespace TorrentDescriptionMaker
             }
 
             return sbBody.ToString();
+        }
+
+        /// <summary>
+        /// Default Publish String Representation
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            string str = "";
+
+            switch (this.MediaType)
+            {
+                case MediaType.MEDIA_DISC:
+                case MediaType.SINGLE_MEDIA_FILE:
+                    str = ToStringMedia();
+                    break;
+                case MediaType.MUSIC_AUDIO_ALBUM:
+                    str = ToStringAudio();
+                    break;
+            }
+  
+            return str; 
 
         }
 

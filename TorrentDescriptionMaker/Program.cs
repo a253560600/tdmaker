@@ -337,6 +337,13 @@ namespace TorrentDescriptionMaker
 
     }
 
+    public enum MediaType
+    {
+        SINGLE_MEDIA_FILE, 
+        MEDIA_DISC,
+        MUSIC_AUDIO_ALBUM
+    }
+
     public enum TakeScreenshotsType
     {
         NONE,
