@@ -47,7 +47,7 @@ To map MediaInfo.dll to the relevant Linux library, you need to create a TDMaker
             <dllmap dll="MediaInfo.dll" target="libmediainfo.so.0"/>
     </configuration>
 }}}
-[http://i36.tinypic.com/246kidz.png]
+[http://i39.tinypic.com/34obuxy.png]
 
 === Mac OS X ===
 {{{
