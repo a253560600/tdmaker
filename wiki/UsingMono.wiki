@@ -41,21 +41,13 @@ Using Mono this Wiki page shows attempts taken to run TDMaker in Linux and Mac O
 == Setting up TDMaker.exe.config==
 To map MediaInfo.dll to the relevant Linux library, you need to create a TDMaker.exe.config file and have the following. The following file needs to be in the same directory TDMaker.exe is in. This file is already included in the zip file downloaded. So extracting all files would have this file in the right place.
 
-=== Linux ===
+=== Linux and Mac OS X===
 {{{
     <configuration>
-            <dllmap dll="MediaInfo.dll" target="libmediainfo.so.0"/>
+            <dllmap os="osx" dll="MediaInfo.dll" target="libmediainfo.dylib"/>
+            <dllmap os="linux" dll="MediaInfo.dll" target="libmediainfo.so.0" />
     </configuration>
 }}}
-[http://i40.tinypic.com/3466tth.png]
-
-=== Mac OS X ===
-{{{
-    <configuration>
-            <dllmap os="osx" dll="MediaInfo.dll" target="libmediainfo.0.dylib"/>
-    </configuration>
-}}}
-
 
 == Running TDMaker in Mono Terminal==
 Execute TDMaker: 
