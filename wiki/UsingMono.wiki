@@ -52,7 +52,7 @@ To map MediaInfo.dll to the relevant Linux library, you need to create a TDMaker
 === Mac OS X ===
 {{{
     <configuration>
-            <dllmap dll="MediaInfo.dll" target="libmediainfo.0.dylib"/>
+            <dllmap os="osx" dll="MediaInfo.dll" target="libmediainfo.0.dylib"/>
     </configuration>
 }}}
 
