@@ -1,5 +1,5 @@
 #summary Knowledgebase for getting TDMaker to work in Linux/Mac using Mono
-#labels Phase-Support
+#labels Phase-Support,Featured
 <wiki:toc max_depth="3" />
 
 = Introduction =
