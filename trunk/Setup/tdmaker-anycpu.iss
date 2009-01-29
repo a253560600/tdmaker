@@ -26,16 +26,49 @@
 //#include "scripts\products\mdac28.iss"
 //#include "scripts\products\jet4sp8.iss"
 
+#define SimpleVersion(str S) \
+	Local[0] = Pos (".0.0.", S), \
+	/* (4) and (5) */ \
+	(Local[0] > 0) ? Copy (S, 1, 3) : \
+	( \
+		Local[0] = Pos (".0.0", S), \
+		/* (3) */ \
+		(Local[0] > 0) ? Copy (S, 1, 3) : \
+		( \
+			Local[0] = Pos (".0", S), \
+			/* (2) */ \
+			(Local[0] > 5) ? Copy (S, 1, Local[0] - 1) : \
+			( \
+				Local[0] = Pos (".0.", S), \
+				/* (6) */ \
+				(Local[0] > 0) ? Copy (S, 1, 3) : \
+				( \
+					Copy (S, 1, 5) \
+				) \
+			) \
+		) \
+	);
+
+#define ExeName "TDMaker"
+#define ExePath "..\TorrentDescriptionMaker\bin\Release\TDMaker.exe"
+#define MyAppVersion GetFileVersion(ExePath)
+#define MySimpleAppVersion SimpleVersion(MyAppVersion)
+
+#pragma message "*** Version info ***
+#pragma message "Detailed version info: " + MyAppVersion
+#pragma message "Simple version info:   " + MySimpleAppVersion
+
 [CustomMessages]
 win2000sp3_title=Windows 2000 Service Pack 3
 winxpsp2_title=Windows XP Service Pack 2
 
 
 [Setup]
-AppName=TDMaker
-AppVerName=TDMaker 1.9
-VersionInfoVersion=1.9.0.0
-VersionInfoTextVersion=1.9.0.0
+AppName={#ExeName} {#MySimpleAppVersion}
+AppVerName={#ExeName}  {#MyAppVersion}
+AppVersion={#MyAppVersion}
+VersionInfoVersion={#MyAppVersion}
+VersionInfoTextVersion={#MyAppVersion}
 VersionInfoCompany=BetaONE
 VersionInfoDescription=Torrent Description Maker
 AppPublisher=BetaONE
@@ -43,13 +76,14 @@ AppPublisherURL=http://code.google.com/p/tdmaker
 AppSupportURL=http://code.google.com/p/tdmaker
 AppUpdatesURL=http://code.google.com/p/tdmaker
 DefaultDirName={pf}\TDMaker
-DefaultGroupName=BetaONE\TDMaker
+DefaultGroupName=BetaONE\{#ExeName}
 AllowNoIcons=yes
 InfoBeforeFile=..\TorrentDescriptionMaker\VersionHistory.txt
 ;InfoAfterFile=..\TorrentDescriptionMaker\ReleaseInfo.txt
 SolidCompression=yes
 ;PrivilegesRequired=none
 OutputDir=..\..\Output\
+OutputBaseFilename={#ExeName}-{#MyAppVersion}-setup
 ArchitecturesInstallIn64BitMode=x64 ia64
 DirExistsWarning=no
 CreateAppDir=true
@@ -57,7 +91,7 @@ UsePreviousGroup=yes
 UsePreviousAppDir=yes
 ShowUndisplayableLanguages=no
 LanguageDetectionMethod=uilanguage
-InternalCompressLevel=fast
+InternalCompressLevel=ultra64
 Compression=lzma
 
 ;required by products
@@ -74,7 +108,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "..\TorrentDescriptionMaker\bin\Release\TDMaker.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: {#ExePath}; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\TorrentDescriptionMaker\bin\Release\*.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\MTN\*.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\MTN\*.dll"; DestDir: "{app}"; Flags: ignoreversion
