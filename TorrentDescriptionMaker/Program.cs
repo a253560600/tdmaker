@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using TDMaker;
 using TDMaker.Properties;
+using System.ComponentModel;
 
 namespace TorrentDescriptionMaker
 {
@@ -15,10 +16,10 @@ namespace TorrentDescriptionMaker
         /// </summary>
         public static McoreSystem.AppInfo gAppInfo = new McoreSystem.AppInfo(Application.ProductName, Application.ProductVersion, McoreSystem.AppInfo.SoftwareCycle.FINAL);
 
-        public const string APP_NAME = "TDMaker";
+        public const string PROGRAM_FILES_APP_NAME = "TDMaker";
         public static TaskType CurrentTask { get; set; }
         private readonly static string ScreenshotsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "MTN");
-        private readonly static string ScreenshotsTempDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), APP_NAME);
+        private readonly static string ScreenshotsTempDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), PROGRAM_FILES_APP_NAME);
         public static string LogsDir { get; set; }
         public static bool IsUNIX { get; private set; }
         public static string DebugLogFilePath { get; set; }
@@ -289,12 +290,7 @@ namespace TorrentDescriptionMaker
             try
             {
                 System.Reflection.Assembly oAsm = System.Reflection.Assembly.GetExecutingAssembly();
-                Stream oStrm = oAsm.GetManifestResourceStream(oAsm.GetName().Name + "." + name);
-
-                for (int i = 0; i < oAsm.GetManifestResourceNames().Length; i++)
-                {
-                    Console.WriteLine(oAsm.GetManifestResourceNames()[i].ToString());
-                }
+                Stream oStrm = oAsm.GetManifestResourceStream(oAsm.GetName().Name + "." + name);   
                 StreamReader oRdr = new StreamReader(oStrm);
                 text = oRdr.ReadToEnd();
             }
@@ -370,13 +366,6 @@ namespace TorrentDescriptionMaker
     {
         ANALYZE_MEDIA,
         CREATE_TORRENT
-    }
-
-    public enum ScreenshotDestType
-    {
-        IMAGESHACK,
-        TINYPIC,
-        IMAGESHACK_LEGACY_METHOD
     }
 
     public class TorrentPacket

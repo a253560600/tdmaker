@@ -323,12 +323,18 @@ namespace TorrentDescriptionMaker
 
         }
 
-        private void frmMain_Shown(object sender, EventArgs e)
+        private void MainWindow_Shown(object sender, EventArgs e)
         {
+            string mtnExe = (Program.IsUNIX ? "mtn" : "mtn.exe");
+
             if (!File.Exists(Settings.Default.MTNPath))
             {
-                Settings.Default.MTNPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), @"TDMaker\mtn.exe");
+                Settings.Default.MTNPath = Path.Combine(Application.StartupPath, mtnExe);
+            }
 
+            if (!File.Exists(Settings.Default.MTNPath))
+            {
+                Settings.Default.MTNPath = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), Program.PROGRAM_FILES_APP_NAME ), mtnExe);
             }
 
             if (!File.Exists(Settings.Default.MTNPath))
@@ -455,7 +461,7 @@ namespace TorrentDescriptionMaker
             if (args.Length > 1)
             {
                 // we process the args
-                lbStatus.Items.Add(Environment.CommandLine);                
+                lbStatus.Items.Add(Environment.CommandLine);
             }
 
         }
@@ -544,6 +550,11 @@ namespace TorrentDescriptionMaker
             rbTExt.Checked = chkTemplatesMode.Checked;
             rbTInt.Checked = !rbTExt.Checked;
 
+            cboScreenshotDest.Items.Clear();
+            foreach (ScreenshotDestType sdt in Enum.GetValues(typeof(ScreenshotDestType)))
+            {
+                cboScreenshotDest.Items.Add(sdt.ToDescriptionString());
+            }
             cboScreenshotDest.SelectedIndex = Settings.Default.ScreenshotDestIndex;
 
             if (string.IsNullOrEmpty(Settings.Default.MTNPath))

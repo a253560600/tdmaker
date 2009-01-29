@@ -9,6 +9,7 @@ using System.ComponentModel;
 using TDMaker;
 using ZSS.ImageUploader;
 using System.Threading;
+using TDMaker.Helpers;
 
 namespace TorrentDescriptionMaker
 {
@@ -131,6 +132,23 @@ namespace TorrentDescriptionMaker
 
         }
 
+        private List<ImageFile> UploadXsTo(string screenshot)
+        {
+            List<ZSS.ImageUploader.ImageFile> lstScreenshots = new List<ImageFile>();
+            int retry = 0;
+            XsToUploader xs = new XsToUploader();
+            while (retry <= 3 && lstScreenshots == null ||
+               (++retry <= 3 && lstScreenshots != null && lstScreenshots.Count < 1))
+            {
+                if (retry > 1)
+                    Thread.Sleep(2000);
+                mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploading {0} to {1}... Attempt {2}", Path.GetFileName(screenshot), xs.Name, retry));
+                lstScreenshots = xs.UploadImage(screenshot);
+            }
+            return lstScreenshots;
+        }
+
+
         private List<ImageFile> UploadTinyPic(string screenshot)
         {
             List<ZSS.ImageUploader.ImageFile> lstScreenshots = new List<ImageFile>();
@@ -141,7 +159,7 @@ namespace TorrentDescriptionMaker
             {
                 if (retry > 1)
                     Thread.Sleep(2000);
-                mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploading {0} to TinyPic... Attempt {1}", Path.GetFileName(screenshot), retry));
+                mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploading {0} to {1}... Attempt {2}", Path.GetFileName(screenshot), tpu.Name, retry));
                 lstScreenshots = tpu.UploadImage(screenshot);
             }
             return lstScreenshots;
@@ -166,6 +184,9 @@ namespace TorrentDescriptionMaker
                         break;
                     case ScreenshotDestType.IMAGESHACK_LEGACY_METHOD:
                         lstScreenshots = UploadImageShack(screenshot, false);
+                        break;
+                    case ScreenshotDestType.XSTO:
+                        lstScreenshots = UploadXsTo(screenshot);
                         break;
                 }
 
