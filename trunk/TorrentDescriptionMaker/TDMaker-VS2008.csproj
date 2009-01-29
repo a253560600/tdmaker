@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ImageUploader, Version=1.0.3310.36943, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="ImageUploader, Version=1.0.3316.32459, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="McoreSystem, Version=1.13.2.1, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="MonoTorrent, Version=0.62.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -41,6 +41,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -67,6 +70,7 @@
     <Compile Include="GUI\TextViewer.designer.cs">
       <DependentUpon>TextViewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Helpers\Options.cs" />
     <Compile Include="Helpers\TDMakerOptions.cs" />
     <Compile Include="MediaInfo\MediaFile.cs" />
