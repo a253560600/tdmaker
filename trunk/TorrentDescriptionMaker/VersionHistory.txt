@@ -1,4 +1,5 @@
 
+1.09.2.0 Introduced a Menu System to perform tasks more effectively
 1.09.1.0 Two new radioButtons to enable/disable built-in template preview
 
 Version 1.9.0 - 20090126

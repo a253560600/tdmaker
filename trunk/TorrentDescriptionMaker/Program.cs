@@ -22,7 +22,7 @@ namespace TorrentDescriptionMaker
         private readonly static string ScreenshotsTempDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), PROGRAM_FILES_APP_NAME);
         public static string LogsDir { get; set; }
         public static bool IsUNIX { get; private set; }
-        public static string DebugLogFilePath { get; set; }
+        internal static string DebugLogFilePath { get; set; }
         private static StringBuilder mSbDebug = new StringBuilder();
 
         /// The main entry point for the application.

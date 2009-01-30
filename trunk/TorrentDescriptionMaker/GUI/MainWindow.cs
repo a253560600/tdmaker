@@ -334,7 +334,7 @@ namespace TorrentDescriptionMaker
 
             if (!File.Exists(Settings.Default.MTNPath))
             {
-                Settings.Default.MTNPath = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), Program.PROGRAM_FILES_APP_NAME ), mtnExe);
+                Settings.Default.MTNPath = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), Program.PROGRAM_FILES_APP_NAME), mtnExe);
             }
 
             if (!File.Exists(Settings.Default.MTNPath))
@@ -891,35 +891,53 @@ namespace TorrentDescriptionMaker
             Clipboard.SetText(txtScrFull.Text);
         }
 
+        private void OpenFile()
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Multiselect = true;
+            dlg.Title = "Browse for Media file...";
+            //dlg.Filter = "Media Files|*.avi; *.divx; *.mkv; *.ogm; *.vob;";
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                LoadMedia(dlg.FileNames);
+            }
+        }
+
+        private void OpenFolder()
+        {
+            FolderBrowserDialog dlg = new FolderBrowserDialog();
+            dlg.Description = "Browse for DVD folder...";
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                LoadMedia(new string[] { dlg.SelectedPath });
+            }
+        }
+
         private void btnBrowse_Click(object sender, EventArgs e)
         {
 
             if (rbFile.Checked)
             {
-                OpenFileDialog dlg = new OpenFileDialog();
-                dlg.Multiselect = true;
-                dlg.Title = "Browse for Media file...";
-                //dlg.Filter = "Media Files|*.avi; *.divx; *.mkv; *.ogm; *.vob;";
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    LoadMedia(dlg.FileNames);
-                }
+                OpenFile();
             }
             else
             {
-                FolderBrowserDialog dlg = new FolderBrowserDialog();
-                dlg.Description = "Browse for DVD folder...";
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    LoadMedia(new string[] { dlg.SelectedPath });
-                }
+                OpenFolder();
             }
 
         }
 
+        private void CopyPublish()
+        {
+            if (!string.IsNullOrEmpty(txtPublish.Text))
+            {
+                Clipboard.SetText(txtPublish.Text);
+            }
+        }
+
         private void btnPublish_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(txtPublish.Text);
+            CopyPublish();
         }
 
         private void bwApp_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -1171,18 +1189,12 @@ namespace TorrentDescriptionMaker
 
         private void tsmTorrentsDir_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(Settings.Default.TorrentsCustomDir))
-            {
-                Process.Start(Settings.Default.TorrentsCustomDir);
-            }
+            FileSystem.OpenDirTorrents();
         }
 
         private void tsmScreenshots_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(Program.GetScreenShotsDir()))
-            {
-                Process.Start(Program.GetScreenShotsDir());
-            }
+            FileSystem.OpenDirScreenshots();
         }
 
         private void chkScreenshot_CheckedChanged(object sender, EventArgs e)
@@ -1193,16 +1205,18 @@ namespace TorrentDescriptionMaker
 
         private void tsmTemplates_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(Settings.Default.TemplatesDir))
-            {
-                Process.Start(Settings.Default.TemplatesDir);
-            }
+           FileSystem.OpenDirTemplates();
+        }
+
+        private void CheckUpdates()
+        {
+            UpdateChecker uc = new UpdateChecker(this.Icon, Resources.GenuineAdv, sBar, true);
+            uc.CheckUpdates();
         }
 
         private void tsmUpdatesCheck_Click(object sender, EventArgs e)
         {
-            UpdateChecker uc = new UpdateChecker(this.Icon, Resources.GenuineAdv, sBar, true);
-            uc.CheckUpdates();
+            CheckUpdates();
         }
 
         private void cboScreenshotDest_SelectedIndexChanged(object sender, EventArgs e)
@@ -1213,10 +1227,7 @@ namespace TorrentDescriptionMaker
 
         private void tsmLogsDir_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(Program.LogsDir))
-            {
-                Process.Start(Program.LogsDir);
-            }
+            FileSystem.OpenDirLogs();
         }
 
         private void lbScreenshots_DoubleClick(object sender, EventArgs e)
@@ -1248,7 +1259,7 @@ namespace TorrentDescriptionMaker
             Process.Start("http://my.imageshack.us/v_images.php");
         }
 
-        private void tmsVersionHistory_Click(object sender, EventArgs e)
+        private void OpenVersionHistory()
         {
             string h = Program.GetText("VersionHistory.txt");
 
@@ -1259,6 +1270,12 @@ namespace TorrentDescriptionMaker
                 v.Icon = this.Icon;
                 v.ShowDialog();
             }
+        }
+
+
+        private void tmsVersionHistory_Click(object sender, EventArgs e)
+        {
+            OpenVersionHistory();
         }
 
         private void cboQuickTemplate_SelectedIndexChanged(object sender, EventArgs e)
@@ -1339,10 +1356,7 @@ namespace TorrentDescriptionMaker
 
         private void tsmSettingsDir_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(Settings.Default.SettingsDir))
-            {
-                Process.Start(Settings.Default.SettingsDir);
-            }
+            FileSystem.OpenDirSettings();
         }
 
 
@@ -1440,6 +1454,61 @@ namespace TorrentDescriptionMaker
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowAboutWindow();
+        }
+
+        private void miFileOpenFile_Click(object sender, EventArgs e)
+        {
+            OpenFile();
+        }
+
+        private void miFileOpenFolder_Click(object sender, EventArgs e)
+        {
+            OpenFolder();
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CopyPublish();
+        }
+
+        private void miHelpCheckUpdates_Click(object sender, EventArgs e)
+        {
+            CheckUpdates();
+        }
+
+        private void miFoldersScreenshots_Click(object sender, EventArgs e)
+        {
+            FileSystem.OpenDirScreenshots();
+        }
+
+        private void miFoldersTorrents_Click(object sender, EventArgs e)
+        {
+            FileSystem.OpenDirTorrents();
+        }
+
+        private void miFoldersLogs_Click(object sender, EventArgs e)
+        {
+            FileSystem.OpenDirLogs();
+        }
+
+        private void miFoldersLogsDebug_Click(object sender, EventArgs e)
+        {
+            FileSystem.OpenFileDebug();
+        }
+
+        private void miFoldersSettings_Click(object sender, EventArgs e)
+        {
+            FileSystem.OpenDirSettings();
+        }
+
+        private void miFoldersTemplates_Click(object sender, EventArgs e)
+        {
+            FileSystem.OpenDirTemplates();
+        }
+
+        private void miHelpVersionHistory_Click(object sender, EventArgs e)
+        {
+            OpenVersionHistory();
         }
 
     }
