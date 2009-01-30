@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnBrowseMTN = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -210,25 +210,27 @@
             this.ttApp = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.miFileOpenFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.miFileSaveTorrent = new System.Windows.Forms.ToolStripMenuItem();
             this.miFileSaveInfoAs = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.printPreviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.miFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.customizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.miFileOpenFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.miEditCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.miHelpCheckUpdates = new System.Windows.Forms.ToolStripMenuItem();
+            this.miHelpVersionHistory = new System.Windows.Forms.ToolStripMenuItem();
+            this.foldersToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.miFoldersLogs = new System.Windows.Forms.ToolStripMenuItem();
+            this.miFoldersSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.miFoldersTemplates = new System.Windows.Forms.ToolStripMenuItem();
+            this.miFoldersTorrents = new System.Windows.Forms.ToolStripMenuItem();
+            this.miFoldersScreenshots = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.miFoldersLogsDebug = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.gbScreenshotFull.SuspendLayout();
             this.gbScreenshotForums.SuspendLayout();
@@ -529,7 +531,7 @@
             this.tcMain.Location = new System.Drawing.Point(12, 32);
             this.tcMain.Name = "tcMain";
             this.tcMain.SelectedIndex = 0;
-            this.tcMain.Size = new System.Drawing.Size(760, 483);
+            this.tcMain.Size = new System.Drawing.Size(760, 475);
             this.tcMain.TabIndex = 4;
             this.tcMain.SelectedIndexChanged += new System.EventHandler(this.tcMain_SelectedIndexChanged);
             // 
@@ -541,7 +543,7 @@
             this.tpMedia.Controls.Add(this.gbLocation);
             this.tpMedia.Location = new System.Drawing.Point(4, 22);
             this.tpMedia.Name = "tpMedia";
-            this.tpMedia.Size = new System.Drawing.Size(752, 457);
+            this.tpMedia.Size = new System.Drawing.Size(752, 449);
             this.tpMedia.TabIndex = 4;
             this.tpMedia.Text = "Media";
             this.tpMedia.UseVisualStyleBackColor = true;
@@ -551,7 +553,7 @@
             this.groupBox10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox10.Controls.Add(this.lbStatus);
-            this.groupBox10.Location = new System.Drawing.Point(12, 327);
+            this.groupBox10.Location = new System.Drawing.Point(12, 322);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(718, 116);
             this.groupBox10.TabIndex = 13;
@@ -560,14 +562,13 @@
             // 
             // lbStatus
             // 
-            this.lbStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lbStatus.BackColor = System.Drawing.SystemColors.Control;
+            this.lbStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbStatus.FormattingEnabled = true;
-            this.lbStatus.Location = new System.Drawing.Point(26, 30);
+            this.lbStatus.Location = new System.Drawing.Point(3, 16);
             this.lbStatus.Name = "lbStatus";
             this.lbStatus.ScrollAlwaysVisible = true;
-            this.lbStatus.Size = new System.Drawing.Size(670, 69);
+            this.lbStatus.Size = new System.Drawing.Size(712, 95);
             this.lbStatus.TabIndex = 11;
             // 
             // groupBox9
@@ -580,7 +581,7 @@
             this.groupBox9.Controls.Add(this.chkSource);
             this.groupBox9.Controls.Add(this.txtWebLink);
             this.groupBox9.Controls.Add(this.cboSource);
-            this.groupBox9.Location = new System.Drawing.Point(297, 181);
+            this.groupBox9.Location = new System.Drawing.Point(297, 178);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(433, 133);
             this.groupBox9.TabIndex = 12;
@@ -663,7 +664,7 @@
             this.gbDVD.Controls.Add(this.chkExtras);
             this.gbDVD.Controls.Add(this.cboAuthoring);
             this.gbDVD.Controls.Add(this.chkSourceEdit);
-            this.gbDVD.Location = new System.Drawing.Point(12, 181);
+            this.gbDVD.Location = new System.Drawing.Point(12, 178);
             this.gbDVD.Name = "gbDVD";
             this.gbDVD.Size = new System.Drawing.Size(269, 133);
             this.gbDVD.TabIndex = 11;
@@ -747,7 +748,7 @@
             this.gbLocation.Controls.Add(this.rbDir);
             this.gbLocation.Controls.Add(this.rbFile);
             this.gbLocation.Controls.Add(this.btnBrowse);
-            this.gbLocation.Location = new System.Drawing.Point(12, 12);
+            this.gbLocation.Location = new System.Drawing.Point(12, 8);
             this.gbLocation.Name = "gbLocation";
             this.gbLocation.Size = new System.Drawing.Size(718, 163);
             this.gbLocation.TabIndex = 7;
@@ -808,7 +809,7 @@
             this.tpMainMediaInfo.Location = new System.Drawing.Point(4, 22);
             this.tpMainMediaInfo.Name = "tpMainMediaInfo";
             this.tpMainMediaInfo.Padding = new System.Windows.Forms.Padding(3);
-            this.tpMainMediaInfo.Size = new System.Drawing.Size(752, 457);
+            this.tpMainMediaInfo.Size = new System.Drawing.Size(752, 439);
             this.tpMainMediaInfo.TabIndex = 0;
             this.tpMainMediaInfo.Text = "Info";
             this.tpMainMediaInfo.UseVisualStyleBackColor = true;
@@ -822,7 +823,7 @@
             this.txtMediaInfo.Name = "txtMediaInfo";
             this.txtMediaInfo.ReadOnly = true;
             this.txtMediaInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtMediaInfo.Size = new System.Drawing.Size(746, 451);
+            this.txtMediaInfo.Size = new System.Drawing.Size(746, 433);
             this.txtMediaInfo.TabIndex = 0;
             this.txtMediaInfo.WordWrap = false;
             // 
@@ -837,7 +838,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(752, 457);
+            this.tabPage2.Size = new System.Drawing.Size(752, 439);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Screenshots";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -857,9 +858,9 @@
             this.pbScreenshot.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbScreenshot.Location = new System.Drawing.Point(20, 368);
+            this.pbScreenshot.Location = new System.Drawing.Point(20, 369);
             this.pbScreenshot.Name = "pbScreenshot";
-            this.pbScreenshot.Size = new System.Drawing.Size(724, 70);
+            this.pbScreenshot.Size = new System.Drawing.Size(724, 52);
             this.pbScreenshot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbScreenshot.TabIndex = 12;
             this.pbScreenshot.TabStop = false;
@@ -899,7 +900,7 @@
             this.tpMainPublish.Location = new System.Drawing.Point(4, 22);
             this.tpMainPublish.Name = "tpMainPublish";
             this.tpMainPublish.Padding = new System.Windows.Forms.Padding(3);
-            this.tpMainPublish.Size = new System.Drawing.Size(752, 457);
+            this.tpMainPublish.Size = new System.Drawing.Size(752, 439);
             this.tpMainPublish.TabIndex = 2;
             this.tpMainPublish.Text = "Publish";
             this.tpMainPublish.UseVisualStyleBackColor = true;
@@ -915,7 +916,7 @@
             this.gbQuickPublish.Dock = System.Windows.Forms.DockStyle.Right;
             this.gbQuickPublish.Location = new System.Drawing.Point(598, 3);
             this.gbQuickPublish.Name = "gbQuickPublish";
-            this.gbQuickPublish.Size = new System.Drawing.Size(151, 451);
+            this.gbQuickPublish.Size = new System.Drawing.Size(151, 433);
             this.gbQuickPublish.TabIndex = 1;
             this.gbQuickPublish.TabStop = false;
             this.gbQuickPublish.Text = "Options";
@@ -998,7 +999,7 @@
             this.txtPublish.Multiline = true;
             this.txtPublish.Name = "txtPublish";
             this.txtPublish.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtPublish.Size = new System.Drawing.Size(597, 455);
+            this.txtPublish.Size = new System.Drawing.Size(597, 437);
             this.txtPublish.TabIndex = 0;
             this.txtPublish.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPublish_KeyPress);
             // 
@@ -1007,7 +1008,7 @@
             this.tabPage4.Controls.Add(this.tcOptions);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(752, 457);
+            this.tabPage4.Size = new System.Drawing.Size(752, 449);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Options";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -1022,7 +1023,7 @@
             this.tcOptions.Location = new System.Drawing.Point(0, 0);
             this.tcOptions.Name = "tcOptions";
             this.tcOptions.SelectedIndex = 0;
-            this.tcOptions.Size = new System.Drawing.Size(752, 457);
+            this.tcOptions.Size = new System.Drawing.Size(752, 449);
             this.tcOptions.TabIndex = 11;
             // 
             // tpGeneral
@@ -1032,7 +1033,7 @@
             this.tpGeneral.Location = new System.Drawing.Point(4, 22);
             this.tpGeneral.Name = "tpGeneral";
             this.tpGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tpGeneral.Size = new System.Drawing.Size(744, 431);
+            this.tpGeneral.Size = new System.Drawing.Size(744, 423);
             this.tpGeneral.TabIndex = 3;
             this.tpGeneral.Text = "General";
             this.tpGeneral.UseVisualStyleBackColor = true;
@@ -1074,7 +1075,7 @@
             this.tpPublish.Location = new System.Drawing.Point(4, 22);
             this.tpPublish.Name = "tpPublish";
             this.tpPublish.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPublish.Size = new System.Drawing.Size(744, 431);
+            this.tpPublish.Size = new System.Drawing.Size(744, 423);
             this.tpPublish.TabIndex = 2;
             this.tpPublish.Text = "Publish Templates";
             this.tpPublish.UseVisualStyleBackColor = true;
@@ -1304,7 +1305,7 @@
             this.tpScreenshots.Location = new System.Drawing.Point(4, 22);
             this.tpScreenshots.Name = "tpScreenshots";
             this.tpScreenshots.Padding = new System.Windows.Forms.Padding(3);
-            this.tpScreenshots.Size = new System.Drawing.Size(744, 431);
+            this.tpScreenshots.Size = new System.Drawing.Size(744, 423);
             this.tpScreenshots.TabIndex = 0;
             this.tpScreenshots.Text = "Movie Thumbnailer";
             this.tpScreenshots.UseVisualStyleBackColor = true;
@@ -1317,7 +1318,7 @@
             this.tcHosting.Location = new System.Drawing.Point(3, 3);
             this.tcHosting.Name = "tcHosting";
             this.tcHosting.SelectedIndex = 0;
-            this.tcHosting.Size = new System.Drawing.Size(738, 425);
+            this.tcHosting.Size = new System.Drawing.Size(738, 417);
             this.tcHosting.TabIndex = 5;
             // 
             // tpMTNUsage
@@ -1326,7 +1327,7 @@
             this.tpMTNUsage.Location = new System.Drawing.Point(4, 22);
             this.tpMTNUsage.Name = "tpMTNUsage";
             this.tpMTNUsage.Padding = new System.Windows.Forms.Padding(3);
-            this.tpMTNUsage.Size = new System.Drawing.Size(730, 399);
+            this.tpMTNUsage.Size = new System.Drawing.Size(730, 391);
             this.tpMTNUsage.TabIndex = 1;
             this.tpMTNUsage.Text = "Usage (Beta)";
             this.tpMTNUsage.UseVisualStyleBackColor = true;
@@ -1371,7 +1372,7 @@
             this.pMTNUsage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pMTNUsage.Location = new System.Drawing.Point(3, 3);
             this.pMTNUsage.Name = "pMTNUsage";
-            this.pMTNUsage.Size = new System.Drawing.Size(724, 393);
+            this.pMTNUsage.Size = new System.Drawing.Size(724, 385);
             this.pMTNUsage.TabIndex = 14;
             // 
             // nudMTN_B_OmitStart
@@ -1484,7 +1485,7 @@
             // chkMTN_v_Verbose
             // 
             this.chkMTN_v_Verbose.AutoSize = true;
-            this.chkMTN_v_Verbose.Location = new System.Drawing.Point(22, 309);
+            this.chkMTN_v_Verbose.Location = new System.Drawing.Point(22, 301);
             this.chkMTN_v_Verbose.Name = "chkMTN_v_Verbose";
             this.chkMTN_v_Verbose.Size = new System.Drawing.Size(95, 17);
             this.chkMTN_v_Verbose.TabIndex = 44;
@@ -1830,7 +1831,7 @@
             this.chkMTN_P_QuitAfterDone.Checked = global::TDMaker.ScreenshotSettings.Default.P_QuitAfterDone;
             this.chkMTN_P_QuitAfterDone.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkMTN_P_QuitAfterDone.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.ScreenshotSettings.Default, "P_QuitAfterDone", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkMTN_P_QuitAfterDone.Location = new System.Drawing.Point(22, 355);
+            this.chkMTN_P_QuitAfterDone.Location = new System.Drawing.Point(22, 347);
             this.chkMTN_P_QuitAfterDone.Name = "chkMTN_P_QuitAfterDone";
             this.chkMTN_P_QuitAfterDone.Size = new System.Drawing.Size(96, 17);
             this.chkMTN_P_QuitAfterDone.TabIndex = 20;
@@ -1875,7 +1876,7 @@
             this.chkShowMTN.AutoSize = true;
             this.chkShowMTN.Checked = global::TDMaker.Properties.Settings.Default.ShowMTNWindow;
             this.chkShowMTN.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "ShowMTNWindow", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkShowMTN.Location = new System.Drawing.Point(22, 332);
+            this.chkShowMTN.Location = new System.Drawing.Point(22, 324);
             this.chkShowMTN.Name = "chkShowMTN";
             this.chkShowMTN.Size = new System.Drawing.Size(122, 17);
             this.chkShowMTN.TabIndex = 11;
@@ -1927,7 +1928,7 @@
             this.tpHostingImageShack.Location = new System.Drawing.Point(4, 22);
             this.tpHostingImageShack.Name = "tpHostingImageShack";
             this.tpHostingImageShack.Padding = new System.Windows.Forms.Padding(3);
-            this.tpHostingImageShack.Size = new System.Drawing.Size(730, 399);
+            this.tpHostingImageShack.Size = new System.Drawing.Size(730, 391);
             this.tpHostingImageShack.TabIndex = 0;
             this.tpHostingImageShack.Text = "ImageShack";
             this.tpHostingImageShack.UseVisualStyleBackColor = true;
@@ -1995,7 +1996,7 @@
             this.tpTorrents.Location = new System.Drawing.Point(4, 22);
             this.tpTorrents.Name = "tpTorrents";
             this.tpTorrents.Padding = new System.Windows.Forms.Padding(3);
-            this.tpTorrents.Size = new System.Drawing.Size(744, 431);
+            this.tpTorrents.Size = new System.Drawing.Size(744, 423);
             this.tpTorrents.TabIndex = 1;
             this.tpTorrents.Text = "Torrent Creator";
             this.tpTorrents.UseVisualStyleBackColor = true;
@@ -2116,36 +2117,36 @@
             // 
             this.dgvTrackers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTrackers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle28.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle28.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle28.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTrackers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle28;
             this.dgvTrackers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTrackers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colName,
             this.colAnnounceURL});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvTrackers.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle29.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle29.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle29.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle29.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle29.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvTrackers.DefaultCellStyle = dataGridViewCellStyle29;
             this.dgvTrackers.Location = new System.Drawing.Point(6, 19);
             this.dgvTrackers.Name = "dgvTrackers";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTrackers.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle30.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle30.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTrackers.RowHeadersDefaultCellStyle = dataGridViewCellStyle30;
             this.dgvTrackers.Size = new System.Drawing.Size(693, 148);
             this.dgvTrackers.TabIndex = 1;
             this.dgvTrackers.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvTrackers_CellValidating);
@@ -2194,7 +2195,7 @@
             this.tpPaths.Location = new System.Drawing.Point(4, 22);
             this.tpPaths.Name = "tpPaths";
             this.tpPaths.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPaths.Size = new System.Drawing.Size(752, 457);
+            this.tpPaths.Size = new System.Drawing.Size(752, 439);
             this.tpPaths.TabIndex = 5;
             this.tpPaths.Text = "Paths";
             this.tpPaths.UseVisualStyleBackColor = true;
@@ -2233,7 +2234,7 @@
             this.btnPublish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPublish.AutoSize = true;
             this.btnPublish.Enabled = false;
-            this.btnPublish.Location = new System.Drawing.Point(604, 516);
+            this.btnPublish.Location = new System.Drawing.Point(616, 514);
             this.btnPublish.Name = "btnPublish";
             this.btnPublish.Size = new System.Drawing.Size(106, 23);
             this.btnPublish.TabIndex = 5;
@@ -2247,7 +2248,7 @@
             this.btnAnalyze.AutoSize = true;
             this.btnAnalyze.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnAnalyze.Enabled = false;
-            this.btnAnalyze.Location = new System.Drawing.Point(28, 516);
+            this.btnAnalyze.Location = new System.Drawing.Point(28, 513);
             this.btnAnalyze.Name = "btnAnalyze";
             this.btnAnalyze.Size = new System.Drawing.Size(104, 23);
             this.btnAnalyze.TabIndex = 9;
@@ -2282,40 +2283,40 @@
             // tsmScreenshots
             // 
             this.tsmScreenshots.Name = "tsmScreenshots";
-            this.tsmScreenshots.Size = new System.Drawing.Size(145, 22);
+            this.tsmScreenshots.Size = new System.Drawing.Size(152, 22);
             this.tsmScreenshots.Text = "&Screenshots...";
             this.tsmScreenshots.Click += new System.EventHandler(this.tsmScreenshots_Click);
             // 
             // tsmTorrentsDir
             // 
             this.tsmTorrentsDir.Name = "tsmTorrentsDir";
-            this.tsmTorrentsDir.Size = new System.Drawing.Size(145, 22);
+            this.tsmTorrentsDir.Size = new System.Drawing.Size(152, 22);
             this.tsmTorrentsDir.Text = "&Torrents...";
             this.tsmTorrentsDir.Click += new System.EventHandler(this.tsmTorrentsDir_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(142, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // tsmLogsDir
             // 
             this.tsmLogsDir.Name = "tsmLogsDir";
-            this.tsmLogsDir.Size = new System.Drawing.Size(145, 22);
+            this.tsmLogsDir.Size = new System.Drawing.Size(152, 22);
             this.tsmLogsDir.Text = "&Logs...";
             this.tsmLogsDir.Click += new System.EventHandler(this.tsmLogsDir_Click);
             // 
             // tsmSettingsDir
             // 
             this.tsmSettingsDir.Name = "tsmSettingsDir";
-            this.tsmSettingsDir.Size = new System.Drawing.Size(145, 22);
+            this.tsmSettingsDir.Size = new System.Drawing.Size(152, 22);
             this.tsmSettingsDir.Text = "&Settings...";
             this.tsmSettingsDir.Click += new System.EventHandler(this.tsmSettingsDir_Click);
             // 
             // tsmTemplates
             // 
             this.tsmTemplates.Name = "tsmTemplates";
-            this.tsmTemplates.Size = new System.Drawing.Size(145, 22);
+            this.tsmTemplates.Size = new System.Drawing.Size(152, 22);
             this.tsmTemplates.Text = "Templates...";
             this.tsmTemplates.Click += new System.EventHandler(this.tsmTemplates_Click);
             // 
@@ -2350,7 +2351,7 @@
             this.btnCreateTorrent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCreateTorrent.AutoSize = true;
             this.btnCreateTorrent.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnCreateTorrent.Location = new System.Drawing.Point(138, 516);
+            this.btnCreateTorrent.Location = new System.Drawing.Point(138, 513);
             this.btnCreateTorrent.Name = "btnCreateTorrent";
             this.btnCreateTorrent.Size = new System.Drawing.Size(85, 23);
             this.btnCreateTorrent.TabIndex = 10;
@@ -2361,19 +2362,18 @@
             // pbLogo
             // 
             this.pbLogo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pbLogo.Location = new System.Drawing.Point(242, 497);
+            this.pbLogo.Location = new System.Drawing.Point(242, 510);
             this.pbLogo.Name = "pbLogo";
-            this.pbLogo.Size = new System.Drawing.Size(356, 40);
+            this.pbLogo.Size = new System.Drawing.Size(356, 29);
             this.pbLogo.TabIndex = 11;
             this.pbLogo.TabStop = false;
-            this.pbLogo.Visible = false;
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
-            this.toolsToolStripMenuItem,
+            this.foldersToolStripMenuItem1,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -2384,42 +2384,32 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripMenuItem,
-            this.openToolStripMenuItem,
+            this.miFileOpenFile,
+            this.miFileOpenFolder,
             this.toolStripSeparator,
             this.miFileSaveTorrent,
             this.miFileSaveInfoAs,
             this.toolStripSeparator3,
-            this.printToolStripMenuItem,
-            this.printPreviewToolStripMenuItem,
-            this.toolStripSeparator4,
             this.miFileExit});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
-            // newToolStripMenuItem
+            // miFileOpenFolder
             // 
-            this.newToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripMenuItem.Image")));
-            this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.newToolStripMenuItem.Text = "&New";
-            // 
-            // openToolStripMenuItem
-            // 
-            this.openToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripMenuItem.Image")));
-            this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.openToolStripMenuItem.Text = "&Open";
+            this.miFileOpenFolder.Image = ((System.Drawing.Image)(resources.GetObject("miFileOpenFolder.Image")));
+            this.miFileOpenFolder.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.miFileOpenFolder.Name = "miFileOpenFolder";
+            this.miFileOpenFolder.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+                        | System.Windows.Forms.Keys.O)));
+            this.miFileOpenFolder.Size = new System.Drawing.Size(215, 22);
+            this.miFileOpenFolder.Text = "&Open Folder...";
+            this.miFileOpenFolder.Click += new System.EventHandler(this.miFileOpenFolder_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(181, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(212, 6);
             // 
             // miFileSaveTorrent
             // 
@@ -2427,108 +2417,42 @@
             this.miFileSaveTorrent.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.miFileSaveTorrent.Name = "miFileSaveTorrent";
             this.miFileSaveTorrent.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.miFileSaveTorrent.Size = new System.Drawing.Size(184, 22);
+            this.miFileSaveTorrent.Size = new System.Drawing.Size(215, 22);
             this.miFileSaveTorrent.Text = "&Save Torrent";
             this.miFileSaveTorrent.Click += new System.EventHandler(this.miFileSaveTorrent_Click);
             // 
             // miFileSaveInfoAs
             // 
             this.miFileSaveInfoAs.Name = "miFileSaveInfoAs";
-            this.miFileSaveInfoAs.Size = new System.Drawing.Size(184, 22);
+            this.miFileSaveInfoAs.Size = new System.Drawing.Size(215, 22);
             this.miFileSaveInfoAs.Text = "&Save Publish Info As...";
             this.miFileSaveInfoAs.Click += new System.EventHandler(this.miFileSaveInfoAs_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(181, 6);
-            // 
-            // printToolStripMenuItem
-            // 
-            this.printToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripMenuItem.Image")));
-            this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.printToolStripMenuItem.Text = "&Print";
-            this.printToolStripMenuItem.Visible = false;
-            // 
-            // printPreviewToolStripMenuItem
-            // 
-            this.printPreviewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripMenuItem.Image")));
-            this.printPreviewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
-            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.printPreviewToolStripMenuItem.Text = "Print Pre&view";
-            this.printPreviewToolStripMenuItem.Visible = false;
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(181, 6);
-            this.toolStripSeparator4.Visible = false;
+            this.toolStripSeparator3.Size = new System.Drawing.Size(212, 6);
             // 
             // miFileExit
             // 
             this.miFileExit.Name = "miFileExit";
-            this.miFileExit.Size = new System.Drawing.Size(184, 22);
+            this.miFileExit.Size = new System.Drawing.Size(215, 22);
             this.miFileExit.Text = "E&xit";
             this.miFileExit.Click += new System.EventHandler(this.miFileExit_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copyToolStripMenuItem,
-            this.toolStripSeparator6,
-            this.selectAllToolStripMenuItem});
+            this.miEditCopy});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.editToolStripMenuItem.Text = "&Edit";
             // 
-            // copyToolStripMenuItem
-            // 
-            this.copyToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripMenuItem.Image")));
-            this.copyToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
-            this.copyToolStripMenuItem.Text = "&Copy";
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(135, 6);
-            // 
-            // selectAllToolStripMenuItem
-            // 
-            this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
-            this.selectAllToolStripMenuItem.Text = "Select &All";
-            // 
-            // toolsToolStripMenuItem
-            // 
-            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.customizeToolStripMenuItem,
-            this.optionsToolStripMenuItem});
-            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.toolsToolStripMenuItem.Text = "&Tools";
-            // 
-            // customizeToolStripMenuItem
-            // 
-            this.customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
-            this.customizeToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.customizeToolStripMenuItem.Text = "&Customize";
-            // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.optionsToolStripMenuItem.Text = "&Options";
-            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miHelpCheckUpdates,
+            this.miHelpVersionHistory,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
@@ -2537,9 +2461,105 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.aboutToolStripMenuItem.Text = "&About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // miFileOpenFile
+            // 
+            this.miFileOpenFile.Image = ((System.Drawing.Image)(resources.GetObject("miFileOpenFile.Image")));
+            this.miFileOpenFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.miFileOpenFile.Name = "miFileOpenFile";
+            this.miFileOpenFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.miFileOpenFile.Size = new System.Drawing.Size(215, 22);
+            this.miFileOpenFile.Text = "&Open File...";
+            this.miFileOpenFile.Click += new System.EventHandler(this.miFileOpenFile_Click);
+            // 
+            // miEditCopy
+            // 
+            this.miEditCopy.Image = ((System.Drawing.Image)(resources.GetObject("miEditCopy.Image")));
+            this.miEditCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.miEditCopy.Name = "miEditCopy";
+            this.miEditCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.miEditCopy.Size = new System.Drawing.Size(152, 22);
+            this.miEditCopy.Text = "&Copy";
+            this.miEditCopy.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
+            // 
+            // miHelpCheckUpdates
+            // 
+            this.miHelpCheckUpdates.Name = "miHelpCheckUpdates";
+            this.miHelpCheckUpdates.Size = new System.Drawing.Size(175, 22);
+            this.miHelpCheckUpdates.Text = "&Check for Updates...";
+            this.miHelpCheckUpdates.Click += new System.EventHandler(this.miHelpCheckUpdates_Click);
+            // 
+            // miHelpVersionHistory
+            // 
+            this.miHelpVersionHistory.Name = "miHelpVersionHistory";
+            this.miHelpVersionHistory.Size = new System.Drawing.Size(175, 22);
+            this.miHelpVersionHistory.Text = "&Version History...";
+            this.miHelpVersionHistory.Click += new System.EventHandler(this.miHelpVersionHistory_Click);
+            // 
+            // foldersToolStripMenuItem1
+            // 
+            this.foldersToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miFoldersScreenshots,
+            this.miFoldersTorrents,
+            this.toolStripSeparator4,
+            this.miFoldersLogs,
+            this.miFoldersSettings,
+            this.miFoldersTemplates});
+            this.foldersToolStripMenuItem1.Name = "foldersToolStripMenuItem1";
+            this.foldersToolStripMenuItem1.Size = new System.Drawing.Size(54, 20);
+            this.foldersToolStripMenuItem1.Text = "&Folders";
+            // 
+            // miFoldersLogs
+            // 
+            this.miFoldersLogs.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miFoldersLogsDebug});
+            this.miFoldersLogs.Name = "miFoldersLogs";
+            this.miFoldersLogs.Size = new System.Drawing.Size(152, 22);
+            this.miFoldersLogs.Text = "&Logs...";
+            this.miFoldersLogs.Click += new System.EventHandler(this.miFoldersLogs_Click);
+            // 
+            // miFoldersSettings
+            // 
+            this.miFoldersSettings.Name = "miFoldersSettings";
+            this.miFoldersSettings.Size = new System.Drawing.Size(152, 22);
+            this.miFoldersSettings.Text = "&Settings...";
+            this.miFoldersSettings.Click += new System.EventHandler(this.miFoldersSettings_Click);
+            // 
+            // miFoldersTemplates
+            // 
+            this.miFoldersTemplates.Name = "miFoldersTemplates";
+            this.miFoldersTemplates.Size = new System.Drawing.Size(152, 22);
+            this.miFoldersTemplates.Text = "&Templates...";
+            this.miFoldersTemplates.Click += new System.EventHandler(this.miFoldersTemplates_Click);
+            // 
+            // miFoldersTorrents
+            // 
+            this.miFoldersTorrents.Name = "miFoldersTorrents";
+            this.miFoldersTorrents.Size = new System.Drawing.Size(152, 22);
+            this.miFoldersTorrents.Text = "&Torrents...";
+            this.miFoldersTorrents.Click += new System.EventHandler(this.miFoldersTorrents_Click);
+            // 
+            // miFoldersScreenshots
+            // 
+            this.miFoldersScreenshots.Name = "miFoldersScreenshots";
+            this.miFoldersScreenshots.Size = new System.Drawing.Size(152, 22);
+            this.miFoldersScreenshots.Text = "&Screenshots...";
+            this.miFoldersScreenshots.Click += new System.EventHandler(this.miFoldersScreenshots_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(149, 6);
+            // 
+            // miFoldersLogsDebug
+            // 
+            this.miFoldersLogsDebug.Name = "miFoldersLogsDebug";
+            this.miFoldersLogsDebug.Size = new System.Drawing.Size(152, 22);
+            this.miFoldersLogsDebug.Text = "&Debug...";
+            this.miFoldersLogsDebug.Click += new System.EventHandler(this.miFoldersLogsDebug_Click);
             // 
             // frmMain
             // 
@@ -2554,8 +2574,8 @@
             this.Controls.Add(this.btnCreateTorrent);
             this.Controls.Add(this.btnAnalyze);
             this.Controls.Add(this.pbLogo);
-            this.Controls.Add(this.btnPublish);
             this.Controls.Add(this.tcMain);
+            this.Controls.Add(this.btnPublish);
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "frmMain";
@@ -2825,25 +2845,27 @@
         private System.Windows.Forms.RadioButton rbTInt;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem miFileOpenFolder;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
         private System.Windows.Forms.ToolStripMenuItem miFileSaveTorrent;
         private System.Windows.Forms.ToolStripMenuItem miFileSaveInfoAs;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem printPreviewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem miFileExit;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem customizeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem miFileOpenFile;
+        private System.Windows.Forms.ToolStripMenuItem miEditCopy;
+        private System.Windows.Forms.ToolStripMenuItem miHelpCheckUpdates;
+        private System.Windows.Forms.ToolStripMenuItem miHelpVersionHistory;
+        private System.Windows.Forms.ToolStripMenuItem foldersToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem miFoldersScreenshots;
+        private System.Windows.Forms.ToolStripMenuItem miFoldersTorrents;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem miFoldersLogs;
+        private System.Windows.Forms.ToolStripMenuItem miFoldersLogsDebug;
+        private System.Windows.Forms.ToolStripMenuItem miFoldersSettings;
+        private System.Windows.Forms.ToolStripMenuItem miFoldersTemplates;
     }
 }
 

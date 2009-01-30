@@ -74,6 +74,7 @@
       <DependentUpon>TextViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Enums.cs" />
+    <Compile Include="Helpers\FileSystem.cs" />
     <Compile Include="Helpers\Options.cs" />
     <Compile Include="Helpers\TDMakerOptions.cs" />
     <Compile Include="Helpers\XsToUploader.cs" />
