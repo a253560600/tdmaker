@@ -138,8 +138,9 @@ namespace TorrentDescriptionMaker
             int retry = 0;
             XsToUploader xs = new XsToUploader();
             while (retry <= 3 && lstScreenshots == null ||
-               (++retry <= 3 && lstScreenshots != null && lstScreenshots.Count < 1))
+               (retry <= 3 && lstScreenshots != null && lstScreenshots.Count < 1))
             {
+                retry++;
                 if (retry > 1)
                     Thread.Sleep(2000);
                 mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploading {0} to {1}... Attempt {2}", Path.GetFileName(screenshot), xs.Name, retry));
