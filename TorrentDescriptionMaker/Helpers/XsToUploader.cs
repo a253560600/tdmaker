@@ -49,7 +49,10 @@ namespace ZSS.ImageUploader
                 string imgLink = Regex.Match(imgSource, "(?<=value=\").+(?=\"><)").Value;
 
                 fullimage = imgLink;
-                thumbnail = imgLink + ".xs.jpg";
+                if (!string.IsNullOrEmpty(fullimage))
+                {
+                    thumbnail = imgLink + ".xs.jpg";
+                }
 
                 if (string.IsNullOrEmpty(fullimage))
                 {
@@ -66,8 +69,9 @@ namespace ZSS.ImageUploader
             }
 
             imgStream.Dispose();
-            imageFiles.Add(new ImageFile(fullimage, ImageFile.ImageType.FULLIMAGE));
-            imageFiles.Add(new ImageFile(thumbnail, ImageFile.ImageType.THUMBNAIL));
+
+            if (!string.IsNullOrEmpty(fullimage)) imageFiles.Add(new ImageFile(fullimage, ImageFile.ImageType.FULLIMAGE));
+            if (!string.IsNullOrEmpty(thumbnail)) imageFiles.Add(new ImageFile(thumbnail, ImageFile.ImageType.THUMBNAIL));
 
             return imageFiles;
         }

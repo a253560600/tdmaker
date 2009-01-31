@@ -61,7 +61,7 @@ namespace TorrentDescriptionMaker
 
                 Console.WriteLine("MTN Path: " + assemblyMTN);
                 Console.WriteLine("MTN Args: " + args);
-         
+
                 psi.WindowStyle = (Settings.Default.ShowMTNWindow ? ProcessWindowStyle.Normal : ProcessWindowStyle.Hidden);
                 Console.WriteLine("MTN Window: " + psi.WindowStyle.ToString());
                 psi.Arguments = args;
@@ -96,80 +96,10 @@ namespace TorrentDescriptionMaker
 
         }
 
-        private List<ImageFile> UploadImageShack(string screenshot, bool linq)
+       private void UploadScreenshot(String mediaFilePath)
         {
-            List<ZSS.ImageUploader.ImageFile> lstScreenshots = new List<ImageFile>();
-            int retry = 0;
-            ImageShackUploader su = new ImageShackUploader();
-
-            if (linq)
-            {
-                su.DeveloperKey = "16BCFGWY58707bec94f7b0a773d0aa8bbf301900";
-                if (Settings.Default.UseImageShackRegCode && !string.IsNullOrEmpty(Settings.Default.ImageShackRegCode))
-                {
-                    su.RegistrationCode = Settings.Default.ImageShackRegCode;
-                }
-                su.Public = false;
-                su.RandomizeFileName = Settings.Default.ImageShakeRandomizeFileName;
-            }
-
-            while (retry <= 3 && lstScreenshots == null ||
-               (++retry <= 3 && lstScreenshots != null && lstScreenshots.Count < 1))
-            {
-                if (retry > 1)
-                    Thread.Sleep(1000);
-                mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploading {0} to ImageShack... Attempt {1}", Path.GetFileName(screenshot), retry));
-                if (linq)
-                {
-                    lstScreenshots = su.UploadImage(screenshot);
-                }
-                else
-                {
-                    lstScreenshots = su.UploadImageLegacy(screenshot);
-                }
-            }
-            return lstScreenshots;
-
-        }
-
-        private List<ImageFile> UploadXsTo(string screenshot)
-        {
-            List<ZSS.ImageUploader.ImageFile> lstScreenshots = new List<ImageFile>();
-            int retry = 0;
-            XsToUploader xs = new XsToUploader();
-            while (retry <= 3 && lstScreenshots == null ||
-               (retry <= 3 && lstScreenshots != null && lstScreenshots.Count < 1))
-            {
-                retry++;
-                if (retry > 1)
-                    Thread.Sleep(2000);
-                mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploading {0} to {1}... Attempt {2}", Path.GetFileName(screenshot), xs.Name, retry));
-                lstScreenshots = xs.UploadImage(screenshot);
-            }
-            return lstScreenshots;
-        }
-
-
-        private List<ImageFile> UploadTinyPic(string screenshot)
-        {
-            List<ZSS.ImageUploader.ImageFile> lstScreenshots = new List<ImageFile>();
-            int retry = 0;
-            TinyPicUploader tpu = new TinyPicUploader("e2aabb8d555322fa", "00a68ed73ddd54da52dc2d5803fa35ee");
-            while (retry <= 3 && lstScreenshots == null ||
-               (++retry <= 3 && lstScreenshots != null && lstScreenshots.Count < 1))
-            {
-                if (retry > 1)
-                    Thread.Sleep(2000);
-                mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploading {0} to {1}... Attempt {2}", Path.GetFileName(screenshot), tpu.Name, retry));
-                lstScreenshots = tpu.UploadImage(screenshot);
-            }
-            return lstScreenshots;
-        }
-
-        private void UploadScreenshot(String mediaFilePath)
-        {
-
             string screenshot = Path.Combine(Program.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + MyMedia.Screenshot.Settings.o_OutputSuffix);
+            HTTPUploader imageUploader = null;
 
             if (File.Exists(screenshot))
             {
@@ -178,17 +108,31 @@ namespace TorrentDescriptionMaker
                 switch ((ScreenshotDestType)Settings.Default.ScreenshotDestIndex)
                 {
                     case ScreenshotDestType.IMAGESHACK:
-                        lstScreenshots = UploadImageShack(screenshot, true);
+                        imageUploader = new ImageShackUploader("16BCFGWY58707bec94f7b0a773d0aa8bbf301900", Settings.Default.ImageShackRegCode, UploadMode.API);
+                        ((ImageShackUploader)imageUploader).RandomizeFileName = Settings.Default.ImageShakeRandomizeFileName;
                         break;
                     case ScreenshotDestType.TINYPIC:
-                        lstScreenshots = UploadTinyPic(screenshot);
+                        imageUploader = new TinyPicUploader("e2aabb8d555322fa", "00a68ed73ddd54da52dc2d5803fa35ee");
                         break;
                     case ScreenshotDestType.IMAGESHACK_LEGACY_METHOD:
-                        lstScreenshots = UploadImageShack(screenshot, false);
+                        imageUploader = new ImageShackUploader();
                         break;
                     case ScreenshotDestType.XSTO:
-                        lstScreenshots = UploadXsTo(screenshot);
+                        imageUploader = new XsToUploader();
                         break;
+                }
+
+                if (imageUploader != null)
+                {
+                    int retry = 0;
+                    while (retry <= 3 && lstScreenshots == null || (retry <= 3 && lstScreenshots != null && lstScreenshots.Count < 1))
+                    {
+                        retry++;
+                        if (retry > 1)
+                            Thread.Sleep(2000);
+                        mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploading {0} to {1}... Attempt {2}", Path.GetFileName(screenshot), imageUploader.Name, retry));
+                        lstScreenshots = imageUploader.UploadImage(screenshot);                      
+                    }
                 }
 
                 if (lstScreenshots != null && lstScreenshots.Count > 0)
