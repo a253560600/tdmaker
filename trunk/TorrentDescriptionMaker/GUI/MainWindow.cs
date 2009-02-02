@@ -81,7 +81,6 @@ namespace TorrentDescriptionMaker
             {
                 if (File.Exists(p) || Directory.Exists(p))
                 {
-                    // txtMediaLocation.Text = p;
                     Program.AppendDebug(string.Format("Queued {0} to create a torrent", p));
                     lbFiles.Items.Add(p);
                     TorrentPacket tp = new TorrentPacket(GetTracker(), p);
@@ -323,7 +322,7 @@ namespace TorrentDescriptionMaker
 
         }
 
-        private void MainWindow_Shown(object sender, EventArgs e)
+        private void ConfigureMTN()
         {
             string mtnExe = (Program.IsUNIX ? "mtn" : "mtn.exe");
 
@@ -349,6 +348,11 @@ namespace TorrentDescriptionMaker
                     Settings.Default.MTNPath = dlg.FileName;
                 }
             }
+        }
+
+        private void MainWindow_Shown(object sender, EventArgs e)
+        {
+            this.ConfigureMTN();
         }
 
         private void SettingsWrite()
@@ -405,14 +409,8 @@ namespace TorrentDescriptionMaker
             Program.ClearScreenshots();
         }
 
-        private void MainWindow_Load(object sender, EventArgs e)
+        private void ConfigureLogo()
         {
-
-            ConfigureDirs();
-            // ConfigureGUIForUnix();
-            SettingsRead();
-
-
             // Logo
             string logo1 = Path.Combine(Application.StartupPath, "logo1.png");
             if (!File.Exists(logo1))
@@ -443,6 +441,16 @@ namespace TorrentDescriptionMaker
                 this.BackColor = System.Drawing.SystemColors.ControlDark;
             }
 
+        }
+
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
+
+            ConfigureDirs();
+            // ConfigureGUIForUnix();
+            SettingsRead();
+            ConfigureLogo();
+
             sBar.Text = string.Format("Ready.");
 
             this.Text = Program.gAppInfo.GetApplicationTitle(Application.ProductName, Application.ProductVersion,
@@ -461,6 +469,7 @@ namespace TorrentDescriptionMaker
             if (args.Length > 1)
             {
                 // we process the args
+
                 lbStatus.Items.Add(Environment.CommandLine);
             }
 
@@ -1205,7 +1214,7 @@ namespace TorrentDescriptionMaker
 
         private void tsmTemplates_Click(object sender, EventArgs e)
         {
-           FileSystem.OpenDirTemplates();
+            FileSystem.OpenDirTemplates();
         }
 
         private void CheckUpdates()
