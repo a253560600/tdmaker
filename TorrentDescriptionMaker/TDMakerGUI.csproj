@@ -72,7 +72,7 @@
     <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Helpers\FileSystem.cs" />
     <Compile Include="Helpers\Options.cs" />
-    <Compile Include="Helpers\TDMakerOptions.cs" />
+    <Compile Include="Helpers\TDMakerCLI.cs" />
     <Compile Include="Helpers\XsToUploader.cs" />
     <Compile Include="MediaInfo\MediaFile.cs" />
     <Compile Include="MediaInfo\NfoReport.cs" />
@@ -181,6 +181,10 @@
     <EmbeddedResource Include="VersionHistory.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\iTSfv\trunk\lib\CommandLineParser\CommandLineParser.vbproj">
+      <Project>{0750FD5C-105A-474E-AB36-CA98DC1FA2E4}</Project>
+      <Name>CommandLineParser</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\ZScreen\ImageUploader\ImageUploader\ImageUploader.csproj">
       <Project>{223EC461-C070-4FF3-ADE7-92BC21AE66FC}</Project>
       <Name>ImageUploader</Name>
