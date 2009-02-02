@@ -1,5 +1,4 @@
-﻿Finalize Menu System 
-Logo PictureBox is disabled until figured out where the best place is to put
+﻿Logo PictureBox is disabled until figured out where the best place is to put
 Reorganize Code to isoloate methods from MainWindow.cs
 If Audio Format contains WMA and Description is not null then use Description of the codec
 Cancel Button to abort BackgroundWorker

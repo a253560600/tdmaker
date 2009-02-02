@@ -51,7 +51,7 @@ namespace TorrentDescriptionMaker
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new frmMain());
+                Application.Run(new MainWindow());
             }
         }
 
@@ -316,7 +316,7 @@ namespace TorrentDescriptionMaker
             }
             catch (Exception ex)
             {
-                // msAppendWarnings(ex.Message);
+                Console.WriteLine(ex.Message);
             }
         }
 

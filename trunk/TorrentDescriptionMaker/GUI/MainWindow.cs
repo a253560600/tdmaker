@@ -14,7 +14,7 @@ using TDMaker.Helpers;
 
 namespace TorrentDescriptionMaker
 {
-    public partial class frmMain : Form
+    public partial class MainWindow : Form
     {
         private TrackerManager mTrackerManager = null;
         /// <summary>
@@ -22,12 +22,12 @@ namespace TorrentDescriptionMaker
         /// </summary>
         private TorrentInfo mTorrentInfo = null;
 
-        public frmMain()
+        public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void frmMain_DragEnter(object sender, DragEventArgs e)
+        private void MainWindow_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
@@ -39,7 +39,7 @@ namespace TorrentDescriptionMaker
             }
         }
 
-        private void frmMain_DragDrop(object sender, DragEventArgs e)
+        private void MainWindow_DragDrop(object sender, DragEventArgs e)
         {
 
             string[] paths = (string[])e.Data.GetData(DataFormats.FileDrop, true);
@@ -84,7 +84,7 @@ namespace TorrentDescriptionMaker
                     // txtMediaLocation.Text = p;
                     Program.AppendDebug(string.Format("Queued {0} to create a torrent", p));
                     lbFiles.Items.Add(p);
-                    TorrentPacket tp = new TorrentPacket(getTracker(), p);
+                    TorrentPacket tp = new TorrentPacket(GetTracker(), p);
                     tps.Add(tp);
 
                     UpdateGuiControls();
@@ -139,7 +139,7 @@ namespace TorrentDescriptionMaker
             mi.Menu = cboDiscMenu.Text;
             mi.Authoring = cboAuthoring.Text;
             mi.WebLink = txtWebLink.Text;
-            mi.TorrentPacketInfo = new TorrentPacket(getTracker(), p);
+            mi.TorrentPacketInfo = new TorrentPacket(GetTracker(), p);
 
             if (Settings.Default.TemplatesMode)
             {
@@ -1045,7 +1045,7 @@ namespace TorrentDescriptionMaker
 
         }
 
-        private Tracker getTracker()
+        private Tracker GetTracker()
         {
             Tracker t = new Tracker("Unknown Tracker", "");
 
@@ -1077,7 +1077,7 @@ namespace TorrentDescriptionMaker
                 for (int i = 0; i < lbFiles.Items.Count; i++)
                 {
                     files[i] = lbFiles.Items[i].ToString();
-                    tps.Add(new TorrentPacket(getTracker(), files[i]));
+                    tps.Add(new TorrentPacket(GetTracker(), files[i]));
                 }
 
                 if (files.Length > 0)
@@ -1282,14 +1282,6 @@ namespace TorrentDescriptionMaker
         {
             createPublishUser();
 
-        }
-
-        private void frmMain_Resize(object sender, EventArgs e)
-        {
-            //int midGap = this.Width - btnCreateTorrent.Location.X - btnCreateTorrent.Width - (this.Width - btnPublish.Location.X);
-
-            //Point p = new Point(midGap/2+btnCreateTorrent.Location.X+btnCreateTorrent.Width, pbLogo.Location.Y);
-            //pbLogo.Location = p;
         }
 
         private string GetHexColor()
