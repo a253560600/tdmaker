@@ -1,6 +1,6 @@
 ﻿namespace TorrentDescriptionMaker
 {
-    partial class frmMain
+    partial class MainWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -2583,10 +2583,10 @@
             this.Text = "Torrent Description Maker";
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.Shown += new System.EventHandler(this.MainWindow_Shown);
-            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.frmMain_DragDrop);
-            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.frmMain_DragEnter);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainWindow_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainWindow_DragEnter);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
-            this.Resize += new System.EventHandler(this.frmMain_Resize);
+            
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.gbScreenshotFull.ResumeLayout(false);
