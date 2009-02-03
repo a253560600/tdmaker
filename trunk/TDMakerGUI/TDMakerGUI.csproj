@@ -53,7 +53,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\BbCode.cs" />
     <Compile Include="GUI\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,25 +71,12 @@
     <Compile Include="GUI\TextViewer.designer.cs">
       <DependentUpon>TextViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Helpers\FileSystem.cs" />
     <Compile Include="Helpers\Options.cs" />
-    <Compile Include="Helpers\XsToUploader.cs" />
-    <Compile Include="MediaInfo\MediaFile.cs" />
-    <Compile Include="MediaInfo\NfoReport.cs" />
-    <Compile Include="MediaInfo\Screenshot.cs" />
-    <Compile Include="ScreenshotSettings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>ScreenshotSettings.settings</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Helpers\TemplateReader.cs" />
-    <Compile Include="Torrents\TorrentInfo.cs">
     </Compile>
     <Compile Include="GUI\MainWindow.cs">
       <SubType>Form</SubType>
@@ -98,8 +84,6 @@
     <Compile Include="GUI\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="MediaInfo\MediaInfo2.cs" />
-    <Compile Include="MediaInfo\MediaInfoDLL.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GUI\MainWindow.resx">
@@ -112,27 +96,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>PublicSettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="Torrents\HttpWebMultipartRequest.cs" />
-    <Compile Include="Torrents\TorrentUploader.cs" />
-    <Compile Include="Torrents\Tracker.cs" />
-    <Compile Include="Torrents\TrackerManager.cs" />
     <Compile Include="Helpers\UpdateChecker.cs" />
     <Compile Include="Helpers\WorkerTask.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ScreenshotSettings.settings">
-      <Generator>PublicSettingsSingleFileGenerator</Generator>
-      <LastGenOutput>ScreenshotSettings.Designer.cs</LastGenOutput>
-    </None>
     <None Include="Resources\info-16-xp.png" />
   </ItemGroup>
   <ItemGroup>

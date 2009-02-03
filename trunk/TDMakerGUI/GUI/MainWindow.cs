@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using System.IO;
-using TDMaker.Properties;
 using TDMaker;
-using System.Diagnostics;
-using ZSS;
-using TDMaker.MediaInfo;
 using TDMaker.Helpers;
+using TDMaker.MediaInfo;
+using TDMaker.Properties;
+using ZSS;
+using TDMakerLib;
 
 namespace TorrentDescriptionMaker
 {
@@ -333,7 +334,7 @@ namespace TorrentDescriptionMaker
 
             if (!File.Exists(Settings.Default.MTNPath))
             {
-                Settings.Default.MTNPath = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), Program.PROGRAM_FILES_APP_NAME), mtnExe);
+                Settings.Default.MTNPath = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), TDMakerLib.Program.PROGRAM_FILES_APP_NAME), mtnExe);
             }
 
             if (!File.Exists(Settings.Default.MTNPath))

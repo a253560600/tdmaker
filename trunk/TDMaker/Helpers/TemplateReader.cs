@@ -5,6 +5,7 @@ using TorrentDescriptionMaker;
 using System.IO;
 using System.Text.RegularExpressions;
 using TDMaker.Properties;
+using TDMakerLib;
 
 namespace TDMaker
 {
@@ -13,7 +14,7 @@ namespace TDMaker
     /// A Template Directory has 7 files: 
     /// GeneralInfo.txt; VideoInfo.txt; AudioInfo.txt; Disc.txt; File.txt
     /// </summary>
-    class TemplateReader
+    public class TemplateReader
     {
         /// <summary>
         /// Location of the Template

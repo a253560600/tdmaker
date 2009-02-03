@@ -10,10 +10,11 @@ using TDMaker;
 using ZSS.ImageUploader;
 using System.Threading;
 using TDMaker.Helpers;
+using TDMakerLib;
 
 namespace TorrentDescriptionMaker
 {
-    class TorrentInfo
+   public class TorrentInfo
     {
         private BackgroundWorker mBwApp = null;
 
