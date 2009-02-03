@@ -15,6 +15,15 @@ namespace TDMakerLib
         public readonly static string ScreenshotsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "MTN");
         public readonly static string ScreenshotsTempDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), PROGRAM_FILES_APP_NAME);
 
+        public static bool DetectUnix()
+        {
+            string os = System.Environment.OSVersion.ToString();
+            bool b = os.Contains("Unix");
+            IsUNIX = b;
+
+            return IsUNIX;
+        }
+
         public static string GetMediaName(string p)
         {
 

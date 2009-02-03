@@ -5,7 +5,6 @@ using System.Text;
 using System.Windows.Forms;
 using TDMaker;
 using TDMaker.Properties;
-using System.ComponentModel;
 using TDMakerLib;
 
 namespace TorrentDescriptionMaker
@@ -16,7 +15,7 @@ namespace TorrentDescriptionMaker
         /// Application Version
         /// </summary>
         public static McoreSystem.AppInfo gAppInfo = new McoreSystem.AppInfo(Application.ProductName, Application.ProductVersion, McoreSystem.AppInfo.SoftwareCycle.FINAL);
-        
+        public static readonly string PROGRAM_FILES_APP_NAME = TDMakerLib.Program.PROGRAM_FILES_APP_NAME;
         public static TaskType CurrentTask { get; set; }
         
         public static string LogsDir { get; set; }
@@ -28,10 +27,9 @@ namespace TorrentDescriptionMaker
         /// </summary>
         [STAThread]
         static void Main(string[] args)
-        {
-            string os = System.Environment.OSVersion.ToString();
-            bool b = os.Contains("Unix");
-            IsUNIX = b;
+        {                     
+            IsUNIX = TDMakerLib.Program.DetectUnix();
+            string os = System.Environment.OSVersion.ToString();            
             System.Console.WriteLine("OSVersion: {0}", os);
 
             if (!Settings.Default.UpgradeSettings)
