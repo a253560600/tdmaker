@@ -7,6 +7,9 @@ namespace TDMaker
 {
     public class TDMakerDLL
     {
-
+        public TDMakerDLL()
+        {
+            
+        }
     }
 }
