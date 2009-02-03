@@ -8,8 +8,8 @@
     <ProjectGuid>{1586DA4D-6F74-46F6-89B3-3F146C2F205C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TDMaker</RootNamespace>
-    <AssemblyName>TDMaker</AssemblyName>
+    <RootNamespace>TDMakerLib</RootNamespace>
+    <AssemblyName>TDMakerLib</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -35,6 +35,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -46,8 +47,35 @@
     <Reference Include="taglib-sharp, Version=2.0.3.0, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\BbCode.cs" />
+    <Compile Include="Helpers\Enums.cs" />
+    <Compile Include="Helpers\Structs.cs" />
+    <Compile Include="Helpers\TemplateReader.cs" />
+    <Compile Include="Helpers\TorrentPacket.cs" />
+    <Compile Include="Helpers\XsToUploader.cs" />
+    <Compile Include="MediaInfo\MediaFile.cs" />
+    <Compile Include="MediaInfo\MediaInfo2.cs" />
+    <Compile Include="MediaInfo\MediaInfoDLL.cs" />
+    <Compile Include="MediaInfo\NfoReport.cs" />
+    <Compile Include="MediaInfo\Screenshot.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <DependentUpon>Settings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ScreenshotSettings.Designer.cs">
+      <DependentUpon>ScreenshotSettings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
     <Compile Include="TDMakerDLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Torrents\HttpWebMultipartRequest.cs" />
+    <Compile Include="Torrents\TorrentInfo.cs" />
+    <Compile Include="Torrents\TorrentUploader.cs" />
+    <Compile Include="Torrents\Tracker.cs" />
+    <Compile Include="Torrents\TrackerManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Lib\32-bit\MediaInfo.dll" />
@@ -56,6 +84,22 @@
     <Content Include="Lib\McoreSystem.dll" />
     <Content Include="Lib\MonoTorrent.dll" />
     <Content Include="Lib\taglib-sharp.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="ScreenshotSettings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>ScreenshotSettings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\ZScreen\ImageUploader\ImageUploader\ImageUploader.csproj">
+      <Project>{223EC461-C070-4FF3-ADE7-92BC21AE66FC}</Project>
+      <Name>ImageUploader</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

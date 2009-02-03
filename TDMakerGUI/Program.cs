@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using TDMaker;
 using TDMaker.Properties;
 using System.ComponentModel;
+using TDMakerLib;
 
 namespace TorrentDescriptionMaker
 {
@@ -15,11 +16,9 @@ namespace TorrentDescriptionMaker
         /// Application Version
         /// </summary>
         public static McoreSystem.AppInfo gAppInfo = new McoreSystem.AppInfo(Application.ProductName, Application.ProductVersion, McoreSystem.AppInfo.SoftwareCycle.FINAL);
-
-        public const string PROGRAM_FILES_APP_NAME = "TDMaker";
+        
         public static TaskType CurrentTask { get; set; }
-        private readonly static string ScreenshotsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "MTN");
-        private readonly static string ScreenshotsTempDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), PROGRAM_FILES_APP_NAME);
+        
         public static string LogsDir { get; set; }
         public static bool IsUNIX { get; private set; }
         internal static string DebugLogFilePath { get; set; }
@@ -119,11 +118,6 @@ namespace TorrentDescriptionMaker
         #endregion
 
 
-        public static string GetScreenShotsDir()
-        {
-            return (Settings.Default.KeepScreenshot ? Program.ScreenshotsDir : Program.ScreenshotsTempDir);
-        }
-
         public static bool MediaIsDisc(string p)
         {
             bool disc = Directory.Exists(p);
@@ -167,7 +161,7 @@ namespace TorrentDescriptionMaker
             if (!Settings.Default.KeepScreenshot)
             {
                 // delete if option set to temporary location 
-                string[] files = Directory.GetFiles(Program.ScreenshotsTempDir, "*.*", SearchOption.AllDirectories);
+                string[] files = Directory.GetFiles(TDMakerLib.Program.ScreenshotsTempDir, "*.*", SearchOption.AllDirectories);
                 foreach (string screenshot in files)
                 {
                     try
@@ -228,30 +222,6 @@ namespace TorrentDescriptionMaker
         {
 
             return string.Format("{0} MiB", (size / 1024.0 / 1024.0).ToString("0.00"));
-
-        }
-
-        /// <summary>
-        /// Get DuratingString in HH:mm:ss
-        /// </summary>
-        /// <param name="dura">Duration in Milliseconds</param>
-        /// <returns>DuratingString in HH:mm:ss</returns>
-        public static string GetDurationString(double dura)
-        {
-
-            double duraSec = dura / 1000.0;
-
-            long hours = (long)duraSec / 3600;
-            long secLeft = (long)duraSec - hours * 3600;
-            long mins = secLeft / 60;
-            long sec = secLeft - mins * 60;
-
-            string duraString = string.Format("{0}:{1}:{2}",
-                hours.ToString("00"),
-                mins.ToString("00"),
-                sec.ToString("00"));
-
-            return duraString;
 
         }
 
@@ -336,91 +306,11 @@ namespace TorrentDescriptionMaker
 
         }
 
-    }
 
-    public enum MediaType
-    {
-        SINGLE_MEDIA_FILE,
-        MEDIA_DISC,
-        MUSIC_AUDIO_ALBUM
-    }
-
-    public enum TakeScreenshotsType
-    {
-        NONE,
-        TAKE_ALL_SCREENSHOTS,
-        TAKE_ONE_SCREENSHOT
-    }
-
-    public enum ProgressType
-    {
-        INCREMENT_PROGRESS_WITH_MSG,
-        PREVIEW_SCREENSHOT,
-        REPORT_MEDIAINFO_SUMMARY,
-        UPDATE_PROGRESSBAR_MAX,
-        UPDATE_SCREENSHOTS_LIST,
-        UPDATE_STATUSBAR_DEBUG
-    }
-
-    public enum TaskType
-    {
-        ANALYZE_MEDIA,
-        CREATE_TORRENT
-    }
-
-    public class TorrentPacket
-    {
-
-        public TDMaker.Tracker Tracker { get; private set; }
-        public string MediaLocation { get; private set; }
-        public string TorrentFolder { get; private set; }
-
-        public TorrentPacket(Tracker tracker, string mediaLoc)
+        internal static string GetScreenShotsDir()
         {
-            this.Tracker = tracker;
-            this.MediaLocation = mediaLoc;
-            this.TorrentFolder = getTorrentFolderPath();
+            return TDMakerLib.Program.GetScreenShotsDir();
         }
-
-        string getTorrentFolderPath()
-        {
-            string dir = "";
-
-            if (!Settings.Default.TorrentFolderDefault &&
-                Directory.Exists(Settings.Default.TorrentsCustomDir))
-            {
-
-                if (Settings.Default.TorrentsOrganize)
-                {
-                    dir = Path.Combine(Settings.Default.TorrentsCustomDir, Tracker.Name);
-                }
-                else
-                {
-                    dir = Settings.Default.TorrentsCustomDir;
-                }
-            }
-            else
-            {
-                dir = Path.GetDirectoryName(MediaLocation);
-            }
-
-            return dir;
-
-        }
-
-    }
-
-
-    /// <summary>
-    /// Options regard Publish
-    /// </summary>
-    public struct PublishOptionsPacket
-    {
-        public bool AlignCenter { get; set; }
-        public bool PreformattedText { get; set; }
-        public bool FullPicture { get; set; }
-        public bool TemplatesMode { get; set; }
-        public string TemplateLocation { get; set; }
     }
 
 

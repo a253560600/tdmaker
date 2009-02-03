@@ -17,9 +17,9 @@ namespace TDMaker
 
         public static void OpenDirScreenshots()
         {
-            if (Directory.Exists(Program.GetScreenShotsDir()))
+            if (Directory.Exists(TDMakerLib.Program.GetScreenShotsDir()))
             {
-                Process.Start(Program.GetScreenShotsDir());
+                Process.Start(TDMakerLib.Program.GetScreenShotsDir());
             }
         }
 
