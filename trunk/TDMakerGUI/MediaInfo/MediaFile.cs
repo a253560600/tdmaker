@@ -49,8 +49,6 @@ namespace TDMaker
         /// This is what you get for mi.Option("Complete");
         /// </summary>
         public string Summary { get; set; }
-        public TagLib.File TagLibFile { get; set; }
-
         public List<AudioInfo> Audio { get; set; }
         public VideoInfo Video { get; set; }
 

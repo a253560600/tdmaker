@@ -1,7 +1,4 @@
-﻿using CommandLineParser;
-using System;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
+﻿using System;
 
 namespace TDMaker
 {
@@ -24,7 +21,7 @@ namespace TDMaker
             {
                 CommandLineParser.CommandLineParser parser = new CommandLineParser.CommandLineParser();
                 SetupCommandLineEntries(parser);
-
+                
                 string strArgs = Environment.CommandLine;                 
             }
 

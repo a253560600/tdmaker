@@ -47,8 +47,13 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TDMakerCLI.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\iTSfv\trunk\lib\CommandLineParser\CommandLineParser.vbproj">
+      <Project>{0750FD5C-105A-474E-AB36-CA98DC1FA2E4}</Project>
+      <Name>CommandLineParser</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TDMaker\TDMaker.csproj">
       <Project>{1586DA4D-6F74-46F6-89B3-3F146C2F205C}</Project>
       <Name>TDMaker</Name>

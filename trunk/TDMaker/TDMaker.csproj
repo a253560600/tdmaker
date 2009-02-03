@@ -43,6 +43,7 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="taglib-sharp, Version=2.0.3.0, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TDMakerDLL.cs" />
