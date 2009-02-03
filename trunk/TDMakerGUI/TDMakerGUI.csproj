@@ -139,10 +139,6 @@
     <EmbeddedResource Include="VersionHistory.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\ZScreen\ImageUploader\ImageUploader\ImageUploader.csproj">
-      <Project>{223EC461-C070-4FF3-ADE7-92BC21AE66FC}</Project>
-      <Name>ImageUploader</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TDMaker\TDMaker.csproj">
       <Project>{1586DA4D-6F74-46F6-89B3-3F146C2F205C}</Project>
       <Name>TDMaker</Name>
