@@ -25,8 +25,7 @@ namespace TDMaker
                 CommandLineParser.CommandLineParser parser = new CommandLineParser.CommandLineParser();
                 SetupCommandLineEntries(parser);
 
-                string strArgs = Environment.CommandLine; 
-                Regex.Replace(strArgs, String.Format("{0}\\", Application.StartupPath)
+                string strArgs = Environment.CommandLine;                 
             }
 
         }
