@@ -734,33 +734,12 @@ namespace TorrentDescriptionMaker
 
         private bool WorkerCreateTorrent(TorrentPacket tp)
         {
-            bool success = true;
-
-            string p = tp.MediaLocation;
-            if (File.Exists(p) || Directory.Exists(p))
-            {
-                MonoTorrent.Common.TorrentCreator tc = new MonoTorrent.Common.TorrentCreator();
-                tc.Private = true;
-                tc.Comment = Program.GetMediaName(p);
-                tc.Path = p;
-                tc.PublisherUrl = "http://code.google.com/p/tdmaker";
-                tc.Publisher = Application.ProductName;
-                tc.StoreMD5 = true;
-                List<string> temp = new List<string>();
-                temp.Add(tp.Tracker.AnnounceURL);
-                tc.Announces.Add(temp);
-
-                string torrentFileName = (File.Exists(p) ? Path.GetFileName(p) : Program.GetMediaName(p)) + ".torrent";
-                string torrentPath = Path.Combine(tp.TorrentFolder, torrentFileName);
-
-                if (!Directory.Exists(tp.TorrentFolder))
-                    Directory.CreateDirectory(Path.GetDirectoryName(torrentPath));
-
-                bwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Creating {0}", torrentPath));
-                tc.Create(torrentPath);
-                bwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Created {0}", torrentPath));
-            }
-
+            TorrentCreator tc = new TorrentCreator(tp);
+            bwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, 
+                string.Format("Creating {0}", tc.TorrentPath));
+            bool success = tc.Create();
+            bwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, 
+                string.Format("Created {0}", tc.TorrentPath));
             return success;
         }
 
