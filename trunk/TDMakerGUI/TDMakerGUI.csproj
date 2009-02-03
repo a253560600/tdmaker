@@ -135,11 +135,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="GenuineAdv.ico" />
-    <Content Include="Lib\32-bit\MediaInfo.dll" />
-    <Content Include="Lib\64-bit\MediaInfo.dll" />
-    <Content Include="Lib\ImageUploader.dll" />
-    <Content Include="Lib\McoreSystem.dll" />
-    <Content Include="Lib\MonoTorrent.dll" />
     <EmbeddedResource Include="GUI\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -173,7 +168,6 @@
     <EmbeddedResource Include="Templates\Minimal\FileAudioInfo.txt" />
     <EmbeddedResource Include="Templates\Minimal\FileVideoInfo.txt" />
     <EmbeddedResource Include="Templates\Minimal\GeneralInfo.txt" />
-    <Content Include="Lib\taglib-sharp.dll" />
     <Content Include="ReleaseInfo.txt" />
     <Content Include="Resources\GenuineAdv.ico" />
     <Content Include="Resources\GenuineAdv.png" />
