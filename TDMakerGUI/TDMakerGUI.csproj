@@ -93,9 +93,18 @@
     <None Include="app.config" />
     <Compile Include="Helpers\UpdateChecker.cs" />
     <Compile Include="Helpers\WorkerTask.cs" />
+    <Compile Include="ScreenshotSettings.Designer.cs">
+      <DependentUpon>ScreenshotSettings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\info-16-xp.png" />
+    <None Include="ScreenshotSettings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>ScreenshotSettings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="GenuineAdv.ico" />

@@ -29,10 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            TDMaker.Properties.Settings settings1 = new TDMaker.Properties.Settings();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            TDMaker.ScreenshotSettings screenshotSettings1 = new TDMaker.ScreenshotSettings();
+            TDMaker.ScreenshotSettings screenshotSettings2 = new TDMaker.ScreenshotSettings();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnBrowseMTN = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -97,6 +100,7 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tcOptions = new System.Windows.Forms.TabControl();
             this.tpGeneral = new System.Windows.Forms.TabPage();
+            this.chkWritePublish = new System.Windows.Forms.CheckBox();
             this.chkUpdateCheck = new System.Windows.Forms.CheckBox();
             this.chkAnalyzeAuto = new System.Windows.Forms.CheckBox();
             this.tpPublish = new System.Windows.Forms.TabPage();
@@ -122,49 +126,18 @@
             this.tcHosting = new System.Windows.Forms.TabControl();
             this.tpMTNUsage = new System.Windows.Forms.TabPage();
             this.pMTNUsage = new System.Windows.Forms.Panel();
-            this.nudMTN_B_OmitStart = new System.Windows.Forms.NumericUpDown();
-            this.chkMTN_B_OmitBegin = new System.Windows.Forms.CheckBox();
-            this.nudMTN_D_EdgeDetection = new System.Windows.Forms.NumericUpDown();
-            this.chkMTN_D_EdgeDetection = new System.Windows.Forms.CheckBox();
-            this.nudMTN_E_OmitEnd = new System.Windows.Forms.NumericUpDown();
-            this.chkMTN_E_OmitEnd = new System.Windows.Forms.CheckBox();
-            this.nudMTN_h_HeightMin = new System.Windows.Forms.NumericUpDown();
-            this.chkMTN_h_Height = new System.Windows.Forms.CheckBox();
             this.chkMTN_v_Verbose = new System.Windows.Forms.CheckBox();
-            this.txtMTN_o_OutputSuffix = new System.Windows.Forms.TextBox();
             this.chkMTN_o_OutputSuffix = new System.Windows.Forms.CheckBox();
-            this.txtMTN_N_InfoSuffix = new System.Windows.Forms.TextBox();
-            this.chkMTN_N_WriteInfo = new System.Windows.Forms.CheckBox();
-            this.chkMTN_z_SeekMode = new System.Windows.Forms.CheckBox();
-            this.chkMTN_i_MediaInfoTurnOff = new System.Windows.Forms.CheckBox();
             this.gbMTN_i_MediaInfo = new System.Windows.Forms.GroupBox();
-            this.chkMTN_T_Title = new System.Windows.Forms.CheckBox();
-            this.cboMTN_f_FontType = new System.Windows.Forms.ComboBox();
             this.txtMTN_T_Title = new System.Windows.Forms.TextBox();
             this.chkMTN_f_Font = new System.Windows.Forms.CheckBox();
             this.chkMTN_F_FontColor = new System.Windows.Forms.CheckBox();
-            this.cboMTN_F_FontColor = new System.Windows.Forms.ComboBox();
             this.chkMTN_F_FontSize = new System.Windows.Forms.CheckBox();
-            this.nudMTN_F_FontSize = new System.Windows.Forms.NumericUpDown();
-            this.chkMTN_L_LocInfo = new System.Windows.Forms.CheckBox();
             this.cboMTN_L_LocInfo = new System.Windows.Forms.ComboBox();
-            this.nudMTN_j_JPEGQuality = new System.Windows.Forms.NumericUpDown();
-            this.chkMTN_j_JPEGQuality = new System.Windows.Forms.CheckBox();
             this.cboMTN_L_LocTimestamp = new System.Windows.Forms.ComboBox();
-            this.chkMTN_tL_LocTimestamp = new System.Windows.Forms.CheckBox();
-            this.chkMTN_k_ColorBackground = new System.Windows.Forms.CheckBox();
             this.nudMTN_g_Gap = new System.Windows.Forms.NumericUpDown();
-            this.chkMTN_g_Gap = new System.Windows.Forms.CheckBox();
-            this.cboMTN_k_ColorBkgrd = new System.Windows.Forms.ComboBox();
-            this.nudMTN_w_Width = new System.Windows.Forms.NumericUpDown();
-            this.chk_w_Width = new System.Windows.Forms.CheckBox();
-            this.chkMTN_P_QuitAfterDone = new System.Windows.Forms.CheckBox();
-            this.nudMTN_s_TimeStep = new System.Windows.Forms.NumericUpDown();
-            this.chkMTN_s_TimeStep = new System.Windows.Forms.CheckBox();
-            this.nudMTN_r_Rows = new System.Windows.Forms.NumericUpDown();
             this.chkShowMTN = new System.Windows.Forms.CheckBox();
             this.chkMTNRows = new System.Windows.Forms.CheckBox();
-            this.nudMTN_c_Columns = new System.Windows.Forms.NumericUpDown();
             this.chkMTNColumns = new System.Windows.Forms.CheckBox();
             this.tpHostingImageShack = new System.Windows.Forms.TabPage();
             this.btnImageShackImages = new System.Windows.Forms.Button();
@@ -175,7 +148,6 @@
             this.tpTorrents = new System.Windows.Forms.TabPage();
             this.btnRefreshTrackers = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.chkWritePublish = new System.Windows.Forms.CheckBox();
             this.chkTorrentOrganize = new System.Windows.Forms.CheckBox();
             this.btnBrowseTorrentCustomFolder = new System.Windows.Forms.Button();
             this.txtTorrentCustomFolder = new System.Windows.Forms.TextBox();
@@ -231,6 +203,37 @@
             this.miHelpCheckUpdates = new System.Windows.Forms.ToolStripMenuItem();
             this.miHelpVersionHistory = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nudMTN_B_OmitStart = new System.Windows.Forms.NumericUpDown();
+            this.chkMTN_B_OmitBegin = new System.Windows.Forms.CheckBox();
+            this.nudMTN_D_EdgeDetection = new System.Windows.Forms.NumericUpDown();
+            this.chkMTN_D_EdgeDetection = new System.Windows.Forms.CheckBox();
+            this.nudMTN_E_OmitEnd = new System.Windows.Forms.NumericUpDown();
+            this.chkMTN_E_OmitEnd = new System.Windows.Forms.CheckBox();
+            this.nudMTN_h_HeightMin = new System.Windows.Forms.NumericUpDown();
+            this.chkMTN_h_Height = new System.Windows.Forms.CheckBox();
+            this.txtMTN_o_OutputSuffix = new System.Windows.Forms.TextBox();
+            this.txtMTN_N_InfoSuffix = new System.Windows.Forms.TextBox();
+            this.chkMTN_N_WriteInfo = new System.Windows.Forms.CheckBox();
+            this.chkMTN_z_SeekMode = new System.Windows.Forms.CheckBox();
+            this.chkMTN_i_MediaInfoTurnOff = new System.Windows.Forms.CheckBox();
+            this.chkMTN_T_Title = new System.Windows.Forms.CheckBox();
+            this.cboMTN_f_FontType = new System.Windows.Forms.ComboBox();
+            this.cboMTN_F_FontColor = new System.Windows.Forms.ComboBox();
+            this.nudMTN_F_FontSize = new System.Windows.Forms.NumericUpDown();
+            this.chkMTN_L_LocInfo = new System.Windows.Forms.CheckBox();
+            this.nudMTN_j_JPEGQuality = new System.Windows.Forms.NumericUpDown();
+            this.chkMTN_j_JPEGQuality = new System.Windows.Forms.CheckBox();
+            this.chkMTN_tL_LocTimestamp = new System.Windows.Forms.CheckBox();
+            this.chkMTN_k_ColorBackground = new System.Windows.Forms.CheckBox();
+            this.chkMTN_g_Gap = new System.Windows.Forms.CheckBox();
+            this.cboMTN_k_ColorBkgrd = new System.Windows.Forms.ComboBox();
+            this.nudMTN_w_Width = new System.Windows.Forms.NumericUpDown();
+            this.chk_w_Width = new System.Windows.Forms.CheckBox();
+            this.chkMTN_P_QuitAfterDone = new System.Windows.Forms.CheckBox();
+            this.nudMTN_s_TimeStep = new System.Windows.Forms.NumericUpDown();
+            this.chkMTN_s_TimeStep = new System.Windows.Forms.CheckBox();
+            this.nudMTN_r_Rows = new System.Windows.Forms.NumericUpDown();
+            this.nudMTN_c_Columns = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.gbScreenshotFull.SuspendLayout();
             this.gbScreenshotForums.SuspendLayout();
@@ -261,18 +264,8 @@
             this.tcHosting.SuspendLayout();
             this.tpMTNUsage.SuspendLayout();
             this.pMTNUsage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_B_OmitStart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_D_EdgeDetection)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_E_OmitEnd)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_h_HeightMin)).BeginInit();
             this.gbMTN_i_MediaInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_F_FontSize)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_j_JPEGQuality)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMTN_g_Gap)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_w_Width)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_s_TimeStep)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_r_Rows)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_c_Columns)).BeginInit();
             this.tpHostingImageShack.SuspendLayout();
             this.tpTorrents.SuspendLayout();
             this.groupBox8.SuspendLayout();
@@ -283,6 +276,16 @@
             this.cmsApp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_B_OmitStart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_D_EdgeDetection)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_E_OmitEnd)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_h_HeightMin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_F_FontSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_j_JPEGQuality)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_w_Width)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_s_TimeStep)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_r_Rows)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_c_Columns)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -325,12 +328,84 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMtn.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.txtMtn.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
-            this.txtMtn.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "MTNPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            settings1.AlignCenter = false;
+            settings1.AnalyzeAuto = true;
+            settings1.AnnounceURLIndex = 0;
+            settings1.AutoCheckUpdates = true;
+            settings1.bDiscMenu = true;
+            settings1.bExtras = true;
+            settings1.BrowseDir = true;
+            settings1.bSource = true;
+            settings1.bTitle = true;
+            settings1.bVideoEdits = true;
+            settings1.CreateTorrent = false;
+            settings1.DiscMenu = "Intact";
+            settings1.DiscMenus = ((System.Collections.Specialized.StringCollection)(resources.GetObject("settings1.DiscMenus")));
+            settings1.Extras = ((System.Collections.Specialized.StringCollection)(resources.GetObject("settings1.Extras")));
+            settings1.ExtrasMode = "Intact";
+            settings1.FontSizeBody = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            settings1.FontSizeHeading1 = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            settings1.FontSizeHeading2 = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            settings1.FontSizeHeading3 = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            settings1.FontSizeIncr = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            settings1.ImageShackRegCode = "";
+            settings1.ImageShakeRandomizeFileName = false;
+            settings1.KeepScreenshot = true;
+            settings1.LargerPreText = true;
+            settings1.MTNArg = "-P -w 0 -c 1 -r 3 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97";
+            settings1.MTNArgs = ((System.Collections.Specialized.StringCollection)(resources.GetObject("settings1.MTNArgs")));
+            settings1.MTNFonts = ((System.Collections.Specialized.StringCollection)(resources.GetObject("settings1.MTNFonts")));
+            settings1.MTNPath = "mtn.exe";
+            settings1.PreText = false;
+            settings1.RunOnce = true;
+            settings1.ScreenshotDestIndex = 0;
+            settings1.SettingsDir = "";
+            settings1.SettingsKey = "";
+            settings1.ShowMTNWindow = false;
+            settings1.Source = "DVD";
+            settings1.SourceEdit = "Untouched";
+            settings1.SourceEdits = ((System.Collections.Specialized.StringCollection)(resources.GetObject("settings1.SourceEdits")));
+            settings1.Sources = ((System.Collections.Specialized.StringCollection)(resources.GetObject("settings1.Sources")));
+            settings1.TakeScreenshot = true;
+            settings1.TemplateIndex = 0;
+            settings1.TemplatesDir = "";
+            settings1.TemplatesMode = false;
+            settings1.TorrentFolderDefault = true;
+            settings1.TorrentsCustomDir = "";
+            settings1.TorrentsOrganize = true;
+            settings1.UpdateCheckAuto = true;
+            settings1.UpgradeSettings = false;
+            settings1.UploadScreenshot = true;
+            settings1.UseFullPicture = true;
+            settings1.UseImageShackRegCode = false;
+            settings1.WebLink = false;
+            settings1.WritePublish = false;
+            this.txtMtn.DataBindings.Add(new System.Windows.Forms.Binding("Text", settings1, "MTNPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.txtMtn.Location = new System.Drawing.Point(114, 25);
             this.txtMtn.Name = "txtMtn";
             this.txtMtn.Size = new System.Drawing.Size(437, 20);
             this.txtMtn.TabIndex = 0;
-            this.txtMtn.Text = global::TDMaker.Properties.Settings.Default.MTNPath;
+            this.txtMtn.Text = settings1.MTNPath;
             // 
             // gbScreenshotFull
             // 
@@ -592,9 +667,9 @@
             // 
             this.chkTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkTitle.AutoSize = true;
-            this.chkTitle.Checked = global::TDMaker.Properties.Settings.Default.bTitle;
+            this.chkTitle.Checked = settings1.bTitle;
             this.chkTitle.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkTitle.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "bTitle", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkTitle.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings1, "bTitle", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkTitle.Location = new System.Drawing.Point(22, 60);
             this.chkTitle.Name = "chkTitle";
             this.chkTitle.Size = new System.Drawing.Size(49, 17);
@@ -615,8 +690,8 @@
             // 
             this.chkWebLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkWebLink.AutoSize = true;
-            this.chkWebLink.Checked = global::TDMaker.Properties.Settings.Default.WebLink;
-            this.chkWebLink.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "WebLink", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkWebLink.Checked = settings1.WebLink;
+            this.chkWebLink.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings1, "WebLink", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkWebLink.Location = new System.Drawing.Point(22, 90);
             this.chkWebLink.Name = "chkWebLink";
             this.chkWebLink.Size = new System.Drawing.Size(75, 17);
@@ -627,9 +702,9 @@
             // chkSource
             // 
             this.chkSource.AutoSize = true;
-            this.chkSource.Checked = global::TDMaker.Properties.Settings.Default.bSource;
+            this.chkSource.Checked = settings1.bSource;
             this.chkSource.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkSource.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "bSource", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkSource.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings1, "bSource", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkSource.Location = new System.Drawing.Point(22, 31);
             this.chkSource.Name = "chkSource";
             this.chkSource.Size = new System.Drawing.Size(60, 17);
@@ -648,13 +723,13 @@
             // 
             // cboSource
             // 
-            this.cboSource.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "Source", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cboSource.DataBindings.Add(new System.Windows.Forms.Binding("Text", settings1, "Source", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cboSource.FormattingEnabled = true;
             this.cboSource.Location = new System.Drawing.Point(117, 29);
             this.cboSource.Name = "cboSource";
             this.cboSource.Size = new System.Drawing.Size(121, 21);
             this.cboSource.TabIndex = 0;
-            this.cboSource.Text = global::TDMaker.Properties.Settings.Default.Source;
+            this.cboSource.Text = settings1.Source;
             // 
             // gbDVD
             // 
@@ -673,20 +748,20 @@
             // 
             // cboDiscMenu
             // 
-            this.cboDiscMenu.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "DiscMenu", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cboDiscMenu.DataBindings.Add(new System.Windows.Forms.Binding("Text", settings1, "DiscMenu", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cboDiscMenu.FormattingEnabled = true;
             this.cboDiscMenu.Location = new System.Drawing.Point(121, 58);
             this.cboDiscMenu.Name = "cboDiscMenu";
             this.cboDiscMenu.Size = new System.Drawing.Size(121, 21);
             this.cboDiscMenu.TabIndex = 18;
-            this.cboDiscMenu.Text = global::TDMaker.Properties.Settings.Default.DiscMenu;
+            this.cboDiscMenu.Text = settings1.DiscMenu;
             // 
             // chkDiscMenu
             // 
             this.chkDiscMenu.AutoSize = true;
-            this.chkDiscMenu.Checked = global::TDMaker.Properties.Settings.Default.bDiscMenu;
+            this.chkDiscMenu.Checked = settings1.bDiscMenu;
             this.chkDiscMenu.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDiscMenu.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "bDiscMenu", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkDiscMenu.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings1, "bDiscMenu", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkDiscMenu.Location = new System.Drawing.Point(26, 60);
             this.chkDiscMenu.Name = "chkDiscMenu";
             this.chkDiscMenu.Size = new System.Drawing.Size(56, 17);
@@ -696,20 +771,20 @@
             // 
             // cboExtras
             // 
-            this.cboExtras.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "ExtrasMode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cboExtras.DataBindings.Add(new System.Windows.Forms.Binding("Text", settings1, "ExtrasMode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cboExtras.FormattingEnabled = true;
             this.cboExtras.Location = new System.Drawing.Point(121, 86);
             this.cboExtras.Name = "cboExtras";
             this.cboExtras.Size = new System.Drawing.Size(121, 21);
             this.cboExtras.TabIndex = 16;
-            this.cboExtras.Text = global::TDMaker.Properties.Settings.Default.ExtrasMode;
+            this.cboExtras.Text = settings1.ExtrasMode;
             // 
             // chkExtras
             // 
             this.chkExtras.AutoSize = true;
-            this.chkExtras.Checked = global::TDMaker.Properties.Settings.Default.bExtras;
+            this.chkExtras.Checked = settings1.bExtras;
             this.chkExtras.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkExtras.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "bExtras", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkExtras.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings1, "bExtras", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkExtras.Location = new System.Drawing.Point(26, 88);
             this.chkExtras.Name = "chkExtras";
             this.chkExtras.Size = new System.Drawing.Size(58, 17);
@@ -719,20 +794,20 @@
             // 
             // cboAuthoring
             // 
-            this.cboAuthoring.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "SourceEdit", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cboAuthoring.DataBindings.Add(new System.Windows.Forms.Binding("Text", settings1, "SourceEdit", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cboAuthoring.FormattingEnabled = true;
             this.cboAuthoring.Location = new System.Drawing.Point(121, 29);
             this.cboAuthoring.Name = "cboAuthoring";
             this.cboAuthoring.Size = new System.Drawing.Size(121, 21);
             this.cboAuthoring.TabIndex = 14;
-            this.cboAuthoring.Text = global::TDMaker.Properties.Settings.Default.SourceEdit;
+            this.cboAuthoring.Text = settings1.SourceEdit;
             // 
             // chkSourceEdit
             // 
             this.chkSourceEdit.AutoSize = true;
-            this.chkSourceEdit.Checked = global::TDMaker.Properties.Settings.Default.bVideoEdits;
+            this.chkSourceEdit.Checked = settings1.bVideoEdits;
             this.chkSourceEdit.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkSourceEdit.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "bVideoEdits", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkSourceEdit.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings1, "bVideoEdits", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkSourceEdit.Location = new System.Drawing.Point(26, 32);
             this.chkSourceEdit.Name = "chkSourceEdit";
             this.chkSourceEdit.Size = new System.Drawing.Size(74, 17);
@@ -769,8 +844,8 @@
             // rbDir
             // 
             this.rbDir.AutoSize = true;
-            this.rbDir.Checked = global::TDMaker.Properties.Settings.Default.BrowseDir;
-            this.rbDir.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "BrowseDir", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.rbDir.Checked = settings1.BrowseDir;
+            this.rbDir.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings1, "BrowseDir", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.rbDir.Location = new System.Drawing.Point(232, 27);
             this.rbDir.Name = "rbDir";
             this.rbDir.Size = new System.Drawing.Size(80, 17);
@@ -868,9 +943,9 @@
             // chkOptImageShack
             // 
             this.chkOptImageShack.AutoSize = true;
-            this.chkOptImageShack.Checked = global::TDMaker.Properties.Settings.Default.UploadScreenshot;
+            this.chkOptImageShack.Checked = settings1.UploadScreenshot;
             this.chkOptImageShack.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkOptImageShack.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "UploadScreenshot", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkOptImageShack.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings1, "UploadScreenshot", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkOptImageShack.Location = new System.Drawing.Point(263, 16);
             this.chkOptImageShack.Name = "chkOptImageShack";
             this.chkOptImageShack.Size = new System.Drawing.Size(129, 17);
@@ -882,9 +957,9 @@
             // chkScreenshot
             // 
             this.chkScreenshot.AutoSize = true;
-            this.chkScreenshot.Checked = global::TDMaker.Properties.Settings.Default.TakeScreenshot;
+            this.chkScreenshot.Checked = settings1.TakeScreenshot;
             this.chkScreenshot.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkScreenshot.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "TakeScreenshot", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkScreenshot.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings1, "TakeScreenshot", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkScreenshot.Location = new System.Drawing.Point(134, 16);
             this.chkScreenshot.Name = "chkScreenshot";
             this.chkScreenshot.Size = new System.Drawing.Size(114, 17);
@@ -1040,12 +1115,24 @@
             this.tpGeneral.Text = "General";
             this.tpGeneral.UseVisualStyleBackColor = true;
             // 
+            // chkWritePublish
+            // 
+            this.chkWritePublish.AutoSize = true;
+            this.chkWritePublish.Checked = settings1.WritePublish;
+            this.chkWritePublish.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings1, "WritePublish", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkWritePublish.Location = new System.Drawing.Point(20, 66);
+            this.chkWritePublish.Name = "chkWritePublish";
+            this.chkWritePublish.Size = new System.Drawing.Size(241, 17);
+            this.chkWritePublish.TabIndex = 5;
+            this.chkWritePublish.Text = "Write Publish Information of the Torrent to File";
+            this.chkWritePublish.UseVisualStyleBackColor = true;
+            // 
             // chkUpdateCheck
             // 
             this.chkUpdateCheck.AutoSize = true;
-            this.chkUpdateCheck.Checked = global::TDMaker.Properties.Settings.Default.UpdateCheckAuto;
+            this.chkUpdateCheck.Checked = settings1.UpdateCheckAuto;
             this.chkUpdateCheck.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUpdateCheck.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "UpdateCheckAuto", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkUpdateCheck.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings1, "UpdateCheckAuto", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkUpdateCheck.Location = new System.Drawing.Point(20, 43);
             this.chkUpdateCheck.Name = "chkUpdateCheck";
             this.chkUpdateCheck.Size = new System.Drawing.Size(180, 17);
@@ -1056,9 +1143,9 @@
             // chkAnalyzeAuto
             // 
             this.chkAnalyzeAuto.AutoSize = true;
-            this.chkAnalyzeAuto.Checked = global::TDMaker.Properties.Settings.Default.AnalyzeAuto;
+            this.chkAnalyzeAuto.Checked = settings1.AnalyzeAuto;
             this.chkAnalyzeAuto.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkAnalyzeAuto.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "AnalyzeAuto", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkAnalyzeAuto.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings1, "AnalyzeAuto", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkAnalyzeAuto.Location = new System.Drawing.Point(20, 20);
             this.chkAnalyzeAuto.Name = "chkAnalyzeAuto";
             this.chkAnalyzeAuto.Size = new System.Drawing.Size(270, 17);
@@ -1117,7 +1204,7 @@
             // 
             // nudFontSizeIncr
             // 
-            this.nudFontSizeIncr.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TDMaker.Properties.Settings.Default, "FontSizeIncr", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nudFontSizeIncr.DataBindings.Add(new System.Windows.Forms.Binding("Value", settings1, "FontSizeIncr", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.nudFontSizeIncr.Location = new System.Drawing.Point(319, 55);
             this.nudFontSizeIncr.Minimum = new decimal(new int[] {
             1,
@@ -1127,13 +1214,13 @@
             this.nudFontSizeIncr.Name = "nudFontSizeIncr";
             this.nudFontSizeIncr.Size = new System.Drawing.Size(55, 20);
             this.nudFontSizeIncr.TabIndex = 9;
-            this.nudFontSizeIncr.Value = global::TDMaker.Properties.Settings.Default.FontSizeIncr;
+            this.nudFontSizeIncr.Value = settings1.FontSizeIncr;
             // 
             // chkPre
             // 
             this.chkPre.AutoSize = true;
-            this.chkPre.Checked = global::TDMaker.Properties.Settings.Default.PreText;
-            this.chkPre.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "PreText", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkPre.Checked = settings1.PreText;
+            this.chkPre.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings1, "PreText", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkPre.Location = new System.Drawing.Point(17, 56);
             this.chkPre.Name = "chkPre";
             this.chkPre.Size = new System.Drawing.Size(132, 17);
@@ -1144,9 +1231,9 @@
             // chkPreIncreaseFontSize
             // 
             this.chkPreIncreaseFontSize.AutoSize = true;
-            this.chkPreIncreaseFontSize.Checked = global::TDMaker.Properties.Settings.Default.LargerPreText;
+            this.chkPreIncreaseFontSize.Checked = settings1.LargerPreText;
             this.chkPreIncreaseFontSize.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPreIncreaseFontSize.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "LargerPreText", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkPreIncreaseFontSize.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings1, "LargerPreText", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkPreIncreaseFontSize.Location = new System.Drawing.Point(165, 56);
             this.chkPreIncreaseFontSize.Name = "chkPreIncreaseFontSize";
             this.chkPreIncreaseFontSize.Size = new System.Drawing.Size(148, 17);
@@ -1157,8 +1244,8 @@
             // chkAlignCenter
             // 
             this.chkAlignCenter.AutoSize = true;
-            this.chkAlignCenter.Checked = global::TDMaker.Properties.Settings.Default.AlignCenter;
-            this.chkAlignCenter.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "AlignCenter", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkAlignCenter.Checked = settings1.AlignCenter;
+            this.chkAlignCenter.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings1, "AlignCenter", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkAlignCenter.Location = new System.Drawing.Point(17, 33);
             this.chkAlignCenter.Name = "chkAlignCenter";
             this.chkAlignCenter.Size = new System.Drawing.Size(83, 17);
@@ -1185,7 +1272,7 @@
             // 
             // nudFontSizeHeading1
             // 
-            this.nudFontSizeHeading1.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TDMaker.Properties.Settings.Default, "FontSizeHeading1", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nudFontSizeHeading1.DataBindings.Add(new System.Windows.Forms.Binding("Value", settings1, "FontSizeHeading1", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.nudFontSizeHeading1.Location = new System.Drawing.Point(106, 30);
             this.nudFontSizeHeading1.Minimum = new decimal(new int[] {
             1,
@@ -1195,7 +1282,7 @@
             this.nudFontSizeHeading1.Name = "nudFontSizeHeading1";
             this.nudFontSizeHeading1.Size = new System.Drawing.Size(55, 20);
             this.nudFontSizeHeading1.TabIndex = 10;
-            this.nudFontSizeHeading1.Value = global::TDMaker.Properties.Settings.Default.FontSizeHeading1;
+            this.nudFontSizeHeading1.Value = settings1.FontSizeHeading1;
             // 
             // label9
             // 
@@ -1208,7 +1295,7 @@
             // 
             // nudHeading2Size
             // 
-            this.nudHeading2Size.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TDMaker.Properties.Settings.Default, "FontSizeHeading2", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nudHeading2Size.DataBindings.Add(new System.Windows.Forms.Binding("Value", settings1, "FontSizeHeading2", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.nudHeading2Size.Location = new System.Drawing.Point(106, 53);
             this.nudHeading2Size.Minimum = new decimal(new int[] {
             1,
@@ -1218,7 +1305,7 @@
             this.nudHeading2Size.Name = "nudHeading2Size";
             this.nudHeading2Size.Size = new System.Drawing.Size(55, 20);
             this.nudHeading2Size.TabIndex = 8;
-            this.nudHeading2Size.Value = global::TDMaker.Properties.Settings.Default.FontSizeHeading2;
+            this.nudHeading2Size.Value = settings1.FontSizeHeading2;
             // 
             // label8
             // 
@@ -1231,7 +1318,7 @@
             // 
             // nudHeading3Size
             // 
-            this.nudHeading3Size.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TDMaker.Properties.Settings.Default, "FontSizeHeading3", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nudHeading3Size.DataBindings.Add(new System.Windows.Forms.Binding("Value", settings1, "FontSizeHeading3", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.nudHeading3Size.Location = new System.Drawing.Point(106, 79);
             this.nudHeading3Size.Minimum = new decimal(new int[] {
             1,
@@ -1241,7 +1328,7 @@
             this.nudHeading3Size.Name = "nudHeading3Size";
             this.nudHeading3Size.Size = new System.Drawing.Size(55, 20);
             this.nudHeading3Size.TabIndex = 4;
-            this.nudHeading3Size.Value = global::TDMaker.Properties.Settings.Default.FontSizeHeading3;
+            this.nudHeading3Size.Value = settings1.FontSizeHeading3;
             // 
             // label7
             // 
@@ -1254,7 +1341,7 @@
             // 
             // nudBodyText
             // 
-            this.nudBodyText.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TDMaker.Properties.Settings.Default, "FontSizeBody", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nudBodyText.DataBindings.Add(new System.Windows.Forms.Binding("Value", settings1, "FontSizeBody", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.nudBodyText.Location = new System.Drawing.Point(106, 105);
             this.nudBodyText.Minimum = new decimal(new int[] {
             1,
@@ -1264,7 +1351,7 @@
             this.nudBodyText.Name = "nudBodyText";
             this.nudBodyText.Size = new System.Drawing.Size(55, 20);
             this.nudBodyText.TabIndex = 5;
-            this.nudBodyText.Value = global::TDMaker.Properties.Settings.Default.FontSizeBody;
+            this.nudBodyText.Value = settings1.FontSizeBody;
             // 
             // label3
             // 
@@ -1278,9 +1365,9 @@
             // chkUploadFullScreenshot
             // 
             this.chkUploadFullScreenshot.AutoSize = true;
-            this.chkUploadFullScreenshot.Checked = global::TDMaker.Properties.Settings.Default.UseFullPicture;
+            this.chkUploadFullScreenshot.Checked = settings1.UseFullPicture;
             this.chkUploadFullScreenshot.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUploadFullScreenshot.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "UseFullPicture", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkUploadFullScreenshot.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings1, "UseFullPicture", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkUploadFullScreenshot.Location = new System.Drawing.Point(16, 41);
             this.chkUploadFullScreenshot.Name = "chkUploadFullScreenshot";
             this.chkUploadFullScreenshot.Size = new System.Drawing.Size(200, 17);
@@ -1291,8 +1378,8 @@
             // chkTemplatesMode
             // 
             this.chkTemplatesMode.AutoSize = true;
-            this.chkTemplatesMode.Checked = global::TDMaker.Properties.Settings.Default.TemplatesMode;
-            this.chkTemplatesMode.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "TemplatesMode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkTemplatesMode.Checked = settings1.TemplatesMode;
+            this.chkTemplatesMode.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings1, "TemplatesMode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkTemplatesMode.Location = new System.Drawing.Point(16, 16);
             this.chkTemplatesMode.Name = "chkTemplatesMode";
             this.chkTemplatesMode.Size = new System.Drawing.Size(230, 17);
@@ -1377,113 +1464,6 @@
             this.pMTNUsage.Size = new System.Drawing.Size(724, 385);
             this.pMTNUsage.TabIndex = 14;
             // 
-            // nudMTN_B_OmitStart
-            // 
-            this.nudMTN_B_OmitStart.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TDMaker.ScreenshotSettings.Default, "B_OmitBegin", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.nudMTN_B_OmitStart.DecimalPlaces = 1;
-            this.nudMTN_B_OmitStart.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.nudMTN_B_OmitStart.Location = new System.Drawing.Point(172, 213);
-            this.nudMTN_B_OmitStart.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.nudMTN_B_OmitStart.Name = "nudMTN_B_OmitStart";
-            this.nudMTN_B_OmitStart.Size = new System.Drawing.Size(120, 20);
-            this.nudMTN_B_OmitStart.TabIndex = 52;
-            this.ttApp.SetToolTip(this.nudMTN_B_OmitStart, "Keep 0 for Exact Dimensions");
-            this.nudMTN_B_OmitStart.Value = global::TDMaker.ScreenshotSettings.Default.B_OmitBegin;
-            // 
-            // chkMTN_B_OmitBegin
-            // 
-            this.chkMTN_B_OmitBegin.AutoSize = true;
-            this.chkMTN_B_OmitBegin.Location = new System.Drawing.Point(22, 215);
-            this.chkMTN_B_OmitBegin.Name = "chkMTN_B_OmitBegin";
-            this.chkMTN_B_OmitBegin.Size = new System.Drawing.Size(121, 17);
-            this.chkMTN_B_OmitBegin.TabIndex = 51;
-            this.chkMTN_B_OmitBegin.Text = "&Omit Start (seconds)";
-            this.chkMTN_B_OmitBegin.UseVisualStyleBackColor = true;
-            // 
-            // nudMTN_D_EdgeDetection
-            // 
-            this.nudMTN_D_EdgeDetection.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TDMaker.ScreenshotSettings.Default, "D_EdgeDetection", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.nudMTN_D_EdgeDetection.Location = new System.Drawing.Point(172, 263);
-            this.nudMTN_D_EdgeDetection.Name = "nudMTN_D_EdgeDetection";
-            this.nudMTN_D_EdgeDetection.Size = new System.Drawing.Size(120, 20);
-            this.nudMTN_D_EdgeDetection.TabIndex = 50;
-            this.nudMTN_D_EdgeDetection.Value = global::TDMaker.ScreenshotSettings.Default.D_EdgeDetection;
-            // 
-            // chkMTN_D_EdgeDetection
-            // 
-            this.chkMTN_D_EdgeDetection.AutoSize = true;
-            this.chkMTN_D_EdgeDetection.Checked = true;
-            this.chkMTN_D_EdgeDetection.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_D_EdgeDetection.Location = new System.Drawing.Point(22, 265);
-            this.chkMTN_D_EdgeDetection.Name = "chkMTN_D_EdgeDetection";
-            this.chkMTN_D_EdgeDetection.Size = new System.Drawing.Size(100, 17);
-            this.chkMTN_D_EdgeDetection.TabIndex = 49;
-            this.chkMTN_D_EdgeDetection.Text = "Edge Detection";
-            this.chkMTN_D_EdgeDetection.UseVisualStyleBackColor = true;
-            // 
-            // nudMTN_E_OmitEnd
-            // 
-            this.nudMTN_E_OmitEnd.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TDMaker.ScreenshotSettings.Default, "E_OmitEnd", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.nudMTN_E_OmitEnd.DecimalPlaces = 1;
-            this.nudMTN_E_OmitEnd.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.nudMTN_E_OmitEnd.Location = new System.Drawing.Point(172, 238);
-            this.nudMTN_E_OmitEnd.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.nudMTN_E_OmitEnd.Name = "nudMTN_E_OmitEnd";
-            this.nudMTN_E_OmitEnd.Size = new System.Drawing.Size(120, 20);
-            this.nudMTN_E_OmitEnd.TabIndex = 48;
-            this.ttApp.SetToolTip(this.nudMTN_E_OmitEnd, "Keep 0 for Exact Dimensions");
-            this.nudMTN_E_OmitEnd.Value = global::TDMaker.ScreenshotSettings.Default.E_OmitEnd;
-            // 
-            // chkMTN_E_OmitEnd
-            // 
-            this.chkMTN_E_OmitEnd.AutoSize = true;
-            this.chkMTN_E_OmitEnd.Location = new System.Drawing.Point(22, 240);
-            this.chkMTN_E_OmitEnd.Name = "chkMTN_E_OmitEnd";
-            this.chkMTN_E_OmitEnd.Size = new System.Drawing.Size(118, 17);
-            this.chkMTN_E_OmitEnd.TabIndex = 47;
-            this.chkMTN_E_OmitEnd.Text = "&Omit End (seconds)";
-            this.chkMTN_E_OmitEnd.UseVisualStyleBackColor = true;
-            // 
-            // nudMTN_h_HeightMin
-            // 
-            this.nudMTN_h_HeightMin.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TDMaker.ScreenshotSettings.Default, "h_MinHeight", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.nudMTN_h_HeightMin.Location = new System.Drawing.Point(172, 62);
-            this.nudMTN_h_HeightMin.Maximum = new decimal(new int[] {
-            1200,
-            0,
-            0,
-            0});
-            this.nudMTN_h_HeightMin.Name = "nudMTN_h_HeightMin";
-            this.nudMTN_h_HeightMin.Size = new System.Drawing.Size(120, 20);
-            this.nudMTN_h_HeightMin.TabIndex = 46;
-            this.nudMTN_h_HeightMin.Value = global::TDMaker.ScreenshotSettings.Default.h_MinHeight;
-            // 
-            // chkMTN_h_Height
-            // 
-            this.chkMTN_h_Height.AutoSize = true;
-            this.chkMTN_h_Height.Location = new System.Drawing.Point(22, 65);
-            this.chkMTN_h_Height.Name = "chkMTN_h_Height";
-            this.chkMTN_h_Height.Size = new System.Drawing.Size(107, 17);
-            this.chkMTN_h_Height.TabIndex = 45;
-            this.chkMTN_h_Height.Text = "Height (Minimum)";
-            this.chkMTN_h_Height.UseVisualStyleBackColor = true;
-            // 
             // chkMTN_v_Verbose
             // 
             this.chkMTN_v_Verbose.AutoSize = true;
@@ -1493,15 +1473,6 @@
             this.chkMTN_v_Verbose.TabIndex = 44;
             this.chkMTN_v_Verbose.Text = "&Verbose Mode";
             this.chkMTN_v_Verbose.UseVisualStyleBackColor = true;
-            // 
-            // txtMTN_o_OutputSuffix
-            // 
-            this.txtMTN_o_OutputSuffix.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.ScreenshotSettings.Default, "o_OutputSuffix", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtMTN_o_OutputSuffix.Location = new System.Drawing.Point(444, 194);
-            this.txtMTN_o_OutputSuffix.Name = "txtMTN_o_OutputSuffix";
-            this.txtMTN_o_OutputSuffix.Size = new System.Drawing.Size(232, 20);
-            this.txtMTN_o_OutputSuffix.TabIndex = 43;
-            this.txtMTN_o_OutputSuffix.Text = global::TDMaker.ScreenshotSettings.Default.o_OutputSuffix;
             // 
             // chkMTN_o_OutputSuffix
             // 
@@ -1514,53 +1485,7 @@
             this.chkMTN_o_OutputSuffix.TabIndex = 42;
             this.chkMTN_o_OutputSuffix.Text = "Output Suffix";
             this.chkMTN_o_OutputSuffix.UseVisualStyleBackColor = true;
-            // 
-            // txtMTN_N_InfoSuffix
-            // 
-            this.txtMTN_N_InfoSuffix.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.ScreenshotSettings.Default, "N_InfoSuffix", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtMTN_N_InfoSuffix.Location = new System.Drawing.Point(444, 167);
-            this.txtMTN_N_InfoSuffix.Name = "txtMTN_N_InfoSuffix";
-            this.txtMTN_N_InfoSuffix.Size = new System.Drawing.Size(232, 20);
-            this.txtMTN_N_InfoSuffix.TabIndex = 41;
-            this.txtMTN_N_InfoSuffix.Text = global::TDMaker.ScreenshotSettings.Default.N_InfoSuffix;
-            // 
-            // chkMTN_N_WriteInfo
-            // 
-            this.chkMTN_N_WriteInfo.AutoSize = true;
-            this.chkMTN_N_WriteInfo.Location = new System.Drawing.Point(350, 170);
-            this.chkMTN_N_WriteInfo.Name = "chkMTN_N_WriteInfo";
-            this.chkMTN_N_WriteInfo.Size = new System.Drawing.Size(73, 17);
-            this.chkMTN_N_WriteInfo.TabIndex = 40;
-            this.chkMTN_N_WriteInfo.Text = "&Info Suffix";
-            this.chkMTN_N_WriteInfo.UseVisualStyleBackColor = true;
-            // 
-            // chkMTN_z_SeekMode
-            // 
-            this.chkMTN_z_SeekMode.AutoSize = true;
-            this.chkMTN_z_SeekMode.Checked = global::TDMaker.ScreenshotSettings.Default.z_Seek;
-            this.chkMTN_z_SeekMode.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-            this.chkMTN_z_SeekMode.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.ScreenshotSettings.Default, "z_Seek", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkMTN_z_SeekMode.Location = new System.Drawing.Point(556, 309);
-            this.chkMTN_z_SeekMode.Name = "chkMTN_z_SeekMode";
-            this.chkMTN_z_SeekMode.Size = new System.Drawing.Size(81, 17);
-            this.chkMTN_z_SeekMode.TabIndex = 10;
-            this.chkMTN_z_SeekMode.Text = "&Seek Mode";
-            this.chkMTN_z_SeekMode.ThreeState = true;
-            this.chkMTN_z_SeekMode.UseVisualStyleBackColor = true;
-            this.chkMTN_z_SeekMode.Visible = false;
-            // 
-            // chkMTN_i_MediaInfoTurnOff
-            // 
-            this.chkMTN_i_MediaInfoTurnOff.AutoSize = true;
-            this.chkMTN_i_MediaInfoTurnOff.Checked = global::TDMaker.ScreenshotSettings.Default.i_InfoOff;
-            this.chkMTN_i_MediaInfoTurnOff.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.ScreenshotSettings.Default, "i_InfoOff", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkMTN_i_MediaInfoTurnOff.Location = new System.Drawing.Point(350, 18);
-            this.chkMTN_i_MediaInfoTurnOff.Name = "chkMTN_i_MediaInfoTurnOff";
-            this.chkMTN_i_MediaInfoTurnOff.Size = new System.Drawing.Size(116, 17);
-            this.chkMTN_i_MediaInfoTurnOff.TabIndex = 37;
-            this.chkMTN_i_MediaInfoTurnOff.Text = "Turn off Media Info";
-            this.chkMTN_i_MediaInfoTurnOff.UseVisualStyleBackColor = false;
-            this.chkMTN_i_MediaInfoTurnOff.CheckedChanged += new System.EventHandler(this.chkMTN_i_MediaInfo_CheckedChanged);
+            this.chkMTN_o_OutputSuffix.CheckedChanged += new System.EventHandler(this.chkMTN_o_OutputSuffix_CheckedChanged);
             // 
             // gbMTN_i_MediaInfo
             // 
@@ -1581,29 +1506,6 @@
             this.gbMTN_i_MediaInfo.TabStop = false;
             this.gbMTN_i_MediaInfo.Text = "Media Info";
             // 
-            // chkMTN_T_Title
-            // 
-            this.chkMTN_T_Title.AutoSize = true;
-            this.chkMTN_T_Title.Location = new System.Drawing.Point(12, 18);
-            this.chkMTN_T_Title.Name = "chkMTN_T_Title";
-            this.chkMTN_T_Title.Size = new System.Drawing.Size(46, 17);
-            this.chkMTN_T_Title.TabIndex = 46;
-            this.chkMTN_T_Title.Text = "&Title";
-            this.chkMTN_T_Title.UseVisualStyleBackColor = true;
-            // 
-            // cboMTN_f_FontType
-            // 
-            this.cboMTN_f_FontType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cboMTN_f_FontType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
-            this.cboMTN_f_FontType.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.ScreenshotSettings.Default, "f_Font", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cboMTN_f_FontType.FormattingEnabled = true;
-            this.cboMTN_f_FontType.Location = new System.Drawing.Point(106, 41);
-            this.cboMTN_f_FontType.Name = "cboMTN_f_FontType";
-            this.cboMTN_f_FontType.Size = new System.Drawing.Size(232, 21);
-            this.cboMTN_f_FontType.TabIndex = 12;
-            this.cboMTN_f_FontType.Text = global::TDMaker.ScreenshotSettings.Default.f_Font;
-            this.ttApp.SetToolTip(this.cboMTN_f_FontType, "tahomabd.ttf : font file; use absolute path if not in usual places");
-            // 
             // txtMTN_T_Title
             // 
             this.txtMTN_T_Title.Location = new System.Drawing.Point(106, 16);
@@ -1615,8 +1517,9 @@
             // chkMTN_f_Font
             // 
             this.chkMTN_f_Font.AutoSize = true;
-            this.chkMTN_f_Font.Checked = true;
+            this.chkMTN_f_Font.Checked = global::TDMaker.ScreenshotSettings.Default.chkMTN_f_Font;
             this.chkMTN_f_Font.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMTN_f_Font.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.ScreenshotSettings.Default, "chkMTN_f_Font", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkMTN_f_Font.Location = new System.Drawing.Point(12, 43);
             this.chkMTN_f_Font.Name = "chkMTN_f_Font";
             this.chkMTN_f_Font.Size = new System.Drawing.Size(78, 17);
@@ -1637,18 +1540,6 @@
             this.ttApp.SetToolTip(this.chkMTN_F_FontColor, "-F RRGGBB:size");
             this.chkMTN_F_FontColor.UseVisualStyleBackColor = true;
             // 
-            // cboMTN_F_FontColor
-            // 
-            this.cboMTN_F_FontColor.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.ScreenshotSettings.Default, "F_FontColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cboMTN_F_FontColor.FormattingEnabled = true;
-            this.cboMTN_F_FontColor.Location = new System.Drawing.Point(106, 67);
-            this.cboMTN_F_FontColor.MaxLength = 6;
-            this.cboMTN_F_FontColor.Name = "cboMTN_F_FontColor";
-            this.cboMTN_F_FontColor.Size = new System.Drawing.Size(120, 21);
-            this.cboMTN_F_FontColor.TabIndex = 27;
-            this.cboMTN_F_FontColor.Text = global::TDMaker.ScreenshotSettings.Default.F_FontColor;
-            this.cboMTN_F_FontColor.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cboMTN_F_FontColor_MouseClick);
-            // 
             // chkMTN_F_FontSize
             // 
             this.chkMTN_F_FontSize.AutoSize = true;
@@ -1661,27 +1552,6 @@
             this.chkMTN_F_FontSize.Text = "Size";
             this.ttApp.SetToolTip(this.chkMTN_F_FontSize, "-F RRGGBB:size");
             this.chkMTN_F_FontSize.UseVisualStyleBackColor = true;
-            // 
-            // nudMTN_F_FontSize
-            // 
-            this.nudMTN_F_FontSize.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TDMaker.ScreenshotSettings.Default, "F_FontSize", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.nudMTN_F_FontSize.Location = new System.Drawing.Point(286, 68);
-            this.nudMTN_F_FontSize.Name = "nudMTN_F_FontSize";
-            this.nudMTN_F_FontSize.Size = new System.Drawing.Size(52, 20);
-            this.nudMTN_F_FontSize.TabIndex = 34;
-            this.nudMTN_F_FontSize.Value = global::TDMaker.ScreenshotSettings.Default.F_FontSize;
-            // 
-            // chkMTN_L_LocInfo
-            // 
-            this.chkMTN_L_LocInfo.AutoSize = true;
-            this.chkMTN_L_LocInfo.Checked = true;
-            this.chkMTN_L_LocInfo.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_L_LocInfo.Location = new System.Drawing.Point(12, 94);
-            this.chkMTN_L_LocInfo.Name = "chkMTN_L_LocInfo";
-            this.chkMTN_L_LocInfo.Size = new System.Drawing.Size(67, 17);
-            this.chkMTN_L_LocInfo.TabIndex = 29;
-            this.chkMTN_L_LocInfo.Text = "Location";
-            this.chkMTN_L_LocInfo.UseVisualStyleBackColor = true;
             // 
             // cboMTN_L_LocInfo
             // 
@@ -1698,32 +1568,6 @@
             this.cboMTN_L_LocInfo.Size = new System.Drawing.Size(232, 21);
             this.cboMTN_L_LocInfo.TabIndex = 30;
             // 
-            // nudMTN_j_JPEGQuality
-            // 
-            this.nudMTN_j_JPEGQuality.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TDMaker.ScreenshotSettings.Default, "j_JpgQuality", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.nudMTN_j_JPEGQuality.Location = new System.Drawing.Point(172, 188);
-            this.nudMTN_j_JPEGQuality.Minimum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this.nudMTN_j_JPEGQuality.Name = "nudMTN_j_JPEGQuality";
-            this.nudMTN_j_JPEGQuality.Size = new System.Drawing.Size(120, 20);
-            this.nudMTN_j_JPEGQuality.TabIndex = 36;
-            this.nudMTN_j_JPEGQuality.Value = global::TDMaker.ScreenshotSettings.Default.j_JpgQuality;
-            // 
-            // chkMTN_j_JPEGQuality
-            // 
-            this.chkMTN_j_JPEGQuality.AutoSize = true;
-            this.chkMTN_j_JPEGQuality.Checked = true;
-            this.chkMTN_j_JPEGQuality.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_j_JPEGQuality.Location = new System.Drawing.Point(22, 190);
-            this.chkMTN_j_JPEGQuality.Name = "chkMTN_j_JPEGQuality";
-            this.chkMTN_j_JPEGQuality.Size = new System.Drawing.Size(105, 17);
-            this.chkMTN_j_JPEGQuality.TabIndex = 35;
-            this.chkMTN_j_JPEGQuality.Text = "JPEG Quality (%)";
-            this.chkMTN_j_JPEGQuality.UseVisualStyleBackColor = true;
-            // 
             // cboMTN_L_LocTimestamp
             // 
             this.cboMTN_L_LocTimestamp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1739,31 +1583,6 @@
             this.cboMTN_L_LocTimestamp.Size = new System.Drawing.Size(120, 21);
             this.cboMTN_L_LocTimestamp.TabIndex = 32;
             // 
-            // chkMTN_tL_LocTimestamp
-            // 
-            this.chkMTN_tL_LocTimestamp.AutoSize = true;
-            this.chkMTN_tL_LocTimestamp.Checked = true;
-            this.chkMTN_tL_LocTimestamp.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_tL_LocTimestamp.Location = new System.Drawing.Point(472, 18);
-            this.chkMTN_tL_LocTimestamp.Name = "chkMTN_tL_LocTimestamp";
-            this.chkMTN_tL_LocTimestamp.Size = new System.Drawing.Size(77, 17);
-            this.chkMTN_tL_LocTimestamp.TabIndex = 31;
-            this.chkMTN_tL_LocTimestamp.Text = "Timestamp";
-            this.chkMTN_tL_LocTimestamp.UseVisualStyleBackColor = true;
-            // 
-            // chkMTN_k_ColorBackground
-            // 
-            this.chkMTN_k_ColorBackground.AutoSize = true;
-            this.chkMTN_k_ColorBackground.Checked = true;
-            this.chkMTN_k_ColorBackground.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_k_ColorBackground.Location = new System.Drawing.Point(22, 140);
-            this.chkMTN_k_ColorBackground.Name = "chkMTN_k_ColorBackground";
-            this.chkMTN_k_ColorBackground.Size = new System.Drawing.Size(111, 17);
-            this.chkMTN_k_ColorBackground.TabIndex = 28;
-            this.chkMTN_k_ColorBackground.Text = "&Background Color";
-            this.ttApp.SetToolTip(this.chkMTN_k_ColorBackground, "  -k RRGGBB : background color (in hex)");
-            this.chkMTN_k_ColorBackground.UseVisualStyleBackColor = true;
-            // 
             // nudMTN_g_Gap
             // 
             this.nudMTN_g_Gap.Location = new System.Drawing.Point(172, 112);
@@ -1776,108 +1595,11 @@
             0,
             0});
             // 
-            // chkMTN_g_Gap
-            // 
-            this.chkMTN_g_Gap.AutoSize = true;
-            this.chkMTN_g_Gap.Checked = true;
-            this.chkMTN_g_Gap.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_g_Gap.Location = new System.Drawing.Point(22, 115);
-            this.chkMTN_g_Gap.Name = "chkMTN_g_Gap";
-            this.chkMTN_g_Gap.Size = new System.Drawing.Size(120, 17);
-            this.chkMTN_g_Gap.TabIndex = 25;
-            this.chkMTN_g_Gap.Text = "Gap between Shots";
-            this.chkMTN_g_Gap.UseVisualStyleBackColor = true;
-            // 
-            // cboMTN_k_ColorBkgrd
-            // 
-            this.cboMTN_k_ColorBkgrd.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.ScreenshotSettings.Default, "k_ColorBackground", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cboMTN_k_ColorBkgrd.FormattingEnabled = true;
-            this.cboMTN_k_ColorBkgrd.Location = new System.Drawing.Point(172, 137);
-            this.cboMTN_k_ColorBkgrd.MaxLength = 6;
-            this.cboMTN_k_ColorBkgrd.Name = "cboMTN_k_ColorBkgrd";
-            this.cboMTN_k_ColorBkgrd.Size = new System.Drawing.Size(120, 21);
-            this.cboMTN_k_ColorBkgrd.TabIndex = 23;
-            this.cboMTN_k_ColorBkgrd.Text = global::TDMaker.ScreenshotSettings.Default.k_ColorBackground;
-            this.cboMTN_k_ColorBkgrd.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cboMTN_k_ColorBkgrd_MouseClick);
-            // 
-            // nudMTN_w_Width
-            // 
-            this.nudMTN_w_Width.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TDMaker.ScreenshotSettings.Default, "w_Width", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.nudMTN_w_Width.Location = new System.Drawing.Point(172, 87);
-            this.nudMTN_w_Width.Maximum = new decimal(new int[] {
-            2048,
-            0,
-            0,
-            0});
-            this.nudMTN_w_Width.Name = "nudMTN_w_Width";
-            this.nudMTN_w_Width.Size = new System.Drawing.Size(120, 20);
-            this.nudMTN_w_Width.TabIndex = 22;
-            this.ttApp.SetToolTip(this.nudMTN_w_Width, "Keep 0 for Exact Dimensions");
-            this.nudMTN_w_Width.Value = global::TDMaker.ScreenshotSettings.Default.w_Width;
-            // 
-            // chk_w_Width
-            // 
-            this.chk_w_Width.AutoSize = true;
-            this.chk_w_Width.Checked = true;
-            this.chk_w_Width.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk_w_Width.Location = new System.Drawing.Point(22, 90);
-            this.chk_w_Width.Name = "chk_w_Width";
-            this.chk_w_Width.Size = new System.Drawing.Size(54, 17);
-            this.chk_w_Width.TabIndex = 21;
-            this.chk_w_Width.Text = "Width";
-            this.chk_w_Width.UseVisualStyleBackColor = true;
-            // 
-            // chkMTN_P_QuitAfterDone
-            // 
-            this.chkMTN_P_QuitAfterDone.AutoSize = true;
-            this.chkMTN_P_QuitAfterDone.Checked = global::TDMaker.ScreenshotSettings.Default.P_QuitAfterDone;
-            this.chkMTN_P_QuitAfterDone.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_P_QuitAfterDone.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.ScreenshotSettings.Default, "P_QuitAfterDone", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkMTN_P_QuitAfterDone.Location = new System.Drawing.Point(22, 347);
-            this.chkMTN_P_QuitAfterDone.Name = "chkMTN_P_QuitAfterDone";
-            this.chkMTN_P_QuitAfterDone.Size = new System.Drawing.Size(96, 17);
-            this.chkMTN_P_QuitAfterDone.TabIndex = 20;
-            this.chkMTN_P_QuitAfterDone.Text = "&Quit after done";
-            this.chkMTN_P_QuitAfterDone.UseVisualStyleBackColor = true;
-            // 
-            // nudMTN_s_TimeStep
-            // 
-            this.nudMTN_s_TimeStep.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TDMaker.ScreenshotSettings.Default, "s_TimeStep", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.nudMTN_s_TimeStep.Location = new System.Drawing.Point(172, 163);
-            this.nudMTN_s_TimeStep.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.nudMTN_s_TimeStep.Name = "nudMTN_s_TimeStep";
-            this.nudMTN_s_TimeStep.Size = new System.Drawing.Size(120, 20);
-            this.nudMTN_s_TimeStep.TabIndex = 19;
-            this.nudMTN_s_TimeStep.Value = global::TDMaker.ScreenshotSettings.Default.s_TimeStep;
-            // 
-            // chkMTN_s_TimeStep
-            // 
-            this.chkMTN_s_TimeStep.AutoSize = true;
-            this.chkMTN_s_TimeStep.Location = new System.Drawing.Point(22, 165);
-            this.chkMTN_s_TimeStep.Name = "chkMTN_s_TimeStep";
-            this.chkMTN_s_TimeStep.Size = new System.Drawing.Size(123, 17);
-            this.chkMTN_s_TimeStep.TabIndex = 18;
-            this.chkMTN_s_TimeStep.Text = "Time Step (seconds)";
-            this.chkMTN_s_TimeStep.UseVisualStyleBackColor = true;
-            // 
-            // nudMTN_r_Rows
-            // 
-            this.nudMTN_r_Rows.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TDMaker.ScreenshotSettings.Default, "r_Rows", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.nudMTN_r_Rows.Location = new System.Drawing.Point(172, 12);
-            this.nudMTN_r_Rows.Name = "nudMTN_r_Rows";
-            this.nudMTN_r_Rows.Size = new System.Drawing.Size(120, 20);
-            this.nudMTN_r_Rows.TabIndex = 17;
-            this.nudMTN_r_Rows.Value = global::TDMaker.ScreenshotSettings.Default.r_Rows;
-            // 
             // chkShowMTN
             // 
             this.chkShowMTN.AutoSize = true;
-            this.chkShowMTN.Checked = global::TDMaker.Properties.Settings.Default.ShowMTNWindow;
-            this.chkShowMTN.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "ShowMTNWindow", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkShowMTN.Checked = settings1.ShowMTNWindow;
+            this.chkShowMTN.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings1, "ShowMTNWindow", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkShowMTN.Location = new System.Drawing.Point(22, 324);
             this.chkShowMTN.Name = "chkShowMTN";
             this.chkShowMTN.Size = new System.Drawing.Size(122, 17);
@@ -1898,15 +1620,6 @@
             this.chkMTNRows.TabIndex = 16;
             this.chkMTNRows.Text = "Rows";
             this.chkMTNRows.UseVisualStyleBackColor = true;
-            // 
-            // nudMTN_c_Columns
-            // 
-            this.nudMTN_c_Columns.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TDMaker.ScreenshotSettings.Default, "c_Columns", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.nudMTN_c_Columns.Location = new System.Drawing.Point(172, 37);
-            this.nudMTN_c_Columns.Name = "nudMTN_c_Columns";
-            this.nudMTN_c_Columns.Size = new System.Drawing.Size(120, 20);
-            this.nudMTN_c_Columns.TabIndex = 15;
-            this.nudMTN_c_Columns.Value = global::TDMaker.ScreenshotSettings.Default.c_Columns;
             // 
             // chkMTNColumns
             // 
@@ -1958,8 +1671,8 @@
             // chkUseImageShackRegCode
             // 
             this.chkUseImageShackRegCode.AutoSize = true;
-            this.chkUseImageShackRegCode.Checked = global::TDMaker.Properties.Settings.Default.UseImageShackRegCode;
-            this.chkUseImageShackRegCode.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "UseImageShackRegCode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkUseImageShackRegCode.Checked = settings1.UseImageShackRegCode;
+            this.chkUseImageShackRegCode.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings1, "UseImageShackRegCode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkUseImageShackRegCode.Location = new System.Drawing.Point(14, 41);
             this.chkUseImageShackRegCode.Name = "chkUseImageShackRegCode";
             this.chkUseImageShackRegCode.Size = new System.Drawing.Size(135, 17);
@@ -1969,18 +1682,18 @@
             // 
             // txtImageShackRegCode
             // 
-            this.txtImageShackRegCode.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "ImageShackRegCode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtImageShackRegCode.DataBindings.Add(new System.Windows.Forms.Binding("Text", settings1, "ImageShackRegCode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.txtImageShackRegCode.Location = new System.Drawing.Point(155, 38);
             this.txtImageShackRegCode.Name = "txtImageShackRegCode";
             this.txtImageShackRegCode.Size = new System.Drawing.Size(298, 20);
             this.txtImageShackRegCode.TabIndex = 4;
-            this.txtImageShackRegCode.Text = global::TDMaker.Properties.Settings.Default.ImageShackRegCode;
+            this.txtImageShackRegCode.Text = settings1.ImageShackRegCode;
             // 
             // chkRandomizeFileNameImageShack
             // 
             this.chkRandomizeFileNameImageShack.AutoSize = true;
-            this.chkRandomizeFileNameImageShack.Checked = global::TDMaker.Properties.Settings.Default.ImageShakeRandomizeFileName;
-            this.chkRandomizeFileNameImageShack.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "ImageShakeRandomizeFileName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkRandomizeFileNameImageShack.Checked = settings1.ImageShakeRandomizeFileName;
+            this.chkRandomizeFileNameImageShack.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings1, "ImageShakeRandomizeFileName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkRandomizeFileNameImageShack.Location = new System.Drawing.Point(14, 18);
             this.chkRandomizeFileNameImageShack.Name = "chkRandomizeFileNameImageShack";
             this.chkRandomizeFileNameImageShack.Size = new System.Drawing.Size(207, 17);
@@ -2031,24 +1744,12 @@
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Save Location";
             // 
-            // chkWritePublish
-            // 
-            this.chkWritePublish.AutoSize = true;
-            this.chkWritePublish.Checked = global::TDMaker.Properties.Settings.Default.WritePublish;
-            this.chkWritePublish.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "WritePublish", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkWritePublish.Location = new System.Drawing.Point(20, 66);
-            this.chkWritePublish.Name = "chkWritePublish";
-            this.chkWritePublish.Size = new System.Drawing.Size(241, 17);
-            this.chkWritePublish.TabIndex = 5;
-            this.chkWritePublish.Text = "Write Publish Information of the Torrent to File";
-            this.chkWritePublish.UseVisualStyleBackColor = true;
-            // 
             // chkTorrentOrganize
             // 
             this.chkTorrentOrganize.AutoSize = true;
-            this.chkTorrentOrganize.Checked = global::TDMaker.Properties.Settings.Default.TorrentsOrganize;
+            this.chkTorrentOrganize.Checked = settings1.TorrentsOrganize;
             this.chkTorrentOrganize.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkTorrentOrganize.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "TorrentsOrganize", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkTorrentOrganize.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings1, "TorrentsOrganize", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkTorrentOrganize.Location = new System.Drawing.Point(114, 67);
             this.chkTorrentOrganize.Name = "chkTorrentOrganize";
             this.chkTorrentOrganize.Size = new System.Drawing.Size(293, 17);
@@ -2071,12 +1772,12 @@
             // 
             this.txtTorrentCustomFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTorrentCustomFolder.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "TorrentsCustomDir", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtTorrentCustomFolder.DataBindings.Add(new System.Windows.Forms.Binding("Text", settings1, "TorrentsCustomDir", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.txtTorrentCustomFolder.Location = new System.Drawing.Point(114, 41);
             this.txtTorrentCustomFolder.Name = "txtTorrentCustomFolder";
             this.txtTorrentCustomFolder.Size = new System.Drawing.Size(480, 20);
             this.txtTorrentCustomFolder.TabIndex = 2;
-            this.txtTorrentCustomFolder.Text = global::TDMaker.Properties.Settings.Default.TorrentsCustomDir;
+            this.txtTorrentCustomFolder.Text = settings1.TorrentsCustomDir;
             // 
             // rbTorrentFolderCustom
             // 
@@ -2092,8 +1793,8 @@
             // rbTorrentDefaultFolder
             // 
             this.rbTorrentDefaultFolder.AutoSize = true;
-            this.rbTorrentDefaultFolder.Checked = global::TDMaker.Properties.Settings.Default.TorrentFolderDefault;
-            this.rbTorrentDefaultFolder.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "TorrentFolderDefault", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.rbTorrentDefaultFolder.Checked = settings1.TorrentFolderDefault;
+            this.rbTorrentDefaultFolder.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings1, "TorrentFolderDefault", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.rbTorrentDefaultFolder.Location = new System.Drawing.Point(19, 19);
             this.rbTorrentDefaultFolder.Name = "rbTorrentDefaultFolder";
             this.rbTorrentDefaultFolder.Size = new System.Drawing.Size(147, 17);
@@ -2118,36 +1819,36 @@
             // 
             this.dgvTrackers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTrackers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTrackers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvTrackers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTrackers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colName,
             this.colAnnounceURL});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvTrackers.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvTrackers.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvTrackers.Location = new System.Drawing.Point(6, 19);
             this.dgvTrackers.Name = "dgvTrackers";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTrackers.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTrackers.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvTrackers.Size = new System.Drawing.Size(693, 148);
             this.dgvTrackers.TabIndex = 1;
             this.dgvTrackers.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvTrackers_CellValidating);
@@ -2180,8 +1881,8 @@
             // chkCreateTorrent
             // 
             this.chkCreateTorrent.AutoSize = true;
-            this.chkCreateTorrent.Checked = global::TDMaker.Properties.Settings.Default.CreateTorrent;
-            this.chkCreateTorrent.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "CreateTorrent", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkCreateTorrent.Checked = settings1.CreateTorrent;
+            this.chkCreateTorrent.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings1, "CreateTorrent", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkCreateTorrent.Location = new System.Drawing.Point(17, 14);
             this.chkCreateTorrent.Name = "chkCreateTorrent";
             this.chkCreateTorrent.Size = new System.Drawing.Size(182, 17);
@@ -2214,9 +1915,9 @@
             // chkKeepScreenshot
             // 
             this.chkKeepScreenshot.AutoSize = true;
-            this.chkKeepScreenshot.Checked = global::TDMaker.Properties.Settings.Default.KeepScreenshot;
+            this.chkKeepScreenshot.Checked = settings1.KeepScreenshot;
             this.chkKeepScreenshot.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkKeepScreenshot.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "KeepScreenshot", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkKeepScreenshot.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings1, "KeepScreenshot", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkKeepScreenshot.Location = new System.Drawing.Point(42, 24);
             this.chkKeepScreenshot.Name = "chkKeepScreenshot";
             this.chkKeepScreenshot.Size = new System.Drawing.Size(194, 17);
@@ -2266,7 +1967,7 @@
             this.tmsVersionHistory,
             this.cmsAppAbout});
             this.cmsApp.Name = "cmsApp";
-            this.cmsApp.Size = new System.Drawing.Size(181, 98);
+            this.cmsApp.Size = new System.Drawing.Size(176, 98);
             // 
             // foldersToolStripMenuItem
             // 
@@ -2278,72 +1979,72 @@
             this.tsmSettingsDir,
             this.tsmTemplates});
             this.foldersToolStripMenuItem.Name = "foldersToolStripMenuItem";
-            this.foldersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.foldersToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.foldersToolStripMenuItem.Text = "&Folders";
             // 
             // tsmScreenshots
             // 
             this.tsmScreenshots.Name = "tsmScreenshots";
-            this.tsmScreenshots.Size = new System.Drawing.Size(146, 22);
+            this.tsmScreenshots.Size = new System.Drawing.Size(145, 22);
             this.tsmScreenshots.Text = "&Screenshots...";
             this.tsmScreenshots.Click += new System.EventHandler(this.tsmScreenshots_Click);
             // 
             // tsmTorrentsDir
             // 
             this.tsmTorrentsDir.Name = "tsmTorrentsDir";
-            this.tsmTorrentsDir.Size = new System.Drawing.Size(146, 22);
+            this.tsmTorrentsDir.Size = new System.Drawing.Size(145, 22);
             this.tsmTorrentsDir.Text = "&Torrents...";
             this.tsmTorrentsDir.Click += new System.EventHandler(this.tsmTorrentsDir_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(142, 6);
             // 
             // tsmLogsDir
             // 
             this.tsmLogsDir.Name = "tsmLogsDir";
-            this.tsmLogsDir.Size = new System.Drawing.Size(146, 22);
+            this.tsmLogsDir.Size = new System.Drawing.Size(145, 22);
             this.tsmLogsDir.Text = "&Logs...";
             this.tsmLogsDir.Click += new System.EventHandler(this.tsmLogsDir_Click);
             // 
             // tsmSettingsDir
             // 
             this.tsmSettingsDir.Name = "tsmSettingsDir";
-            this.tsmSettingsDir.Size = new System.Drawing.Size(146, 22);
+            this.tsmSettingsDir.Size = new System.Drawing.Size(145, 22);
             this.tsmSettingsDir.Text = "&Settings...";
             this.tsmSettingsDir.Click += new System.EventHandler(this.tsmSettingsDir_Click);
             // 
             // tsmTemplates
             // 
             this.tsmTemplates.Name = "tsmTemplates";
-            this.tsmTemplates.Size = new System.Drawing.Size(146, 22);
+            this.tsmTemplates.Size = new System.Drawing.Size(145, 22);
             this.tsmTemplates.Text = "Templates...";
             this.tsmTemplates.Click += new System.EventHandler(this.tsmTemplates_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(172, 6);
             // 
             // tsmUpdatesCheck
             // 
             this.tsmUpdatesCheck.Name = "tsmUpdatesCheck";
-            this.tsmUpdatesCheck.Size = new System.Drawing.Size(180, 22);
+            this.tsmUpdatesCheck.Size = new System.Drawing.Size(175, 22);
             this.tsmUpdatesCheck.Text = "Check for &Updates...";
             this.tsmUpdatesCheck.Click += new System.EventHandler(this.tsmUpdatesCheck_Click);
             // 
             // tmsVersionHistory
             // 
             this.tmsVersionHistory.Name = "tmsVersionHistory";
-            this.tmsVersionHistory.Size = new System.Drawing.Size(180, 22);
+            this.tmsVersionHistory.Size = new System.Drawing.Size(175, 22);
             this.tmsVersionHistory.Text = "&Version History...";
             this.tmsVersionHistory.Click += new System.EventHandler(this.tmsVersionHistory_Click);
             // 
             // cmsAppAbout
             // 
             this.cmsAppAbout.Name = "cmsAppAbout";
-            this.cmsAppAbout.Size = new System.Drawing.Size(180, 22);
+            this.cmsAppAbout.Size = new System.Drawing.Size(175, 22);
             this.cmsAppAbout.Text = "&About...";
             this.cmsAppAbout.Click += new System.EventHandler(this.cmsAppAbout_Click);
             // 
@@ -2393,7 +2094,7 @@
             this.toolStripSeparator3,
             this.miFileExit});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // miFileOpenFile
@@ -2402,7 +2103,7 @@
             this.miFileOpenFile.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.miFileOpenFile.Name = "miFileOpenFile";
             this.miFileOpenFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.miFileOpenFile.Size = new System.Drawing.Size(223, 22);
+            this.miFileOpenFile.Size = new System.Drawing.Size(215, 22);
             this.miFileOpenFile.Text = "&Open File...";
             this.miFileOpenFile.Click += new System.EventHandler(this.miFileOpenFile_Click);
             // 
@@ -2413,14 +2114,14 @@
             this.miFileOpenFolder.Name = "miFileOpenFolder";
             this.miFileOpenFolder.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
                         | System.Windows.Forms.Keys.O)));
-            this.miFileOpenFolder.Size = new System.Drawing.Size(223, 22);
+            this.miFileOpenFolder.Size = new System.Drawing.Size(215, 22);
             this.miFileOpenFolder.Text = "&Open Folder...";
             this.miFileOpenFolder.Click += new System.EventHandler(this.miFileOpenFolder_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(220, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(212, 6);
             // 
             // miFileSaveTorrent
             // 
@@ -2428,26 +2129,26 @@
             this.miFileSaveTorrent.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.miFileSaveTorrent.Name = "miFileSaveTorrent";
             this.miFileSaveTorrent.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.miFileSaveTorrent.Size = new System.Drawing.Size(223, 22);
+            this.miFileSaveTorrent.Size = new System.Drawing.Size(215, 22);
             this.miFileSaveTorrent.Text = "&Save Torrent";
             this.miFileSaveTorrent.Click += new System.EventHandler(this.miFileSaveTorrent_Click);
             // 
             // miFileSaveInfoAs
             // 
             this.miFileSaveInfoAs.Name = "miFileSaveInfoAs";
-            this.miFileSaveInfoAs.Size = new System.Drawing.Size(223, 22);
+            this.miFileSaveInfoAs.Size = new System.Drawing.Size(215, 22);
             this.miFileSaveInfoAs.Text = "&Save Publish Info As...";
             this.miFileSaveInfoAs.Click += new System.EventHandler(this.miFileSaveInfoAs_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(220, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(212, 6);
             // 
             // miFileExit
             // 
             this.miFileExit.Name = "miFileExit";
-            this.miFileExit.Size = new System.Drawing.Size(223, 22);
+            this.miFileExit.Size = new System.Drawing.Size(215, 22);
             this.miFileExit.Text = "E&xit";
             this.miFileExit.Click += new System.EventHandler(this.miFileExit_Click);
             // 
@@ -2456,7 +2157,7 @@
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miEditCopy});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.editToolStripMenuItem.Text = "&Edit";
             // 
             // miEditCopy
@@ -2465,7 +2166,7 @@
             this.miEditCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.miEditCopy.Name = "miEditCopy";
             this.miEditCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.miEditCopy.Size = new System.Drawing.Size(144, 22);
+            this.miEditCopy.Size = new System.Drawing.Size(138, 22);
             this.miEditCopy.Text = "&Copy";
             this.miEditCopy.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
@@ -2479,55 +2180,55 @@
             this.miFoldersSettings,
             this.miFoldersTemplates});
             this.foldersToolStripMenuItem1.Name = "foldersToolStripMenuItem1";
-            this.foldersToolStripMenuItem1.Size = new System.Drawing.Size(57, 20);
+            this.foldersToolStripMenuItem1.Size = new System.Drawing.Size(54, 20);
             this.foldersToolStripMenuItem1.Text = "&Folders";
             // 
             // miFoldersScreenshots
             // 
             this.miFoldersScreenshots.Name = "miFoldersScreenshots";
-            this.miFoldersScreenshots.Size = new System.Drawing.Size(146, 22);
+            this.miFoldersScreenshots.Size = new System.Drawing.Size(145, 22);
             this.miFoldersScreenshots.Text = "&Screenshots...";
             this.miFoldersScreenshots.Click += new System.EventHandler(this.miFoldersScreenshots_Click);
             // 
             // miFoldersTorrents
             // 
             this.miFoldersTorrents.Name = "miFoldersTorrents";
-            this.miFoldersTorrents.Size = new System.Drawing.Size(146, 22);
+            this.miFoldersTorrents.Size = new System.Drawing.Size(145, 22);
             this.miFoldersTorrents.Text = "&Torrents...";
             this.miFoldersTorrents.Click += new System.EventHandler(this.miFoldersTorrents_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(142, 6);
             // 
             // miFoldersLogs
             // 
             this.miFoldersLogs.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miFoldersLogsDebug});
             this.miFoldersLogs.Name = "miFoldersLogs";
-            this.miFoldersLogs.Size = new System.Drawing.Size(146, 22);
+            this.miFoldersLogs.Size = new System.Drawing.Size(145, 22);
             this.miFoldersLogs.Text = "&Logs...";
             this.miFoldersLogs.Click += new System.EventHandler(this.miFoldersLogs_Click);
             // 
             // miFoldersLogsDebug
             // 
             this.miFoldersLogsDebug.Name = "miFoldersLogsDebug";
-            this.miFoldersLogsDebug.Size = new System.Drawing.Size(118, 22);
+            this.miFoldersLogsDebug.Size = new System.Drawing.Size(117, 22);
             this.miFoldersLogsDebug.Text = "&Debug...";
             this.miFoldersLogsDebug.Click += new System.EventHandler(this.miFoldersLogsDebug_Click);
             // 
             // miFoldersSettings
             // 
             this.miFoldersSettings.Name = "miFoldersSettings";
-            this.miFoldersSettings.Size = new System.Drawing.Size(146, 22);
+            this.miFoldersSettings.Size = new System.Drawing.Size(145, 22);
             this.miFoldersSettings.Text = "&Settings...";
             this.miFoldersSettings.Click += new System.EventHandler(this.miFoldersSettings_Click);
             // 
             // miFoldersTemplates
             // 
             this.miFoldersTemplates.Name = "miFoldersTemplates";
-            this.miFoldersTemplates.Size = new System.Drawing.Size(146, 22);
+            this.miFoldersTemplates.Size = new System.Drawing.Size(145, 22);
             this.miFoldersTemplates.Text = "&Templates...";
             this.miFoldersTemplates.Click += new System.EventHandler(this.miFoldersTemplates_Click);
             // 
@@ -2538,29 +2239,623 @@
             this.miHelpVersionHistory,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // miHelpCheckUpdates
             // 
             this.miHelpCheckUpdates.Name = "miHelpCheckUpdates";
-            this.miHelpCheckUpdates.Size = new System.Drawing.Size(180, 22);
+            this.miHelpCheckUpdates.Size = new System.Drawing.Size(175, 22);
             this.miHelpCheckUpdates.Text = "&Check for Updates...";
             this.miHelpCheckUpdates.Click += new System.EventHandler(this.miHelpCheckUpdates_Click);
             // 
             // miHelpVersionHistory
             // 
             this.miHelpVersionHistory.Name = "miHelpVersionHistory";
-            this.miHelpVersionHistory.Size = new System.Drawing.Size(180, 22);
+            this.miHelpVersionHistory.Size = new System.Drawing.Size(175, 22);
             this.miHelpVersionHistory.Text = "&Version History...";
             this.miHelpVersionHistory.Click += new System.EventHandler(this.miHelpVersionHistory_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.aboutToolStripMenuItem.Text = "&About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // nudMTN_B_OmitStart
+            // 
+            screenshotSettings1.a_AspectRatio = "";
+            screenshotSettings1.B_OmitBegin = new decimal(new int[] {
+            0,
+            0,
+            0,
+            65536});
+            screenshotSettings1.b_SkipBlank = new decimal(new int[] {
+            0,
+            0,
+            0,
+            65536});
+            screenshotSettings1.c_Columns = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            screenshotSettings1.C_CutMovie = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            screenshotSettings1.chk_h_MinHeight = false;
+            screenshotSettings1.chk_w_Width = false;
+            screenshotSettings1.chkMTN_B_OmitBegin = false;
+            screenshotSettings1.chkMTN_D_EdgeDetection = true;
+            screenshotSettings1.chkMTN_E_OmitEnd = false;
+            screenshotSettings1.chkMTN_g_Gap = true;
+            screenshotSettings1.chkMTN_j_JPEGQuality = true;
+            screenshotSettings1.chkMTN_k_ColorBackground = true;
+            screenshotSettings1.chkMTN_L_LocInfo = true;
+            screenshotSettings1.chkMTN_N_WriteInfo = false;
+            screenshotSettings1.chkMTN_s_TimeStep = false;
+            screenshotSettings1.chkMTN_T_Title = false;
+            screenshotSettings1.chkMTN_tL_LocTimestamp = true;
+            screenshotSettings1.D_EdgeDetection = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            screenshotSettings1.E_OmitEnd = new decimal(new int[] {
+            0,
+            0,
+            0,
+            65536});
+            screenshotSettings1.f_Font = "tahomabd.ttf";
+            screenshotSettings1.F_FontColor = "000000";
+            screenshotSettings1.F_FontSize = new decimal(new int[] {
+            12,
+            0,
+            0,
+            0});
+            screenshotSettings1.g_GapBetweenShots = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            screenshotSettings1.h_MinHeight = new decimal(new int[] {
+            150,
+            0,
+            0,
+            0});
+            screenshotSettings1.I_IndivScreens = false;
+            screenshotSettings1.i_InfoOff = false;
+            screenshotSettings1.InfoTextIndex = 3;
+            screenshotSettings1.InfoTimestampIndex = 1;
+            screenshotSettings1.j_JpgQuality = new decimal(new int[] {
+            97,
+            0,
+            0,
+            0});
+            screenshotSettings1.k_ColorBackground = "EEEEEE";
+            screenshotSettings1.L_InfoLocation = "4:2";
+            screenshotSettings1.N_InfoSuffix = "_s.txt";
+            screenshotSettings1.n_Priority = false;
+            screenshotSettings1.O_OutputDir = "";
+            screenshotSettings1.o_OutputSuffix = "_s.jpg";
+            screenshotSettings1.p_PauseBeforeExit = false;
+            screenshotSettings1.P_QuitAfterDone = true;
+            screenshotSettings1.r_Rows = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            screenshotSettings1.s_TimeStep = new decimal(new int[] {
+            120,
+            0,
+            0,
+            0});
+            screenshotSettings1.SettingsKey = "";
+            screenshotSettings1.T_Text = false;
+            screenshotSettings1.t_TimeStamp = false;
+            screenshotSettings1.v_Verbose = false;
+            screenshotSettings1.W_Update = false;
+            screenshotSettings1.w_Width = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            screenshotSettings1.Z_NonSeek = "false";
+            screenshotSettings1.z_Seek = false;
+            this.nudMTN_B_OmitStart.DataBindings.Add(new System.Windows.Forms.Binding("Value", screenshotSettings1, "B_OmitBegin", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nudMTN_B_OmitStart.DecimalPlaces = 1;
+            this.nudMTN_B_OmitStart.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudMTN_B_OmitStart.Location = new System.Drawing.Point(172, 213);
+            this.nudMTN_B_OmitStart.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nudMTN_B_OmitStart.Name = "nudMTN_B_OmitStart";
+            this.nudMTN_B_OmitStart.Size = new System.Drawing.Size(120, 20);
+            this.nudMTN_B_OmitStart.TabIndex = 52;
+            this.ttApp.SetToolTip(this.nudMTN_B_OmitStart, "Keep 0 for Exact Dimensions");
+            this.nudMTN_B_OmitStart.Value = screenshotSettings1.B_OmitBegin;
+            // 
+            // chkMTN_B_OmitBegin
+            // 
+            this.chkMTN_B_OmitBegin.AutoSize = true;
+            this.chkMTN_B_OmitBegin.Checked = global::TDMaker.ScreenshotSettings.Default.chkMTN_B_OmitBegin;
+            this.chkMTN_B_OmitBegin.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.ScreenshotSettings.Default, "chkMTN_B_OmitBegin", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkMTN_B_OmitBegin.Location = new System.Drawing.Point(22, 215);
+            this.chkMTN_B_OmitBegin.Name = "chkMTN_B_OmitBegin";
+            this.chkMTN_B_OmitBegin.Size = new System.Drawing.Size(121, 17);
+            this.chkMTN_B_OmitBegin.TabIndex = 51;
+            this.chkMTN_B_OmitBegin.Text = "&Omit Start (seconds)";
+            this.chkMTN_B_OmitBegin.UseVisualStyleBackColor = true;
+            // 
+            // nudMTN_D_EdgeDetection
+            // 
+            this.nudMTN_D_EdgeDetection.DataBindings.Add(new System.Windows.Forms.Binding("Value", screenshotSettings1, "D_EdgeDetection", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nudMTN_D_EdgeDetection.Location = new System.Drawing.Point(172, 263);
+            this.nudMTN_D_EdgeDetection.Name = "nudMTN_D_EdgeDetection";
+            this.nudMTN_D_EdgeDetection.Size = new System.Drawing.Size(120, 20);
+            this.nudMTN_D_EdgeDetection.TabIndex = 50;
+            this.nudMTN_D_EdgeDetection.Value = screenshotSettings1.D_EdgeDetection;
+            // 
+            // chkMTN_D_EdgeDetection
+            // 
+            this.chkMTN_D_EdgeDetection.AutoSize = true;
+            this.chkMTN_D_EdgeDetection.Checked = global::TDMaker.ScreenshotSettings.Default.chkMTN_D_EdgeDetection;
+            this.chkMTN_D_EdgeDetection.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMTN_D_EdgeDetection.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.ScreenshotSettings.Default, "chkMTN_D_EdgeDetection", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkMTN_D_EdgeDetection.Location = new System.Drawing.Point(22, 265);
+            this.chkMTN_D_EdgeDetection.Name = "chkMTN_D_EdgeDetection";
+            this.chkMTN_D_EdgeDetection.Size = new System.Drawing.Size(100, 17);
+            this.chkMTN_D_EdgeDetection.TabIndex = 49;
+            this.chkMTN_D_EdgeDetection.Text = "Edge Detection";
+            this.chkMTN_D_EdgeDetection.UseVisualStyleBackColor = true;
+            // 
+            // nudMTN_E_OmitEnd
+            // 
+            this.nudMTN_E_OmitEnd.DataBindings.Add(new System.Windows.Forms.Binding("Value", screenshotSettings1, "E_OmitEnd", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nudMTN_E_OmitEnd.DecimalPlaces = 1;
+            this.nudMTN_E_OmitEnd.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudMTN_E_OmitEnd.Location = new System.Drawing.Point(172, 238);
+            this.nudMTN_E_OmitEnd.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nudMTN_E_OmitEnd.Name = "nudMTN_E_OmitEnd";
+            this.nudMTN_E_OmitEnd.Size = new System.Drawing.Size(120, 20);
+            this.nudMTN_E_OmitEnd.TabIndex = 48;
+            this.ttApp.SetToolTip(this.nudMTN_E_OmitEnd, "Keep 0 for Exact Dimensions");
+            this.nudMTN_E_OmitEnd.Value = screenshotSettings1.E_OmitEnd;
+            // 
+            // chkMTN_E_OmitEnd
+            // 
+            this.chkMTN_E_OmitEnd.AutoSize = true;
+            this.chkMTN_E_OmitEnd.Checked = global::TDMaker.ScreenshotSettings.Default.chkMTN_E_OmitEnd;
+            this.chkMTN_E_OmitEnd.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.ScreenshotSettings.Default, "chkMTN_E_OmitEnd", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkMTN_E_OmitEnd.Location = new System.Drawing.Point(22, 240);
+            this.chkMTN_E_OmitEnd.Name = "chkMTN_E_OmitEnd";
+            this.chkMTN_E_OmitEnd.Size = new System.Drawing.Size(118, 17);
+            this.chkMTN_E_OmitEnd.TabIndex = 47;
+            this.chkMTN_E_OmitEnd.Text = "&Omit End (seconds)";
+            this.chkMTN_E_OmitEnd.UseVisualStyleBackColor = true;
+            // 
+            // nudMTN_h_HeightMin
+            // 
+            this.nudMTN_h_HeightMin.DataBindings.Add(new System.Windows.Forms.Binding("Value", screenshotSettings1, "h_MinHeight", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nudMTN_h_HeightMin.Location = new System.Drawing.Point(172, 62);
+            this.nudMTN_h_HeightMin.Maximum = new decimal(new int[] {
+            1200,
+            0,
+            0,
+            0});
+            this.nudMTN_h_HeightMin.Name = "nudMTN_h_HeightMin";
+            this.nudMTN_h_HeightMin.Size = new System.Drawing.Size(120, 20);
+            this.nudMTN_h_HeightMin.TabIndex = 46;
+            this.nudMTN_h_HeightMin.Value = screenshotSettings1.h_MinHeight;
+            // 
+            // chkMTN_h_Height
+            // 
+            this.chkMTN_h_Height.AutoSize = true;
+            this.chkMTN_h_Height.Checked = global::TDMaker.ScreenshotSettings.Default.chk_h_MinHeight;
+            this.chkMTN_h_Height.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.ScreenshotSettings.Default, "chk_h_MinHeight", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkMTN_h_Height.Location = new System.Drawing.Point(22, 65);
+            this.chkMTN_h_Height.Name = "chkMTN_h_Height";
+            this.chkMTN_h_Height.Size = new System.Drawing.Size(107, 17);
+            this.chkMTN_h_Height.TabIndex = 45;
+            this.chkMTN_h_Height.Text = "Height (Minimum)";
+            this.chkMTN_h_Height.UseVisualStyleBackColor = true;
+            // 
+            // txtMTN_o_OutputSuffix
+            // 
+            this.txtMTN_o_OutputSuffix.DataBindings.Add(new System.Windows.Forms.Binding("Text", screenshotSettings1, "o_OutputSuffix", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtMTN_o_OutputSuffix.Location = new System.Drawing.Point(444, 194);
+            this.txtMTN_o_OutputSuffix.Name = "txtMTN_o_OutputSuffix";
+            this.txtMTN_o_OutputSuffix.Size = new System.Drawing.Size(232, 20);
+            this.txtMTN_o_OutputSuffix.TabIndex = 43;
+            this.txtMTN_o_OutputSuffix.Text = screenshotSettings1.o_OutputSuffix;
+            // 
+            // txtMTN_N_InfoSuffix
+            // 
+            this.txtMTN_N_InfoSuffix.DataBindings.Add(new System.Windows.Forms.Binding("Text", screenshotSettings1, "N_InfoSuffix", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtMTN_N_InfoSuffix.Location = new System.Drawing.Point(444, 167);
+            this.txtMTN_N_InfoSuffix.Name = "txtMTN_N_InfoSuffix";
+            this.txtMTN_N_InfoSuffix.Size = new System.Drawing.Size(232, 20);
+            this.txtMTN_N_InfoSuffix.TabIndex = 41;
+            this.txtMTN_N_InfoSuffix.Text = screenshotSettings1.N_InfoSuffix;
+            // 
+            // chkMTN_N_WriteInfo
+            // 
+            this.chkMTN_N_WriteInfo.AutoSize = true;
+            this.chkMTN_N_WriteInfo.Checked = global::TDMaker.ScreenshotSettings.Default.chkMTN_N_WriteInfo;
+            this.chkMTN_N_WriteInfo.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.ScreenshotSettings.Default, "chkMTN_N_WriteInfo", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkMTN_N_WriteInfo.Location = new System.Drawing.Point(350, 170);
+            this.chkMTN_N_WriteInfo.Name = "chkMTN_N_WriteInfo";
+            this.chkMTN_N_WriteInfo.Size = new System.Drawing.Size(73, 17);
+            this.chkMTN_N_WriteInfo.TabIndex = 40;
+            this.chkMTN_N_WriteInfo.Text = "&Info Suffix";
+            this.chkMTN_N_WriteInfo.UseVisualStyleBackColor = true;
+            // 
+            // chkMTN_z_SeekMode
+            // 
+            this.chkMTN_z_SeekMode.AutoSize = true;
+            this.chkMTN_z_SeekMode.Checked = screenshotSettings1.z_Seek;
+            this.chkMTN_z_SeekMode.CheckState = System.Windows.Forms.CheckState.Indeterminate;
+            this.chkMTN_z_SeekMode.DataBindings.Add(new System.Windows.Forms.Binding("Checked", screenshotSettings1, "z_Seek", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkMTN_z_SeekMode.Location = new System.Drawing.Point(556, 309);
+            this.chkMTN_z_SeekMode.Name = "chkMTN_z_SeekMode";
+            this.chkMTN_z_SeekMode.Size = new System.Drawing.Size(81, 17);
+            this.chkMTN_z_SeekMode.TabIndex = 10;
+            this.chkMTN_z_SeekMode.Text = "&Seek Mode";
+            this.chkMTN_z_SeekMode.ThreeState = true;
+            this.chkMTN_z_SeekMode.UseVisualStyleBackColor = true;
+            this.chkMTN_z_SeekMode.Visible = false;
+            // 
+            // chkMTN_i_MediaInfoTurnOff
+            // 
+            this.chkMTN_i_MediaInfoTurnOff.AutoSize = true;
+            this.chkMTN_i_MediaInfoTurnOff.Checked = screenshotSettings1.i_InfoOff;
+            this.chkMTN_i_MediaInfoTurnOff.DataBindings.Add(new System.Windows.Forms.Binding("Checked", screenshotSettings1, "i_InfoOff", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkMTN_i_MediaInfoTurnOff.Location = new System.Drawing.Point(350, 18);
+            this.chkMTN_i_MediaInfoTurnOff.Name = "chkMTN_i_MediaInfoTurnOff";
+            this.chkMTN_i_MediaInfoTurnOff.Size = new System.Drawing.Size(116, 17);
+            this.chkMTN_i_MediaInfoTurnOff.TabIndex = 37;
+            this.chkMTN_i_MediaInfoTurnOff.Text = "Turn off Media Info";
+            this.chkMTN_i_MediaInfoTurnOff.UseVisualStyleBackColor = false;
+            this.chkMTN_i_MediaInfoTurnOff.CheckedChanged += new System.EventHandler(this.chkMTN_i_MediaInfo_CheckedChanged);
+            // 
+            // chkMTN_T_Title
+            // 
+            this.chkMTN_T_Title.AutoSize = true;
+            this.chkMTN_T_Title.Checked = global::TDMaker.ScreenshotSettings.Default.chkMTN_T_Title;
+            this.chkMTN_T_Title.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.ScreenshotSettings.Default, "chkMTN_T_Title", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkMTN_T_Title.Location = new System.Drawing.Point(12, 18);
+            this.chkMTN_T_Title.Name = "chkMTN_T_Title";
+            this.chkMTN_T_Title.Size = new System.Drawing.Size(46, 17);
+            this.chkMTN_T_Title.TabIndex = 46;
+            this.chkMTN_T_Title.Text = "&Title";
+            this.chkMTN_T_Title.UseVisualStyleBackColor = true;
+            // 
+            // cboMTN_f_FontType
+            // 
+            this.cboMTN_f_FontType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboMTN_f_FontType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
+            this.cboMTN_f_FontType.DataBindings.Add(new System.Windows.Forms.Binding("Text", screenshotSettings1, "f_Font", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cboMTN_f_FontType.FormattingEnabled = true;
+            this.cboMTN_f_FontType.Location = new System.Drawing.Point(106, 41);
+            this.cboMTN_f_FontType.Name = "cboMTN_f_FontType";
+            this.cboMTN_f_FontType.Size = new System.Drawing.Size(232, 21);
+            this.cboMTN_f_FontType.TabIndex = 12;
+            this.cboMTN_f_FontType.Text = screenshotSettings1.f_Font;
+            this.ttApp.SetToolTip(this.cboMTN_f_FontType, "tahomabd.ttf : font file; use absolute path if not in usual places");
+            // 
+            // cboMTN_F_FontColor
+            // 
+            this.cboMTN_F_FontColor.DataBindings.Add(new System.Windows.Forms.Binding("Text", screenshotSettings1, "F_FontColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cboMTN_F_FontColor.FormattingEnabled = true;
+            this.cboMTN_F_FontColor.Location = new System.Drawing.Point(106, 67);
+            this.cboMTN_F_FontColor.MaxLength = 6;
+            this.cboMTN_F_FontColor.Name = "cboMTN_F_FontColor";
+            this.cboMTN_F_FontColor.Size = new System.Drawing.Size(120, 21);
+            this.cboMTN_F_FontColor.TabIndex = 27;
+            this.cboMTN_F_FontColor.Text = screenshotSettings1.F_FontColor;
+            this.cboMTN_F_FontColor.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cboMTN_F_FontColor_MouseClick);
+            // 
+            // nudMTN_F_FontSize
+            // 
+            this.nudMTN_F_FontSize.DataBindings.Add(new System.Windows.Forms.Binding("Value", screenshotSettings1, "F_FontSize", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nudMTN_F_FontSize.Location = new System.Drawing.Point(286, 68);
+            this.nudMTN_F_FontSize.Name = "nudMTN_F_FontSize";
+            this.nudMTN_F_FontSize.Size = new System.Drawing.Size(52, 20);
+            this.nudMTN_F_FontSize.TabIndex = 34;
+            this.nudMTN_F_FontSize.Value = screenshotSettings1.F_FontSize;
+            // 
+            // chkMTN_L_LocInfo
+            // 
+            this.chkMTN_L_LocInfo.AutoSize = true;
+            this.chkMTN_L_LocInfo.Checked = global::TDMaker.ScreenshotSettings.Default.chkMTN_L_LocInfo;
+            this.chkMTN_L_LocInfo.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMTN_L_LocInfo.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.ScreenshotSettings.Default, "chkMTN_L_LocInfo", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkMTN_L_LocInfo.Location = new System.Drawing.Point(12, 94);
+            this.chkMTN_L_LocInfo.Name = "chkMTN_L_LocInfo";
+            this.chkMTN_L_LocInfo.Size = new System.Drawing.Size(67, 17);
+            this.chkMTN_L_LocInfo.TabIndex = 29;
+            this.chkMTN_L_LocInfo.Text = "Location";
+            this.chkMTN_L_LocInfo.UseVisualStyleBackColor = true;
+            // 
+            // nudMTN_j_JPEGQuality
+            // 
+            this.nudMTN_j_JPEGQuality.DataBindings.Add(new System.Windows.Forms.Binding("Value", screenshotSettings1, "j_JpgQuality", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nudMTN_j_JPEGQuality.Location = new System.Drawing.Point(172, 188);
+            this.nudMTN_j_JPEGQuality.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.nudMTN_j_JPEGQuality.Name = "nudMTN_j_JPEGQuality";
+            this.nudMTN_j_JPEGQuality.Size = new System.Drawing.Size(120, 20);
+            this.nudMTN_j_JPEGQuality.TabIndex = 36;
+            this.nudMTN_j_JPEGQuality.Value = screenshotSettings1.j_JpgQuality;
+            // 
+            // chkMTN_j_JPEGQuality
+            // 
+            this.chkMTN_j_JPEGQuality.AutoSize = true;
+            this.chkMTN_j_JPEGQuality.Checked = global::TDMaker.ScreenshotSettings.Default.chkMTN_j_JPEGQuality;
+            this.chkMTN_j_JPEGQuality.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMTN_j_JPEGQuality.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.ScreenshotSettings.Default, "chkMTN_j_JPEGQuality", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkMTN_j_JPEGQuality.Location = new System.Drawing.Point(22, 190);
+            this.chkMTN_j_JPEGQuality.Name = "chkMTN_j_JPEGQuality";
+            this.chkMTN_j_JPEGQuality.Size = new System.Drawing.Size(105, 17);
+            this.chkMTN_j_JPEGQuality.TabIndex = 35;
+            this.chkMTN_j_JPEGQuality.Text = "JPEG Quality (%)";
+            this.chkMTN_j_JPEGQuality.UseVisualStyleBackColor = true;
+            // 
+            // chkMTN_tL_LocTimestamp
+            // 
+            this.chkMTN_tL_LocTimestamp.AutoSize = true;
+            this.chkMTN_tL_LocTimestamp.Checked = global::TDMaker.ScreenshotSettings.Default.chkMTN_tL_LocTimestamp;
+            this.chkMTN_tL_LocTimestamp.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMTN_tL_LocTimestamp.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.ScreenshotSettings.Default, "chkMTN_tL_LocTimestamp", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkMTN_tL_LocTimestamp.Location = new System.Drawing.Point(472, 18);
+            this.chkMTN_tL_LocTimestamp.Name = "chkMTN_tL_LocTimestamp";
+            this.chkMTN_tL_LocTimestamp.Size = new System.Drawing.Size(77, 17);
+            this.chkMTN_tL_LocTimestamp.TabIndex = 31;
+            this.chkMTN_tL_LocTimestamp.Text = "Timestamp";
+            this.chkMTN_tL_LocTimestamp.UseVisualStyleBackColor = true;
+            // 
+            // chkMTN_k_ColorBackground
+            // 
+            this.chkMTN_k_ColorBackground.AutoSize = true;
+            this.chkMTN_k_ColorBackground.Checked = global::TDMaker.ScreenshotSettings.Default.chkMTN_k_ColorBackground;
+            this.chkMTN_k_ColorBackground.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMTN_k_ColorBackground.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.ScreenshotSettings.Default, "chkMTN_k_ColorBackground", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkMTN_k_ColorBackground.Location = new System.Drawing.Point(22, 140);
+            this.chkMTN_k_ColorBackground.Name = "chkMTN_k_ColorBackground";
+            this.chkMTN_k_ColorBackground.Size = new System.Drawing.Size(111, 17);
+            this.chkMTN_k_ColorBackground.TabIndex = 28;
+            this.chkMTN_k_ColorBackground.Text = "&Background Color";
+            this.ttApp.SetToolTip(this.chkMTN_k_ColorBackground, "  -k RRGGBB : background color (in hex)");
+            this.chkMTN_k_ColorBackground.UseVisualStyleBackColor = true;
+            // 
+            // chkMTN_g_Gap
+            // 
+            this.chkMTN_g_Gap.AutoSize = true;
+            this.chkMTN_g_Gap.Checked = global::TDMaker.ScreenshotSettings.Default.chkMTN_g_Gap;
+            this.chkMTN_g_Gap.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMTN_g_Gap.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.ScreenshotSettings.Default, "chkMTN_g_Gap", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkMTN_g_Gap.Location = new System.Drawing.Point(22, 115);
+            this.chkMTN_g_Gap.Name = "chkMTN_g_Gap";
+            this.chkMTN_g_Gap.Size = new System.Drawing.Size(120, 17);
+            this.chkMTN_g_Gap.TabIndex = 25;
+            this.chkMTN_g_Gap.Text = "Gap between Shots";
+            this.chkMTN_g_Gap.UseVisualStyleBackColor = true;
+            // 
+            // cboMTN_k_ColorBkgrd
+            // 
+            this.cboMTN_k_ColorBkgrd.DataBindings.Add(new System.Windows.Forms.Binding("Text", screenshotSettings1, "k_ColorBackground", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cboMTN_k_ColorBkgrd.FormattingEnabled = true;
+            this.cboMTN_k_ColorBkgrd.Location = new System.Drawing.Point(172, 137);
+            this.cboMTN_k_ColorBkgrd.MaxLength = 6;
+            this.cboMTN_k_ColorBkgrd.Name = "cboMTN_k_ColorBkgrd";
+            this.cboMTN_k_ColorBkgrd.Size = new System.Drawing.Size(120, 21);
+            this.cboMTN_k_ColorBkgrd.TabIndex = 23;
+            this.cboMTN_k_ColorBkgrd.Text = screenshotSettings1.k_ColorBackground;
+            this.cboMTN_k_ColorBkgrd.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cboMTN_k_ColorBkgrd_MouseClick);
+            // 
+            // nudMTN_w_Width
+            // 
+            screenshotSettings2.a_AspectRatio = "";
+            screenshotSettings2.B_OmitBegin = new decimal(new int[] {
+            0,
+            0,
+            0,
+            65536});
+            screenshotSettings2.b_SkipBlank = new decimal(new int[] {
+            0,
+            0,
+            0,
+            65536});
+            screenshotSettings2.c_Columns = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            screenshotSettings2.C_CutMovie = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            screenshotSettings2.chk_h_MinHeight = false;
+            screenshotSettings2.chk_w_Width = false;
+            screenshotSettings2.chkMTN_B_OmitBegin = false;
+            screenshotSettings2.chkMTN_D_EdgeDetection = true;
+            screenshotSettings2.chkMTN_E_OmitEnd = false;
+            screenshotSettings2.chkMTN_g_Gap = true;
+            screenshotSettings2.chkMTN_j_JPEGQuality = true;
+            screenshotSettings2.chkMTN_k_ColorBackground = true;
+            screenshotSettings2.chkMTN_L_LocInfo = true;
+            screenshotSettings2.chkMTN_N_WriteInfo = false;
+            screenshotSettings2.chkMTN_s_TimeStep = false;
+            screenshotSettings2.chkMTN_T_Title = false;
+            screenshotSettings2.chkMTN_tL_LocTimestamp = true;
+            screenshotSettings2.D_EdgeDetection = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            screenshotSettings2.E_OmitEnd = new decimal(new int[] {
+            0,
+            0,
+            0,
+            65536});
+            screenshotSettings2.f_Font = "tahomabd.ttf";
+            screenshotSettings2.F_FontColor = "000000";
+            screenshotSettings2.F_FontSize = new decimal(new int[] {
+            12,
+            0,
+            0,
+            0});
+            screenshotSettings2.g_GapBetweenShots = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            screenshotSettings2.h_MinHeight = new decimal(new int[] {
+            150,
+            0,
+            0,
+            0});
+            screenshotSettings2.I_IndivScreens = false;
+            screenshotSettings2.i_InfoOff = false;
+            screenshotSettings2.InfoTextIndex = 3;
+            screenshotSettings2.InfoTimestampIndex = 1;
+            screenshotSettings2.j_JpgQuality = new decimal(new int[] {
+            97,
+            0,
+            0,
+            0});
+            screenshotSettings2.k_ColorBackground = "EEEEEE";
+            screenshotSettings2.L_InfoLocation = "4:2";
+            screenshotSettings2.N_InfoSuffix = "_s.txt";
+            screenshotSettings2.n_Priority = false;
+            screenshotSettings2.O_OutputDir = "";
+            screenshotSettings2.o_OutputSuffix = "_s.jpg";
+            screenshotSettings2.p_PauseBeforeExit = false;
+            screenshotSettings2.P_QuitAfterDone = true;
+            screenshotSettings2.r_Rows = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            screenshotSettings2.s_TimeStep = new decimal(new int[] {
+            120,
+            0,
+            0,
+            0});
+            screenshotSettings2.SettingsKey = "";
+            screenshotSettings2.T_Text = false;
+            screenshotSettings2.t_TimeStamp = false;
+            screenshotSettings2.v_Verbose = false;
+            screenshotSettings2.W_Update = false;
+            screenshotSettings2.w_Width = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            screenshotSettings2.Z_NonSeek = "false";
+            screenshotSettings2.z_Seek = false;
+            this.nudMTN_w_Width.DataBindings.Add(new System.Windows.Forms.Binding("Value", screenshotSettings2, "w_Width", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nudMTN_w_Width.Location = new System.Drawing.Point(172, 87);
+            this.nudMTN_w_Width.Maximum = new decimal(new int[] {
+            2048,
+            0,
+            0,
+            0});
+            this.nudMTN_w_Width.Name = "nudMTN_w_Width";
+            this.nudMTN_w_Width.Size = new System.Drawing.Size(120, 20);
+            this.nudMTN_w_Width.TabIndex = 22;
+            this.ttApp.SetToolTip(this.nudMTN_w_Width, "Keep 0 for Exact Dimensions");
+            this.nudMTN_w_Width.Value = screenshotSettings1.w_Width;
+            // 
+            // chk_w_Width
+            // 
+            this.chk_w_Width.AutoSize = true;
+            this.chk_w_Width.Checked = global::TDMaker.ScreenshotSettings.Default.chk_w_Width;
+            this.chk_w_Width.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.ScreenshotSettings.Default, "chk_w_Width", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chk_w_Width.Location = new System.Drawing.Point(22, 90);
+            this.chk_w_Width.Name = "chk_w_Width";
+            this.chk_w_Width.Size = new System.Drawing.Size(54, 17);
+            this.chk_w_Width.TabIndex = 21;
+            this.chk_w_Width.Text = "Width";
+            this.chk_w_Width.UseVisualStyleBackColor = true;
+            // 
+            // chkMTN_P_QuitAfterDone
+            // 
+            this.chkMTN_P_QuitAfterDone.AutoSize = true;
+            this.chkMTN_P_QuitAfterDone.Checked = screenshotSettings1.P_QuitAfterDone;
+            this.chkMTN_P_QuitAfterDone.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMTN_P_QuitAfterDone.DataBindings.Add(new System.Windows.Forms.Binding("Checked", screenshotSettings1, "P_QuitAfterDone", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkMTN_P_QuitAfterDone.Location = new System.Drawing.Point(22, 347);
+            this.chkMTN_P_QuitAfterDone.Name = "chkMTN_P_QuitAfterDone";
+            this.chkMTN_P_QuitAfterDone.Size = new System.Drawing.Size(96, 17);
+            this.chkMTN_P_QuitAfterDone.TabIndex = 20;
+            this.chkMTN_P_QuitAfterDone.Text = "&Quit after done";
+            this.chkMTN_P_QuitAfterDone.UseVisualStyleBackColor = true;
+            // 
+            // nudMTN_s_TimeStep
+            // 
+            this.nudMTN_s_TimeStep.DataBindings.Add(new System.Windows.Forms.Binding("Value", screenshotSettings1, "s_TimeStep", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nudMTN_s_TimeStep.Location = new System.Drawing.Point(172, 163);
+            this.nudMTN_s_TimeStep.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nudMTN_s_TimeStep.Name = "nudMTN_s_TimeStep";
+            this.nudMTN_s_TimeStep.Size = new System.Drawing.Size(120, 20);
+            this.nudMTN_s_TimeStep.TabIndex = 19;
+            this.nudMTN_s_TimeStep.Value = screenshotSettings1.s_TimeStep;
+            // 
+            // chkMTN_s_TimeStep
+            // 
+            this.chkMTN_s_TimeStep.AutoSize = true;
+            this.chkMTN_s_TimeStep.Checked = global::TDMaker.ScreenshotSettings.Default.chkMTN_s_TimeStep;
+            this.chkMTN_s_TimeStep.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.ScreenshotSettings.Default, "chkMTN_s_TimeStep", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkMTN_s_TimeStep.Location = new System.Drawing.Point(22, 165);
+            this.chkMTN_s_TimeStep.Name = "chkMTN_s_TimeStep";
+            this.chkMTN_s_TimeStep.Size = new System.Drawing.Size(123, 17);
+            this.chkMTN_s_TimeStep.TabIndex = 18;
+            this.chkMTN_s_TimeStep.Text = "Time Step (seconds)";
+            this.chkMTN_s_TimeStep.UseVisualStyleBackColor = true;
+            // 
+            // nudMTN_r_Rows
+            // 
+            this.nudMTN_r_Rows.DataBindings.Add(new System.Windows.Forms.Binding("Value", screenshotSettings1, "r_Rows", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nudMTN_r_Rows.Location = new System.Drawing.Point(172, 12);
+            this.nudMTN_r_Rows.Name = "nudMTN_r_Rows";
+            this.nudMTN_r_Rows.Size = new System.Drawing.Size(120, 20);
+            this.nudMTN_r_Rows.TabIndex = 17;
+            this.nudMTN_r_Rows.Value = screenshotSettings1.r_Rows;
+            // 
+            // nudMTN_c_Columns
+            // 
+            this.nudMTN_c_Columns.DataBindings.Add(new System.Windows.Forms.Binding("Value", screenshotSettings1, "c_Columns", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nudMTN_c_Columns.Location = new System.Drawing.Point(172, 37);
+            this.nudMTN_c_Columns.Name = "nudMTN_c_Columns";
+            this.nudMTN_c_Columns.Size = new System.Drawing.Size(120, 20);
+            this.nudMTN_c_Columns.TabIndex = 15;
+            this.nudMTN_c_Columns.Value = screenshotSettings1.c_Columns;
             // 
             // MainWindow
             // 
@@ -2633,19 +2928,9 @@
             this.tpMTNUsage.ResumeLayout(false);
             this.pMTNUsage.ResumeLayout(false);
             this.pMTNUsage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_B_OmitStart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_D_EdgeDetection)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_E_OmitEnd)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_h_HeightMin)).EndInit();
             this.gbMTN_i_MediaInfo.ResumeLayout(false);
             this.gbMTN_i_MediaInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_F_FontSize)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_j_JPEGQuality)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMTN_g_Gap)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_w_Width)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_s_TimeStep)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_r_Rows)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_c_Columns)).EndInit();
             this.tpHostingImageShack.ResumeLayout(false);
             this.tpHostingImageShack.PerformLayout();
             this.tpTorrents.ResumeLayout(false);
@@ -2661,6 +2946,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_B_OmitStart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_D_EdgeDetection)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_E_OmitEnd)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_h_HeightMin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_F_FontSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_j_JPEGQuality)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_w_Width)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_s_TimeStep)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_r_Rows)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_c_Columns)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

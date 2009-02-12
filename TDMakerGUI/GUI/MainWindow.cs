@@ -1492,5 +1492,10 @@ namespace TorrentDescriptionMaker
             OpenVersionHistory();
         }
 
+        private void chkMTN_o_OutputSuffix_CheckedChanged(object sender, EventArgs e)
+        {
+            chkMTN_o_OutputSuffix.Checked = true;
+        }
+
     }
 }

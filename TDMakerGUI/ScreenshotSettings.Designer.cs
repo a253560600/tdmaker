@@ -430,5 +430,173 @@ namespace TDMaker {
                 this["F_FontSize"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chk_h_MinHeight {
+            get {
+                return ((bool)(this["chk_h_MinHeight"]));
+            }
+            set {
+                this["chk_h_MinHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chk_w_Width {
+            get {
+                return ((bool)(this["chk_w_Width"]));
+            }
+            set {
+                this["chk_w_Width"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool chkMTN_g_Gap {
+            get {
+                return ((bool)(this["chkMTN_g_Gap"]));
+            }
+            set {
+                this["chkMTN_g_Gap"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool chkMTN_k_ColorBackground {
+            get {
+                return ((bool)(this["chkMTN_k_ColorBackground"]));
+            }
+            set {
+                this["chkMTN_k_ColorBackground"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkMTN_s_TimeStep {
+            get {
+                return ((bool)(this["chkMTN_s_TimeStep"]));
+            }
+            set {
+                this["chkMTN_s_TimeStep"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool chkMTN_j_JPEGQuality {
+            get {
+                return ((bool)(this["chkMTN_j_JPEGQuality"]));
+            }
+            set {
+                this["chkMTN_j_JPEGQuality"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkMTN_B_OmitBegin {
+            get {
+                return ((bool)(this["chkMTN_B_OmitBegin"]));
+            }
+            set {
+                this["chkMTN_B_OmitBegin"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkMTN_E_OmitEnd {
+            get {
+                return ((bool)(this["chkMTN_E_OmitEnd"]));
+            }
+            set {
+                this["chkMTN_E_OmitEnd"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool chkMTN_D_EdgeDetection {
+            get {
+                return ((bool)(this["chkMTN_D_EdgeDetection"]));
+            }
+            set {
+                this["chkMTN_D_EdgeDetection"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkMTN_T_Title {
+            get {
+                return ((bool)(this["chkMTN_T_Title"]));
+            }
+            set {
+                this["chkMTN_T_Title"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool chkMTN_L_LocInfo {
+            get {
+                return ((bool)(this["chkMTN_L_LocInfo"]));
+            }
+            set {
+                this["chkMTN_L_LocInfo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkMTN_N_WriteInfo {
+            get {
+                return ((bool)(this["chkMTN_N_WriteInfo"]));
+            }
+            set {
+                this["chkMTN_N_WriteInfo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool chkMTN_tL_LocTimestamp {
+            get {
+                return ((bool)(this["chkMTN_tL_LocTimestamp"]));
+            }
+            set {
+                this["chkMTN_tL_LocTimestamp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool chkMTN_f_Font {
+            get {
+                return ((bool)(this["chkMTN_f_Font"]));
+            }
+            set {
+                this["chkMTN_f_Font"] = value;
+            }
+        }
     }
 }

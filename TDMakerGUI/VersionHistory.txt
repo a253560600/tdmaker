@@ -1,3 +1,4 @@
+1.10.0.1 Options set in MTN tab were not remembered [Tegan, Chucky]
 1.10.0.0 Added experimental support to upload screenshots to xs.to
 1.09.2.0 Introduced a Menu System to perform tasks more effectively
 1.09.1.0 Two new radioButtons to enable/disable built-in template preview
