@@ -13,13 +13,13 @@
 //#include "scripts\products\dotnetfx11lp.iss"
 //#include "scripts\products\dotnetfx11sp1.iss"
 
-#include "scripts\products\dotnetfx20.iss"
-#include "scripts\products\dotnetfx20lp.iss"
-#include "scripts\products\dotnetfx20sp1.iss"
-#include "scripts\products\dotnetfx20sp1lp.iss"
+//#include "scripts\products\dotnetfx20.iss"
+//#include "scripts\products\dotnetfx20lp.iss"
+//#include "scripts\products\dotnetfx20sp1.iss"
+//#include "scripts\products\dotnetfx20sp1lp.iss"
 
 #include "scripts\products\dotnetfx35.iss"
-//#include "scripts\products\dotnetfx35lp.iss"
+#include "scripts\products\dotnetfx35lp.iss"
 //#include "scripts\products\dotnetfx35sp1.iss"
 //#include "scripts\products\dotnetfx35sp1lp.iss"
 
@@ -50,9 +50,8 @@
 	);
 
 #define ExeName "TDMaker"
-#define ExePath "..\TorrentDescriptionMaker\bin\Release\TDMaker.exe"
+#define ExePath "H:\Users\Mihajlo\Documents\Visual Studio 2008\Projects\TDMaker\trunk\TDMakerGUI\bin\Release\TDMaker.exe"
 #define MyAppVersion GetFileVersion(ExePath)
-#define MySimpleAppVersion SimpleVersion(MyAppVersion)
 
 #pragma message "*** Version info ***
 #pragma message "Detailed version info: " + MyAppVersion
@@ -64,8 +63,8 @@ winxpsp2_title=Windows XP Service Pack 2
 
 
 [Setup]
-AppName={#ExeName} {#MySimpleAppVersion}
-AppVerName={#ExeName}  {#MyAppVersion}
+AppName={#ExeName}
+AppVerName={#ExeName} {#MyAppVersion}
 AppVersion={#MyAppVersion}
 VersionInfoVersion={#MyAppVersion}
 VersionInfoTextVersion={#MyAppVersion}
@@ -78,7 +77,7 @@ AppUpdatesURL=http://code.google.com/p/tdmaker
 DefaultDirName={pf}\TDMaker
 DefaultGroupName=BetaONE\{#ExeName}
 AllowNoIcons=yes
-InfoBeforeFile=..\TorrentDescriptionMaker\VersionHistory.txt
+InfoBeforeFile=..\TDMakerGUI\VersionHistory.txt
 ;InfoAfterFile=..\TorrentDescriptionMaker\ReleaseInfo.txt
 SolidCompression=yes
 ;PrivilegesRequired=none
@@ -109,7 +108,7 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 
 [Files]
 Source: {#ExePath}; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\TorrentDescriptionMaker\bin\Release\*.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\TDMakerGUI\bin\Release\*.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\MTN\*.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\MTN\*.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\MediaInfo\x86\MediaInfo.dll"; DestDir: "{app}"; Flags: ignoreversion; Check: Not IsWin64
@@ -151,13 +150,13 @@ begin
 	
 	kb835732();
 	
-	if (minwinversion(5, 0) and minspversion(5, 0, 4)) then begin
-		dotnetfx20sp1();
-		dotnetfx20sp1lp();
-	end else begin
-		dotnetfx20();
-		dotnetfx20lp();
-	end;
+//	if (minwinversion(5, 0) and minspversion(5, 0, 4)) then begin
+//		dotnetfx20sp1();
+//		dotnetfx20sp1lp();
+//	end else begin
+//		dotnetfx20();
+//		dotnetfx20lp();
+//	end;
 	
 dotnetfx35();
 	//dotnetfx35lp();
