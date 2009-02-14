@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using TDMaker.Properties;
-using System.IO;
-using MediaInfoLib;
-using System.Text;
 using System.ComponentModel;
-using TDMaker;
-using ZSS.ImageUploader;
+using System.Diagnostics;
+using System.IO;
+using System.Text;
 using System.Threading;
+using TDMaker;
 using TDMaker.Helpers;
+using TDMaker.Properties;
 using TDMakerLib;
+using ZSS.ImageUploader;
 
 namespace TorrentDescriptionMaker
 {
