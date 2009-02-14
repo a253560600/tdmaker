@@ -156,7 +156,6 @@ namespace TDMaker
                                 string lang = mMI.Get(StreamKind.Text, i, "Language/String");
                                 if (!string.IsNullOrEmpty(lang))
                                 {
-                                    // System.Windows.Forms.MessageBox.Show(lang);
                                     sbLang.Append(lang);
                                     if (i < subCount - 1)
                                         sbLang.Append(", ");

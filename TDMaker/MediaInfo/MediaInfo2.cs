@@ -172,7 +172,6 @@ namespace TorrentDescriptionMaker
                             string lang = mi.Get(StreamKind.Text, i, "Language/String");
                             if (!string.IsNullOrEmpty(lang))
                             {
-                                // System.Windows.Forms.MessageBox.Show(lang);
                                 if (!langs.Contains(lang))
                                     langs.Add(lang);
                             }

@@ -32,11 +32,11 @@ namespace TorrentDescriptionMaker
             string os = System.Environment.OSVersion.ToString();            
             System.Console.WriteLine("OSVersion: {0}", os);
 
-            if (!Settings.Default.UpgradeSettings)
-            {
-                Settings.Default.Upgrade();
-                Settings.Default.UpgradeSettings = true;
-            }
+            //if (!Settings.Default.UpgradeSettings)
+            //{
+            //    Settings.Default.Upgrade();
+            //    Settings.Default.UpgradeSettings = true;
+            //}
             LoadConfig();
 
             if (args.Length > 1 && Program.IsUNIX)
