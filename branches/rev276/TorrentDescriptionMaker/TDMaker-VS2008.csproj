@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F3519E2C-4C9F-4EED-8EDA-78FED87BC10F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TDMaker</RootNamespace>
+    <AssemblyName>TDMaker</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="McoreSystem, Version=1.13.2.1, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="MonoTorrent, Version=0.62.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\MonoTorrent.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
+    <Reference Include="taglib-sharp, Version=2.0.3.0, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helpers\BbCode.cs" />
+    <Compile Include="GUI\AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\RunOnceWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\RunOnceWindow.Designer.cs">
+      <DependentUpon>RunOnceWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\TextViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\TextViewer.designer.cs">
+      <DependentUpon>TextViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\Enums.cs" />
+    <Compile Include="Helpers\FileSystem.cs" />
+    <Compile Include="Helpers\Options.cs" />
+    <Compile Include="Helpers\TDMakerOptions.cs" />
+    <Compile Include="Helpers\XsToUploader.cs" />
+    <Compile Include="MediaInfo\MediaFile.cs" />
+    <Compile Include="MediaInfo\NfoReport.cs" />
+    <Compile Include="MediaInfo\Screenshot.cs" />
+    <Compile Include="ScreenshotSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>ScreenshotSettings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\TemplateReader.cs" />
+    <Compile Include="Torrents\TorrentInfo.cs">
+    </Compile>
+    <Compile Include="GUI\MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MediaInfo\MediaInfo2.cs" />
+    <Compile Include="MediaInfo\MediaInfoDLL.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUI\MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Torrents\HttpWebMultipartRequest.cs" />
+    <Compile Include="Torrents\TorrentUploader.cs" />
+    <Compile Include="Torrents\Tracker.cs" />
+    <Compile Include="Torrents\TrackerManager.cs" />
+    <Compile Include="Helpers\UpdateChecker.cs" />
+    <Compile Include="Helpers\WorkerTask.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ScreenshotSettings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>ScreenshotSettings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Resources\info-16-xp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GenuineAdv.ico" />
+    <Content Include="Lib\32-bit\MediaInfo.dll" />
+    <Content Include="Lib\64-bit\MediaInfo.dll" />
+    <Content Include="Lib\ImageUploader.dll" />
+    <Content Include="Lib\McoreSystem.dll" />
+    <Content Include="Lib\MonoTorrent.dll" />
+    <EmbeddedResource Include="GUI\AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\RunOnceWindow.resx">
+      <DependentUpon>RunOnceWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\TextViewer.resx">
+      <DependentUpon>TextViewer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Templates\Default\DiscAudioInfo.txt" />
+    <EmbeddedResource Include="Templates\Default\FileAudioInfo.txt" />
+    <EmbeddedResource Include="Templates\Default\Disc.txt" />
+    <EmbeddedResource Include="Templates\Default\File.txt" />
+    <EmbeddedResource Include="Templates\Default\GeneralInfo.txt" />
+    <EmbeddedResource Include="Templates\Default\DiscVideoInfo.txt" />
+    <EmbeddedResource Include="Templates\MTN\Disc.txt" />
+    <EmbeddedResource Include="Templates\MTN\DiscAudioInfo.txt" />
+    <EmbeddedResource Include="Templates\MTN\File.txt" />
+    <EmbeddedResource Include="Templates\MTN\FileAudioInfo.txt" />
+    <EmbeddedResource Include="Templates\MTN\GeneralInfo.txt" />
+    <EmbeddedResource Include="Templates\MTN\DiscVideoInfo.txt" />
+    <EmbeddedResource Include="Templates\Default\FileVideoInfo.txt" />
+    <EmbeddedResource Include="Templates\MTN\FileVideoInfo.txt" />
+    <EmbeddedResource Include="Templates\Minimal\Disc.txt" />
+    <EmbeddedResource Include="Templates\Minimal\DiscAudioInfo.txt" />
+    <EmbeddedResource Include="Templates\Minimal\DiscVideoInfo.txt" />
+    <EmbeddedResource Include="Templates\Minimal\File.txt" />
+    <EmbeddedResource Include="Templates\Minimal\FileAudioInfo.txt" />
+    <EmbeddedResource Include="Templates\Minimal\FileVideoInfo.txt" />
+    <EmbeddedResource Include="Templates\Minimal\GeneralInfo.txt" />
+    <Content Include="Lib\taglib-sharp.dll" />
+    <Content Include="ReleaseInfo.txt" />
+    <Content Include="Resources\GenuineAdv.ico" />
+    <Content Include="Resources\GenuineAdv.png" />
+    <Content Include="TODO.txt" />
+    <EmbeddedResource Include="VersionHistory.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Projects\ZScreen\ImageUploader\ImageUploader\ImageUploader.csproj">
+      <Project>{223EC461-C070-4FF3-ADE7-92BC21AE66FC}</Project>
+      <Name>ImageUploader</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
