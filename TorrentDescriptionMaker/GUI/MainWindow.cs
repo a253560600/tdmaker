@@ -453,8 +453,7 @@ namespace TorrentDescriptionMaker
 
             if (Settings.Default.UpdateCheckAuto)
             {
-                UpdateChecker uc = new UpdateChecker(this.Icon, Resources.GenuineAdv, sBar, false);
-                uc.CheckUpdates();
+                CheckUpdates(false);
             }
 
             string[] args = Environment.GetCommandLineArgs();
@@ -1208,15 +1207,16 @@ namespace TorrentDescriptionMaker
            FileSystem.OpenDirTemplates();
         }
 
-        private void CheckUpdates()
-        {
-            UpdateChecker uc = new UpdateChecker(this.Icon, Resources.GenuineAdv, sBar, true);
+        private void CheckUpdates(bool manual)
+        {            
+            McoreSystem.UpdateChecker uc = new McoreSystem.UpdateChecker("http://code.google.com/p/tdmaker/downloads/list");
+            uc.Manual = manual;
             uc.CheckUpdates();
         }
 
         private void tsmUpdatesCheck_Click(object sender, EventArgs e)
         {
-            CheckUpdates();
+            CheckUpdates(true);
         }
 
         private void cboScreenshotDest_SelectedIndexChanged(object sender, EventArgs e)
@@ -1465,7 +1465,7 @@ namespace TorrentDescriptionMaker
 
         private void miHelpCheckUpdates_Click(object sender, EventArgs e)
         {
-            CheckUpdates();
+            CheckUpdates(true);
         }
 
         private void miFoldersScreenshots_Click(object sender, EventArgs e)

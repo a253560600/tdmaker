@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnBrowseMTN = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -96,9 +96,7 @@
             this.tcHosting = new System.Windows.Forms.TabControl();
             this.tpMTNUsage = new System.Windows.Forms.TabPage();
             this.pMTNUsage = new System.Windows.Forms.Panel();
-            this.chkMTN_v_Verbose = new System.Windows.Forms.CheckBox();
             this.chkMTN_o_OutputSuffix = new System.Windows.Forms.CheckBox();
-            this.chkMTN_N_WriteInfo = new System.Windows.Forms.CheckBox();
             this.gbMTN_i_MediaInfo = new System.Windows.Forms.GroupBox();
             this.txtMTN_T_Title = new System.Windows.Forms.TextBox();
             this.cboMTN_L_LocInfo = new System.Windows.Forms.ComboBox();
@@ -195,8 +193,10 @@
             this.chkMTN_E_OmitEnd = new System.Windows.Forms.CheckBox();
             this.nudMTN_h_HeightMin = new System.Windows.Forms.NumericUpDown();
             this.chkMTN_h_Height = new System.Windows.Forms.CheckBox();
+            this.chkMTN_v_Verbose = new System.Windows.Forms.CheckBox();
             this.txtMTN_o_OutputSuffix = new System.Windows.Forms.TextBox();
             this.txtMTN_N_InfoSuffix = new System.Windows.Forms.TextBox();
+            this.chkMTN_N_WriteInfo = new System.Windows.Forms.CheckBox();
             this.chkMTN_z_SeekMode = new System.Windows.Forms.CheckBox();
             this.chkMTN_i_MediaInfoTurnOff = new System.Windows.Forms.CheckBox();
             this.chkMTN_T_Title = new System.Windows.Forms.CheckBox();
@@ -474,9 +474,9 @@
             this.sBar,
             this.tssPerc,
             this.pBar});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 544);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 540);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(792, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(784, 22);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -489,7 +489,7 @@
             // sBar
             // 
             this.sBar.Name = "sBar";
-            this.sBar.Size = new System.Drawing.Size(659, 17);
+            this.sBar.Size = new System.Drawing.Size(651, 17);
             this.sBar.Spring = true;
             this.sBar.Text = "Ready";
             this.sBar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -518,7 +518,7 @@
             this.tcMain.Location = new System.Drawing.Point(12, 32);
             this.tcMain.Name = "tcMain";
             this.tcMain.SelectedIndex = 0;
-            this.tcMain.Size = new System.Drawing.Size(760, 475);
+            this.tcMain.Size = new System.Drawing.Size(752, 471);
             this.tcMain.TabIndex = 4;
             this.tcMain.SelectedIndexChanged += new System.EventHandler(this.tcMain_SelectedIndexChanged);
             // 
@@ -530,7 +530,7 @@
             this.tpMedia.Controls.Add(this.gbLocation);
             this.tpMedia.Location = new System.Drawing.Point(4, 22);
             this.tpMedia.Name = "tpMedia";
-            this.tpMedia.Size = new System.Drawing.Size(752, 449);
+            this.tpMedia.Size = new System.Drawing.Size(744, 445);
             this.tpMedia.TabIndex = 4;
             this.tpMedia.Text = "Media";
             this.tpMedia.UseVisualStyleBackColor = true;
@@ -663,7 +663,7 @@
             this.tpMainMediaInfo.Location = new System.Drawing.Point(4, 22);
             this.tpMainMediaInfo.Name = "tpMainMediaInfo";
             this.tpMainMediaInfo.Padding = new System.Windows.Forms.Padding(3);
-            this.tpMainMediaInfo.Size = new System.Drawing.Size(752, 449);
+            this.tpMainMediaInfo.Size = new System.Drawing.Size(744, 445);
             this.tpMainMediaInfo.TabIndex = 0;
             this.tpMainMediaInfo.Text = "Info";
             this.tpMainMediaInfo.UseVisualStyleBackColor = true;
@@ -677,7 +677,7 @@
             this.txtMediaInfo.Name = "txtMediaInfo";
             this.txtMediaInfo.ReadOnly = true;
             this.txtMediaInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtMediaInfo.Size = new System.Drawing.Size(746, 443);
+            this.txtMediaInfo.Size = new System.Drawing.Size(738, 439);
             this.txtMediaInfo.TabIndex = 0;
             this.txtMediaInfo.WordWrap = false;
             // 
@@ -692,7 +692,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(752, 449);
+            this.tabPage2.Size = new System.Drawing.Size(744, 445);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Screenshots";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -726,7 +726,7 @@
             this.tpMainPublish.Location = new System.Drawing.Point(4, 22);
             this.tpMainPublish.Name = "tpMainPublish";
             this.tpMainPublish.Padding = new System.Windows.Forms.Padding(3);
-            this.tpMainPublish.Size = new System.Drawing.Size(752, 449);
+            this.tpMainPublish.Size = new System.Drawing.Size(744, 445);
             this.tpMainPublish.TabIndex = 2;
             this.tpMainPublish.Text = "Publish";
             this.tpMainPublish.UseVisualStyleBackColor = true;
@@ -740,9 +740,9 @@
             this.gbQuickPublish.Controls.Add(this.chkQuickAlignCenter);
             this.gbQuickPublish.Controls.Add(this.chkQuickPre);
             this.gbQuickPublish.Dock = System.Windows.Forms.DockStyle.Right;
-            this.gbQuickPublish.Location = new System.Drawing.Point(598, 3);
+            this.gbQuickPublish.Location = new System.Drawing.Point(590, 3);
             this.gbQuickPublish.Name = "gbQuickPublish";
-            this.gbQuickPublish.Size = new System.Drawing.Size(151, 443);
+            this.gbQuickPublish.Size = new System.Drawing.Size(151, 439);
             this.gbQuickPublish.TabIndex = 1;
             this.gbQuickPublish.TabStop = false;
             this.gbQuickPublish.Text = "Options";
@@ -834,7 +834,7 @@
             this.tabPage4.Controls.Add(this.tcOptions);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(752, 449);
+            this.tabPage4.Size = new System.Drawing.Size(744, 445);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Options";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -849,7 +849,7 @@
             this.tcOptions.Location = new System.Drawing.Point(0, 0);
             this.tcOptions.Name = "tcOptions";
             this.tcOptions.SelectedIndex = 0;
-            this.tcOptions.Size = new System.Drawing.Size(752, 449);
+            this.tcOptions.Size = new System.Drawing.Size(744, 445);
             this.tcOptions.TabIndex = 11;
             // 
             // tpGeneral
@@ -859,7 +859,7 @@
             this.tpGeneral.Location = new System.Drawing.Point(4, 22);
             this.tpGeneral.Name = "tpGeneral";
             this.tpGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tpGeneral.Size = new System.Drawing.Size(744, 423);
+            this.tpGeneral.Size = new System.Drawing.Size(736, 419);
             this.tpGeneral.TabIndex = 3;
             this.tpGeneral.Text = "General";
             this.tpGeneral.UseVisualStyleBackColor = true;
@@ -875,7 +875,7 @@
             this.tpPublish.Location = new System.Drawing.Point(4, 22);
             this.tpPublish.Name = "tpPublish";
             this.tpPublish.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPublish.Size = new System.Drawing.Size(744, 423);
+            this.tpPublish.Size = new System.Drawing.Size(736, 419);
             this.tpPublish.TabIndex = 2;
             this.tpPublish.Text = "Publish Templates";
             this.tpPublish.UseVisualStyleBackColor = true;
@@ -972,7 +972,7 @@
             this.tpScreenshots.Location = new System.Drawing.Point(4, 22);
             this.tpScreenshots.Name = "tpScreenshots";
             this.tpScreenshots.Padding = new System.Windows.Forms.Padding(3);
-            this.tpScreenshots.Size = new System.Drawing.Size(744, 423);
+            this.tpScreenshots.Size = new System.Drawing.Size(736, 419);
             this.tpScreenshots.TabIndex = 0;
             this.tpScreenshots.Text = "Movie Thumbnailer";
             this.tpScreenshots.UseVisualStyleBackColor = true;
@@ -985,7 +985,7 @@
             this.tcHosting.Location = new System.Drawing.Point(3, 3);
             this.tcHosting.Name = "tcHosting";
             this.tcHosting.SelectedIndex = 0;
-            this.tcHosting.Size = new System.Drawing.Size(738, 417);
+            this.tcHosting.Size = new System.Drawing.Size(730, 413);
             this.tcHosting.TabIndex = 5;
             // 
             // tpMTNUsage
@@ -994,7 +994,7 @@
             this.tpMTNUsage.Location = new System.Drawing.Point(4, 22);
             this.tpMTNUsage.Name = "tpMTNUsage";
             this.tpMTNUsage.Padding = new System.Windows.Forms.Padding(3);
-            this.tpMTNUsage.Size = new System.Drawing.Size(730, 391);
+            this.tpMTNUsage.Size = new System.Drawing.Size(722, 387);
             this.tpMTNUsage.TabIndex = 1;
             this.tpMTNUsage.Text = "Usage (Beta)";
             this.tpMTNUsage.UseVisualStyleBackColor = true;
@@ -1039,40 +1039,21 @@
             this.pMTNUsage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pMTNUsage.Location = new System.Drawing.Point(3, 3);
             this.pMTNUsage.Name = "pMTNUsage";
-            this.pMTNUsage.Size = new System.Drawing.Size(724, 385);
+            this.pMTNUsage.Size = new System.Drawing.Size(716, 381);
             this.pMTNUsage.TabIndex = 14;
-            // 
-            // chkMTN_v_Verbose
-            // 
-            this.chkMTN_v_Verbose.AutoSize = true;
-            this.chkMTN_v_Verbose.Location = new System.Drawing.Point(22, 301);
-            this.chkMTN_v_Verbose.Name = "chkMTN_v_Verbose";
-            this.chkMTN_v_Verbose.Size = new System.Drawing.Size(95, 17);
-            this.chkMTN_v_Verbose.TabIndex = 44;
-            this.chkMTN_v_Verbose.Text = "&Verbose Mode";
-            this.chkMTN_v_Verbose.UseVisualStyleBackColor = true;
             // 
             // chkMTN_o_OutputSuffix
             // 
             this.chkMTN_o_OutputSuffix.AutoSize = true;
-            this.chkMTN_o_OutputSuffix.Checked = true;
+            this.chkMTN_o_OutputSuffix.Checked = global::TDMaker.Properties.Settings.Default.chkMTN_o_OutputSuffix;
             this.chkMTN_o_OutputSuffix.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMTN_o_OutputSuffix.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "chkMTN_o_OutputSuffix", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkMTN_o_OutputSuffix.Location = new System.Drawing.Point(350, 196);
             this.chkMTN_o_OutputSuffix.Name = "chkMTN_o_OutputSuffix";
             this.chkMTN_o_OutputSuffix.Size = new System.Drawing.Size(87, 17);
             this.chkMTN_o_OutputSuffix.TabIndex = 42;
             this.chkMTN_o_OutputSuffix.Text = "Output Suffix";
             this.chkMTN_o_OutputSuffix.UseVisualStyleBackColor = true;
-            // 
-            // chkMTN_N_WriteInfo
-            // 
-            this.chkMTN_N_WriteInfo.AutoSize = true;
-            this.chkMTN_N_WriteInfo.Location = new System.Drawing.Point(350, 170);
-            this.chkMTN_N_WriteInfo.Name = "chkMTN_N_WriteInfo";
-            this.chkMTN_N_WriteInfo.Size = new System.Drawing.Size(73, 17);
-            this.chkMTN_N_WriteInfo.TabIndex = 40;
-            this.chkMTN_N_WriteInfo.Text = "&Info Suffix";
-            this.chkMTN_N_WriteInfo.UseVisualStyleBackColor = true;
             // 
             // gbMTN_i_MediaInfo
             // 
@@ -1179,7 +1160,7 @@
             this.tpHostingImageShack.Location = new System.Drawing.Point(4, 22);
             this.tpHostingImageShack.Name = "tpHostingImageShack";
             this.tpHostingImageShack.Padding = new System.Windows.Forms.Padding(3);
-            this.tpHostingImageShack.Size = new System.Drawing.Size(730, 391);
+            this.tpHostingImageShack.Size = new System.Drawing.Size(722, 387);
             this.tpHostingImageShack.TabIndex = 0;
             this.tpHostingImageShack.Text = "ImageShack";
             this.tpHostingImageShack.UseVisualStyleBackColor = true;
@@ -1214,7 +1195,7 @@
             this.tpTorrents.Location = new System.Drawing.Point(4, 22);
             this.tpTorrents.Name = "tpTorrents";
             this.tpTorrents.Padding = new System.Windows.Forms.Padding(3);
-            this.tpTorrents.Size = new System.Drawing.Size(744, 423);
+            this.tpTorrents.Size = new System.Drawing.Size(736, 419);
             this.tpTorrents.TabIndex = 1;
             this.tpTorrents.Text = "Torrent Creator";
             this.tpTorrents.UseVisualStyleBackColor = true;
@@ -1222,7 +1203,7 @@
             // btnRefreshTrackers
             // 
             this.btnRefreshTrackers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRefreshTrackers.Location = new System.Drawing.Point(641, 10);
+            this.btnRefreshTrackers.Location = new System.Drawing.Point(633, 10);
             this.btnRefreshTrackers.Name = "btnRefreshTrackers";
             this.btnRefreshTrackers.Size = new System.Drawing.Size(75, 23);
             this.btnRefreshTrackers.TabIndex = 5;
@@ -1243,7 +1224,7 @@
             this.groupBox8.Controls.Add(this.rbTorrentDefaultFolder);
             this.groupBox8.Location = new System.Drawing.Point(17, 225);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(705, 122);
+            this.groupBox8.Size = new System.Drawing.Size(697, 122);
             this.groupBox8.TabIndex = 4;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Save Location";
@@ -1251,7 +1232,7 @@
             // btnBrowseTorrentCustomFolder
             // 
             this.btnBrowseTorrentCustomFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowseTorrentCustomFolder.Location = new System.Drawing.Point(600, 39);
+            this.btnBrowseTorrentCustomFolder.Location = new System.Drawing.Point(592, 39);
             this.btnBrowseTorrentCustomFolder.Name = "btnBrowseTorrentCustomFolder";
             this.btnBrowseTorrentCustomFolder.Size = new System.Drawing.Size(75, 23);
             this.btnBrowseTorrentCustomFolder.TabIndex = 3;
@@ -1277,7 +1258,7 @@
             this.groupBox7.Controls.Add(this.dgvTrackers);
             this.groupBox7.Location = new System.Drawing.Point(17, 39);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(705, 180);
+            this.groupBox7.Size = new System.Drawing.Size(697, 180);
             this.groupBox7.TabIndex = 3;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Tracker Manager";
@@ -1286,37 +1267,37 @@
             // 
             this.dgvTrackers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTrackers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTrackers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvTrackers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTrackers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colName,
             this.colAnnounceURL});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvTrackers.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvTrackers.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvTrackers.Location = new System.Drawing.Point(6, 19);
             this.dgvTrackers.Name = "dgvTrackers";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTrackers.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.dgvTrackers.Size = new System.Drawing.Size(693, 148);
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTrackers.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvTrackers.Size = new System.Drawing.Size(685, 148);
             this.dgvTrackers.TabIndex = 1;
             this.dgvTrackers.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvTrackers_CellValidating);
             // 
@@ -1341,7 +1322,7 @@
             this.cboAnnounceURL.FormattingEnabled = true;
             this.cboAnnounceURL.Location = new System.Drawing.Point(209, 12);
             this.cboAnnounceURL.Name = "cboAnnounceURL";
-            this.cboAnnounceURL.Size = new System.Drawing.Size(426, 21);
+            this.cboAnnounceURL.Size = new System.Drawing.Size(418, 21);
             this.cboAnnounceURL.TabIndex = 2;
             this.cboAnnounceURL.SelectedIndexChanged += new System.EventHandler(this.cboAnnounceURL_SelectedIndexChanged);
             // 
@@ -1352,7 +1333,7 @@
             this.tpPaths.Location = new System.Drawing.Point(4, 22);
             this.tpPaths.Name = "tpPaths";
             this.tpPaths.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPaths.Size = new System.Drawing.Size(752, 449);
+            this.tpPaths.Size = new System.Drawing.Size(744, 445);
             this.tpPaths.TabIndex = 5;
             this.tpPaths.Text = "Paths";
             this.tpPaths.UseVisualStyleBackColor = true;
@@ -1378,7 +1359,7 @@
             this.btnPublish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPublish.AutoSize = true;
             this.btnPublish.Enabled = false;
-            this.btnPublish.Location = new System.Drawing.Point(616, 514);
+            this.btnPublish.Location = new System.Drawing.Point(608, 510);
             this.btnPublish.Name = "btnPublish";
             this.btnPublish.Size = new System.Drawing.Size(106, 23);
             this.btnPublish.TabIndex = 5;
@@ -1392,7 +1373,7 @@
             this.btnAnalyze.AutoSize = true;
             this.btnAnalyze.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnAnalyze.Enabled = false;
-            this.btnAnalyze.Location = new System.Drawing.Point(28, 513);
+            this.btnAnalyze.Location = new System.Drawing.Point(28, 509);
             this.btnAnalyze.Name = "btnAnalyze";
             this.btnAnalyze.Size = new System.Drawing.Size(104, 23);
             this.btnAnalyze.TabIndex = 9;
@@ -1495,7 +1476,7 @@
             this.btnCreateTorrent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCreateTorrent.AutoSize = true;
             this.btnCreateTorrent.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnCreateTorrent.Location = new System.Drawing.Point(138, 513);
+            this.btnCreateTorrent.Location = new System.Drawing.Point(138, 509);
             this.btnCreateTorrent.Name = "btnCreateTorrent";
             this.btnCreateTorrent.Size = new System.Drawing.Size(85, 23);
             this.btnCreateTorrent.TabIndex = 10;
@@ -1506,7 +1487,7 @@
             // pbLogo
             // 
             this.pbLogo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pbLogo.Location = new System.Drawing.Point(242, 510);
+            this.pbLogo.Location = new System.Drawing.Point(242, 506);
             this.pbLogo.Name = "pbLogo";
             this.pbLogo.Size = new System.Drawing.Size(356, 29);
             this.pbLogo.TabIndex = 11;
@@ -1521,7 +1502,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(792, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(784, 24);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -2139,6 +2120,18 @@
             this.chkMTN_h_Height.Text = "Height (Minimum)";
             this.chkMTN_h_Height.UseVisualStyleBackColor = true;
             // 
+            // chkMTN_v_Verbose
+            // 
+            this.chkMTN_v_Verbose.AutoSize = true;
+            this.chkMTN_v_Verbose.Checked = global::TDMaker.Properties.Settings.Default.chkMTN_v_Verbose;
+            this.chkMTN_v_Verbose.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "chkMTN_v_Verbose", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkMTN_v_Verbose.Location = new System.Drawing.Point(22, 301);
+            this.chkMTN_v_Verbose.Name = "chkMTN_v_Verbose";
+            this.chkMTN_v_Verbose.Size = new System.Drawing.Size(95, 17);
+            this.chkMTN_v_Verbose.TabIndex = 44;
+            this.chkMTN_v_Verbose.Text = "&Verbose Mode";
+            this.chkMTN_v_Verbose.UseVisualStyleBackColor = true;
+            // 
             // txtMTN_o_OutputSuffix
             // 
             this.txtMTN_o_OutputSuffix.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.ScreenshotSettings.Default, "o_OutputSuffix", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -2156,6 +2149,18 @@
             this.txtMTN_N_InfoSuffix.Size = new System.Drawing.Size(232, 20);
             this.txtMTN_N_InfoSuffix.TabIndex = 41;
             this.txtMTN_N_InfoSuffix.Text = global::TDMaker.ScreenshotSettings.Default.N_InfoSuffix;
+            // 
+            // chkMTN_N_WriteInfo
+            // 
+            this.chkMTN_N_WriteInfo.AutoSize = true;
+            this.chkMTN_N_WriteInfo.Checked = global::TDMaker.Properties.Settings.Default.chkMTN_N_WriteInfo;
+            this.chkMTN_N_WriteInfo.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TDMaker.Properties.Settings.Default, "chkMTN_N_WriteInfo", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkMTN_N_WriteInfo.Location = new System.Drawing.Point(350, 170);
+            this.chkMTN_N_WriteInfo.Name = "chkMTN_N_WriteInfo";
+            this.chkMTN_N_WriteInfo.Size = new System.Drawing.Size(73, 17);
+            this.chkMTN_N_WriteInfo.TabIndex = 40;
+            this.chkMTN_N_WriteInfo.Text = "&Info Suffix";
+            this.chkMTN_N_WriteInfo.UseVisualStyleBackColor = true;
             // 
             // chkMTN_z_SeekMode
             // 
@@ -2528,7 +2533,7 @@
             this.txtTorrentCustomFolder.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::TDMaker.Properties.Settings.Default, "TorrentsCustomDir", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.txtTorrentCustomFolder.Location = new System.Drawing.Point(114, 41);
             this.txtTorrentCustomFolder.Name = "txtTorrentCustomFolder";
-            this.txtTorrentCustomFolder.Size = new System.Drawing.Size(480, 20);
+            this.txtTorrentCustomFolder.Size = new System.Drawing.Size(472, 20);
             this.txtTorrentCustomFolder.TabIndex = 2;
             this.txtTorrentCustomFolder.Text = global::TDMaker.Properties.Settings.Default.TorrentsCustomDir;
             // 
@@ -2589,7 +2594,7 @@
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 566);
+            this.ClientSize = new System.Drawing.Size(784, 562);
             this.ContextMenuStrip = this.cmsApp;
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
