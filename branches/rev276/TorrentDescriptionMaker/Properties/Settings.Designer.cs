@@ -844,5 +844,41 @@ namespace TDMaker.Properties {
                 this["chkMTN_tL_LocTimestamp"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkMTN_v_Verbose {
+            get {
+                return ((bool)(this["chkMTN_v_Verbose"]));
+            }
+            set {
+                this["chkMTN_v_Verbose"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkMTN_N_WriteInfo {
+            get {
+                return ((bool)(this["chkMTN_N_WriteInfo"]));
+            }
+            set {
+                this["chkMTN_N_WriteInfo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool chkMTN_o_OutputSuffix {
+            get {
+                return ((bool)(this["chkMTN_o_OutputSuffix"]));
+            }
+            set {
+                this["chkMTN_o_OutputSuffix"] = value;
+            }
+        }
     }
 }

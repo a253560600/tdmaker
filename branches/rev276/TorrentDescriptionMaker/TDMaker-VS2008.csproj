@@ -33,7 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="McoreSystem, Version=1.13.2.1, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="McoreSystem, Version=1.14.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Projects\iTSfv\trunk\lib\McoreSystem\bin\McoreSystem.dll</HintPath>
+    </Reference>
     <Reference Include="MonoTorrent, Version=0.62.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Lib\MonoTorrent.dll</HintPath>
