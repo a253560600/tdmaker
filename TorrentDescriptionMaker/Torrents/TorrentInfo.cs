@@ -10,6 +10,7 @@ using TDMaker;
 using ZSS.ImageUploader;
 using System.Threading;
 using TDMaker.Helpers;
+using ZSS.ImageUploader.Helpers;
 
 namespace TorrentDescriptionMaker
 {
@@ -103,7 +104,7 @@ namespace TorrentDescriptionMaker
 
             if (File.Exists(screenshot))
             {
-                List<ZSS.ImageUploader.ImageFile> lstScreenshots = new List<ImageFile>();
+                ImageFileManager imf = null;
 
                 switch ((ScreenshotDestType)Settings.Default.ScreenshotDestIndex)
                 {
@@ -125,30 +126,20 @@ namespace TorrentDescriptionMaker
                 if (imageUploader != null)
                 {
                     int retry = 0;
-                    while (retry <= 3 && lstScreenshots == null || (retry <= 3 && lstScreenshots != null && lstScreenshots.Count < 1))
+                    while (retry <= 3 && imf == null || (retry <= 3 && imf != null && imf.FileCount < 1))
                     {
                         retry++;
                         if (retry > 1)
                             Thread.Sleep(2000);
                         mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploading {0} to {1}... Attempt {2}", Path.GetFileName(screenshot), imageUploader.Name, retry));
-                        lstScreenshots = imageUploader.UploadImage(screenshot);                      
+                        imf = imageUploader.UploadImage(screenshot);                      
                     }
                 }
 
-                if (lstScreenshots != null && lstScreenshots.Count > 0)
+                if (imf != null && imf.FileCount > 0)
                 {
-
-                    foreach (ImageFile imf in lstScreenshots)
-                    {
-                        if (imf.Type == ImageFile.ImageType.FULLIMAGE)
-                        {
-                            MyMedia.Screenshot.Full = imf.URI;
-                        }
-                        else if (imf.Type == ImageFile.ImageType.THUMBNAIL_FORUMS1)
-                        {
-                            MyMedia.Screenshot.LinkedThumbnail = imf.URI;
-                        }
-                    }
+                    MyMedia.Screenshot.Full = imf.GetFullImageUrl();
+                    MyMedia.Screenshot.LinkedThumbnail = imf.GetLinkedThumbnailUrl();
 
                     mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploaded {0}.", Path.GetFileName(screenshot)));
 
