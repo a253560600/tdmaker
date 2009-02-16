@@ -7,6 +7,7 @@ using System.Net;
 using System.IO;
 using System.Text.RegularExpressions;
 using ZSS.ImageUploader;
+using ZSS.ImageUploader.Helpers;
 
 namespace ZSS.ImageUploader
 {
@@ -23,7 +24,7 @@ namespace ZSS.ImageUploader
         /// <param name="image"></param>
         /// <param name="format"></param>
         /// <returns></returns>
-        public override List<ImageFile> UploadImage(Image image, ImageFormat format)
+        public override ImageFileManager UploadImage(Image image, ImageFormat format)
         {
             MemoryStream imgStream = new MemoryStream();
             image.Save(imgStream, format);
@@ -73,7 +74,8 @@ namespace ZSS.ImageUploader
             if (!string.IsNullOrEmpty(fullimage)) imageFiles.Add(new ImageFile(fullimage, ImageFile.ImageType.FULLIMAGE));
             if (!string.IsNullOrEmpty(thumbnail)) imageFiles.Add(new ImageFile(thumbnail, ImageFile.ImageType.THUMBNAIL));
 
-            return imageFiles;
+            ImageFileManager ifm = new ImageFileManager(imageFiles);
+            return ifm;
         }
     }
 }
