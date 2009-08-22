@@ -1,3 +1,5 @@
+1.10.0.2 Fixed errors while uploading to TinyPic
+
 Version 1.10 - 20090216
 
 1.10.0.1 Options set in MTN tab were not remembered [Tegan, Chucky]

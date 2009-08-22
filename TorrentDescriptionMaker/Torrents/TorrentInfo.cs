@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using TDMaker.Properties;
-using System.IO;
-using MediaInfoLib;
-using System.Text;
 using System.ComponentModel;
-using TDMaker;
-using ZSS.ImageUploader;
+using System.Diagnostics;
+using System.IO;
+using System.Text;
 using System.Threading;
+using TDMaker;
 using TDMaker.Helpers;
-using ZSS.ImageUploader.Helpers;
+using TDMaker.Properties;
+using UploadersLib;
+using UploadersLib.Helpers;
+using UploadersLib.ImageUploaders;
 
 namespace TorrentDescriptionMaker
 {
@@ -100,7 +99,7 @@ namespace TorrentDescriptionMaker
        private void UploadScreenshot(String mediaFilePath)
         {
             string screenshot = Path.Combine(Program.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + MyMedia.Screenshot.Settings.o_OutputSuffix);
-            HTTPUploader imageUploader = null;
+            ImageUploader imageUploader = null;
 
             if (File.Exists(screenshot))
             {
@@ -110,23 +109,17 @@ namespace TorrentDescriptionMaker
                 {
                     case ScreenshotDestType.IMAGESHACK:
                         imageUploader = new ImageShackUploader("16BCFGWY58707bec94f7b0a773d0aa8bbf301900", Settings.Default.ImageShackRegCode, UploadMode.API);
-                        ((ImageShackUploader)imageUploader).RandomizeFileName = Settings.Default.ImageShakeRandomizeFileName;
+                        // ((ImageShackUploader)imageUploader).RandomizeFileName = Settings.Default.ImageShakeRandomizeFileName;
                         break;
                     case ScreenshotDestType.TINYPIC:
-                        imageUploader = new TinyPicUploader("e2aabb8d555322fa", "00a68ed73ddd54da52dc2d5803fa35ee");
-                        break;
-                    case ScreenshotDestType.IMAGESHACK_LEGACY_METHOD:
-                        imageUploader = new ImageShackUploader();
-                        break;
-                    case ScreenshotDestType.XSTO:
-                        imageUploader = new XsToUploader();
+                        imageUploader = new TinyPicUploader("e2aabb8d555322fa", "00a68ed73ddd54da52dc2d5803fa35ee", UploadMode.API);
                         break;
                 }
 
                 if (imageUploader != null)
                 {
                     int retry = 0;
-                    while (retry <= 3 && imf == null || (retry <= 3 && imf != null && imf.FileCount < 1))
+                    while (retry <= 3 && imf == null || (retry <= 3 && imf != null && imf.ImageFileList.Count < 1))
                     {
                         retry++;
                         if (retry > 1)
@@ -136,10 +129,10 @@ namespace TorrentDescriptionMaker
                     }
                 }
 
-                if (imf != null && imf.FileCount > 0)
+                if (imf != null && imf.ImageFileList.Count > 0)
                 {
                     MyMedia.Screenshot.Full = imf.GetFullImageUrl();
-                    MyMedia.Screenshot.LinkedThumbnail = imf.GetLinkedThumbnailUrl();
+                    MyMedia.Screenshot.LinkedThumbnail = imf.GetLinkedThumbnailForumUrl();
 
                     mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploaded {0}.", Path.GetFileName(screenshot)));
 
