@@ -76,7 +76,6 @@
     <Compile Include="Helpers\FileSystem.cs" />
     <Compile Include="Helpers\Options.cs" />
     <Compile Include="Helpers\TDMakerOptions.cs" />
-    <Compile Include="Helpers\XsToUploader.cs" />
     <Compile Include="MediaInfo\MediaFile.cs" />
     <Compile Include="MediaInfo\NfoReport.cs" />
     <Compile Include="MediaInfo\Screenshot.cs" />
@@ -184,9 +183,9 @@
     <EmbeddedResource Include="VersionHistory.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Projects\ZScreen\ImageUploader\ImageUploader\ImageUploader.csproj">
-      <Project>{223EC461-C070-4FF3-ADE7-92BC21AE66FC}</Project>
-      <Name>ImageUploader</Name>
+    <ProjectReference Include="..\..\..\Projects\ZScreen\trunk\ZSS.UploadersLib\UploadersLib.csproj">
+      <Project>{D91D7F12-8976-41D9-9524-827EE9B02CCD}</Project>
+      <Name>UploadersLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

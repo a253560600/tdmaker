@@ -13,10 +13,6 @@ namespace TDMaker.Helpers
         IMAGESHACK,
         [Description("TinyPic")]
         TINYPIC,
-        [Description("ImageShack (Anonymous)")]
-        IMAGESHACK_LEGACY_METHOD,
-        [Description("xs.to")]
-        XSTO
     }
 
     public static class ScreenshotDestTypeExtensions
