@@ -1,9 +1,0 @@
-﻿[size=%FontSize_Heading3%][b][i]General:[/i][/b][/size]
-[size=%FontSize_Body%]         
-            [u]Format:[/u] %Format%
-             [u]Codec:[/u] %Video_Codec%
-         [u]File Size:[/u] %FileSize%
-          [u]Duration:[/u] %Duration%
-           [u]Bitrate:[/u] %Bitrate%
-         [u]Subtitles:[/u] %Subtitles%
-[/size]

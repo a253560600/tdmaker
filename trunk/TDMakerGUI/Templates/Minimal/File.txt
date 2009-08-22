@@ -1,9 +1,0 @@
-[b]%FileName%[/b]
-
-%General_Info%
-
-[img]%ScreenshotFull%[/img]
-
-%Video_Info%
-
-%Audio_Info%
