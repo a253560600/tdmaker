@@ -594,6 +594,47 @@ namespace TDMaker
             rbTorrentDefaultFolder.Checked = Program.conf.TorrentFolderDefault;
             rbTorrentFolderCustom.Checked = !rbTorrentDefaultFolder.Checked;
 
+            this.chkMTN_o_OutputSuffix.Checked = Program.conf.ScreenshotSettings.chkMTN_o_OutputSuffix;
+            this.nudMTN_B_OmitStart.Value = Program.conf.ScreenshotSettings.B_OmitBegin;
+            this.chkMTN_B_OmitBegin.Checked = Program.conf.ScreenshotSettings.chkMTN_B_OmitBegin;
+            this.nudMTN_D_EdgeDetection.Value = Program.conf.ScreenshotSettings.D_EdgeDetection;
+            this.chkMTN_D_EdgeDetection.Checked = Program.conf.ScreenshotSettings.chkMTN_D_EdgeDetection;
+            this.nudMTN_E_OmitEnd.Value = Program.conf.ScreenshotSettings.E_OmitEnd;
+            this.chkMTN_E_OmitEnd.Checked = Program.conf.ScreenshotSettings.chkMTN_E_OmitEnd;
+            this.nudMTN_h_HeightMin.Value = Program.conf.ScreenshotSettings.h_MinHeight;
+            this.chkMTN_h_Height.Checked = Program.conf.ScreenshotSettings.chkMTN_h_Height;
+            this.chkMTN_v_Verbose.Checked = Program.conf.ScreenshotSettings.chkMTN_v_Verbose;
+            this.txtMTN_o_OutputSuffix.Text = Program.conf.ScreenshotSettings.o_OutputSuffix;
+            this.chkMTN_N_WriteInfo.Checked = Program.conf.ScreenshotSettings.chkMTN_N_WriteInfo;
+            this.chkMTN_z_SeekMode.Checked = Program.conf.ScreenshotSettings.z_Seek;
+            this.chkMTN_i_MediaInfoTurnOff.Checked = Program.conf.ScreenshotSettings.i_InfoOff;
+            this.chkMTN_T_Title.Checked = Program.conf.ScreenshotSettings.chkMTN_T_Title;
+            this.chkMTN_f_Font.Checked = Program.conf.ScreenshotSettings.chkMTN_f_Font;
+            this.chkMTN_F_FontColor.Checked = Program.conf.ScreenshotSettings.chkMTN_F_FontColor;
+            this.cboMTN_F_FontColor.Text = Program.conf.ScreenshotSettings.F_FontColor;
+            this.chkMTN_F_FontSize.Checked = Program.conf.ScreenshotSettings.chkMTN_F_FontSize;
+            this.nudMTN_F_FontSize.Value = Program.conf.ScreenshotSettings.F_FontSize;
+            this.chkMTN_L_LocInfo.Checked = Program.conf.ScreenshotSettings.chkMTN_L_LocInfo;
+            this.nudMTN_j_JPEGQuality.Value = Program.conf.ScreenshotSettings.j_JpgQuality;
+            this.chkMTN_tL_LocTimestamp.Checked = Program.conf.ScreenshotSettings.chkMTN_tL_LocTimestamp;
+            this.chkMTN_k_ColorBackground.Checked = Program.conf.ScreenshotSettings.chkMTN_k_ColorBackground;
+            this.chkMTN_g_Gap.Text = Program.conf.ScreenshotSettings.chkMTN_g_Gap;
+            this.cboMTN_k_ColorBkgrd.Text = Program.conf.ScreenshotSettings.k_ColorBackground;
+            this.nudMTN_w_Width.Value = Program.conf.ScreenshotSettings.w_Width;
+            this.nudMTN_c_Columns.Value = Program.conf.ScreenshotSettings.c_Columns;
+            this.chkMTN_P_QuitAfterDone.Checked = Program.conf.ScreenshotSettings.P_QuitAfterDone;
+            this.chk_w_Width.Checked = Program.conf.ScreenshotSettings.chk_w_Width;
+            this.txtMTN_N_InfoSuffix.Text = Program.conf.ScreenshotSettings.N_InfoSuffix;
+            this.cboMTN_f_FontType.Text = Program.conf.ScreenshotSettings.f_Font;
+            this.chkMTN_j_JPEGQuality.Checked = Program.conf.ScreenshotSettings.chkMTN_j_JPEGQuality;
+            this.nudMTN_s_TimeStep.Value = Program.conf.ScreenshotSettings.s_TimeStep;
+            this.txtImageShackRegCode.Text = Program.conf.ImageShackRegCode;
+            this.chkTorrentOrganize.Checked = Program.conf.TorrentsOrganize;
+            this.rbTorrentDefaultFolder.Checked = Program.conf.TorrentFolderDefault;
+            this.chkCreateTorrent.Checked = Program.conf.CreateTorrent;
+            this.chkMTN_s_TimeStep.Checked = Program.conf.ScreenshotSettings.chkMTN_s_TimeStep;
+            this.nudMTN_r_Rows.Value = Program.conf.ScreenshotSettings.r_Rows;
+
             // Trackers
             TrackersRead();
 
