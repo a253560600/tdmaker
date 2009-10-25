@@ -104,10 +104,6 @@
       <Project>{091475E0-BF06-4D9D-9A4D-7E71BE08FB96}</Project>
       <Name>ZSS.UpdateCheckerLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\ZScreen\trunk\ZSS.UploadersLib\UploadersLib.csproj">
-      <Project>{D91D7F12-8976-41D9-9524-827EE9B02CCD}</Project>
-      <Name>UploadersLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TDMakerLib\TDMakerLib.csproj">
       <Project>{6023302C-5D3C-494A-B7D1-95A0BED8CA22}</Project>
       <Name>TDMakerLib</Name>

@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel;
 
 namespace TDMakerLib
 {
     [Serializable]
     public class XMLScreenshotSettings
     {
-        public string a_AspectRatio {get; set;}
+        public string a_AspectRatio { get; set; }
         public decimal b_SkipBlank { get; set; }
         public bool bTitle { get; set; }
         public bool bSource { get; set; }
@@ -23,7 +24,7 @@ namespace TDMakerLib
         public decimal h_MinHeight { get; set; }
         public bool i_InfoOff { get; set; }
         public bool I_IndivScreens { get; set; }
-        public decimal j_JpgQuality { get; set; }
+        public decimal j_JpgQuality = 50;
         public string k_ColorBackground { get; set; }
         public bool n_Priority { get; set; }
         public string N_InfoSuffix { get; set; }
@@ -65,5 +66,21 @@ namespace TDMakerLib
         public bool chkMTN_v_Verbose { get; set; }
         public bool WebLink { get; set; }
 
+        public XMLScreenshotSettings()
+        {
+            ApplyDefaultValues(this);
+        }
+
+        static public void ApplyDefaultValues(object self)
+        {
+            foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(self))
+            {
+                DefaultValueAttribute attr = prop.Attributes[typeof(DefaultValueAttribute)] as DefaultValueAttribute;
+                if (attr == null) continue;
+                prop.SetValue(self, attr.Value);
+            }
+        }
+
     }
+
 }

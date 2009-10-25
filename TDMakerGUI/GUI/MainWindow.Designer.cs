@@ -1047,7 +1047,6 @@ namespace TDMaker
             // chkMTN_o_OutputSuffix
             // 
             this.chkMTN_o_OutputSuffix.AutoSize = true;
-            this.chkMTN_o_OutputSuffix.Checked = Program.conf.ScreenshotSettings.chkMTN_o_OutputSuffix;
             this.chkMTN_o_OutputSuffix.CheckState = System.Windows.Forms.CheckState.Checked;            
             this.chkMTN_o_OutputSuffix.Location = new System.Drawing.Point(350, 196);
             this.chkMTN_o_OutputSuffix.Name = "chkMTN_o_OutputSuffix";
@@ -2000,12 +1999,10 @@ namespace TDMaker
             this.nudMTN_B_OmitStart.Size = new System.Drawing.Size(120, 20);
             this.nudMTN_B_OmitStart.TabIndex = 52;
             this.ttApp.SetToolTip(this.nudMTN_B_OmitStart, "Keep 0 for Exact Dimensions");
-            this.nudMTN_B_OmitStart.Value = Program.conf.ScreenshotSettings.B_OmitBegin;
             // 
             // chkMTN_B_OmitBegin
             // 
             this.chkMTN_B_OmitBegin.AutoSize = true;
-            this.chkMTN_B_OmitBegin.Checked = Program.conf.ScreenshotSettings.chkMTN_B_OmitBegin;
             this.chkMTN_B_OmitBegin.Location = new System.Drawing.Point(22, 215);
             this.chkMTN_B_OmitBegin.Name = "chkMTN_B_OmitBegin";
             this.chkMTN_B_OmitBegin.Size = new System.Drawing.Size(121, 17);
@@ -2019,12 +2016,10 @@ namespace TDMaker
             this.nudMTN_D_EdgeDetection.Name = "nudMTN_D_EdgeDetection";
             this.nudMTN_D_EdgeDetection.Size = new System.Drawing.Size(120, 20);
             this.nudMTN_D_EdgeDetection.TabIndex = 50;
-            this.nudMTN_D_EdgeDetection.Value = Program.conf.ScreenshotSettings.D_EdgeDetection;
             // 
             // chkMTN_D_EdgeDetection
             // 
             this.chkMTN_D_EdgeDetection.AutoSize = true;
-            this.chkMTN_D_EdgeDetection.Checked = Program.conf.ScreenshotSettings.chkMTN_D_EdgeDetection;
             this.chkMTN_D_EdgeDetection.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkMTN_D_EdgeDetection.Location = new System.Drawing.Point(22, 265);
             this.chkMTN_D_EdgeDetection.Name = "chkMTN_D_EdgeDetection";
@@ -2051,12 +2046,10 @@ namespace TDMaker
             this.nudMTN_E_OmitEnd.Size = new System.Drawing.Size(120, 20);
             this.nudMTN_E_OmitEnd.TabIndex = 48;
             this.ttApp.SetToolTip(this.nudMTN_E_OmitEnd, "Keep 0 for Exact Dimensions");
-            this.nudMTN_E_OmitEnd.Value = Program.conf.ScreenshotSettings.E_OmitEnd;
             // 
             // chkMTN_E_OmitEnd
             // 
             this.chkMTN_E_OmitEnd.AutoSize = true;
-            this.chkMTN_E_OmitEnd.Checked = Program.conf.ScreenshotSettings.chkMTN_E_OmitEnd;
             this.chkMTN_E_OmitEnd.Location = new System.Drawing.Point(22, 240);
             this.chkMTN_E_OmitEnd.Name = "chkMTN_E_OmitEnd";
             this.chkMTN_E_OmitEnd.Size = new System.Drawing.Size(118, 17);
@@ -2075,12 +2068,10 @@ namespace TDMaker
             this.nudMTN_h_HeightMin.Name = "nudMTN_h_HeightMin";
             this.nudMTN_h_HeightMin.Size = new System.Drawing.Size(120, 20);
             this.nudMTN_h_HeightMin.TabIndex = 46;
-            this.nudMTN_h_HeightMin.Value = Program.conf.ScreenshotSettings.h_MinHeight;
             // 
             // chkMTN_h_Height
             // 
             this.chkMTN_h_Height.AutoSize = true;
-            this.chkMTN_h_Height.Checked = Program.conf.ScreenshotSettings.chkMTN_h_Height;
             this.chkMTN_h_Height.Location = new System.Drawing.Point(22, 65);
             this.chkMTN_h_Height.Name = "chkMTN_h_Height";
             this.chkMTN_h_Height.Size = new System.Drawing.Size(107, 17);
@@ -2091,7 +2082,6 @@ namespace TDMaker
             // chkMTN_v_Verbose
             // 
             this.chkMTN_v_Verbose.AutoSize = true;
-            this.chkMTN_v_Verbose.Checked = Program.conf.ScreenshotSettings.chkMTN_v_Verbose;
             this.chkMTN_v_Verbose.Location = new System.Drawing.Point(22, 301);
             this.chkMTN_v_Verbose.Name = "chkMTN_v_Verbose";
             this.chkMTN_v_Verbose.Size = new System.Drawing.Size(95, 17);
@@ -2105,7 +2095,6 @@ namespace TDMaker
             this.txtMTN_o_OutputSuffix.Name = "txtMTN_o_OutputSuffix";
             this.txtMTN_o_OutputSuffix.Size = new System.Drawing.Size(232, 20);
             this.txtMTN_o_OutputSuffix.TabIndex = 43;
-            this.txtMTN_o_OutputSuffix.Text = Program.conf.ScreenshotSettings.o_OutputSuffix;
             // 
             // txtMTN_N_InfoSuffix
             // 
@@ -2113,12 +2102,10 @@ namespace TDMaker
             this.txtMTN_N_InfoSuffix.Name = "txtMTN_N_InfoSuffix";
             this.txtMTN_N_InfoSuffix.Size = new System.Drawing.Size(232, 20);
             this.txtMTN_N_InfoSuffix.TabIndex = 41;
-            this.txtMTN_N_InfoSuffix.Text = Program.conf.ScreenshotSettings.N_InfoSuffix;
             // 
             // chkMTN_N_WriteInfo
             // 
             this.chkMTN_N_WriteInfo.AutoSize = true;
-            this.chkMTN_N_WriteInfo.Checked = Program.conf.ScreenshotSettings.chkMTN_N_WriteInfo;
             this.chkMTN_N_WriteInfo.Location = new System.Drawing.Point(350, 170);
             this.chkMTN_N_WriteInfo.Name = "chkMTN_N_WriteInfo";
             this.chkMTN_N_WriteInfo.Size = new System.Drawing.Size(73, 17);
@@ -2129,7 +2116,6 @@ namespace TDMaker
             // chkMTN_z_SeekMode
             // 
             this.chkMTN_z_SeekMode.AutoSize = true;
-            this.chkMTN_z_SeekMode.Checked = Program.conf.ScreenshotSettings.z_Seek;
             this.chkMTN_z_SeekMode.CheckState = System.Windows.Forms.CheckState.Indeterminate;
             this.chkMTN_z_SeekMode.Location = new System.Drawing.Point(556, 309);
             this.chkMTN_z_SeekMode.Name = "chkMTN_z_SeekMode";
@@ -2143,7 +2129,6 @@ namespace TDMaker
             // chkMTN_i_MediaInfoTurnOff
             // 
             this.chkMTN_i_MediaInfoTurnOff.AutoSize = true;
-            this.chkMTN_i_MediaInfoTurnOff.Checked = Program.conf.ScreenshotSettings.i_InfoOff;
             this.chkMTN_i_MediaInfoTurnOff.Location = new System.Drawing.Point(350, 18);
             this.chkMTN_i_MediaInfoTurnOff.Name = "chkMTN_i_MediaInfoTurnOff";
             this.chkMTN_i_MediaInfoTurnOff.Size = new System.Drawing.Size(116, 17);
@@ -2155,7 +2140,6 @@ namespace TDMaker
             // chkMTN_T_Title
             // 
             this.chkMTN_T_Title.AutoSize = true;
-            this.chkMTN_T_Title.Checked = Program.conf.ScreenshotSettings.chkMTN_T_Title;
             this.chkMTN_T_Title.Location = new System.Drawing.Point(12, 18);
             this.chkMTN_T_Title.Name = "chkMTN_T_Title";
             this.chkMTN_T_Title.Size = new System.Drawing.Size(46, 17);
@@ -2172,13 +2156,11 @@ namespace TDMaker
             this.cboMTN_f_FontType.Name = "cboMTN_f_FontType";
             this.cboMTN_f_FontType.Size = new System.Drawing.Size(232, 21);
             this.cboMTN_f_FontType.TabIndex = 12;
-            this.cboMTN_f_FontType.Text = Program.conf.ScreenshotSettings.f_Font;
             this.ttApp.SetToolTip(this.cboMTN_f_FontType, "tahomabd.ttf : font file; use absolute path if not in usual places");
             // 
             // chkMTN_f_Font
             // 
             this.chkMTN_f_Font.AutoSize = true;
-            this.chkMTN_f_Font.Checked = Program.conf.ScreenshotSettings.chkMTN_f_Font;
             this.chkMTN_f_Font.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkMTN_f_Font.Location = new System.Drawing.Point(12, 43);
             this.chkMTN_f_Font.Name = "chkMTN_f_Font";
@@ -2190,7 +2172,6 @@ namespace TDMaker
             // chkMTN_F_FontColor
             // 
             this.chkMTN_F_FontColor.AutoSize = true;
-            this.chkMTN_F_FontColor.Checked = Program.conf.ScreenshotSettings.chkMTN_F_FontColor;
             this.chkMTN_F_FontColor.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkMTN_F_FontColor.Location = new System.Drawing.Point(12, 69);
             this.chkMTN_F_FontColor.Name = "chkMTN_F_FontColor";
@@ -2208,13 +2189,11 @@ namespace TDMaker
             this.cboMTN_F_FontColor.Name = "cboMTN_F_FontColor";
             this.cboMTN_F_FontColor.Size = new System.Drawing.Size(120, 21);
             this.cboMTN_F_FontColor.TabIndex = 27;
-            this.cboMTN_F_FontColor.Text = Program.conf.ScreenshotSettings.F_FontColor;
             this.cboMTN_F_FontColor.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cboMTN_F_FontColor_MouseClick);
             // 
             // chkMTN_F_FontSize
             // 
             this.chkMTN_F_FontSize.AutoSize = true;
-            this.chkMTN_F_FontSize.Checked = Program.conf.ScreenshotSettings.chkMTN_F_FontSize;
             this.chkMTN_F_FontSize.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkMTN_F_FontSize.Location = new System.Drawing.Point(234, 69);
             this.chkMTN_F_FontSize.Name = "chkMTN_F_FontSize";
@@ -2230,12 +2209,10 @@ namespace TDMaker
             this.nudMTN_F_FontSize.Name = "nudMTN_F_FontSize";
             this.nudMTN_F_FontSize.Size = new System.Drawing.Size(52, 20);
             this.nudMTN_F_FontSize.TabIndex = 34;
-            this.nudMTN_F_FontSize.Value = Program.conf.ScreenshotSettings.F_FontSize;
             // 
             // chkMTN_L_LocInfo
             // 
             this.chkMTN_L_LocInfo.AutoSize = true;
-            this.chkMTN_L_LocInfo.Checked = Program.conf.ScreenshotSettings.chkMTN_L_LocInfo;
             this.chkMTN_L_LocInfo.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkMTN_L_LocInfo.Location = new System.Drawing.Point(12, 94);
             this.chkMTN_L_LocInfo.Name = "chkMTN_L_LocInfo";
@@ -2255,12 +2232,10 @@ namespace TDMaker
             this.nudMTN_j_JPEGQuality.Name = "nudMTN_j_JPEGQuality";
             this.nudMTN_j_JPEGQuality.Size = new System.Drawing.Size(120, 20);
             this.nudMTN_j_JPEGQuality.TabIndex = 36;
-            this.nudMTN_j_JPEGQuality.Value = Program.conf.ScreenshotSettings.j_JpgQuality;
             // 
             // chkMTN_j_JPEGQuality
             // 
             this.chkMTN_j_JPEGQuality.AutoSize = true;
-            this.chkMTN_j_JPEGQuality.Checked = Program.conf.ScreenshotSettings.chkMTN_j_JPEGQuality;
             this.chkMTN_j_JPEGQuality.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkMTN_j_JPEGQuality.Location = new System.Drawing.Point(22, 190);
             this.chkMTN_j_JPEGQuality.Name = "chkMTN_j_JPEGQuality";
@@ -2272,7 +2247,6 @@ namespace TDMaker
             // chkMTN_tL_LocTimestamp
             // 
             this.chkMTN_tL_LocTimestamp.AutoSize = true;
-            this.chkMTN_tL_LocTimestamp.Checked = Program.conf.ScreenshotSettings.chkMTN_tL_LocTimestamp;
             this.chkMTN_tL_LocTimestamp.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkMTN_tL_LocTimestamp.Location = new System.Drawing.Point(472, 18);
             this.chkMTN_tL_LocTimestamp.Name = "chkMTN_tL_LocTimestamp";
@@ -2284,7 +2258,6 @@ namespace TDMaker
             // chkMTN_k_ColorBackground
             // 
             this.chkMTN_k_ColorBackground.AutoSize = true;
-            this.chkMTN_k_ColorBackground.Checked = Program.conf.ScreenshotSettings.chkMTN_k_ColorBackground;
             this.chkMTN_k_ColorBackground.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkMTN_k_ColorBackground.Location = new System.Drawing.Point(22, 140);
             this.chkMTN_k_ColorBackground.Name = "chkMTN_k_ColorBackground";
@@ -2303,7 +2276,6 @@ namespace TDMaker
             this.chkMTN_g_Gap.Name = "chkMTN_g_Gap";
             this.chkMTN_g_Gap.Size = new System.Drawing.Size(120, 17);
             this.chkMTN_g_Gap.TabIndex = 25;
-            this.chkMTN_g_Gap.Text = Program.conf.ScreenshotSettings.chkMTN_g_Gap;
             this.chkMTN_g_Gap.UseVisualStyleBackColor = true;
             // 
             // cboMTN_k_ColorBkgrd
@@ -2314,7 +2286,6 @@ namespace TDMaker
             this.cboMTN_k_ColorBkgrd.Name = "cboMTN_k_ColorBkgrd";
             this.cboMTN_k_ColorBkgrd.Size = new System.Drawing.Size(120, 21);
             this.cboMTN_k_ColorBkgrd.TabIndex = 23;
-            this.cboMTN_k_ColorBkgrd.Text = Program.conf.ScreenshotSettings.k_ColorBackground;
             this.cboMTN_k_ColorBkgrd.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cboMTN_k_ColorBkgrd_MouseClick);
             // 
             // nudMTN_w_Width
@@ -2329,12 +2300,10 @@ namespace TDMaker
             this.nudMTN_w_Width.Size = new System.Drawing.Size(120, 20);
             this.nudMTN_w_Width.TabIndex = 22;
             this.ttApp.SetToolTip(this.nudMTN_w_Width, "Keep 0 for Exact Dimensions");
-            this.nudMTN_w_Width.Value = Program.conf.ScreenshotSettings.w_Width;
             // 
             // chk_w_Width
             // 
             this.chk_w_Width.AutoSize = true;
-            this.chk_w_Width.Checked = Program.conf.ScreenshotSettings.chk_w_Width;
             this.chk_w_Width.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chk_w_Width.Location = new System.Drawing.Point(22, 90);
             this.chk_w_Width.Name = "chk_w_Width";
@@ -2346,7 +2315,6 @@ namespace TDMaker
             // chkMTN_P_QuitAfterDone
             // 
             this.chkMTN_P_QuitAfterDone.AutoSize = true;
-            this.chkMTN_P_QuitAfterDone.Checked = Program.conf.ScreenshotSettings.P_QuitAfterDone;
             this.chkMTN_P_QuitAfterDone.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkMTN_P_QuitAfterDone.Location = new System.Drawing.Point(22, 347);
             this.chkMTN_P_QuitAfterDone.Name = "chkMTN_P_QuitAfterDone";
@@ -2366,12 +2334,10 @@ namespace TDMaker
             this.nudMTN_s_TimeStep.Name = "nudMTN_s_TimeStep";
             this.nudMTN_s_TimeStep.Size = new System.Drawing.Size(120, 20);
             this.nudMTN_s_TimeStep.TabIndex = 19;
-            this.nudMTN_s_TimeStep.Value = Program.conf.ScreenshotSettings.s_TimeStep;
             // 
             // chkMTN_s_TimeStep
             // 
             this.chkMTN_s_TimeStep.AutoSize = true;
-            this.chkMTN_s_TimeStep.Checked = Program.conf.ScreenshotSettings.chkMTN_s_TimeStep;
             this.chkMTN_s_TimeStep.Location = new System.Drawing.Point(22, 165);
             this.chkMTN_s_TimeStep.Name = "chkMTN_s_TimeStep";
             this.chkMTN_s_TimeStep.Size = new System.Drawing.Size(123, 17);
@@ -2385,7 +2351,6 @@ namespace TDMaker
             this.nudMTN_r_Rows.Name = "nudMTN_r_Rows";
             this.nudMTN_r_Rows.Size = new System.Drawing.Size(120, 20);
             this.nudMTN_r_Rows.TabIndex = 17;
-            this.nudMTN_r_Rows.Value = Program.conf.ScreenshotSettings.r_Rows;
             // 
             // chkShowMTN
             // 
@@ -2406,7 +2371,6 @@ namespace TDMaker
             this.nudMTN_c_Columns.Name = "nudMTN_c_Columns";
             this.nudMTN_c_Columns.Size = new System.Drawing.Size(120, 20);
             this.nudMTN_c_Columns.TabIndex = 15;
-            this.nudMTN_c_Columns.Value = Program.conf.ScreenshotSettings.c_Columns;
             // 
             // chkUseImageShackRegCode
             // 
@@ -2425,7 +2389,6 @@ namespace TDMaker
             this.txtImageShackRegCode.Name = "txtImageShackRegCode";
             this.txtImageShackRegCode.Size = new System.Drawing.Size(298, 20);
             this.txtImageShackRegCode.TabIndex = 4;
-            this.txtImageShackRegCode.Text = Program.conf.ImageShackRegCode;
             // 
             // chkRandomizeFileNameImageShack
             // 
@@ -2452,7 +2415,6 @@ namespace TDMaker
             // chkTorrentOrganize
             // 
             this.chkTorrentOrganize.AutoSize = true;
-            this.chkTorrentOrganize.Checked = Program.conf.TorrentsOrganize;
             this.chkTorrentOrganize.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkTorrentOrganize.Location = new System.Drawing.Point(114, 67);
             this.chkTorrentOrganize.Name = "chkTorrentOrganize";
@@ -2474,7 +2436,6 @@ namespace TDMaker
             // rbTorrentDefaultFolder
             // 
             this.rbTorrentDefaultFolder.AutoSize = true;
-            this.rbTorrentDefaultFolder.Checked = Program.conf.TorrentFolderDefault;
             this.rbTorrentDefaultFolder.Location = new System.Drawing.Point(19, 19);
             this.rbTorrentDefaultFolder.Name = "rbTorrentDefaultFolder";
             this.rbTorrentDefaultFolder.Size = new System.Drawing.Size(147, 17);
@@ -2486,7 +2447,6 @@ namespace TDMaker
             // chkCreateTorrent
             // 
             this.chkCreateTorrent.AutoSize = true;
-            this.chkCreateTorrent.Checked = Program.conf.CreateTorrent;
             this.chkCreateTorrent.Location = new System.Drawing.Point(17, 14);
             this.chkCreateTorrent.Name = "chkCreateTorrent";
             this.chkCreateTorrent.Size = new System.Drawing.Size(182, 17);
