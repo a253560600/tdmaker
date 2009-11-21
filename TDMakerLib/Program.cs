@@ -33,7 +33,7 @@ namespace TDMakerLib
         public static readonly string XMLFileName = "Settings.xml";
         public static string DefaultXMLFilePath { get; private set; }
 
-        public static XMLSettings conf;
+        public static XMLSettingsCore conf;
         private static bool RunConfig = false;
 
         public static bool DetectUnix()
@@ -249,7 +249,7 @@ namespace TDMakerLib
                 }
             }
 
-            DefaultXMLFilePath = Path.Combine(SettingsDir, XMLSettings.XMLFileName);
+            DefaultXMLFilePath = Path.Combine(SettingsDir, XMLSettingsCore.XMLFileName);
             string DefaultXMLFilePathOld = Path.Combine(SettingsDir, XMLFileName);
             if (!File.Exists(DefaultXMLFilePath) && File.Exists(DefaultXMLFilePathOld))
             {
@@ -283,12 +283,12 @@ namespace TDMakerLib
             }
 
             Program.InitializeDefaultFolderPaths(); // happens before XMLSettings is readed
-            conf = XMLSettings.Read();
+            conf = XMLSettingsCore.Read();
         }
 
         public static void Unload()
         {
-            conf.Save();
+            conf.Write();
             appSettings.Write();
         }
     }

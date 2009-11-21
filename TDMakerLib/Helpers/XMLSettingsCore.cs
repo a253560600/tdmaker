@@ -13,11 +13,11 @@ using System.ComponentModel;
 namespace TDMakerLib
 {
     [XmlRoot("Settings")]
-    public class XMLSettings
+    public class XMLSettingsCore : XMLSettings
     {
         public static string XMLFileName = string.Format("{0}-{1}-Settings.xml", Application.ProductName, Application.ProductVersion);
 
-        public XMLSettings()
+        public XMLSettingsCore()
         {
             ApplyDefaultValues(this);
 
@@ -52,7 +52,7 @@ namespace TDMakerLib
         public int FontSizeBody { get; set; }
         [Category("Text Formatting / Font Sizes"), DefaultValue(1), Description("Font Size increment")]
         public int FontSizeIncr { get; set; }
-        
+
         public bool AnalyzeAuto { get; set; }
         public bool AutoCheckUpdates { get; set; }
         public bool bDiscMenu { get; set; }
@@ -83,7 +83,7 @@ namespace TDMakerLib
         public decimal FontSizeHeading1 { get; set; }
         public decimal FontSizeHeading3 { get; set; }
         public int AnnounceURLIndex { get; set; }
-        public int ScreenshotDestIndex { get; set; }
+        public ImageDestType ImageUploader = ImageDestType.IMAGESHACK;
         public int TemplateIndex { get; set; }
         public string DiscMenu { get; set; }
         public string ExtrasMode { get; set; }
@@ -100,14 +100,28 @@ namespace TDMakerLib
         public StringCollection MTNFonts = new StringCollection();
         public StringCollection SourceEdits = new StringCollection();
         public StringCollection Sources = new StringCollection();
-        public XMLScreenshotSettings ScreenshotSettings = new XMLScreenshotSettings();
+        public XMLSettingsScreenshot ScreenshotSettings = new XMLSettingsScreenshot();
 
+        public bool chkMTN_s_TimeStep { get; set; }
+        public bool chkMTN_j_JPEGQuality { get; set; }
+        public bool chkMTN_B_OmitBegin { get; set; }
+        public bool chkMTN_E_OmitEnd { get; set; }
+        public bool chkMTN_D_EdgeDetection { get; set; }
+        public bool chkMTN_h_Height { get; set; }
+        public bool chkMTN_T_Title { get; set; }
+        public bool chkMTN_L_LocInfo { get; set; }
+        public bool chkMTN_N_WriteInfo { get; set; }
+        public bool chkMTN_tL_LocTimestamp { get; set; }
+        public bool chkMTN_f_Font { get; set; }
+        public bool chkMTN_v_Verbose { get; set; }
+        public bool chkMTN_o_OutputSuffix { get; set; }
+        public bool chkMTN_k_ColorBackground { get; set; }
 
         #region I/O Methods
 
         public string FilePath { get; set; }
 
-        public void Save(string filePath)
+        public void Write(string filePath)
         {
             try
             {
@@ -129,12 +143,12 @@ namespace TDMakerLib
             }
         }
 
-        public void Save()
+        public void Write()
         {
-            Save(this.FilePath);
+            Write(Program.appSettings.XMLSettingsFile);
         }
 
-        public static XMLSettings Read()
+        public static XMLSettingsCore Read()
         {
             string settingsFile = Program.appSettings.GetSettingsFilePath();
             if (!File.Exists(settingsFile))
@@ -159,10 +173,9 @@ namespace TDMakerLib
 
             Program.appSettings.XMLSettingsFile = Program.appSettings.GetSettingsFilePath();
             return Read(Program.appSettings.XMLSettingsFile);
-
         }
 
-        public static XMLSettings Read(string filePath)
+        public static XMLSettingsCore Read(string filePath)
         {
             if (!string.IsNullOrEmpty(filePath))
             {
@@ -178,7 +191,7 @@ namespace TDMakerLib
                         XmlSerializer xs = new XmlSerializer(typeof(XMLSettings), TextUploader.Types.ToArray());
                         using (FileStream fs = new FileStream(filePath, FileMode.Open))
                         {
-                            return xs.Deserialize(fs) as XMLSettings;
+                            return xs.Deserialize(fs) as XMLSettingsCore;
                         }
                     }
                     catch (Exception ex)
@@ -188,19 +201,9 @@ namespace TDMakerLib
                 }
             }
 
-            return new XMLSettings();
+            return new XMLSettingsCore();
         }
 
         #endregion
-
-        static public void ApplyDefaultValues(object self)
-        {
-            foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(self))
-            {
-                DefaultValueAttribute attr = prop.Attributes[typeof(DefaultValueAttribute)] as DefaultValueAttribute;
-                if (attr == null) continue;
-                prop.SetValue(self, attr.Value);
-            }
-        }
     }
 }

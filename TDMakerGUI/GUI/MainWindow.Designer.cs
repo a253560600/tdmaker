@@ -38,6 +38,7 @@ namespace TDMaker
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnBrowseMTN = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtMtn = new System.Windows.Forms.TextBox();
             this.gbScreenshotFull = new System.Windows.Forms.GroupBox();
             this.lbScreenshots = new System.Windows.Forms.ListBox();
             this.txtScrFull = new System.Windows.Forms.LinkLabel();
@@ -61,11 +62,22 @@ namespace TDMaker
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.lbStatus = new System.Windows.Forms.ListBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.chkTitle = new System.Windows.Forms.CheckBox();
             this.txtTitle = new System.Windows.Forms.TextBox();
+            this.chkWebLink = new System.Windows.Forms.CheckBox();
+            this.chkSource = new System.Windows.Forms.CheckBox();
             this.txtWebLink = new System.Windows.Forms.TextBox();
+            this.cboSource = new System.Windows.Forms.ComboBox();
             this.gbDVD = new System.Windows.Forms.GroupBox();
+            this.cboDiscMenu = new System.Windows.Forms.ComboBox();
+            this.chkDiscMenu = new System.Windows.Forms.CheckBox();
+            this.cboExtras = new System.Windows.Forms.ComboBox();
+            this.chkExtras = new System.Windows.Forms.CheckBox();
+            this.cboAuthoring = new System.Windows.Forms.ComboBox();
+            this.chkSourceEdit = new System.Windows.Forms.CheckBox();
             this.gbLocation = new System.Windows.Forms.GroupBox();
             this.lbFiles = new System.Windows.Forms.ListBox();
+            this.rbDir = new System.Windows.Forms.RadioButton();
             this.rbFile = new System.Windows.Forms.RadioButton();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.tpMainMediaInfo = new System.Windows.Forms.TabPage();
@@ -73,6 +85,8 @@ namespace TDMaker
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.cboScreenshotDest = new System.Windows.Forms.ComboBox();
             this.pbScreenshot = new System.Windows.Forms.PictureBox();
+            this.chkOptImageShack = new System.Windows.Forms.CheckBox();
+            this.chkScreenshot = new System.Windows.Forms.CheckBox();
             this.tpMainPublish = new System.Windows.Forms.TabPage();
             this.gbQuickPublish = new System.Windows.Forms.GroupBox();
             this.rbTExt = new System.Windows.Forms.RadioButton();
@@ -85,42 +99,99 @@ namespace TDMaker
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tcOptions = new System.Windows.Forms.TabControl();
             this.tpGeneral = new System.Windows.Forms.TabPage();
+            this.chkUpdateCheck = new System.Windows.Forms.CheckBox();
+            this.chkAnalyzeAuto = new System.Windows.Forms.CheckBox();
             this.tpPublish = new System.Windows.Forms.TabPage();
             this.btnTemplatesRewrite = new System.Windows.Forms.Button();
             this.cboTemplate = new System.Windows.Forms.ComboBox();
             this.gbTemplatesInternal = new System.Windows.Forms.GroupBox();
+            this.nudFontSizeIncr = new System.Windows.Forms.NumericUpDown();
+            this.chkPre = new System.Windows.Forms.CheckBox();
+            this.chkPreIncreaseFontSize = new System.Windows.Forms.CheckBox();
+            this.chkAlignCenter = new System.Windows.Forms.CheckBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.nudFontSizeHeading1 = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
+            this.nudHeading2Size = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
+            this.nudHeading3Size = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
+            this.nudBodyText = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
+            this.chkUploadFullScreenshot = new System.Windows.Forms.CheckBox();
+            this.chkTemplatesMode = new System.Windows.Forms.CheckBox();
             this.tpScreenshots = new System.Windows.Forms.TabPage();
             this.tcHosting = new System.Windows.Forms.TabControl();
             this.tpMTNUsage = new System.Windows.Forms.TabPage();
             this.pMTNUsage = new System.Windows.Forms.Panel();
+            this.nudMTN_B_OmitStart = new System.Windows.Forms.NumericUpDown();
+            this.chkMTN_B_OmitBegin = new System.Windows.Forms.CheckBox();
+            this.nudMTN_D_EdgeDetection = new System.Windows.Forms.NumericUpDown();
+            this.chkMTN_D_EdgeDetection = new System.Windows.Forms.CheckBox();
+            this.nudMTN_E_OmitEnd = new System.Windows.Forms.NumericUpDown();
+            this.chkMTN_E_OmitEnd = new System.Windows.Forms.CheckBox();
+            this.nudMTN_h_HeightMin = new System.Windows.Forms.NumericUpDown();
+            this.chkMTN_h_Height = new System.Windows.Forms.CheckBox();
+            this.chkMTN_v_Verbose = new System.Windows.Forms.CheckBox();
+            this.txtMTN_o_OutputSuffix = new System.Windows.Forms.TextBox();
             this.chkMTN_o_OutputSuffix = new System.Windows.Forms.CheckBox();
+            this.txtMTN_N_InfoSuffix = new System.Windows.Forms.TextBox();
+            this.chkMTN_N_WriteInfo = new System.Windows.Forms.CheckBox();
+            this.chkMTN_z_SeekMode = new System.Windows.Forms.CheckBox();
+            this.chkMTN_i_MediaInfoTurnOff = new System.Windows.Forms.CheckBox();
             this.gbMTN_i_MediaInfo = new System.Windows.Forms.GroupBox();
+            this.chkMTN_T_Title = new System.Windows.Forms.CheckBox();
+            this.cboMTN_f_FontType = new System.Windows.Forms.ComboBox();
             this.txtMTN_T_Title = new System.Windows.Forms.TextBox();
+            this.chkMTN_f_Font = new System.Windows.Forms.CheckBox();
+            this.chkMTN_F_FontColor = new System.Windows.Forms.CheckBox();
+            this.cboMTN_F_FontColor = new System.Windows.Forms.ComboBox();
+            this.chkMTN_F_FontSize = new System.Windows.Forms.CheckBox();
+            this.nudMTN_F_FontSize = new System.Windows.Forms.NumericUpDown();
+            this.chkMTN_L_LocInfo = new System.Windows.Forms.CheckBox();
             this.cboMTN_L_LocInfo = new System.Windows.Forms.ComboBox();
+            this.nudMTN_j_JPEGQuality = new System.Windows.Forms.NumericUpDown();
+            this.chkMTN_j_JPEGQuality = new System.Windows.Forms.CheckBox();
             this.cboMTN_L_LocTimestamp = new System.Windows.Forms.ComboBox();
+            this.chkMTN_tL_LocTimestamp = new System.Windows.Forms.CheckBox();
+            this.chkMTN_k_ColorBackground = new System.Windows.Forms.CheckBox();
             this.nudMTN_g_Gap = new System.Windows.Forms.NumericUpDown();
+            this.chkMTN_g_Gap = new System.Windows.Forms.CheckBox();
+            this.cboMTN_k_ColorBkgrd = new System.Windows.Forms.ComboBox();
+            this.nudMTN_w_Width = new System.Windows.Forms.NumericUpDown();
+            this.chk_w_Width = new System.Windows.Forms.CheckBox();
+            this.chkMTN_P_QuitAfterDone = new System.Windows.Forms.CheckBox();
+            this.nudMTN_s_TimeStep = new System.Windows.Forms.NumericUpDown();
+            this.chkMTN_s_TimeStep = new System.Windows.Forms.CheckBox();
+            this.nudMTN_r_Rows = new System.Windows.Forms.NumericUpDown();
+            this.chkShowMTN = new System.Windows.Forms.CheckBox();
             this.chkMTNRows = new System.Windows.Forms.CheckBox();
+            this.nudMTN_c_Columns = new System.Windows.Forms.NumericUpDown();
             this.chkMTNColumns = new System.Windows.Forms.CheckBox();
             this.tpHostingImageShack = new System.Windows.Forms.TabPage();
             this.btnImageShackImages = new System.Windows.Forms.Button();
             this.btnImageShackRegCode = new System.Windows.Forms.Button();
+            this.chkUseImageShackRegCode = new System.Windows.Forms.CheckBox();
+            this.txtImageShackRegCode = new System.Windows.Forms.TextBox();
+            this.chkRandomizeFileNameImageShack = new System.Windows.Forms.CheckBox();
             this.tpTorrents = new System.Windows.Forms.TabPage();
             this.btnRefreshTrackers = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.chkWritePublish = new System.Windows.Forms.CheckBox();
+            this.chkTorrentOrganize = new System.Windows.Forms.CheckBox();
             this.btnBrowseTorrentCustomFolder = new System.Windows.Forms.Button();
+            this.txtTorrentCustomFolder = new System.Windows.Forms.TextBox();
             this.rbTorrentFolderCustom = new System.Windows.Forms.RadioButton();
+            this.rbTorrentDefaultFolder = new System.Windows.Forms.RadioButton();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.dgvTrackers = new System.Windows.Forms.DataGridView();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAnnounceURL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cboAnnounceURL = new System.Windows.Forms.ComboBox();
+            this.chkCreateTorrent = new System.Windows.Forms.CheckBox();
             this.tpPaths = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chkKeepScreenshot = new System.Windows.Forms.CheckBox();
             this.tmrStatus = new System.Windows.Forms.Timer(this.components);
             this.btnPublish = new System.Windows.Forms.Button();
             this.btnAnalyze = new System.Windows.Forms.Button();
@@ -162,77 +233,6 @@ namespace TDMaker
             this.miHelpCheckUpdates = new System.Windows.Forms.ToolStripMenuItem();
             this.miHelpVersionHistory = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.chkTitle = new System.Windows.Forms.CheckBox();
-            this.chkWebLink = new System.Windows.Forms.CheckBox();
-            this.chkSource = new System.Windows.Forms.CheckBox();
-            this.cboSource = new System.Windows.Forms.ComboBox();
-            this.cboDiscMenu = new System.Windows.Forms.ComboBox();
-            this.chkDiscMenu = new System.Windows.Forms.CheckBox();
-            this.cboExtras = new System.Windows.Forms.ComboBox();
-            this.chkExtras = new System.Windows.Forms.CheckBox();
-            this.cboAuthoring = new System.Windows.Forms.ComboBox();
-            this.chkSourceEdit = new System.Windows.Forms.CheckBox();
-            this.rbDir = new System.Windows.Forms.RadioButton();
-            this.chkOptImageShack = new System.Windows.Forms.CheckBox();
-            this.chkScreenshot = new System.Windows.Forms.CheckBox();
-            this.chkUpdateCheck = new System.Windows.Forms.CheckBox();
-            this.chkAnalyzeAuto = new System.Windows.Forms.CheckBox();
-            this.nudFontSizeIncr = new System.Windows.Forms.NumericUpDown();
-            this.chkPre = new System.Windows.Forms.CheckBox();
-            this.chkPreIncreaseFontSize = new System.Windows.Forms.CheckBox();
-            this.chkAlignCenter = new System.Windows.Forms.CheckBox();
-            this.nudFontSizeHeading1 = new System.Windows.Forms.NumericUpDown();
-            this.nudHeading2Size = new System.Windows.Forms.NumericUpDown();
-            this.nudHeading3Size = new System.Windows.Forms.NumericUpDown();
-            this.nudBodyText = new System.Windows.Forms.NumericUpDown();
-            this.chkUploadFullScreenshot = new System.Windows.Forms.CheckBox();
-            this.chkTemplatesMode = new System.Windows.Forms.CheckBox();
-            this.nudMTN_B_OmitStart = new System.Windows.Forms.NumericUpDown();
-            this.chkMTN_B_OmitBegin = new System.Windows.Forms.CheckBox();
-            this.nudMTN_D_EdgeDetection = new System.Windows.Forms.NumericUpDown();
-            this.chkMTN_D_EdgeDetection = new System.Windows.Forms.CheckBox();
-            this.nudMTN_E_OmitEnd = new System.Windows.Forms.NumericUpDown();
-            this.chkMTN_E_OmitEnd = new System.Windows.Forms.CheckBox();
-            this.nudMTN_h_HeightMin = new System.Windows.Forms.NumericUpDown();
-            this.chkMTN_h_Height = new System.Windows.Forms.CheckBox();
-            this.chkMTN_v_Verbose = new System.Windows.Forms.CheckBox();
-            this.txtMTN_o_OutputSuffix = new System.Windows.Forms.TextBox();
-            this.txtMTN_N_InfoSuffix = new System.Windows.Forms.TextBox();
-            this.chkMTN_N_WriteInfo = new System.Windows.Forms.CheckBox();
-            this.chkMTN_z_SeekMode = new System.Windows.Forms.CheckBox();
-            this.chkMTN_i_MediaInfoTurnOff = new System.Windows.Forms.CheckBox();
-            this.chkMTN_T_Title = new System.Windows.Forms.CheckBox();
-            this.cboMTN_f_FontType = new System.Windows.Forms.ComboBox();
-            this.chkMTN_f_Font = new System.Windows.Forms.CheckBox();
-            this.chkMTN_F_FontColor = new System.Windows.Forms.CheckBox();
-            this.cboMTN_F_FontColor = new System.Windows.Forms.ComboBox();
-            this.chkMTN_F_FontSize = new System.Windows.Forms.CheckBox();
-            this.nudMTN_F_FontSize = new System.Windows.Forms.NumericUpDown();
-            this.chkMTN_L_LocInfo = new System.Windows.Forms.CheckBox();
-            this.nudMTN_j_JPEGQuality = new System.Windows.Forms.NumericUpDown();
-            this.chkMTN_j_JPEGQuality = new System.Windows.Forms.CheckBox();
-            this.chkMTN_tL_LocTimestamp = new System.Windows.Forms.CheckBox();
-            this.chkMTN_k_ColorBackground = new System.Windows.Forms.CheckBox();
-            this.chkMTN_g_Gap = new System.Windows.Forms.CheckBox();
-            this.cboMTN_k_ColorBkgrd = new System.Windows.Forms.ComboBox();
-            this.nudMTN_w_Width = new System.Windows.Forms.NumericUpDown();
-            this.chk_w_Width = new System.Windows.Forms.CheckBox();
-            this.chkMTN_P_QuitAfterDone = new System.Windows.Forms.CheckBox();
-            this.nudMTN_s_TimeStep = new System.Windows.Forms.NumericUpDown();
-            this.chkMTN_s_TimeStep = new System.Windows.Forms.CheckBox();
-            this.nudMTN_r_Rows = new System.Windows.Forms.NumericUpDown();
-            this.chkShowMTN = new System.Windows.Forms.CheckBox();
-            this.nudMTN_c_Columns = new System.Windows.Forms.NumericUpDown();
-            this.chkUseImageShackRegCode = new System.Windows.Forms.CheckBox();
-            this.txtImageShackRegCode = new System.Windows.Forms.TextBox();
-            this.chkRandomizeFileNameImageShack = new System.Windows.Forms.CheckBox();
-            this.chkWritePublish = new System.Windows.Forms.CheckBox();
-            this.chkTorrentOrganize = new System.Windows.Forms.CheckBox();
-            this.txtTorrentCustomFolder = new System.Windows.Forms.TextBox();
-            this.rbTorrentDefaultFolder = new System.Windows.Forms.RadioButton();
-            this.chkCreateTorrent = new System.Windows.Forms.CheckBox();
-            this.chkKeepScreenshot = new System.Windows.Forms.CheckBox();
-            this.txtMtn = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.gbScreenshotFull.SuspendLayout();
             this.gbScreenshotForums.SuspendLayout();
@@ -253,13 +253,28 @@ namespace TDMaker
             this.tpGeneral.SuspendLayout();
             this.tpPublish.SuspendLayout();
             this.gbTemplatesInternal.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeIncr)).BeginInit();
             this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeHeading1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHeading2Size)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHeading3Size)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBodyText)).BeginInit();
             this.tpScreenshots.SuspendLayout();
             this.tcHosting.SuspendLayout();
             this.tpMTNUsage.SuspendLayout();
             this.pMTNUsage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_B_OmitStart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_D_EdgeDetection)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_E_OmitEnd)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_h_HeightMin)).BeginInit();
             this.gbMTN_i_MediaInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_F_FontSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_j_JPEGQuality)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMTN_g_Gap)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_w_Width)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_s_TimeStep)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_r_Rows)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_c_Columns)).BeginInit();
             this.tpHostingImageShack.SuspendLayout();
             this.tpTorrents.SuspendLayout();
             this.groupBox8.SuspendLayout();
@@ -270,21 +285,6 @@ namespace TDMaker
             this.cmsApp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeIncr)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeHeading1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHeading2Size)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHeading3Size)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBodyText)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_B_OmitStart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_D_EdgeDetection)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_E_OmitEnd)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_h_HeightMin)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_F_FontSize)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_j_JPEGQuality)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_w_Width)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_s_TimeStep)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_r_Rows)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_c_Columns)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -321,11 +321,23 @@ namespace TDMaker
             this.label1.TabIndex = 3;
             this.label1.Text = "MTN Path:";
             // 
+            // txtMtn
+            // 
+            this.txtMtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMtn.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtMtn.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
+            this.txtMtn.Location = new System.Drawing.Point(114, 25);
+            this.txtMtn.Name = "txtMtn";
+            this.txtMtn.Size = new System.Drawing.Size(437, 20);
+            this.txtMtn.TabIndex = 0;
+            // 
             // gbScreenshotFull
             // 
             this.gbScreenshotFull.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.gbScreenshotFull.Controls.Add(this.lbScreenshots);
+            this.gbScreenshotFull.Controls.Add(this.pbScreenshot);
             this.gbScreenshotFull.Controls.Add(this.txtScrFull);
             this.gbScreenshotFull.Controls.Add(this.label4);
             this.gbScreenshotFull.Controls.Add(this.btnCopy0);
@@ -577,6 +589,19 @@ namespace TDMaker
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Source Properties";
             // 
+            // chkTitle
+            // 
+            this.chkTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkTitle.AutoSize = true;
+            this.chkTitle.Checked = true;
+            this.chkTitle.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkTitle.Location = new System.Drawing.Point(22, 60);
+            this.chkTitle.Name = "chkTitle";
+            this.chkTitle.Size = new System.Drawing.Size(49, 17);
+            this.chkTitle.TabIndex = 14;
+            this.chkTitle.Text = "&Title:";
+            this.chkTitle.UseVisualStyleBackColor = true;
+            // 
             // txtTitle
             // 
             this.txtTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
@@ -586,6 +611,29 @@ namespace TDMaker
             this.txtTitle.Size = new System.Drawing.Size(292, 20);
             this.txtTitle.TabIndex = 15;
             // 
+            // chkWebLink
+            // 
+            this.chkWebLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkWebLink.AutoSize = true;
+            this.chkWebLink.Location = new System.Drawing.Point(22, 90);
+            this.chkWebLink.Name = "chkWebLink";
+            this.chkWebLink.Size = new System.Drawing.Size(75, 17);
+            this.chkWebLink.TabIndex = 9;
+            this.chkWebLink.Text = "&Web Link:";
+            this.chkWebLink.UseVisualStyleBackColor = true;
+            // 
+            // chkSource
+            // 
+            this.chkSource.AutoSize = true;
+            this.chkSource.Checked = true;
+            this.chkSource.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSource.Location = new System.Drawing.Point(22, 31);
+            this.chkSource.Name = "chkSource";
+            this.chkSource.Size = new System.Drawing.Size(60, 17);
+            this.chkSource.TabIndex = 13;
+            this.chkSource.Text = "&Source";
+            this.chkSource.UseVisualStyleBackColor = true;
+            // 
             // txtWebLink
             // 
             this.txtWebLink.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
@@ -594,6 +642,14 @@ namespace TDMaker
             this.txtWebLink.Name = "txtWebLink";
             this.txtWebLink.Size = new System.Drawing.Size(292, 20);
             this.txtWebLink.TabIndex = 10;
+            // 
+            // cboSource
+            // 
+            this.cboSource.FormattingEnabled = true;
+            this.cboSource.Location = new System.Drawing.Point(117, 29);
+            this.cboSource.Name = "cboSource";
+            this.cboSource.Size = new System.Drawing.Size(121, 21);
+            this.cboSource.TabIndex = 0;
             // 
             // gbDVD
             // 
@@ -609,6 +665,66 @@ namespace TDMaker
             this.gbDVD.TabIndex = 11;
             this.gbDVD.TabStop = false;
             this.gbDVD.Text = "DVD Properties";
+            // 
+            // cboDiscMenu
+            // 
+            this.cboDiscMenu.FormattingEnabled = true;
+            this.cboDiscMenu.Location = new System.Drawing.Point(121, 58);
+            this.cboDiscMenu.Name = "cboDiscMenu";
+            this.cboDiscMenu.Size = new System.Drawing.Size(121, 21);
+            this.cboDiscMenu.TabIndex = 18;
+            // 
+            // chkDiscMenu
+            // 
+            this.chkDiscMenu.AutoSize = true;
+            this.chkDiscMenu.Checked = true;
+            this.chkDiscMenu.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkDiscMenu.Location = new System.Drawing.Point(26, 60);
+            this.chkDiscMenu.Name = "chkDiscMenu";
+            this.chkDiscMenu.Size = new System.Drawing.Size(56, 17);
+            this.chkDiscMenu.TabIndex = 17;
+            this.chkDiscMenu.Text = "Menu:";
+            this.chkDiscMenu.UseVisualStyleBackColor = true;
+            // 
+            // cboExtras
+            // 
+            this.cboExtras.FormattingEnabled = true;
+            this.cboExtras.Location = new System.Drawing.Point(121, 86);
+            this.cboExtras.Name = "cboExtras";
+            this.cboExtras.Size = new System.Drawing.Size(121, 21);
+            this.cboExtras.TabIndex = 16;
+            // 
+            // chkExtras
+            // 
+            this.chkExtras.AutoSize = true;
+            this.chkExtras.Checked = true;
+            this.chkExtras.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkExtras.Location = new System.Drawing.Point(26, 88);
+            this.chkExtras.Name = "chkExtras";
+            this.chkExtras.Size = new System.Drawing.Size(58, 17);
+            this.chkExtras.TabIndex = 15;
+            this.chkExtras.Text = "E&xtras:";
+            this.chkExtras.UseVisualStyleBackColor = true;
+            // 
+            // cboAuthoring
+            // 
+            this.cboAuthoring.FormattingEnabled = true;
+            this.cboAuthoring.Location = new System.Drawing.Point(121, 29);
+            this.cboAuthoring.Name = "cboAuthoring";
+            this.cboAuthoring.Size = new System.Drawing.Size(121, 21);
+            this.cboAuthoring.TabIndex = 14;
+            // 
+            // chkSourceEdit
+            // 
+            this.chkSourceEdit.AutoSize = true;
+            this.chkSourceEdit.Checked = true;
+            this.chkSourceEdit.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSourceEdit.Location = new System.Drawing.Point(26, 32);
+            this.chkSourceEdit.Name = "chkSourceEdit";
+            this.chkSourceEdit.Size = new System.Drawing.Size(74, 17);
+            this.chkSourceEdit.TabIndex = 13;
+            this.chkSourceEdit.Text = "Authoring:";
+            this.chkSourceEdit.UseVisualStyleBackColor = true;
             // 
             // gbLocation
             // 
@@ -635,6 +751,18 @@ namespace TDMaker
             this.lbFiles.Name = "lbFiles";
             this.lbFiles.Size = new System.Drawing.Size(676, 82);
             this.lbFiles.TabIndex = 13;
+            // 
+            // rbDir
+            // 
+            this.rbDir.AutoSize = true;
+            this.rbDir.Location = new System.Drawing.Point(232, 27);
+            this.rbDir.Name = "rbDir";
+            this.rbDir.Size = new System.Drawing.Size(80, 17);
+            this.rbDir.TabIndex = 9;
+            this.rbDir.TabStop = true;
+            this.rbDir.Text = "&DVD Folder";
+            this.rbDir.UseVisualStyleBackColor = true;
+            this.rbDir.CheckedChanged += new System.EventHandler(this.rbDir_CheckedChanged);
             // 
             // rbFile
             // 
@@ -686,7 +814,6 @@ namespace TDMaker
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.cboScreenshotDest);
-            this.tabPage2.Controls.Add(this.pbScreenshot);
             this.tabPage2.Controls.Add(this.gbScreenshotForums);
             this.tabPage2.Controls.Add(this.gbScreenshotFull);
             this.tabPage2.Controls.Add(this.chkOptImageShack);
@@ -711,15 +838,40 @@ namespace TDMaker
             // 
             // pbScreenshot
             // 
-            this.pbScreenshot.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbScreenshot.Location = new System.Drawing.Point(20, 369);
+            this.pbScreenshot.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbScreenshot.Location = new System.Drawing.Point(584, 64);
             this.pbScreenshot.Name = "pbScreenshot";
-            this.pbScreenshot.Size = new System.Drawing.Size(724, 52);
+            this.pbScreenshot.Size = new System.Drawing.Size(104, 88);
             this.pbScreenshot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbScreenshot.TabIndex = 12;
             this.pbScreenshot.TabStop = false;
+            this.pbScreenshot.Click += new System.EventHandler(this.pbScreenshot_Click);
+            // 
+            // chkOptImageShack
+            // 
+            this.chkOptImageShack.AutoSize = true;
+            this.chkOptImageShack.Checked = true;
+            this.chkOptImageShack.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkOptImageShack.Location = new System.Drawing.Point(263, 16);
+            this.chkOptImageShack.Name = "chkOptImageShack";
+            this.chkOptImageShack.Size = new System.Drawing.Size(129, 17);
+            this.chkOptImageShack.TabIndex = 0;
+            this.chkOptImageShack.Text = "Upload Screenshot to";
+            this.chkOptImageShack.UseVisualStyleBackColor = true;
+            this.chkOptImageShack.CheckedChanged += new System.EventHandler(this.chkOptImageShack_CheckedChanged);
+            // 
+            // chkScreenshot
+            // 
+            this.chkScreenshot.AutoSize = true;
+            this.chkScreenshot.Checked = true;
+            this.chkScreenshot.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkScreenshot.Location = new System.Drawing.Point(134, 16);
+            this.chkScreenshot.Name = "chkScreenshot";
+            this.chkScreenshot.Size = new System.Drawing.Size(114, 17);
+            this.chkScreenshot.TabIndex = 11;
+            this.chkScreenshot.Text = "&Create Screenshot";
+            this.chkScreenshot.UseVisualStyleBackColor = true;
+            this.chkScreenshot.CheckedChanged += new System.EventHandler(this.chkScreenshot_CheckedChanged);
             // 
             // tpMainPublish
             // 
@@ -866,6 +1018,30 @@ namespace TDMaker
             this.tpGeneral.Text = "General";
             this.tpGeneral.UseVisualStyleBackColor = true;
             // 
+            // chkUpdateCheck
+            // 
+            this.chkUpdateCheck.AutoSize = true;
+            this.chkUpdateCheck.Checked = true;
+            this.chkUpdateCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkUpdateCheck.Location = new System.Drawing.Point(20, 43);
+            this.chkUpdateCheck.Name = "chkUpdateCheck";
+            this.chkUpdateCheck.Size = new System.Drawing.Size(180, 17);
+            this.chkUpdateCheck.TabIndex = 12;
+            this.chkUpdateCheck.Text = "Automatically Check for Updates";
+            this.chkUpdateCheck.UseVisualStyleBackColor = true;
+            // 
+            // chkAnalyzeAuto
+            // 
+            this.chkAnalyzeAuto.AutoSize = true;
+            this.chkAnalyzeAuto.Checked = true;
+            this.chkAnalyzeAuto.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAnalyzeAuto.Location = new System.Drawing.Point(20, 20);
+            this.chkAnalyzeAuto.Name = "chkAnalyzeAuto";
+            this.chkAnalyzeAuto.Size = new System.Drawing.Size(270, 17);
+            this.chkAnalyzeAuto.TabIndex = 9;
+            this.chkAnalyzeAuto.Text = "&Process media immediately after loading file or folder";
+            this.chkAnalyzeAuto.UseVisualStyleBackColor = true;
+            // 
             // tpPublish
             // 
             this.tpPublish.Controls.Add(this.btnTemplatesRewrite);
@@ -915,6 +1091,55 @@ namespace TDMaker
             this.gbTemplatesInternal.TabStop = false;
             this.gbTemplatesInternal.Text = "Internal Template Settings";
             // 
+            // nudFontSizeIncr
+            // 
+            this.nudFontSizeIncr.Location = new System.Drawing.Point(319, 55);
+            this.nudFontSizeIncr.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudFontSizeIncr.Name = "nudFontSizeIncr";
+            this.nudFontSizeIncr.Size = new System.Drawing.Size(55, 20);
+            this.nudFontSizeIncr.TabIndex = 9;
+            this.nudFontSizeIncr.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // chkPre
+            // 
+            this.chkPre.AutoSize = true;
+            this.chkPre.Location = new System.Drawing.Point(17, 56);
+            this.chkPre.Name = "chkPre";
+            this.chkPre.Size = new System.Drawing.Size(132, 17);
+            this.chkPre.TabIndex = 1;
+            this.chkPre.Text = "Use Preformatted Text";
+            this.chkPre.UseVisualStyleBackColor = true;
+            // 
+            // chkPreIncreaseFontSize
+            // 
+            this.chkPreIncreaseFontSize.AutoSize = true;
+            this.chkPreIncreaseFontSize.Checked = true;
+            this.chkPreIncreaseFontSize.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPreIncreaseFontSize.Location = new System.Drawing.Point(165, 56);
+            this.chkPreIncreaseFontSize.Name = "chkPreIncreaseFontSize";
+            this.chkPreIncreaseFontSize.Size = new System.Drawing.Size(148, 17);
+            this.chkPreIncreaseFontSize.TabIndex = 8;
+            this.chkPreIncreaseFontSize.Text = "and increase Font Size by";
+            this.chkPreIncreaseFontSize.UseVisualStyleBackColor = true;
+            // 
+            // chkAlignCenter
+            // 
+            this.chkAlignCenter.AutoSize = true;
+            this.chkAlignCenter.Location = new System.Drawing.Point(17, 33);
+            this.chkAlignCenter.Name = "chkAlignCenter";
+            this.chkAlignCenter.Size = new System.Drawing.Size(83, 17);
+            this.chkAlignCenter.TabIndex = 0;
+            this.chkAlignCenter.Text = "Align &Center";
+            this.chkAlignCenter.UseVisualStyleBackColor = true;
+            // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.nudFontSizeHeading1);
@@ -932,6 +1157,23 @@ namespace TDMaker
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Font Size";
             // 
+            // nudFontSizeHeading1
+            // 
+            this.nudFontSizeHeading1.Location = new System.Drawing.Point(106, 30);
+            this.nudFontSizeHeading1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudFontSizeHeading1.Name = "nudFontSizeHeading1";
+            this.nudFontSizeHeading1.Size = new System.Drawing.Size(55, 20);
+            this.nudFontSizeHeading1.TabIndex = 10;
+            this.nudFontSizeHeading1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -940,6 +1182,23 @@ namespace TDMaker
             this.label9.Size = new System.Drawing.Size(56, 13);
             this.label9.TabIndex = 9;
             this.label9.Text = "Heading 1";
+            // 
+            // nudHeading2Size
+            // 
+            this.nudHeading2Size.Location = new System.Drawing.Point(106, 53);
+            this.nudHeading2Size.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudHeading2Size.Name = "nudHeading2Size";
+            this.nudHeading2Size.Size = new System.Drawing.Size(55, 20);
+            this.nudHeading2Size.TabIndex = 8;
+            this.nudHeading2Size.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label8
             // 
@@ -950,6 +1209,23 @@ namespace TDMaker
             this.label8.TabIndex = 7;
             this.label8.Text = "Heading 2";
             // 
+            // nudHeading3Size
+            // 
+            this.nudHeading3Size.Location = new System.Drawing.Point(106, 79);
+            this.nudHeading3Size.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudHeading3Size.Name = "nudHeading3Size";
+            this.nudHeading3Size.Size = new System.Drawing.Size(55, 20);
+            this.nudHeading3Size.TabIndex = 4;
+            this.nudHeading3Size.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -959,6 +1235,23 @@ namespace TDMaker
             this.label7.TabIndex = 6;
             this.label7.Text = "Body";
             // 
+            // nudBodyText
+            // 
+            this.nudBodyText.Location = new System.Drawing.Point(106, 105);
+            this.nudBodyText.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudBodyText.Name = "nudBodyText";
+            this.nudBodyText.Size = new System.Drawing.Size(55, 20);
+            this.nudBodyText.TabIndex = 5;
+            this.nudBodyText.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -967,6 +1260,29 @@ namespace TDMaker
             this.label3.Size = new System.Drawing.Size(56, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "Heading 3";
+            // 
+            // chkUploadFullScreenshot
+            // 
+            this.chkUploadFullScreenshot.AutoSize = true;
+            this.chkUploadFullScreenshot.Checked = true;
+            this.chkUploadFullScreenshot.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkUploadFullScreenshot.Location = new System.Drawing.Point(16, 41);
+            this.chkUploadFullScreenshot.Name = "chkUploadFullScreenshot";
+            this.chkUploadFullScreenshot.Size = new System.Drawing.Size(200, 17);
+            this.chkUploadFullScreenshot.TabIndex = 1;
+            this.chkUploadFullScreenshot.Text = "Use &Full Image instead of Thumbnail ";
+            this.chkUploadFullScreenshot.UseVisualStyleBackColor = true;
+            // 
+            // chkTemplatesMode
+            // 
+            this.chkTemplatesMode.AutoSize = true;
+            this.chkTemplatesMode.Location = new System.Drawing.Point(16, 16);
+            this.chkTemplatesMode.Name = "chkTemplatesMode";
+            this.chkTemplatesMode.Size = new System.Drawing.Size(230, 17);
+            this.chkTemplatesMode.TabIndex = 0;
+            this.chkTemplatesMode.Text = "Create description using External &Template:";
+            this.chkTemplatesMode.UseVisualStyleBackColor = true;
+            this.chkTemplatesMode.CheckedChanged += new System.EventHandler(this.chkTemplatesMode_CheckedChanged);
             // 
             // tpScreenshots
             // 
@@ -1044,16 +1360,175 @@ namespace TDMaker
             this.pMTNUsage.Size = new System.Drawing.Size(716, 381);
             this.pMTNUsage.TabIndex = 14;
             // 
+            // nudMTN_B_OmitStart
+            // 
+            this.nudMTN_B_OmitStart.DecimalPlaces = 1;
+            this.nudMTN_B_OmitStart.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudMTN_B_OmitStart.Location = new System.Drawing.Point(172, 213);
+            this.nudMTN_B_OmitStart.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nudMTN_B_OmitStart.Name = "nudMTN_B_OmitStart";
+            this.nudMTN_B_OmitStart.Size = new System.Drawing.Size(120, 20);
+            this.nudMTN_B_OmitStart.TabIndex = 52;
+            this.ttApp.SetToolTip(this.nudMTN_B_OmitStart, "Keep 0 for Exact Dimensions");
+            // 
+            // chkMTN_B_OmitBegin
+            // 
+            this.chkMTN_B_OmitBegin.AutoSize = true;
+            this.chkMTN_B_OmitBegin.Location = new System.Drawing.Point(22, 215);
+            this.chkMTN_B_OmitBegin.Name = "chkMTN_B_OmitBegin";
+            this.chkMTN_B_OmitBegin.Size = new System.Drawing.Size(121, 17);
+            this.chkMTN_B_OmitBegin.TabIndex = 51;
+            this.chkMTN_B_OmitBegin.Text = "&Omit Start (seconds)";
+            this.chkMTN_B_OmitBegin.UseVisualStyleBackColor = true;
+            // 
+            // nudMTN_D_EdgeDetection
+            // 
+            this.nudMTN_D_EdgeDetection.Location = new System.Drawing.Point(172, 263);
+            this.nudMTN_D_EdgeDetection.Name = "nudMTN_D_EdgeDetection";
+            this.nudMTN_D_EdgeDetection.Size = new System.Drawing.Size(120, 20);
+            this.nudMTN_D_EdgeDetection.TabIndex = 50;
+            // 
+            // chkMTN_D_EdgeDetection
+            // 
+            this.chkMTN_D_EdgeDetection.AutoSize = true;
+            this.chkMTN_D_EdgeDetection.Checked = true;
+            this.chkMTN_D_EdgeDetection.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMTN_D_EdgeDetection.Location = new System.Drawing.Point(22, 265);
+            this.chkMTN_D_EdgeDetection.Name = "chkMTN_D_EdgeDetection";
+            this.chkMTN_D_EdgeDetection.Size = new System.Drawing.Size(100, 17);
+            this.chkMTN_D_EdgeDetection.TabIndex = 49;
+            this.chkMTN_D_EdgeDetection.Text = "Edge Detection";
+            this.chkMTN_D_EdgeDetection.UseVisualStyleBackColor = true;
+            // 
+            // nudMTN_E_OmitEnd
+            // 
+            this.nudMTN_E_OmitEnd.DecimalPlaces = 1;
+            this.nudMTN_E_OmitEnd.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudMTN_E_OmitEnd.Location = new System.Drawing.Point(172, 238);
+            this.nudMTN_E_OmitEnd.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nudMTN_E_OmitEnd.Name = "nudMTN_E_OmitEnd";
+            this.nudMTN_E_OmitEnd.Size = new System.Drawing.Size(120, 20);
+            this.nudMTN_E_OmitEnd.TabIndex = 48;
+            this.ttApp.SetToolTip(this.nudMTN_E_OmitEnd, "Keep 0 for Exact Dimensions");
+            // 
+            // chkMTN_E_OmitEnd
+            // 
+            this.chkMTN_E_OmitEnd.AutoSize = true;
+            this.chkMTN_E_OmitEnd.Location = new System.Drawing.Point(22, 240);
+            this.chkMTN_E_OmitEnd.Name = "chkMTN_E_OmitEnd";
+            this.chkMTN_E_OmitEnd.Size = new System.Drawing.Size(118, 17);
+            this.chkMTN_E_OmitEnd.TabIndex = 47;
+            this.chkMTN_E_OmitEnd.Text = "&Omit End (seconds)";
+            this.chkMTN_E_OmitEnd.UseVisualStyleBackColor = true;
+            // 
+            // nudMTN_h_HeightMin
+            // 
+            this.nudMTN_h_HeightMin.Location = new System.Drawing.Point(172, 62);
+            this.nudMTN_h_HeightMin.Maximum = new decimal(new int[] {
+            1200,
+            0,
+            0,
+            0});
+            this.nudMTN_h_HeightMin.Name = "nudMTN_h_HeightMin";
+            this.nudMTN_h_HeightMin.Size = new System.Drawing.Size(120, 20);
+            this.nudMTN_h_HeightMin.TabIndex = 46;
+            // 
+            // chkMTN_h_Height
+            // 
+            this.chkMTN_h_Height.AutoSize = true;
+            this.chkMTN_h_Height.Location = new System.Drawing.Point(22, 65);
+            this.chkMTN_h_Height.Name = "chkMTN_h_Height";
+            this.chkMTN_h_Height.Size = new System.Drawing.Size(107, 17);
+            this.chkMTN_h_Height.TabIndex = 45;
+            this.chkMTN_h_Height.Text = "Height (Minimum)";
+            this.chkMTN_h_Height.UseVisualStyleBackColor = true;
+            // 
+            // chkMTN_v_Verbose
+            // 
+            this.chkMTN_v_Verbose.AutoSize = true;
+            this.chkMTN_v_Verbose.Location = new System.Drawing.Point(22, 301);
+            this.chkMTN_v_Verbose.Name = "chkMTN_v_Verbose";
+            this.chkMTN_v_Verbose.Size = new System.Drawing.Size(95, 17);
+            this.chkMTN_v_Verbose.TabIndex = 44;
+            this.chkMTN_v_Verbose.Text = "&Verbose Mode";
+            this.chkMTN_v_Verbose.UseVisualStyleBackColor = true;
+            // 
+            // txtMTN_o_OutputSuffix
+            // 
+            this.txtMTN_o_OutputSuffix.Location = new System.Drawing.Point(444, 194);
+            this.txtMTN_o_OutputSuffix.Name = "txtMTN_o_OutputSuffix";
+            this.txtMTN_o_OutputSuffix.Size = new System.Drawing.Size(232, 20);
+            this.txtMTN_o_OutputSuffix.TabIndex = 43;
+            // 
             // chkMTN_o_OutputSuffix
             // 
             this.chkMTN_o_OutputSuffix.AutoSize = true;
-            this.chkMTN_o_OutputSuffix.CheckState = System.Windows.Forms.CheckState.Checked;            
+            this.chkMTN_o_OutputSuffix.Checked = true;
+            this.chkMTN_o_OutputSuffix.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkMTN_o_OutputSuffix.Location = new System.Drawing.Point(350, 196);
             this.chkMTN_o_OutputSuffix.Name = "chkMTN_o_OutputSuffix";
             this.chkMTN_o_OutputSuffix.Size = new System.Drawing.Size(87, 17);
             this.chkMTN_o_OutputSuffix.TabIndex = 42;
             this.chkMTN_o_OutputSuffix.Text = "Output Suffix";
             this.chkMTN_o_OutputSuffix.UseVisualStyleBackColor = true;
+            // 
+            // txtMTN_N_InfoSuffix
+            // 
+            this.txtMTN_N_InfoSuffix.Location = new System.Drawing.Point(444, 167);
+            this.txtMTN_N_InfoSuffix.Name = "txtMTN_N_InfoSuffix";
+            this.txtMTN_N_InfoSuffix.Size = new System.Drawing.Size(232, 20);
+            this.txtMTN_N_InfoSuffix.TabIndex = 41;
+            // 
+            // chkMTN_N_WriteInfo
+            // 
+            this.chkMTN_N_WriteInfo.AutoSize = true;
+            this.chkMTN_N_WriteInfo.Location = new System.Drawing.Point(350, 170);
+            this.chkMTN_N_WriteInfo.Name = "chkMTN_N_WriteInfo";
+            this.chkMTN_N_WriteInfo.Size = new System.Drawing.Size(73, 17);
+            this.chkMTN_N_WriteInfo.TabIndex = 40;
+            this.chkMTN_N_WriteInfo.Text = "&Info Suffix";
+            this.chkMTN_N_WriteInfo.UseVisualStyleBackColor = true;
+            // 
+            // chkMTN_z_SeekMode
+            // 
+            this.chkMTN_z_SeekMode.AutoSize = true;
+            this.chkMTN_z_SeekMode.Checked = true;
+            this.chkMTN_z_SeekMode.CheckState = System.Windows.Forms.CheckState.Indeterminate;
+            this.chkMTN_z_SeekMode.Location = new System.Drawing.Point(556, 309);
+            this.chkMTN_z_SeekMode.Name = "chkMTN_z_SeekMode";
+            this.chkMTN_z_SeekMode.Size = new System.Drawing.Size(81, 17);
+            this.chkMTN_z_SeekMode.TabIndex = 10;
+            this.chkMTN_z_SeekMode.Text = "&Seek Mode";
+            this.chkMTN_z_SeekMode.ThreeState = true;
+            this.chkMTN_z_SeekMode.UseVisualStyleBackColor = true;
+            this.chkMTN_z_SeekMode.Visible = false;
+            // 
+            // chkMTN_i_MediaInfoTurnOff
+            // 
+            this.chkMTN_i_MediaInfoTurnOff.AutoSize = true;
+            this.chkMTN_i_MediaInfoTurnOff.Location = new System.Drawing.Point(350, 18);
+            this.chkMTN_i_MediaInfoTurnOff.Name = "chkMTN_i_MediaInfoTurnOff";
+            this.chkMTN_i_MediaInfoTurnOff.Size = new System.Drawing.Size(116, 17);
+            this.chkMTN_i_MediaInfoTurnOff.TabIndex = 37;
+            this.chkMTN_i_MediaInfoTurnOff.Text = "Turn off Media Info";
+            this.chkMTN_i_MediaInfoTurnOff.UseVisualStyleBackColor = false;
+            this.chkMTN_i_MediaInfoTurnOff.CheckedChanged += new System.EventHandler(this.chkMTN_i_MediaInfo_CheckedChanged);
             // 
             // gbMTN_i_MediaInfo
             // 
@@ -1074,6 +1549,27 @@ namespace TDMaker
             this.gbMTN_i_MediaInfo.TabStop = false;
             this.gbMTN_i_MediaInfo.Text = "Media Info";
             // 
+            // chkMTN_T_Title
+            // 
+            this.chkMTN_T_Title.AutoSize = true;
+            this.chkMTN_T_Title.Location = new System.Drawing.Point(12, 18);
+            this.chkMTN_T_Title.Name = "chkMTN_T_Title";
+            this.chkMTN_T_Title.Size = new System.Drawing.Size(46, 17);
+            this.chkMTN_T_Title.TabIndex = 46;
+            this.chkMTN_T_Title.Text = "&Title";
+            this.chkMTN_T_Title.UseVisualStyleBackColor = true;
+            // 
+            // cboMTN_f_FontType
+            // 
+            this.cboMTN_f_FontType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboMTN_f_FontType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
+            this.cboMTN_f_FontType.FormattingEnabled = true;
+            this.cboMTN_f_FontType.Location = new System.Drawing.Point(106, 41);
+            this.cboMTN_f_FontType.Name = "cboMTN_f_FontType";
+            this.cboMTN_f_FontType.Size = new System.Drawing.Size(232, 21);
+            this.cboMTN_f_FontType.TabIndex = 12;
+            this.ttApp.SetToolTip(this.cboMTN_f_FontType, "tahomabd.ttf : font file; use absolute path if not in usual places");
+            // 
             // txtMTN_T_Title
             // 
             this.txtMTN_T_Title.Location = new System.Drawing.Point(106, 16);
@@ -1081,6 +1577,73 @@ namespace TDMaker
             this.txtMTN_T_Title.Size = new System.Drawing.Size(232, 20);
             this.txtMTN_T_Title.TabIndex = 45;
             this.txtMTN_T_Title.Text = "%Title%";
+            // 
+            // chkMTN_f_Font
+            // 
+            this.chkMTN_f_Font.AutoSize = true;
+            this.chkMTN_f_Font.Checked = true;
+            this.chkMTN_f_Font.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMTN_f_Font.Location = new System.Drawing.Point(12, 43);
+            this.chkMTN_f_Font.Name = "chkMTN_f_Font";
+            this.chkMTN_f_Font.Size = new System.Drawing.Size(78, 17);
+            this.chkMTN_f_Font.TabIndex = 13;
+            this.chkMTN_f_Font.Text = "&Font Name";
+            this.chkMTN_f_Font.UseVisualStyleBackColor = true;
+            // 
+            // chkMTN_F_FontColor
+            // 
+            this.chkMTN_F_FontColor.AutoSize = true;
+            this.chkMTN_F_FontColor.Checked = true;
+            this.chkMTN_F_FontColor.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMTN_F_FontColor.Location = new System.Drawing.Point(12, 69);
+            this.chkMTN_F_FontColor.Name = "chkMTN_F_FontColor";
+            this.chkMTN_F_FontColor.Size = new System.Drawing.Size(74, 17);
+            this.chkMTN_F_FontColor.TabIndex = 24;
+            this.chkMTN_F_FontColor.Text = "&Font Color";
+            this.ttApp.SetToolTip(this.chkMTN_F_FontColor, "-F RRGGBB:size");
+            this.chkMTN_F_FontColor.UseVisualStyleBackColor = true;
+            // 
+            // cboMTN_F_FontColor
+            // 
+            this.cboMTN_F_FontColor.FormattingEnabled = true;
+            this.cboMTN_F_FontColor.Location = new System.Drawing.Point(106, 67);
+            this.cboMTN_F_FontColor.MaxLength = 6;
+            this.cboMTN_F_FontColor.Name = "cboMTN_F_FontColor";
+            this.cboMTN_F_FontColor.Size = new System.Drawing.Size(120, 21);
+            this.cboMTN_F_FontColor.TabIndex = 27;
+            this.cboMTN_F_FontColor.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cboMTN_F_FontColor_MouseClick);
+            // 
+            // chkMTN_F_FontSize
+            // 
+            this.chkMTN_F_FontSize.AutoSize = true;
+            this.chkMTN_F_FontSize.Checked = true;
+            this.chkMTN_F_FontSize.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMTN_F_FontSize.Location = new System.Drawing.Point(234, 69);
+            this.chkMTN_F_FontSize.Name = "chkMTN_F_FontSize";
+            this.chkMTN_F_FontSize.Size = new System.Drawing.Size(46, 17);
+            this.chkMTN_F_FontSize.TabIndex = 33;
+            this.chkMTN_F_FontSize.Text = "Size";
+            this.ttApp.SetToolTip(this.chkMTN_F_FontSize, "-F RRGGBB:size");
+            this.chkMTN_F_FontSize.UseVisualStyleBackColor = true;
+            // 
+            // nudMTN_F_FontSize
+            // 
+            this.nudMTN_F_FontSize.Location = new System.Drawing.Point(286, 68);
+            this.nudMTN_F_FontSize.Name = "nudMTN_F_FontSize";
+            this.nudMTN_F_FontSize.Size = new System.Drawing.Size(52, 20);
+            this.nudMTN_F_FontSize.TabIndex = 34;
+            // 
+            // chkMTN_L_LocInfo
+            // 
+            this.chkMTN_L_LocInfo.AutoSize = true;
+            this.chkMTN_L_LocInfo.Checked = true;
+            this.chkMTN_L_LocInfo.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMTN_L_LocInfo.Location = new System.Drawing.Point(12, 94);
+            this.chkMTN_L_LocInfo.Name = "chkMTN_L_LocInfo";
+            this.chkMTN_L_LocInfo.Size = new System.Drawing.Size(67, 17);
+            this.chkMTN_L_LocInfo.TabIndex = 29;
+            this.chkMTN_L_LocInfo.Text = "Location";
+            this.chkMTN_L_LocInfo.UseVisualStyleBackColor = true;
             // 
             // cboMTN_L_LocInfo
             // 
@@ -1097,6 +1660,35 @@ namespace TDMaker
             this.cboMTN_L_LocInfo.Size = new System.Drawing.Size(232, 21);
             this.cboMTN_L_LocInfo.TabIndex = 30;
             // 
+            // nudMTN_j_JPEGQuality
+            // 
+            this.nudMTN_j_JPEGQuality.Location = new System.Drawing.Point(172, 188);
+            this.nudMTN_j_JPEGQuality.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.nudMTN_j_JPEGQuality.Name = "nudMTN_j_JPEGQuality";
+            this.nudMTN_j_JPEGQuality.Size = new System.Drawing.Size(120, 20);
+            this.nudMTN_j_JPEGQuality.TabIndex = 36;
+            this.nudMTN_j_JPEGQuality.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // chkMTN_j_JPEGQuality
+            // 
+            this.chkMTN_j_JPEGQuality.AutoSize = true;
+            this.chkMTN_j_JPEGQuality.Checked = true;
+            this.chkMTN_j_JPEGQuality.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMTN_j_JPEGQuality.Location = new System.Drawing.Point(22, 190);
+            this.chkMTN_j_JPEGQuality.Name = "chkMTN_j_JPEGQuality";
+            this.chkMTN_j_JPEGQuality.Size = new System.Drawing.Size(105, 17);
+            this.chkMTN_j_JPEGQuality.TabIndex = 35;
+            this.chkMTN_j_JPEGQuality.Text = "JPEG Quality (%)";
+            this.chkMTN_j_JPEGQuality.UseVisualStyleBackColor = true;
+            // 
             // cboMTN_L_LocTimestamp
             // 
             this.cboMTN_L_LocTimestamp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1112,6 +1704,31 @@ namespace TDMaker
             this.cboMTN_L_LocTimestamp.Size = new System.Drawing.Size(120, 21);
             this.cboMTN_L_LocTimestamp.TabIndex = 32;
             // 
+            // chkMTN_tL_LocTimestamp
+            // 
+            this.chkMTN_tL_LocTimestamp.AutoSize = true;
+            this.chkMTN_tL_LocTimestamp.Checked = true;
+            this.chkMTN_tL_LocTimestamp.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMTN_tL_LocTimestamp.Location = new System.Drawing.Point(472, 18);
+            this.chkMTN_tL_LocTimestamp.Name = "chkMTN_tL_LocTimestamp";
+            this.chkMTN_tL_LocTimestamp.Size = new System.Drawing.Size(77, 17);
+            this.chkMTN_tL_LocTimestamp.TabIndex = 31;
+            this.chkMTN_tL_LocTimestamp.Text = "Timestamp";
+            this.chkMTN_tL_LocTimestamp.UseVisualStyleBackColor = true;
+            // 
+            // chkMTN_k_ColorBackground
+            // 
+            this.chkMTN_k_ColorBackground.AutoSize = true;
+            this.chkMTN_k_ColorBackground.Checked = true;
+            this.chkMTN_k_ColorBackground.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMTN_k_ColorBackground.Location = new System.Drawing.Point(22, 140);
+            this.chkMTN_k_ColorBackground.Name = "chkMTN_k_ColorBackground";
+            this.chkMTN_k_ColorBackground.Size = new System.Drawing.Size(111, 17);
+            this.chkMTN_k_ColorBackground.TabIndex = 28;
+            this.chkMTN_k_ColorBackground.Text = "&Background Color";
+            this.ttApp.SetToolTip(this.chkMTN_k_ColorBackground, "  -k RRGGBB : background color (in hex)");
+            this.chkMTN_k_ColorBackground.UseVisualStyleBackColor = true;
+            // 
             // nudMTN_g_Gap
             // 
             this.nudMTN_g_Gap.Location = new System.Drawing.Point(172, 112);
@@ -1123,6 +1740,109 @@ namespace TDMaker
             0,
             0,
             0});
+            // 
+            // chkMTN_g_Gap
+            // 
+            this.chkMTN_g_Gap.AutoSize = true;
+            this.chkMTN_g_Gap.Checked = true;
+            this.chkMTN_g_Gap.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMTN_g_Gap.Location = new System.Drawing.Point(22, 115);
+            this.chkMTN_g_Gap.Name = "chkMTN_g_Gap";
+            this.chkMTN_g_Gap.Size = new System.Drawing.Size(120, 17);
+            this.chkMTN_g_Gap.TabIndex = 25;
+            this.chkMTN_g_Gap.Text = "Gap between Shots";
+            this.chkMTN_g_Gap.UseVisualStyleBackColor = true;
+            // 
+            // cboMTN_k_ColorBkgrd
+            // 
+            this.cboMTN_k_ColorBkgrd.FormattingEnabled = true;
+            this.cboMTN_k_ColorBkgrd.Location = new System.Drawing.Point(172, 137);
+            this.cboMTN_k_ColorBkgrd.MaxLength = 6;
+            this.cboMTN_k_ColorBkgrd.Name = "cboMTN_k_ColorBkgrd";
+            this.cboMTN_k_ColorBkgrd.Size = new System.Drawing.Size(120, 21);
+            this.cboMTN_k_ColorBkgrd.TabIndex = 23;
+            this.cboMTN_k_ColorBkgrd.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cboMTN_k_ColorBkgrd_MouseClick);
+            // 
+            // nudMTN_w_Width
+            // 
+            this.nudMTN_w_Width.Location = new System.Drawing.Point(172, 87);
+            this.nudMTN_w_Width.Maximum = new decimal(new int[] {
+            2048,
+            0,
+            0,
+            0});
+            this.nudMTN_w_Width.Name = "nudMTN_w_Width";
+            this.nudMTN_w_Width.Size = new System.Drawing.Size(120, 20);
+            this.nudMTN_w_Width.TabIndex = 22;
+            this.ttApp.SetToolTip(this.nudMTN_w_Width, "Keep 0 for Exact Dimensions");
+            // 
+            // chk_w_Width
+            // 
+            this.chk_w_Width.AutoSize = true;
+            this.chk_w_Width.Checked = true;
+            this.chk_w_Width.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_w_Width.Location = new System.Drawing.Point(22, 90);
+            this.chk_w_Width.Name = "chk_w_Width";
+            this.chk_w_Width.Size = new System.Drawing.Size(54, 17);
+            this.chk_w_Width.TabIndex = 21;
+            this.chk_w_Width.Text = "Width";
+            this.chk_w_Width.UseVisualStyleBackColor = true;
+            // 
+            // chkMTN_P_QuitAfterDone
+            // 
+            this.chkMTN_P_QuitAfterDone.AutoSize = true;
+            this.chkMTN_P_QuitAfterDone.Checked = true;
+            this.chkMTN_P_QuitAfterDone.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMTN_P_QuitAfterDone.Location = new System.Drawing.Point(22, 347);
+            this.chkMTN_P_QuitAfterDone.Name = "chkMTN_P_QuitAfterDone";
+            this.chkMTN_P_QuitAfterDone.Size = new System.Drawing.Size(96, 17);
+            this.chkMTN_P_QuitAfterDone.TabIndex = 20;
+            this.chkMTN_P_QuitAfterDone.Text = "&Quit after done";
+            this.chkMTN_P_QuitAfterDone.UseVisualStyleBackColor = true;
+            this.chkMTN_P_QuitAfterDone.CheckedChanged += new System.EventHandler(this.chkMTN_P_QuitAfterDone_CheckedChanged);
+            // 
+            // nudMTN_s_TimeStep
+            // 
+            this.nudMTN_s_TimeStep.Location = new System.Drawing.Point(172, 163);
+            this.nudMTN_s_TimeStep.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nudMTN_s_TimeStep.Name = "nudMTN_s_TimeStep";
+            this.nudMTN_s_TimeStep.Size = new System.Drawing.Size(120, 20);
+            this.nudMTN_s_TimeStep.TabIndex = 19;
+            // 
+            // chkMTN_s_TimeStep
+            // 
+            this.chkMTN_s_TimeStep.AutoSize = true;
+            this.chkMTN_s_TimeStep.Location = new System.Drawing.Point(22, 165);
+            this.chkMTN_s_TimeStep.Name = "chkMTN_s_TimeStep";
+            this.chkMTN_s_TimeStep.Size = new System.Drawing.Size(123, 17);
+            this.chkMTN_s_TimeStep.TabIndex = 18;
+            this.chkMTN_s_TimeStep.Text = "Time Step (seconds)";
+            this.chkMTN_s_TimeStep.UseVisualStyleBackColor = true;
+            // 
+            // nudMTN_r_Rows
+            // 
+            this.nudMTN_r_Rows.Location = new System.Drawing.Point(172, 12);
+            this.nudMTN_r_Rows.Name = "nudMTN_r_Rows";
+            this.nudMTN_r_Rows.Size = new System.Drawing.Size(120, 20);
+            this.nudMTN_r_Rows.TabIndex = 17;
+            this.nudMTN_r_Rows.ValueChanged += new System.EventHandler(this.nudMTN_r_Rows_ValueChanged);
+            // 
+            // chkShowMTN
+            // 
+            this.chkShowMTN.AutoSize = true;
+            this.chkShowMTN.Location = new System.Drawing.Point(22, 324);
+            this.chkShowMTN.Name = "chkShowMTN";
+            this.chkShowMTN.Size = new System.Drawing.Size(122, 17);
+            this.chkShowMTN.TabIndex = 11;
+            this.chkShowMTN.Text = "Show &MTN Window";
+            this.ttApp.SetToolTip(this.chkShowMTN, "Show MTN Window for Debugging purposes. Need to uncheck \"Quit after done\" if you " +
+                    "need to keep the Window open as long as you like.");
+            this.chkShowMTN.UseVisualStyleBackColor = true;
+            this.chkShowMTN.CheckedChanged += new System.EventHandler(this.chkShowMTN_CheckedChanged);
             // 
             // chkMTNRows
             // 
@@ -1136,6 +1856,13 @@ namespace TDMaker
             this.chkMTNRows.Text = "Rows";
             this.chkMTNRows.UseVisualStyleBackColor = true;
             this.chkMTNRows.CheckedChanged += new System.EventHandler(this.chkMTNRows_CheckedChanged);
+            // 
+            // nudMTN_c_Columns
+            // 
+            this.nudMTN_c_Columns.Location = new System.Drawing.Point(172, 37);
+            this.nudMTN_c_Columns.Name = "nudMTN_c_Columns";
+            this.nudMTN_c_Columns.Size = new System.Drawing.Size(120, 20);
+            this.nudMTN_c_Columns.TabIndex = 15;
             // 
             // chkMTNColumns
             // 
@@ -1185,6 +1912,33 @@ namespace TDMaker
             this.btnImageShackRegCode.UseVisualStyleBackColor = true;
             this.btnImageShackRegCode.Click += new System.EventHandler(this.btnImageShackRegCode_Click);
             // 
+            // chkUseImageShackRegCode
+            // 
+            this.chkUseImageShackRegCode.AutoSize = true;
+            this.chkUseImageShackRegCode.Location = new System.Drawing.Point(14, 41);
+            this.chkUseImageShackRegCode.Name = "chkUseImageShackRegCode";
+            this.chkUseImageShackRegCode.Size = new System.Drawing.Size(135, 17);
+            this.chkUseImageShackRegCode.TabIndex = 5;
+            this.chkUseImageShackRegCode.Text = "Use Registration Code:";
+            this.chkUseImageShackRegCode.UseVisualStyleBackColor = true;
+            // 
+            // txtImageShackRegCode
+            // 
+            this.txtImageShackRegCode.Location = new System.Drawing.Point(155, 38);
+            this.txtImageShackRegCode.Name = "txtImageShackRegCode";
+            this.txtImageShackRegCode.Size = new System.Drawing.Size(298, 20);
+            this.txtImageShackRegCode.TabIndex = 4;
+            // 
+            // chkRandomizeFileNameImageShack
+            // 
+            this.chkRandomizeFileNameImageShack.AutoSize = true;
+            this.chkRandomizeFileNameImageShack.Location = new System.Drawing.Point(14, 18);
+            this.chkRandomizeFileNameImageShack.Name = "chkRandomizeFileNameImageShack";
+            this.chkRandomizeFileNameImageShack.Size = new System.Drawing.Size(207, 17);
+            this.chkRandomizeFileNameImageShack.TabIndex = 3;
+            this.chkRandomizeFileNameImageShack.Text = "Randomize File Name for ImageShack";
+            this.chkRandomizeFileNameImageShack.UseVisualStyleBackColor = true;
+            // 
             // tpTorrents
             // 
             this.tpTorrents.Controls.Add(this.btnRefreshTrackers);
@@ -1229,6 +1983,28 @@ namespace TDMaker
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Save Location";
             // 
+            // chkWritePublish
+            // 
+            this.chkWritePublish.AutoSize = true;
+            this.chkWritePublish.Location = new System.Drawing.Point(19, 91);
+            this.chkWritePublish.Name = "chkWritePublish";
+            this.chkWritePublish.Size = new System.Drawing.Size(241, 17);
+            this.chkWritePublish.TabIndex = 5;
+            this.chkWritePublish.Text = "Write Publish Information of the Torrent to File";
+            this.chkWritePublish.UseVisualStyleBackColor = true;
+            // 
+            // chkTorrentOrganize
+            // 
+            this.chkTorrentOrganize.AutoSize = true;
+            this.chkTorrentOrganize.Checked = true;
+            this.chkTorrentOrganize.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkTorrentOrganize.Location = new System.Drawing.Point(114, 67);
+            this.chkTorrentOrganize.Name = "chkTorrentOrganize";
+            this.chkTorrentOrganize.Size = new System.Drawing.Size(293, 17);
+            this.chkTorrentOrganize.TabIndex = 4;
+            this.chkTorrentOrganize.Text = "Create torrents in sub-folders according to Tracker Name";
+            this.chkTorrentOrganize.UseVisualStyleBackColor = true;
+            // 
             // btnBrowseTorrentCustomFolder
             // 
             this.btnBrowseTorrentCustomFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1240,6 +2016,15 @@ namespace TDMaker
             this.btnBrowseTorrentCustomFolder.UseVisualStyleBackColor = true;
             this.btnBrowseTorrentCustomFolder.Click += new System.EventHandler(this.btnBrowseTorrentCustomFolder_Click);
             // 
+            // txtTorrentCustomFolder
+            // 
+            this.txtTorrentCustomFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTorrentCustomFolder.Location = new System.Drawing.Point(114, 41);
+            this.txtTorrentCustomFolder.Name = "txtTorrentCustomFolder";
+            this.txtTorrentCustomFolder.Size = new System.Drawing.Size(472, 20);
+            this.txtTorrentCustomFolder.TabIndex = 2;
+            // 
             // rbTorrentFolderCustom
             // 
             this.rbTorrentFolderCustom.AutoSize = true;
@@ -1250,6 +2035,17 @@ namespace TDMaker
             this.rbTorrentFolderCustom.Text = "Custom folder";
             this.rbTorrentFolderCustom.UseVisualStyleBackColor = true;
             this.rbTorrentFolderCustom.CheckedChanged += new System.EventHandler(this.rbTorrentFolderCustom_CheckedChanged);
+            // 
+            // rbTorrentDefaultFolder
+            // 
+            this.rbTorrentDefaultFolder.AutoSize = true;
+            this.rbTorrentDefaultFolder.Location = new System.Drawing.Point(19, 19);
+            this.rbTorrentDefaultFolder.Name = "rbTorrentDefaultFolder";
+            this.rbTorrentDefaultFolder.Size = new System.Drawing.Size(147, 17);
+            this.rbTorrentDefaultFolder.TabIndex = 0;
+            this.rbTorrentDefaultFolder.TabStop = true;
+            this.rbTorrentDefaultFolder.Text = "Parent folder of the Media";
+            this.rbTorrentDefaultFolder.UseVisualStyleBackColor = true;
             // 
             // groupBox7
             // 
@@ -1326,6 +2122,16 @@ namespace TDMaker
             this.cboAnnounceURL.TabIndex = 2;
             this.cboAnnounceURL.SelectedIndexChanged += new System.EventHandler(this.cboAnnounceURL_SelectedIndexChanged);
             // 
+            // chkCreateTorrent
+            // 
+            this.chkCreateTorrent.AutoSize = true;
+            this.chkCreateTorrent.Location = new System.Drawing.Point(17, 14);
+            this.chkCreateTorrent.Name = "chkCreateTorrent";
+            this.chkCreateTorrent.Size = new System.Drawing.Size(182, 17);
+            this.chkCreateTorrent.TabIndex = 0;
+            this.chkCreateTorrent.Text = "Automatically create &torrent using";
+            this.chkCreateTorrent.UseVisualStyleBackColor = true;
+            // 
             // tpPaths
             // 
             this.tpPaths.Controls.Add(this.groupBox2);
@@ -1347,6 +2153,18 @@ namespace TDMaker
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Screenshot Location";
+            // 
+            // chkKeepScreenshot
+            // 
+            this.chkKeepScreenshot.AutoSize = true;
+            this.chkKeepScreenshot.Checked = true;
+            this.chkKeepScreenshot.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkKeepScreenshot.Location = new System.Drawing.Point(42, 24);
+            this.chkKeepScreenshot.Name = "chkKeepScreenshot";
+            this.chkKeepScreenshot.Size = new System.Drawing.Size(194, 17);
+            this.chkKeepScreenshot.TabIndex = 1;
+            this.chkKeepScreenshot.Text = "Keep Screenshots in Pictures\\MTN";
+            this.chkKeepScreenshot.UseVisualStyleBackColor = true;
             // 
             // tmrStatus
             // 
@@ -1686,798 +2504,6 @@ namespace TDMaker
             this.aboutToolStripMenuItem.Text = "&About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // chkTitle
-            // 
-            this.chkTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkTitle.AutoSize = true;
-            this.chkTitle.Checked = Program.conf.ShowTitle;
-            this.chkTitle.CheckState = System.Windows.Forms.CheckState.Checked;            
-            this.chkTitle.Location = new System.Drawing.Point(22, 60);
-            this.chkTitle.Name = "chkTitle";
-            this.chkTitle.Size = new System.Drawing.Size(49, 17);
-            this.chkTitle.TabIndex = 14;
-            this.chkTitle.Text = "&Title:";
-            this.chkTitle.UseVisualStyleBackColor = true;
-            // 
-            // chkWebLink
-            // 
-            this.chkWebLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkWebLink.AutoSize = true;
-            this.chkWebLink.Checked = Program.conf.WebLink;            
-            this.chkWebLink.Location = new System.Drawing.Point(22, 90);
-            this.chkWebLink.Name = "chkWebLink";
-            this.chkWebLink.Size = new System.Drawing.Size(75, 17);
-            this.chkWebLink.TabIndex = 9;
-            this.chkWebLink.Text = "&Web Link:";
-            this.chkWebLink.UseVisualStyleBackColor = true;
-            // 
-            // chkSource
-            // 
-            this.chkSource.AutoSize = true;
-            this.chkSource.Checked = Program.conf.ShowSource;
-            this.chkSource.CheckState = System.Windows.Forms.CheckState.Checked;            
-            this.chkSource.Location = new System.Drawing.Point(22, 31);
-            this.chkSource.Name = "chkSource";
-            this.chkSource.Size = new System.Drawing.Size(60, 17);
-            this.chkSource.TabIndex = 13;
-            this.chkSource.Text = "&Source";
-            this.chkSource.UseVisualStyleBackColor = true;
-            // 
-            // cboSource
-            //             
-            this.cboSource.FormattingEnabled = true;
-            this.cboSource.Location = new System.Drawing.Point(117, 29);
-            this.cboSource.Name = "cboSource";
-            this.cboSource.Size = new System.Drawing.Size(121, 21);
-            this.cboSource.TabIndex = 0;
-            this.cboSource.Text = Program.conf.Source;
-            // 
-            // cboDiscMenu
-            // 
-            this.cboDiscMenu.FormattingEnabled = true;
-            this.cboDiscMenu.Location = new System.Drawing.Point(121, 58);
-            this.cboDiscMenu.Name = "cboDiscMenu";
-            this.cboDiscMenu.Size = new System.Drawing.Size(121, 21);
-            this.cboDiscMenu.TabIndex = 18;
-            this.cboDiscMenu.Text = Program.conf.DiscMenu;
-            // 
-            // chkDiscMenu
-            // 
-            this.chkDiscMenu.AutoSize = true;
-            this.chkDiscMenu.Checked = Program.conf.bDiscMenu;
-            this.chkDiscMenu.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDiscMenu.Location = new System.Drawing.Point(26, 60);
-            this.chkDiscMenu.Name = "chkDiscMenu";
-            this.chkDiscMenu.Size = new System.Drawing.Size(56, 17);
-            this.chkDiscMenu.TabIndex = 17;
-            this.chkDiscMenu.Text = "Menu:";
-            this.chkDiscMenu.UseVisualStyleBackColor = true;
-            // 
-            // cboExtras
-            // 
-            this.cboExtras.FormattingEnabled = true;
-            this.cboExtras.Location = new System.Drawing.Point(121, 86);
-            this.cboExtras.Name = "cboExtras";
-            this.cboExtras.Size = new System.Drawing.Size(121, 21);
-            this.cboExtras.TabIndex = 16;
-            this.cboExtras.Text = Program.conf.ExtrasMode;
-            // 
-            // chkExtras
-            // 
-            this.chkExtras.AutoSize = true;
-            this.chkExtras.Checked = Program.conf.bExtras;
-            this.chkExtras.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkExtras.Location = new System.Drawing.Point(26, 88);
-            this.chkExtras.Name = "chkExtras";
-            this.chkExtras.Size = new System.Drawing.Size(58, 17);
-            this.chkExtras.TabIndex = 15;
-            this.chkExtras.Text = "E&xtras:";
-            this.chkExtras.UseVisualStyleBackColor = true;
-            // 
-            // cboAuthoring
-            // 
-            this.cboAuthoring.FormattingEnabled = true;
-            this.cboAuthoring.Location = new System.Drawing.Point(121, 29);
-            this.cboAuthoring.Name = "cboAuthoring";
-            this.cboAuthoring.Size = new System.Drawing.Size(121, 21);
-            this.cboAuthoring.TabIndex = 14;
-            this.cboAuthoring.Text = Program.conf.SourceEdit;
-            // 
-            // chkSourceEdit
-            // 
-            this.chkSourceEdit.AutoSize = true;
-            this.chkSourceEdit.Checked = Program.conf.ShowVideoEdits;
-            this.chkSourceEdit.CheckState = System.Windows.Forms.CheckState.Checked;            
-            this.chkSourceEdit.Location = new System.Drawing.Point(26, 32);
-            this.chkSourceEdit.Name = "chkSourceEdit";
-            this.chkSourceEdit.Size = new System.Drawing.Size(74, 17);
-            this.chkSourceEdit.TabIndex = 13;
-            this.chkSourceEdit.Text = "Authoring:";
-            this.chkSourceEdit.UseVisualStyleBackColor = true;
-            // 
-            // rbDir
-            // 
-            this.rbDir.AutoSize = true;
-            this.rbDir.Checked = Program.conf.BrowseDir;
-            this.rbDir.Location = new System.Drawing.Point(232, 27);
-            this.rbDir.Name = "rbDir";
-            this.rbDir.Size = new System.Drawing.Size(80, 17);
-            this.rbDir.TabIndex = 9;
-            this.rbDir.TabStop = true;
-            this.rbDir.Text = "&DVD Folder";
-            this.rbDir.UseVisualStyleBackColor = true;
-            this.rbDir.CheckedChanged += new System.EventHandler(this.rbDir_CheckedChanged);
-            // 
-            // chkOptImageShack
-            // 
-            this.chkOptImageShack.AutoSize = true;
-            this.chkOptImageShack.Checked = Program.conf.UploadScreenshot;
-            this.chkOptImageShack.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkOptImageShack.Location = new System.Drawing.Point(263, 16);
-            this.chkOptImageShack.Name = "chkOptImageShack";
-            this.chkOptImageShack.Size = new System.Drawing.Size(129, 17);
-            this.chkOptImageShack.TabIndex = 0;
-            this.chkOptImageShack.Text = "Upload Screenshot to";
-            this.chkOptImageShack.UseVisualStyleBackColor = true;
-            this.chkOptImageShack.CheckedChanged += new System.EventHandler(this.chkOptImageShack_CheckedChanged);
-            // 
-            // chkScreenshot
-            // 
-            this.chkScreenshot.AutoSize = true;
-            this.chkScreenshot.Checked = Program.conf.TakeScreenshot;
-            this.chkScreenshot.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkScreenshot.Location = new System.Drawing.Point(134, 16);
-            this.chkScreenshot.Name = "chkScreenshot";
-            this.chkScreenshot.Size = new System.Drawing.Size(114, 17);
-            this.chkScreenshot.TabIndex = 11;
-            this.chkScreenshot.Text = "&Create Screenshot";
-            this.chkScreenshot.UseVisualStyleBackColor = true;
-            this.chkScreenshot.CheckedChanged += new System.EventHandler(this.chkScreenshot_CheckedChanged);
-            // 
-            // chkUpdateCheck
-            // 
-            this.chkUpdateCheck.AutoSize = true;
-            this.chkUpdateCheck.Checked = Program.conf.UpdateCheckAuto;
-            this.chkUpdateCheck.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUpdateCheck.Location = new System.Drawing.Point(20, 43);
-            this.chkUpdateCheck.Name = "chkUpdateCheck";
-            this.chkUpdateCheck.Size = new System.Drawing.Size(180, 17);
-            this.chkUpdateCheck.TabIndex = 12;
-            this.chkUpdateCheck.Text = "Automatically Check for Updates";
-            this.chkUpdateCheck.UseVisualStyleBackColor = true;
-            // 
-            // chkAnalyzeAuto
-            // 
-            this.chkAnalyzeAuto.AutoSize = true;
-            this.chkAnalyzeAuto.Checked = Program.conf.AnalyzeAuto;
-            this.chkAnalyzeAuto.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkAnalyzeAuto.Location = new System.Drawing.Point(20, 20);
-            this.chkAnalyzeAuto.Name = "chkAnalyzeAuto";
-            this.chkAnalyzeAuto.Size = new System.Drawing.Size(270, 17);
-            this.chkAnalyzeAuto.TabIndex = 9;
-            this.chkAnalyzeAuto.Text = "&Process media immediately after loading file or folder";
-            this.chkAnalyzeAuto.UseVisualStyleBackColor = true;
-            // 
-            // nudFontSizeIncr
-            // 
-            this.nudFontSizeIncr.Location = new System.Drawing.Point(319, 55);
-            this.nudFontSizeIncr.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudFontSizeIncr.Name = "nudFontSizeIncr";
-            this.nudFontSizeIncr.Size = new System.Drawing.Size(55, 20);
-            this.nudFontSizeIncr.TabIndex = 9;
-            this.nudFontSizeIncr.Value = Program.conf.FontSizeIncr;
-            // 
-            // chkPre
-            // 
-            this.chkPre.AutoSize = true;
-            this.chkPre.Checked = Program.conf.PreText;
-            this.chkPre.Location = new System.Drawing.Point(17, 56);
-            this.chkPre.Name = "chkPre";
-            this.chkPre.Size = new System.Drawing.Size(132, 17);
-            this.chkPre.TabIndex = 1;
-            this.chkPre.Text = "Use Preformatted Text";
-            this.chkPre.UseVisualStyleBackColor = true;
-            // 
-            // chkPreIncreaseFontSize
-            // 
-            this.chkPreIncreaseFontSize.AutoSize = true;
-            this.chkPreIncreaseFontSize.Checked = Program.conf.LargerPreText;
-            this.chkPreIncreaseFontSize.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPreIncreaseFontSize.Location = new System.Drawing.Point(165, 56);
-            this.chkPreIncreaseFontSize.Name = "chkPreIncreaseFontSize";
-            this.chkPreIncreaseFontSize.Size = new System.Drawing.Size(148, 17);
-            this.chkPreIncreaseFontSize.TabIndex = 8;
-            this.chkPreIncreaseFontSize.Text = "and increase Font Size by";
-            this.chkPreIncreaseFontSize.UseVisualStyleBackColor = true;
-            // 
-            // chkAlignCenter
-            // 
-            this.chkAlignCenter.AutoSize = true;
-            this.chkAlignCenter.Checked = Program.conf.AlignCenter;
-            this.chkAlignCenter.Location = new System.Drawing.Point(17, 33);
-            this.chkAlignCenter.Name = "chkAlignCenter";
-            this.chkAlignCenter.Size = new System.Drawing.Size(83, 17);
-            this.chkAlignCenter.TabIndex = 0;
-            this.chkAlignCenter.Text = "Align &Center";
-            this.chkAlignCenter.UseVisualStyleBackColor = true;
-            // 
-            // nudFontSizeHeading1
-            // 
-            this.nudFontSizeHeading1.Location = new System.Drawing.Point(106, 30);
-            this.nudFontSizeHeading1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudFontSizeHeading1.Name = "nudFontSizeHeading1";
-            this.nudFontSizeHeading1.Size = new System.Drawing.Size(55, 20);
-            this.nudFontSizeHeading1.TabIndex = 10;
-            this.nudFontSizeHeading1.Value = Program.conf.FontSizeHeading1;
-            // 
-            // nudHeading2Size
-            // 
-            this.nudHeading2Size.Location = new System.Drawing.Point(106, 53);
-            this.nudHeading2Size.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudHeading2Size.Name = "nudHeading2Size";
-            this.nudHeading2Size.Size = new System.Drawing.Size(55, 20);
-            this.nudHeading2Size.TabIndex = 8;
-            this.nudHeading2Size.Value = Program.conf.FontSizeHeading2;
-            // 
-            // nudHeading3Size
-            // 
-            this.nudHeading3Size.Location = new System.Drawing.Point(106, 79);
-            this.nudHeading3Size.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudHeading3Size.Name = "nudHeading3Size";
-            this.nudHeading3Size.Size = new System.Drawing.Size(55, 20);
-            this.nudHeading3Size.TabIndex = 4;
-            this.nudHeading3Size.Value = Program.conf.FontSizeHeading3;
-            // 
-            // nudBodyText
-            // 
-            this.nudBodyText.Location = new System.Drawing.Point(106, 105);
-            this.nudBodyText.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudBodyText.Name = "nudBodyText";
-            this.nudBodyText.Size = new System.Drawing.Size(55, 20);
-            this.nudBodyText.TabIndex = 5;
-            this.nudBodyText.Value = Program.conf.FontSizeBody;
-            // 
-            // chkUploadFullScreenshot
-            // 
-            this.chkUploadFullScreenshot.AutoSize = true;
-            this.chkUploadFullScreenshot.Checked = Program.conf.UseFullPicture;
-            this.chkUploadFullScreenshot.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUploadFullScreenshot.Location = new System.Drawing.Point(16, 41);
-            this.chkUploadFullScreenshot.Name = "chkUploadFullScreenshot";
-            this.chkUploadFullScreenshot.Size = new System.Drawing.Size(200, 17);
-            this.chkUploadFullScreenshot.TabIndex = 1;
-            this.chkUploadFullScreenshot.Text = "Use &Full Image instead of Thumbnail ";
-            this.chkUploadFullScreenshot.UseVisualStyleBackColor = true;
-            // 
-            // chkTemplatesMode
-            // 
-            this.chkTemplatesMode.AutoSize = true;
-            this.chkTemplatesMode.Checked = Program.conf.TemplatesMode;
-            this.chkTemplatesMode.Location = new System.Drawing.Point(16, 16);
-            this.chkTemplatesMode.Name = "chkTemplatesMode";
-            this.chkTemplatesMode.Size = new System.Drawing.Size(230, 17);
-            this.chkTemplatesMode.TabIndex = 0;
-            this.chkTemplatesMode.Text = "Create description using External &Template:";
-            this.chkTemplatesMode.UseVisualStyleBackColor = true;
-            this.chkTemplatesMode.CheckedChanged += new System.EventHandler(this.chkTemplatesMode_CheckedChanged);
-            // 
-            // nudMTN_B_OmitStart
-            // 
-            this.nudMTN_B_OmitStart.DecimalPlaces = 1;
-            this.nudMTN_B_OmitStart.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.nudMTN_B_OmitStart.Location = new System.Drawing.Point(172, 213);
-            this.nudMTN_B_OmitStart.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.nudMTN_B_OmitStart.Name = "nudMTN_B_OmitStart";
-            this.nudMTN_B_OmitStart.Size = new System.Drawing.Size(120, 20);
-            this.nudMTN_B_OmitStart.TabIndex = 52;
-            this.ttApp.SetToolTip(this.nudMTN_B_OmitStart, "Keep 0 for Exact Dimensions");
-            // 
-            // chkMTN_B_OmitBegin
-            // 
-            this.chkMTN_B_OmitBegin.AutoSize = true;
-            this.chkMTN_B_OmitBegin.Location = new System.Drawing.Point(22, 215);
-            this.chkMTN_B_OmitBegin.Name = "chkMTN_B_OmitBegin";
-            this.chkMTN_B_OmitBegin.Size = new System.Drawing.Size(121, 17);
-            this.chkMTN_B_OmitBegin.TabIndex = 51;
-            this.chkMTN_B_OmitBegin.Text = "&Omit Start (seconds)";
-            this.chkMTN_B_OmitBegin.UseVisualStyleBackColor = true;
-            // 
-            // nudMTN_D_EdgeDetection
-            // 
-            this.nudMTN_D_EdgeDetection.Location = new System.Drawing.Point(172, 263);
-            this.nudMTN_D_EdgeDetection.Name = "nudMTN_D_EdgeDetection";
-            this.nudMTN_D_EdgeDetection.Size = new System.Drawing.Size(120, 20);
-            this.nudMTN_D_EdgeDetection.TabIndex = 50;
-            // 
-            // chkMTN_D_EdgeDetection
-            // 
-            this.chkMTN_D_EdgeDetection.AutoSize = true;
-            this.chkMTN_D_EdgeDetection.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_D_EdgeDetection.Location = new System.Drawing.Point(22, 265);
-            this.chkMTN_D_EdgeDetection.Name = "chkMTN_D_EdgeDetection";
-            this.chkMTN_D_EdgeDetection.Size = new System.Drawing.Size(100, 17);
-            this.chkMTN_D_EdgeDetection.TabIndex = 49;
-            this.chkMTN_D_EdgeDetection.Text = "Edge Detection";
-            this.chkMTN_D_EdgeDetection.UseVisualStyleBackColor = true;
-            // 
-            // nudMTN_E_OmitEnd
-            // 
-            this.nudMTN_E_OmitEnd.DecimalPlaces = 1;
-            this.nudMTN_E_OmitEnd.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.nudMTN_E_OmitEnd.Location = new System.Drawing.Point(172, 238);
-            this.nudMTN_E_OmitEnd.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.nudMTN_E_OmitEnd.Name = "nudMTN_E_OmitEnd";
-            this.nudMTN_E_OmitEnd.Size = new System.Drawing.Size(120, 20);
-            this.nudMTN_E_OmitEnd.TabIndex = 48;
-            this.ttApp.SetToolTip(this.nudMTN_E_OmitEnd, "Keep 0 for Exact Dimensions");
-            // 
-            // chkMTN_E_OmitEnd
-            // 
-            this.chkMTN_E_OmitEnd.AutoSize = true;
-            this.chkMTN_E_OmitEnd.Location = new System.Drawing.Point(22, 240);
-            this.chkMTN_E_OmitEnd.Name = "chkMTN_E_OmitEnd";
-            this.chkMTN_E_OmitEnd.Size = new System.Drawing.Size(118, 17);
-            this.chkMTN_E_OmitEnd.TabIndex = 47;
-            this.chkMTN_E_OmitEnd.Text = "&Omit End (seconds)";
-            this.chkMTN_E_OmitEnd.UseVisualStyleBackColor = true;
-            // 
-            // nudMTN_h_HeightMin
-            // 
-            this.nudMTN_h_HeightMin.Location = new System.Drawing.Point(172, 62);
-            this.nudMTN_h_HeightMin.Maximum = new decimal(new int[] {
-            1200,
-            0,
-            0,
-            0});
-            this.nudMTN_h_HeightMin.Name = "nudMTN_h_HeightMin";
-            this.nudMTN_h_HeightMin.Size = new System.Drawing.Size(120, 20);
-            this.nudMTN_h_HeightMin.TabIndex = 46;
-            // 
-            // chkMTN_h_Height
-            // 
-            this.chkMTN_h_Height.AutoSize = true;
-            this.chkMTN_h_Height.Location = new System.Drawing.Point(22, 65);
-            this.chkMTN_h_Height.Name = "chkMTN_h_Height";
-            this.chkMTN_h_Height.Size = new System.Drawing.Size(107, 17);
-            this.chkMTN_h_Height.TabIndex = 45;
-            this.chkMTN_h_Height.Text = "Height (Minimum)";
-            this.chkMTN_h_Height.UseVisualStyleBackColor = true;
-            // 
-            // chkMTN_v_Verbose
-            // 
-            this.chkMTN_v_Verbose.AutoSize = true;
-            this.chkMTN_v_Verbose.Location = new System.Drawing.Point(22, 301);
-            this.chkMTN_v_Verbose.Name = "chkMTN_v_Verbose";
-            this.chkMTN_v_Verbose.Size = new System.Drawing.Size(95, 17);
-            this.chkMTN_v_Verbose.TabIndex = 44;
-            this.chkMTN_v_Verbose.Text = "&Verbose Mode";
-            this.chkMTN_v_Verbose.UseVisualStyleBackColor = true;
-            // 
-            // txtMTN_o_OutputSuffix
-            // 
-            this.txtMTN_o_OutputSuffix.Location = new System.Drawing.Point(444, 194);
-            this.txtMTN_o_OutputSuffix.Name = "txtMTN_o_OutputSuffix";
-            this.txtMTN_o_OutputSuffix.Size = new System.Drawing.Size(232, 20);
-            this.txtMTN_o_OutputSuffix.TabIndex = 43;
-            // 
-            // txtMTN_N_InfoSuffix
-            // 
-            this.txtMTN_N_InfoSuffix.Location = new System.Drawing.Point(444, 167);
-            this.txtMTN_N_InfoSuffix.Name = "txtMTN_N_InfoSuffix";
-            this.txtMTN_N_InfoSuffix.Size = new System.Drawing.Size(232, 20);
-            this.txtMTN_N_InfoSuffix.TabIndex = 41;
-            // 
-            // chkMTN_N_WriteInfo
-            // 
-            this.chkMTN_N_WriteInfo.AutoSize = true;
-            this.chkMTN_N_WriteInfo.Location = new System.Drawing.Point(350, 170);
-            this.chkMTN_N_WriteInfo.Name = "chkMTN_N_WriteInfo";
-            this.chkMTN_N_WriteInfo.Size = new System.Drawing.Size(73, 17);
-            this.chkMTN_N_WriteInfo.TabIndex = 40;
-            this.chkMTN_N_WriteInfo.Text = "&Info Suffix";
-            this.chkMTN_N_WriteInfo.UseVisualStyleBackColor = true;
-            // 
-            // chkMTN_z_SeekMode
-            // 
-            this.chkMTN_z_SeekMode.AutoSize = true;
-            this.chkMTN_z_SeekMode.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-            this.chkMTN_z_SeekMode.Location = new System.Drawing.Point(556, 309);
-            this.chkMTN_z_SeekMode.Name = "chkMTN_z_SeekMode";
-            this.chkMTN_z_SeekMode.Size = new System.Drawing.Size(81, 17);
-            this.chkMTN_z_SeekMode.TabIndex = 10;
-            this.chkMTN_z_SeekMode.Text = "&Seek Mode";
-            this.chkMTN_z_SeekMode.ThreeState = true;
-            this.chkMTN_z_SeekMode.UseVisualStyleBackColor = true;
-            this.chkMTN_z_SeekMode.Visible = false;
-            // 
-            // chkMTN_i_MediaInfoTurnOff
-            // 
-            this.chkMTN_i_MediaInfoTurnOff.AutoSize = true;
-            this.chkMTN_i_MediaInfoTurnOff.Location = new System.Drawing.Point(350, 18);
-            this.chkMTN_i_MediaInfoTurnOff.Name = "chkMTN_i_MediaInfoTurnOff";
-            this.chkMTN_i_MediaInfoTurnOff.Size = new System.Drawing.Size(116, 17);
-            this.chkMTN_i_MediaInfoTurnOff.TabIndex = 37;
-            this.chkMTN_i_MediaInfoTurnOff.Text = "Turn off Media Info";
-            this.chkMTN_i_MediaInfoTurnOff.UseVisualStyleBackColor = false;
-            this.chkMTN_i_MediaInfoTurnOff.CheckedChanged += new System.EventHandler(this.chkMTN_i_MediaInfo_CheckedChanged);
-            // 
-            // chkMTN_T_Title
-            // 
-            this.chkMTN_T_Title.AutoSize = true;
-            this.chkMTN_T_Title.Location = new System.Drawing.Point(12, 18);
-            this.chkMTN_T_Title.Name = "chkMTN_T_Title";
-            this.chkMTN_T_Title.Size = new System.Drawing.Size(46, 17);
-            this.chkMTN_T_Title.TabIndex = 46;
-            this.chkMTN_T_Title.Text = "&Title";
-            this.chkMTN_T_Title.UseVisualStyleBackColor = true;
-            // 
-            // cboMTN_f_FontType
-            // 
-            this.cboMTN_f_FontType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cboMTN_f_FontType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
-            this.cboMTN_f_FontType.FormattingEnabled = true;
-            this.cboMTN_f_FontType.Location = new System.Drawing.Point(106, 41);
-            this.cboMTN_f_FontType.Name = "cboMTN_f_FontType";
-            this.cboMTN_f_FontType.Size = new System.Drawing.Size(232, 21);
-            this.cboMTN_f_FontType.TabIndex = 12;
-            this.ttApp.SetToolTip(this.cboMTN_f_FontType, "tahomabd.ttf : font file; use absolute path if not in usual places");
-            // 
-            // chkMTN_f_Font
-            // 
-            this.chkMTN_f_Font.AutoSize = true;
-            this.chkMTN_f_Font.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_f_Font.Location = new System.Drawing.Point(12, 43);
-            this.chkMTN_f_Font.Name = "chkMTN_f_Font";
-            this.chkMTN_f_Font.Size = new System.Drawing.Size(78, 17);
-            this.chkMTN_f_Font.TabIndex = 13;
-            this.chkMTN_f_Font.Text = "&Font Name";
-            this.chkMTN_f_Font.UseVisualStyleBackColor = true;
-            // 
-            // chkMTN_F_FontColor
-            // 
-            this.chkMTN_F_FontColor.AutoSize = true;
-            this.chkMTN_F_FontColor.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_F_FontColor.Location = new System.Drawing.Point(12, 69);
-            this.chkMTN_F_FontColor.Name = "chkMTN_F_FontColor";
-            this.chkMTN_F_FontColor.Size = new System.Drawing.Size(74, 17);
-            this.chkMTN_F_FontColor.TabIndex = 24;
-            this.chkMTN_F_FontColor.Text = "&Font Color";
-            this.ttApp.SetToolTip(this.chkMTN_F_FontColor, "-F RRGGBB:size");
-            this.chkMTN_F_FontColor.UseVisualStyleBackColor = true;
-            // 
-            // cboMTN_F_FontColor
-            // 
-            this.cboMTN_F_FontColor.FormattingEnabled = true;
-            this.cboMTN_F_FontColor.Location = new System.Drawing.Point(106, 67);
-            this.cboMTN_F_FontColor.MaxLength = 6;
-            this.cboMTN_F_FontColor.Name = "cboMTN_F_FontColor";
-            this.cboMTN_F_FontColor.Size = new System.Drawing.Size(120, 21);
-            this.cboMTN_F_FontColor.TabIndex = 27;
-            this.cboMTN_F_FontColor.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cboMTN_F_FontColor_MouseClick);
-            // 
-            // chkMTN_F_FontSize
-            // 
-            this.chkMTN_F_FontSize.AutoSize = true;
-            this.chkMTN_F_FontSize.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_F_FontSize.Location = new System.Drawing.Point(234, 69);
-            this.chkMTN_F_FontSize.Name = "chkMTN_F_FontSize";
-            this.chkMTN_F_FontSize.Size = new System.Drawing.Size(46, 17);
-            this.chkMTN_F_FontSize.TabIndex = 33;
-            this.chkMTN_F_FontSize.Text = "Size";
-            this.ttApp.SetToolTip(this.chkMTN_F_FontSize, "-F RRGGBB:size");
-            this.chkMTN_F_FontSize.UseVisualStyleBackColor = true;
-            // 
-            // nudMTN_F_FontSize
-            // 
-            this.nudMTN_F_FontSize.Location = new System.Drawing.Point(286, 68);
-            this.nudMTN_F_FontSize.Name = "nudMTN_F_FontSize";
-            this.nudMTN_F_FontSize.Size = new System.Drawing.Size(52, 20);
-            this.nudMTN_F_FontSize.TabIndex = 34;
-            // 
-            // chkMTN_L_LocInfo
-            // 
-            this.chkMTN_L_LocInfo.AutoSize = true;
-            this.chkMTN_L_LocInfo.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_L_LocInfo.Location = new System.Drawing.Point(12, 94);
-            this.chkMTN_L_LocInfo.Name = "chkMTN_L_LocInfo";
-            this.chkMTN_L_LocInfo.Size = new System.Drawing.Size(67, 17);
-            this.chkMTN_L_LocInfo.TabIndex = 29;
-            this.chkMTN_L_LocInfo.Text = "Location";
-            this.chkMTN_L_LocInfo.UseVisualStyleBackColor = true;
-            // 
-            // nudMTN_j_JPEGQuality
-            // 
-            this.nudMTN_j_JPEGQuality.Location = new System.Drawing.Point(172, 188);
-            this.nudMTN_j_JPEGQuality.Minimum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this.nudMTN_j_JPEGQuality.Name = "nudMTN_j_JPEGQuality";
-            this.nudMTN_j_JPEGQuality.Size = new System.Drawing.Size(120, 20);
-            this.nudMTN_j_JPEGQuality.TabIndex = 36;
-            // 
-            // chkMTN_j_JPEGQuality
-            // 
-            this.chkMTN_j_JPEGQuality.AutoSize = true;
-            this.chkMTN_j_JPEGQuality.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_j_JPEGQuality.Location = new System.Drawing.Point(22, 190);
-            this.chkMTN_j_JPEGQuality.Name = "chkMTN_j_JPEGQuality";
-            this.chkMTN_j_JPEGQuality.Size = new System.Drawing.Size(105, 17);
-            this.chkMTN_j_JPEGQuality.TabIndex = 35;
-            this.chkMTN_j_JPEGQuality.Text = "JPEG Quality (%)";
-            this.chkMTN_j_JPEGQuality.UseVisualStyleBackColor = true;
-            // 
-            // chkMTN_tL_LocTimestamp
-            // 
-            this.chkMTN_tL_LocTimestamp.AutoSize = true;
-            this.chkMTN_tL_LocTimestamp.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_tL_LocTimestamp.Location = new System.Drawing.Point(472, 18);
-            this.chkMTN_tL_LocTimestamp.Name = "chkMTN_tL_LocTimestamp";
-            this.chkMTN_tL_LocTimestamp.Size = new System.Drawing.Size(77, 17);
-            this.chkMTN_tL_LocTimestamp.TabIndex = 31;
-            this.chkMTN_tL_LocTimestamp.Text = "Timestamp";
-            this.chkMTN_tL_LocTimestamp.UseVisualStyleBackColor = true;
-            // 
-            // chkMTN_k_ColorBackground
-            // 
-            this.chkMTN_k_ColorBackground.AutoSize = true;
-            this.chkMTN_k_ColorBackground.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_k_ColorBackground.Location = new System.Drawing.Point(22, 140);
-            this.chkMTN_k_ColorBackground.Name = "chkMTN_k_ColorBackground";
-            this.chkMTN_k_ColorBackground.Size = new System.Drawing.Size(111, 17);
-            this.chkMTN_k_ColorBackground.TabIndex = 28;
-            this.chkMTN_k_ColorBackground.Text = "&Background Color";
-            this.ttApp.SetToolTip(this.chkMTN_k_ColorBackground, "  -k RRGGBB : background color (in hex)");
-            this.chkMTN_k_ColorBackground.UseVisualStyleBackColor = true;
-            // 
-            // chkMTN_g_Gap
-            // 
-            this.chkMTN_g_Gap.AutoSize = true;
-            this.chkMTN_g_Gap.Checked = true;
-            this.chkMTN_g_Gap.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_g_Gap.Location = new System.Drawing.Point(22, 115);
-            this.chkMTN_g_Gap.Name = "chkMTN_g_Gap";
-            this.chkMTN_g_Gap.Size = new System.Drawing.Size(120, 17);
-            this.chkMTN_g_Gap.TabIndex = 25;
-            this.chkMTN_g_Gap.UseVisualStyleBackColor = true;
-            // 
-            // cboMTN_k_ColorBkgrd
-            // 
-            this.cboMTN_k_ColorBkgrd.FormattingEnabled = true;
-            this.cboMTN_k_ColorBkgrd.Location = new System.Drawing.Point(172, 137);
-            this.cboMTN_k_ColorBkgrd.MaxLength = 6;
-            this.cboMTN_k_ColorBkgrd.Name = "cboMTN_k_ColorBkgrd";
-            this.cboMTN_k_ColorBkgrd.Size = new System.Drawing.Size(120, 21);
-            this.cboMTN_k_ColorBkgrd.TabIndex = 23;
-            this.cboMTN_k_ColorBkgrd.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cboMTN_k_ColorBkgrd_MouseClick);
-            // 
-            // nudMTN_w_Width
-            // 
-            this.nudMTN_w_Width.Location = new System.Drawing.Point(172, 87);
-            this.nudMTN_w_Width.Maximum = new decimal(new int[] {
-            2048,
-            0,
-            0,
-            0});
-            this.nudMTN_w_Width.Name = "nudMTN_w_Width";
-            this.nudMTN_w_Width.Size = new System.Drawing.Size(120, 20);
-            this.nudMTN_w_Width.TabIndex = 22;
-            this.ttApp.SetToolTip(this.nudMTN_w_Width, "Keep 0 for Exact Dimensions");
-            // 
-            // chk_w_Width
-            // 
-            this.chk_w_Width.AutoSize = true;
-            this.chk_w_Width.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk_w_Width.Location = new System.Drawing.Point(22, 90);
-            this.chk_w_Width.Name = "chk_w_Width";
-            this.chk_w_Width.Size = new System.Drawing.Size(54, 17);
-            this.chk_w_Width.TabIndex = 21;
-            this.chk_w_Width.Text = "Width";
-            this.chk_w_Width.UseVisualStyleBackColor = true;
-            // 
-            // chkMTN_P_QuitAfterDone
-            // 
-            this.chkMTN_P_QuitAfterDone.AutoSize = true;
-            this.chkMTN_P_QuitAfterDone.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_P_QuitAfterDone.Location = new System.Drawing.Point(22, 347);
-            this.chkMTN_P_QuitAfterDone.Name = "chkMTN_P_QuitAfterDone";
-            this.chkMTN_P_QuitAfterDone.Size = new System.Drawing.Size(96, 17);
-            this.chkMTN_P_QuitAfterDone.TabIndex = 20;
-            this.chkMTN_P_QuitAfterDone.Text = "&Quit after done";
-            this.chkMTN_P_QuitAfterDone.UseVisualStyleBackColor = true;
-            // 
-            // nudMTN_s_TimeStep
-            // 
-            this.nudMTN_s_TimeStep.Location = new System.Drawing.Point(172, 163);
-            this.nudMTN_s_TimeStep.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.nudMTN_s_TimeStep.Name = "nudMTN_s_TimeStep";
-            this.nudMTN_s_TimeStep.Size = new System.Drawing.Size(120, 20);
-            this.nudMTN_s_TimeStep.TabIndex = 19;
-            // 
-            // chkMTN_s_TimeStep
-            // 
-            this.chkMTN_s_TimeStep.AutoSize = true;
-            this.chkMTN_s_TimeStep.Location = new System.Drawing.Point(22, 165);
-            this.chkMTN_s_TimeStep.Name = "chkMTN_s_TimeStep";
-            this.chkMTN_s_TimeStep.Size = new System.Drawing.Size(123, 17);
-            this.chkMTN_s_TimeStep.TabIndex = 18;
-            this.chkMTN_s_TimeStep.Text = "Time Step (seconds)";
-            this.chkMTN_s_TimeStep.UseVisualStyleBackColor = true;
-            // 
-            // nudMTN_r_Rows
-            // 
-            this.nudMTN_r_Rows.Location = new System.Drawing.Point(172, 12);
-            this.nudMTN_r_Rows.Name = "nudMTN_r_Rows";
-            this.nudMTN_r_Rows.Size = new System.Drawing.Size(120, 20);
-            this.nudMTN_r_Rows.TabIndex = 17;
-            // 
-            // chkShowMTN
-            // 
-            this.chkShowMTN.AutoSize = true;
-            this.chkShowMTN.Checked = Program.conf.ShowMTNWindow;
-            this.chkShowMTN.Location = new System.Drawing.Point(22, 324);
-            this.chkShowMTN.Name = "chkShowMTN";
-            this.chkShowMTN.Size = new System.Drawing.Size(122, 17);
-            this.chkShowMTN.TabIndex = 11;
-            this.chkShowMTN.Text = "Show &MTN Window";
-            this.ttApp.SetToolTip(this.chkShowMTN, "Show MTN Window for Debugging purposes. Need to uncheck \"Quit after done\" if you " +
-                    "need to keep the Window open as long as you like.");
-            this.chkShowMTN.UseVisualStyleBackColor = true;
-            // 
-            // nudMTN_c_Columns
-            // 
-            this.nudMTN_c_Columns.Location = new System.Drawing.Point(172, 37);
-            this.nudMTN_c_Columns.Name = "nudMTN_c_Columns";
-            this.nudMTN_c_Columns.Size = new System.Drawing.Size(120, 20);
-            this.nudMTN_c_Columns.TabIndex = 15;
-            // 
-            // chkUseImageShackRegCode
-            // 
-            this.chkUseImageShackRegCode.AutoSize = true;
-            this.chkUseImageShackRegCode.Checked = Program.conf.UseImageShackRegCode;
-            this.chkUseImageShackRegCode.Location = new System.Drawing.Point(14, 41);
-            this.chkUseImageShackRegCode.Name = "chkUseImageShackRegCode";
-            this.chkUseImageShackRegCode.Size = new System.Drawing.Size(135, 17);
-            this.chkUseImageShackRegCode.TabIndex = 5;
-            this.chkUseImageShackRegCode.Text = "Use Registration Code:";
-            this.chkUseImageShackRegCode.UseVisualStyleBackColor = true;
-            // 
-            // txtImageShackRegCode
-            // 
-            this.txtImageShackRegCode.Location = new System.Drawing.Point(155, 38);
-            this.txtImageShackRegCode.Name = "txtImageShackRegCode";
-            this.txtImageShackRegCode.Size = new System.Drawing.Size(298, 20);
-            this.txtImageShackRegCode.TabIndex = 4;
-            // 
-            // chkRandomizeFileNameImageShack
-            // 
-            this.chkRandomizeFileNameImageShack.AutoSize = true;
-            this.chkRandomizeFileNameImageShack.Checked = Program.conf.ImageShakeRandomizeFileName;
-            this.chkRandomizeFileNameImageShack.Location = new System.Drawing.Point(14, 18);
-            this.chkRandomizeFileNameImageShack.Name = "chkRandomizeFileNameImageShack";
-            this.chkRandomizeFileNameImageShack.Size = new System.Drawing.Size(207, 17);
-            this.chkRandomizeFileNameImageShack.TabIndex = 3;
-            this.chkRandomizeFileNameImageShack.Text = "Randomize File Name for ImageShack";
-            this.chkRandomizeFileNameImageShack.UseVisualStyleBackColor = true;
-            // 
-            // chkWritePublish
-            // 
-            this.chkWritePublish.AutoSize = true;
-            this.chkWritePublish.Checked = Program.conf.WritePublish;
-            this.chkWritePublish.Location = new System.Drawing.Point(19, 91);
-            this.chkWritePublish.Name = "chkWritePublish";
-            this.chkWritePublish.Size = new System.Drawing.Size(241, 17);
-            this.chkWritePublish.TabIndex = 5;
-            this.chkWritePublish.Text = "Write Publish Information of the Torrent to File";
-            this.chkWritePublish.UseVisualStyleBackColor = true;
-            // 
-            // chkTorrentOrganize
-            // 
-            this.chkTorrentOrganize.AutoSize = true;
-            this.chkTorrentOrganize.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkTorrentOrganize.Location = new System.Drawing.Point(114, 67);
-            this.chkTorrentOrganize.Name = "chkTorrentOrganize";
-            this.chkTorrentOrganize.Size = new System.Drawing.Size(293, 17);
-            this.chkTorrentOrganize.TabIndex = 4;
-            this.chkTorrentOrganize.Text = "Create torrents in sub-folders according to Tracker Name";
-            this.chkTorrentOrganize.UseVisualStyleBackColor = true;
-            // 
-            // txtTorrentCustomFolder
-            // 
-            this.txtTorrentCustomFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTorrentCustomFolder.Location = new System.Drawing.Point(114, 41);
-            this.txtTorrentCustomFolder.Name = "txtTorrentCustomFolder";
-            this.txtTorrentCustomFolder.Size = new System.Drawing.Size(472, 20);
-            this.txtTorrentCustomFolder.TabIndex = 2;
-            this.txtTorrentCustomFolder.Text = Program.conf.TorrentsCustomDir;
-            // 
-            // rbTorrentDefaultFolder
-            // 
-            this.rbTorrentDefaultFolder.AutoSize = true;
-            this.rbTorrentDefaultFolder.Location = new System.Drawing.Point(19, 19);
-            this.rbTorrentDefaultFolder.Name = "rbTorrentDefaultFolder";
-            this.rbTorrentDefaultFolder.Size = new System.Drawing.Size(147, 17);
-            this.rbTorrentDefaultFolder.TabIndex = 0;
-            this.rbTorrentDefaultFolder.TabStop = true;
-            this.rbTorrentDefaultFolder.Text = "Parent folder of the Media";
-            this.rbTorrentDefaultFolder.UseVisualStyleBackColor = true;
-            // 
-            // chkCreateTorrent
-            // 
-            this.chkCreateTorrent.AutoSize = true;
-            this.chkCreateTorrent.Location = new System.Drawing.Point(17, 14);
-            this.chkCreateTorrent.Name = "chkCreateTorrent";
-            this.chkCreateTorrent.Size = new System.Drawing.Size(182, 17);
-            this.chkCreateTorrent.TabIndex = 0;
-            this.chkCreateTorrent.Text = "Automatically create &torrent using";
-            this.chkCreateTorrent.UseVisualStyleBackColor = true;
-            // 
-            // chkKeepScreenshot
-            // 
-            this.chkKeepScreenshot.AutoSize = true;
-            this.chkKeepScreenshot.Checked = Program.conf.KeepScreenshot;
-            this.chkKeepScreenshot.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkKeepScreenshot.Location = new System.Drawing.Point(42, 24);
-            this.chkKeepScreenshot.Name = "chkKeepScreenshot";
-            this.chkKeepScreenshot.Size = new System.Drawing.Size(194, 17);
-            this.chkKeepScreenshot.TabIndex = 1;
-            this.chkKeepScreenshot.Text = "Keep Screenshots in Pictures\\MTN";
-            this.chkKeepScreenshot.UseVisualStyleBackColor = true;
-            // 
-            // txtMtn
-            // 
-            this.txtMtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMtn.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.txtMtn.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
-            this.txtMtn.Location = new System.Drawing.Point(114, 25);
-            this.txtMtn.Name = "txtMtn";
-            this.txtMtn.Size = new System.Drawing.Size(437, 20);
-            this.txtMtn.TabIndex = 0;
-            this.txtMtn.Text = Program.conf.MTNPath;
-            // 
             // MainWindow
             // 
             this.AcceptButton = this.btnBrowse;
@@ -2537,16 +2563,31 @@ namespace TDMaker
             this.tpPublish.PerformLayout();
             this.gbTemplatesInternal.ResumeLayout(false);
             this.gbTemplatesInternal.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeIncr)).EndInit();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeHeading1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHeading2Size)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHeading3Size)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBodyText)).EndInit();
             this.tpScreenshots.ResumeLayout(false);
             this.tcHosting.ResumeLayout(false);
             this.tpMTNUsage.ResumeLayout(false);
             this.pMTNUsage.ResumeLayout(false);
             this.pMTNUsage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_B_OmitStart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_D_EdgeDetection)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_E_OmitEnd)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_h_HeightMin)).EndInit();
             this.gbMTN_i_MediaInfo.ResumeLayout(false);
             this.gbMTN_i_MediaInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_F_FontSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_j_JPEGQuality)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMTN_g_Gap)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_w_Width)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_s_TimeStep)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_r_Rows)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_c_Columns)).EndInit();
             this.tpHostingImageShack.ResumeLayout(false);
             this.tpHostingImageShack.PerformLayout();
             this.tpTorrents.ResumeLayout(false);
@@ -2562,21 +2603,6 @@ namespace TDMaker
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeIncr)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeHeading1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHeading2Size)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHeading3Size)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBodyText)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_B_OmitStart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_D_EdgeDetection)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_E_OmitEnd)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_h_HeightMin)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_F_FontSize)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_j_JPEGQuality)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_w_Width)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_s_TimeStep)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_r_Rows)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMTN_c_Columns)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -12,7 +12,7 @@ using UploadersLib.ImageUploaders;
 
 namespace TDMakerLib
 {
-   public class TorrentInfo
+    public class TorrentInfo
     {
         private BackgroundWorker mBwApp = null;
 
@@ -95,23 +95,26 @@ namespace TDMakerLib
 
         }
 
-       private void UploadScreenshot(String mediaFilePath)
+        private void UploadScreenshot(String mediaFilePath)
         {
-            string screenshot = Path.Combine(Program.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + MyMedia.Screenshot.Settings.o_OutputSuffix);
+            string ssPath = Path.Combine(Program.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + MyMedia.Screenshot.Settings.o_OutputSuffix);
             ImageUploader imageUploader = null;
 
-            if (File.Exists(screenshot))
+            if (File.Exists(ssPath))
             {
                 ImageFileManager imf = null;
 
-                switch ((ScreenshotDestType)Program.conf.ScreenshotDestIndex)
+                switch ((ImageDestType)Program.conf.ImageUploader)
                 {
-                    case ScreenshotDestType.IMAGESHACK:
-                        imageUploader = new ImageShackUploader("16BCFGWY58707bec94f7b0a773d0aa8bbf301900", Program.conf.ImageShackRegCode, UploadMode.API);
+                    case ImageDestType.IMAGESHACK:
+                        imageUploader = new ImageShackUploader("16BCFGWY58707bec94f7b0a773d0aa8bbf301900", Program.conf.ImageShackRegCode, UploadMode.ANONYMOUS);
                         // ((ImageShackUploader)imageUploader).RandomizeFileName = Program.conf.ImageShakeRandomizeFileName;
                         break;
-                    case ScreenshotDestType.TINYPIC:
-                        imageUploader = new TinyPicUploader("e2aabb8d555322fa", "00a68ed73ddd54da52dc2d5803fa35ee", UploadMode.API);
+                    case  ImageDestType.TINYPIC:
+                        imageUploader = new TinyPicUploader("e2aabb8d555322fa", "00a68ed73ddd54da52dc2d5803fa35ee", UploadMode.ANONYMOUS);
+                        break;
+                    case ImageDestType.IMAGEBIN:
+                        imageUploader = new ImageBin();
                         break;
                 }
 
@@ -123,22 +126,23 @@ namespace TDMakerLib
                         retry++;
                         if (retry > 1)
                             Thread.Sleep(2000);
-                        mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploading {0} to {1}... Attempt {2}", Path.GetFileName(screenshot), imageUploader.Name, retry));
-                        imf = imageUploader.UploadImage(screenshot);                      
+                        mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploading {0} to {1}... Attempt {2}", Path.GetFileName(ssPath), imageUploader.Name, retry));
+                        imf = imageUploader.UploadImage(ssPath);
                     }
                 }
 
                 if (imf != null && imf.ImageFileList.Count > 0)
                 {
+                    MyMedia.Screenshot.LocalPath = ssPath;
                     MyMedia.Screenshot.Full = imf.GetFullImageUrl();
                     MyMedia.Screenshot.LinkedThumbnail = imf.GetLinkedThumbnailForumUrl();
 
-                    mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploaded {0}.", Path.GetFileName(screenshot)));
+                    mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploaded {0}.", Path.GetFileName(ssPath)));
 
                 }
                 else
                 {
-                    mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Failed uploading {0}. Try again later.", Path.GetFileName(screenshot)));
+                    mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Failed uploading {0}. Try again later.", Path.GetFileName(ssPath)));
                 }
 
             }
