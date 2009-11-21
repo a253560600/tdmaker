@@ -10,7 +10,7 @@ namespace TDMakerLib.MediaInfo
         /// <summary>
         /// Screenshot Settings
         /// </summary>
-        public XMLScreenshotSettings Settings { get; set; }
+        public XMLSettingsScreenshot Settings { get; set; }
         /// <summary>
         /// FontStyle for Screenshot Text
         /// </summary>
@@ -28,11 +28,14 @@ namespace TDMakerLib.MediaInfo
         /// URL of Linked Thumbnail
         /// </summary>
         public string LinkedThumbnail { get; set; }
-
+        /// <summary>
+        /// Local file path of the Screenshot
+        /// </summary>
+        public string LocalPath { get; set; }
         
         public Screenshot()
         {
-            this.Settings = new XMLScreenshotSettings();
+            this.Settings = new XMLSettingsScreenshot();
         }
 
     }

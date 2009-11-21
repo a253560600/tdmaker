@@ -81,6 +81,7 @@
     <Compile Include="Helpers\TemplateReader.cs" />
     <Compile Include="Helpers\TorrentPacket.cs" />
     <Compile Include="Helpers\WorkerTask.cs" />
+    <Compile Include="Helpers\XMLSettings.cs" />
     <Compile Include="MediaInfo\MediaFile.cs" />
     <Compile Include="MediaInfo\MediaInfo2.cs" />
     <Compile Include="MediaInfo\MediaInfoDLL.cs" />
@@ -88,8 +89,8 @@
     <Compile Include="MediaInfo\Screenshot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Helpers\XMLScreenshotSettings.cs" />
-    <Compile Include="Helpers\XMLSettings.cs" />
+    <Compile Include="Helpers\XMLSettingsScreenshot.cs" />
+    <Compile Include="Helpers\XMLSettingsCore.cs" />
     <Compile Include="Torrents\HttpWebMultipartRequest.cs" />
     <Compile Include="Torrents\TorrentInfo.cs" />
     <Compile Include="Torrents\TorrentUploader.cs" />
