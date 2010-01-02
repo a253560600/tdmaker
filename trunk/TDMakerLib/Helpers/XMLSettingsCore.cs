@@ -9,6 +9,7 @@ using System.Collections.Specialized;
 using UploadersLib;
 using System.Windows.Forms;
 using System.ComponentModel;
+using System.Drawing.Design;
 
 namespace TDMakerLib
 {
@@ -33,14 +34,57 @@ namespace TDMakerLib
             MTNFonts.AddRange(new string[] { "arial.ttf", "tahomabd.ttf" });
         }
 
-        [Category("MTN"), DefaultValue("mtn.exe"), Description("MTN Argument")]
-        public string MTNPath { get; set; }
-        [Category("MTN"), DefaultValue("-P -w 0 -c 1 -r 3 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97"), Description("MTN Argument")]
-        public string MTNArg { get; set; }
+        // Misc
+        [BrowsableAttribute(false)]
+        public bool RunOnce { get; set; }
+        [BrowsableAttribute(false)]
+        public bool UpgradeSettings { get; set; }
+
+        // Tab 1 - Input
+        [BrowsableAttribute(false)]
+        public bool bDiscMenu { get; set; }
+        [BrowsableAttribute(false)]
+        public bool bExtras { get; set; }
+        [BrowsableAttribute(false)]
+        public bool bBrowseDir { get; set; }
+        [Category("Source"), DefaultValue(true), Description("Show Source Type in Torrent Description")]
+        public bool bShowSource { get; set; }
+        [Category("Source"), DefaultValue(true), Description("Show Media Title in Torrent Description")]
+        public bool ShowTitle { get; set; }
+        [Category("Source"), DefaultValue(false), Description("Show Video Edits in Torrent Description")]
+        public bool bTitle { get; set; }
+        public bool bSource { get; set; }
+        public bool bVideoEdits { get; set; }
+
+        [Category("Source"), DefaultValue("DVD"), Description("Source Type")]
+        public string Source { get; set; }
+        [Category("Source"), DefaultValue("Untouched"), Description("Authoring")]
+        public string Authoring { get; set; }
+
+        // Tab 2 - Media Info
+        /*
+         * Nothing
+         */
+
+        // Tab 3 - Publish 
+        [Category("Screenshots"), DefaultValue(true), Description("Capture Screenshots using MTN")]
+        public bool TakeScreenshot { get; set; }
         [Category("Screenshots"), DefaultValue(true), Description("Upload screenshot.")]
         public bool UploadScreenshot { get; set; }
         [Category("Screenshots"), DefaultValue(true), Description("Use full image URL in the torrent description.")]
         public bool UseFullPicture { get; set; }
+        [Category("Screenshots"), DefaultValue(true), Description(@"Keep Screenshots in Pictures\MTN")]
+        public bool KeepScreenshot { get; set; }
+
+        // Tab 4.1 - Options - Publish Templates
+        // Tab 4.2 - Options - MTN
+
+        [EditorAttribute(typeof(ExeFileNameEditor), typeof(UITypeEditor))]
+        [Category("MTN"), DefaultValue("mtn.exe"), Description("MTN Argument")]
+        public string MTNPath { get; set; }
+        [Category("MTN"), DefaultValue("-P -w 0 -c 1 -r 3 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97"), Description("MTN Argument")]
+        public string MTNArg { get; set; }
+
         public bool AlignCenter { get; set; }
         public bool PreText { get; set; }
 
@@ -53,30 +97,22 @@ namespace TDMakerLib
         [Category("Text Formatting / Font Sizes"), DefaultValue(1), Description("Font Size increment")]
         public int FontSizeIncr { get; set; }
 
+        [Category("Options / General"), DefaultValue(true), Description("Process media immediately after loading file or folder")]
         public bool AnalyzeAuto { get; set; }
-        public bool AutoCheckUpdates { get; set; }
-        public bool bDiscMenu { get; set; }
-        public bool bExtras { get; set; }
-        public bool BrowseDir { get; set; }
-        [Category("Source"), DefaultValue(true), Description("Show Source Type in Torrent Description")]
-        public bool ShowSource { get; set; }
-        [Category("Source"), DefaultValue(true), Description("Show Media Title in Torrent Description")]
-        public bool ShowTitle { get; set; }
-        [Category("Source"), DefaultValue(false), Description("Show Video Edits in Torrent Description")]
-        public bool ShowVideoEdits { get; set; }
+        [Category("Options / General"), DefaultValue(true), Description("Automatically Check for Updates")]
+        public bool UpdateCheckAuto { get; set; }
+
         [Category("Source"), DefaultValue(false), Description("Create Torrent")]
         public bool CreateTorrent { get; set; }
         public bool ImageShakeRandomizeFileName { get; set; }
-        public bool KeepScreenshot { get; set; }
-        public bool RunOnce { get; set; }
+
+        [Category("MTN"), DefaultValue(false), Description("Show MTN during file creation")]
         public bool ShowMTNWindow { get; set; }
-        [Category("MTN"), DefaultValue(true), Description("Capture Screenshots using MTN")]
-        public bool TakeScreenshot { get; set; }
+
         public bool TemplatesMode { get; set; }
         public bool TorrentFolderDefault { get; set; }
         public bool TorrentsOrganize { get; set; }
-        public bool UpdateCheckAuto { get; set; }
-        public bool UpgradeSettings { get; set; }
+
         public bool UseImageShackRegCode { get; set; }
         public bool WebLink { get; set; }
         public bool WritePublish { get; set; }
@@ -89,9 +125,7 @@ namespace TDMakerLib
         public string ExtrasMode { get; set; }
         public string ImageShackRegCode { get; set; }
         public string SettingsDir { get; set; }
-        [Category("Source"), DefaultValue("DVD"), Description("Source Type")]
-        public string Source { get; set; }
-        public string SourceEdit { get; set; }
+
         public string TemplatesDir { get; set; }
         public string TorrentsCustomDir { get; set; }
         public StringCollection DiscMenus = new StringCollection();
@@ -101,21 +135,45 @@ namespace TDMakerLib
         public StringCollection SourceEdits = new StringCollection();
         public StringCollection Sources = new StringCollection();
         public XMLSettingsScreenshot ScreenshotSettings = new XMLSettingsScreenshot();
-
+        
+        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
+        public bool chk_g_Gap { get; set; }
+        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
         public bool chkMTN_s_TimeStep { get; set; }
+        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
         public bool chkMTN_j_JPEGQuality { get; set; }
+        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
         public bool chkMTN_B_OmitBegin { get; set; }
+        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
         public bool chkMTN_E_OmitEnd { get; set; }
+        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
         public bool chkMTN_D_EdgeDetection { get; set; }
+        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
         public bool chkMTN_h_Height { get; set; }
+        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
         public bool chkMTN_T_Title { get; set; }
+        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
         public bool chkMTN_L_LocInfo { get; set; }
+        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
         public bool chkMTN_N_WriteInfo { get; set; }
+        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
         public bool chkMTN_tL_LocTimestamp { get; set; }
+        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
         public bool chkMTN_f_Font { get; set; }
+        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
         public bool chkMTN_v_Verbose { get; set; }
+        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
         public bool chkMTN_o_OutputSuffix { get; set; }
+        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
         public bool chkMTN_k_ColorBackground { get; set; }
+        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
+        public bool chkMTN_F_FontSize { get; set; }
+        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
+        public bool chkMTN_F_FontColor { get; set; }
+        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
+        public bool chk_h_MinHeight { get; set; }
+        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
+        public bool chk_w_Width { get; set; }
 
         #region I/O Methods
 
@@ -129,7 +187,7 @@ namespace TDMakerLib
                     Directory.CreateDirectory(Path.GetDirectoryName(filePath));
 
                 //Write XML file
-                XmlSerializer serial = new XmlSerializer(typeof(XMLSettings));
+                XmlSerializer serial = new XmlSerializer(typeof(XMLSettingsCore));
                 FileStream fs = new FileStream(filePath, FileMode.Create);
                 serial.Serialize(fs, this);
                 fs.Close();
@@ -188,7 +246,7 @@ namespace TDMakerLib
                 {
                     try
                     {
-                        XmlSerializer xs = new XmlSerializer(typeof(XMLSettings), TextUploader.Types.ToArray());
+                        XmlSerializer xs = new XmlSerializer(typeof(XMLSettingsCore), TextUploader.Types.ToArray());
                         using (FileStream fs = new FileStream(filePath, FileMode.Open))
                         {
                             return xs.Deserialize(fs) as XMLSettingsCore;
