@@ -5,75 +5,91 @@ using System.Text;
 using System.ComponentModel;
 using System.Xml.Serialization;
 using System.IO;
+using System.Drawing.Design;
+using System.Windows.Forms.Design;
 
 namespace TDMakerLib
 {
     [Serializable]
     public class XMLSettingsScreenshot : XMLSettings
     {
-        public string a_AspectRatio { get; set; }
-        public int b_SkipBlank { get; set; }
-        public bool bTitle { get; set; }
-        public bool bSource { get; set; }
+        [Category("MTN / Optional"), DefaultValue(false), Description("override input file's display aspect ratio")]
+        public bool a_AspectRatio { get; set; }
+        [Category("MTN / Optional"), DefaultValue(0.80), Description("skip if % blank is higher; 0:skip all 1:skip really blank >1:off")]
+        public double b_SkipBlank { get; set; }
+        [Category("MTN / Optional"), DefaultValue(0), Description("omit this seconds from the beginning")]
         public int B_OmitBegin { get; set; }
-        [Category("MTN"), DefaultValue(1), Description("# of columns")]
+        [Category("MTN / Core"), DefaultValue(1), Description("# of columns")]
         public int c_Columns { get; set; }
+        [Category("MTN / Optional"), DefaultValue(-1), Description("cut movie and thumbnails not more than the specified seconds; <=0:off")]
         public int C_CutMovie { get; set; }
+        [Category("MTN / Optional"), DefaultValue(12), Description("edge detection; 0:off >0:on; higher detects more; try -D4 -D6 or -D8")]
         public int D_EdgeDetection { get; set; }
+        [Category("MTN / Optional"), DefaultValue(0), Description("omit this seconds at the end")]
         public int E_OmitEnd { get; set; }
-        [Category("MTN"), DefaultValue("tahomabd.ttf"), Description("font file; use absolute path if not in usual places")]
+        [Category("MTN / Optional"), DefaultValue("tahomabd.ttf"), Description("font file; use absolute path if not in usual places")]
         public string f_Font { get; set; }
+        [EditorAttribute(typeof(ColorDialogEditor), typeof(UITypeEditor))]
+        [Category("MTN / Optional"), DefaultValue("RRGGBB"), Description("font color; RRGGBB:size")]
         public string F_FontColor { get; set; }
-        [Category("MTN"), DefaultValue(8), Description("gap between each shot")]
-        public int g_GapBetweenShots { get; set; }
-        [Category("MTN"), DefaultValue(150), Description("minimum height of each shot; will reduce # of column to fit")]
-        public int h_MinHeight { get; set; }
-        public bool i_InfoOff { get; set; }
-        public bool I_IndivScreens { get; set; }
-        [Category("MTN"), DefaultValue(99), Description("jpeg quality")]
-        public int j_JpgQuality { get; set; }
-        [Category("MTN"), DefaultValue("RRGGBB"), Description("background color (in hex)")]
-        public string k_ColorBackground { get; set; }
-        public bool n_Priority { get; set; }
-        public string N_InfoSuffix { get; set; }
-        [Category("MTN"), DefaultValue("_s.jpg"), Description("output suffix")]
-        public string o_OutputSuffix { get; set; }
-        public string O_OutputDir { get; set; }
-        [Category("MTN"), DefaultValue(false), Description("pause before exiting; default on in win32")]
-        public bool p_PauseBeforeExit { get; set; }
-        [Category("MTN"), DefaultValue(true), Description("dont pause before exiting; override -p")]
-        public bool P_QuitAfterDone { get; set; }
-        [Category("MTN"), DefaultValue(3), Description("# of rows; >0:override -s")]
-        public int r_Rows { get; set; }
-        [Category("MTN"), DefaultValue(120), Description("time step between each shot")]
-        public int s_TimeStep { get; set; }
-        public bool t_TimeStamp { get; set; }
-        public bool T_Text { get; set; }
-        public bool v_Verbose { get; set; }
-        public int w_Width { get; set; }
-        public bool W_Update { get; set; }
-        public bool z_Seek { get; set; }
-        public string Z_NonSeek { get; set; }
-        public string L_InfoLocation { get; set; }
-        public int InfoTextIndex { get; set; }
-        public int InfoTimestampIndex { get; set; }
+        [Category("MTN / Optional"), DefaultValue(0), Description("width of output image; 0:column * movie width")]
         public int F_FontSize { get; set; }
-        public bool chkMTN_F_FontSize { get; set; }
-        public bool chkMTN_F_FontColor { get; set; }
-        public bool chk_h_MinHeight { get; set; }
-        public bool chk_w_Width { get; set; }
-        public string g_Gap { get; set; }
-        public bool WebLink { get; set; }
+        [Category("MTN / Optional"), DefaultValue(8), Description("gap between each shot")]
+        public int g_GapBetweenShots { get; set; }
+        [Category("MTN / Optional"), DefaultValue(150), Description("minimum height of each shot; will reduce # of column to fit")]
+        public int h_MinHeight { get; set; }
+        [Category("MTN / Optional"), DefaultValue(false), Description("info text off")]
+        public bool i_InfoOff { get; set; }
+        [Category("MTN / Optional"), DefaultValue(false), Description("save individual shots too")]
+        public bool I_IndivScreens { get; set; }
+        [Category("MTN / Optional"), DefaultValue(99), Description("jpeg quality")]
+        public int j_JpgQuality { get; set; }
+        [EditorAttribute(typeof(ColorDialogEditor), typeof(UITypeEditor))]
+        [Category("MTN / Optional"), DefaultValue("RRGGBB"), Description("background color (in hex)")]
+        public string k_ColorBackground { get; set; }
+        [Category("MTN / Optional"), DefaultValue(1), Description("location of text; 1=lower left, 2=lower right, 3=upper right, 4=upper left")]
+        public int L_LocInfo { get; set; }
+        [Category("MTN / Optional"), DefaultValue(0), Description("width of output image; 0:column * movie width")]
+        public int L_LocTimestamp { get; set; }
+        [Category("MTN / Optional"), DefaultValue(false), Description("run at normal priority")]
+        public bool n_Priority { get; set; }
+        [Category("MTN / Optional"), DefaultValue("_s.txt"), Description("save info text to a file with suffix")]
+        public string N_InfoSuffix { get; set; }
+        [Category("MTN / Optional"), DefaultValue("_s.jpg"), Description("output suffix")]
+        public string o_OutputSuffix { get; set; }
+        [EditorAttribute(typeof(FolderNameEditor), typeof(UITypeEditor))]
+        [Category("MTN / Optional"), DefaultValue(""), Description("save output files in the specified directory")]
+        public string O_OutputDir { get; set; }
+        [Category("MTN / Optional"), DefaultValue(false), Description("pause before exiting; default on in win32")]
+        public bool p_PauseBeforeExit { get; set; }
+        [Category("MTN / Optional"), DefaultValue(true), Description("dont pause before exiting; override -p")]
+        public bool P_QuitAfterDone { get; set; }
+        [Category("MTN / Core"), DefaultValue(3), Description("# of rows; >0:override -s")]
+        public int r_Rows { get; set; }
+        [Category("MTN / Optional"), DefaultValue(120), Description("time step between each shot")]
+        public int s_TimeStep { get; set; }
+        [Category("MTN / Optional"), DefaultValue(false), Description("pause before exiting; default on in win32")]
+        public bool t_TimeStamp { get; set; }
+        [Category("MTN / Optional"), DefaultValue(false), Description("add text above output image")]
+        public bool T_Text { get; set; }
+        [Category("MTN / Optional"), DefaultValue(false), Description("verbose mode (debug)")]
+        public bool v_Verbose { get; set; }
+        [Category("MTN / Optional"), DefaultValue(0), Description("width of output image; 0:column * movie width")]
+        public int w_Width { get; set; }
+        [Category("MTN / Optional"), DefaultValue(false), Description("dont overwrite existing files, i.e. update mode")]
+        public bool W_Update { get; set; }
+        [Category("MTN / Optional"), DefaultValue(false), Description("always use seek mode")]
+        public bool z_Seek { get; set; }
+        [Category("MTN / Optional"), DefaultValue(false), Description("always use non-seek mode -- slower but more accurate timing")]
+        public bool Z_NonSeek { get; set; }
+
 
         public XMLSettingsScreenshot()
         {
             ApplyDefaultValues(this);
         }
 
-
         #region I/O Methods
-
-        public string FilePath { get; set; }
 
         public void Write(string filePath)
         {

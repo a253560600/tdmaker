@@ -344,8 +344,7 @@ namespace TDMaker
                 dlg.Title = "Browse for mtn.exe";
                 dlg.Filter = "Applications (*.exe)|*.exe";
                 if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    txtMtn.Text = dlg.FileName;
+                {                    
                     Program.conf.MTNPath = dlg.FileName;
                 }
             }
@@ -354,8 +353,8 @@ namespace TDMaker
         private void SettingsWrite()
         {
             // MTN Args
-            cboMTN_L_LocInfo.SelectedIndex = Program.conf.ScreenshotSettings.InfoTextIndex;
-            cboMTN_L_LocTimestamp.SelectedIndex = Program.conf.ScreenshotSettings.InfoTimestampIndex;
+            cboMTN_L_LocInfo.SelectedIndex = Program.conf.ScreenshotSettings.L_LocInfo;
+            cboMTN_L_LocTimestamp.SelectedIndex = Program.conf.ScreenshotSettings.L_LocTimestamp;
 
             // Source
             if (!Program.conf.Sources.Contains(cboSource.Text))
@@ -407,11 +406,9 @@ namespace TDMaker
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
-
             ConfigureDirs();
             // ConfigureGUIForUnix();
             SettingsRead();
-
 
             // Logo
             string logo1 = Path.Combine(Application.StartupPath, "logo1.png");
@@ -544,8 +541,7 @@ namespace TDMaker
 
         private void SettingsRead()
         {
-
-            rbFile.Checked = !Program.conf.BrowseDir;
+            rbFile.Checked = !Program.conf.bBrowseDir;
             rbTExt.Checked = chkTemplatesMode.Checked;
             rbTInt.Checked = !rbTExt.Checked;
 
@@ -559,8 +555,8 @@ namespace TDMaker
             if (string.IsNullOrEmpty(Program.conf.MTNPath))
                 Program.conf.MTNPath = Path.Combine(Application.StartupPath, "mtn.exe");
 
-            cboMTN_L_LocInfo.SelectedIndex = Program.conf.ScreenshotSettings.InfoTextIndex;
-            cboMTN_L_LocTimestamp.SelectedIndex = Program.conf.ScreenshotSettings.InfoTimestampIndex;
+            cboMTN_L_LocInfo.SelectedIndex = Program.conf.ScreenshotSettings.L_LocInfo;
+            cboMTN_L_LocTimestamp.SelectedIndex = Program.conf.ScreenshotSettings.L_LocTimestamp;
 
             cboSource.Items.Clear();
             foreach (string src in Program.conf.Sources)
@@ -611,20 +607,20 @@ namespace TDMaker
             this.chkMTN_i_MediaInfoTurnOff.Checked = Program.conf.ScreenshotSettings.i_InfoOff;
             this.chkMTN_T_Title.Checked = Program.conf.chkMTN_T_Title;
             this.chkMTN_f_Font.Checked = Program.conf.chkMTN_f_Font;
-            this.chkMTN_F_FontColor.Checked = Program.conf.ScreenshotSettings.chkMTN_F_FontColor;
+            this.chkMTN_F_FontColor.Checked = Program.conf.chkMTN_F_FontColor;
             this.cboMTN_F_FontColor.Text = Program.conf.ScreenshotSettings.F_FontColor;
-            this.chkMTN_F_FontSize.Checked = Program.conf.ScreenshotSettings.chkMTN_F_FontSize;
+            this.chkMTN_F_FontSize.Checked = Program.conf.chkMTN_F_FontSize;
             this.nudMTN_F_FontSize.Value = Program.conf.ScreenshotSettings.F_FontSize;
             this.chkMTN_L_LocInfo.Checked = Program.conf.chkMTN_L_LocInfo;
             this.nudMTN_j_JPEGQuality.Value = Program.conf.ScreenshotSettings.j_JpgQuality;
             this.chkMTN_tL_LocTimestamp.Checked = Program.conf.chkMTN_tL_LocTimestamp;
             this.chkMTN_k_ColorBackground.Checked = Program.conf.chkMTN_k_ColorBackground;
-            this.chkMTN_g_Gap.Text = Program.conf.ScreenshotSettings.g_Gap;
+            this.chkMTN_g_Gap.Checked = Program.conf.chk_g_Gap;
             this.cboMTN_k_ColorBkgrd.Text = Program.conf.ScreenshotSettings.k_ColorBackground;
             this.nudMTN_w_Width.Value = Program.conf.ScreenshotSettings.w_Width;
             this.nudMTN_c_Columns.Value = Program.conf.ScreenshotSettings.c_Columns;
             this.chkMTN_P_QuitAfterDone.Checked = Program.conf.ScreenshotSettings.P_QuitAfterDone;
-            this.chk_w_Width.Checked = Program.conf.ScreenshotSettings.chk_w_Width;
+            this.chk_w_Width.Checked = Program.conf.chk_w_Width;
             this.txtMTN_N_InfoSuffix.Text = Program.conf.ScreenshotSettings.N_InfoSuffix;
             this.cboMTN_f_FontType.Text = Program.conf.ScreenshotSettings.f_Font;
             this.chkMTN_j_JPEGQuality.Checked = Program.conf.chkMTN_j_JPEGQuality;
@@ -639,6 +635,14 @@ namespace TDMaker
             // Trackers
             TrackersRead();
 
+            pgApp.SelectedObject = Program.conf;
+            pgMtn.SelectedObject = Program.conf.ScreenshotSettings;
+        }
+
+        private void SettingsReadMedia()
+        {
+            // cboAuthoring.Text = Program.conf.
+            rbDir.Checked = Program.conf.bBrowseDir;
         }
 
         private void TrackersWrite()
@@ -858,7 +862,7 @@ namespace TDMaker
                         {
                             txtScrFull.Text = mTorrentInfo.MyMedia.Screenshot.Full;
                             txtBBScrForums.Text = mTorrentInfo.MyMedia.Screenshot.LinkedThumbnail;
-                            pbScreenshot.ImageLocation  = mTorrentInfo.MyMedia.Screenshot.LocalPath;
+                            pbScreenshot.ImageLocation = mTorrentInfo.MyMedia.Screenshot.LocalPath;
 
                             if (!string.IsNullOrEmpty(txtScrFull.Text))
                                 txtBBScrFull.Text = string.Format("[img]{0}[/img]", txtScrFull.Text);
@@ -1175,6 +1179,7 @@ namespace TDMaker
         private void rbDir_CheckedChanged(object sender, EventArgs e)
         {
             gbDVD.Enabled = rbDir.Checked;
+            Program.conf.bBrowseDir = rbDir.Checked;
         }
 
         private void txtPublish_KeyPress(object sender, KeyPressEventArgs e)
@@ -1541,6 +1546,11 @@ namespace TDMaker
         }
 
         private void pbScreenshot_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cboMTN_k_ColorBkgrd_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

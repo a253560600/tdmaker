@@ -293,7 +293,7 @@ namespace TDMakerLib
             StringBuilder sbTitleInfo = new StringBuilder();
 
             // Source 
-            if (Program.conf.ShowSource && !string.IsNullOrEmpty(Program.conf.Source))
+            if (Program.conf.bShowSource && !string.IsNullOrEmpty(Program.conf.Source))
             {
                 sbTitleInfo.AppendLine(string.Format("[u]Source:[/u] {0}", this.Source));
             }
@@ -301,7 +301,7 @@ namespace TDMakerLib
             if (MediaType == MediaType.MEDIA_DISC)
             {
                 // Authoring
-                if (Program.conf.ShowVideoEdits && !string.IsNullOrEmpty(this.Authoring))
+                if (Program.conf.bVideoEdits && !string.IsNullOrEmpty(this.Authoring))
                 {
                     sbTitleInfo.AppendLine(string.Format("[u]Authoring:[/u] {0}", this.Authoring));
                 }
