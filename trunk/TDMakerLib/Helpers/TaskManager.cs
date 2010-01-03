@@ -34,7 +34,7 @@ namespace TDMakerLib.Helpers
                 temp.Add(tp.Tracker.AnnounceURL);
                 tc.Announces.Add(temp);
 
-                string torrentFileName = (File.Exists(p) ? Path.GetFileName(p) : Program.GetMediaName(p)) + ".torrent";
+                string torrentFileName = string.Format("{0} - {1}.torrent", (File.Exists(p) ? Path.GetFileName(p) : Program.GetMediaName(p)), tp.Tracker.Name);
                 string torrentPath = Path.Combine(tp.TorrentFolder, torrentFileName);
 
                 if (!Directory.Exists(tp.TorrentFolder))
