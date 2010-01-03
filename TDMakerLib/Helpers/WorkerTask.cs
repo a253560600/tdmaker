@@ -12,8 +12,9 @@ namespace TDMakerLib
         public List<TorrentPacket> TorrentPackets { get; set; }
         public string[] FilePaths { get; set; }
 
-        public WorkerTask(TaskType task)
+        public WorkerTask(BackgroundWorker worker, TaskType task)
         {
+            this.MyWorker = worker;
             this.Task = task;
         }
 

@@ -10,6 +10,7 @@ using UploadersLib;
 using System.Windows.Forms;
 using System.ComponentModel;
 using System.Drawing.Design;
+using System.Windows.Forms.Design;
 
 namespace TDMakerLib
 {
@@ -27,7 +28,7 @@ namespace TDMakerLib
                                             "-P -N _s.txt -w1024 -c3 -r4 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97", 
                                             "-w 0 -c 1 -r 3 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97", 
                                           });
-            Sources.AddRange(new string[] { "DVD", "DVD-5", "DVD-9", "HDTV", "SDTV", "Blu-ray Disc", "HD DVD", "Laser Disc", "VHS" });
+            Sources.AddRange(new string[] { "DVD-5", "DVD-9", "HDTV", "SDTV", "Blu-ray Disc", "HD DVD", "Laser Disc", "VHS" });
             Extras.AddRange(new string[] { "Intact", "Shrunk", "Removed", "None on Source" });
             SourceEdits.AddRange(new string[] { "Untouched", "Shrunk" });
             DiscMenus.AddRange(new string[] { "Intact", "Removed", "Shrunk" });
@@ -56,7 +57,7 @@ namespace TDMakerLib
         public bool bSource { get; set; }
         public bool bVideoEdits { get; set; }
 
-        [Category("Source"), DefaultValue("DVD"), Description("Source Type")]
+        [Category("Source"), DefaultValue("DVD-9"), Description("Source Type")]
         public string Source { get; set; }
         [Category("Source"), DefaultValue("Untouched"), Description("Authoring")]
         public string Authoring { get; set; }
@@ -76,18 +77,18 @@ namespace TDMakerLib
         [Category("Screenshots"), DefaultValue(true), Description(@"Keep Screenshots in Pictures\MTN")]
         public bool KeepScreenshot { get; set; }
 
-        // Tab 4.1 - Options - Publish Templates
-        // Tab 4.2 - Options - MTN
-
-        [EditorAttribute(typeof(ExeFileNameEditor), typeof(UITypeEditor))]
-        [Category("MTN"), DefaultValue("mtn.exe"), Description("MTN Argument")]
-        public string MTNPath { get; set; }
-        [Category("MTN"), DefaultValue("-P -w 0 -c 1 -r 3 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97"), Description("MTN Argument")]
-        public string MTNArg { get; set; }
-
+        // Tab 3 - Publish - Options
         public bool AlignCenter { get; set; }
         public bool PreText { get; set; }
+        public bool TemplatesMode { get; set; }
 
+        // Tab 4.0 - Options - General
+        [Category("Options / General"), DefaultValue(true), Description("Process media immediately after loading file or folder")]
+        public bool AnalyzeAuto { get; set; }
+        [Category("Options / General"), DefaultValue(true), Description("Automatically Check for Updates")]
+        public bool UpdateCheckAuto { get; set; }
+
+        // Tab 4.1 - Options - Publish Templates
         [Category("Text Formatting"), DefaultValue(true), Description("Font Size for Heading 2")]
         public bool LargerPreText { get; set; }
         [Category("Text Formatting / Font Sizes"), DefaultValue(4), Description("Font Size for Heading 2")]
@@ -96,46 +97,59 @@ namespace TDMakerLib
         public int FontSizeBody { get; set; }
         [Category("Text Formatting / Font Sizes"), DefaultValue(1), Description("Font Size increment")]
         public int FontSizeIncr { get; set; }
+        public decimal FontSizeHeading1 { get; set; }
+        public decimal FontSizeHeading3 { get; set; }
 
-        [Category("Options / General"), DefaultValue(true), Description("Process media immediately after loading file or folder")]
-        public bool AnalyzeAuto { get; set; }
-        [Category("Options / General"), DefaultValue(true), Description("Automatically Check for Updates")]
-        public bool UpdateCheckAuto { get; set; }
+        // Tab 4.2 - Options - MTN
+        [EditorAttribute(typeof(ExeFileNameEditor), typeof(UITypeEditor))]
+        [Category("MTN"), DefaultValue("mtn.exe"), Description("MTN Argument")]
+        public string MTNPath { get; set; }
+        [Category("MTN"), DefaultValue("-P -w 0 -c 1 -r 3 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97"), Description("MTN Argument")]
+        public string MTNArg { get; set; }
 
+        // Tab 4.3 - Options - Torrent Creator
         [Category("Source"), DefaultValue(false), Description("Create Torrent")]
-        public bool CreateTorrent { get; set; }
+        public bool TorrentCreateAuto { get; set; }
         public bool ImageShakeRandomizeFileName { get; set; }
 
         [Category("MTN"), DefaultValue(false), Description("Show MTN during file creation")]
         public bool ShowMTNWindow { get; set; }
 
-        public bool TemplatesMode { get; set; }
+
         public bool TorrentFolderDefault { get; set; }
         public bool TorrentsOrganize { get; set; }
 
-        public bool UseImageShackRegCode { get; set; }
         public bool WebLink { get; set; }
         public bool WritePublish { get; set; }
-        public decimal FontSizeHeading1 { get; set; }
-        public decimal FontSizeHeading3 { get; set; }
+
         public int AnnounceURLIndex { get; set; }
         public ImageDestType ImageUploader = ImageDestType.IMAGESHACK;
         public int TemplateIndex { get; set; }
         public string DiscMenu { get; set; }
         public string ExtrasMode { get; set; }
         public string ImageShackRegCode { get; set; }
-        public string SettingsDir { get; set; }
 
+        [Category("Options / Paths"), Description("Browse to reconfigure the Settings folder path")]
+        [EditorAttribute(typeof(FolderNameEditor), typeof(UITypeEditor))]
+        public string SettingsDir { get; set; }
+        [Category("Options / Paths"), Description("Browse to reconfigure the Templates folder path")]
+        [EditorAttribute(typeof(FolderNameEditor), typeof(UITypeEditor))]
         public string TemplatesDir { get; set; }
+        [Category("Options / Paths"), Description("Browse to change where torrent files are saved")]
         public string TorrentsCustomDir { get; set; }
+
         public StringCollection DiscMenus = new StringCollection();
+        public string Extra = "Intact";
         public StringCollection Extras = new StringCollection();
-        public StringCollection MTNArgs = new StringCollection();
-        public StringCollection MTNFonts = new StringCollection();
+        public string SourceEdit = "Untouched";
         public StringCollection SourceEdits = new StringCollection();
         public StringCollection Sources = new StringCollection();
+
+        public StringCollection MTNArgs = new StringCollection();
+        public StringCollection MTNFonts = new StringCollection();
+
         public XMLSettingsScreenshot ScreenshotSettings = new XMLSettingsScreenshot();
-        
+
         [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
         public bool chk_g_Gap { get; set; }
         [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]

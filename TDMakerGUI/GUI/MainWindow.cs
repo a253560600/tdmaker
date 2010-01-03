@@ -93,7 +93,7 @@ namespace TDMaker
 
             if (Program.conf.AnalyzeAuto)
             {
-                WorkerTask wt = new WorkerTask(TaskType.ANALYZE_MEDIA);
+                WorkerTask wt = new WorkerTask(bwApp, TaskType.ANALYZE_MEDIA);
                 wt.FilePaths = ps;
                 AnalyzeMedia(wt);
             }
@@ -344,7 +344,7 @@ namespace TDMaker
                 dlg.Title = "Browse for mtn.exe";
                 dlg.Filter = "Applications (*.exe)|*.exe";
                 if (dlg.ShowDialog() == DialogResult.OK)
-                {                    
+                {
                     Program.conf.MTNPath = dlg.FileName;
                 }
             }
@@ -541,14 +541,20 @@ namespace TDMaker
 
         private void SettingsRead()
         {
-            rbFile.Checked = !Program.conf.bBrowseDir;
-            rbTExt.Checked = chkTemplatesMode.Checked;
-            rbTInt.Checked = !rbTExt.Checked;
+            SettingsReadMedia();
 
             cboScreenshotDest.Items.Clear();
             foreach (ImageDestType sdt in Enum.GetValues(typeof(ImageDestType)))
             {
-                cboScreenshotDest.Items.Add(sdt.GetDescription());
+                switch (sdt)
+                {
+                    case ImageDestType.IMAGEBIN:
+                    case ImageDestType.IMAGESHACK:
+                    case ImageDestType.IMGUR:
+                    case ImageDestType.TINYPIC:
+                        cboScreenshotDest.Items.Add(sdt.GetDescription());
+                        break;
+                }
             }
             cboScreenshotDest.SelectedIndex = (int)Program.conf.ImageUploader;
 
@@ -628,7 +634,7 @@ namespace TDMaker
             this.txtImageShackRegCode.Text = Program.conf.ImageShackRegCode;
             this.chkTorrentOrganize.Checked = Program.conf.TorrentsOrganize;
             this.rbTorrentDefaultFolder.Checked = Program.conf.TorrentFolderDefault;
-            this.chkCreateTorrent.Checked = Program.conf.CreateTorrent;
+            this.chkCreateTorrent.Checked = Program.conf.TorrentCreateAuto;
             this.chkMTN_s_TimeStep.Checked = Program.conf.chkMTN_s_TimeStep;
             this.nudMTN_r_Rows.Value = Program.conf.ScreenshotSettings.r_Rows;
 
@@ -643,6 +649,10 @@ namespace TDMaker
         {
             // cboAuthoring.Text = Program.conf.
             rbDir.Checked = Program.conf.bBrowseDir;
+            rbFile.Checked = !rbDir.Checked;
+            gbDVD.Enabled = rbDir.Checked;
+            rbTExt.Checked = chkTemplatesMode.Checked;
+            rbTInt.Checked = !rbTExt.Checked;
         }
 
         private void TrackersWrite()
@@ -653,8 +663,9 @@ namespace TDMaker
             {
                 object name = dgvTrackers.Rows[i].Cells[0].Value;
                 object url = dgvTrackers.Rows[i].Cells[1].Value;
+                object groupName = dgvTrackers.Rows[i].Cells[2].Value;
                 if (name != null && url != null)
-                    mTrackerManager.Trackers.Add(new Tracker(name.ToString(), url.ToString()));
+                    mTrackerManager.Trackers.Add(new Tracker(name.ToString(), url.ToString(), groupName.ToString()));
 
             }
 
@@ -676,6 +687,7 @@ namespace TDMaker
                     Console.WriteLine(string.Format("Adding {0}", mTrackerManager.Trackers[i].Name));
                     dgvTrackers.Rows[i].Cells[0].Value = mTrackerManager.Trackers[i].Name;
                     dgvTrackers.Rows[i].Cells[1].Value = mTrackerManager.Trackers[i].AnnounceURL;
+                    dgvTrackers.Rows[i].Cells[2].Value = mTrackerManager.Trackers[i].GroupName;
                 }
 
                 FillTrackersComboBox();
@@ -751,9 +763,9 @@ namespace TDMaker
 
                     tiList.Add(ti);
 
-                    if (Program.conf.CreateTorrent)
+                    if (Program.conf.TorrentCreateAuto)
                     {
-                        new TaskManager(new WorkerTask(Loader.CurrentTask)).WorkerCreateTorrent(mi.TorrentPacketInfo);
+                        new TaskManager(new WorkerTask(bwApp, Loader.CurrentTask)).WorkerCreateTorrent(mi.TorrentPacketInfo);
                     }
 
                 }
@@ -774,7 +786,7 @@ namespace TDMaker
             {
                 foreach (TorrentPacket tp in tps)
                 {
-                    new TaskManager(new WorkerTask(Loader.CurrentTask)).WorkerCreateTorrent(tp);
+                    new TaskManager(new WorkerTask(bwApp, Loader.CurrentTask)).WorkerCreateTorrent(tp);
                 }
             }
             catch (Exception ex)
@@ -1016,7 +1028,7 @@ namespace TDMaker
             {
                 files[i] = lbFiles.Items[i].ToString();
             }
-            WorkerTask wt = new WorkerTask(TaskType.ANALYZE_MEDIA);
+            WorkerTask wt = new WorkerTask(bwApp, TaskType.ANALYZE_MEDIA);
             wt.FilePaths = files;
             this.AnalyzeMedia(wt);
         }
@@ -1062,7 +1074,7 @@ namespace TDMaker
 
         private Tracker GetTracker()
         {
-            Tracker t = new Tracker("Unknown Tracker", "");
+            Tracker t = new Tracker("Unknown Tracker", "http://unknown", "Movies");
 
             if (Program.conf.AnnounceURLIndex < 0)
                 Program.conf.AnnounceURLIndex = 0;
@@ -1097,7 +1109,7 @@ namespace TDMaker
 
                 if (files.Length > 0)
                 {
-                    WorkerTask wt = new WorkerTask(TaskType.CREATE_TORRENT);
+                    WorkerTask wt = new WorkerTask(bwApp, TaskType.CREATE_TORRENT);
                     wt.TorrentPackets = tps;
                     bwApp.RunWorkerAsync(wt);
 
@@ -1136,7 +1148,7 @@ namespace TDMaker
         {
             if (null == e.FormattedValue || string.IsNullOrEmpty(e.FormattedValue.ToString()))
             {
-                MessageBox.Show(string.Format("{0} cannot be null.", dgvTrackers.Columns[e.ColumnIndex].HeaderText));
+                sBar.Text = string.Format("{0} cannot be null.", dgvTrackers.Columns[e.ColumnIndex].HeaderText);
             }
         }
 
@@ -1173,7 +1185,7 @@ namespace TDMaker
 
         private void rbFile_CheckedChanged(object sender, EventArgs e)
         {
-
+            gbDVD.Enabled = rbDir.Checked;
         }
 
         private void rbDir_CheckedChanged(object sender, EventArgs e)
@@ -1189,7 +1201,6 @@ namespace TDMaker
                 TextBox tb = (TextBox)sender;
                 tb.SelectAll();
                 e.Handled = true;
-
             }
         }
 
@@ -1547,12 +1558,30 @@ namespace TDMaker
 
         private void pbScreenshot_Click(object sender, EventArgs e)
         {
-
+            if (!string.IsNullOrEmpty(txtScrFull.Text))
+            {
+                Process.Start(txtScrFull.Text);
+            }
         }
 
         private void cboMTN_k_ColorBkgrd_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void chkUseImageShackRegCode_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkRandomizeFileNameImageShack_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkCreateTorrent_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.conf.TorrentCreateAuto = chkCreateTorrent.Checked;
         }
 
     }

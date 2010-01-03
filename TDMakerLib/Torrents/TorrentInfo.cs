@@ -110,7 +110,7 @@ namespace TDMakerLib
                         imageUploader = new ImageShackUploader("16BCFGWY58707bec94f7b0a773d0aa8bbf301900", Program.conf.ImageShackRegCode, UploadMode.ANONYMOUS);
                         // ((ImageShackUploader)imageUploader).RandomizeFileName = Program.conf.ImageShakeRandomizeFileName;
                         break;
-                    case  ImageDestType.TINYPIC:
+                    case ImageDestType.TINYPIC:
                         imageUploader = new TinyPicUploader("e2aabb8d555322fa", "00a68ed73ddd54da52dc2d5803fa35ee", UploadMode.ANONYMOUS);
                         break;
                     case ImageDestType.IMAGEBIN:
@@ -118,6 +118,9 @@ namespace TDMakerLib
                         break;
                     case ImageDestType.IMGUR:
                         imageUploader = new Imgur();
+                        break;
+                    default:
+                        imageUploader = new UploadersLib.ImageUploaders.Imgur();
                         break;
                 }
 
