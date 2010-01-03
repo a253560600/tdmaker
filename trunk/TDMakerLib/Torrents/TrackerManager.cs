@@ -22,17 +22,14 @@ namespace TDMakerLib
         {
             if (File.Exists(TrackersXML))
             {
-
                 object obj = new object();
                 try
                 {
                     using (FileStream fs = new FileStream(TrackersXML, FileMode.Open, FileAccess.Read))
                     {
-
                         XmlSerializer xs = new XmlSerializer(Trackers.GetType());
                         obj = xs.Deserialize(fs);
                         fs.Close();
-
                     }
 
                     if (obj != null)
@@ -46,7 +43,6 @@ namespace TDMakerLib
                 catch (Exception e)
                 {
                     Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
-                    throw;
                 }
             }            
         }

@@ -23,26 +23,29 @@ namespace TDMakerLib.Helpers
             string p = tp.MediaLocation;
             if (File.Exists(p) || Directory.Exists(p))
             {
-                MonoTorrent.Common.TorrentCreator tc = new MonoTorrent.Common.TorrentCreator();
-                tc.Private = true;
-                tc.Comment = Program.GetMediaName(p);
-                tc.Path = p;
-                tc.PublisherUrl = "http://code.google.com/p/tdmaker";
-                tc.Publisher = Application.ProductName;
-                tc.StoreMD5 = true;
-                List<string> temp = new List<string>();
-                temp.Add(tp.Tracker.AnnounceURL);
-                tc.Announces.Add(temp);
+                foreach (Tracker myTracker in tp.TrackerGroupActive.Trackers)
+                {
+                    MonoTorrent.Common.TorrentCreator tc = new MonoTorrent.Common.TorrentCreator();
+                    tc.Private = true;
+                    tc.Comment = Program.GetMediaName(p);
+                    tc.Path = p;
+                    tc.PublisherUrl = "http://code.google.com/p/tdmaker";
+                    tc.Publisher = Application.ProductName;
+                    tc.StoreMD5 = true;
+                    List<string> temp = new List<string>();
+                    temp.Add(myTracker.AnnounceURL);
+                    tc.Announces.Add(temp);
 
-                string torrentFileName = string.Format("{0} - {1}.torrent", (File.Exists(p) ? Path.GetFileName(p) : Program.GetMediaName(p)), tp.Tracker.Name);
-                string torrentPath = Path.Combine(tp.TorrentFolder, torrentFileName);
+                    string torrentFileName = string.Format("{0} - {1}.torrent", (File.Exists(p) ? Path.GetFileName(p) : Program.GetMediaName(p)), myTracker.Name);
+                    string torrentPath = Path.Combine(tp.TorrentFolder, torrentFileName);
 
-                if (!Directory.Exists(tp.TorrentFolder))
-                    Directory.CreateDirectory(Path.GetDirectoryName(torrentPath));
+                    if (!Directory.Exists(tp.TorrentFolder))
+                        Directory.CreateDirectory(Path.GetDirectoryName(torrentPath));
 
-                mTask.MyWorker.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Creating {0}", torrentPath));
-                tc.Create(torrentPath);
-                mTask.MyWorker.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Created {0}", torrentPath));
+                    mTask.MyWorker.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Creating {0}", torrentPath));
+                    tc.Create(torrentPath);
+                    mTask.MyWorker.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Created {0}", torrentPath));
+                }
             }
 
             return success;

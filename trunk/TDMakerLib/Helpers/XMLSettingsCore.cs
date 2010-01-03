@@ -165,6 +165,7 @@ namespace TDMakerLib
         public bool TorrentFolderDefault { get; set; }
         [Category("Torrent Creator"), DefaultValue(false), Description("Save torrent files in sub-folders organized by tracker namer")]
         public bool TorrentsOrganize { get; set; }
+        public List<TrackerGroup> TrackerGroups = new List<TrackerGroup>();
 
         // Tab 4.4 - Options - Paths
         [Category("Options / Paths"), Description("Browse to reconfigure the Settings folder path")]

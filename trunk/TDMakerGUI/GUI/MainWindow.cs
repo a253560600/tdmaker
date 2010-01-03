@@ -383,9 +383,7 @@ namespace TDMaker
                 Program.conf.MTNFonts.Add(cboMTN_f_FontType.Text);
             }
 
-            // tm2.Write(dgvTrackers);
-            TrackersWrite();
-            Program.conf.AnnounceURLIndex = cboAnnounceURL.SelectedIndex;
+            Program.conf.AnnounceURLIndex = cboTrackerGroupActive.SelectedIndex;
             Program.conf.TemplateIndex = cboTemplate.SelectedIndex;
 
             Program.conf.TorrentFolderDefault = rbTorrentDefaultFolder.Checked;
@@ -640,9 +638,6 @@ namespace TDMaker
             this.chkMTN_s_TimeStep.Checked = Program.conf.chkMTN_s_TimeStep;
             this.nudMTN_r_Rows.Value = Program.conf.ScreenshotSettings.r_Rows;
 
-            // Trackers
-            TrackersRead();
-
             pgApp.SelectedObject = Program.conf;
             pgMtn.SelectedObject = Program.conf.ScreenshotSettings;
         }
@@ -692,52 +687,28 @@ namespace TDMaker
             nudHeading2Size.Value = (decimal)Program.conf.FontSizeHeading2;
             nudHeading3Size.Value = (decimal)Program.conf.FontSizeHeading3;
             nudBodySize.Value = (decimal)Program.conf.FontSizeBody;
+
+            SettingsReadOptionsTorrents();
         }
 
-        private void TrackersWrite()
+        private void SettingsReadOptionsTorrents()
         {
-            mTrackerManager.Trackers.Clear();
-
-            for (int i = 0; i < dgvTrackers.Rows.Count; i++)
+            lbTrackerGroups.Items.Clear();
+            foreach (TrackerGroup tg in Program.conf.TrackerGroups)
             {
-                object name = dgvTrackers.Rows[i].Cells[0].Value;
-                object url = dgvTrackers.Rows[i].Cells[1].Value;
-                object groupName = dgvTrackers.Rows[i].Cells[2].Value;
-                if (name != null && url != null)
-                    mTrackerManager.Trackers.Add(new Tracker(name.ToString(), url.ToString(), groupName.ToString()));
-
-            }
-
-            mTrackerManager.Write();
-
-        }
-
-        private void TrackersRead()
-        {
-            Console.WriteLine("Reading trackers.xml");
-            mTrackerManager.Read();
-            Console.WriteLine(string.Format("Read {0} trackers", mTrackerManager.Trackers.Count.ToString()));
-            try
-            {
-
-                for (int i = 0; i < mTrackerManager.Trackers.Count; i++)
+                lbTrackerGroups.Items.Add(tg);
+                lbTrackers.Items.Clear();
+                foreach (Tracker myTracker in tg.Trackers)
                 {
-                    dgvTrackers.Rows.Add();
-                    Console.WriteLine(string.Format("Adding {0}", mTrackerManager.Trackers[i].Name));
-                    dgvTrackers.Rows[i].Cells[0].Value = mTrackerManager.Trackers[i].Name;
-                    dgvTrackers.Rows[i].Cells[1].Value = mTrackerManager.Trackers[i].AnnounceURL;
-                    dgvTrackers.Rows[i].Cells[2].Value = mTrackerManager.Trackers[i].GroupName;
+                    lbTrackers.Items.Add(myTracker);
                 }
-
-                FillTrackersComboBox();
-                if (cboAnnounceURL.Items.Count > 0)
-                    cboAnnounceURL.SelectedIndex = Math.Max(Program.conf.AnnounceURLIndex, 0);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
             }
 
+            rbTorrentDefaultFolder.Checked = Program.conf.TorrentFolderDefault;
+            chkWritePublish.Checked = Program.conf.WritePublish;
+            chkTorrentOrganize.Checked = Program.conf.TorrentsOrganize;
+
+            txtTorrentCustomFolder.Text = Program.conf.TorrentsCustomDir;
         }
 
         private void btnCopy_Click(object sender, EventArgs e)
@@ -1096,12 +1067,10 @@ namespace TDMaker
         {
             try
             {
-                cboAnnounceURL.Items.Clear();
-                for (int i = 0; i < dgvTrackers.Rows.Count; i++)
+                cboTrackerGroupActive.Items.Clear();
+                foreach (TrackerGroup tg in lbTrackerGroups.Items)
                 {
-                    object val = dgvTrackers.Rows[i].Cells[1].Value;
-                    if (val != null)
-                        cboAnnounceURL.Items.Add(dgvTrackers.Rows[i].Cells[1].Value);
+                    cboTrackerGroupActive.Items.Add(tg);
                 }
             }
             catch (Exception ex)
@@ -1109,28 +1078,18 @@ namespace TDMaker
                 Console.WriteLine("fillTrackersComboBox() fails...");
                 Console.WriteLine(ex.ToString());
             }
-
         }
 
-        private Tracker GetTracker()
+        private TrackerGroup GetTracker()
         {
-            Tracker t = new Tracker("Unknown Tracker", "http://unknown", "Movies");
+            TrackerGroup t = null;
 
             if (Program.conf.AnnounceURLIndex < 0)
                 Program.conf.AnnounceURLIndex = 0;
 
-            if (dgvTrackers.Rows.Count > Program.conf.AnnounceURLIndex)
+            if (cboTrackerGroupActive.Items.Count > Program.conf.AnnounceURLIndex)
             {
-
-                object obj1 = dgvTrackers.Rows[Program.conf.AnnounceURLIndex].Cells[0].Value;
-                object obj2 = dgvTrackers.Rows[Program.conf.AnnounceURLIndex].Cells[1].Value;
-
-                if (obj1 != null && obj2 != null)
-                {
-                    t.Name = obj1.ToString();
-                    t.AnnounceURL = obj2.ToString();
-                }
-
+                t = cboTrackerGroupActive.Items[Program.conf.AnnounceURLIndex] as TrackerGroup;
             }
             return t;
         }
@@ -1170,6 +1129,7 @@ namespace TDMaker
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 txtTorrentCustomFolder.Text = dlg.SelectedPath;
+                Program.conf.TorrentsCustomDir = txtTorrentCustomFolder.Text;
             }
         }
 
@@ -1177,19 +1137,15 @@ namespace TDMaker
         private void rbTorrentFolderCustom_CheckedChanged(object sender, EventArgs e)
         {
             UpdateGuiControls();
+            if (string.IsNullOrEmpty(txtTorrentCustomFolder.Text))
+            {
+                txtTorrentCustomFolder.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Torrent Uploads");
+            }
         }
 
         private void cboAnnounceURL_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Program.conf.AnnounceURLIndex = cboAnnounceURL.SelectedIndex;
-        }
-
-        private void dgvTrackers_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {
-            if (null == e.FormattedValue || string.IsNullOrEmpty(e.FormattedValue.ToString()))
-            {
-                sBar.Text = string.Format("{0} cannot be null.", dgvTrackers.Columns[e.ColumnIndex].HeaderText);
-            }
+            Program.conf.AnnounceURLIndex = cboTrackerGroupActive.SelectedIndex;
         }
 
         private void createPublishUser()
@@ -1401,14 +1357,13 @@ namespace TDMaker
         {
             try
             {
-                int old = cboAnnounceURL.SelectedIndex;
+                int old = cboTrackerGroupActive.SelectedIndex;
                 FillTrackersComboBox();
-                if (cboAnnounceURL.Items.Count > 0)
+                if (cboTrackerGroupActive.Items.Count > 0)
                 {
                     if (old < 0) old = 0;
-                    cboAnnounceURL.SelectedIndex = Math.Min(old, cboAnnounceURL.Items.Count - 1);
+                    cboTrackerGroupActive.SelectedIndex = Math.Min(old, cboTrackerGroupActive.Items.Count - 1);
                 }
-
             }
             catch (Exception ex)
             {
@@ -1420,7 +1375,6 @@ namespace TDMaker
         {
             FileSystem.OpenDirSettings();
         }
-
 
         private void UpdatePublish()
         {
@@ -1739,6 +1693,88 @@ namespace TDMaker
         private void nudBodyText_ValueChanged(object sender, EventArgs e)
         {
             Program.conf.FontSizeBody = (int)nudBodySize.Value;
+        }
+
+        private void lbTrackers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lbTrackers.SelectedIndex != -1)
+            {
+                Tracker t = lbTrackers.SelectedItem as Tracker;
+                if (t != null)
+                {
+                    pgTracker.SelectedObject = t;
+                }
+                pgTracker.Enabled = t != null;
+            }
+        }
+
+        private void lbTrackerGroups_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lbTrackers.Items.Clear();
+            TrackerGroup tg = lbTrackerGroups.SelectedItem as TrackerGroup;
+            if (tg != null)
+            {
+                foreach (Tracker myTracker in tg.Trackers)
+                {
+                    lbTrackers.Items.Add(myTracker);
+                }
+                lbTrackers.SelectedIndex = 0;
+            }
+        }
+
+        private void btnAddTrackerGroup_Click(object sender, EventArgs e)
+        {
+            TrackerGroup tg = new TrackerGroup("Linux ISOs");
+            Tracker t = new Tracker("Ubuntu", "http://torrent.ubuntu.com:6969");
+            tg.Trackers.Add(t);
+
+            Program.conf.TrackerGroups.Add(tg);
+            lbTrackerGroups.Items.Add(tg);
+            lbTrackerGroups.SelectedIndex = lbTrackerGroups.Items.Count - 1;
+
+            btnRefreshTrackers_Click(sender, e);
+        }
+
+        private void btnRemoveTrackerGroup_Click(object sender, EventArgs e)
+        {
+            if (lbTrackerGroups.SelectedIndex > -1)
+            {
+                int sel = lbTrackerGroups.SelectedIndex;
+                lbTrackerGroups.Items.RemoveAt(sel);
+                Program.conf.TrackerGroups.RemoveAt(sel);
+                lbTrackers.Items.Clear();
+                pgTracker.Enabled = false;
+            }
+        }
+
+        private void btnRemoveTracker_Click(object sender, EventArgs e)
+        {
+            if (lbTrackers.SelectedIndex > -1 && lbTrackerGroups.SelectedIndex > -1)
+            {
+                int sel = lbTrackers.SelectedIndex;
+                lbTrackers.Items.RemoveAt(sel);
+                Program.conf.TrackerGroups[lbTrackerGroups.SelectedIndex].Trackers.RemoveAt(sel);
+            }
+        }
+
+        private void chkTorrentOrganize_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.conf.TorrentsOrganize = chkTorrentOrganize.Checked;
+        }
+
+        private void chkWritePublish_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.conf.WritePublish = chkWritePublish.Checked;
+        }
+
+        private void rbTorrentDefaultFolder_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.conf.TorrentFolderDefault = rbTorrentDefaultFolder.Checked;
+        }
+
+        private void txtTorrentCustomFolder_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

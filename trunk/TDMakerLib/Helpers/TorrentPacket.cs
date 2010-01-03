@@ -4,13 +4,13 @@ namespace TDMakerLib
 {
     public class TorrentPacket
     {
-        public Tracker Tracker { get; private set; }
+        public TrackerGroup TrackerGroupActive { get; private set; }
         public string MediaLocation { get; private set; }
         public string TorrentFolder { get; private set; }
 
-        public TorrentPacket(Tracker tracker, string mediaLoc)
+        public TorrentPacket(TrackerGroup tracker, string mediaLoc)
         {
-            this.Tracker = tracker;
+            this.TrackerGroupActive = tracker;
             this.MediaLocation = mediaLoc;
             this.TorrentFolder = getTorrentFolderPath();
         }
@@ -25,7 +25,7 @@ namespace TDMakerLib
 
                 if (Program.conf.TorrentsOrganize)
                 {
-                    dir = Path.Combine(Program.conf.TorrentsCustomDir, Tracker.Name);
+                    dir = Path.Combine(Program.conf.TorrentsCustomDir, TrackerGroupActive.Name);
                 }
                 else
                 {
