@@ -45,8 +45,12 @@ namespace TDMakerLib
             try
             {
                 Console.WriteLine("Creating a MTN process...");
-
                 string assemblyMTN = (Program.IsUNIX ? Program.conf.MTNPath.Replace(".exe", "") : Program.conf.MTNPath);
+                if (string.IsNullOrEmpty(Path.GetDirectoryName(assemblyMTN)))
+                {
+                    assemblyMTN = Path.Combine(System.Windows.Forms.Application.StartupPath, assemblyMTN);
+                    Program.conf.MTNPath = assemblyMTN;
+                }
 
                 string args = string.Format("{0} \"{1}\"", MyMedia.Screenshot.MTNArgs.Trim(), mediaFilePath);
 

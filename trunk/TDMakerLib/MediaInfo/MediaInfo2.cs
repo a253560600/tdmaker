@@ -284,7 +284,7 @@ namespace TDMakerLib
             StringBuilder sbBody = new StringBuilder();
 
             // Show Title
-            if (Program.conf.ShowTitle)
+            if (Program.conf.bTitle)
             {
                 sbBody.AppendLine(bb.Size(fontSizeHeading1, bb.Bold(this.Title)));
                 sbBody.AppendLine();
@@ -293,7 +293,7 @@ namespace TDMakerLib
             StringBuilder sbTitleInfo = new StringBuilder();
 
             // Source 
-            if (Program.conf.bShowSource && !string.IsNullOrEmpty(Program.conf.Source))
+            if (Program.conf.bSource && !string.IsNullOrEmpty(Program.conf.Source))
             {
                 sbTitleInfo.AppendLine(string.Format("[u]Source:[/u] {0}", this.Source));
             }
@@ -301,7 +301,7 @@ namespace TDMakerLib
             if (MediaType == MediaType.MEDIA_DISC)
             {
                 // Authoring
-                if (Program.conf.bVideoEdits && !string.IsNullOrEmpty(this.Authoring))
+                if (Program.conf.bAuthoring && !string.IsNullOrEmpty(this.Authoring))
                 {
                     sbTitleInfo.AppendLine(string.Format("[u]Authoring:[/u] {0}", this.Authoring));
                 }
@@ -315,7 +315,7 @@ namespace TDMakerLib
                     sbTitleInfo.AppendLine(string.Format("[u]Extras:[/u] {0}", this.Extras));
                 }
                 // WebLink
-                if (Program.conf.WebLink && !string.IsNullOrEmpty(this.WebLink))
+                if (Program.conf.bWebLink && !string.IsNullOrEmpty(this.WebLink))
                 {
                     sbTitleInfo.AppendLine(string.Format("[u]Web Link:[/u] {0}", this.WebLink));
                 }

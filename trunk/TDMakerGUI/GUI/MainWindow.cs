@@ -362,7 +362,7 @@ namespace TDMaker
                 Program.conf.Sources.Add(cboSource.Text);
             }
             // Source Edits
-            if (!Program.conf.SourceEdits.Contains(cboAuthoring.Text))
+            if (!Program.conf.AuthoringModes.Contains(cboAuthoring.Text))
             {
                 Program.conf.Sources.Add(cboAuthoring.Text);
             }
@@ -536,25 +536,27 @@ namespace TDMaker
                     Directory.CreateDirectory(Program.conf.TorrentsCustomDir);
             }
             mTrackerManager = new TrackerManager();
-
         }
 
         private void SettingsRead()
         {
             SettingsReadMedia();
+            SettingsReadScreenshots();
+            SettingsReadOptions();
 
             cboScreenshotDest.Items.Clear();
             foreach (ImageDestType sdt in Enum.GetValues(typeof(ImageDestType)))
             {
-                switch (sdt)
-                {
-                    case ImageDestType.IMAGEBIN:
-                    case ImageDestType.IMAGESHACK:
-                    case ImageDestType.IMGUR:
-                    case ImageDestType.TINYPIC:
-                        cboScreenshotDest.Items.Add(sdt.GetDescription());
-                        break;
-                }
+                //switch (sdt)
+                //{
+                //case ImageDestType.IMAGEBIN:
+                //case ImageDestType.IMAGESHACK:
+                //case ImageDestType.IMGUR:
+                //case ImageDestType.TINYPIC:
+
+                //     break;
+                // }
+                cboScreenshotDest.Items.Add(sdt.GetDescription());
             }
             cboScreenshotDest.SelectedIndex = (int)Program.conf.ImageUploader;
 
@@ -571,7 +573,7 @@ namespace TDMaker
             }
 
             cboAuthoring.Items.Clear();
-            foreach (string ed in Program.conf.SourceEdits)
+            foreach (string ed in Program.conf.AuthoringModes)
             {
                 cboAuthoring.Items.Add(ed);
             }
@@ -647,12 +649,49 @@ namespace TDMaker
 
         private void SettingsReadMedia()
         {
-            // cboAuthoring.Text = Program.conf.
             rbDir.Checked = Program.conf.bBrowseDir;
             rbFile.Checked = !rbDir.Checked;
             gbDVD.Enabled = rbDir.Checked;
             rbTExt.Checked = chkTemplatesMode.Checked;
             rbTInt.Checked = !rbTExt.Checked;
+
+            chkAuthoring.Checked = Program.conf.bAuthoring;
+            cboAuthoring.Text = Program.conf.AuthoringMode;
+
+            chkDiscMenu.Checked = Program.conf.bDiscMenu;
+            cboDiscMenu.Text = Program.conf.DiscMenu;
+
+            chkExtras.Checked = Program.conf.bExtras;
+            cboExtras.Text = Program.conf.Extra;
+
+            chkSource.Checked = Program.conf.bSource;
+            cboSource.Text = Program.conf.Source;
+            chkTitle.Checked = Program.conf.bTitle;
+            chkWebLink.Checked = Program.conf.bWebLink;
+        }
+
+        private void SettingsReadScreenshots()
+        {
+            chkScreenshot.Checked = Program.conf.TakeScreenshot;
+            chkScreenshotUpload.Checked = Program.conf.UploadScreenshot;
+        }
+
+        private void SettingsReadOptions()
+        {
+            chkTemplatesMode.Checked = Program.conf.TemplatesMode;
+            cboTemplate.SelectedIndex = Program.conf.TemplateIndex;
+            chkUploadFullScreenshot.Checked = Program.conf.UseFullPicture;
+
+
+            chkAlignCenter.Checked = Program.conf.AlignCenter;
+            chkPre.Checked = Program.conf.PreText;
+            chkPreIncreaseFontSize.Checked = Program.conf.LargerPreText;
+
+            nudFontSizeIncr.Value = (decimal)Program.conf.FontSizeIncr;
+            nudHeading1Size.Value = (decimal)Program.conf.FontSizeHeading1;
+            nudHeading2Size.Value = (decimal)Program.conf.FontSizeHeading2;
+            nudHeading3Size.Value = (decimal)Program.conf.FontSizeHeading3;
+            nudBodySize.Value = (decimal)Program.conf.FontSizeBody;
         }
 
         private void TrackersWrite()
@@ -1015,9 +1054,10 @@ namespace TDMaker
             }
         }
 
-        private void chkOptImageShack_CheckedChanged(object sender, EventArgs e)
+        private void chkScreenshotUpload_CheckedChanged(object sender, EventArgs e)
         {
-            chkUploadFullScreenshot.Enabled = chkOptImageShack.Checked;
+            chkUploadFullScreenshot.Enabled = chkScreenshotUpload.Checked;
+            Program.conf.UploadScreenshot = chkScreenshotUpload.Checked;
         }
 
         private void btnAnalyze_Click(object sender, EventArgs e)
@@ -1207,6 +1247,7 @@ namespace TDMaker
         private void chkTemplatesMode_CheckedChanged(object sender, EventArgs e)
         {
             gbTemplatesInternal.Enabled = !chkTemplatesMode.Checked;
+            Program.conf.TemplatesMode = chkTemplatesMode.Checked;
         }
 
         private void btnMTNHelp_Click(object sender, EventArgs e)
@@ -1228,6 +1269,7 @@ namespace TDMaker
         {
             gbScreenshotForums.Enabled = chkScreenshot.Checked;
             gbScreenshotFull.Enabled = chkScreenshot.Checked;
+            Program.conf.TakeScreenshot = chkScreenshot.Checked;
         }
 
         private void tsmTemplates_Click(object sender, EventArgs e)
@@ -1584,5 +1626,119 @@ namespace TDMaker
             Program.conf.TorrentCreateAuto = chkCreateTorrent.Checked;
         }
 
+        private void pgApp_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        {
+            SettingsRead();
+        }
+
+        private void cboAuthoring_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Program.conf.AuthoringMode = cboAuthoring.Text;
+        }
+
+        private void chkSourceEdit_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.conf.bAuthoring = chkAuthoring.Checked;
+        }
+
+        private void cboExtras_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Program.conf.Extra = cboExtras.Text;
+        }
+
+        private void chkExtras_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.conf.bExtras = chkExtras.Checked;
+        }
+
+        private void cboDiscMenu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Program.conf.DiscMenu = cboDiscMenu.Text;
+        }
+
+        private void chkDiscMenu_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.conf.bDiscMenu = chkDiscMenu.Checked;
+        }
+
+        private void chkSource_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.conf.bSource = chkSource.Checked;
+        }
+
+        private void cboSource_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Program.conf.Source = cboSource.Text;
+        }
+
+        private void chkTitle_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.conf.bTitle = chkTitle.Checked;
+        }
+
+        private void txtTitle_TextChanged(object sender, EventArgs e)
+        {
+            // we dont save this
+        }
+
+        private void chkWebLink_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.conf.bWebLink = chkWebLink.Checked;
+        }
+
+        private void txtWebLink_TextChanged(object sender, EventArgs e)
+        {
+            // we dont save this
+        }
+
+        private void cboTemplate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Program.conf.TemplateIndex = cboTemplate.SelectedIndex;
+        }
+
+        private void chkUploadFullScreenshot_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.conf.UseFullPicture = chkUploadFullScreenshot.Checked;
+        }
+
+        private void chkAlignCenter_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.conf.AlignCenter = chkAlignCenter.Checked;
+        }
+
+        private void chkPre_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.conf.PreText = chkPre.Checked;
+        }
+
+        private void chkPreIncreaseFontSize_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.conf.LargerPreText = chkPreIncreaseFontSize.Checked;
+        }
+
+        private void nudFontSizeIncr_ValueChanged(object sender, EventArgs e)
+        {
+            Program.conf.FontSizeIncr = (int)nudFontSizeIncr.Value;
+        }
+
+        private void nudFontSizeHeading1_ValueChanged(object sender, EventArgs e)
+        {
+            Program.conf.FontSizeHeading1 = (int)nudHeading1Size.Value;
+        }
+
+        private void nudHeading2Size_ValueChanged(object sender, EventArgs e)
+        {
+            Program.conf.FontSizeHeading2 = (int)nudHeading2Size.Value;
+        }
+
+        private void nudHeading3Size_ValueChanged(object sender, EventArgs e)
+        {
+            Program.conf.FontSizeHeading3 = (int)nudHeading3Size.Value;
+        }
+
+        private void nudBodyText_ValueChanged(object sender, EventArgs e)
+        {
+            Program.conf.FontSizeBody = (int)nudBodySize.Value;
+        }
     }
 }

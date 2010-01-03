@@ -23,16 +23,34 @@ namespace TDMakerLib
         {
             ApplyDefaultValues(this);
 
-            MTNArgs.AddRange(new string[] { "-P -w 0 -c 1 -r 3 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97", 
+            if (MTNArgs.Count == 0)
+            {
+                MTNArgs.AddRange(new string[] { "-P -w 0 -c 1 -r 3 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97", 
                                             "-P -N _s.txt -w 0 -c 1 -r 3 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97", 
                                             "-P -N _s.txt -w1024 -c3 -r4 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97", 
                                             "-w 0 -c 1 -r 3 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97", 
                                           });
-            Sources.AddRange(new string[] { "DVD-5", "DVD-9", "HDTV", "SDTV", "Blu-ray Disc", "HD DVD", "Laser Disc", "VHS" });
-            Extras.AddRange(new string[] { "Intact", "Shrunk", "Removed", "None on Source" });
-            SourceEdits.AddRange(new string[] { "Untouched", "Shrunk" });
-            DiscMenus.AddRange(new string[] { "Intact", "Removed", "Shrunk" });
-            MTNFonts.AddRange(new string[] { "arial.ttf", "tahomabd.ttf" });
+            }
+            if (Sources.Count == 0)
+            {
+                Sources.AddRange(new string[] { "DVD-5", "DVD-9", "HDTV", "SDTV", "Blu-ray Disc", "HD DVD", "Laser Disc", "VHS" });
+            }
+            if (Extras.Count == 0)
+            {
+                Extras.AddRange(new string[] { "Intact", "Shrunk", "Removed", "None on Source" });
+            }
+            if (AuthoringModes.Count == 0)
+            {
+                AuthoringModes.AddRange(new string[] { "Untouched", "Shrunk" });
+            }
+            if (DiscMenus.Count == 0)
+            {
+                DiscMenus.AddRange(new string[] { "Intact", "Removed", "Shrunk" });
+            }
+            if (MTNFonts.Count == 0)
+            {
+                MTNFonts.AddRange(new string[] { "arial.ttf", "tahomabd.ttf" });
+            }
         }
 
         // Misc
@@ -42,25 +60,37 @@ namespace TDMakerLib
         public bool UpgradeSettings { get; set; }
 
         // Tab 1 - Input
-        [BrowsableAttribute(false)]
-        public bool bDiscMenu { get; set; }
-        [BrowsableAttribute(false)]
-        public bool bExtras { get; set; }
+
+        // Disc Properties
         [BrowsableAttribute(false)]
         public bool bBrowseDir { get; set; }
-        [Category("Source"), DefaultValue(true), Description("Show Source Type in Torrent Description")]
-        public bool bShowSource { get; set; }
-        [Category("Source"), DefaultValue(true), Description("Show Media Title in Torrent Description")]
-        public bool ShowTitle { get; set; }
-        [Category("Source"), DefaultValue(false), Description("Show Video Edits in Torrent Description")]
-        public bool bTitle { get; set; }
-        public bool bSource { get; set; }
-        public bool bVideoEdits { get; set; }
 
-        [Category("Source"), DefaultValue("DVD-9"), Description("Source Type")]
-        public string Source { get; set; }
-        [Category("Source"), DefaultValue("Untouched"), Description("Authoring")]
-        public string Authoring { get; set; }
+        [BrowsableAttribute(false)]
+        public bool bAuthoring { get; set; }
+        public string AuthoringMode = "Untouched";
+        public StringCollection AuthoringModes = new StringCollection();
+
+        [BrowsableAttribute(false)]
+        public bool bDiscMenu { get; set; }
+        public string DiscMenu = "Intact";
+        public StringCollection DiscMenus = new StringCollection();
+
+        [BrowsableAttribute(false)]
+        public bool bExtras { get; set; }
+        public string Extra = "Intact";
+        public StringCollection Extras = new StringCollection();
+
+        // Source Properties
+        [BrowsableAttribute(false)]
+        public bool bSource { get; set; }
+        [BrowsableAttribute(false)]
+        public string Source = "DVD-9";
+        public StringCollection Sources = new StringCollection();
+
+        [BrowsableAttribute(false)]
+        public bool bTitle { get; set; }
+        [BrowsableAttribute(false)]
+        public bool bWebLink { get; set; }
 
         // Tab 2 - Media Info
         /*
@@ -78,8 +108,11 @@ namespace TDMakerLib
         public bool KeepScreenshot { get; set; }
 
         // Tab 3 - Publish - Options
+        [Category("Publish / Config"), DefaultValue(false), Description("Setting true will center align the description")]
         public bool AlignCenter { get; set; }
+        [Category("Publish / Config"), DefaultValue(false), Description("Setting true will retain the formatting on some message boards")]
         public bool PreText { get; set; }
+        [Category("Publish / Config"), DefaultValue(true), Description("Setting true will use Templates to generate the description")]
         public bool TemplatesMode { get; set; }
 
         // Tab 4.0 - Options - General
@@ -89,46 +122,51 @@ namespace TDMakerLib
         public bool UpdateCheckAuto { get; set; }
 
         // Tab 4.1 - Options - Publish Templates
-        [Category("Text Formatting"), DefaultValue(true), Description("Font Size for Heading 2")]
+        [Category("Options / Publish"), DefaultValue(false), Description("Create Torrent")]
+        public bool WritePublish { get; set; }
+        [Category("Options / Publish"), DefaultValue(true), Description("Font Size for Heading 2")]
         public bool LargerPreText { get; set; }
-        [Category("Text Formatting / Font Sizes"), DefaultValue(4), Description("Font Size for Heading 2")]
+        [Category("Options / Publish / Font Sizes"), DefaultValue(5), Description("Font Size for Heading 1")]
+        public int FontSizeHeading1 { get; set; }
+        [Category("Options / Publish / Font Sizes"), DefaultValue(4), Description("Font Size for Heading 2")]
         public int FontSizeHeading2 { get; set; }
-        [Category("Text Formatting / Font Sizes"), DefaultValue(2), Description("Font Size for Body")]
+        [Category("Options / Publish / Font Sizes"), DefaultValue(3), Description("Font Size for Heading 3")]
+        public int FontSizeHeading3 { get; set; }
+        [Category("Options / Publish / Font Sizes"), DefaultValue(2), Description("Font Size for Body")]
         public int FontSizeBody { get; set; }
-        [Category("Text Formatting / Font Sizes"), DefaultValue(1), Description("Font Size increment")]
+        [Category("Options / Publish / Font Sizes"), DefaultValue(1), Description("Font Size increment")]
         public int FontSizeIncr { get; set; }
-        public decimal FontSizeHeading1 { get; set; }
-        public decimal FontSizeHeading3 { get; set; }
+        [Browsable(false)]
+        public int TemplateIndex { get; set; }
 
         // Tab 4.2 - Options - MTN
+        public StringCollection MTNArgs = new StringCollection();
+        public StringCollection MTNFonts = new StringCollection();
+        public XMLSettingsScreenshot ScreenshotSettings = new XMLSettingsScreenshot();
+        [Category("MTN"), DefaultValue(false), Description("Show MTN during file creation")]
+        public bool ShowMTNWindow { get; set; }
         [EditorAttribute(typeof(ExeFileNameEditor), typeof(UITypeEditor))]
         [Category("MTN"), DefaultValue("mtn.exe"), Description("MTN Argument")]
         public string MTNPath { get; set; }
         [Category("MTN"), DefaultValue("-P -w 0 -c 1 -r 3 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97"), Description("MTN Argument")]
         public string MTNArg { get; set; }
-
-        // Tab 4.3 - Options - Torrent Creator
-        [Category("Source"), DefaultValue(false), Description("Create Torrent")]
-        public bool TorrentCreateAuto { get; set; }
+        public ImageDestType ImageUploader = ImageDestType.IMAGESHACK ;
+        [Category("MTN / Image Uploaders"), DefaultValue(""), Description("ImageShack registration code")]
+        public string ImageShackRegCode { get; set; }
+        [Category("MTN / Image Uploaders"), DefaultValue(false), Description("Randomize ImageShack file name")]
         public bool ImageShakeRandomizeFileName { get; set; }
 
-        [Category("MTN"), DefaultValue(false), Description("Show MTN during file creation")]
-        public bool ShowMTNWindow { get; set; }
-
-
+        // Tab 4.3 - Options - Torrent Creator
+        [Browsable(false)]
+        public int AnnounceURLIndex { get; set; }
+        [Category("Torrent Creator"), DefaultValue(false), Description("Create Torrent")]
+        public bool TorrentCreateAuto { get; set; }
+        [Category("Torrent Creator"), DefaultValue(false), Description("Create torrents in the same folders as the media file")]
         public bool TorrentFolderDefault { get; set; }
+        [Category("Torrent Creator"), DefaultValue(false), Description("Save torrent files in sub-folders organized by tracker namer")]
         public bool TorrentsOrganize { get; set; }
 
-        public bool WebLink { get; set; }
-        public bool WritePublish { get; set; }
-
-        public int AnnounceURLIndex { get; set; }
-        public ImageDestType ImageUploader = ImageDestType.IMAGESHACK;
-        public int TemplateIndex { get; set; }
-        public string DiscMenu { get; set; }
-        public string ExtrasMode { get; set; }
-        public string ImageShackRegCode { get; set; }
-
+        // Tab 4.4 - Options - Paths
         [Category("Options / Paths"), Description("Browse to reconfigure the Settings folder path")]
         [EditorAttribute(typeof(FolderNameEditor), typeof(UITypeEditor))]
         public string SettingsDir { get; set; }
@@ -137,18 +175,6 @@ namespace TDMakerLib
         public string TemplatesDir { get; set; }
         [Category("Options / Paths"), Description("Browse to change where torrent files are saved")]
         public string TorrentsCustomDir { get; set; }
-
-        public StringCollection DiscMenus = new StringCollection();
-        public string Extra = "Intact";
-        public StringCollection Extras = new StringCollection();
-        public string SourceEdit = "Untouched";
-        public StringCollection SourceEdits = new StringCollection();
-        public StringCollection Sources = new StringCollection();
-
-        public StringCollection MTNArgs = new StringCollection();
-        public StringCollection MTNFonts = new StringCollection();
-
-        public XMLSettingsScreenshot ScreenshotSettings = new XMLSettingsScreenshot();
 
         [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
         public bool chk_g_Gap { get; set; }
@@ -190,8 +216,6 @@ namespace TDMakerLib
         public bool chk_w_Width { get; set; }
 
         #region I/O Methods
-
-        public string FilePath { get; set; }
 
         public void Write(string filePath)
         {

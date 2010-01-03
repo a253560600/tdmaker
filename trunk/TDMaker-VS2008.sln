@@ -11,6 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZSS.UpdateCheckerLib", "..\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{515B3AAB-EB9E-47A4-80AD-0AE6E2FF17FD}"
 	ProjectSection(SolutionItems) = preProject
+		Lib\DavuxLib.dll = Lib\DavuxLib.dll
+		Lib\Microsoft.WindowsAPICodePack.dll = Lib\Microsoft.WindowsAPICodePack.dll
+		Lib\Microsoft.WindowsAPICodePack.Shell.dll = Lib\Microsoft.WindowsAPICodePack.Shell.dll
 		Lib\MonoTorrent.dll = Lib\MonoTorrent.dll
 		Lib\taglib-sharp.dll = Lib\taglib-sharp.dll
 	EndProjectSection

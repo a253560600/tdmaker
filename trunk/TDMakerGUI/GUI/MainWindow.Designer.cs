@@ -32,15 +32,15 @@ namespace TDMaker
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbScreenshotFull = new System.Windows.Forms.GroupBox();
             this.lbScreenshots = new System.Windows.Forms.ListBox();
-            this.pbScreenshot = new System.Windows.Forms.PictureBox();
             this.txtScrFull = new System.Windows.Forms.LinkLabel();
             this.label4 = new System.Windows.Forms.Label();
             this.btnCopy0 = new System.Windows.Forms.Button();
+            this.pbScreenshot = new System.Windows.Forms.PictureBox();
             this.gbScreenshotForums = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnCopy2 = new System.Windows.Forms.Button();
@@ -71,7 +71,7 @@ namespace TDMaker
             this.cboExtras = new System.Windows.Forms.ComboBox();
             this.chkExtras = new System.Windows.Forms.CheckBox();
             this.cboAuthoring = new System.Windows.Forms.ComboBox();
-            this.chkSourceEdit = new System.Windows.Forms.CheckBox();
+            this.chkAuthoring = new System.Windows.Forms.CheckBox();
             this.gbLocation = new System.Windows.Forms.GroupBox();
             this.lbFiles = new System.Windows.Forms.ListBox();
             this.rbDir = new System.Windows.Forms.RadioButton();
@@ -80,9 +80,12 @@ namespace TDMaker
             this.tpMainMediaInfo = new System.Windows.Forms.TabPage();
             this.txtMediaInfo = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.cboScreenshotDest = new System.Windows.Forms.ComboBox();
-            this.chkOptImageShack = new System.Windows.Forms.CheckBox();
+            this.tlpScreenshots = new System.Windows.Forms.TableLayoutPanel();
+            this.tlpScreenshots2 = new System.Windows.Forms.TableLayoutPanel();
+            this.flpScreenshots1 = new System.Windows.Forms.FlowLayoutPanel();
             this.chkScreenshot = new System.Windows.Forms.CheckBox();
+            this.chkScreenshotUpload = new System.Windows.Forms.CheckBox();
+            this.cboScreenshotDest = new System.Windows.Forms.ComboBox();
             this.tpMainPublish = new System.Windows.Forms.TabPage();
             this.tlpPublish = new System.Windows.Forms.TableLayoutPanel();
             this.gbQuickPublish = new System.Windows.Forms.GroupBox();
@@ -104,13 +107,13 @@ namespace TDMaker
             this.chkPreIncreaseFontSize = new System.Windows.Forms.CheckBox();
             this.chkAlignCenter = new System.Windows.Forms.CheckBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.nudFontSizeHeading1 = new System.Windows.Forms.NumericUpDown();
+            this.nudHeading1Size = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.nudHeading2Size = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.nudHeading3Size = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
-            this.nudBodyText = new System.Windows.Forms.NumericUpDown();
+            this.nudBodySize = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.chkUploadFullScreenshot = new System.Windows.Forms.CheckBox();
             this.chkTemplatesMode = new System.Windows.Forms.CheckBox();
@@ -181,8 +184,12 @@ namespace TDMaker
             this.rbTorrentDefaultFolder = new System.Windows.Forms.RadioButton();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.dgvTrackers = new System.Windows.Forms.DataGridView();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAnnounceURL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGroup = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cboAnnounceURL = new System.Windows.Forms.ComboBox();
             this.chkCreateTorrent = new System.Windows.Forms.CheckBox();
+            this.tpAdvanced = new System.Windows.Forms.TabPage();
             this.pgApp = new System.Windows.Forms.PropertyGrid();
             this.tmrStatus = new System.Windows.Forms.Timer(this.components);
             this.btnPublish = new System.Windows.Forms.Button();
@@ -225,13 +232,6 @@ namespace TDMaker
             this.miHelpCheckUpdates = new System.Windows.Forms.ToolStripMenuItem();
             this.miHelpVersionHistory = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tlpScreenshots = new System.Windows.Forms.TableLayoutPanel();
-            this.flpScreenshots1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.tlpScreenshots2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tpAdvanced = new System.Windows.Forms.TabPage();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAnnounceURL = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colGroup = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbScreenshotFull.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbScreenshot)).BeginInit();
             this.gbScreenshotForums.SuspendLayout();
@@ -244,6 +244,9 @@ namespace TDMaker
             this.gbLocation.SuspendLayout();
             this.tpMainMediaInfo.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tlpScreenshots.SuspendLayout();
+            this.tlpScreenshots2.SuspendLayout();
+            this.flpScreenshots1.SuspendLayout();
             this.tpMainPublish.SuspendLayout();
             this.tlpPublish.SuspendLayout();
             this.gbQuickPublish.SuspendLayout();
@@ -253,10 +256,10 @@ namespace TDMaker
             this.gbTemplatesInternal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeIncr)).BeginInit();
             this.groupBox6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeHeading1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHeading1Size)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeading2Size)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeading3Size)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBodyText)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBodySize)).BeginInit();
             this.tpScreenshots.SuspendLayout();
             this.tcHosting.SuspendLayout();
             this.tpUsage.SuspendLayout();
@@ -279,13 +282,10 @@ namespace TDMaker
             this.groupBox8.SuspendLayout();
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTrackers)).BeginInit();
+            this.tpAdvanced.SuspendLayout();
             this.cmsApp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.menuStrip1.SuspendLayout();
-            this.tlpScreenshots.SuspendLayout();
-            this.flpScreenshots1.SuspendLayout();
-            this.tlpScreenshots2.SuspendLayout();
-            this.tpAdvanced.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbScreenshotFull
@@ -313,18 +313,6 @@ namespace TDMaker
             this.lbScreenshots.TabIndex = 8;
             this.lbScreenshots.SelectedIndexChanged += new System.EventHandler(this.lbScreenshots_SelectedIndexChanged);
             this.lbScreenshots.DoubleClick += new System.EventHandler(this.lbScreenshots_DoubleClick);
-            // 
-            // pbScreenshot
-            // 
-            this.pbScreenshot.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbScreenshot.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbScreenshot.Location = new System.Drawing.Point(640, 3);
-            this.pbScreenshot.Name = "pbScreenshot";
-            this.pbScreenshot.Size = new System.Drawing.Size(107, 433);
-            this.pbScreenshot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbScreenshot.TabIndex = 12;
-            this.pbScreenshot.TabStop = false;
-            this.pbScreenshot.Click += new System.EventHandler(this.pbScreenshot_Click);
             // 
             // txtScrFull
             // 
@@ -358,6 +346,18 @@ namespace TDMaker
             this.btnCopy0.Text = "&Copy to Clipboard";
             this.btnCopy0.UseVisualStyleBackColor = true;
             this.btnCopy0.Click += new System.EventHandler(this.btnCopy0_Click);
+            // 
+            // pbScreenshot
+            // 
+            this.pbScreenshot.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbScreenshot.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbScreenshot.Location = new System.Drawing.Point(640, 3);
+            this.pbScreenshot.Name = "pbScreenshot";
+            this.pbScreenshot.Size = new System.Drawing.Size(107, 433);
+            this.pbScreenshot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbScreenshot.TabIndex = 12;
+            this.pbScreenshot.TabStop = false;
+            this.pbScreenshot.Click += new System.EventHandler(this.pbScreenshot_Click);
             // 
             // gbScreenshotForums
             // 
@@ -565,6 +565,7 @@ namespace TDMaker
             this.chkTitle.TabIndex = 14;
             this.chkTitle.Text = "&Title:";
             this.chkTitle.UseVisualStyleBackColor = true;
+            this.chkTitle.CheckedChanged += new System.EventHandler(this.chkTitle_CheckedChanged);
             // 
             // txtTitle
             // 
@@ -574,6 +575,7 @@ namespace TDMaker
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(304, 20);
             this.txtTitle.TabIndex = 15;
+            this.txtTitle.TextChanged += new System.EventHandler(this.txtTitle_TextChanged);
             // 
             // chkWebLink
             // 
@@ -585,6 +587,7 @@ namespace TDMaker
             this.chkWebLink.TabIndex = 9;
             this.chkWebLink.Text = "&Web Link:";
             this.chkWebLink.UseVisualStyleBackColor = true;
+            this.chkWebLink.CheckedChanged += new System.EventHandler(this.chkWebLink_CheckedChanged);
             // 
             // chkSource
             // 
@@ -597,6 +600,7 @@ namespace TDMaker
             this.chkSource.TabIndex = 13;
             this.chkSource.Text = "&Source";
             this.chkSource.UseVisualStyleBackColor = true;
+            this.chkSource.CheckedChanged += new System.EventHandler(this.chkSource_CheckedChanged);
             // 
             // txtWebLink
             // 
@@ -606,6 +610,7 @@ namespace TDMaker
             this.txtWebLink.Name = "txtWebLink";
             this.txtWebLink.Size = new System.Drawing.Size(304, 20);
             this.txtWebLink.TabIndex = 10;
+            this.txtWebLink.TextChanged += new System.EventHandler(this.txtWebLink_TextChanged);
             // 
             // cboSource
             // 
@@ -614,6 +619,7 @@ namespace TDMaker
             this.cboSource.Name = "cboSource";
             this.cboSource.Size = new System.Drawing.Size(121, 21);
             this.cboSource.TabIndex = 0;
+            this.cboSource.SelectedIndexChanged += new System.EventHandler(this.cboSource_SelectedIndexChanged);
             // 
             // gbDVD
             // 
@@ -622,7 +628,7 @@ namespace TDMaker
             this.gbDVD.Controls.Add(this.cboExtras);
             this.gbDVD.Controls.Add(this.chkExtras);
             this.gbDVD.Controls.Add(this.cboAuthoring);
-            this.gbDVD.Controls.Add(this.chkSourceEdit);
+            this.gbDVD.Controls.Add(this.chkAuthoring);
             this.gbDVD.Location = new System.Drawing.Point(12, 178);
             this.gbDVD.Name = "gbDVD";
             this.gbDVD.Size = new System.Drawing.Size(269, 133);
@@ -637,6 +643,7 @@ namespace TDMaker
             this.cboDiscMenu.Name = "cboDiscMenu";
             this.cboDiscMenu.Size = new System.Drawing.Size(121, 21);
             this.cboDiscMenu.TabIndex = 18;
+            this.cboDiscMenu.SelectedIndexChanged += new System.EventHandler(this.cboDiscMenu_SelectedIndexChanged);
             // 
             // chkDiscMenu
             // 
@@ -649,6 +656,7 @@ namespace TDMaker
             this.chkDiscMenu.TabIndex = 17;
             this.chkDiscMenu.Text = "Menu:";
             this.chkDiscMenu.UseVisualStyleBackColor = true;
+            this.chkDiscMenu.CheckedChanged += new System.EventHandler(this.chkDiscMenu_CheckedChanged);
             // 
             // cboExtras
             // 
@@ -657,6 +665,7 @@ namespace TDMaker
             this.cboExtras.Name = "cboExtras";
             this.cboExtras.Size = new System.Drawing.Size(121, 21);
             this.cboExtras.TabIndex = 16;
+            this.cboExtras.SelectedIndexChanged += new System.EventHandler(this.cboExtras_SelectedIndexChanged);
             // 
             // chkExtras
             // 
@@ -669,6 +678,7 @@ namespace TDMaker
             this.chkExtras.TabIndex = 15;
             this.chkExtras.Text = "E&xtras:";
             this.chkExtras.UseVisualStyleBackColor = true;
+            this.chkExtras.CheckedChanged += new System.EventHandler(this.chkExtras_CheckedChanged);
             // 
             // cboAuthoring
             // 
@@ -677,18 +687,20 @@ namespace TDMaker
             this.cboAuthoring.Name = "cboAuthoring";
             this.cboAuthoring.Size = new System.Drawing.Size(121, 21);
             this.cboAuthoring.TabIndex = 14;
+            this.cboAuthoring.SelectedIndexChanged += new System.EventHandler(this.cboAuthoring_SelectedIndexChanged);
             // 
-            // chkSourceEdit
+            // chkAuthoring
             // 
-            this.chkSourceEdit.AutoSize = true;
-            this.chkSourceEdit.Checked = true;
-            this.chkSourceEdit.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkSourceEdit.Location = new System.Drawing.Point(26, 32);
-            this.chkSourceEdit.Name = "chkSourceEdit";
-            this.chkSourceEdit.Size = new System.Drawing.Size(74, 17);
-            this.chkSourceEdit.TabIndex = 13;
-            this.chkSourceEdit.Text = "Authoring:";
-            this.chkSourceEdit.UseVisualStyleBackColor = true;
+            this.chkAuthoring.AutoSize = true;
+            this.chkAuthoring.Checked = true;
+            this.chkAuthoring.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAuthoring.Location = new System.Drawing.Point(26, 32);
+            this.chkAuthoring.Name = "chkAuthoring";
+            this.chkAuthoring.Size = new System.Drawing.Size(74, 17);
+            this.chkAuthoring.TabIndex = 13;
+            this.chkAuthoring.Text = "Authoring:";
+            this.chkAuthoring.UseVisualStyleBackColor = true;
+            this.chkAuthoring.CheckedChanged += new System.EventHandler(this.chkSourceEdit_CheckedChanged);
             // 
             // gbLocation
             // 
@@ -788,28 +800,48 @@ namespace TDMaker
             this.tabPage2.Text = "Screenshots";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // cboScreenshotDest
+            // tlpScreenshots
             // 
-            this.cboScreenshotDest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboScreenshotDest.FormattingEnabled = true;
-            this.cboScreenshotDest.Location = new System.Drawing.Point(258, 3);
-            this.cboScreenshotDest.Name = "cboScreenshotDest";
-            this.cboScreenshotDest.Size = new System.Drawing.Size(196, 21);
-            this.cboScreenshotDest.TabIndex = 2;
-            this.cboScreenshotDest.SelectedIndexChanged += new System.EventHandler(this.cboScreenshotDest_SelectedIndexChanged);
+            this.tlpScreenshots.ColumnCount = 2;
+            this.tlpScreenshots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85F));
+            this.tlpScreenshots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tlpScreenshots.Controls.Add(this.tlpScreenshots2, 0, 0);
+            this.tlpScreenshots.Controls.Add(this.pbScreenshot, 1, 0);
+            this.tlpScreenshots.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpScreenshots.Location = new System.Drawing.Point(3, 3);
+            this.tlpScreenshots.Name = "tlpScreenshots";
+            this.tlpScreenshots.RowCount = 1;
+            this.tlpScreenshots.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpScreenshots.Size = new System.Drawing.Size(750, 439);
+            this.tlpScreenshots.TabIndex = 12;
             // 
-            // chkOptImageShack
+            // tlpScreenshots2
             // 
-            this.chkOptImageShack.AutoSize = true;
-            this.chkOptImageShack.Checked = true;
-            this.chkOptImageShack.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkOptImageShack.Location = new System.Drawing.Point(123, 3);
-            this.chkOptImageShack.Name = "chkOptImageShack";
-            this.chkOptImageShack.Size = new System.Drawing.Size(129, 17);
-            this.chkOptImageShack.TabIndex = 0;
-            this.chkOptImageShack.Text = "Upload Screenshot to";
-            this.chkOptImageShack.UseVisualStyleBackColor = true;
-            this.chkOptImageShack.CheckedChanged += new System.EventHandler(this.chkOptImageShack_CheckedChanged);
+            this.tlpScreenshots2.ColumnCount = 1;
+            this.tlpScreenshots2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpScreenshots2.Controls.Add(this.flpScreenshots1, 0, 0);
+            this.tlpScreenshots2.Controls.Add(this.gbScreenshotForums, 0, 2);
+            this.tlpScreenshots2.Controls.Add(this.gbScreenshotFull, 0, 1);
+            this.tlpScreenshots2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpScreenshots2.Location = new System.Drawing.Point(3, 3);
+            this.tlpScreenshots2.Name = "tlpScreenshots2";
+            this.tlpScreenshots2.RowCount = 3;
+            this.tlpScreenshots2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.tlpScreenshots2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpScreenshots2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpScreenshots2.Size = new System.Drawing.Size(631, 433);
+            this.tlpScreenshots2.TabIndex = 0;
+            // 
+            // flpScreenshots1
+            // 
+            this.flpScreenshots1.Controls.Add(this.chkScreenshot);
+            this.flpScreenshots1.Controls.Add(this.chkScreenshotUpload);
+            this.flpScreenshots1.Controls.Add(this.cboScreenshotDest);
+            this.flpScreenshots1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flpScreenshots1.Location = new System.Drawing.Point(3, 3);
+            this.flpScreenshots1.Name = "flpScreenshots1";
+            this.flpScreenshots1.Size = new System.Drawing.Size(625, 26);
+            this.flpScreenshots1.TabIndex = 0;
             // 
             // chkScreenshot
             // 
@@ -823,6 +855,29 @@ namespace TDMaker
             this.chkScreenshot.Text = "&Create Screenshot";
             this.chkScreenshot.UseVisualStyleBackColor = true;
             this.chkScreenshot.CheckedChanged += new System.EventHandler(this.chkScreenshot_CheckedChanged);
+            // 
+            // chkScreenshotUpload
+            // 
+            this.chkScreenshotUpload.AutoSize = true;
+            this.chkScreenshotUpload.Checked = true;
+            this.chkScreenshotUpload.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkScreenshotUpload.Location = new System.Drawing.Point(123, 3);
+            this.chkScreenshotUpload.Name = "chkScreenshotUpload";
+            this.chkScreenshotUpload.Size = new System.Drawing.Size(129, 17);
+            this.chkScreenshotUpload.TabIndex = 0;
+            this.chkScreenshotUpload.Text = "Upload Screenshot to";
+            this.chkScreenshotUpload.UseVisualStyleBackColor = true;
+            this.chkScreenshotUpload.CheckedChanged += new System.EventHandler(this.chkScreenshotUpload_CheckedChanged);
+            // 
+            // cboScreenshotDest
+            // 
+            this.cboScreenshotDest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboScreenshotDest.FormattingEnabled = true;
+            this.cboScreenshotDest.Location = new System.Drawing.Point(258, 3);
+            this.cboScreenshotDest.Name = "cboScreenshotDest";
+            this.cboScreenshotDest.Size = new System.Drawing.Size(196, 21);
+            this.cboScreenshotDest.TabIndex = 2;
+            this.cboScreenshotDest.SelectedIndexChanged += new System.EventHandler(this.cboScreenshotDest_SelectedIndexChanged);
             // 
             // tpMainPublish
             // 
@@ -1006,6 +1061,7 @@ namespace TDMaker
             this.cboTemplate.Name = "cboTemplate";
             this.cboTemplate.Size = new System.Drawing.Size(195, 21);
             this.cboTemplate.TabIndex = 9;
+            this.cboTemplate.SelectedIndexChanged += new System.EventHandler(this.cboTemplate_SelectedIndexChanged);
             // 
             // gbTemplatesInternal
             // 
@@ -1036,6 +1092,7 @@ namespace TDMaker
             0,
             0,
             0});
+            this.nudFontSizeIncr.ValueChanged += new System.EventHandler(this.nudFontSizeIncr_ValueChanged);
             // 
             // chkPre
             // 
@@ -1046,6 +1103,7 @@ namespace TDMaker
             this.chkPre.TabIndex = 1;
             this.chkPre.Text = "Use Preformatted Text";
             this.chkPre.UseVisualStyleBackColor = true;
+            this.chkPre.CheckedChanged += new System.EventHandler(this.chkPre_CheckedChanged);
             // 
             // chkPreIncreaseFontSize
             // 
@@ -1058,6 +1116,7 @@ namespace TDMaker
             this.chkPreIncreaseFontSize.TabIndex = 8;
             this.chkPreIncreaseFontSize.Text = "and increase Font Size by";
             this.chkPreIncreaseFontSize.UseVisualStyleBackColor = true;
+            this.chkPreIncreaseFontSize.CheckedChanged += new System.EventHandler(this.chkPreIncreaseFontSize_CheckedChanged);
             // 
             // chkAlignCenter
             // 
@@ -1068,16 +1127,17 @@ namespace TDMaker
             this.chkAlignCenter.TabIndex = 0;
             this.chkAlignCenter.Text = "Align &Center";
             this.chkAlignCenter.UseVisualStyleBackColor = true;
+            this.chkAlignCenter.CheckedChanged += new System.EventHandler(this.chkAlignCenter_CheckedChanged);
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.nudFontSizeHeading1);
+            this.groupBox6.Controls.Add(this.nudHeading1Size);
             this.groupBox6.Controls.Add(this.label9);
             this.groupBox6.Controls.Add(this.nudHeading2Size);
             this.groupBox6.Controls.Add(this.label8);
             this.groupBox6.Controls.Add(this.nudHeading3Size);
             this.groupBox6.Controls.Add(this.label7);
-            this.groupBox6.Controls.Add(this.nudBodyText);
+            this.groupBox6.Controls.Add(this.nudBodySize);
             this.groupBox6.Controls.Add(this.label3);
             this.groupBox6.Location = new System.Drawing.Point(455, 72);
             this.groupBox6.Name = "groupBox6";
@@ -1086,22 +1146,23 @@ namespace TDMaker
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Font Size";
             // 
-            // nudFontSizeHeading1
+            // nudHeading1Size
             // 
-            this.nudFontSizeHeading1.Location = new System.Drawing.Point(106, 30);
-            this.nudFontSizeHeading1.Minimum = new decimal(new int[] {
+            this.nudHeading1Size.Location = new System.Drawing.Point(106, 30);
+            this.nudHeading1Size.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.nudFontSizeHeading1.Name = "nudFontSizeHeading1";
-            this.nudFontSizeHeading1.Size = new System.Drawing.Size(55, 20);
-            this.nudFontSizeHeading1.TabIndex = 10;
-            this.nudFontSizeHeading1.Value = new decimal(new int[] {
+            this.nudHeading1Size.Name = "nudHeading1Size";
+            this.nudHeading1Size.Size = new System.Drawing.Size(55, 20);
+            this.nudHeading1Size.TabIndex = 10;
+            this.nudHeading1Size.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
+            this.nudHeading1Size.ValueChanged += new System.EventHandler(this.nudFontSizeHeading1_ValueChanged);
             // 
             // label9
             // 
@@ -1128,6 +1189,7 @@ namespace TDMaker
             0,
             0,
             0});
+            this.nudHeading2Size.ValueChanged += new System.EventHandler(this.nudHeading2Size_ValueChanged);
             // 
             // label8
             // 
@@ -1154,6 +1216,7 @@ namespace TDMaker
             0,
             0,
             0});
+            this.nudHeading3Size.ValueChanged += new System.EventHandler(this.nudHeading3Size_ValueChanged);
             // 
             // label7
             // 
@@ -1164,22 +1227,23 @@ namespace TDMaker
             this.label7.TabIndex = 6;
             this.label7.Text = "Body";
             // 
-            // nudBodyText
+            // nudBodySize
             // 
-            this.nudBodyText.Location = new System.Drawing.Point(106, 105);
-            this.nudBodyText.Minimum = new decimal(new int[] {
+            this.nudBodySize.Location = new System.Drawing.Point(106, 105);
+            this.nudBodySize.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.nudBodyText.Name = "nudBodyText";
-            this.nudBodyText.Size = new System.Drawing.Size(55, 20);
-            this.nudBodyText.TabIndex = 5;
-            this.nudBodyText.Value = new decimal(new int[] {
+            this.nudBodySize.Name = "nudBodySize";
+            this.nudBodySize.Size = new System.Drawing.Size(55, 20);
+            this.nudBodySize.TabIndex = 5;
+            this.nudBodySize.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
+            this.nudBodySize.ValueChanged += new System.EventHandler(this.nudBodyText_ValueChanged);
             // 
             // label3
             // 
@@ -1201,6 +1265,7 @@ namespace TDMaker
             this.chkUploadFullScreenshot.TabIndex = 1;
             this.chkUploadFullScreenshot.Text = "Use &Full Image instead of Thumbnail ";
             this.chkUploadFullScreenshot.UseVisualStyleBackColor = true;
+            this.chkUploadFullScreenshot.CheckedChanged += new System.EventHandler(this.chkUploadFullScreenshot_CheckedChanged);
             // 
             // chkTemplatesMode
             // 
@@ -2015,40 +2080,60 @@ namespace TDMaker
             // 
             this.dgvTrackers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTrackers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTrackers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvTrackers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTrackers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colName,
             this.colAnnounceURL,
             this.colGroup});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvTrackers.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvTrackers.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvTrackers.Location = new System.Drawing.Point(6, 19);
             this.dgvTrackers.Name = "dgvTrackers";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTrackers.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTrackers.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvTrackers.Size = new System.Drawing.Size(697, 148);
             this.dgvTrackers.TabIndex = 1;
             this.dgvTrackers.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvTrackers_CellValidating);
+            // 
+            // colName
+            // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colName.HeaderText = "Tracker Name";
+            this.colName.Name = "colName";
+            this.colName.Width = 90;
+            // 
+            // colAnnounceURL
+            // 
+            this.colAnnounceURL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colAnnounceURL.HeaderText = "Announce URL";
+            this.colAnnounceURL.Name = "colAnnounceURL";
+            // 
+            // colGroup
+            // 
+            this.colGroup.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colGroup.HeaderText = "Group Name";
+            this.colGroup.Name = "colGroup";
+            this.colGroup.Width = 83;
             // 
             // cboAnnounceURL
             // 
@@ -2073,6 +2158,17 @@ namespace TDMaker
             this.chkCreateTorrent.UseVisualStyleBackColor = true;
             this.chkCreateTorrent.CheckedChanged += new System.EventHandler(this.chkCreateTorrent_CheckedChanged);
             // 
+            // tpAdvanced
+            // 
+            this.tpAdvanced.Controls.Add(this.pgApp);
+            this.tpAdvanced.Location = new System.Drawing.Point(4, 22);
+            this.tpAdvanced.Name = "tpAdvanced";
+            this.tpAdvanced.Padding = new System.Windows.Forms.Padding(3);
+            this.tpAdvanced.Size = new System.Drawing.Size(748, 419);
+            this.tpAdvanced.TabIndex = 3;
+            this.tpAdvanced.Text = "Advanced";
+            this.tpAdvanced.UseVisualStyleBackColor = true;
+            // 
             // pgApp
             // 
             this.pgApp.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -2080,6 +2176,7 @@ namespace TDMaker
             this.pgApp.Name = "pgApp";
             this.pgApp.Size = new System.Drawing.Size(742, 413);
             this.pgApp.TabIndex = 0;
+            this.pgApp.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.pgApp_PropertyValueChanged);
             // 
             // tmrStatus
             // 
@@ -2419,80 +2516,6 @@ namespace TDMaker
             this.aboutToolStripMenuItem.Text = "&About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // tlpScreenshots
-            // 
-            this.tlpScreenshots.ColumnCount = 2;
-            this.tlpScreenshots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85F));
-            this.tlpScreenshots.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tlpScreenshots.Controls.Add(this.tlpScreenshots2, 0, 0);
-            this.tlpScreenshots.Controls.Add(this.pbScreenshot, 1, 0);
-            this.tlpScreenshots.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpScreenshots.Location = new System.Drawing.Point(3, 3);
-            this.tlpScreenshots.Name = "tlpScreenshots";
-            this.tlpScreenshots.RowCount = 1;
-            this.tlpScreenshots.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpScreenshots.Size = new System.Drawing.Size(750, 439);
-            this.tlpScreenshots.TabIndex = 12;
-            // 
-            // flpScreenshots1
-            // 
-            this.flpScreenshots1.Controls.Add(this.chkScreenshot);
-            this.flpScreenshots1.Controls.Add(this.chkOptImageShack);
-            this.flpScreenshots1.Controls.Add(this.cboScreenshotDest);
-            this.flpScreenshots1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flpScreenshots1.Location = new System.Drawing.Point(3, 3);
-            this.flpScreenshots1.Name = "flpScreenshots1";
-            this.flpScreenshots1.Size = new System.Drawing.Size(625, 26);
-            this.flpScreenshots1.TabIndex = 0;
-            // 
-            // tlpScreenshots2
-            // 
-            this.tlpScreenshots2.ColumnCount = 1;
-            this.tlpScreenshots2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpScreenshots2.Controls.Add(this.flpScreenshots1, 0, 0);
-            this.tlpScreenshots2.Controls.Add(this.gbScreenshotForums, 0, 2);
-            this.tlpScreenshots2.Controls.Add(this.gbScreenshotFull, 0, 1);
-            this.tlpScreenshots2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpScreenshots2.Location = new System.Drawing.Point(3, 3);
-            this.tlpScreenshots2.Name = "tlpScreenshots2";
-            this.tlpScreenshots2.RowCount = 3;
-            this.tlpScreenshots2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-            this.tlpScreenshots2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpScreenshots2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpScreenshots2.Size = new System.Drawing.Size(631, 433);
-            this.tlpScreenshots2.TabIndex = 0;
-            // 
-            // tpAdvanced
-            // 
-            this.tpAdvanced.Controls.Add(this.pgApp);
-            this.tpAdvanced.Location = new System.Drawing.Point(4, 22);
-            this.tpAdvanced.Name = "tpAdvanced";
-            this.tpAdvanced.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAdvanced.Size = new System.Drawing.Size(748, 419);
-            this.tpAdvanced.TabIndex = 3;
-            this.tpAdvanced.Text = "Advanced";
-            this.tpAdvanced.UseVisualStyleBackColor = true;
-            // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colName.HeaderText = "Tracker Name";
-            this.colName.Name = "colName";
-            this.colName.Width = 98;
-            // 
-            // colAnnounceURL
-            // 
-            this.colAnnounceURL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colAnnounceURL.HeaderText = "Announce URL";
-            this.colAnnounceURL.Name = "colAnnounceURL";
-            // 
-            // colGroup
-            // 
-            this.colGroup.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colGroup.HeaderText = "Group Name";
-            this.colGroup.Name = "colGroup";
-            this.colGroup.Width = 90;
-            // 
             // MainWindow
             // 
             this.AcceptButton = this.btnBrowse;
@@ -2537,6 +2560,10 @@ namespace TDMaker
             this.tpMainMediaInfo.ResumeLayout(false);
             this.tpMainMediaInfo.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.tlpScreenshots.ResumeLayout(false);
+            this.tlpScreenshots2.ResumeLayout(false);
+            this.flpScreenshots1.ResumeLayout(false);
+            this.flpScreenshots1.PerformLayout();
             this.tpMainPublish.ResumeLayout(false);
             this.tlpPublish.ResumeLayout(false);
             this.tlpPublish.PerformLayout();
@@ -2551,10 +2578,10 @@ namespace TDMaker
             ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeIncr)).EndInit();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeHeading1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHeading1Size)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeading2Size)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeading3Size)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBodyText)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBodySize)).EndInit();
             this.tpScreenshots.ResumeLayout(false);
             this.tcHosting.ResumeLayout(false);
             this.tpUsage.ResumeLayout(false);
@@ -2582,15 +2609,11 @@ namespace TDMaker
             this.groupBox8.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTrackers)).EndInit();
+            this.tpAdvanced.ResumeLayout(false);
             this.cmsApp.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.tlpScreenshots.ResumeLayout(false);
-            this.flpScreenshots1.ResumeLayout(false);
-            this.flpScreenshots1.PerformLayout();
-            this.tlpScreenshots2.ResumeLayout(false);
-            this.tpAdvanced.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2623,12 +2646,12 @@ namespace TDMaker
         private System.Windows.Forms.GroupBox gbLocation;
         private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.CheckBox chkOptImageShack;
+        private System.Windows.Forms.CheckBox chkScreenshotUpload;
         private System.Windows.Forms.CheckBox chkUploadFullScreenshot;
         private System.Windows.Forms.GroupBox gbTemplatesInternal;
         private System.Windows.Forms.CheckBox chkAlignCenter;
         private System.Windows.Forms.CheckBox chkPre;
-        private System.Windows.Forms.NumericUpDown nudBodyText;
+        private System.Windows.Forms.NumericUpDown nudBodySize;
         private System.Windows.Forms.NumericUpDown nudHeading3Size;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Label label7;
@@ -2665,13 +2688,13 @@ namespace TDMaker
         private System.Windows.Forms.TextBox txtPublish;
         private System.Windows.Forms.NumericUpDown nudHeading2Size;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.NumericUpDown nudFontSizeHeading1;
+        private System.Windows.Forms.NumericUpDown nudHeading1Size;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.GroupBox gbQuickPublish;
         private System.Windows.Forms.CheckBox chkQuickAlignCenter;
         private System.Windows.Forms.CheckBox chkQuickPre;
         private System.Windows.Forms.CheckBox chkQuickFullPicture;
-        private System.Windows.Forms.CheckBox chkSourceEdit;
+        private System.Windows.Forms.CheckBox chkAuthoring;
         private System.Windows.Forms.ComboBox cboAuthoring;
         private System.Windows.Forms.ComboBox cboExtras;
         private System.Windows.Forms.CheckBox chkExtras;
