@@ -116,9 +116,9 @@ namespace TDMaker
         	this.chkTemplatesMode = new System.Windows.Forms.CheckBox();
         	this.tpScreenshots = new System.Windows.Forms.TabPage();
         	this.tcHosting = new System.Windows.Forms.TabControl();
-        	this.tpUsage = new System.Windows.Forms.TabPage();
+        	this.tpUsage2 = new System.Windows.Forms.TabPage();
         	this.pgMtn = new System.Windows.Forms.PropertyGrid();
-        	this.tpMTNUsage = new System.Windows.Forms.TabPage();
+        	this.tpUsage1 = new System.Windows.Forms.TabPage();
         	this.pMTNUsage = new System.Windows.Forms.Panel();
         	this.nudMTN_B_OmitStart = new System.Windows.Forms.NumericUpDown();
         	this.chkMTN_B_OmitBegin = new System.Windows.Forms.CheckBox();
@@ -267,8 +267,8 @@ namespace TDMaker
         	((System.ComponentModel.ISupportInitialize)(this.nudBodySize)).BeginInit();
         	this.tpScreenshots.SuspendLayout();
         	this.tcHosting.SuspendLayout();
-        	this.tpUsage.SuspendLayout();
-        	this.tpMTNUsage.SuspendLayout();
+        	this.tpUsage2.SuspendLayout();
+        	this.tpUsage1.SuspendLayout();
         	this.pMTNUsage.SuspendLayout();
         	((System.ComponentModel.ISupportInitialize)(this.nudMTN_B_OmitStart)).BeginInit();
         	((System.ComponentModel.ISupportInitialize)(this.nudMTN_D_EdgeDetection)).BeginInit();
@@ -1300,8 +1300,8 @@ namespace TDMaker
         	// 
         	// tcHosting
         	// 
-        	this.tcHosting.Controls.Add(this.tpUsage);
-        	this.tcHosting.Controls.Add(this.tpMTNUsage);
+        	this.tcHosting.Controls.Add(this.tpUsage1);
+        	this.tcHosting.Controls.Add(this.tpUsage2);
         	this.tcHosting.Controls.Add(this.tpHostingImageShack);
         	this.tcHosting.Dock = System.Windows.Forms.DockStyle.Fill;
         	this.tcHosting.Location = new System.Drawing.Point(3, 3);
@@ -1310,16 +1310,16 @@ namespace TDMaker
         	this.tcHosting.Size = new System.Drawing.Size(842, 413);
         	this.tcHosting.TabIndex = 5;
         	// 
-        	// tpUsage
+        	// tpUsage2
         	// 
-        	this.tpUsage.Controls.Add(this.pgMtn);
-        	this.tpUsage.Location = new System.Drawing.Point(4, 22);
-        	this.tpUsage.Name = "tpUsage";
-        	this.tpUsage.Padding = new System.Windows.Forms.Padding(3);
-        	this.tpUsage.Size = new System.Drawing.Size(834, 387);
-        	this.tpUsage.TabIndex = 2;
-        	this.tpUsage.Text = "Usage";
-        	this.tpUsage.UseVisualStyleBackColor = true;
+        	this.tpUsage2.Controls.Add(this.pgMtn);
+        	this.tpUsage2.Location = new System.Drawing.Point(4, 22);
+        	this.tpUsage2.Name = "tpUsage2";
+        	this.tpUsage2.Padding = new System.Windows.Forms.Padding(3);
+        	this.tpUsage2.Size = new System.Drawing.Size(834, 387);
+        	this.tpUsage2.TabIndex = 2;
+        	this.tpUsage2.Text = "Usage (Advanced)";
+        	this.tpUsage2.UseVisualStyleBackColor = true;
         	// 
         	// pgMtn
         	// 
@@ -1329,16 +1329,16 @@ namespace TDMaker
         	this.pgMtn.Size = new System.Drawing.Size(828, 381);
         	this.pgMtn.TabIndex = 0;
         	// 
-        	// tpMTNUsage
+        	// tpUsage1
         	// 
-        	this.tpMTNUsage.Controls.Add(this.pMTNUsage);
-        	this.tpMTNUsage.Location = new System.Drawing.Point(4, 22);
-        	this.tpMTNUsage.Name = "tpMTNUsage";
-        	this.tpMTNUsage.Padding = new System.Windows.Forms.Padding(3);
-        	this.tpMTNUsage.Size = new System.Drawing.Size(834, 387);
-        	this.tpMTNUsage.TabIndex = 1;
-        	this.tpMTNUsage.Text = "Usage (Beta)";
-        	this.tpMTNUsage.UseVisualStyleBackColor = true;
+        	this.tpUsage1.Controls.Add(this.pMTNUsage);
+        	this.tpUsage1.Location = new System.Drawing.Point(4, 22);
+        	this.tpUsage1.Name = "tpUsage1";
+        	this.tpUsage1.Padding = new System.Windows.Forms.Padding(3);
+        	this.tpUsage1.Size = new System.Drawing.Size(834, 387);
+        	this.tpUsage1.TabIndex = 1;
+        	this.tpUsage1.Text = "Usage (Simple)";
+        	this.tpUsage1.UseVisualStyleBackColor = true;
         	// 
         	// pMTNUsage
         	// 
@@ -2671,8 +2671,8 @@ namespace TDMaker
         	((System.ComponentModel.ISupportInitialize)(this.nudBodySize)).EndInit();
         	this.tpScreenshots.ResumeLayout(false);
         	this.tcHosting.ResumeLayout(false);
-        	this.tpUsage.ResumeLayout(false);
-        	this.tpMTNUsage.ResumeLayout(false);
+        	this.tpUsage2.ResumeLayout(false);
+        	this.tpUsage1.ResumeLayout(false);
         	this.pMTNUsage.ResumeLayout(false);
         	this.pMTNUsage.PerformLayout();
         	((System.ComponentModel.ISupportInitialize)(this.nudMTN_B_OmitStart)).EndInit();
@@ -2708,6 +2708,8 @@ namespace TDMaker
         	this.ResumeLayout(false);
         	this.PerformLayout();
         }
+        private System.Windows.Forms.TabPage tpUsage2;
+        private System.Windows.Forms.TabPage tpUsage1;
 
         #endregion
 
@@ -2823,7 +2825,6 @@ namespace TDMaker
         private System.Windows.Forms.PictureBox pbLogo;
         private System.Windows.Forms.ComboBox cboMTN_f_FontType;
         private System.Windows.Forms.PictureBox pbScreenshot;
-        private System.Windows.Forms.TabPage tpMTNUsage;
         private System.Windows.Forms.Panel pMTNUsage;
         private System.Windows.Forms.CheckBox chkMTNColumns;
         private System.Windows.Forms.CheckBox chkMTN_f_Font;
@@ -2896,7 +2897,6 @@ namespace TDMaker
         private System.Windows.Forms.ToolStripMenuItem miFoldersLogsDebug;
         private System.Windows.Forms.ToolStripMenuItem miFoldersSettings;
         private System.Windows.Forms.ToolStripMenuItem miFoldersTemplates;
-        private System.Windows.Forms.TabPage tpUsage;
         private System.Windows.Forms.PropertyGrid pgMtn;
         private System.Windows.Forms.PropertyGrid pgApp;
         private System.Windows.Forms.TableLayoutPanel tlpPublish;
