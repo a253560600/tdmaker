@@ -14,6 +14,7 @@
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>
     </ApplicationIcon>
+    <SourceAnalysisOverrideSettingsFile>C:\Documents and Settings\e80655\Application Data\ICSharpCode/SharpDevelop3.0\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,8 +43,12 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML" />
+    <Reference Include="UploadersLib">
+      <HintPath>..\Lib\UploadersLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GUI\InputBox.cs" />
     <Compile Include="GUI\RunOnceWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,14 +105,6 @@
     <EmbeddedResource Include="VersionHistory.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\ZScreen\trunk\ZSS.UpdateChecker\ZSS.UpdateCheckerLib.csproj">
-      <Project>{091475E0-BF06-4D9D-9A4D-7E71BE08FB96}</Project>
-      <Name>ZSS.UpdateCheckerLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\ZScreen\trunk\ZSS.UploadersLib\ZSS.UploadersLib.csproj">
-      <Project>{E1C94415-3424-4517-A2A1-B2FDD1F59C67}</Project>
-      <Name>ZSS.UploadersLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TDMakerLib\TDMakerLib.csproj">
       <Project>{6023302C-5D3C-494A-B7D1-95A0BED8CA22}</Project>
       <Name>TDMakerLib</Name>

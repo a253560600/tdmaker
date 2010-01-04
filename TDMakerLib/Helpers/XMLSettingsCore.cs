@@ -150,7 +150,7 @@ namespace TDMakerLib
         public string MTNPath { get; set; }
         [Category("MTN"), DefaultValue("-P -w 0 -c 1 -r 3 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97"), Description("MTN Argument")]
         public string MTNArg { get; set; }
-        public ImageDestType ImageUploader = ImageDestType.IMAGESHACK ;
+        public ImageDestType2 ImageUploader = ImageDestType2.IMAGESHACK ;
         [Category("MTN / Image Uploaders"), DefaultValue(""), Description("ImageShack registration code")]
         public string ImageShackRegCode { get; set; }
         [Category("MTN / Image Uploaders"), DefaultValue(false), Description("Randomize ImageShack file name")]
@@ -178,7 +178,7 @@ namespace TDMakerLib
         public string TorrentsCustomDir { get; set; }
 
         [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
-        public bool chk_g_Gap { get; set; }
+        public bool chkMTN_g_Gap { get; set; }
         [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
         public bool chkMTN_s_TimeStep { get; set; }
         [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
@@ -198,7 +198,7 @@ namespace TDMakerLib
         [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
         public bool chkMTN_N_WriteInfo { get; set; }
         [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
-        public bool chkMTN_tL_LocTimestamp { get; set; }
+        public bool chkMTN_L_LocTimestamp { get; set; }
         [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
         public bool chkMTN_f_Font { get; set; }
         [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
@@ -212,9 +212,9 @@ namespace TDMakerLib
         [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
         public bool chkMTN_F_FontColor { get; set; }
         [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
-        public bool chk_h_MinHeight { get; set; }
+        public bool chkMTN_h_MinHeight { get; set; }
         [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
-        public bool chk_w_Width { get; set; }
+        public bool chkMTN_w_Width { get; set; }
 
         #region I/O Methods
 

@@ -67,6 +67,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\taglib-sharp.dll</HintPath>
     </Reference>
+    <Reference Include="UploadersLib">
+      <HintPath>..\Lib\UploadersLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ZSS.UpdateCheckerLib">
+      <HintPath>..\Lib\ZSS.UpdateCheckerLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FontDialogEditor.cs" />
@@ -184,12 +190,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Templates\MTN\GeneralInfo.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\ZScreen\trunk\ZSS.UploadersLib\ZSS.UploadersLib.csproj">
-      <Project>{E1C94415-3424-4517-A2A1-B2FDD1F59C67}</Project>
-      <Name>ZSS.UploadersLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,4 +1,7 @@
-﻿Logo PictureBox is disabled until figured out where the best place is to put
+﻿Proxy Support
+Revamp Configuration of Dirs similar to ZScreen 
+
+Logo PictureBox is disabled until figured out where the best place is to put
 Reorganize Code to isoloate methods from MainWindow.cs
 If Audio Format contains WMA and Description is not null then use Description of the codec
 Cancel Button to abort BackgroundWorker
@@ -18,7 +21,7 @@ Support for Multi-Disc DVDs
 		DVD1
 		DVD2
 
-Filelist using TreeGUI
+Filelist using TreeGUI - support for packs
 
 Full Automation [tacoking]
 	User browses movie folder 

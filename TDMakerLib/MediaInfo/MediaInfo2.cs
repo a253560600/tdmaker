@@ -4,7 +4,6 @@ using System.IO;
 using MediaInfoLib;
 using TDMakerLib;
 using TDMakerLib.MediaInfo;
-using TDMakerLib;
 
 namespace TDMakerLib
 {

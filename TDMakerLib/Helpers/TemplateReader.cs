@@ -4,7 +4,6 @@ using System.Text;
 using TDMakerLib;
 using System.IO;
 using System.Text.RegularExpressions;
-using TDMakerLib;
 
 namespace TDMakerLib
 {
