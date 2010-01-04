@@ -39,8 +39,6 @@ namespace TDMakerLib
 
         public static bool IsUNIX { get; private set; }
 
-        public readonly static string ScreenshotsTempDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), PROGRAM_FILES_APP_NAME);
-
         private static string[] AppDirs;
         public static readonly string XMLFileName = "Settings.xml";
         public static string DefaultXMLFilePath { get; private set; }
@@ -100,7 +98,7 @@ namespace TDMakerLib
 
         public static string GetScreenShotsDir()
         {
-            return (Engine.conf.KeepScreenshot ? Engine.zPicturesDir : Engine.ScreenshotsTempDir);
+            return (Engine.conf.KeepScreenshot ? Engine.zPicturesDir : Engine.zTempDir);
         }
 
         public static bool MediaIsDisc(string p)
@@ -146,7 +144,7 @@ namespace TDMakerLib
             if (!Engine.conf.KeepScreenshot)
             {
                 // delete if option set to temporary location 
-                string[] files = Directory.GetFiles(Engine.ScreenshotsTempDir, "*.*", SearchOption.AllDirectories);
+                string[] files = Directory.GetFiles(Engine.zTempDir, "*.*", SearchOption.AllDirectories);
                 foreach (string screenshot in files)
                 {
                     try
