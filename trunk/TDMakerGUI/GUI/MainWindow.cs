@@ -149,80 +149,79 @@ namespace TDMaker
 
             if (Engine.conf.TakeScreenshot)
             {
-
                 // Create MTN Arg
 
                 // Fill Screenshot object : coded parameters in alphabetical order
                 StringBuilder sbMTNArgs = new StringBuilder();
-                if (chkMTN_P_QuitAfterDone.Checked)
+                if (Engine.conf.ScreenshotSettings.P_QuitAfterDone)
                 {
                     sbMTNArgs.Append("-P ");
                 }
-                sbMTNArgs.Append(string.Format("-w{0} ", nudMTN_w_Width.Value));
-                if (chkMTN_h_Height.Checked)
+                sbMTNArgs.Append(string.Format("-w{0} ", Engine.conf.ScreenshotSettings.w_Width));
+                if (Engine.conf.chkMTN_h_Height)
                 {
-                    sbMTNArgs.Append(string.Format("-h{0} ", nudMTN_h_HeightMin.Value));
+                    sbMTNArgs.Append(string.Format("-h{0} ", Engine.conf.ScreenshotSettings.h_MinHeight));
                 }
-                sbMTNArgs.Append(string.Format("-c{0} ", nudMTN_c_Columns.Value));
-                sbMTNArgs.Append(string.Format("-r{0} ", nudMTN_r_Rows.Value));
-                if (chkMTN_F_FontColor.Checked)
+                sbMTNArgs.Append(string.Format("-c{0} ", Engine.conf.ScreenshotSettings.c_Columns));
+                sbMTNArgs.Append(string.Format("-r{0} ", Engine.conf.ScreenshotSettings.r_Rows));
+                if (Engine.conf.chkMTN_F_FontColor)
                 {
-                    sbMTNArgs.Append(string.Format("-k{0} ", cboMTN_k_ColorBkgrd.Text));
+                    sbMTNArgs.Append(string.Format("-k{0} ", Engine.conf.ScreenshotSettings.k_ColorBackground));
                 }
 
-                if (chkMTN_i_MediaInfoTurnOff.Checked || Engine.IsUNIX)
+                if (Engine.conf.chkMTN_i_MediaInfoTurnOff || Engine.IsUNIX)
                 {
                     sbMTNArgs.Append("-i ");
                 }
                 else if (!Engine.IsUNIX)
                 {
-                    if (chkMTN_f_Font.Checked)
+                    if (Engine.conf.chkMTN_f_Font)
                     {
-                        sbMTNArgs.Append(string.Format("-f {0} ", cboMTN_f_FontType.Text));
+                        sbMTNArgs.Append(string.Format("-f {0} ", Engine.conf.ScreenshotSettings.f_Font));
                     }
-                    if (chkMTN_k_ColorBackground.Checked && chkMTN_F_FontSize.Checked)
+                    if (Engine.conf.chkMTN_k_ColorBackground && Engine.conf.chkMTN_F_FontSize)
                     {
-                        sbMTNArgs.Append(string.Format("-F {0}:{1} ", cboMTN_F_FontColor.Text, nudMTN_F_FontSize.Value));
+                        sbMTNArgs.Append(string.Format("-F {0}:{1} ", Engine.conf.ScreenshotSettings.F_FontColor, Engine.conf.ScreenshotSettings.F_FontSize));
                     }
                 }
-                if (!chkMTN_tL_LocTimestamp.Checked || Engine.IsUNIX)
+                if (!Engine.conf.chkMTN_L_LocTimestamp || Engine.IsUNIX)
                 {
                     sbMTNArgs.Append("-t ");
                 }
                 else if (!Engine.IsUNIX)
                 {
-                    if (chkMTN_L_LocInfo.Checked && chkMTN_tL_LocTimestamp.Checked)
+                    if (Engine.conf.chkMTN_L_LocInfo && Engine.conf.chkMTN_L_LocTimestamp)
                     {
-                        sbMTNArgs.Append(string.Format("-L {0}:{1} ", cboMTN_L_LocInfo.SelectedIndex + 1, cboMTN_L_LocTimestamp.SelectedIndex + 1));
+                        sbMTNArgs.Append(string.Format("-L {0}:{1} ", Engine.conf.ScreenshotSettings.L_LocInfo + 1, Engine.conf.ScreenshotSettings.L_LocTimestamp + 1));
                     }
                 }
 
-                if (chkMTN_g_Gap.Checked)
+                if (Engine.conf.chkMTN_g_Gap)
                 {
-                    sbMTNArgs.Append(string.Format("-g {0} ", nudMTN_g_Gap.Value));
+                    sbMTNArgs.Append(string.Format("-g {0} ", Engine.conf.ScreenshotSettings.g_GapBetweenShots));
                 }
-                if (chkMTN_j_JPEGQuality.Checked)
+                if (Engine.conf.chkMTN_j_JPEGQuality)
                 {
-                    sbMTNArgs.Append(string.Format("-j {0} ", nudMTN_j_JPEGQuality.Value));
+                    sbMTNArgs.Append(string.Format("-j {0} ", Engine.conf.ScreenshotSettings.j_JpgQuality));
                 }
-                if (chkMTN_s_TimeStep.Checked)
+                if (Engine.conf.chkMTN_s_TimeStep)
                 {
-                    sbMTNArgs.Append(string.Format("-s {0} ", nudMTN_s_TimeStep.Value));
-                }
-
-                if (chkMTN_D_EdgeDetection.Checked)
-                {
-                    sbMTNArgs.Append(string.Format("-D {0} ", nudMTN_D_EdgeDetection.Value));
+                    sbMTNArgs.Append(string.Format("-s {0} ", Engine.conf.ScreenshotSettings.s_TimeStep));
                 }
 
-                if (chkMTN_B_OmitBegin.Checked)
+                if (Engine.conf.chkMTN_D_EdgeDetection)
                 {
-                    sbMTNArgs.Append(string.Format("-B {0} ", nudMTN_B_OmitStart.Value));
+                    sbMTNArgs.Append(string.Format("-D {0} ", Engine.conf.ScreenshotSettings.D_EdgeDetection));
                 }
 
-                if (chkMTN_E_OmitEnd.Checked)
+                if (Engine.conf.chkMTN_B_OmitBegin)
                 {
-                    sbMTNArgs.Append(string.Format("-E {0} ", nudMTN_E_OmitEnd.Value));
+                    sbMTNArgs.Append(string.Format("-B {0} ", Engine.conf.ScreenshotSettings.B_OmitBegin));
+                }
+
+                if (Engine.conf.chkMTN_E_OmitEnd)
+                {
+                    sbMTNArgs.Append(string.Format("-E {0} ", Engine.conf.ScreenshotSettings.E_OmitEnd));
                 }
 
                 // Not supported in MTN 2.45
@@ -235,15 +234,15 @@ namespace TDMaker
                 //    sbMTNArgs.Append("-Z ");
                 //}
 
-                if (chkMTN_N_WriteInfo.Checked || Engine.IsUNIX)
+                if (Engine.conf.chkMTN_N_WriteInfo || Engine.IsUNIX)
                 {
-                    sbMTNArgs.Append(string.Format("-N {0} ", txtMTN_N_InfoSuffix.Text));
-                    mi.Screenshot.Settings.N_InfoSuffix = txtMTN_N_InfoSuffix.Text;
+                    sbMTNArgs.Append(string.Format("-N {0} ", Engine.conf.ScreenshotSettings.N_InfoSuffix));
+                    mi.Screenshot.Settings.N_InfoSuffix = Engine.conf.ScreenshotSettings.N_InfoSuffix;
                 }
 
-                if (chkMTN_o_OutputSuffix.Checked)
+                if (Engine.conf.chkMTN_o_OutputSuffix)
                 {
-                    sbMTNArgs.Append(string.Format("-o {0} ", txtMTN_o_OutputSuffix.Text));
+                    sbMTNArgs.Append(string.Format("-o {0} ", Engine.conf.ScreenshotSettings.o_OutputSuffix));
                     mi.Screenshot.Settings.o_OutputSuffix = txtMTN_o_OutputSuffix.Text;
                 }
                 if (chkMTN_v_Verbose.Checked)
@@ -263,19 +262,10 @@ namespace TDMaker
 
                 mi.Screenshot.MTNArgs = sbMTNArgs.ToString();
 
-                //mi.Screenshot.Settings.c_Columns = (int)nudMTN_c_Columns.Value;
-                //mi.Screenshot.Settings.j_JpgQuality = (int)nudMTN_j_JPEGQuality.Value;
-                //mi.Screenshot.FontStyle = string.Format("{0}:{1}", cboMTN_F_FontColor.Text, nudMTN_F_FontSize.Value);
-                //mi.Screenshot.Settings.L_InfoLocation = string.Format("{0}:{1}", cboMTN_L_LocInfo.SelectedIndex, cboMTN_L_LocTimestamp.SelectedIndex);
-                //mi.Screenshot.Settings.P_QuitAfterDone = chkMTN_P_QuitAfterDone.Checked;
-                //mi.Screenshot.Settings.r_Rows = (int)nudMTN_r_Rows.Value;
-                //mi.Screenshot.Settings.w_Width = (int)nudMTN_w_Width.Value;
-
                 // Screenshots Mode
                 if (Engine.conf.UploadScreenshot)
                 {
                     mi.TakeScreenshots = TakeScreenshotsType.TAKE_ONE_SCREENSHOT;
-
                 }
             }
             return mi;
@@ -687,7 +677,7 @@ namespace TDMaker
             this.chkMTN_P_QuitAfterDone.Checked = Engine.conf.ScreenshotSettings.P_QuitAfterDone;
             this.chkMTN_s_TimeStep.Checked = Engine.conf.chkMTN_s_TimeStep;
             this.chkMTN_T_Title.Checked = Engine.conf.chkMTN_T_Title;
-            this.chkMTN_tL_LocTimestamp.Checked = Engine.conf.chkMTN_L_LocTimestamp;
+            this.chkMTN_L_LocTimestamp.Checked = Engine.conf.chkMTN_L_LocTimestamp;
             this.chkMTN_v_Verbose.Checked = Engine.conf.chkMTN_v_Verbose;
             this.chkMTN_w_Width.Checked = Engine.conf.chkMTN_w_Width;
             this.chkMTN_z_SeekMode.Checked = Engine.conf.ScreenshotSettings.z_Seek;
@@ -1250,7 +1240,7 @@ namespace TDMaker
 
         private void CheckUpdates(bool manual)
         {
-            // McoreSystem.UpdateChecker uc = new McoreSystem.UpdateChecker("http://code.google.com/p/tdmaker/downloads/list");
+            //McoreSystem.UpdateChecker uc = new McoreSystem.UpdateChecker("http://code.google.com/p/tdmaker/downloads/list");
             //uc.Manual = manual;
             //uc.CheckUpdates();
         }
@@ -1263,7 +1253,7 @@ namespace TDMaker
         private void cboScreenshotDest_SelectedIndexChanged(object sender, EventArgs e)
         {
             Engine.conf.ImageUploader = (ImageDestType2)cboScreenshotDest.SelectedIndex;
-            tpHostingImageShack.Enabled = cboScreenshotDest.SelectedIndex == 0;
+            tpHosting.Enabled = cboScreenshotDest.SelectedIndex == 0;
         }
 
         private void tsmLogsDir_Click(object sender, EventArgs e)

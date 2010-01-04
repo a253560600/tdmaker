@@ -114,7 +114,7 @@ namespace TDMaker
             this.label3 = new System.Windows.Forms.Label();
             this.chkUploadFullScreenshot = new System.Windows.Forms.CheckBox();
             this.chkTemplatesMode = new System.Windows.Forms.CheckBox();
-            this.tpScreenshots = new System.Windows.Forms.TabPage();
+            this.tpOptionsMTN = new System.Windows.Forms.TabPage();
             this.tcMtn = new System.Windows.Forms.TabControl();
             this.tpUsage1 = new System.Windows.Forms.TabPage();
             this.pMTNUsage = new System.Windows.Forms.Panel();
@@ -147,7 +147,7 @@ namespace TDMaker
             this.nudMTN_j_JPEGQuality = new System.Windows.Forms.NumericUpDown();
             this.chkMTN_j_JPEGQuality = new System.Windows.Forms.CheckBox();
             this.cboMTN_L_LocTimestamp = new System.Windows.Forms.ComboBox();
-            this.chkMTN_tL_LocTimestamp = new System.Windows.Forms.CheckBox();
+            this.chkMTN_L_LocTimestamp = new System.Windows.Forms.CheckBox();
             this.chkMTN_k_ColorBackground = new System.Windows.Forms.CheckBox();
             this.nudMTN_g_Gap = new System.Windows.Forms.NumericUpDown();
             this.chkMTN_g_Gap = new System.Windows.Forms.CheckBox();
@@ -164,7 +164,7 @@ namespace TDMaker
             this.chkMTNColumns = new System.Windows.Forms.CheckBox();
             this.tpUsage2 = new System.Windows.Forms.TabPage();
             this.pgMtn = new System.Windows.Forms.PropertyGrid();
-            this.tpHostingImageShack = new System.Windows.Forms.TabPage();
+            this.tpHosting = new System.Windows.Forms.TabPage();
             this.btnImageShackImages = new System.Windows.Forms.Button();
             this.btnImageShackRegCode = new System.Windows.Forms.Button();
             this.chkUseImageShackRegCode = new System.Windows.Forms.CheckBox();
@@ -237,6 +237,9 @@ namespace TDMaker
             this.miHelpCheckUpdates = new System.Windows.Forms.ToolStripMenuItem();
             this.miHelpVersionHistory = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gbImageShack = new System.Windows.Forms.GroupBox();
+            this.txtMtnArgs = new System.Windows.Forms.TextBox();
+            this.tlpMTN = new System.Windows.Forms.TableLayoutPanel();
             this.gbScreenshotFull.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbScreenshot)).BeginInit();
             this.gbScreenshotForums.SuspendLayout();
@@ -265,7 +268,7 @@ namespace TDMaker
             ((System.ComponentModel.ISupportInitialize)(this.nudHeading2Size)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeading3Size)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBodySize)).BeginInit();
-            this.tpScreenshots.SuspendLayout();
+            this.tpOptionsMTN.SuspendLayout();
             this.tcMtn.SuspendLayout();
             this.tpUsage1.SuspendLayout();
             this.pMTNUsage.SuspendLayout();
@@ -282,7 +285,7 @@ namespace TDMaker
             ((System.ComponentModel.ISupportInitialize)(this.nudMTN_r_Rows)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMTN_c_Columns)).BeginInit();
             this.tpUsage2.SuspendLayout();
-            this.tpHostingImageShack.SuspendLayout();
+            this.tpHosting.SuspendLayout();
             this.tpTorrents.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.gbTrackerMgr.SuspendLayout();
@@ -295,6 +298,8 @@ namespace TDMaker
             this.cmsApp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            this.gbImageShack.SuspendLayout();
+            this.tlpMTN.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbScreenshotFull
@@ -1025,8 +1030,8 @@ namespace TDMaker
             // 
             // tcOptions
             // 
+            this.tcOptions.Controls.Add(this.tpOptionsMTN);
             this.tcOptions.Controls.Add(this.tpPublish);
-            this.tcOptions.Controls.Add(this.tpScreenshots);
             this.tcOptions.Controls.Add(this.tpTorrents);
             this.tcOptions.Controls.Add(this.tpAdvanced);
             this.tcOptions.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1288,27 +1293,28 @@ namespace TDMaker
             this.chkTemplatesMode.UseVisualStyleBackColor = true;
             this.chkTemplatesMode.CheckedChanged += new System.EventHandler(this.chkTemplatesMode_CheckedChanged);
             // 
-            // tpScreenshots
+            // tpOptionsMTN
             // 
-            this.tpScreenshots.Controls.Add(this.tcMtn);
-            this.tpScreenshots.Location = new System.Drawing.Point(4, 22);
-            this.tpScreenshots.Name = "tpScreenshots";
-            this.tpScreenshots.Padding = new System.Windows.Forms.Padding(3);
-            this.tpScreenshots.Size = new System.Drawing.Size(848, 419);
-            this.tpScreenshots.TabIndex = 0;
-            this.tpScreenshots.Text = "Movie Thumbnailer";
-            this.tpScreenshots.UseVisualStyleBackColor = true;
+            this.tpOptionsMTN.Controls.Add(this.tlpMTN);
+            this.tpOptionsMTN.Location = new System.Drawing.Point(4, 22);
+            this.tpOptionsMTN.Name = "tpOptionsMTN";
+            this.tpOptionsMTN.Padding = new System.Windows.Forms.Padding(3);
+            this.tpOptionsMTN.Size = new System.Drawing.Size(848, 419);
+            this.tpOptionsMTN.TabIndex = 0;
+            this.tpOptionsMTN.Text = "Movie Thumbnailer";
+            this.tpOptionsMTN.UseVisualStyleBackColor = true;
             // 
             // tcMtn
             // 
+            this.tcMtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tcMtn.Controls.Add(this.tpUsage1);
             this.tcMtn.Controls.Add(this.tpUsage2);
-            this.tcMtn.Controls.Add(this.tpHostingImageShack);
-            this.tcMtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcMtn.Controls.Add(this.tpHosting);
             this.tcMtn.Location = new System.Drawing.Point(3, 3);
             this.tcMtn.Name = "tcMtn";
             this.tcMtn.SelectedIndex = 0;
-            this.tcMtn.Size = new System.Drawing.Size(842, 413);
+            this.tcMtn.Size = new System.Drawing.Size(836, 365);
             this.tcMtn.TabIndex = 5;
             // 
             // tpUsage1
@@ -1317,7 +1323,7 @@ namespace TDMaker
             this.tpUsage1.Location = new System.Drawing.Point(4, 22);
             this.tpUsage1.Name = "tpUsage1";
             this.tpUsage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tpUsage1.Size = new System.Drawing.Size(834, 387);
+            this.tpUsage1.Size = new System.Drawing.Size(828, 339);
             this.tpUsage1.TabIndex = 1;
             this.tpUsage1.Text = "Usage (Simple)";
             this.tpUsage1.UseVisualStyleBackColor = true;
@@ -1344,7 +1350,7 @@ namespace TDMaker
             this.pMTNUsage.Controls.Add(this.nudMTN_j_JPEGQuality);
             this.pMTNUsage.Controls.Add(this.chkMTN_j_JPEGQuality);
             this.pMTNUsage.Controls.Add(this.cboMTN_L_LocTimestamp);
-            this.pMTNUsage.Controls.Add(this.chkMTN_tL_LocTimestamp);
+            this.pMTNUsage.Controls.Add(this.chkMTN_L_LocTimestamp);
             this.pMTNUsage.Controls.Add(this.chkMTN_k_ColorBackground);
             this.pMTNUsage.Controls.Add(this.nudMTN_g_Gap);
             this.pMTNUsage.Controls.Add(this.chkMTN_g_Gap);
@@ -1362,7 +1368,7 @@ namespace TDMaker
             this.pMTNUsage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pMTNUsage.Location = new System.Drawing.Point(3, 3);
             this.pMTNUsage.Name = "pMTNUsage";
-            this.pMTNUsage.Size = new System.Drawing.Size(828, 381);
+            this.pMTNUsage.Size = new System.Drawing.Size(822, 333);
             this.pMTNUsage.TabIndex = 14;
             // 
             // nudMTN_B_OmitStart
@@ -1373,7 +1379,7 @@ namespace TDMaker
             0,
             0,
             65536});
-            this.nudMTN_B_OmitStart.Location = new System.Drawing.Point(172, 213);
+            this.nudMTN_B_OmitStart.Location = new System.Drawing.Point(176, 208);
             this.nudMTN_B_OmitStart.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -1388,7 +1394,7 @@ namespace TDMaker
             // chkMTN_B_OmitBegin
             // 
             this.chkMTN_B_OmitBegin.AutoSize = true;
-            this.chkMTN_B_OmitBegin.Location = new System.Drawing.Point(22, 215);
+            this.chkMTN_B_OmitBegin.Location = new System.Drawing.Point(24, 212);
             this.chkMTN_B_OmitBegin.Name = "chkMTN_B_OmitBegin";
             this.chkMTN_B_OmitBegin.Size = new System.Drawing.Size(121, 17);
             this.chkMTN_B_OmitBegin.TabIndex = 51;
@@ -1397,7 +1403,7 @@ namespace TDMaker
             // 
             // nudMTN_D_EdgeDetection
             // 
-            this.nudMTN_D_EdgeDetection.Location = new System.Drawing.Point(172, 263);
+            this.nudMTN_D_EdgeDetection.Location = new System.Drawing.Point(176, 256);
             this.nudMTN_D_EdgeDetection.Name = "nudMTN_D_EdgeDetection";
             this.nudMTN_D_EdgeDetection.Size = new System.Drawing.Size(120, 20);
             this.nudMTN_D_EdgeDetection.TabIndex = 50;
@@ -1408,7 +1414,7 @@ namespace TDMaker
             this.chkMTN_D_EdgeDetection.AutoSize = true;
             this.chkMTN_D_EdgeDetection.Checked = true;
             this.chkMTN_D_EdgeDetection.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_D_EdgeDetection.Location = new System.Drawing.Point(22, 265);
+            this.chkMTN_D_EdgeDetection.Location = new System.Drawing.Point(24, 260);
             this.chkMTN_D_EdgeDetection.Name = "chkMTN_D_EdgeDetection";
             this.chkMTN_D_EdgeDetection.Size = new System.Drawing.Size(100, 17);
             this.chkMTN_D_EdgeDetection.TabIndex = 49;
@@ -1423,7 +1429,7 @@ namespace TDMaker
             0,
             0,
             65536});
-            this.nudMTN_E_OmitEnd.Location = new System.Drawing.Point(172, 238);
+            this.nudMTN_E_OmitEnd.Location = new System.Drawing.Point(176, 232);
             this.nudMTN_E_OmitEnd.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -1438,7 +1444,7 @@ namespace TDMaker
             // chkMTN_E_OmitEnd
             // 
             this.chkMTN_E_OmitEnd.AutoSize = true;
-            this.chkMTN_E_OmitEnd.Location = new System.Drawing.Point(22, 240);
+            this.chkMTN_E_OmitEnd.Location = new System.Drawing.Point(24, 236);
             this.chkMTN_E_OmitEnd.Name = "chkMTN_E_OmitEnd";
             this.chkMTN_E_OmitEnd.Size = new System.Drawing.Size(118, 17);
             this.chkMTN_E_OmitEnd.TabIndex = 47;
@@ -1447,7 +1453,7 @@ namespace TDMaker
             // 
             // nudMTN_h_HeightMin
             // 
-            this.nudMTN_h_HeightMin.Location = new System.Drawing.Point(172, 62);
+            this.nudMTN_h_HeightMin.Location = new System.Drawing.Point(176, 64);
             this.nudMTN_h_HeightMin.Maximum = new decimal(new int[] {
             1200,
             0,
@@ -1461,7 +1467,7 @@ namespace TDMaker
             // chkMTN_h_Height
             // 
             this.chkMTN_h_Height.AutoSize = true;
-            this.chkMTN_h_Height.Location = new System.Drawing.Point(22, 65);
+            this.chkMTN_h_Height.Location = new System.Drawing.Point(24, 64);
             this.chkMTN_h_Height.Name = "chkMTN_h_Height";
             this.chkMTN_h_Height.Size = new System.Drawing.Size(107, 17);
             this.chkMTN_h_Height.TabIndex = 45;
@@ -1471,7 +1477,7 @@ namespace TDMaker
             // chkMTN_v_Verbose
             // 
             this.chkMTN_v_Verbose.AutoSize = true;
-            this.chkMTN_v_Verbose.Location = new System.Drawing.Point(22, 301);
+            this.chkMTN_v_Verbose.Location = new System.Drawing.Point(488, 240);
             this.chkMTN_v_Verbose.Name = "chkMTN_v_Verbose";
             this.chkMTN_v_Verbose.Size = new System.Drawing.Size(95, 17);
             this.chkMTN_v_Verbose.TabIndex = 44;
@@ -1480,7 +1486,7 @@ namespace TDMaker
             // 
             // txtMTN_o_OutputSuffix
             // 
-            this.txtMTN_o_OutputSuffix.Location = new System.Drawing.Point(444, 194);
+            this.txtMTN_o_OutputSuffix.Location = new System.Drawing.Point(448, 192);
             this.txtMTN_o_OutputSuffix.Name = "txtMTN_o_OutputSuffix";
             this.txtMTN_o_OutputSuffix.Size = new System.Drawing.Size(232, 20);
             this.txtMTN_o_OutputSuffix.TabIndex = 43;
@@ -1491,7 +1497,7 @@ namespace TDMaker
             this.chkMTN_o_OutputSuffix.AutoSize = true;
             this.chkMTN_o_OutputSuffix.Checked = true;
             this.chkMTN_o_OutputSuffix.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_o_OutputSuffix.Location = new System.Drawing.Point(350, 196);
+            this.chkMTN_o_OutputSuffix.Location = new System.Drawing.Point(352, 195);
             this.chkMTN_o_OutputSuffix.Name = "chkMTN_o_OutputSuffix";
             this.chkMTN_o_OutputSuffix.Size = new System.Drawing.Size(87, 17);
             this.chkMTN_o_OutputSuffix.TabIndex = 42;
@@ -1501,7 +1507,7 @@ namespace TDMaker
             // 
             // txtMTN_N_InfoSuffix
             // 
-            this.txtMTN_N_InfoSuffix.Location = new System.Drawing.Point(444, 167);
+            this.txtMTN_N_InfoSuffix.Location = new System.Drawing.Point(448, 168);
             this.txtMTN_N_InfoSuffix.Name = "txtMTN_N_InfoSuffix";
             this.txtMTN_N_InfoSuffix.Size = new System.Drawing.Size(232, 20);
             this.txtMTN_N_InfoSuffix.TabIndex = 41;
@@ -1510,7 +1516,7 @@ namespace TDMaker
             // chkMTN_N_WriteInfo
             // 
             this.chkMTN_N_WriteInfo.AutoSize = true;
-            this.chkMTN_N_WriteInfo.Location = new System.Drawing.Point(350, 170);
+            this.chkMTN_N_WriteInfo.Location = new System.Drawing.Point(352, 171);
             this.chkMTN_N_WriteInfo.Name = "chkMTN_N_WriteInfo";
             this.chkMTN_N_WriteInfo.Size = new System.Drawing.Size(73, 17);
             this.chkMTN_N_WriteInfo.TabIndex = 40;
@@ -1523,7 +1529,7 @@ namespace TDMaker
             this.chkMTN_z_SeekMode.AutoSize = true;
             this.chkMTN_z_SeekMode.Checked = true;
             this.chkMTN_z_SeekMode.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-            this.chkMTN_z_SeekMode.Location = new System.Drawing.Point(720, 344);
+            this.chkMTN_z_SeekMode.Location = new System.Drawing.Point(712, 288);
             this.chkMTN_z_SeekMode.Name = "chkMTN_z_SeekMode";
             this.chkMTN_z_SeekMode.Size = new System.Drawing.Size(81, 17);
             this.chkMTN_z_SeekMode.TabIndex = 10;
@@ -1535,7 +1541,7 @@ namespace TDMaker
             // chkMTN_i_MediaInfoTurnOff
             // 
             this.chkMTN_i_MediaInfoTurnOff.AutoSize = true;
-            this.chkMTN_i_MediaInfoTurnOff.Location = new System.Drawing.Point(350, 18);
+            this.chkMTN_i_MediaInfoTurnOff.Location = new System.Drawing.Point(352, 16);
             this.chkMTN_i_MediaInfoTurnOff.Name = "chkMTN_i_MediaInfoTurnOff";
             this.chkMTN_i_MediaInfoTurnOff.Size = new System.Drawing.Size(116, 17);
             this.chkMTN_i_MediaInfoTurnOff.TabIndex = 37;
@@ -1555,7 +1561,7 @@ namespace TDMaker
             this.gbMTN_i_MediaInfo.Controls.Add(this.nudMTN_F_FontSize);
             this.gbMTN_i_MediaInfo.Controls.Add(this.chkMTN_L_LocInfo);
             this.gbMTN_i_MediaInfo.Controls.Add(this.cboMTN_L_LocInfo);
-            this.gbMTN_i_MediaInfo.Location = new System.Drawing.Point(338, 41);
+            this.gbMTN_i_MediaInfo.Location = new System.Drawing.Point(344, 40);
             this.gbMTN_i_MediaInfo.Name = "gbMTN_i_MediaInfo";
             this.gbMTN_i_MediaInfo.Size = new System.Drawing.Size(364, 122);
             this.gbMTN_i_MediaInfo.TabIndex = 39;
@@ -1587,7 +1593,7 @@ namespace TDMaker
             // 
             // txtMTN_T_Title
             // 
-            this.txtMTN_T_Title.Location = new System.Drawing.Point(106, 16);
+            this.txtMTN_T_Title.Location = new System.Drawing.Point(104, 16);
             this.txtMTN_T_Title.Name = "txtMTN_T_Title";
             this.txtMTN_T_Title.Size = new System.Drawing.Size(232, 20);
             this.txtMTN_T_Title.TabIndex = 45;
@@ -1685,7 +1691,7 @@ namespace TDMaker
             // 
             // nudMTN_j_JPEGQuality
             // 
-            this.nudMTN_j_JPEGQuality.Location = new System.Drawing.Point(172, 188);
+            this.nudMTN_j_JPEGQuality.Location = new System.Drawing.Point(176, 184);
             this.nudMTN_j_JPEGQuality.Minimum = new decimal(new int[] {
             50,
             0,
@@ -1706,7 +1712,7 @@ namespace TDMaker
             this.chkMTN_j_JPEGQuality.AutoSize = true;
             this.chkMTN_j_JPEGQuality.Checked = true;
             this.chkMTN_j_JPEGQuality.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_j_JPEGQuality.Location = new System.Drawing.Point(22, 190);
+            this.chkMTN_j_JPEGQuality.Location = new System.Drawing.Point(24, 188);
             this.chkMTN_j_JPEGQuality.Name = "chkMTN_j_JPEGQuality";
             this.chkMTN_j_JPEGQuality.Size = new System.Drawing.Size(105, 17);
             this.chkMTN_j_JPEGQuality.TabIndex = 35;
@@ -1722,7 +1728,7 @@ namespace TDMaker
             "Lower Right",
             "Upper Right",
             "Upper Left"});
-            this.cboMTN_L_LocTimestamp.Location = new System.Drawing.Point(556, 16);
+            this.cboMTN_L_LocTimestamp.Location = new System.Drawing.Point(560, 16);
             this.cboMTN_L_LocTimestamp.MaxLength = 6;
             this.cboMTN_L_LocTimestamp.Name = "cboMTN_L_LocTimestamp";
             this.cboMTN_L_LocTimestamp.Size = new System.Drawing.Size(120, 21);
@@ -1731,23 +1737,23 @@ namespace TDMaker
             // 
             // chkMTN_tL_LocTimestamp
             // 
-            this.chkMTN_tL_LocTimestamp.AutoSize = true;
-            this.chkMTN_tL_LocTimestamp.Checked = true;
-            this.chkMTN_tL_LocTimestamp.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_tL_LocTimestamp.Location = new System.Drawing.Point(472, 18);
-            this.chkMTN_tL_LocTimestamp.Name = "chkMTN_tL_LocTimestamp";
-            this.chkMTN_tL_LocTimestamp.Size = new System.Drawing.Size(77, 17);
-            this.chkMTN_tL_LocTimestamp.TabIndex = 31;
-            this.chkMTN_tL_LocTimestamp.Text = "Timestamp";
-            this.chkMTN_tL_LocTimestamp.UseVisualStyleBackColor = true;
-            this.chkMTN_tL_LocTimestamp.CheckedChanged += new System.EventHandler(this.chkMTN_tL_LocTimestamp_CheckedChanged);
+            this.chkMTN_L_LocTimestamp.AutoSize = true;
+            this.chkMTN_L_LocTimestamp.Checked = true;
+            this.chkMTN_L_LocTimestamp.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMTN_L_LocTimestamp.Location = new System.Drawing.Point(472, 16);
+            this.chkMTN_L_LocTimestamp.Name = "chkMTN_tL_LocTimestamp";
+            this.chkMTN_L_LocTimestamp.Size = new System.Drawing.Size(77, 17);
+            this.chkMTN_L_LocTimestamp.TabIndex = 31;
+            this.chkMTN_L_LocTimestamp.Text = "Timestamp";
+            this.chkMTN_L_LocTimestamp.UseVisualStyleBackColor = true;
+            this.chkMTN_L_LocTimestamp.CheckedChanged += new System.EventHandler(this.chkMTN_tL_LocTimestamp_CheckedChanged);
             // 
             // chkMTN_k_ColorBackground
             // 
             this.chkMTN_k_ColorBackground.AutoSize = true;
             this.chkMTN_k_ColorBackground.Checked = true;
             this.chkMTN_k_ColorBackground.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_k_ColorBackground.Location = new System.Drawing.Point(22, 140);
+            this.chkMTN_k_ColorBackground.Location = new System.Drawing.Point(24, 140);
             this.chkMTN_k_ColorBackground.Name = "chkMTN_k_ColorBackground";
             this.chkMTN_k_ColorBackground.Size = new System.Drawing.Size(111, 17);
             this.chkMTN_k_ColorBackground.TabIndex = 28;
@@ -1757,7 +1763,7 @@ namespace TDMaker
             // 
             // nudMTN_g_Gap
             // 
-            this.nudMTN_g_Gap.Location = new System.Drawing.Point(172, 112);
+            this.nudMTN_g_Gap.Location = new System.Drawing.Point(176, 112);
             this.nudMTN_g_Gap.Name = "nudMTN_g_Gap";
             this.nudMTN_g_Gap.Size = new System.Drawing.Size(120, 20);
             this.nudMTN_g_Gap.TabIndex = 26;
@@ -1773,7 +1779,7 @@ namespace TDMaker
             this.chkMTN_g_Gap.AutoSize = true;
             this.chkMTN_g_Gap.Checked = true;
             this.chkMTN_g_Gap.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_g_Gap.Location = new System.Drawing.Point(22, 115);
+            this.chkMTN_g_Gap.Location = new System.Drawing.Point(24, 112);
             this.chkMTN_g_Gap.Name = "chkMTN_g_Gap";
             this.chkMTN_g_Gap.Size = new System.Drawing.Size(120, 17);
             this.chkMTN_g_Gap.TabIndex = 25;
@@ -1783,7 +1789,7 @@ namespace TDMaker
             // cboMTN_k_ColorBkgrd
             // 
             this.cboMTN_k_ColorBkgrd.FormattingEnabled = true;
-            this.cboMTN_k_ColorBkgrd.Location = new System.Drawing.Point(172, 137);
+            this.cboMTN_k_ColorBkgrd.Location = new System.Drawing.Point(176, 136);
             this.cboMTN_k_ColorBkgrd.MaxLength = 6;
             this.cboMTN_k_ColorBkgrd.Name = "cboMTN_k_ColorBkgrd";
             this.cboMTN_k_ColorBkgrd.Size = new System.Drawing.Size(120, 21);
@@ -1793,7 +1799,7 @@ namespace TDMaker
             // 
             // nudMTN_w_Width
             // 
-            this.nudMTN_w_Width.Location = new System.Drawing.Point(172, 87);
+            this.nudMTN_w_Width.Location = new System.Drawing.Point(176, 88);
             this.nudMTN_w_Width.Maximum = new decimal(new int[] {
             2048,
             0,
@@ -1810,7 +1816,7 @@ namespace TDMaker
             this.chkMTN_w_Width.AutoSize = true;
             this.chkMTN_w_Width.Checked = true;
             this.chkMTN_w_Width.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_w_Width.Location = new System.Drawing.Point(22, 90);
+            this.chkMTN_w_Width.Location = new System.Drawing.Point(24, 88);
             this.chkMTN_w_Width.Name = "chkMTN_w_Width";
             this.chkMTN_w_Width.Size = new System.Drawing.Size(54, 17);
             this.chkMTN_w_Width.TabIndex = 21;
@@ -1822,7 +1828,7 @@ namespace TDMaker
             this.chkMTN_P_QuitAfterDone.AutoSize = true;
             this.chkMTN_P_QuitAfterDone.Checked = true;
             this.chkMTN_P_QuitAfterDone.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMTN_P_QuitAfterDone.Location = new System.Drawing.Point(22, 347);
+            this.chkMTN_P_QuitAfterDone.Location = new System.Drawing.Point(352, 264);
             this.chkMTN_P_QuitAfterDone.Name = "chkMTN_P_QuitAfterDone";
             this.chkMTN_P_QuitAfterDone.Size = new System.Drawing.Size(96, 17);
             this.chkMTN_P_QuitAfterDone.TabIndex = 20;
@@ -1832,7 +1838,7 @@ namespace TDMaker
             // 
             // nudMTN_s_TimeStep
             // 
-            this.nudMTN_s_TimeStep.Location = new System.Drawing.Point(172, 163);
+            this.nudMTN_s_TimeStep.Location = new System.Drawing.Point(176, 160);
             this.nudMTN_s_TimeStep.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -1846,7 +1852,7 @@ namespace TDMaker
             // chkMTN_s_TimeStep
             // 
             this.chkMTN_s_TimeStep.AutoSize = true;
-            this.chkMTN_s_TimeStep.Location = new System.Drawing.Point(22, 165);
+            this.chkMTN_s_TimeStep.Location = new System.Drawing.Point(24, 164);
             this.chkMTN_s_TimeStep.Name = "chkMTN_s_TimeStep";
             this.chkMTN_s_TimeStep.Size = new System.Drawing.Size(123, 17);
             this.chkMTN_s_TimeStep.TabIndex = 18;
@@ -1855,7 +1861,7 @@ namespace TDMaker
             // 
             // nudMTN_r_Rows
             // 
-            this.nudMTN_r_Rows.Location = new System.Drawing.Point(172, 12);
+            this.nudMTN_r_Rows.Location = new System.Drawing.Point(176, 16);
             this.nudMTN_r_Rows.Name = "nudMTN_r_Rows";
             this.nudMTN_r_Rows.Size = new System.Drawing.Size(120, 20);
             this.nudMTN_r_Rows.TabIndex = 17;
@@ -1864,7 +1870,7 @@ namespace TDMaker
             // chkShowMTN
             // 
             this.chkShowMTN.AutoSize = true;
-            this.chkShowMTN.Location = new System.Drawing.Point(22, 324);
+            this.chkShowMTN.Location = new System.Drawing.Point(352, 240);
             this.chkShowMTN.Name = "chkShowMTN";
             this.chkShowMTN.Size = new System.Drawing.Size(122, 17);
             this.chkShowMTN.TabIndex = 11;
@@ -1879,7 +1885,7 @@ namespace TDMaker
             this.chkMTNRows.AutoSize = true;
             this.chkMTNRows.Checked = true;
             this.chkMTNRows.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-            this.chkMTNRows.Location = new System.Drawing.Point(22, 15);
+            this.chkMTNRows.Location = new System.Drawing.Point(24, 16);
             this.chkMTNRows.Name = "chkMTNRows";
             this.chkMTNRows.Size = new System.Drawing.Size(53, 17);
             this.chkMTNRows.TabIndex = 16;
@@ -1889,7 +1895,7 @@ namespace TDMaker
             // 
             // nudMTN_c_Columns
             // 
-            this.nudMTN_c_Columns.Location = new System.Drawing.Point(172, 37);
+            this.nudMTN_c_Columns.Location = new System.Drawing.Point(176, 40);
             this.nudMTN_c_Columns.Name = "nudMTN_c_Columns";
             this.nudMTN_c_Columns.Size = new System.Drawing.Size(120, 20);
             this.nudMTN_c_Columns.TabIndex = 15;
@@ -1900,7 +1906,7 @@ namespace TDMaker
             this.chkMTNColumns.AutoSize = true;
             this.chkMTNColumns.Checked = true;
             this.chkMTNColumns.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-            this.chkMTNColumns.Location = new System.Drawing.Point(22, 40);
+            this.chkMTNColumns.Location = new System.Drawing.Point(24, 40);
             this.chkMTNColumns.Name = "chkMTNColumns";
             this.chkMTNColumns.Size = new System.Drawing.Size(66, 17);
             this.chkMTNColumns.TabIndex = 14;
@@ -1914,7 +1920,7 @@ namespace TDMaker
             this.tpUsage2.Location = new System.Drawing.Point(4, 22);
             this.tpUsage2.Name = "tpUsage2";
             this.tpUsage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tpUsage2.Size = new System.Drawing.Size(834, 387);
+            this.tpUsage2.Size = new System.Drawing.Size(828, 339);
             this.tpUsage2.TabIndex = 2;
             this.tpUsage2.Text = "Usage (Advanced)";
             this.tpUsage2.UseVisualStyleBackColor = true;
@@ -1924,27 +1930,23 @@ namespace TDMaker
             this.pgMtn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pgMtn.Location = new System.Drawing.Point(3, 3);
             this.pgMtn.Name = "pgMtn";
-            this.pgMtn.Size = new System.Drawing.Size(828, 381);
+            this.pgMtn.Size = new System.Drawing.Size(822, 333);
             this.pgMtn.TabIndex = 0;
             // 
-            // tpHostingImageShack
+            // tpHosting
             // 
-            this.tpHostingImageShack.Controls.Add(this.btnImageShackImages);
-            this.tpHostingImageShack.Controls.Add(this.btnImageShackRegCode);
-            this.tpHostingImageShack.Controls.Add(this.chkUseImageShackRegCode);
-            this.tpHostingImageShack.Controls.Add(this.txtImageShackRegCode);
-            this.tpHostingImageShack.Controls.Add(this.chkRandomizeFileNameImageShack);
-            this.tpHostingImageShack.Location = new System.Drawing.Point(4, 22);
-            this.tpHostingImageShack.Name = "tpHostingImageShack";
-            this.tpHostingImageShack.Padding = new System.Windows.Forms.Padding(3);
-            this.tpHostingImageShack.Size = new System.Drawing.Size(834, 387);
-            this.tpHostingImageShack.TabIndex = 0;
-            this.tpHostingImageShack.Text = "ImageShack";
-            this.tpHostingImageShack.UseVisualStyleBackColor = true;
+            this.tpHosting.Controls.Add(this.gbImageShack);
+            this.tpHosting.Location = new System.Drawing.Point(4, 22);
+            this.tpHosting.Name = "tpHosting";
+            this.tpHosting.Padding = new System.Windows.Forms.Padding(3);
+            this.tpHosting.Size = new System.Drawing.Size(828, 339);
+            this.tpHosting.TabIndex = 0;
+            this.tpHosting.Text = "Image Hosting";
+            this.tpHosting.UseVisualStyleBackColor = true;
             // 
             // btnImageShackImages
             // 
-            this.btnImageShackImages.Location = new System.Drawing.Point(540, 36);
+            this.btnImageShackImages.Location = new System.Drawing.Point(542, 42);
             this.btnImageShackImages.Name = "btnImageShackImages";
             this.btnImageShackImages.Size = new System.Drawing.Size(75, 23);
             this.btnImageShackImages.TabIndex = 7;
@@ -1954,7 +1956,7 @@ namespace TDMaker
             // 
             // btnImageShackRegCode
             // 
-            this.btnImageShackRegCode.Location = new System.Drawing.Point(459, 36);
+            this.btnImageShackRegCode.Location = new System.Drawing.Point(461, 42);
             this.btnImageShackRegCode.Name = "btnImageShackRegCode";
             this.btnImageShackRegCode.Size = new System.Drawing.Size(75, 23);
             this.btnImageShackRegCode.TabIndex = 6;
@@ -1965,7 +1967,7 @@ namespace TDMaker
             // chkUseImageShackRegCode
             // 
             this.chkUseImageShackRegCode.AutoSize = true;
-            this.chkUseImageShackRegCode.Location = new System.Drawing.Point(14, 41);
+            this.chkUseImageShackRegCode.Location = new System.Drawing.Point(16, 47);
             this.chkUseImageShackRegCode.Name = "chkUseImageShackRegCode";
             this.chkUseImageShackRegCode.Size = new System.Drawing.Size(135, 17);
             this.chkUseImageShackRegCode.TabIndex = 5;
@@ -1975,7 +1977,7 @@ namespace TDMaker
             // 
             // txtImageShackRegCode
             // 
-            this.txtImageShackRegCode.Location = new System.Drawing.Point(155, 38);
+            this.txtImageShackRegCode.Location = new System.Drawing.Point(157, 44);
             this.txtImageShackRegCode.Name = "txtImageShackRegCode";
             this.txtImageShackRegCode.Size = new System.Drawing.Size(298, 20);
             this.txtImageShackRegCode.TabIndex = 4;
@@ -1983,7 +1985,7 @@ namespace TDMaker
             // chkRandomizeFileNameImageShack
             // 
             this.chkRandomizeFileNameImageShack.AutoSize = true;
-            this.chkRandomizeFileNameImageShack.Location = new System.Drawing.Point(14, 18);
+            this.chkRandomizeFileNameImageShack.Location = new System.Drawing.Point(16, 24);
             this.chkRandomizeFileNameImageShack.Name = "chkRandomizeFileNameImageShack";
             this.chkRandomizeFileNameImageShack.Size = new System.Drawing.Size(207, 17);
             this.chkRandomizeFileNameImageShack.TabIndex = 3;
@@ -2630,6 +2632,46 @@ namespace TDMaker
             this.aboutToolStripMenuItem.Text = "&About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // gbImageShack
+            // 
+            this.gbImageShack.Controls.Add(this.chkRandomizeFileNameImageShack);
+            this.gbImageShack.Controls.Add(this.btnImageShackImages);
+            this.gbImageShack.Controls.Add(this.txtImageShackRegCode);
+            this.gbImageShack.Controls.Add(this.btnImageShackRegCode);
+            this.gbImageShack.Controls.Add(this.chkUseImageShackRegCode);
+            this.gbImageShack.Location = new System.Drawing.Point(8, 8);
+            this.gbImageShack.Name = "gbImageShack";
+            this.gbImageShack.Size = new System.Drawing.Size(648, 88);
+            this.gbImageShack.TabIndex = 8;
+            this.gbImageShack.TabStop = false;
+            this.gbImageShack.Text = "ImageShack";
+            // 
+            // txtMtnArgs
+            // 
+            this.txtMtnArgs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMtnArgs.Location = new System.Drawing.Point(3, 374);
+            this.txtMtnArgs.Multiline = true;
+            this.txtMtnArgs.Name = "txtMtnArgs";
+            this.txtMtnArgs.ReadOnly = true;
+            this.txtMtnArgs.Size = new System.Drawing.Size(836, 32);
+            this.txtMtnArgs.TabIndex = 6;
+            // 
+            // tlpMTN
+            // 
+            this.tlpMTN.ColumnCount = 1;
+            this.tlpMTN.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpMTN.Controls.Add(this.txtMtnArgs, 0, 1);
+            this.tlpMTN.Controls.Add(this.tcMtn, 0, 0);
+            this.tlpMTN.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpMTN.Location = new System.Drawing.Point(3, 3);
+            this.tlpMTN.Name = "tlpMTN";
+            this.tlpMTN.RowCount = 2;
+            this.tlpMTN.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90F));
+            this.tlpMTN.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tlpMTN.Size = new System.Drawing.Size(842, 413);
+            this.tlpMTN.TabIndex = 7;
+            // 
             // MainWindow
             // 
             this.AcceptButton = this.btnBrowse;
@@ -2696,7 +2738,7 @@ namespace TDMaker
             ((System.ComponentModel.ISupportInitialize)(this.nudHeading2Size)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeading3Size)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBodySize)).EndInit();
-            this.tpScreenshots.ResumeLayout(false);
+            this.tpOptionsMTN.ResumeLayout(false);
             this.tcMtn.ResumeLayout(false);
             this.tpUsage1.ResumeLayout(false);
             this.pMTNUsage.ResumeLayout(false);
@@ -2715,8 +2757,7 @@ namespace TDMaker
             ((System.ComponentModel.ISupportInitialize)(this.nudMTN_r_Rows)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMTN_c_Columns)).EndInit();
             this.tpUsage2.ResumeLayout(false);
-            this.tpHostingImageShack.ResumeLayout(false);
-            this.tpHostingImageShack.PerformLayout();
+            this.tpHosting.ResumeLayout(false);
             this.tpTorrents.ResumeLayout(false);
             this.tpTorrents.PerformLayout();
             this.groupBox8.ResumeLayout(false);
@@ -2732,6 +2773,10 @@ namespace TDMaker
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.gbImageShack.ResumeLayout(false);
+            this.gbImageShack.PerformLayout();
+            this.tlpMTN.ResumeLayout(false);
+            this.tlpMTN.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2792,7 +2837,7 @@ namespace TDMaker
         private System.Windows.Forms.CheckBox chkCreateTorrent;
         private System.Windows.Forms.ComboBox cboTrackerGroupActive;
         private System.Windows.Forms.TabControl tcOptions;
-        private System.Windows.Forms.TabPage tpScreenshots;
+        private System.Windows.Forms.TabPage tpOptionsMTN;
         private System.Windows.Forms.TabPage tpTorrents;
         private System.Windows.Forms.TabPage tpPublish;
         private System.Windows.Forms.Button btnCreateTorrent;
@@ -2841,7 +2886,7 @@ namespace TDMaker
         private System.Windows.Forms.Button btnTemplatesRewrite;
         private System.Windows.Forms.CheckBox chkShowMTN;
         private System.Windows.Forms.TabControl tcMtn;
-        private System.Windows.Forms.TabPage tpHostingImageShack;
+        private System.Windows.Forms.TabPage tpHosting;
         private System.Windows.Forms.CheckBox chkUseImageShackRegCode;
         private System.Windows.Forms.TextBox txtImageShackRegCode;
         private System.Windows.Forms.Button btnImageShackRegCode;
@@ -2874,7 +2919,7 @@ namespace TDMaker
         private System.Windows.Forms.NumericUpDown nudMTN_F_FontSize;
         private System.Windows.Forms.CheckBox chkMTN_F_FontSize;
         private System.Windows.Forms.ComboBox cboMTN_L_LocTimestamp;
-        private System.Windows.Forms.CheckBox chkMTN_tL_LocTimestamp;
+        private System.Windows.Forms.CheckBox chkMTN_L_LocTimestamp;
         private System.Windows.Forms.ComboBox cboMTN_L_LocInfo;
         private System.Windows.Forms.CheckBox chkMTN_L_LocInfo;
         private System.Windows.Forms.NumericUpDown nudMTN_j_JPEGQuality;
@@ -2944,6 +2989,9 @@ namespace TDMaker
         private System.Windows.Forms.Button btnRemoveTrackerGroup;
         private System.Windows.Forms.GroupBox gbTrackerGroups;
         private System.Windows.Forms.GroupBox gbTrackers;
+        private System.Windows.Forms.GroupBox gbImageShack;
+        private System.Windows.Forms.TableLayoutPanel tlpMTN;
+        private System.Windows.Forms.TextBox txtMtnArgs;
     }
 }
 

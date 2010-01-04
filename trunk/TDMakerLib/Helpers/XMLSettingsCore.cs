@@ -171,6 +171,8 @@ namespace TDMakerLib
         [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
         public bool chkMTN_N_WriteInfo { get; set; }
         [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
+        public bool chkMTN_i_MediaInfoTurnOff { get; set; }
+        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
         public bool chkMTN_L_LocTimestamp { get; set; }
         [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
         public bool chkMTN_f_Font { get; set; }

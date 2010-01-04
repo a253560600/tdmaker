@@ -1,4 +1,6 @@
-﻿Proxy Support
+﻿Import trackers.xml before public release
+
+Proxy Support
 Revamp Configuration of Dirs similar to ZScreen 
 
 Logo PictureBox is disabled until figured out where the best place is to put
