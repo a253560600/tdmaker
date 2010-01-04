@@ -22,35 +22,6 @@ namespace TDMakerLib
         public XMLSettingsCore()
         {
             ApplyDefaultValues(this);
-
-            if (MTNArgs.Count == 0)
-            {
-                MTNArgs.AddRange(new string[] { "-P -w 0 -c 1 -r 3 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97", 
-                                            "-P -N _s.txt -w 0 -c 1 -r 3 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97", 
-                                            "-P -N _s.txt -w1024 -c3 -r4 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97", 
-                                            "-w 0 -c 1 -r 3 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97", 
-                                          });
-            }
-            if (Sources.Count == 0)
-            {
-                Sources.AddRange(new string[] { "DVD-5", "DVD-9", "HDTV", "SDTV", "Blu-ray Disc", "HD DVD", "Laser Disc", "VHS" });
-            }
-            if (Extras.Count == 0)
-            {
-                Extras.AddRange(new string[] { "Intact", "Shrunk", "Removed", "None on Source" });
-            }
-            if (AuthoringModes.Count == 0)
-            {
-                AuthoringModes.AddRange(new string[] { "Untouched", "Shrunk" });
-            }
-            if (DiscMenus.Count == 0)
-            {
-                DiscMenus.AddRange(new string[] { "Intact", "Removed", "Shrunk" });
-            }
-            if (MTNFonts.Count == 0)
-            {
-                MTNFonts.AddRange(new string[] { "arial.ttf", "tahomabd.ttf" });
-            }
         }
 
         // Misc
