@@ -388,7 +388,7 @@ namespace TDMaker
 
             Program.conf.TorrentFolderDefault = rbTorrentDefaultFolder.Checked;
 
-            Program.conf.ImageUploader = (ImageDestType)cboScreenshotDest.SelectedIndex;
+            Program.conf.ImageUploader = (ImageDestType2)cboScreenshotDest.SelectedIndex;
 
             Program.conf.Write();
 
@@ -543,17 +543,8 @@ namespace TDMaker
             SettingsReadOptions();
 
             cboScreenshotDest.Items.Clear();
-            foreach (ImageDestType sdt in Enum.GetValues(typeof(ImageDestType)))
+            foreach (ImageDestType2 sdt in Enum.GetValues(typeof(ImageDestType2)))
             {
-                //switch (sdt)
-                //{
-                //case ImageDestType.IMAGEBIN:
-                //case ImageDestType.IMAGESHACK:
-                //case ImageDestType.IMGUR:
-                //case ImageDestType.TINYPIC:
-
-                //     break;
-                // }
                 cboScreenshotDest.Items.Add(sdt.GetDescription());
             }
             cboScreenshotDest.SelectedIndex = (int)Program.conf.ImageUploader;
@@ -619,14 +610,14 @@ namespace TDMaker
             this.nudMTN_F_FontSize.Value = Program.conf.ScreenshotSettings.F_FontSize;
             this.chkMTN_L_LocInfo.Checked = Program.conf.chkMTN_L_LocInfo;
             this.nudMTN_j_JPEGQuality.Value = Program.conf.ScreenshotSettings.j_JpgQuality;
-            this.chkMTN_tL_LocTimestamp.Checked = Program.conf.chkMTN_tL_LocTimestamp;
+            this.chkMTN_tL_LocTimestamp.Checked = Program.conf.chkMTN_L_LocTimestamp;
             this.chkMTN_k_ColorBackground.Checked = Program.conf.chkMTN_k_ColorBackground;
-            this.chkMTN_g_Gap.Checked = Program.conf.chk_g_Gap;
+            this.chkMTN_g_Gap.Checked = Program.conf.chkMTN_g_Gap;
             this.cboMTN_k_ColorBkgrd.Text = Program.conf.ScreenshotSettings.k_ColorBackground;
             this.nudMTN_w_Width.Value = Program.conf.ScreenshotSettings.w_Width;
             this.nudMTN_c_Columns.Value = Program.conf.ScreenshotSettings.c_Columns;
             this.chkMTN_P_QuitAfterDone.Checked = Program.conf.ScreenshotSettings.P_QuitAfterDone;
-            this.chk_w_Width.Checked = Program.conf.chk_w_Width;
+            this.chk_w_Width.Checked = Program.conf.chkMTN_w_Width;
             this.txtMTN_N_InfoSuffix.Text = Program.conf.ScreenshotSettings.N_InfoSuffix;
             this.cboMTN_f_FontType.Text = Program.conf.ScreenshotSettings.f_Font;
             this.chkMTN_j_JPEGQuality.Checked = Program.conf.chkMTN_j_JPEGQuality;
@@ -1247,7 +1238,7 @@ namespace TDMaker
 
         private void cboScreenshotDest_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Program.conf.ImageUploader = (ImageDestType)cboScreenshotDest.SelectedIndex;
+            Program.conf.ImageUploader = (ImageDestType2)cboScreenshotDest.SelectedIndex;
             tpHostingImageShack.Enabled = cboScreenshotDest.SelectedIndex == 0;
         }
 
@@ -1724,15 +1715,21 @@ namespace TDMaker
 
         private void btnAddTrackerGroup_Click(object sender, EventArgs e)
         {
-            TrackerGroup tg = new TrackerGroup("Linux ISOs");
-            Tracker t = new Tracker("Ubuntu", "http://torrent.ubuntu.com:6969");
-            tg.Trackers.Add(t);
+        	ZScreenLib.InputBox ib = new ZScreenLib.InputBox();
+        	ib.Title = "Enter group name";
+        	ib.InputText = "Linux ISOs";
+        	if (ib.ShowDialog() == DialogResult.OK) 
+        	{
+        		TrackerGroup tg = new TrackerGroup(ib.InputText);
+            	Tracker t = new Tracker("Ubuntu", "http://torrent.ubuntu.com:6969");
+            	tg.Trackers.Add(t);
 
-            Program.conf.TrackerGroups.Add(tg);
-            lbTrackerGroups.Items.Add(tg);
-            lbTrackerGroups.SelectedIndex = lbTrackerGroups.Items.Count - 1;
+            	Program.conf.TrackerGroups.Add(tg);
+            	lbTrackerGroups.Items.Add(tg);
+            	lbTrackerGroups.SelectedIndex = lbTrackerGroups.Items.Count - 1;
 
-            btnRefreshTrackers_Click(sender, e);
+            	btnRefreshTrackers_Click(sender, e);
+        	}
         }
 
         private void btnRemoveTrackerGroup_Click(object sender, EventArgs e)
@@ -1775,6 +1772,31 @@ namespace TDMaker
         private void txtTorrentCustomFolder_TextChanged(object sender, EventArgs e)
         {
 
+        }
+        
+        void BtnAddTrackerClick(object sender, EventArgs e)
+        {
+        	if (lbTrackerGroups.SelectedIndex > -1) 
+        	{
+        		TrackerGroup tg = lbTrackerGroups.Items[lbTrackerGroups.SelectedIndex] as TrackerGroup;
+        		if (tg != null) 
+        		{
+        			Tracker t = new Tracker("Ubuntu", "http://torrent.ubuntu.com:6969");
+            		tg.Trackers.Add(t);        			        			
+            		lbTrackers.Items.Add(t);
+            		lbTrackers.SelectedIndex = lbTrackers.Items.Count - 1;
+        		}
+        	}
+        }
+        
+        void PgTrackerPropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        {
+            if (lbTrackers.SelectedIndex > -1 && lbTrackerGroups.SelectedIndex > -1)
+            {
+                int sel = lbTrackers.SelectedIndex;
+                lbTrackers.Items[sel] = (Tracker)pgTracker.SelectedObject;                
+                Program.conf.TrackerGroups[lbTrackerGroups.SelectedIndex].Trackers[lbTrackers.SelectedIndex] = (Tracker)pgTracker.SelectedObject;
+            }	
         }
     }
 }

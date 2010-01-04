@@ -26,6 +26,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using MS.WindowsAPICodePack.Internal;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using UploadersLib;
 using TDMakerLib;
@@ -36,7 +37,7 @@ namespace TDMakerLib
     {
         public bool PreferSystemFolders { get; private set; }
         public string RootFolder { get; private set; }
-        public ImageDestType ImageDestinationType { get; private set; }
+        public ImageDestType2 ImageDestinationType { get; private set; }
 
         public ConfigWizard(string rootDir)
         {
@@ -44,20 +45,11 @@ namespace TDMakerLib
             this.Text = string.Format("TDMaker {0} - Configuration Wizard", Application.ProductVersion);
             txtRootFolder.Text = rootDir;
             this.RootFolder = rootDir;
-            foreach (ImageDestType sdt in Enum.GetValues(typeof(ImageDestType)))
+            foreach (ImageDestType2 sdt in Enum.GetValues(typeof(ImageDestType2)))
             {
-                //switch (sdt)
-                //{
-                //    case ImageDestType.IMAGEBIN:
-                //    case ImageDestType.IMAGESHACK:
-                //    case ImageDestType.IMGUR:
-                //    case ImageDestType.TINYPIC:
-                //        cboScreenshotDest.Items.Add(sdt.GetDescription());
-                //        break;
-                //}
                 cboScreenshotDest.Items.Add(sdt.GetDescription());
             }
-            cboScreenshotDest.SelectedIndex = (int)ImageDestType.IMAGESHACK;
+            cboScreenshotDest.SelectedIndex = (int)ImageDestType2.IMAGESHACK;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -69,17 +61,34 @@ namespace TDMakerLib
         private void btnBrowseRootDir_Click(object sender, EventArgs e)
         {
             string oldDir = txtRootFolder.Text;
-            CommonOpenFileDialog cfd = new CommonOpenFileDialog();
-            cfd.EnsureReadOnly = true;
-            cfd.IsFolderPicker = true;
-            cfd.AllowNonFileSystemItems = true;
-            cfd.Title = "Configure Root diretory...";
-
-            if (cfd.ShowDialog() == CommonFileDialogResult.OK)
+            string newDir = string.Empty;
+            if (CoreHelpers.RunningOnWin7) 
             {
-                txtRootFolder.Text = cfd.FileName;
+            	CommonOpenFileDialog dlg = new CommonOpenFileDialog();
+            	dlg.EnsureReadOnly = true;
+            	dlg.IsFolderPicker = true;
+            	dlg.AllowNonFileSystemItems = true;
+            	dlg.Title = "Configure Root diretory...";
+
+            	if (dlg.ShowDialog() == CommonFileDialogResult.OK)
+            	{
+            		newDir = dlg.FileName;
+            	}
+            }
+            else
+            {
+            	FolderBrowserDialog dlg = new FolderBrowserDialog();
+            	dlg.Description = "Configure Root diretory...";
+            	if (dlg.ShowDialog() == DialogResult.OK)
+            	{
+            		newDir = dlg.SelectedPath;
+            	}
+            }
+            if (!string.IsNullOrEmpty(newDir))
+            {
+            	txtRootFolder.Text = newDir;
                 RootFolder = txtRootFolder.Text;
-                FileSystem.MoveDirectory(oldDir, txtRootFolder.Text);
+                FileSystem.MoveDirectory(oldDir, txtRootFolder.Text);            	
             }
         }
 
@@ -93,7 +102,7 @@ namespace TDMakerLib
 
         private void cboScreenshotDest_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ImageDestinationType = (ImageDestType)cboScreenshotDest.SelectedIndex;
+            ImageDestinationType = (ImageDestType2)cboScreenshotDest.SelectedIndex;
         }
 
         private void chkPreferSystemFolders_CheckedChanged(object sender, EventArgs e)

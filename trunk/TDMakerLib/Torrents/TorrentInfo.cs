@@ -108,19 +108,19 @@ namespace TDMakerLib
             {
                 ImageFileManager imf = null;
 
-                switch ((ImageDestType)Program.conf.ImageUploader)
+                switch ((ImageDestType2)Program.conf.ImageUploader)
                 {
-                    case ImageDestType.IMAGESHACK:
+                    case ImageDestType2.IMAGESHACK:
                         imageUploader = new ImageShackUploader("16BCFGWY58707bec94f7b0a773d0aa8bbf301900", Program.conf.ImageShackRegCode, UploadMode.ANONYMOUS);
                         // ((ImageShackUploader)imageUploader).RandomizeFileName = Program.conf.ImageShakeRandomizeFileName;
                         break;
-                    case ImageDestType.TINYPIC:
+                    case ImageDestType2.TINYPIC:
                         imageUploader = new TinyPicUploader("e2aabb8d555322fa", "00a68ed73ddd54da52dc2d5803fa35ee", UploadMode.ANONYMOUS);
                         break;
-                    case ImageDestType.IMAGEBIN:
+                    case ImageDestType2.IMAGEBIN:
                         imageUploader = new ImageBin();
                         break;
-                    case ImageDestType.IMGUR:
+                    case ImageDestType2.IMGUR:
                         imageUploader = new Imgur();
                         break;
                     default:

@@ -16,11 +16,11 @@ namespace TDMakerLib
 
         public string RootDir { get; set; }
         public string XMLSettingsFile { get; set; }
-        public ImageDestType ImageUploader { get; set; }
+        public ImageDestType2 ImageUploader { get; set; }
 
         public AppSettings()
         {
-            ImageUploader = ImageDestType.IMAGESHACK;
+            ImageUploader = ImageDestType2.IMAGESHACK;
         }
 
         public static AppSettings Read()
