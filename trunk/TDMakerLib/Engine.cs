@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace TDMakerLib
 {
-    public static class Program
+    public static class Engine
     {
         public const string PROGRAM_FILES_APP_NAME = "TDMaker";
         private static string mProductName = Application.ProductName;
@@ -15,18 +15,30 @@ namespace TDMakerLib
         public static bool Portable { get; private set; }
         public static bool MultipleInstance { get; private set; }
 
-        internal static readonly string LocalAppDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName);
-        public static AppSettings appSettings = AppSettings.Read();
+        internal static readonly string zRoamingAppDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Application.ProductName);
+        internal static readonly string zLocalAppDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName);
+
+        internal static readonly string zLogsDir = Path.Combine(zLocalAppDataFolder, "Logs");
+        internal static readonly string zPicturesDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), Application.ProductName);
+        internal static readonly string zSettingsDir = Path.Combine(zRoamingAppDataFolder, "Settings");
+        internal static readonly string zTemplatesDir = Path.Combine(zRoamingAppDataFolder, "Templates");
+        internal static readonly string zTorrentsDir = Path.Combine(zLocalAppDataFolder, "Torrents");
+        public static readonly string zTempDir = Path.Combine(zLocalAppDataFolder, "Temp");
+
+        public static AppSettings mAppSettings = AppSettings.Read();
 
         private static readonly string PortableRootFolder = Application.ProductName; // using relative paths
         public static string DefaultRootAppFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), Application.ProductName);
         public static string RootAppFolder { get; set; }
 
-        public static string SettingsDir { get; set; }
-        public static string LogsDir { get; set; }
+        public static string LogsDir = zLogsDir;
+        public static string PicturesDir = zPicturesDir;
+        public static string SettingsDir = zSettingsDir;
+        public static string TemplatesDir = conf != null && conf.UseCustomTemplatesDir ? conf.CustomTemplatesDir : TemplatesDir;
+        public static string TorrentsDir = conf != null && conf.UseCustomTorrentsDir ? conf.CustomTorrentsDir : TorrentsDir;
+
         public static bool IsUNIX { get; private set; }
 
-        public readonly static string ScreenshotsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "MTN");
         public readonly static string ScreenshotsTempDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), PROGRAM_FILES_APP_NAME);
 
         private static string[] AppDirs;
@@ -88,7 +100,7 @@ namespace TDMakerLib
 
         public static string GetScreenShotsDir()
         {
-            return (Program.conf.KeepScreenshot ? Program.ScreenshotsDir : Program.ScreenshotsTempDir);
+            return (Engine.conf.KeepScreenshot ? Engine.zPicturesDir : Engine.ScreenshotsTempDir);
         }
 
         public static bool MediaIsDisc(string p)
@@ -131,10 +143,10 @@ namespace TDMakerLib
 
         public static void ClearScreenshots()
         {
-            if (!Program.conf.KeepScreenshot)
+            if (!Engine.conf.KeepScreenshot)
             {
                 // delete if option set to temporary location 
-                string[] files = Directory.GetFiles(Program.ScreenshotsTempDir, "*.*", SearchOption.AllDirectories);
+                string[] files = Directory.GetFiles(Engine.ScreenshotsTempDir, "*.*", SearchOption.AllDirectories);
                 foreach (string screenshot in files)
                 {
                     try
@@ -182,7 +194,7 @@ namespace TDMakerLib
             {
                 // Copy Default Templates to Templates folder
                 string dPrefix = string.Format("Templates.{0}.", name);
-                string tDir = Path.Combine(Program.conf.TemplatesDir, name);
+                string tDir = Path.Combine(Engine.TemplatesDir, name);
                 if (!Directory.Exists(tDir))
                 {
                     Directory.CreateDirectory(tDir);
@@ -205,7 +217,6 @@ namespace TDMakerLib
             }
 
         }
-
 
         public static string GetText(string name)
         {
@@ -236,10 +247,24 @@ namespace TDMakerLib
         /// </summary>
         public static void InitializeDefaultFolderPaths()
         {
-            LogsDir = Path.Combine(RootAppFolder, "Logs");
-            SettingsDir = Path.Combine(RootAppFolder, "Settings");
+            if (mAppSettings.PreferSystemFolders)
+            {
+                LogsDir = zLogsDir;
+                PicturesDir = zPicturesDir;
+                SettingsDir = zSettingsDir;
+                TemplatesDir = zTemplatesDir;
+                TorrentsDir = zTorrentsDir;
+            }
+            else
+            {
+                LogsDir = Path.Combine(RootAppFolder, "Logs");
+                PicturesDir = Path.Combine(RootAppFolder, "Screenshots");
+                SettingsDir = Path.Combine(RootAppFolder, "Settings");
+                TemplatesDir = Path.Combine(RootAppFolder, "Templates");
+                TorrentsDir = Path.Combine(RootAppFolder, "Torrents");
+            }
 
-            AppDirs = new[] { LogsDir, SettingsDir };
+            AppDirs = new[] { LogsDir, PicturesDir, SettingsDir, TorrentsDir };
 
             foreach (string dp in AppDirs)
             {
@@ -257,39 +282,61 @@ namespace TDMakerLib
             }
         }
 
-        public static void Load()
+        public static bool Load()
         {
             FileSystem.AppendDebug("Operating System: " + Environment.OSVersion.VersionString);
             FileSystem.AppendDebug("Product Version: " + mAppInfo.GetApplicationTitleFull());
+            DialogResult configResult = DialogResult.OK;
 
             if (Directory.Exists(Path.Combine(Application.StartupPath, PortableRootFolder)))
             {
                 Portable = true;
+                mAppSettings.PreferSystemFolders = false;
                 RootAppFolder = PortableRootFolder;
                 mProductName += " Portable";
                 mAppInfo.AppName = mProductName;
             }
             else
             {
-                if (string.IsNullOrEmpty(Program.appSettings.RootDir))
+                if (string.IsNullOrEmpty(Engine.mAppSettings.RootDir))
                 {
                     ConfigWizard cw = new ConfigWizard(DefaultRootAppFolder);
-                    cw.ShowDialog();
-                    Program.appSettings.RootDir = cw.RootFolder;
-                    Program.appSettings.ImageUploader = cw.ImageDestinationType;
+                    configResult = cw.ShowDialog();
+                    Engine.mAppSettings.RootDir = cw.RootFolder;
+                    Engine.mAppSettings.PreferSystemFolders = cw.PreferSystemFolders;
+                    Engine.mAppSettings.ImageUploader = cw.ImageDestinationType;
                     RunConfig = true;
                 }
-                RootAppFolder = Program.appSettings.RootDir;
+                if (!string.IsNullOrEmpty(Engine.mAppSettings.RootDir))
+                {
+                    RootAppFolder = Engine.mAppSettings.RootDir;
+                }
+                else
+                {
+                    RootAppFolder = DefaultRootAppFolder;
+                }
             }
-
-            Program.InitializeDefaultFolderPaths(); // happens before XMLSettings is readed
-            conf = XMLSettingsCore.Read();
+            if (configResult == DialogResult.OK)
+            {
+                FileSystem.AppendDebug("Config file: " + AppSettings.AppSettingsFile);
+                FileSystem.AppendDebug(string.Format("Root Folder: {0}", mAppSettings.PreferSystemFolders ? zLocalAppDataFolder : RootAppFolder));
+                FileSystem.AppendDebug("Initializing Default folder paths...");
+                Engine.InitializeDefaultFolderPaths(); // happens before XMLSettings is readed
+                conf = XMLSettingsCore.Read();
+            }
+            return configResult == DialogResult.OK;
         }
 
         public static void Unload()
         {
-            conf.Write();
-            appSettings.Write();
+            if (conf != null)
+            {
+                conf.Write();
+            }
+            if (!Portable)
+            {
+                mAppSettings.Write();
+            }
         }
     }
 }

@@ -75,7 +75,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FontDialogEditor.cs" />
+    <Compile Include="Helpers\FontDialogEditor.cs" />
     <Compile Include="Helpers\ColorDialogEditor.cs" />
     <Compile Include="Helpers\ExeFileNameEditor.cs" />
     <Compile Include="Forms\AboutBox.cs">
@@ -109,7 +109,7 @@
     <Compile Include="MediaInfo\MediaInfoDLL.cs" />
     <Compile Include="MediaInfo\NfoReport.cs" />
     <Compile Include="MediaInfo\Screenshot.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Engine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\XMLSettingsScreenshot.cs" />
     <Compile Include="Helpers\XMLSettingsCore.cs" />

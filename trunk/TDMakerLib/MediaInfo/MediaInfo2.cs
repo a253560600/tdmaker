@@ -225,7 +225,7 @@ namespace TDMakerLib
                         this.Overall.FileSizeString = string.Format("{0} MiB", (this.Overall.FileSize / 1024.0 / 1024.0).ToString("0.00"));
 
                         this.Overall.Duration = dura;
-                        this.Overall.DurationString = Program.GetDurationString(dura);
+                        this.Overall.DurationString = Engine.GetDurationString(dura);
 
                     }
 
@@ -265,17 +265,17 @@ namespace TDMakerLib
 
         private string ToStringMedia()
         {
-            int fontSizeHeading1 = (int)(Program.conf.PreText && Program.conf.LargerPreText == true ?
-        Program.conf.FontSizeHeading1 + Program.conf.FontSizeIncr :
-        Program.conf.FontSizeHeading1);
+            int fontSizeHeading1 = (int)(Engine.conf.PreText && Engine.conf.LargerPreText == true ?
+        Engine.conf.FontSizeHeading1 + Engine.conf.FontSizeIncr :
+        Engine.conf.FontSizeHeading1);
 
-            int fontSizeHeading2 = (int)(Program.conf.PreText && Program.conf.LargerPreText == true ?
-                Program.conf.FontSizeHeading2 + Program.conf.FontSizeIncr :
-                Program.conf.FontSizeHeading2);
+            int fontSizeHeading2 = (int)(Engine.conf.PreText && Engine.conf.LargerPreText == true ?
+                Engine.conf.FontSizeHeading2 + Engine.conf.FontSizeIncr :
+                Engine.conf.FontSizeHeading2);
 
-            int fontSizeBody = (int)(Program.conf.PreText && Program.conf.LargerPreText == true ?
-                Program.conf.FontSizeBody + Program.conf.FontSizeIncr :
-                Program.conf.FontSizeBody);
+            int fontSizeBody = (int)(Engine.conf.PreText && Engine.conf.LargerPreText == true ?
+                Engine.conf.FontSizeBody + Engine.conf.FontSizeIncr :
+                Engine.conf.FontSizeBody);
 
 
             BbCode bb = new BbCode();
@@ -283,7 +283,7 @@ namespace TDMakerLib
             StringBuilder sbBody = new StringBuilder();
 
             // Show Title
-            if (Program.conf.bTitle)
+            if (Engine.conf.bTitle)
             {
                 sbBody.AppendLine(bb.Size(fontSizeHeading1, bb.Bold(this.Title)));
                 sbBody.AppendLine();
@@ -292,7 +292,7 @@ namespace TDMakerLib
             StringBuilder sbTitleInfo = new StringBuilder();
 
             // Source 
-            if (Program.conf.bSource && !string.IsNullOrEmpty(Program.conf.Source))
+            if (Engine.conf.bSource && !string.IsNullOrEmpty(Engine.conf.Source))
             {
                 sbTitleInfo.AppendLine(string.Format("[u]Source:[/u] {0}", this.Source));
             }
@@ -300,21 +300,21 @@ namespace TDMakerLib
             if (MediaType == MediaType.MEDIA_DISC)
             {
                 // Authoring
-                if (Program.conf.bAuthoring && !string.IsNullOrEmpty(this.Authoring))
+                if (Engine.conf.bAuthoring && !string.IsNullOrEmpty(this.Authoring))
                 {
                     sbTitleInfo.AppendLine(string.Format("[u]Authoring:[/u] {0}", this.Authoring));
                 }
-                if (Program.conf.bDiscMenu && !string.IsNullOrEmpty(this.Menu))
+                if (Engine.conf.bDiscMenu && !string.IsNullOrEmpty(this.Menu))
                 {
                     sbTitleInfo.AppendLine(string.Format("[u]Menu:[/u] {0}", this.Menu));
                 }
                 // Extras
-                if (Program.conf.bExtras && !string.IsNullOrEmpty(this.Extras))
+                if (Engine.conf.bExtras && !string.IsNullOrEmpty(this.Extras))
                 {
                     sbTitleInfo.AppendLine(string.Format("[u]Extras:[/u] {0}", this.Extras));
                 }
                 // WebLink
-                if (Program.conf.bWebLink && !string.IsNullOrEmpty(this.WebLink))
+                if (Engine.conf.bWebLink && !string.IsNullOrEmpty(this.WebLink))
                 {
                     sbTitleInfo.AppendLine(string.Format("[u]Web Link:[/u] {0}", this.WebLink));
                 }

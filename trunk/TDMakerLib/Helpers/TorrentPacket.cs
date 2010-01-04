@@ -19,17 +19,17 @@ namespace TDMakerLib
         {
             string dir = "";
 
-            if (!Program.conf.TorrentFolderDefault &&
-                Directory.Exists(Program.conf.TorrentsCustomDir))
+            if (!Engine.conf.TorrentFolderDefault &&
+                Directory.Exists(Engine.conf.CustomTorrentsDir))
             {
 
-                if (Program.conf.TorrentsOrganize)
+                if (Engine.conf.TorrentsOrganize)
                 {
-                    dir = Path.Combine(Program.conf.TorrentsCustomDir, TrackerGroupActive.Name);
+                    dir = Path.Combine(Engine.conf.CustomTorrentsDir, TrackerGroupActive.Name);
                 }
                 else
                 {
-                    dir = Program.conf.TorrentsCustomDir;
+                    dir = Engine.conf.CustomTorrentsDir;
                 }
             }
             else

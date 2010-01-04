@@ -117,7 +117,7 @@ namespace TDMakerLib
         [Category("MTN"), DefaultValue(false), Description("Show MTN during file creation")]
         public bool ShowMTNWindow { get; set; }
         [EditorAttribute(typeof(ExeFileNameEditor), typeof(UITypeEditor))]
-        [Category("MTN"), DefaultValue("mtn.exe"), Description("MTN Argument")]
+        [Category("MTN"), Description("MTN Argument")]
         public string MTNPath { get; set; }
         [Category("MTN"), DefaultValue("-P -w 0 -c 1 -r 3 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97"), Description("MTN Argument")]
         public string MTNArg { get; set; }
@@ -129,7 +129,7 @@ namespace TDMakerLib
 
         // Tab 4.3 - Options - Torrent Creator
         [Browsable(false)]
-        public int AnnounceURLIndex { get; set; }
+        public int TrackerGroupActive { get; set; }
         [Category("Torrent Creator"), DefaultValue(false), Description("Create Torrent")]
         public bool TorrentCreateAuto { get; set; }
         [Category("Torrent Creator"), DefaultValue(false), Description("Create torrents in the same folders as the media file")]
@@ -139,14 +139,16 @@ namespace TDMakerLib
         public List<TrackerGroup> TrackerGroups = new List<TrackerGroup>();
 
         // Tab 4.4 - Options - Paths
-        [Category("Options / Paths"), Description("Browse to reconfigure the Settings folder path")]
-        [EditorAttribute(typeof(FolderNameEditor), typeof(UITypeEditor))]
-        public string SettingsDir { get; set; }
+        [Category("Options / Paths"), DefaultValue(false), Description("Use custom Templates directory")]
+        public bool UseCustomTemplatesDir { get; set; }
         [Category("Options / Paths"), Description("Browse to reconfigure the Templates folder path")]
         [EditorAttribute(typeof(FolderNameEditor), typeof(UITypeEditor))]
-        public string TemplatesDir { get; set; }
+        public string CustomTemplatesDir { get; set; }
+        [Category("Options / Paths"), DefaultValue(false), Description("Use custom Torrents directory")]
+        public bool UseCustomTorrentsDir { get; set; }
         [Category("Options / Paths"), Description("Browse to change where torrent files are saved")]
-        public string TorrentsCustomDir { get; set; }
+        [EditorAttribute(typeof(FolderNameEditor), typeof(UITypeEditor))]
+        public string CustomTorrentsDir { get; set; }
 
         [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
         public bool chkMTN_g_Gap { get; set; }
@@ -213,34 +215,34 @@ namespace TDMakerLib
 
         public void Write()
         {
-            Write(Program.appSettings.XMLSettingsFile);
+            Write(Engine.mAppSettings.XMLSettingsFile);
         }
 
         public static XMLSettingsCore Read()
         {
-            string settingsFile = Program.appSettings.GetSettingsFilePath();
+            string settingsFile = Engine.mAppSettings.GetSettingsFilePath();
             if (!File.Exists(settingsFile))
             {
-                if (File.Exists(Program.appSettings.XMLSettingsFile))
+                if (File.Exists(Engine.mAppSettings.XMLSettingsFile))
                 {
                     // Step 2 - Attempt to read previous Application Version specific Settings file
-                    settingsFile = Program.appSettings.XMLSettingsFile;
+                    settingsFile = Engine.mAppSettings.XMLSettingsFile;
                 }
                 else
                 {
                     // Step 3 - Attempt to read conventional Settings file
-                    settingsFile = Program.XMLSettingsFile;
+                    settingsFile = Engine.XMLSettingsFile;
                 }
             }
 
-            if (File.Exists(settingsFile) && settingsFile != Program.appSettings.GetSettingsFilePath())
+            if (File.Exists(settingsFile) && settingsFile != Engine.mAppSettings.GetSettingsFilePath())
             {
                 // Update AppSettings.xml
-                File.Copy(settingsFile, Program.appSettings.GetSettingsFilePath());
+                File.Copy(settingsFile, Engine.mAppSettings.GetSettingsFilePath());
             }
 
-            Program.appSettings.XMLSettingsFile = Program.appSettings.GetSettingsFilePath();
-            return Read(Program.appSettings.XMLSettingsFile);
+            Engine.mAppSettings.XMLSettingsFile = Engine.mAppSettings.GetSettingsFilePath();
+            return Read(Engine.mAppSettings.XMLSettingsFile);
         }
 
         public static XMLSettingsCore Read(string filePath)

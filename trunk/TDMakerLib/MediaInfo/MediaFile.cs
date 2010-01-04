@@ -111,7 +111,7 @@ namespace TDMakerLib
                     mMI.Option("Complete");
                     this.Summary = mMI.Inform();
 
-                    if (Program.IsUNIX)
+                    if (Engine.IsUNIX)
                     {
                         Console.WriteLine(string.Format("MediaInfo Summary Length: {0}", this.Summary.Length.ToString()));
                         Console.WriteLine(string.Format("MediaInfo Summary: {0}", this.Summary));
@@ -281,13 +281,13 @@ namespace TDMakerLib
         public override string ToString()
         {
 
-            int fontSizeHeading3 = (int)(Program.conf.PreText && Program.conf.LargerPreText == true ?
-           Program.conf.FontSizeHeading3 + Program.conf.FontSizeIncr :
-           Program.conf.FontSizeHeading3);
+            int fontSizeHeading3 = (int)(Engine.conf.PreText && Engine.conf.LargerPreText == true ?
+           Engine.conf.FontSizeHeading3 + Engine.conf.FontSizeIncr :
+           Engine.conf.FontSizeHeading3);
 
-            int fontSizeBody = (int)(Program.conf.PreText && Program.conf.LargerPreText == true ?
-                Program.conf.FontSizeBody + Program.conf.FontSizeIncr :
-                Program.conf.FontSizeBody);
+            int fontSizeBody = (int)(Engine.conf.PreText && Engine.conf.LargerPreText == true ?
+                Engine.conf.FontSizeBody + Engine.conf.FontSizeIncr :
+                Engine.conf.FontSizeBody);
 
 
             BbCode bb = new BbCode();

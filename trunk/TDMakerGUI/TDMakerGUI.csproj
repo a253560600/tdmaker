@@ -48,7 +48,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GUI\InputBox.cs" />
+    <Compile Include="GUI\InputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GUI\RunOnceWindow.cs">
       <SubType>Form</SubType>
     </Compile>

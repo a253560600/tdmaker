@@ -6,17 +6,20 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Threading;
 using UploadersLib;
+using System.ComponentModel;
 
 namespace TDMakerLib
 {
     [Serializable]
     public class AppSettings
     {
-        private static string AppSettingsFile = Path.Combine(Program.LocalAppDataFolder, "AppSettings.xml");
+        public readonly static string AppSettingsFile = Path.Combine(Engine.zLocalAppDataFolder, "AppSettings.xml");
 
         public string RootDir { get; set; }
         public string XMLSettingsFile { get; set; }
         public ImageDestType2 ImageUploader { get; set; }
+        [Category("Options / General"), DefaultValue(false), Description("Prefer System Folders for all the data created by ZScreen")]
+        public bool PreferSystemFolders { get; set; }
 
         public AppSettings()
         {
@@ -30,7 +33,7 @@ namespace TDMakerLib
 
         public string GetSettingsFilePath()
         {
-            return Path.Combine(Program.SettingsDir, Program.XMLFileName);
+            return Path.Combine(Engine.SettingsDir, Engine.XMLFileName);
         }
 
         public static AppSettings Read(string filePath)

@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TDMakerLib")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Torrent Description Maker")]
+[assembly: AssemblyDescription("Program used to create a Media Description, Screenshot and a Torrent of a Media file")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("McoreD")]
 [assembly: AssemblyProduct("TDMakerLib")]
-[assembly: AssemblyCopyright("Copyright ©  2009")]
+[assembly: AssemblyCopyright("Copyright © McoreD 2009 - 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
