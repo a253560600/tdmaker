@@ -266,17 +266,17 @@ namespace TDMakerLib
         private string GetStyles(string pattern)
         {
 
-            int fontSizeHeading1 = (int)(Program.conf.PreText && Program.conf.LargerPreText == true ?
-                Program.conf.FontSizeHeading1 + Program.conf.FontSizeIncr : Program.conf.FontSizeHeading1);
+            int fontSizeHeading1 = (int)(Engine.conf.PreText && Engine.conf.LargerPreText == true ?
+                Engine.conf.FontSizeHeading1 + Engine.conf.FontSizeIncr : Engine.conf.FontSizeHeading1);
 
-            int fontSizeHeading2 = (int)(Program.conf.PreText && Program.conf.LargerPreText == true ?
-                Program.conf.FontSizeHeading2 + Program.conf.FontSizeIncr : Program.conf.FontSizeHeading2);
+            int fontSizeHeading2 = (int)(Engine.conf.PreText && Engine.conf.LargerPreText == true ?
+                Engine.conf.FontSizeHeading2 + Engine.conf.FontSizeIncr : Engine.conf.FontSizeHeading2);
 
-            int fontSizeHeading3 = (int)(Program.conf.PreText && Program.conf.LargerPreText == true ?
-                Program.conf.FontSizeHeading3 + Program.conf.FontSizeIncr : Program.conf.FontSizeHeading3);
+            int fontSizeHeading3 = (int)(Engine.conf.PreText && Engine.conf.LargerPreText == true ?
+                Engine.conf.FontSizeHeading3 + Engine.conf.FontSizeIncr : Engine.conf.FontSizeHeading3);
 
-            int fontSizeBody = (int)(Program.conf.PreText && Program.conf.LargerPreText == true ?
-                Program.conf.FontSizeBody + Program.conf.FontSizeIncr : Program.conf.FontSizeBody);
+            int fontSizeBody = (int)(Engine.conf.PreText && Engine.conf.LargerPreText == true ?
+                Engine.conf.FontSizeBody + Engine.conf.FontSizeIncr : Engine.conf.FontSizeBody);
 
             pattern = Regex.Replace(pattern, "%FontSize_Body%", fontSizeBody.ToString(), RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%FontSize_Heading1%", fontSizeHeading1.ToString(), RegexOptions.IgnoreCase);

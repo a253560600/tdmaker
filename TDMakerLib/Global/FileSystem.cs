@@ -11,7 +11,7 @@ namespace TDMakerLib
     public static class FileSystem
     {
         public static StringBuilder mDebug = new StringBuilder();
-        public static string DebugLogFilePath { get; set; }
+        public static string DebugLogFilePath = Path.Combine(Engine.LogsDir, string.Format("{0}-{1}-debug.txt", Application.ProductName, DateTime.Now.ToString("yyyyMMdd")));
 
         public static void AppendDebug(Exception ex)
         {
@@ -28,41 +28,41 @@ namespace TDMakerLib
 
         public static void OpenDirTorrents()
         {
-            if (Directory.Exists(Program.conf.TorrentsCustomDir))
+            if (Directory.Exists(Engine.conf.CustomTorrentsDir))
             {
-                Process.Start(Program.conf.TorrentsCustomDir);
+                Process.Start(Engine.conf.CustomTorrentsDir);
             }
         }
 
         public static void OpenDirScreenshots()
         {
-            if (Directory.Exists(Program.GetScreenShotsDir()))
+            if (Directory.Exists(Engine.GetScreenShotsDir()))
             {
-                Process.Start(Program.GetScreenShotsDir());
+                Process.Start(Engine.GetScreenShotsDir());
             }
         }
 
         public static void OpenDirTemplates()
         {
-            if (Directory.Exists(Program.conf.TemplatesDir))
+            if (Directory.Exists(Engine.TemplatesDir))
             {
-                Process.Start(Program.conf.TemplatesDir);
+                Process.Start(Engine.TemplatesDir);
             }
         }
 
         public static void OpenDirLogs()
         {
-            if (Directory.Exists(Program.LogsDir))
+            if (Directory.Exists(Engine.LogsDir))
             {
-                Process.Start(Program.LogsDir);
+                Process.Start(Engine.LogsDir);
             }
         }
 
         public static void OpenDirSettings()
         {
-            if (Directory.Exists(Program.conf.SettingsDir))
+            if (Directory.Exists(Engine.SettingsDir))
             {
-                Process.Start(Program.conf.SettingsDir);
+                Process.Start(Engine.SettingsDir);
             }
         }
 

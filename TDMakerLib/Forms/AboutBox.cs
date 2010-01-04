@@ -23,7 +23,7 @@ namespace TDMakerLib
             sbDesc.AppendLine(Application.StartupPath);
             sbDesc.AppendLine();
             sbDesc.AppendLine("Settings file:");
-            sbDesc.AppendLine(Program.DefaultXMLFilePath);
+            sbDesc.AppendLine(Engine.DefaultXMLFilePath);
             this.textBoxDescription.Text = sbDesc.ToString();
         }
 
@@ -106,5 +106,10 @@ namespace TDMakerLib
             }
         }
         #endregion
+
+        private void AboutBox_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

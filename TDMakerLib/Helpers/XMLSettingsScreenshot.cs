@@ -115,34 +115,34 @@ namespace TDMakerLib
 
         public void Write()
         {
-            Write(Program.appSettings.XMLSettingsFile);
+            Write(Engine.mAppSettings.XMLSettingsFile);
         }
 
         public static XMLSettingsScreenshot Read()
         {
-            string settingsFile = Program.appSettings.GetSettingsFilePath();
+            string settingsFile = Engine.mAppSettings.GetSettingsFilePath();
             if (!File.Exists(settingsFile))
             {
-                if (File.Exists(Program.appSettings.XMLSettingsFile))
+                if (File.Exists(Engine.mAppSettings.XMLSettingsFile))
                 {
                     // Step 2 - Attempt to read previous Application Version specific Settings file
-                    settingsFile = Program.appSettings.XMLSettingsFile;
+                    settingsFile = Engine.mAppSettings.XMLSettingsFile;
                 }
                 else
                 {
                     // Step 3 - Attempt to read conventional Settings file
-                    settingsFile = Program.XMLSettingsFile;
+                    settingsFile = Engine.XMLSettingsFile;
                 }
             }
 
-            if (File.Exists(settingsFile) && settingsFile != Program.appSettings.GetSettingsFilePath())
+            if (File.Exists(settingsFile) && settingsFile != Engine.mAppSettings.GetSettingsFilePath())
             {
                 // Update AppSettings.xml
-                File.Copy(settingsFile, Program.appSettings.GetSettingsFilePath());
+                File.Copy(settingsFile, Engine.mAppSettings.GetSettingsFilePath());
             }
 
-            Program.appSettings.XMLSettingsFile = Program.appSettings.GetSettingsFilePath();
-            return Read(Program.appSettings.XMLSettingsFile);
+            Engine.mAppSettings.XMLSettingsFile = Engine.mAppSettings.GetSettingsFilePath();
+            return Read(Engine.mAppSettings.XMLSettingsFile);
         }
 
         public static XMLSettingsScreenshot Read(string filePath)

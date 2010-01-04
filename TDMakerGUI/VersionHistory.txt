@@ -1,3 +1,4 @@
+2.01.0.0 Option to prefer known folders for Settings and Data
 2.00.0.0 Core changes to support TDMaker Command Line Interface
 1.10.0.2 Fixed errors while uploading to TinyPic
 

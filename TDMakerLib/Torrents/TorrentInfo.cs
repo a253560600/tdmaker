@@ -25,10 +25,10 @@ namespace TDMakerLib
 
             this.mBwApp = bwApp;
 
-            if (Program.conf.TakeScreenshot)
+            if (Engine.conf.TakeScreenshot)
             {
                 if (mi.Overall != null && TakeScreenshot(mi.Overall.FilePath) &&
-                    Program.conf.UploadScreenshot)
+                    Engine.conf.UploadScreenshot)
                 {
                     UploadScreenshot(mi.Overall.FilePath);
                 }
@@ -45,11 +45,11 @@ namespace TDMakerLib
             try
             {
                 Console.WriteLine("Creating a MTN process...");
-                string assemblyMTN = (Program.IsUNIX ? Program.conf.MTNPath.Replace(".exe", "") : Program.conf.MTNPath);
+                string assemblyMTN = (Engine.IsUNIX ? Engine.conf.MTNPath.Replace(".exe", "") : Engine.conf.MTNPath);
                 if (string.IsNullOrEmpty(Path.GetDirectoryName(assemblyMTN)))
                 {
                     assemblyMTN = Path.Combine(System.Windows.Forms.Application.StartupPath, assemblyMTN);
-                    Program.conf.MTNPath = assemblyMTN;
+                    Engine.conf.MTNPath = assemblyMTN;
                 }
 
                 string args = string.Format("{0} \"{1}\"", MyMedia.Screenshot.MTNArgs.Trim(), mediaFilePath);
@@ -57,7 +57,7 @@ namespace TDMakerLib
                 Process p = new Process();
                 ProcessStartInfo psi = new ProcessStartInfo(assemblyMTN);
 
-                if (Program.IsUNIX)
+                if (Engine.IsUNIX)
                 {
                     psi.UseShellExecute = false;
                 }
@@ -65,7 +65,7 @@ namespace TDMakerLib
                 Console.WriteLine("MTN Path: " + assemblyMTN);
                 Console.WriteLine("MTN Args: " + args);
 
-                psi.WindowStyle = (Program.conf.ShowMTNWindow ? ProcessWindowStyle.Normal : ProcessWindowStyle.Hidden);
+                psi.WindowStyle = (Engine.conf.ShowMTNWindow ? ProcessWindowStyle.Normal : ProcessWindowStyle.Hidden);
                 Console.WriteLine("MTN Window: " + psi.WindowStyle.ToString());
                 psi.Arguments = args;
 
@@ -73,12 +73,12 @@ namespace TDMakerLib
                 p.Start();
                 p.WaitForExit(1000 * 30);
 
-                if (Program.IsUNIX)
+                if (Engine.IsUNIX)
                 {
                     // Save _s.txt to MediaInfo2.Overall object
                     if (string.IsNullOrEmpty(MyMedia.Overall.Summary))
                     {
-                        string info = Path.Combine(Program.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + MyMedia.Screenshot.Settings.N_InfoSuffix);
+                        string info = Path.Combine(Engine.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + MyMedia.Screenshot.Settings.N_InfoSuffix);
 
                         using (StreamReader sr = new StreamReader(info))
                         {
@@ -101,17 +101,17 @@ namespace TDMakerLib
 
         private void UploadScreenshot(String mediaFilePath)
         {
-            string ssPath = Path.Combine(Program.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + MyMedia.Screenshot.Settings.o_OutputSuffix);
+            string ssPath = Path.Combine(Engine.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + MyMedia.Screenshot.Settings.o_OutputSuffix);
             ImageUploader imageUploader = null;
 
             if (File.Exists(ssPath))
             {
                 ImageFileManager imf = null;
 
-                switch ((ImageDestType2)Program.conf.ImageUploader)
+                switch ((ImageDestType2)Engine.conf.ImageUploader)
                 {
                     case ImageDestType2.IMAGESHACK:
-                        imageUploader = new ImageShackUploader("16BCFGWY58707bec94f7b0a773d0aa8bbf301900", Program.conf.ImageShackRegCode, UploadMode.ANONYMOUS);
+                        imageUploader = new ImageShackUploader("16BCFGWY58707bec94f7b0a773d0aa8bbf301900", Engine.conf.ImageShackRegCode, UploadMode.ANONYMOUS);
                         // ((ImageShackUploader)imageUploader).RandomizeFileName = Program.conf.ImageShakeRandomizeFileName;
                         break;
                     case ImageDestType2.TINYPIC:

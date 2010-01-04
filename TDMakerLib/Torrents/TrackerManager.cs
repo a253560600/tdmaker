@@ -15,7 +15,7 @@ namespace TDMakerLib
         public TrackerManager()
         {
             Trackers = new List<Tracker>();
-            this.TrackersXML = Path.Combine(Program.conf.SettingsDir, "trackers.xml");
+            this.TrackersXML = Path.Combine(Engine.SettingsDir, "trackers.xml");
         }
 
         public void Read()
