@@ -87,7 +87,7 @@ namespace TDMakerLib
         public bool TemplatesMode { get; set; }
 
         // Tab 4.0 - Options - General
-        [Category("Options / General"), DefaultValue(true), Description("Process media immediately after loading file or folder")]
+        [Category("Options / General"), DefaultValue(false), Description("Process media immediately after loading file or folder")]
         public bool AnalyzeAuto { get; set; }
         [Category("Options / General"), DefaultValue(true), Description("Automatically Check for Updates")]
         public bool UpdateCheckAuto { get; set; }
@@ -149,47 +149,8 @@ namespace TDMakerLib
         [Category("Options / Paths"), Description("Browse to change where torrent files are saved")]
         [EditorAttribute(typeof(FolderNameEditor), typeof(UITypeEditor))]
         public string CustomTorrentsDir { get; set; }
-
-        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
-        public bool chkMTN_g_Gap { get; set; }
-        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
-        public bool chkMTN_s_TimeStep { get; set; }
-        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
-        public bool chkMTN_j_JPEGQuality { get; set; }
-        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
-        public bool chkMTN_B_OmitBegin { get; set; }
-        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
-        public bool chkMTN_E_OmitEnd { get; set; }
-        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
-        public bool chkMTN_D_EdgeDetection { get; set; }
-        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
-        public bool chkMTN_h_Height { get; set; }
-        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
-        public bool chkMTN_T_Title { get; set; }
-        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
-        public bool chkMTN_L_LocInfo { get; set; }
-        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
-        public bool chkMTN_N_WriteInfo { get; set; }
-        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
-        public bool chkMTN_i_MediaInfoTurnOff { get; set; }
-        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
-        public bool chkMTN_L_LocTimestamp { get; set; }
-        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
-        public bool chkMTN_f_Font { get; set; }
-        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
-        public bool chkMTN_v_Verbose { get; set; }
-        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
-        public bool chkMTN_o_OutputSuffix { get; set; }
-        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
-        public bool chkMTN_k_ColorBackground { get; set; }
-        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
-        public bool chkMTN_F_FontSize { get; set; }
-        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
-        public bool chkMTN_F_FontColor { get; set; }
-        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
-        public bool chkMTN_h_MinHeight { get; set; }
-        [Category("MTN Commands"), DefaultValue(false), Description("Enable/Disable Time Step")]
-        public bool chkMTN_w_Width { get; set; }
+        
+        public string txtMTN_T_Title = string.Empty;
 
         #region I/O Methods
 

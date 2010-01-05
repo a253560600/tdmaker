@@ -78,7 +78,7 @@ namespace TDMakerLib
                     // Save _s.txt to MediaInfo2.Overall object
                     if (string.IsNullOrEmpty(MyMedia.Overall.Summary))
                     {
-                        string info = Path.Combine(Engine.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + MyMedia.Screenshot.Settings.N_InfoSuffix);
+                        string info = Path.Combine(Engine.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + Engine.conf.ScreenshotSettings.N_InfoSuffix);
 
                         using (StreamReader sr = new StreamReader(info))
                         {
@@ -101,7 +101,7 @@ namespace TDMakerLib
 
         private void UploadScreenshot(String mediaFilePath)
         {
-            string ssPath = Path.Combine(Engine.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + MyMedia.Screenshot.Settings.o_OutputSuffix);
+            string ssPath = Path.Combine(Engine.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + Engine.conf.ScreenshotSettings.o_OutputSuffix);
             ImageUploader imageUploader = null;
 
             if (File.Exists(ssPath))

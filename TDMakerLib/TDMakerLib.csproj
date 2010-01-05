@@ -75,6 +75,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global\Adapter.cs" />
     <Compile Include="Helpers\FontDialogEditor.cs" />
     <Compile Include="Helpers\ColorDialogEditor.cs" />
     <Compile Include="Helpers\ExeFileNameEditor.cs" />
