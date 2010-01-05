@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using MediaInfoLib;
 using TDMakerLib;
+using System.Diagnostics;
 
 namespace TDMakerLib
 {
@@ -87,35 +88,35 @@ namespace TDMakerLib
                 //* General
                 //********************* 
 
-                //System.Console.WriteLine("Current Dir1: " + System.Environment.CurrentDirectory);
+                //System.Debug.WriteLine("Current Dir1: " + System.Environment.CurrentDirectory);
                 //System.Environment.CurrentDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                //System.Console.WriteLine("Current Dir2: " + System.Environment.CurrentDirectory);
+                //System.Debug.WriteLine("Current Dir2: " + System.Environment.CurrentDirectory);
 
                 MediaInfoLib.MediaInfo mMI = null;
                 try
                 {
-                    Console.WriteLine("Loading MediaInfo.dll");
+                    Debug.WriteLine("Loading MediaInfo.dll");
                     mMI = new MediaInfoLib.MediaInfo();
-                    Console.WriteLine("Loaded MediaInfo.dll");
+                    Debug.WriteLine("Loaded MediaInfo.dll");
 
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.ToString());
+                    Debug.WriteLine(ex.ToString());
                 }
 
                 if (mMI != null)
                 {
-                    Console.WriteLine(string.Format("MediaInfo Opening {0}", FilePath));
+                    Debug.WriteLine(string.Format("MediaInfo Opening {0}", FilePath));
                     mMI.Open(FilePath);
-                    Console.WriteLine(string.Format("MediaInfo Opened {0}", FilePath));
+                    Debug.WriteLine(string.Format("MediaInfo Opened {0}", FilePath));
                     mMI.Option("Complete");
                     this.Summary = mMI.Inform();
 
                     if (Engine.IsUNIX)
                     {
-                        Console.WriteLine(string.Format("MediaInfo Summary Length: {0}", this.Summary.Length.ToString()));
-                        Console.WriteLine(string.Format("MediaInfo Summary: {0}", this.Summary));
+                        Debug.WriteLine(string.Format("MediaInfo Summary Length: {0}", this.Summary.Length.ToString()));
+                        Debug.WriteLine(string.Format("MediaInfo Summary: {0}", this.Summary));
                     }
 
                     // Format Info

@@ -14,7 +14,7 @@ namespace TDMakerLib
 {
     public class TorrentInfo
     {
-    	/// <summary>
+        /// <summary>
         /// Default Publish String representation of a Torrent
         /// </summary>
         /// <returns>Publish String</returns>
@@ -36,7 +36,7 @@ namespace TDMakerLib
         /// Options for Publishing
         /// </summary>
         public PublishOptionsPacket PublishOptions { get; set; }
-        
+
         private BackgroundWorker mBwApp = null;
 
         public TorrentInfo(BackgroundWorker bwApp, MediaInfo2 mi)
@@ -50,33 +50,33 @@ namespace TDMakerLib
 
             if (Engine.conf.TakeScreenshot)
             {
-            	TakeScreenshots();
+                TakeScreenshots();
             }
-            if (Engine.conf.UploadScreenshot) 
+            if (Engine.conf.UploadScreenshot)
             {
-            	UploadScreenshots();
+                UploadScreenshots();
             }
 
         }
-        
+
         private void TakeScreenshots()
         {
-            	foreach(MediaFile mf in this.MyMedia.MediaFiles)            	
-            	{
-            		TakeScreenshot(mf);
-            	}        	
+            foreach (MediaFile mf in this.MyMedia.MediaFiles)
+            {
+                TakeScreenshot(mf);
+            }
         }
 
         private bool TakeScreenshot(MediaFile mf)
         {
-        	bool success = true;
-        	String mediaFilePath = mf.FilePath;
+            bool success = true;
+            String mediaFilePath = mf.FilePath;
             Debug.WriteLine("Taking Screenshot for " + Path.GetFileName(mediaFilePath));
             mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, "Taking Screenshot for " + Path.GetFileName(mediaFilePath));
 
             try
             {
-                Console.WriteLine("Creating a MTN process...");
+                Debug.WriteLine("Creating a MTN process...");
                 string assemblyMTN = (Engine.IsUNIX ? Engine.conf.MTNPath.Replace(".exe", "") : Engine.conf.MTNPath);
                 if (string.IsNullOrEmpty(Path.GetDirectoryName(assemblyMTN)))
                 {
@@ -84,7 +84,8 @@ namespace TDMakerLib
                     Engine.conf.MTNPath = assemblyMTN;
                 }
 
-                string args = string.Format("{0} \"{1}\"", MyMedia.Screenshot.MTNArgs.Trim(), mediaFilePath);
+                mf.Screenshot.MTNArgs = Adapter.GetMtnArg(Engine.mtnProfileMgr.GetMtnProfileActive());
+                string args = string.Format("{0} \"{1}\"", mf.Screenshot.MTNArgs, mediaFilePath);
 
                 Process p = new Process();
                 ProcessStartInfo psi = new ProcessStartInfo(assemblyMTN);
@@ -94,11 +95,11 @@ namespace TDMakerLib
                     psi.UseShellExecute = false;
                 }
 
-                Console.WriteLine("MTN Path: " + assemblyMTN);
-                Console.WriteLine("MTN Args: " + args);
+                Debug.WriteLine("MTN Path: " + assemblyMTN);
+                Debug.WriteLine("MTN Args: " + args);
 
                 psi.WindowStyle = (Engine.conf.ShowMTNWindow ? ProcessWindowStyle.Normal : ProcessWindowStyle.Hidden);
-                Console.WriteLine("MTN Window: " + psi.WindowStyle.ToString());
+                Debug.WriteLine("MTN Window: " + psi.WindowStyle.ToString());
                 psi.Arguments = args;
 
                 p.StartInfo = psi;
@@ -122,7 +123,7 @@ namespace TDMakerLib
             catch (Exception ex)
             {
                 success = false;
-                Console.WriteLine(ex.ToString());
+                Debug.WriteLine(ex.ToString());
                 mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, ex.Message + " for " + Path.GetFileName(mediaFilePath));
             }
 
@@ -131,22 +132,24 @@ namespace TDMakerLib
 
         private void UploadScreenshots()
         {
-        	foreach(MediaFile mf in this.MyMedia.MediaFiles)
-        	{
-        		ImageFileManager imf = UploadScreenshot(mf.FilePath);
-        		if (imf != null && imf.ImageFileList != null && imf.ImageFileList.Count > 0) {        		
-        			mf.Screenshot.LocalPath = imf.LocalFilePath;
+            foreach (MediaFile mf in this.MyMedia.MediaFiles)
+            {
+                ImageFileManager imf = UploadScreenshot(mf.FilePath);
+                if (imf != null && imf.ImageFileList != null && imf.ImageFileList.Count > 0)
+                {
+                    mf.Screenshot.LocalPath = imf.LocalFilePath;
                     mf.Screenshot.Full = imf.GetFullImageUrl();
                     mf.Screenshot.LinkedThumbnail = imf.GetLinkedThumbnailForumUrl();
-        		}
-        	}
+                    mBwApp.ReportProgress((int)ProgressType.UPDATE_SCREENSHOTS_LIST, mf.Screenshot);
+                }
+            }
         }
         private ImageFileManager UploadScreenshot(string mediaFilePath)
-        {        	
-        	string ssPath = Path.Combine(Engine.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + Engine.mtnProfileMgr.GetMtnProfileActive().o_OutputSuffix);
+        {
+            string ssPath = Path.Combine(Engine.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + Engine.mtnProfileMgr.GetMtnProfileActive().o_OutputSuffix);
             ImageUploader imageUploader = null;
             ImageFileManager imf = null;
-                
+
             if (File.Exists(ssPath))
             {
                 switch ((ImageDestType2)Engine.conf.ImageUploader)
@@ -172,15 +175,15 @@ namespace TDMakerLib
                 if (imageUploader != null)
                 {
                     int retry = 0;
-                    
-                    if (Engine.conf.ProxyEnabled) 
-                    {                    	
-	                    ProxySettings proxy = new ProxySettings(); 
-	                    proxy.ProxyEnabled = true;                     	
-                    	proxy.ProxyActive = Engine.conf.ProxySettings;
-                    	Uploader.ProxySettings = proxy;                    
+
+                    if (Engine.conf.ProxyEnabled)
+                    {
+                        ProxySettings proxy = new ProxySettings();
+                        proxy.ProxyEnabled = true;
+                        proxy.ProxyActive = Engine.conf.ProxySettings;
+                        Uploader.ProxySettings = proxy;
                     }
-                    
+
                     while (retry <= 3 && imf == null || (retry <= 3 && imf != null && imf.ImageFileList.Count < 1))
                     {
                         retry++;
@@ -193,7 +196,7 @@ namespace TDMakerLib
 
                 if (imf != null && imf.ImageFileList.Count > 0)
                 {
-                	imf.LocalFilePath = ssPath;
+                    imf.LocalFilePath = ssPath;
                     MyMedia.Screenshot.LocalPath = imf.LocalFilePath;
                     MyMedia.Screenshot.Full = imf.GetFullImageUrl();
                     MyMedia.Screenshot.LinkedThumbnail = imf.GetLinkedThumbnailForumUrl();

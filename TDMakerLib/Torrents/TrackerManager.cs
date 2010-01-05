@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 using TDMakerLib;
+using System.Diagnostics;
 
 namespace TDMakerLib
 {
@@ -37,12 +38,12 @@ namespace TDMakerLib
                         Trackers = (List<Tracker>)obj;
                     }
 
-                    Console.WriteLine("Done reading trackers.xml");
+                    Debug.WriteLine("Done reading trackers.xml");
 
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
+                    Debug.WriteLine("Failed to deserialize. Reason: " + e.Message);
                 }
             }            
         }
@@ -62,7 +63,7 @@ namespace TDMakerLib
             }
             catch (Exception e)
             {
-                Console.WriteLine("Failed to serialize. Reason: " + e.Message);
+                Debug.WriteLine("Failed to serialize. Reason: " + e.Message);
                 throw;
             }
             finally

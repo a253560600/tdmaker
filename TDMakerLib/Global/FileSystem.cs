@@ -22,7 +22,7 @@ namespace TDMakerLib
         {
             // a modified http://iso.org/iso/en/prods-services/popstds/datesandtime.html - McoreD
             string line = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss - ") + msg;
-            Console.WriteLine(line);
+            Debug.WriteLine(line);
             mDebug.AppendLine(line);
         }
 
@@ -88,7 +88,7 @@ namespace TDMakerLib
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
         }
 
