@@ -7,6 +7,7 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Collections.Specialized;
 using UploadersLib;
+using UploadersLib.Helpers;
 using System.Windows.Forms;
 using System.ComponentModel;
 using System.Drawing.Design;
@@ -114,6 +115,11 @@ namespace TDMakerLib
         public StringCollection MTNArgs = new StringCollection();
         public StringCollection MTNFonts = new StringCollection();
 
+        [Category("Options / Proxy"), Description("Proxy Settings")]
+        public bool ProxyEnabled {get; set;}
+        [Category("Options / Proxy"), Description("Proxy Settings")]
+        public ProxyInfo ProxySettings = new ProxyInfo();
+       
         [Category("MTN"), DefaultValue(false), Description("Show MTN during file creation")]
         public bool ShowMTNWindow { get; set; }
         [EditorAttribute(typeof(ExeFileNameEditor), typeof(UITypeEditor))]

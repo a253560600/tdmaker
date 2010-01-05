@@ -99,14 +99,14 @@ namespace TDMakerLib
                 }
 
                 // Not supported in MTN 2.45
-                //if (chkMTN_z_SeekMode.Checked)
-                //{
-                //    sbMTNArgs.Append("-z ");
-                //}
-                //else
-                //{
-                //    sbMTNArgs.Append("-Z ");
-                //}
+                if (Engine.mtnProfileMgr.GetMtnProfileActive().z_AlwaysSeek)
+                {
+                    sbMTNArgs.Append("-z ");
+                }
+                else if (Engine.mtnProfileMgr.GetMtnProfileActive().Z_AlwaysNonSeek)
+                {
+                    sbMTNArgs.Append("-Z ");
+                }
 
                 if (Engine.mtnProfileMgr.GetMtnProfileActive().N_InfoSuffix != XMLSettingsScreenshot.N_InfoSuffix_default || Engine.IsUNIX)
                 {

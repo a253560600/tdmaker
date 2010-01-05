@@ -1,6 +1,6 @@
 ﻿using TDMakerLib;
 
-namespace TDMakerLib.MediaInfo
+namespace TDMakerLib
 {
     /// <summary>
     /// Class for Screnshot information. Belongs to MediaInfo2.cs
