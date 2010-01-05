@@ -111,22 +111,17 @@ namespace TDMakerLib
         [Browsable(false)]
         public int TemplateIndex { get; set; }
 
-        // Tab 4.2 - Options - MTN
-        public StringCollection MTNArgs = new StringCollection();
-        public StringCollection MTNFonts = new StringCollection();
-
         [Category("Options / Proxy"), Description("Proxy Settings")]
         public bool ProxyEnabled {get; set;}
         [Category("Options / Proxy"), Description("Proxy Settings")]
         public ProxyInfo ProxySettings = new ProxyInfo();
-       
+
+        // Tab 4.2 - Options - MTN
         [Category("MTN"), DefaultValue(false), Description("Show MTN during file creation")]
         public bool ShowMTNWindow { get; set; }
         [EditorAttribute(typeof(ExeFileNameEditor), typeof(UITypeEditor))]
         [Category("MTN"), Description("MTN Argument")]
         public string MTNPath { get; set; }
-        [Category("MTN"), DefaultValue("-P -w 0 -c 1 -r 3 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97"), Description("MTN Argument")]
-        public string MTNArg { get; set; }
         public ImageDestType2 ImageUploader = ImageDestType2.IMAGESHACK ;
         [Category("MTN / Image Uploaders"), DefaultValue(""), Description("ImageShack registration code")]
         public string ImageShackRegCode { get; set; }

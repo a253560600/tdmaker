@@ -50,6 +50,8 @@ namespace TDMakerLib
         
         [Category("MTN / Optional"), DefaultValue(a_AspectRatio_default), Description("override input file's display aspect ratio")]
         public bool a_AspectRatio { get; set; }
+        [Category("MTN / Optional"), DefaultValue(1.3333), Description("forced aspect ratio e.g. 1.3333")]
+        public double a_AspectRatioValue { get; set; }        
         [Category("MTN / Optional"), DefaultValue(b_SkipBlank_default), Description("skip if % blank is higher; 0:skip all 1:skip really blank >1:off")]
         public double b_SkipBlank { get; set; }
         [Category("MTN / Optional"), DefaultValue(B_OmitBegin_default), Description("omit this number of seconds from the beginning")]

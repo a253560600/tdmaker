@@ -380,14 +380,6 @@ namespace TDMaker
 
         private void SettingsReadInput()
         {
-            if (Engine.conf.MTNArgs.Count == 0)
-            {
-                Engine.conf.MTNArgs.AddRange(new string[] { "-P -w 0 -c 1 -r 3 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97", 
-                                            "-P -N _s.txt -w 0 -c 1 -r 3 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97", 
-                                            "-P -N _s.txt -w1024 -c3 -r4 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97", 
-                                            "-w 0 -c 1 -r 3 -keeeeee -f arial.ttf -g8 -F 000000:12 -L4:2 -j 97", 
-                                          });
-            }
             if (Engine.conf.Sources.Count == 0)
             {
                 Engine.conf.Sources.AddRange(new string[] { "DVD-5", "DVD-9", "HDTV", "SDTV", "Blu-ray Disc", "HD DVD", "Laser Disc", "VHS" });
@@ -403,10 +395,6 @@ namespace TDMaker
             if (Engine.conf.DiscMenus.Count == 0)
             {
                 Engine.conf.DiscMenus.AddRange(new string[] { "Intact", "Removed", "Shrunk" });
-            }
-            if (Engine.conf.MTNFonts.Count == 0)
-            {
-                Engine.conf.MTNFonts.AddRange(new string[] { "arial.ttf", "tahomabd.ttf" });
             }
 
             cboSource.Items.Clear();
@@ -490,7 +478,33 @@ namespace TDMaker
         {
         	if (Engine.mtnProfileMgr.MtnProfiles.Count == 0) 
         	{
-        		Engine.mtnProfileMgr.MtnProfiles.Add(new XMLSettingsScreenshot("Default"));
+        		XMLSettingsScreenshot mtnDefault1 = new XMLSettingsScreenshot("MTN for MVids (Auto Width)") 
+        		{ 
+        			k_ColorBackground = "eeeeee", 
+        			f_FontFile = "arial.ttf", 
+        			F_FontColor = "000000", 
+        			F_FontSize = 12, 
+        			g_GapBetweenShots = 8,
+        			L_LocInfo = 4, 
+        			L_LocTimestamp = 2, 
+        			j_JpgQuality = 97, 
+        			N_InfoSuffix = ""
+        		};        		
+        		Engine.mtnProfileMgr.MtnProfiles.Add(mtnDefault1);
+        		XMLSettingsScreenshot mtnDefault2 =  new XMLSettingsScreenshot("MTN for MVids (Fixed Width)") 
+        		{ 
+        			k_ColorBackground = "eeeeee", 
+        			f_FontFile = "arial.ttf", 
+        			F_FontColor = "000000", 
+        			F_FontSize = 12, 
+        			g_GapBetweenShots = 8,        			
+        			L_LocInfo = 4, 
+        			L_LocTimestamp = 2, 
+        			j_JpgQuality = 97, 
+        			w_Width = 800,
+        			N_InfoSuffix = ""
+        		};    
+        		Engine.mtnProfileMgr.MtnProfiles.Add(mtnDefault2);
         	}
         	
         	foreach(XMLSettingsScreenshot mtnProfile in Engine.mtnProfileMgr.MtnProfiles)
@@ -1611,7 +1625,7 @@ namespace TDMaker
         {
         	InputBox ib = new InputBox(); 
         	ib.Title = "Enter profile name..."; 
-        	ib.InputText = "MTN for MV";
+        	ib.InputText = "Default";
         	if (ib.ShowDialog() == DialogResult.OK)
         	{
         		XMLSettingsScreenshot mtnProfile = new XMLSettingsScreenshot(ib.InputText);
@@ -1635,15 +1649,18 @@ namespace TDMaker
         void BtnRemoveMtnProfileClick(object sender, EventArgs e)
         {
         	int sel = lbMtnProfiles.SelectedIndex;
-        	lbMtnProfiles.Items.RemoveAt(sel);
-        	Engine.mtnProfileMgr.MtnProfiles.RemoveAt(sel);
-        	sel = sel-1;
-        	if (sel<0) {
-        		sel = 0;
+	        if (sel >= 0) {
+	        	lbMtnProfiles.Items.RemoveAt(sel);
+	        	Engine.mtnProfileMgr.MtnProfiles.RemoveAt(sel);
+	        	sel = sel-1;
+	        	if (sel<0) {
+	        		sel = 0;
+	        	}
+	        	if (lbMtnProfiles.Items.Count>0) {
+	        		lbMtnProfiles.SelectedIndex = sel;		
+	        	}        		
         	}
-        	if (lbMtnProfiles.Items.Count>0) {
-        		lbMtnProfiles.SelectedIndex = sel;		
-        	}
+
         }
         
         void ChkProxyEnableCheckedChanged(object sender, EventArgs e)
