@@ -105,6 +105,7 @@
     <Compile Include="Helpers\TorrentPacket.cs" />
     <Compile Include="Helpers\WorkerTask.cs" />
     <Compile Include="Helpers\XMLSettings.cs" />
+    <Compile Include="Helpers\XMLSettingsMtnProfiles.cs" />
     <Compile Include="MediaInfo\MediaFile.cs" />
     <Compile Include="MediaInfo\MediaInfo2.cs" />
     <Compile Include="MediaInfo\MediaInfoDLL.cs" />

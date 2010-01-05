@@ -19,14 +19,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{515B3AAB-EB9
 		Lib\UploadersLib.dll = Lib\UploadersLib.dll
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "32-bit", "32-bit", "{C15DC8C7-86D8-4F17-9370-8098EF188559}"
-	ProjectSection(SolutionItems) = preProject
-		Lib\32-bit\MediaInfo.dll = Lib\32-bit\MediaInfo.dll
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "64-bit", "64-bit", "{865B91A1-6C9E-4668-A3C8-8962DEF78DDA}"
 	ProjectSection(SolutionItems) = preProject
 		Lib\64-bit\MediaInfo.dll = Lib\64-bit\MediaInfo.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "32-bit", "32-bit", "{C15DC8C7-86D8-4F17-9370-8098EF188559}"
+	ProjectSection(SolutionItems) = preProject
+		Lib\32-bit\MediaInfo.dll = Lib\32-bit\MediaInfo.dll
 	EndProjectSection
 EndProject
 Global
@@ -84,7 +84,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{865B91A1-6C9E-4668-A3C8-8962DEF78DDA} = {515B3AAB-EB9E-47A4-80AD-0AE6E2FF17FD}
 		{C15DC8C7-86D8-4F17-9370-8098EF188559} = {515B3AAB-EB9E-47A4-80AD-0AE6E2FF17FD}
+		{865B91A1-6C9E-4668-A3C8-8962DEF78DDA} = {515B3AAB-EB9E-47A4-80AD-0AE6E2FF17FD}
 	EndGlobalSection
 EndGlobal

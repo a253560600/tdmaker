@@ -40,10 +40,12 @@ namespace TDMakerLib
         public static bool IsUNIX { get; private set; }
 
         private static string[] AppDirs;
-        public static readonly string XMLFileName = "Settings.xml";
+       
         public static string DefaultXMLFilePath { get; private set; }
 
         public static XMLSettingsCore conf;
+        public static XMLSettingsMtnProfiles mtnProfileMgr; 
+        
         private static bool RunConfig = false;
 
         public static bool DetectUnix()
@@ -160,7 +162,6 @@ namespace TDMakerLib
             }
         }
 
-
         /// <summary>
         /// Get DuratingString in HH:mm:ss
         /// </summary>
@@ -273,11 +274,6 @@ namespace TDMakerLib
             }
 
             DefaultXMLFilePath = Path.Combine(SettingsDir, XMLSettingsCore.XMLFileName);
-            string DefaultXMLFilePathOld = Path.Combine(SettingsDir, XMLFileName);
-            if (!File.Exists(DefaultXMLFilePath) && File.Exists(DefaultXMLFilePathOld))
-            {
-                DefaultXMLFilePath = DefaultXMLFilePathOld;
-            }
         }
 
         public static bool Load()
@@ -321,6 +317,7 @@ namespace TDMakerLib
                 FileSystem.AppendDebug("Initializing Default folder paths...");
                 Engine.InitializeDefaultFolderPaths(); // happens before XMLSettings is readed
                 conf = XMLSettingsCore.Read();
+                mtnProfileMgr = XMLSettingsMtnProfiles.Read();
             }
             return configResult == DialogResult.OK;
         }

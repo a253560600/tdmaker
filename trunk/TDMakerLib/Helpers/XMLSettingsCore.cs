@@ -113,7 +113,7 @@ namespace TDMakerLib
         // Tab 4.2 - Options - MTN
         public StringCollection MTNArgs = new StringCollection();
         public StringCollection MTNFonts = new StringCollection();
-        public XMLSettingsScreenshot ScreenshotSettings = new XMLSettingsScreenshot();
+
         [Category("MTN"), DefaultValue(false), Description("Show MTN during file creation")]
         public bool ShowMTNWindow { get; set; }
         [EditorAttribute(typeof(ExeFileNameEditor), typeof(UITypeEditor))]
@@ -183,7 +183,7 @@ namespace TDMakerLib
 
         public static XMLSettingsCore Read()
         {
-            string settingsFile = Engine.mAppSettings.GetSettingsFilePath();
+            string settingsFile = Engine.mAppSettings.GetSettingsFilePath(XMLFileName);
             if (!File.Exists(settingsFile))
             {
                 if (File.Exists(Engine.mAppSettings.XMLSettingsFile))
@@ -198,13 +198,13 @@ namespace TDMakerLib
                 }
             }
 
-            if (File.Exists(settingsFile) && settingsFile != Engine.mAppSettings.GetSettingsFilePath())
+            if (File.Exists(settingsFile) && settingsFile != Engine.mAppSettings.GetSettingsFilePath(XMLFileName))
             {
                 // Update AppSettings.xml
-                File.Copy(settingsFile, Engine.mAppSettings.GetSettingsFilePath());
+                File.Copy(settingsFile, Engine.mAppSettings.GetSettingsFilePath(XMLFileName));
             }
 
-            Engine.mAppSettings.XMLSettingsFile = Engine.mAppSettings.GetSettingsFilePath();
+            Engine.mAppSettings.XMLSettingsFile = Engine.mAppSettings.GetSettingsFilePath(XMLFileName);
             return Read(Engine.mAppSettings.XMLSettingsFile);
         }
 
