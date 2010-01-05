@@ -30,10 +30,10 @@ namespace TDMakerLib
         {
             return Read(AppSettingsFile);
         }
-
-        public string GetSettingsFilePath()
+       
+        public string GetSettingsFilePath(string fileName)
         {
-            return Path.Combine(Engine.SettingsDir, Engine.XMLFileName);
+            return Path.Combine(Engine.SettingsDir, fileName);
         }
 
         public static AppSettings Read(string filePath)

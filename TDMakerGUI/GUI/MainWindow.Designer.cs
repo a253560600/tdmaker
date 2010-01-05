@@ -99,54 +99,14 @@ namespace TDMaker
         	this.tlpMTN = new System.Windows.Forms.TableLayoutPanel();
         	this.txtMtnArgs = new System.Windows.Forms.TextBox();
         	this.tcMtn = new System.Windows.Forms.TabControl();
-        	this.tpUsage1 = new System.Windows.Forms.TabPage();
-        	this.pMTNUsage = new System.Windows.Forms.Panel();
-        	this.nudMTN_B_OmitStart = new System.Windows.Forms.NumericUpDown();
-        	this.chkMTN_B_OmitBegin = new System.Windows.Forms.CheckBox();
-        	this.nudMTN_D_EdgeDetection = new System.Windows.Forms.NumericUpDown();
-        	this.chkMTN_D_EdgeDetection = new System.Windows.Forms.CheckBox();
-        	this.nudMTN_E_OmitEnd = new System.Windows.Forms.NumericUpDown();
-        	this.chkMTN_E_OmitEnd = new System.Windows.Forms.CheckBox();
-        	this.nudMTN_h_HeightMin = new System.Windows.Forms.NumericUpDown();
-        	this.chkMTN_h_Height = new System.Windows.Forms.CheckBox();
-        	this.chkMTN_v_Verbose = new System.Windows.Forms.CheckBox();
-        	this.txtMTN_o_OutputSuffix = new System.Windows.Forms.TextBox();
-        	this.chkMTN_o_OutputSuffix = new System.Windows.Forms.CheckBox();
-        	this.txtMTN_N_InfoSuffix = new System.Windows.Forms.TextBox();
-        	this.chkMTN_N_WriteInfo = new System.Windows.Forms.CheckBox();
-        	this.chkMTN_z_SeekMode = new System.Windows.Forms.CheckBox();
-        	this.chkMTN_i_MediaInfoTurnOff = new System.Windows.Forms.CheckBox();
-        	this.gbMTN_i_MediaInfo = new System.Windows.Forms.GroupBox();
-        	this.chkMTN_T_Title = new System.Windows.Forms.CheckBox();
-        	this.cboMTN_f_FontType = new System.Windows.Forms.ComboBox();
-        	this.txtMTN_T_Title = new System.Windows.Forms.TextBox();
-        	this.chkMTN_f_Font = new System.Windows.Forms.CheckBox();
-        	this.chkMTN_F_FontColor = new System.Windows.Forms.CheckBox();
-        	this.cboMTN_F_FontColor = new System.Windows.Forms.ComboBox();
-        	this.chkMTN_F_FontSize = new System.Windows.Forms.CheckBox();
-        	this.nudMTN_F_FontSize = new System.Windows.Forms.NumericUpDown();
-        	this.chkMTN_L_LocInfo = new System.Windows.Forms.CheckBox();
-        	this.cboMTN_L_LocInfo = new System.Windows.Forms.ComboBox();
-        	this.nudMTN_j_JPEGQuality = new System.Windows.Forms.NumericUpDown();
-        	this.chkMTN_j_JPEGQuality = new System.Windows.Forms.CheckBox();
-        	this.cboMTN_L_LocTimestamp = new System.Windows.Forms.ComboBox();
-        	this.chkMTN_L_LocTimestamp = new System.Windows.Forms.CheckBox();
-        	this.chkMTN_k_ColorBackground = new System.Windows.Forms.CheckBox();
-        	this.nudMTN_g_Gap = new System.Windows.Forms.NumericUpDown();
-        	this.chkMTN_g_Gap = new System.Windows.Forms.CheckBox();
-        	this.cboMTN_k_ColorBkgrd = new System.Windows.Forms.ComboBox();
-        	this.nudMTN_w_Width = new System.Windows.Forms.NumericUpDown();
-        	this.chkMTN_w_Width = new System.Windows.Forms.CheckBox();
-        	this.chkMTN_P_QuitAfterDone = new System.Windows.Forms.CheckBox();
-        	this.nudMTN_s_TimeStep = new System.Windows.Forms.NumericUpDown();
-        	this.chkMTN_s_TimeStep = new System.Windows.Forms.CheckBox();
-        	this.nudMTN_r_Rows = new System.Windows.Forms.NumericUpDown();
-        	this.chkShowMTN = new System.Windows.Forms.CheckBox();
-        	this.chkMTNRows = new System.Windows.Forms.CheckBox();
-        	this.nudMTN_c_Columns = new System.Windows.Forms.NumericUpDown();
-        	this.chkMTNColumns = new System.Windows.Forms.CheckBox();
         	this.tpUsage2 = new System.Windows.Forms.TabPage();
+        	this.tlpMtnUsage = new System.Windows.Forms.TableLayoutPanel();
         	this.pgMtn = new System.Windows.Forms.PropertyGrid();
+        	this.tlpMtnProfiles = new System.Windows.Forms.TableLayoutPanel();
+        	this.flpMtn = new System.Windows.Forms.FlowLayoutPanel();
+        	this.tbnAddMtnProfile = new System.Windows.Forms.Button();
+        	this.btnRemoveMtnProfile = new System.Windows.Forms.Button();
+        	this.lbMtnProfiles = new System.Windows.Forms.ListBox();
         	this.tpHosting = new System.Windows.Forms.TabPage();
         	this.gbImageShack = new System.Windows.Forms.GroupBox();
         	this.chkRandomizeFileNameImageShack = new System.Windows.Forms.CheckBox();
@@ -263,21 +223,10 @@ namespace TDMaker
         	this.tpOptionsMTN.SuspendLayout();
         	this.tlpMTN.SuspendLayout();
         	this.tcMtn.SuspendLayout();
-        	this.tpUsage1.SuspendLayout();
-        	this.pMTNUsage.SuspendLayout();
-        	((System.ComponentModel.ISupportInitialize)(this.nudMTN_B_OmitStart)).BeginInit();
-        	((System.ComponentModel.ISupportInitialize)(this.nudMTN_D_EdgeDetection)).BeginInit();
-        	((System.ComponentModel.ISupportInitialize)(this.nudMTN_E_OmitEnd)).BeginInit();
-        	((System.ComponentModel.ISupportInitialize)(this.nudMTN_h_HeightMin)).BeginInit();
-        	this.gbMTN_i_MediaInfo.SuspendLayout();
-        	((System.ComponentModel.ISupportInitialize)(this.nudMTN_F_FontSize)).BeginInit();
-        	((System.ComponentModel.ISupportInitialize)(this.nudMTN_j_JPEGQuality)).BeginInit();
-        	((System.ComponentModel.ISupportInitialize)(this.nudMTN_g_Gap)).BeginInit();
-        	((System.ComponentModel.ISupportInitialize)(this.nudMTN_w_Width)).BeginInit();
-        	((System.ComponentModel.ISupportInitialize)(this.nudMTN_s_TimeStep)).BeginInit();
-        	((System.ComponentModel.ISupportInitialize)(this.nudMTN_r_Rows)).BeginInit();
-        	((System.ComponentModel.ISupportInitialize)(this.nudMTN_c_Columns)).BeginInit();
         	this.tpUsage2.SuspendLayout();
+        	this.tlpMtnUsage.SuspendLayout();
+        	this.tlpMtnProfiles.SuspendLayout();
+        	this.flpMtn.SuspendLayout();
         	this.tpHosting.SuspendLayout();
         	this.gbImageShack.SuspendLayout();
         	this.tpPublish.SuspendLayout();
@@ -1056,6 +1005,7 @@ namespace TDMaker
         	// 
         	this.tlpMTN.ColumnCount = 1;
         	this.tlpMTN.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+        	this.tlpMTN.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
         	this.tlpMTN.Controls.Add(this.txtMtnArgs, 0, 1);
         	this.tlpMTN.Controls.Add(this.tcMtn, 0, 0);
         	this.tlpMTN.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1079,7 +1029,6 @@ namespace TDMaker
         	// 
         	// tcMtn
         	// 
-        	this.tcMtn.Controls.Add(this.tpUsage1);
         	this.tcMtn.Controls.Add(this.tpUsage2);
         	this.tcMtn.Controls.Add(this.tpHosting);
         	this.tcMtn.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1089,622 +1038,93 @@ namespace TDMaker
         	this.tcMtn.Size = new System.Drawing.Size(836, 365);
         	this.tcMtn.TabIndex = 5;
         	// 
-        	// tpUsage1
-        	// 
-        	this.tpUsage1.Controls.Add(this.pMTNUsage);
-        	this.tpUsage1.Location = new System.Drawing.Point(4, 22);
-        	this.tpUsage1.Name = "tpUsage1";
-        	this.tpUsage1.Padding = new System.Windows.Forms.Padding(3);
-        	this.tpUsage1.Size = new System.Drawing.Size(828, 339);
-        	this.tpUsage1.TabIndex = 1;
-        	this.tpUsage1.Text = "Usage (Simple)";
-        	this.tpUsage1.UseVisualStyleBackColor = true;
-        	// 
-        	// pMTNUsage
-        	// 
-        	this.pMTNUsage.AutoScroll = true;
-        	this.pMTNUsage.Controls.Add(this.nudMTN_B_OmitStart);
-        	this.pMTNUsage.Controls.Add(this.chkMTN_B_OmitBegin);
-        	this.pMTNUsage.Controls.Add(this.nudMTN_D_EdgeDetection);
-        	this.pMTNUsage.Controls.Add(this.chkMTN_D_EdgeDetection);
-        	this.pMTNUsage.Controls.Add(this.nudMTN_E_OmitEnd);
-        	this.pMTNUsage.Controls.Add(this.chkMTN_E_OmitEnd);
-        	this.pMTNUsage.Controls.Add(this.nudMTN_h_HeightMin);
-        	this.pMTNUsage.Controls.Add(this.chkMTN_h_Height);
-        	this.pMTNUsage.Controls.Add(this.chkMTN_v_Verbose);
-        	this.pMTNUsage.Controls.Add(this.txtMTN_o_OutputSuffix);
-        	this.pMTNUsage.Controls.Add(this.chkMTN_o_OutputSuffix);
-        	this.pMTNUsage.Controls.Add(this.txtMTN_N_InfoSuffix);
-        	this.pMTNUsage.Controls.Add(this.chkMTN_N_WriteInfo);
-        	this.pMTNUsage.Controls.Add(this.chkMTN_z_SeekMode);
-        	this.pMTNUsage.Controls.Add(this.chkMTN_i_MediaInfoTurnOff);
-        	this.pMTNUsage.Controls.Add(this.gbMTN_i_MediaInfo);
-        	this.pMTNUsage.Controls.Add(this.nudMTN_j_JPEGQuality);
-        	this.pMTNUsage.Controls.Add(this.chkMTN_j_JPEGQuality);
-        	this.pMTNUsage.Controls.Add(this.cboMTN_L_LocTimestamp);
-        	this.pMTNUsage.Controls.Add(this.chkMTN_L_LocTimestamp);
-        	this.pMTNUsage.Controls.Add(this.chkMTN_k_ColorBackground);
-        	this.pMTNUsage.Controls.Add(this.nudMTN_g_Gap);
-        	this.pMTNUsage.Controls.Add(this.chkMTN_g_Gap);
-        	this.pMTNUsage.Controls.Add(this.cboMTN_k_ColorBkgrd);
-        	this.pMTNUsage.Controls.Add(this.nudMTN_w_Width);
-        	this.pMTNUsage.Controls.Add(this.chkMTN_w_Width);
-        	this.pMTNUsage.Controls.Add(this.chkMTN_P_QuitAfterDone);
-        	this.pMTNUsage.Controls.Add(this.nudMTN_s_TimeStep);
-        	this.pMTNUsage.Controls.Add(this.chkMTN_s_TimeStep);
-        	this.pMTNUsage.Controls.Add(this.nudMTN_r_Rows);
-        	this.pMTNUsage.Controls.Add(this.chkShowMTN);
-        	this.pMTNUsage.Controls.Add(this.chkMTNRows);
-        	this.pMTNUsage.Controls.Add(this.nudMTN_c_Columns);
-        	this.pMTNUsage.Controls.Add(this.chkMTNColumns);
-        	this.pMTNUsage.Dock = System.Windows.Forms.DockStyle.Fill;
-        	this.pMTNUsage.Location = new System.Drawing.Point(3, 3);
-        	this.pMTNUsage.Name = "pMTNUsage";
-        	this.pMTNUsage.Size = new System.Drawing.Size(822, 333);
-        	this.pMTNUsage.TabIndex = 14;
-        	// 
-        	// nudMTN_B_OmitStart
-        	// 
-        	this.nudMTN_B_OmitStart.DecimalPlaces = 1;
-        	this.nudMTN_B_OmitStart.Increment = new decimal(new int[] {
-        	        	        	1,
-        	        	        	0,
-        	        	        	0,
-        	        	        	65536});
-        	this.nudMTN_B_OmitStart.Location = new System.Drawing.Point(176, 208);
-        	this.nudMTN_B_OmitStart.Maximum = new decimal(new int[] {
-        	        	        	1000,
-        	        	        	0,
-        	        	        	0,
-        	        	        	0});
-        	this.nudMTN_B_OmitStart.Name = "nudMTN_B_OmitStart";
-        	this.nudMTN_B_OmitStart.Size = new System.Drawing.Size(120, 20);
-        	this.nudMTN_B_OmitStart.TabIndex = 52;
-        	this.ttApp.SetToolTip(this.nudMTN_B_OmitStart, "Keep 0 for Exact Dimensions");
-        	this.nudMTN_B_OmitStart.ValueChanged += new System.EventHandler(this.nudMTN_B_OmitStart_ValueChanged);
-        	// 
-        	// chkMTN_B_OmitBegin
-        	// 
-        	this.chkMTN_B_OmitBegin.AutoSize = true;
-        	this.chkMTN_B_OmitBegin.Location = new System.Drawing.Point(24, 212);
-        	this.chkMTN_B_OmitBegin.Name = "chkMTN_B_OmitBegin";
-        	this.chkMTN_B_OmitBegin.Size = new System.Drawing.Size(121, 17);
-        	this.chkMTN_B_OmitBegin.TabIndex = 51;
-        	this.chkMTN_B_OmitBegin.Text = "&Omit Start (seconds)";
-        	this.chkMTN_B_OmitBegin.UseVisualStyleBackColor = true;
-        	// 
-        	// nudMTN_D_EdgeDetection
-        	// 
-        	this.nudMTN_D_EdgeDetection.Location = new System.Drawing.Point(176, 256);
-        	this.nudMTN_D_EdgeDetection.Name = "nudMTN_D_EdgeDetection";
-        	this.nudMTN_D_EdgeDetection.Size = new System.Drawing.Size(120, 20);
-        	this.nudMTN_D_EdgeDetection.TabIndex = 50;
-        	this.nudMTN_D_EdgeDetection.ValueChanged += new System.EventHandler(this.nudMTN_D_EdgeDetection_ValueChanged);
-        	// 
-        	// chkMTN_D_EdgeDetection
-        	// 
-        	this.chkMTN_D_EdgeDetection.AutoSize = true;
-        	this.chkMTN_D_EdgeDetection.Checked = true;
-        	this.chkMTN_D_EdgeDetection.CheckState = System.Windows.Forms.CheckState.Checked;
-        	this.chkMTN_D_EdgeDetection.Location = new System.Drawing.Point(24, 260);
-        	this.chkMTN_D_EdgeDetection.Name = "chkMTN_D_EdgeDetection";
-        	this.chkMTN_D_EdgeDetection.Size = new System.Drawing.Size(100, 17);
-        	this.chkMTN_D_EdgeDetection.TabIndex = 49;
-        	this.chkMTN_D_EdgeDetection.Text = "Edge Detection";
-        	this.chkMTN_D_EdgeDetection.UseVisualStyleBackColor = true;
-        	// 
-        	// nudMTN_E_OmitEnd
-        	// 
-        	this.nudMTN_E_OmitEnd.DecimalPlaces = 1;
-        	this.nudMTN_E_OmitEnd.Increment = new decimal(new int[] {
-        	        	        	1,
-        	        	        	0,
-        	        	        	0,
-        	        	        	65536});
-        	this.nudMTN_E_OmitEnd.Location = new System.Drawing.Point(176, 232);
-        	this.nudMTN_E_OmitEnd.Maximum = new decimal(new int[] {
-        	        	        	1000,
-        	        	        	0,
-        	        	        	0,
-        	        	        	0});
-        	this.nudMTN_E_OmitEnd.Name = "nudMTN_E_OmitEnd";
-        	this.nudMTN_E_OmitEnd.Size = new System.Drawing.Size(120, 20);
-        	this.nudMTN_E_OmitEnd.TabIndex = 48;
-        	this.ttApp.SetToolTip(this.nudMTN_E_OmitEnd, "Keep 0 for Exact Dimensions");
-        	this.nudMTN_E_OmitEnd.ValueChanged += new System.EventHandler(this.nudMTN_E_OmitEnd_ValueChanged);
-        	// 
-        	// chkMTN_E_OmitEnd
-        	// 
-        	this.chkMTN_E_OmitEnd.AutoSize = true;
-        	this.chkMTN_E_OmitEnd.Location = new System.Drawing.Point(24, 236);
-        	this.chkMTN_E_OmitEnd.Name = "chkMTN_E_OmitEnd";
-        	this.chkMTN_E_OmitEnd.Size = new System.Drawing.Size(118, 17);
-        	this.chkMTN_E_OmitEnd.TabIndex = 47;
-        	this.chkMTN_E_OmitEnd.Text = "&Omit End (seconds)";
-        	this.chkMTN_E_OmitEnd.UseVisualStyleBackColor = true;
-        	// 
-        	// nudMTN_h_HeightMin
-        	// 
-        	this.nudMTN_h_HeightMin.Location = new System.Drawing.Point(176, 64);
-        	this.nudMTN_h_HeightMin.Maximum = new decimal(new int[] {
-        	        	        	1200,
-        	        	        	0,
-        	        	        	0,
-        	        	        	0});
-        	this.nudMTN_h_HeightMin.Name = "nudMTN_h_HeightMin";
-        	this.nudMTN_h_HeightMin.Size = new System.Drawing.Size(120, 20);
-        	this.nudMTN_h_HeightMin.TabIndex = 46;
-        	this.nudMTN_h_HeightMin.ValueChanged += new System.EventHandler(this.nudMTN_h_HeightMin_ValueChanged);
-        	// 
-        	// chkMTN_h_Height
-        	// 
-        	this.chkMTN_h_Height.AutoSize = true;
-        	this.chkMTN_h_Height.Location = new System.Drawing.Point(24, 64);
-        	this.chkMTN_h_Height.Name = "chkMTN_h_Height";
-        	this.chkMTN_h_Height.Size = new System.Drawing.Size(107, 17);
-        	this.chkMTN_h_Height.TabIndex = 45;
-        	this.chkMTN_h_Height.Text = "Height (Minimum)";
-        	this.chkMTN_h_Height.UseVisualStyleBackColor = true;
-        	// 
-        	// chkMTN_v_Verbose
-        	// 
-        	this.chkMTN_v_Verbose.AutoSize = true;
-        	this.chkMTN_v_Verbose.Location = new System.Drawing.Point(488, 240);
-        	this.chkMTN_v_Verbose.Name = "chkMTN_v_Verbose";
-        	this.chkMTN_v_Verbose.Size = new System.Drawing.Size(95, 17);
-        	this.chkMTN_v_Verbose.TabIndex = 44;
-        	this.chkMTN_v_Verbose.Text = "&Verbose Mode";
-        	this.chkMTN_v_Verbose.UseVisualStyleBackColor = true;
-        	// 
-        	// txtMTN_o_OutputSuffix
-        	// 
-        	this.txtMTN_o_OutputSuffix.Location = new System.Drawing.Point(448, 192);
-        	this.txtMTN_o_OutputSuffix.Name = "txtMTN_o_OutputSuffix";
-        	this.txtMTN_o_OutputSuffix.Size = new System.Drawing.Size(232, 20);
-        	this.txtMTN_o_OutputSuffix.TabIndex = 43;
-        	this.txtMTN_o_OutputSuffix.TextChanged += new System.EventHandler(this.txtMTN_o_OutputSuffix_TextChanged);
-        	// 
-        	// chkMTN_o_OutputSuffix
-        	// 
-        	this.chkMTN_o_OutputSuffix.AutoSize = true;
-        	this.chkMTN_o_OutputSuffix.Checked = true;
-        	this.chkMTN_o_OutputSuffix.CheckState = System.Windows.Forms.CheckState.Checked;
-        	this.chkMTN_o_OutputSuffix.Location = new System.Drawing.Point(352, 195);
-        	this.chkMTN_o_OutputSuffix.Name = "chkMTN_o_OutputSuffix";
-        	this.chkMTN_o_OutputSuffix.Size = new System.Drawing.Size(87, 17);
-        	this.chkMTN_o_OutputSuffix.TabIndex = 42;
-        	this.chkMTN_o_OutputSuffix.Text = "Output Suffix";
-        	this.chkMTN_o_OutputSuffix.UseVisualStyleBackColor = true;
-        	this.chkMTN_o_OutputSuffix.CheckedChanged += new System.EventHandler(this.chkMTN_o_OutputSuffix_CheckedChanged);
-        	// 
-        	// txtMTN_N_InfoSuffix
-        	// 
-        	this.txtMTN_N_InfoSuffix.Location = new System.Drawing.Point(448, 168);
-        	this.txtMTN_N_InfoSuffix.Name = "txtMTN_N_InfoSuffix";
-        	this.txtMTN_N_InfoSuffix.Size = new System.Drawing.Size(232, 20);
-        	this.txtMTN_N_InfoSuffix.TabIndex = 41;
-        	this.txtMTN_N_InfoSuffix.TextChanged += new System.EventHandler(this.txtMTN_N_InfoSuffix_TextChanged);
-        	// 
-        	// chkMTN_N_WriteInfo
-        	// 
-        	this.chkMTN_N_WriteInfo.AutoSize = true;
-        	this.chkMTN_N_WriteInfo.Location = new System.Drawing.Point(352, 171);
-        	this.chkMTN_N_WriteInfo.Name = "chkMTN_N_WriteInfo";
-        	this.chkMTN_N_WriteInfo.Size = new System.Drawing.Size(73, 17);
-        	this.chkMTN_N_WriteInfo.TabIndex = 40;
-        	this.chkMTN_N_WriteInfo.Text = "&Info Suffix";
-        	this.chkMTN_N_WriteInfo.UseVisualStyleBackColor = true;
-        	this.chkMTN_N_WriteInfo.CheckedChanged += new System.EventHandler(this.chkMTN_N_WriteInfo_CheckedChanged);
-        	// 
-        	// chkMTN_z_SeekMode
-        	// 
-        	this.chkMTN_z_SeekMode.AutoSize = true;
-        	this.chkMTN_z_SeekMode.Checked = true;
-        	this.chkMTN_z_SeekMode.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-        	this.chkMTN_z_SeekMode.Location = new System.Drawing.Point(712, 288);
-        	this.chkMTN_z_SeekMode.Name = "chkMTN_z_SeekMode";
-        	this.chkMTN_z_SeekMode.Size = new System.Drawing.Size(81, 17);
-        	this.chkMTN_z_SeekMode.TabIndex = 10;
-        	this.chkMTN_z_SeekMode.Text = "&Seek Mode";
-        	this.chkMTN_z_SeekMode.ThreeState = true;
-        	this.chkMTN_z_SeekMode.UseVisualStyleBackColor = true;
-        	this.chkMTN_z_SeekMode.Visible = false;
-        	// 
-        	// chkMTN_i_MediaInfoTurnOff
-        	// 
-        	this.chkMTN_i_MediaInfoTurnOff.AutoSize = true;
-        	this.chkMTN_i_MediaInfoTurnOff.Location = new System.Drawing.Point(352, 16);
-        	this.chkMTN_i_MediaInfoTurnOff.Name = "chkMTN_i_MediaInfoTurnOff";
-        	this.chkMTN_i_MediaInfoTurnOff.Size = new System.Drawing.Size(116, 17);
-        	this.chkMTN_i_MediaInfoTurnOff.TabIndex = 37;
-        	this.chkMTN_i_MediaInfoTurnOff.Text = "Turn off Media Info";
-        	this.chkMTN_i_MediaInfoTurnOff.UseVisualStyleBackColor = false;
-        	this.chkMTN_i_MediaInfoTurnOff.CheckedChanged += new System.EventHandler(this.chkMTN_i_MediaInfo_CheckedChanged);
-        	// 
-        	// gbMTN_i_MediaInfo
-        	// 
-        	this.gbMTN_i_MediaInfo.Controls.Add(this.chkMTN_T_Title);
-        	this.gbMTN_i_MediaInfo.Controls.Add(this.cboMTN_f_FontType);
-        	this.gbMTN_i_MediaInfo.Controls.Add(this.txtMTN_T_Title);
-        	this.gbMTN_i_MediaInfo.Controls.Add(this.chkMTN_f_Font);
-        	this.gbMTN_i_MediaInfo.Controls.Add(this.chkMTN_F_FontColor);
-        	this.gbMTN_i_MediaInfo.Controls.Add(this.cboMTN_F_FontColor);
-        	this.gbMTN_i_MediaInfo.Controls.Add(this.chkMTN_F_FontSize);
-        	this.gbMTN_i_MediaInfo.Controls.Add(this.nudMTN_F_FontSize);
-        	this.gbMTN_i_MediaInfo.Controls.Add(this.chkMTN_L_LocInfo);
-        	this.gbMTN_i_MediaInfo.Controls.Add(this.cboMTN_L_LocInfo);
-        	this.gbMTN_i_MediaInfo.Location = new System.Drawing.Point(344, 40);
-        	this.gbMTN_i_MediaInfo.Name = "gbMTN_i_MediaInfo";
-        	this.gbMTN_i_MediaInfo.Size = new System.Drawing.Size(364, 122);
-        	this.gbMTN_i_MediaInfo.TabIndex = 39;
-        	this.gbMTN_i_MediaInfo.TabStop = false;
-        	this.gbMTN_i_MediaInfo.Text = "Media Info";
-        	// 
-        	// chkMTN_T_Title
-        	// 
-        	this.chkMTN_T_Title.AutoSize = true;
-        	this.chkMTN_T_Title.Location = new System.Drawing.Point(12, 18);
-        	this.chkMTN_T_Title.Name = "chkMTN_T_Title";
-        	this.chkMTN_T_Title.Size = new System.Drawing.Size(46, 17);
-        	this.chkMTN_T_Title.TabIndex = 46;
-        	this.chkMTN_T_Title.Text = "&Title";
-        	this.chkMTN_T_Title.UseVisualStyleBackColor = true;
-        	this.chkMTN_T_Title.CheckedChanged += new System.EventHandler(this.chkMTN_T_Title_CheckedChanged);
-        	// 
-        	// cboMTN_f_FontType
-        	// 
-        	this.cboMTN_f_FontType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-        	this.cboMTN_f_FontType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
-        	this.cboMTN_f_FontType.FormattingEnabled = true;
-        	this.cboMTN_f_FontType.Location = new System.Drawing.Point(106, 41);
-        	this.cboMTN_f_FontType.Name = "cboMTN_f_FontType";
-        	this.cboMTN_f_FontType.Size = new System.Drawing.Size(232, 21);
-        	this.cboMTN_f_FontType.TabIndex = 12;
-        	this.ttApp.SetToolTip(this.cboMTN_f_FontType, "tahomabd.ttf : font file; use absolute path if not in usual places");
-        	this.cboMTN_f_FontType.SelectedIndexChanged += new System.EventHandler(this.cboMTN_f_FontType_SelectedIndexChanged);
-        	// 
-        	// txtMTN_T_Title
-        	// 
-        	this.txtMTN_T_Title.Location = new System.Drawing.Point(104, 16);
-        	this.txtMTN_T_Title.Name = "txtMTN_T_Title";
-        	this.txtMTN_T_Title.Size = new System.Drawing.Size(232, 20);
-        	this.txtMTN_T_Title.TabIndex = 45;
-        	this.txtMTN_T_Title.Text = "%Title%";
-        	this.txtMTN_T_Title.TextChanged += new System.EventHandler(this.txtMTN_T_Title_TextChanged);
-        	// 
-        	// chkMTN_f_Font
-        	// 
-        	this.chkMTN_f_Font.AutoSize = true;
-        	this.chkMTN_f_Font.Checked = true;
-        	this.chkMTN_f_Font.CheckState = System.Windows.Forms.CheckState.Checked;
-        	this.chkMTN_f_Font.Location = new System.Drawing.Point(12, 43);
-        	this.chkMTN_f_Font.Name = "chkMTN_f_Font";
-        	this.chkMTN_f_Font.Size = new System.Drawing.Size(78, 17);
-        	this.chkMTN_f_Font.TabIndex = 13;
-        	this.chkMTN_f_Font.Text = "&Font Name";
-        	this.chkMTN_f_Font.UseVisualStyleBackColor = true;
-        	this.chkMTN_f_Font.CheckedChanged += new System.EventHandler(this.chkMTN_f_Font_CheckedChanged);
-        	// 
-        	// chkMTN_F_FontColor
-        	// 
-        	this.chkMTN_F_FontColor.AutoSize = true;
-        	this.chkMTN_F_FontColor.Checked = true;
-        	this.chkMTN_F_FontColor.CheckState = System.Windows.Forms.CheckState.Checked;
-        	this.chkMTN_F_FontColor.Location = new System.Drawing.Point(12, 69);
-        	this.chkMTN_F_FontColor.Name = "chkMTN_F_FontColor";
-        	this.chkMTN_F_FontColor.Size = new System.Drawing.Size(74, 17);
-        	this.chkMTN_F_FontColor.TabIndex = 24;
-        	this.chkMTN_F_FontColor.Text = "&Font Color";
-        	this.ttApp.SetToolTip(this.chkMTN_F_FontColor, "-F RRGGBB:size");
-        	this.chkMTN_F_FontColor.UseVisualStyleBackColor = true;
-        	this.chkMTN_F_FontColor.CheckedChanged += new System.EventHandler(this.chkMTN_F_FontColor_CheckedChanged);
-        	// 
-        	// cboMTN_F_FontColor
-        	// 
-        	this.cboMTN_F_FontColor.FormattingEnabled = true;
-        	this.cboMTN_F_FontColor.Location = new System.Drawing.Point(106, 67);
-        	this.cboMTN_F_FontColor.MaxLength = 6;
-        	this.cboMTN_F_FontColor.Name = "cboMTN_F_FontColor";
-        	this.cboMTN_F_FontColor.Size = new System.Drawing.Size(120, 21);
-        	this.cboMTN_F_FontColor.TabIndex = 27;
-        	this.cboMTN_F_FontColor.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cboMTN_F_FontColor_MouseClick);
-        	this.cboMTN_F_FontColor.SelectedIndexChanged += new System.EventHandler(this.cboMTN_F_FontColor_SelectedIndexChanged);
-        	// 
-        	// chkMTN_F_FontSize
-        	// 
-        	this.chkMTN_F_FontSize.AutoSize = true;
-        	this.chkMTN_F_FontSize.Checked = true;
-        	this.chkMTN_F_FontSize.CheckState = System.Windows.Forms.CheckState.Checked;
-        	this.chkMTN_F_FontSize.Location = new System.Drawing.Point(234, 69);
-        	this.chkMTN_F_FontSize.Name = "chkMTN_F_FontSize";
-        	this.chkMTN_F_FontSize.Size = new System.Drawing.Size(46, 17);
-        	this.chkMTN_F_FontSize.TabIndex = 33;
-        	this.chkMTN_F_FontSize.Text = "Size";
-        	this.ttApp.SetToolTip(this.chkMTN_F_FontSize, "-F RRGGBB:size");
-        	this.chkMTN_F_FontSize.UseVisualStyleBackColor = true;
-        	this.chkMTN_F_FontSize.CheckedChanged += new System.EventHandler(this.chkMTN_F_FontSize_CheckedChanged);
-        	// 
-        	// nudMTN_F_FontSize
-        	// 
-        	this.nudMTN_F_FontSize.Location = new System.Drawing.Point(286, 68);
-        	this.nudMTN_F_FontSize.Name = "nudMTN_F_FontSize";
-        	this.nudMTN_F_FontSize.Size = new System.Drawing.Size(52, 20);
-        	this.nudMTN_F_FontSize.TabIndex = 34;
-        	this.nudMTN_F_FontSize.ValueChanged += new System.EventHandler(this.nudMTN_F_FontSize_ValueChanged);
-        	// 
-        	// chkMTN_L_LocInfo
-        	// 
-        	this.chkMTN_L_LocInfo.AutoSize = true;
-        	this.chkMTN_L_LocInfo.Checked = true;
-        	this.chkMTN_L_LocInfo.CheckState = System.Windows.Forms.CheckState.Checked;
-        	this.chkMTN_L_LocInfo.Location = new System.Drawing.Point(12, 94);
-        	this.chkMTN_L_LocInfo.Name = "chkMTN_L_LocInfo";
-        	this.chkMTN_L_LocInfo.Size = new System.Drawing.Size(67, 17);
-        	this.chkMTN_L_LocInfo.TabIndex = 29;
-        	this.chkMTN_L_LocInfo.Text = "Location";
-        	this.chkMTN_L_LocInfo.UseVisualStyleBackColor = true;
-        	this.chkMTN_L_LocInfo.CheckedChanged += new System.EventHandler(this.chkMTN_L_LocInfo_CheckedChanged);
-        	// 
-        	// cboMTN_L_LocInfo
-        	// 
-        	this.cboMTN_L_LocInfo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-        	this.cboMTN_L_LocInfo.FormattingEnabled = true;
-        	this.cboMTN_L_LocInfo.Items.AddRange(new object[] {
-        	        	        	"Lower Left",
-        	        	        	"Lower Right",
-        	        	        	"Upper Right",
-        	        	        	"Upper Left"});
-        	this.cboMTN_L_LocInfo.Location = new System.Drawing.Point(106, 92);
-        	this.cboMTN_L_LocInfo.MaxLength = 6;
-        	this.cboMTN_L_LocInfo.Name = "cboMTN_L_LocInfo";
-        	this.cboMTN_L_LocInfo.Size = new System.Drawing.Size(232, 21);
-        	this.cboMTN_L_LocInfo.TabIndex = 30;
-        	this.cboMTN_L_LocInfo.SelectedIndexChanged += new System.EventHandler(this.cboMTN_L_LocInfo_SelectedIndexChanged);
-        	// 
-        	// nudMTN_j_JPEGQuality
-        	// 
-        	this.nudMTN_j_JPEGQuality.Location = new System.Drawing.Point(176, 184);
-        	this.nudMTN_j_JPEGQuality.Minimum = new decimal(new int[] {
-        	        	        	50,
-        	        	        	0,
-        	        	        	0,
-        	        	        	0});
-        	this.nudMTN_j_JPEGQuality.Name = "nudMTN_j_JPEGQuality";
-        	this.nudMTN_j_JPEGQuality.Size = new System.Drawing.Size(120, 20);
-        	this.nudMTN_j_JPEGQuality.TabIndex = 36;
-        	this.nudMTN_j_JPEGQuality.Value = new decimal(new int[] {
-        	        	        	50,
-        	        	        	0,
-        	        	        	0,
-        	        	        	0});
-        	this.nudMTN_j_JPEGQuality.ValueChanged += new System.EventHandler(this.nudMTN_j_JPEGQuality_ValueChanged);
-        	// 
-        	// chkMTN_j_JPEGQuality
-        	// 
-        	this.chkMTN_j_JPEGQuality.AutoSize = true;
-        	this.chkMTN_j_JPEGQuality.Checked = true;
-        	this.chkMTN_j_JPEGQuality.CheckState = System.Windows.Forms.CheckState.Checked;
-        	this.chkMTN_j_JPEGQuality.Location = new System.Drawing.Point(24, 188);
-        	this.chkMTN_j_JPEGQuality.Name = "chkMTN_j_JPEGQuality";
-        	this.chkMTN_j_JPEGQuality.Size = new System.Drawing.Size(105, 17);
-        	this.chkMTN_j_JPEGQuality.TabIndex = 35;
-        	this.chkMTN_j_JPEGQuality.Text = "JPEG Quality (%)";
-        	this.chkMTN_j_JPEGQuality.UseVisualStyleBackColor = true;
-        	// 
-        	// cboMTN_L_LocTimestamp
-        	// 
-        	this.cboMTN_L_LocTimestamp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-        	this.cboMTN_L_LocTimestamp.FormattingEnabled = true;
-        	this.cboMTN_L_LocTimestamp.Items.AddRange(new object[] {
-        	        	        	"Lower Left",
-        	        	        	"Lower Right",
-        	        	        	"Upper Right",
-        	        	        	"Upper Left"});
-        	this.cboMTN_L_LocTimestamp.Location = new System.Drawing.Point(560, 16);
-        	this.cboMTN_L_LocTimestamp.MaxLength = 6;
-        	this.cboMTN_L_LocTimestamp.Name = "cboMTN_L_LocTimestamp";
-        	this.cboMTN_L_LocTimestamp.Size = new System.Drawing.Size(120, 21);
-        	this.cboMTN_L_LocTimestamp.TabIndex = 32;
-        	this.cboMTN_L_LocTimestamp.SelectedIndexChanged += new System.EventHandler(this.cboMTN_L_LocTimestamp_SelectedIndexChanged);
-        	// 
-        	// chkMTN_L_LocTimestamp
-        	// 
-        	this.chkMTN_L_LocTimestamp.AutoSize = true;
-        	this.chkMTN_L_LocTimestamp.Checked = true;
-        	this.chkMTN_L_LocTimestamp.CheckState = System.Windows.Forms.CheckState.Checked;
-        	this.chkMTN_L_LocTimestamp.Location = new System.Drawing.Point(472, 16);
-        	this.chkMTN_L_LocTimestamp.Name = "chkMTN_L_LocTimestamp";
-        	this.chkMTN_L_LocTimestamp.Size = new System.Drawing.Size(77, 17);
-        	this.chkMTN_L_LocTimestamp.TabIndex = 31;
-        	this.chkMTN_L_LocTimestamp.Text = "Timestamp";
-        	this.chkMTN_L_LocTimestamp.UseVisualStyleBackColor = true;
-        	this.chkMTN_L_LocTimestamp.CheckedChanged += new System.EventHandler(this.chkMTN_tL_LocTimestamp_CheckedChanged);
-        	// 
-        	// chkMTN_k_ColorBackground
-        	// 
-        	this.chkMTN_k_ColorBackground.AutoSize = true;
-        	this.chkMTN_k_ColorBackground.Checked = true;
-        	this.chkMTN_k_ColorBackground.CheckState = System.Windows.Forms.CheckState.Checked;
-        	this.chkMTN_k_ColorBackground.Location = new System.Drawing.Point(24, 140);
-        	this.chkMTN_k_ColorBackground.Name = "chkMTN_k_ColorBackground";
-        	this.chkMTN_k_ColorBackground.Size = new System.Drawing.Size(111, 17);
-        	this.chkMTN_k_ColorBackground.TabIndex = 28;
-        	this.chkMTN_k_ColorBackground.Text = "&Background Color";
-        	this.ttApp.SetToolTip(this.chkMTN_k_ColorBackground, "  -k RRGGBB : background color (in hex)");
-        	this.chkMTN_k_ColorBackground.UseVisualStyleBackColor = true;
-        	// 
-        	// nudMTN_g_Gap
-        	// 
-        	this.nudMTN_g_Gap.Location = new System.Drawing.Point(176, 112);
-        	this.nudMTN_g_Gap.Name = "nudMTN_g_Gap";
-        	this.nudMTN_g_Gap.Size = new System.Drawing.Size(120, 20);
-        	this.nudMTN_g_Gap.TabIndex = 26;
-        	this.nudMTN_g_Gap.Value = new decimal(new int[] {
-        	        	        	8,
-        	        	        	0,
-        	        	        	0,
-        	        	        	0});
-        	this.nudMTN_g_Gap.ValueChanged += new System.EventHandler(this.nudMTN_g_Gap_ValueChanged);
-        	// 
-        	// chkMTN_g_Gap
-        	// 
-        	this.chkMTN_g_Gap.AutoSize = true;
-        	this.chkMTN_g_Gap.Checked = true;
-        	this.chkMTN_g_Gap.CheckState = System.Windows.Forms.CheckState.Checked;
-        	this.chkMTN_g_Gap.Location = new System.Drawing.Point(24, 112);
-        	this.chkMTN_g_Gap.Name = "chkMTN_g_Gap";
-        	this.chkMTN_g_Gap.Size = new System.Drawing.Size(120, 17);
-        	this.chkMTN_g_Gap.TabIndex = 25;
-        	this.chkMTN_g_Gap.Text = "Gap between Shots";
-        	this.chkMTN_g_Gap.UseVisualStyleBackColor = true;
-        	// 
-        	// cboMTN_k_ColorBkgrd
-        	// 
-        	this.cboMTN_k_ColorBkgrd.FormattingEnabled = true;
-        	this.cboMTN_k_ColorBkgrd.Location = new System.Drawing.Point(176, 136);
-        	this.cboMTN_k_ColorBkgrd.MaxLength = 6;
-        	this.cboMTN_k_ColorBkgrd.Name = "cboMTN_k_ColorBkgrd";
-        	this.cboMTN_k_ColorBkgrd.Size = new System.Drawing.Size(120, 21);
-        	this.cboMTN_k_ColorBkgrd.TabIndex = 23;
-        	this.cboMTN_k_ColorBkgrd.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cboMTN_k_ColorBkgrd_MouseClick);
-        	this.cboMTN_k_ColorBkgrd.SelectedIndexChanged += new System.EventHandler(this.cboMTN_k_ColorBkgrd_SelectedIndexChanged);
-        	// 
-        	// nudMTN_w_Width
-        	// 
-        	this.nudMTN_w_Width.Location = new System.Drawing.Point(176, 88);
-        	this.nudMTN_w_Width.Maximum = new decimal(new int[] {
-        	        	        	2048,
-        	        	        	0,
-        	        	        	0,
-        	        	        	0});
-        	this.nudMTN_w_Width.Name = "nudMTN_w_Width";
-        	this.nudMTN_w_Width.Size = new System.Drawing.Size(120, 20);
-        	this.nudMTN_w_Width.TabIndex = 22;
-        	this.ttApp.SetToolTip(this.nudMTN_w_Width, "Keep 0 for Exact Dimensions");
-        	this.nudMTN_w_Width.ValueChanged += new System.EventHandler(this.nudMTN_w_Width_ValueChanged);
-        	// 
-        	// chkMTN_w_Width
-        	// 
-        	this.chkMTN_w_Width.AutoSize = true;
-        	this.chkMTN_w_Width.Checked = true;
-        	this.chkMTN_w_Width.CheckState = System.Windows.Forms.CheckState.Checked;
-        	this.chkMTN_w_Width.Location = new System.Drawing.Point(24, 88);
-        	this.chkMTN_w_Width.Name = "chkMTN_w_Width";
-        	this.chkMTN_w_Width.Size = new System.Drawing.Size(54, 17);
-        	this.chkMTN_w_Width.TabIndex = 21;
-        	this.chkMTN_w_Width.Text = "Width";
-        	this.chkMTN_w_Width.UseVisualStyleBackColor = true;
-        	// 
-        	// chkMTN_P_QuitAfterDone
-        	// 
-        	this.chkMTN_P_QuitAfterDone.AutoSize = true;
-        	this.chkMTN_P_QuitAfterDone.Checked = true;
-        	this.chkMTN_P_QuitAfterDone.CheckState = System.Windows.Forms.CheckState.Checked;
-        	this.chkMTN_P_QuitAfterDone.Location = new System.Drawing.Point(352, 264);
-        	this.chkMTN_P_QuitAfterDone.Name = "chkMTN_P_QuitAfterDone";
-        	this.chkMTN_P_QuitAfterDone.Size = new System.Drawing.Size(96, 17);
-        	this.chkMTN_P_QuitAfterDone.TabIndex = 20;
-        	this.chkMTN_P_QuitAfterDone.Text = "&Quit after done";
-        	this.chkMTN_P_QuitAfterDone.UseVisualStyleBackColor = true;
-        	this.chkMTN_P_QuitAfterDone.CheckedChanged += new System.EventHandler(this.chkMTN_P_QuitAfterDone_CheckedChanged);
-        	// 
-        	// nudMTN_s_TimeStep
-        	// 
-        	this.nudMTN_s_TimeStep.Location = new System.Drawing.Point(176, 160);
-        	this.nudMTN_s_TimeStep.Maximum = new decimal(new int[] {
-        	        	        	1000,
-        	        	        	0,
-        	        	        	0,
-        	        	        	0});
-        	this.nudMTN_s_TimeStep.Name = "nudMTN_s_TimeStep";
-        	this.nudMTN_s_TimeStep.Size = new System.Drawing.Size(120, 20);
-        	this.nudMTN_s_TimeStep.TabIndex = 19;
-        	this.nudMTN_s_TimeStep.ValueChanged += new System.EventHandler(this.nudMTN_s_TimeStep_ValueChanged);
-        	// 
-        	// chkMTN_s_TimeStep
-        	// 
-        	this.chkMTN_s_TimeStep.AutoSize = true;
-        	this.chkMTN_s_TimeStep.Location = new System.Drawing.Point(24, 164);
-        	this.chkMTN_s_TimeStep.Name = "chkMTN_s_TimeStep";
-        	this.chkMTN_s_TimeStep.Size = new System.Drawing.Size(123, 17);
-        	this.chkMTN_s_TimeStep.TabIndex = 18;
-        	this.chkMTN_s_TimeStep.Text = "Time Step (seconds)";
-        	this.chkMTN_s_TimeStep.UseVisualStyleBackColor = true;
-        	// 
-        	// nudMTN_r_Rows
-        	// 
-        	this.nudMTN_r_Rows.Location = new System.Drawing.Point(176, 16);
-        	this.nudMTN_r_Rows.Name = "nudMTN_r_Rows";
-        	this.nudMTN_r_Rows.Size = new System.Drawing.Size(120, 20);
-        	this.nudMTN_r_Rows.TabIndex = 17;
-        	this.nudMTN_r_Rows.ValueChanged += new System.EventHandler(this.nudMTN_r_Rows_ValueChanged);
-        	// 
-        	// chkShowMTN
-        	// 
-        	this.chkShowMTN.AutoSize = true;
-        	this.chkShowMTN.Location = new System.Drawing.Point(352, 240);
-        	this.chkShowMTN.Name = "chkShowMTN";
-        	this.chkShowMTN.Size = new System.Drawing.Size(122, 17);
-        	this.chkShowMTN.TabIndex = 11;
-        	this.chkShowMTN.Text = "Show &MTN Window";
-        	this.ttApp.SetToolTip(this.chkShowMTN, "Show MTN Window for Debugging purposes. Need to uncheck \"Quit after done\" if you " +
-        	        	"need to keep the Window open as long as you like.");
-        	this.chkShowMTN.UseVisualStyleBackColor = true;
-        	this.chkShowMTN.CheckedChanged += new System.EventHandler(this.chkShowMTN_CheckedChanged);
-        	// 
-        	// chkMTNRows
-        	// 
-        	this.chkMTNRows.AutoSize = true;
-        	this.chkMTNRows.Checked = true;
-        	this.chkMTNRows.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-        	this.chkMTNRows.Location = new System.Drawing.Point(24, 16);
-        	this.chkMTNRows.Name = "chkMTNRows";
-        	this.chkMTNRows.Size = new System.Drawing.Size(53, 17);
-        	this.chkMTNRows.TabIndex = 16;
-        	this.chkMTNRows.Text = "Rows";
-        	this.chkMTNRows.UseVisualStyleBackColor = true;
-        	this.chkMTNRows.CheckedChanged += new System.EventHandler(this.chkMTNRows_CheckedChanged);
-        	// 
-        	// nudMTN_c_Columns
-        	// 
-        	this.nudMTN_c_Columns.Location = new System.Drawing.Point(176, 40);
-        	this.nudMTN_c_Columns.Name = "nudMTN_c_Columns";
-        	this.nudMTN_c_Columns.Size = new System.Drawing.Size(120, 20);
-        	this.nudMTN_c_Columns.TabIndex = 15;
-        	this.nudMTN_c_Columns.ValueChanged += new System.EventHandler(this.nudMTN_c_Columns_ValueChanged);
-        	// 
-        	// chkMTNColumns
-        	// 
-        	this.chkMTNColumns.AutoSize = true;
-        	this.chkMTNColumns.Checked = true;
-        	this.chkMTNColumns.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-        	this.chkMTNColumns.Location = new System.Drawing.Point(24, 40);
-        	this.chkMTNColumns.Name = "chkMTNColumns";
-        	this.chkMTNColumns.Size = new System.Drawing.Size(66, 17);
-        	this.chkMTNColumns.TabIndex = 14;
-        	this.chkMTNColumns.Text = "Columns";
-        	this.chkMTNColumns.UseVisualStyleBackColor = true;
-        	this.chkMTNColumns.CheckedChanged += new System.EventHandler(this.chkMTNColumns_CheckedChanged);
-        	// 
         	// tpUsage2
         	// 
-        	this.tpUsage2.Controls.Add(this.pgMtn);
+        	this.tpUsage2.Controls.Add(this.tlpMtnUsage);
         	this.tpUsage2.Location = new System.Drawing.Point(4, 22);
         	this.tpUsage2.Name = "tpUsage2";
         	this.tpUsage2.Padding = new System.Windows.Forms.Padding(3);
         	this.tpUsage2.Size = new System.Drawing.Size(828, 339);
         	this.tpUsage2.TabIndex = 2;
-        	this.tpUsage2.Text = "Usage (Advanced)";
+        	this.tpUsage2.Text = "Usage";
         	this.tpUsage2.UseVisualStyleBackColor = true;
+        	// 
+        	// tlpMtnUsage
+        	// 
+        	this.tlpMtnUsage.ColumnCount = 2;
+        	this.tlpMtnUsage.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+        	this.tlpMtnUsage.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
+        	this.tlpMtnUsage.Controls.Add(this.pgMtn, 1, 0);
+        	this.tlpMtnUsage.Controls.Add(this.tlpMtnProfiles, 0, 0);
+        	this.tlpMtnUsage.Dock = System.Windows.Forms.DockStyle.Fill;
+        	this.tlpMtnUsage.Location = new System.Drawing.Point(3, 3);
+        	this.tlpMtnUsage.Name = "tlpMtnUsage";
+        	this.tlpMtnUsage.RowCount = 1;
+        	this.tlpMtnUsage.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+        	this.tlpMtnUsage.Size = new System.Drawing.Size(822, 333);
+        	this.tlpMtnUsage.TabIndex = 1;
         	// 
         	// pgMtn
         	// 
         	this.pgMtn.Dock = System.Windows.Forms.DockStyle.Fill;
-        	this.pgMtn.Location = new System.Drawing.Point(3, 3);
+        	this.pgMtn.Location = new System.Drawing.Point(208, 3);
         	this.pgMtn.Name = "pgMtn";
-        	this.pgMtn.Size = new System.Drawing.Size(822, 333);
+        	this.pgMtn.Size = new System.Drawing.Size(611, 327);
         	this.pgMtn.TabIndex = 0;
         	this.pgMtn.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.PgMtnPropertyValueChanged);
+        	// 
+        	// tlpMtnProfiles
+        	// 
+        	this.tlpMtnProfiles.ColumnCount = 1;
+        	this.tlpMtnProfiles.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+        	this.tlpMtnProfiles.Controls.Add(this.flpMtn, 0, 1);
+        	this.tlpMtnProfiles.Controls.Add(this.lbMtnProfiles, 0, 0);
+        	this.tlpMtnProfiles.Dock = System.Windows.Forms.DockStyle.Fill;
+        	this.tlpMtnProfiles.Location = new System.Drawing.Point(3, 3);
+        	this.tlpMtnProfiles.Name = "tlpMtnProfiles";
+        	this.tlpMtnProfiles.RowCount = 2;
+        	this.tlpMtnProfiles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+        	this.tlpMtnProfiles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
+        	this.tlpMtnProfiles.Size = new System.Drawing.Size(199, 327);
+        	this.tlpMtnProfiles.TabIndex = 1;
+        	// 
+        	// flpMtn
+        	// 
+        	this.flpMtn.Controls.Add(this.tbnAddMtnProfile);
+        	this.flpMtn.Controls.Add(this.btnRemoveMtnProfile);
+        	this.flpMtn.Location = new System.Drawing.Point(3, 294);
+        	this.flpMtn.Name = "flpMtn";
+        	this.flpMtn.Size = new System.Drawing.Size(162, 30);
+        	this.flpMtn.TabIndex = 7;
+        	// 
+        	// tbnAddMtnProfile
+        	// 
+        	this.tbnAddMtnProfile.Location = new System.Drawing.Point(3, 3);
+        	this.tbnAddMtnProfile.Name = "tbnAddMtnProfile";
+        	this.tbnAddMtnProfile.Size = new System.Drawing.Size(75, 23);
+        	this.tbnAddMtnProfile.TabIndex = 0;
+        	this.tbnAddMtnProfile.Text = "Add...";
+        	this.tbnAddMtnProfile.UseVisualStyleBackColor = true;
+        	this.tbnAddMtnProfile.Click += new System.EventHandler(this.TbnAddMtnProfileClick);
+        	// 
+        	// btnRemoveMtnProfile
+        	// 
+        	this.btnRemoveMtnProfile.Location = new System.Drawing.Point(84, 3);
+        	this.btnRemoveMtnProfile.Name = "btnRemoveMtnProfile";
+        	this.btnRemoveMtnProfile.Size = new System.Drawing.Size(75, 23);
+        	this.btnRemoveMtnProfile.TabIndex = 1;
+        	this.btnRemoveMtnProfile.Text = "Remove";
+        	this.btnRemoveMtnProfile.UseVisualStyleBackColor = true;
+        	// 
+        	// lbMtnProfiles
+        	// 
+        	this.lbMtnProfiles.Dock = System.Windows.Forms.DockStyle.Fill;
+        	this.lbMtnProfiles.FormattingEnabled = true;
+        	this.lbMtnProfiles.Location = new System.Drawing.Point(3, 3);
+        	this.lbMtnProfiles.Name = "lbMtnProfiles";
+        	this.lbMtnProfiles.Size = new System.Drawing.Size(193, 277);
+        	this.lbMtnProfiles.TabIndex = 8;
+        	this.lbMtnProfiles.SelectedIndexChanged += new System.EventHandler(this.LbMtnProfilesSelectedIndexChanged);
         	// 
         	// tpHosting
         	// 
@@ -1740,7 +1160,6 @@ namespace TDMaker
         	this.chkRandomizeFileNameImageShack.TabIndex = 3;
         	this.chkRandomizeFileNameImageShack.Text = "Randomize File Name for ImageShack";
         	this.chkRandomizeFileNameImageShack.UseVisualStyleBackColor = true;
-        	this.chkRandomizeFileNameImageShack.CheckedChanged += new System.EventHandler(this.chkRandomizeFileNameImageShack_CheckedChanged);
         	// 
         	// btnImageShackImages
         	// 
@@ -1778,7 +1197,6 @@ namespace TDMaker
         	this.chkUseImageShackRegCode.TabIndex = 5;
         	this.chkUseImageShackRegCode.Text = "Use Registration Code:";
         	this.chkUseImageShackRegCode.UseVisualStyleBackColor = true;
-        	this.chkUseImageShackRegCode.CheckedChanged += new System.EventHandler(this.chkUseImageShackRegCode_CheckedChanged);
         	// 
         	// tpPublish
         	// 
@@ -2730,23 +2148,10 @@ namespace TDMaker
         	this.tlpMTN.ResumeLayout(false);
         	this.tlpMTN.PerformLayout();
         	this.tcMtn.ResumeLayout(false);
-        	this.tpUsage1.ResumeLayout(false);
-        	this.pMTNUsage.ResumeLayout(false);
-        	this.pMTNUsage.PerformLayout();
-        	((System.ComponentModel.ISupportInitialize)(this.nudMTN_B_OmitStart)).EndInit();
-        	((System.ComponentModel.ISupportInitialize)(this.nudMTN_D_EdgeDetection)).EndInit();
-        	((System.ComponentModel.ISupportInitialize)(this.nudMTN_E_OmitEnd)).EndInit();
-        	((System.ComponentModel.ISupportInitialize)(this.nudMTN_h_HeightMin)).EndInit();
-        	this.gbMTN_i_MediaInfo.ResumeLayout(false);
-        	this.gbMTN_i_MediaInfo.PerformLayout();
-        	((System.ComponentModel.ISupportInitialize)(this.nudMTN_F_FontSize)).EndInit();
-        	((System.ComponentModel.ISupportInitialize)(this.nudMTN_j_JPEGQuality)).EndInit();
-        	((System.ComponentModel.ISupportInitialize)(this.nudMTN_g_Gap)).EndInit();
-        	((System.ComponentModel.ISupportInitialize)(this.nudMTN_w_Width)).EndInit();
-        	((System.ComponentModel.ISupportInitialize)(this.nudMTN_s_TimeStep)).EndInit();
-        	((System.ComponentModel.ISupportInitialize)(this.nudMTN_r_Rows)).EndInit();
-        	((System.ComponentModel.ISupportInitialize)(this.nudMTN_c_Columns)).EndInit();
         	this.tpUsage2.ResumeLayout(false);
+        	this.tlpMtnUsage.ResumeLayout(false);
+        	this.tlpMtnProfiles.ResumeLayout(false);
+        	this.flpMtn.ResumeLayout(false);
         	this.tpHosting.ResumeLayout(false);
         	this.gbImageShack.ResumeLayout(false);
         	this.gbImageShack.PerformLayout();
@@ -2779,8 +2184,13 @@ namespace TDMaker
         	this.ResumeLayout(false);
         	this.PerformLayout();
         }
+        private System.Windows.Forms.TableLayoutPanel tlpMtnProfiles;
+        private System.Windows.Forms.TableLayoutPanel tlpMtnUsage;
+        private System.Windows.Forms.ListBox lbMtnProfiles;
+        private System.Windows.Forms.Button btnRemoveMtnProfile;
+        private System.Windows.Forms.Button tbnAddMtnProfile;
+        private System.Windows.Forms.FlowLayoutPanel flpMtn;
         private System.Windows.Forms.TabPage tpUsage2;
-        private System.Windows.Forms.TabPage tpUsage1;
 
         #endregion
 
@@ -2882,7 +2292,6 @@ namespace TDMaker
         private System.Windows.Forms.ToolStripStatusLabel tssPerc;
         private System.Windows.Forms.ListBox lbScreenshots;
         private System.Windows.Forms.Button btnTemplatesRewrite;
-        private System.Windows.Forms.CheckBox chkShowMTN;
         private System.Windows.Forms.TabControl tcMtn;
         private System.Windows.Forms.TabPage tpHosting;
         private System.Windows.Forms.CheckBox chkUseImageShackRegCode;
@@ -2894,53 +2303,9 @@ namespace TDMaker
         private System.Windows.Forms.CheckBox chkTitle;
         private System.Windows.Forms.TextBox txtTitle;
         private System.Windows.Forms.PictureBox pbLogo;
-        private System.Windows.Forms.ComboBox cboMTN_f_FontType;
         private System.Windows.Forms.PictureBox pbScreenshot;
-        private System.Windows.Forms.Panel pMTNUsage;
-        private System.Windows.Forms.CheckBox chkMTNColumns;
-        private System.Windows.Forms.CheckBox chkMTN_f_Font;
-        private System.Windows.Forms.NumericUpDown nudMTN_s_TimeStep;
-        private System.Windows.Forms.CheckBox chkMTN_s_TimeStep;
-        private System.Windows.Forms.NumericUpDown nudMTN_r_Rows;
-        private System.Windows.Forms.CheckBox chkMTNRows;
-        private System.Windows.Forms.NumericUpDown nudMTN_c_Columns;
-        private System.Windows.Forms.CheckBox chkMTN_P_QuitAfterDone;
-        private System.Windows.Forms.NumericUpDown nudMTN_w_Width;
-        private System.Windows.Forms.CheckBox chkMTN_w_Width;
         private System.Windows.Forms.ToolTip ttApp;
-        private System.Windows.Forms.CheckBox chkMTN_F_FontColor;
-        private System.Windows.Forms.ComboBox cboMTN_k_ColorBkgrd;
-        private System.Windows.Forms.CheckBox chkMTN_k_ColorBackground;
-        private System.Windows.Forms.ComboBox cboMTN_F_FontColor;
-        private System.Windows.Forms.NumericUpDown nudMTN_g_Gap;
-        private System.Windows.Forms.CheckBox chkMTN_g_Gap;
-        private System.Windows.Forms.NumericUpDown nudMTN_F_FontSize;
-        private System.Windows.Forms.CheckBox chkMTN_F_FontSize;
-        private System.Windows.Forms.ComboBox cboMTN_L_LocTimestamp;
-        private System.Windows.Forms.CheckBox chkMTN_L_LocTimestamp;
-        private System.Windows.Forms.ComboBox cboMTN_L_LocInfo;
-        private System.Windows.Forms.CheckBox chkMTN_L_LocInfo;
-        private System.Windows.Forms.NumericUpDown nudMTN_j_JPEGQuality;
-        private System.Windows.Forms.CheckBox chkMTN_j_JPEGQuality;
-        private System.Windows.Forms.CheckBox chkMTN_i_MediaInfoTurnOff;
-        private System.Windows.Forms.GroupBox gbMTN_i_MediaInfo;
-        private System.Windows.Forms.CheckBox chkMTN_z_SeekMode;
-        private System.Windows.Forms.TextBox txtMTN_N_InfoSuffix;
-        private System.Windows.Forms.CheckBox chkMTN_N_WriteInfo;
-        private System.Windows.Forms.TextBox txtMTN_o_OutputSuffix;
-        private System.Windows.Forms.CheckBox chkMTN_o_OutputSuffix;
-        private System.Windows.Forms.CheckBox chkMTN_v_Verbose;
-        private System.Windows.Forms.CheckBox chkMTN_T_Title;
-        private System.Windows.Forms.TextBox txtMTN_T_Title;
-        private System.Windows.Forms.NumericUpDown nudMTN_h_HeightMin;
-        private System.Windows.Forms.CheckBox chkMTN_h_Height;
         private System.Windows.Forms.Button btnRefreshTrackers;
-        private System.Windows.Forms.NumericUpDown nudMTN_E_OmitEnd;
-        private System.Windows.Forms.CheckBox chkMTN_E_OmitEnd;
-        private System.Windows.Forms.NumericUpDown nudMTN_D_EdgeDetection;
-        private System.Windows.Forms.CheckBox chkMTN_D_EdgeDetection;
-        private System.Windows.Forms.NumericUpDown nudMTN_B_OmitStart;
-        private System.Windows.Forms.CheckBox chkMTN_B_OmitBegin;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem tsmSettingsDir;
         private System.Windows.Forms.RadioButton rbTExt;

@@ -149,7 +149,7 @@ namespace TDMaker
 
             if (Engine.conf.TakeScreenshot)
             { 
-                mi.Screenshot.MTNArgs = Adapter.GetMtnArg(Engine.conf.ScreenshotSettings); 
+                mi.Screenshot.MTNArgs = Adapter.GetMtnArg(Engine.mtnProfileMgr.GetMtnProfileActive()); 
 
                 // Screenshots Mode
                 if (Engine.conf.UploadScreenshot)
@@ -226,38 +226,10 @@ namespace TDMaker
                     Engine.conf.MTNPath = dlg.FileName;
                 }
             }
-
-            foreach (Control ctl in tpUsage1.Controls)
-            {
-                if (ctl.GetType() == typeof(CheckBox))
-                {
-                    CheckBox chkTpUsage1 = ctl as CheckBox;
-                    chkTpUsage1.CheckedChanged += new EventHandler(chkTpUsage1_CheckedChanged);
-                }
-                else if (ctl.GetType() == typeof(NumericUpDown))
-                {
-                    NumericUpDown nudTpUsage1 = ctl as NumericUpDown;
-                    nudTpUsage1.ValueChanged += new EventHandler(nudTpUsage1_ValueChanged);
-                }
-            }
-        }
-
-        void nudTpUsage1_ValueChanged(object sender, EventArgs e)
-        {
-            pgMtn.SelectedObject = Engine.conf.ScreenshotSettings;
-        }
-
-        void chkTpUsage1_CheckedChanged(object sender, EventArgs e)
-        {
-            pgApp.SelectedObject = Engine.conf;
         }
 
         private void SettingsWrite()
         {
-            // MTN Args
-            cboMTN_L_LocInfo.SelectedIndex = Engine.conf.ScreenshotSettings.L_LocInfo-1;
-            cboMTN_L_LocTimestamp.SelectedIndex = Engine.conf.ScreenshotSettings.L_LocTimestamp-1;
-
             // Source
             if (!Engine.conf.Sources.Contains(cboSource.Text))
             {
@@ -279,12 +251,6 @@ namespace TDMaker
                 Engine.conf.Sources.Add(cboExtras.Text);
             }
 
-            // Fonts
-            if (!Engine.conf.MTNFonts.Contains(cboMTN_f_FontType.Text))
-            {
-                Engine.conf.MTNFonts.Add(cboMTN_f_FontType.Text);
-            }
-
             Engine.conf.TrackerGroupActive = cboTrackerGroupActive.SelectedIndex;
             Engine.conf.TemplateIndex = cboTemplate.SelectedIndex;
 
@@ -293,7 +259,7 @@ namespace TDMaker
             Engine.conf.ImageUploader = (ImageDestType2)cboScreenshotDest.SelectedIndex;
 
             Engine.conf.Write();
-
+            Engine.mtnProfileMgr.Write();
         }
 
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
@@ -406,20 +372,10 @@ namespace TDMaker
             if (string.IsNullOrEmpty(Engine.conf.MTNPath))
                 Engine.conf.MTNPath = Path.Combine(Application.StartupPath, "mtn.exe");
 
-            cboMTN_L_LocInfo.SelectedIndex = Engine.conf.ScreenshotSettings.L_LocInfo-1;
-            cboMTN_L_LocTimestamp.SelectedIndex = Engine.conf.ScreenshotSettings.L_LocTimestamp-1;
-
-            cboMTN_f_FontType.Items.Clear();
-            foreach (string s in Engine.conf.MTNFonts)
-            {
-                cboMTN_f_FontType.Items.Add(s);
-            }
-
             rbTorrentDefaultFolder.Checked = Engine.conf.TorrentFolderDefault;
             rbTorrentFolderCustom.Checked = !rbTorrentDefaultFolder.Checked;
 
             pgApp.SelectedObject = Engine.conf;
-            pgMtn.SelectedObject = Engine.conf.ScreenshotSettings;
         }
 
         private void SettingsReadInput()
@@ -529,34 +485,23 @@ namespace TDMaker
 
         private void SettingsReadOptionsMTN()
         {
+        	if (Engine.mtnProfileMgr.MtnProfiles.Count == 0) 
+        	{
+        		Engine.mtnProfileMgr.MtnProfiles.Add(new XMLSettingsScreenshot("Default"));
+        	}
+        	
+        	foreach(XMLSettingsScreenshot mtnProfile in Engine.mtnProfileMgr.MtnProfiles)
+        	{
+        		lbMtnProfiles.Items.Add(mtnProfile);
+        	}
+        	lbMtnProfiles.SelectedIndex = Engine.mtnProfileMgr.MtnProfileActive;
+        	
             this.chkCreateTorrent.Checked = Engine.conf.TorrentCreateAuto;
             this.chkTorrentOrganize.Checked = Engine.conf.TorrentsOrganize;
-
-            this.cboMTN_F_FontColor.Text = Engine.conf.ScreenshotSettings.F_FontColor;
-            this.cboMTN_f_FontType.Text = Engine.conf.ScreenshotSettings.f_FontFile;
-            this.cboMTN_k_ColorBkgrd.Text = Engine.conf.ScreenshotSettings.k_ColorBackground;
-
-            this.nudMTN_B_OmitStart.Value = Engine.conf.ScreenshotSettings.B_OmitBegin;
-            this.nudMTN_c_Columns.Value = Engine.conf.ScreenshotSettings.c_Columns;
-            this.nudMTN_D_EdgeDetection.Value = Engine.conf.ScreenshotSettings.D_EdgeDetection;
-            this.nudMTN_E_OmitEnd.Value = Engine.conf.ScreenshotSettings.E_OmitEnd;
-            this.nudMTN_F_FontSize.Value = Engine.conf.ScreenshotSettings.F_FontSize;
-            this.nudMTN_h_HeightMin.Value = Engine.conf.ScreenshotSettings.h_MinHeight;
-            this.nudMTN_j_JPEGQuality.Value = Engine.conf.ScreenshotSettings.j_JpgQuality;
-            this.nudMTN_r_Rows.Value = Engine.conf.ScreenshotSettings.r_Rows;
-            this.nudMTN_s_TimeStep.Value = Engine.conf.ScreenshotSettings.s_TimeStep;
-            this.nudMTN_w_Width.Value = Engine.conf.ScreenshotSettings.w_Width;
-            
-            this.chkMTN_i_MediaInfoTurnOff.Checked = Engine.conf.ScreenshotSettings.i_InfoOff;
-            this.chkMTN_P_QuitAfterDone.Checked = Engine.conf.ScreenshotSettings.P_QuitAfterDone;
-            this.chkMTN_z_SeekMode.Checked = Engine.conf.ScreenshotSettings.z_AlwaysSeek;
 
             this.rbTorrentDefaultFolder.Checked = Engine.conf.TorrentFolderDefault;
 
             this.txtImageShackRegCode.Text = Engine.conf.ImageShackRegCode;
-            this.txtMTN_N_InfoSuffix.Text = Engine.conf.ScreenshotSettings.N_InfoSuffix;
-            this.txtMTN_o_OutputSuffix.Text = Engine.conf.ScreenshotSettings.o_OutputSuffix;
-
         }
 
         private void SettingsReadOptionsTorrents()
@@ -1212,22 +1157,6 @@ namespace TDMaker
             }
         }
 
-        private void cboMTN_k_ColorBkgrd_MouseClick(object sender, MouseEventArgs e)
-        {
-            this.SetComboBoxTextColor(ref cboMTN_k_ColorBkgrd);
-        }
-
-        private void cboMTN_F_FontColor_MouseClick(object sender, MouseEventArgs e)
-        {
-            this.SetComboBoxTextColor(ref cboMTN_F_FontColor);
-        }
-
-        private void chkMTN_i_MediaInfo_CheckedChanged(object sender, EventArgs e)
-        {
-            gbMTN_i_MediaInfo.Enabled = !chkMTN_i_MediaInfoTurnOff.Checked;
-            Engine.conf.ScreenshotSettings.i_InfoOff = chkMTN_i_MediaInfoTurnOff.Checked;
-        }
-
         private void btnRefreshTrackers_Click(object sender, EventArgs e)
         {
             try
@@ -1402,52 +1331,12 @@ namespace TDMaker
             OpenVersionHistory();
         }
 
-        private void chkMTNColumns_CheckedChanged(object sender, EventArgs e)
-        {
-            chkMTNColumns.CheckState = CheckState.Indeterminate;
-        }
-
-        private void chkMTNRows_CheckedChanged(object sender, EventArgs e)
-        {
-            chkMTNRows.CheckState = CheckState.Indeterminate;
-        }
-
-        private void chkShowMTN_CheckedChanged(object sender, EventArgs e)
-        {
-            Engine.conf.ShowMTNWindow = chkShowMTN.Checked;
-        }
-
-        private void nudMTN_r_Rows_ValueChanged(object sender, EventArgs e)
-        {
-            Engine.conf.ScreenshotSettings.r_Rows = (int)nudMTN_r_Rows.Value;
-        }
-
-        private void chkMTN_P_QuitAfterDone_CheckedChanged(object sender, EventArgs e)
-        {
-            Engine.conf.ScreenshotSettings.P_QuitAfterDone = chkMTN_P_QuitAfterDone.Checked;
-        }
-
         private void pbScreenshot_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtScrFull.Text))
             {
                 Process.Start(txtScrFull.Text);
             }
-        }
-
-        private void cboMTN_k_ColorBkgrd_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Engine.conf.ScreenshotSettings.k_ColorBackground = cboMTN_k_ColorBkgrd.Text;
-        }
-
-        private void chkUseImageShackRegCode_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chkRandomizeFileNameImageShack_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void chkCreateTorrent_CheckedChanged(object sender, EventArgs e)
@@ -1700,135 +1589,35 @@ namespace TDMaker
                 }
             }
         }
-
-        private void nudMTN_c_Columns_ValueChanged(object sender, EventArgs e)
-        {
-            Engine.conf.ScreenshotSettings.c_Columns = (int)nudMTN_c_Columns.Value;
-        }
-
-        private void nudMTN_h_HeightMin_ValueChanged(object sender, EventArgs e)
-        {
-            Engine.conf.ScreenshotSettings.h_MinHeight = (int)nudMTN_h_HeightMin.Value;
-        }
-
-        private void nudMTN_w_Width_ValueChanged(object sender, EventArgs e)
-        {
-            Engine.conf.ScreenshotSettings.w_Width = (int)nudMTN_w_Width.Value;
-        }
-
-        private void nudMTN_g_Gap_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void nudMTN_s_TimeStep_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void nudMTN_j_JPEGQuality_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void nudMTN_B_OmitStart_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void nudMTN_E_OmitEnd_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void nudMTN_D_EdgeDetection_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chkMTN_tL_LocTimestamp_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cboMTN_L_LocTimestamp_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chkMTN_T_Title_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtMTN_T_Title_TextChanged(object sender, EventArgs e)
-        {
-        	Engine.conf.txtMTN_T_Title = txtMTN_T_Title.Text;
-        }
-
-        private void chkMTN_f_Font_CheckedChanged(object sender, EventArgs e)
-        {
-        	
-        }
-
-        private void cboMTN_f_FontType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chkMTN_F_FontColor_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cboMTN_F_FontColor_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chkMTN_F_FontSize_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void nudMTN_F_FontSize_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chkMTN_L_LocInfo_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cboMTN_L_LocInfo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chkMTN_N_WriteInfo_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtMTN_N_InfoSuffix_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chkMTN_o_OutputSuffix_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtMTN_o_OutputSuffix_TextChanged(object sender, EventArgs e)
-        {
-
-        }
         
         void PgMtnPropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
-        	txtMtnArgs.Text = Adapter.GetMtnArg(Engine.conf.ScreenshotSettings);
+        	txtMtnArgs.Text = Adapter.GetMtnArg(Engine.mtnProfileMgr.GetMtnProfileActive());
+        }
+        
+        void TbnAddMtnProfileClick(object sender, EventArgs e)
+        {
+        	InputBox ib = new InputBox(); 
+        	ib.Title = "Enter profile name..."; 
+        	ib.InputText = "MTN for MV";
+        	if (ib.ShowDialog() == DialogResult.OK)
+        	{
+        		XMLSettingsScreenshot mtnProfile = new XMLSettingsScreenshot(ib.InputText);
+        		Engine.mtnProfileMgr.MtnProfiles.Add(mtnProfile);
+        		lbMtnProfiles.Items.Add(mtnProfile);
+        		lbMtnProfiles.SelectedIndex = lbMtnProfiles.Items.Count-1;
+        	}
+        }
+        
+        void LbMtnProfilesSelectedIndexChanged(object sender, EventArgs e)
+        {
+        	if (lbMtnProfiles.SelectedIndex > -1) 
+        	{
+        		XMLSettingsScreenshot mtnProfile = lbMtnProfiles.Items[lbMtnProfiles.SelectedIndex] as XMLSettingsScreenshot ;
+        		pgMtn.SelectedObject = mtnProfile;
+        		Engine.mtnProfileMgr.MtnProfileActive = lbMtnProfiles.SelectedIndex;
+        		txtMtnArgs.Text = Adapter.GetMtnArg(mtnProfile);
+        	}
         }
     }
 }

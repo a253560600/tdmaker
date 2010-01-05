@@ -45,6 +45,9 @@ namespace TDMakerLib
     	public const bool z_Seek_default = false;
     	public const bool Z_NonSeek_default = false;
     	
+        [Category("MTN / General"), DefaultValue("New Profile"), Description("descriptive name for the MTN Profile")]
+        public string ProfileName { get; set; }
+        
         [Category("MTN / Optional"), DefaultValue(a_AspectRatio_default), Description("override input file's display aspect ratio")]
         public bool a_AspectRatio { get; set; }
         [Category("MTN / Optional"), DefaultValue(b_SkipBlank_default), Description("skip if % blank is higher; 0:skip all 1:skip really blank >1:off")]
@@ -103,7 +106,9 @@ namespace TDMakerLib
         [Category("MTN / Optional"), DefaultValue(t_TimeStampOff_default), Description("time stamp off")]
         public bool t_TimeStampOff { get; set; }
         [Category("MTN / Optional"), DefaultValue(T_Text_default), Description("add text above output image")]
-        public bool T_Text { get; set; }
+        public bool T_TitleTextAdd { get; set; }
+        [Category("MTN / Optional"), DefaultValue("%Title%"), Description("title to add above output image")]
+        public string T_TitleText { get; set; }
         [Category("MTN / Optional"), DefaultValue(v_Verbose_default), Description("verbose mode (debug)")]
         public bool v_Verbose { get; set; }
         [Category("MTN / Optional"), DefaultValue(0), Description("width of output image; 0:column * movie width")]
@@ -114,100 +119,21 @@ namespace TDMakerLib
         public bool z_AlwaysSeek { get; set; }
         [Category("MTN / Optional"), DefaultValue(Z_NonSeek_default), Description("always use non-seek mode -- slower but more accurate timing")]
         public bool Z_AlwaysNonSeek { get; set; }
-
-        public string T_Title = string.Empty;    
-        
+       
         public XMLSettingsScreenshot()
         {
             ApplyDefaultValues(this);
         }
-
-        #region I/O Methods
-
-        public void Write(string filePath)
+        
+        public XMLSettingsScreenshot(string profileName)
+        	:this()
         {
-            try
-            {
-                if (!Directory.Exists(Path.GetDirectoryName(filePath)))
-                    Directory.CreateDirectory(Path.GetDirectoryName(filePath));
-
-                //Write XML file
-                XmlSerializer serial = new XmlSerializer(typeof(XMLSettings));
-                FileStream fs = new FileStream(filePath, FileMode.Create);
-                serial.Serialize(fs, this);
-                fs.Close();
-
-                serial = null;
-                fs = null;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+        	this.ProfileName = profileName;
         }
-
-        public void Write()
-        {
-            Write(Engine.mAppSettings.XMLSettingsFile);
-        }
-
-        public static XMLSettingsScreenshot Read()
-        {
-            string settingsFile = Engine.mAppSettings.GetSettingsFilePath();
-            if (!File.Exists(settingsFile))
-            {
-                if (File.Exists(Engine.mAppSettings.XMLSettingsFile))
-                {
-                    // Step 2 - Attempt to read previous Application Version specific Settings file
-                    settingsFile = Engine.mAppSettings.XMLSettingsFile;
-                }
-                else
-                {
-                    // Step 3 - Attempt to read conventional Settings file
-                    settingsFile = Engine.XMLSettingsFile;
-                }
-            }
-
-            if (File.Exists(settingsFile) && settingsFile != Engine.mAppSettings.GetSettingsFilePath())
-            {
-                // Update AppSettings.xml
-                File.Copy(settingsFile, Engine.mAppSettings.GetSettingsFilePath());
-            }
-
-            Engine.mAppSettings.XMLSettingsFile = Engine.mAppSettings.GetSettingsFilePath();
-            return Read(Engine.mAppSettings.XMLSettingsFile);
-        }
-
-        public static XMLSettingsScreenshot Read(string filePath)
-        {
-            if (!string.IsNullOrEmpty(filePath))
-            {
-                string settingsDir = Path.GetDirectoryName(filePath);
-                if (!Directory.Exists(settingsDir))
-                {
-                    Directory.CreateDirectory(settingsDir);
-                }
-                if (File.Exists(filePath))
-                {
-                    try
-                    {
-                        XmlSerializer xs = new XmlSerializer(typeof(XMLSettings));
-                        using (FileStream fs = new FileStream(filePath, FileMode.Open))
-                        {
-                            return xs.Deserialize(fs) as XMLSettingsScreenshot;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.ToString());
-                    }
-                }
-            }
-
-            return new XMLSettingsScreenshot();
-        }
-
-        #endregion
+        
+		public override string ToString()
+		{
+			return this.ProfileName;		 
+		}        
     }
-
 }
