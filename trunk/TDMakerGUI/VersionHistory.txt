@@ -1,11 +1,11 @@
 Version 2.0
 
 2.00.0.0 Core changes to create TDMaker Dynamic Links Library
-1.17.0.0 Processing multiple files will show multiple Media Info tabs
+1.17.0.0 Show multiple Media Info tabs when processing multiple files
 1.16.0.0 Added proxy support under Options tab
 1.15.0.0 Support for multiple MTN profiles
 1.14.0.0 Tracker Groups enable creation of multiple torrents of the same file for multiple trackers [issue 4]
-1.13.0.0 MTN Screenshot preview under Screenshot tab
+1.13.0.0 MTN Screenshot preview for multiple files under Screenshots tab
 1.12.0.0 Using ZScreen UploadersLib.dll to support ImageShack, TinyPic, ImageBin and Imgur hosting services
 1.11.0.0 Option to prefer known folders for Settings and Data
 1.10.0.2 Fixed errors while uploading to TinyPic

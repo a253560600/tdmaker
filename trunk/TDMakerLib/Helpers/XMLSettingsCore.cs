@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using System.Drawing.Design;
 using System.Windows.Forms.Design;
+using System.Diagnostics;
 
 namespace TDMakerLib
 {
@@ -173,7 +174,7 @@ namespace TDMakerLib
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Debug.WriteLine(e.Message);
             }
         }
 
@@ -230,7 +231,7 @@ namespace TDMakerLib
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex.ToString());
+                        Debug.WriteLine(ex.ToString());
                     }
                 }
             }

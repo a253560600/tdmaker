@@ -90,12 +90,10 @@ namespace TDMakerLib
 
         public void CreateInfo()
         {
-
             string pattern = "";
 
             if (TorrentInfo.MyMedia != null)
             {
-
                 if (TorrentInfo.MyMedia.MediaType == MediaType.MEDIA_DISC)
                 {
                     pattern = CreateDiscInfo(TorrentInfo.MyMedia);
@@ -106,22 +104,21 @@ namespace TDMakerLib
                 }
 
                 pattern = GetSourceInfo(pattern, TorrentInfo.MyMedia);
-                pattern = GetScreenshotInfo(ref pattern, TorrentInfo.MyMedia);
                 pattern = Regex.Replace(pattern, "%NewLine%", Environment.NewLine);
 
                 PublishInfo = pattern.Trim();
             }
         }
 
-        private string GetScreenshotInfo(ref string pattern, MediaInfo2 mi)
+        private string GetScreenshotInfo(string pattern, MediaFile mf)
         {
-            if (!string.IsNullOrEmpty(mi.Screenshot.Full))
+            if (!string.IsNullOrEmpty(mf.Screenshot.Full))
             {
-                pattern = Regex.Replace(pattern, "%ScreenshotFull%", mi.Screenshot.Full, RegexOptions.IgnoreCase);             
+                pattern = Regex.Replace(pattern, "%ScreenshotFull%", mf.Screenshot.Full, RegexOptions.IgnoreCase);
             }
-            if (!string.IsNullOrEmpty(mi.Screenshot.LinkedThumbnail))
+            if (!string.IsNullOrEmpty(mf.Screenshot.LinkedThumbnail))
             {
-                pattern = Regex.Replace(pattern, "%ScreenshotForums%", mi.Screenshot.LinkedThumbnail, RegexOptions.IgnoreCase);
+                pattern = Regex.Replace(pattern, "%ScreenshotForums%", mf.Screenshot.LinkedThumbnail, RegexOptions.IgnoreCase);
             }
             return pattern;
         }
@@ -204,6 +201,7 @@ namespace TDMakerLib
 
                 pattern = GetStringFromAnyPattern(pattern, mf);
                 pattern = GetStyles(pattern); // apply any formatting
+                pattern = GetScreenshotInfo(pattern, mf);
 
                 sb.AppendLine(pattern);
             }
@@ -259,6 +257,7 @@ namespace TDMakerLib
 
                 pattern = GetStringFromAnyPattern(pattern, mi.Overall);
                 pattern = GetStyles(pattern); // apply any formatting
+                pattern = GetScreenshotInfo(pattern, mi.Overall);
             }
             return pattern;
         }

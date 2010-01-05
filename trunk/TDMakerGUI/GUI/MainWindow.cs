@@ -50,7 +50,6 @@ namespace TDMaker
 
         private void MakeGUIReadyForAnalysis()
         {
-            lbScreenshots.Items.Clear();
             pBar.Value = 0;
         }
 
@@ -127,6 +126,11 @@ namespace TDMaker
         /// <returns>MediaInfo2 object</returns>
         private MediaInfo2 PrepareNewMedia(string p)
         {
+            tcMediaInfo.Controls.Clear();
+            lbScreenshots.Items.Clear();
+            pbScreenshot.ImageLocation = "";
+            pgScreenshot.SelectedObject = null;
+
             MediaInfo2 mi = new MediaInfo2(p);
             mi.Extras = cboExtras.Text;
             if (cboSource.Text == "DVD")
@@ -148,8 +152,8 @@ namespace TDMaker
             }
 
             if (Engine.conf.TakeScreenshot)
-            { 
-                mi.Screenshot.MTNArgs = Adapter.GetMtnArg(Engine.mtnProfileMgr.GetMtnProfileActive()); 
+            {
+                mi.Screenshot.MTNArgs = Adapter.GetMtnArg(Engine.mtnProfileMgr.GetMtnProfileActive());
 
                 // Screenshots Mode
                 if (Engine.conf.UploadScreenshot)
@@ -159,7 +163,7 @@ namespace TDMaker
             }
             return mi;
         }
-        
+
         private void AnalyzeMedia(WorkerTask wt)
         {
             List<MediaInfo2> miList = new List<MediaInfo2>();
@@ -178,14 +182,6 @@ namespace TDMaker
 
                     // if it is a DVD, set the title to be name of the folder. 
                     this.Text = string.Format("{0} - {1}", Loader.gAppInfo.GetApplicationTitle(Application.ProductName, Application.ProductVersion, McoreSystem.AppInfo.VersionDepth.MajorMinorBuild), Engine.GetMediaName(mi.Location));
-
-                    txtScrFull.Text = "";
-                    txtBBScrFull.Text = "";
-                    txtBBScrForums.Text = "";
-
-                    // pBar.Style = ProgressBarStyle.Marquee;
-
-                    // lbStatus.Items.Add("Analyzing Media using MediaInfo.");
 
                     miList.Add(mi);
                 }
@@ -447,7 +443,6 @@ namespace TDMaker
 
         private void SettingsReadScreenshots()
         {
-            chkScreenshot.Checked = Engine.conf.TakeScreenshot;
             chkScreenshotUpload.Checked = Engine.conf.UploadScreenshot;
         }
 
@@ -466,7 +461,7 @@ namespace TDMaker
             nudHeading2Size.Value = (decimal)Engine.conf.FontSizeHeading2;
             nudHeading3Size.Value = (decimal)Engine.conf.FontSizeHeading3;
             nudBodySize.Value = (decimal)Engine.conf.FontSizeBody;
-            
+
             chkProxyEnable.Checked = Engine.conf.ProxyEnabled;
             pgProxy.SelectedObject = Engine.conf.ProxySettings;
 
@@ -476,43 +471,43 @@ namespace TDMaker
 
         private void SettingsReadOptionsMTN()
         {
-        	if (Engine.mtnProfileMgr.MtnProfiles.Count == 0) 
-        	{
-        		XMLSettingsScreenshot mtnDefault1 = new XMLSettingsScreenshot("MTN for MVids (Auto Width)") 
-        		{ 
-        			k_ColorBackground = "eeeeee", 
-        			f_FontFile = "arial.ttf", 
-        			F_FontColor = "000000", 
-        			F_FontSize = 12, 
-        			g_GapBetweenShots = 8,
-        			L_LocInfo = 4, 
-        			L_LocTimestamp = 2, 
-        			j_JpgQuality = 97, 
-        			N_InfoSuffix = ""
-        		};        		
-        		Engine.mtnProfileMgr.MtnProfiles.Add(mtnDefault1);
-        		XMLSettingsScreenshot mtnDefault2 =  new XMLSettingsScreenshot("MTN for MVids (Fixed Width)") 
-        		{ 
-        			k_ColorBackground = "eeeeee", 
-        			f_FontFile = "arial.ttf", 
-        			F_FontColor = "000000", 
-        			F_FontSize = 12, 
-        			g_GapBetweenShots = 8,        			
-        			L_LocInfo = 4, 
-        			L_LocTimestamp = 2, 
-        			j_JpgQuality = 97, 
-        			w_Width = 800,
-        			N_InfoSuffix = ""
-        		};    
-        		Engine.mtnProfileMgr.MtnProfiles.Add(mtnDefault2);
-        	}
-        	
-        	foreach(XMLSettingsScreenshot mtnProfile in Engine.mtnProfileMgr.MtnProfiles)
-        	{
-        		lbMtnProfiles.Items.Add(mtnProfile);
-        	}
-        	lbMtnProfiles.SelectedIndex = Engine.mtnProfileMgr.MtnProfileActive;
-        	
+            if (Engine.mtnProfileMgr.MtnProfiles.Count == 0)
+            {
+                XMLSettingsScreenshot mtnDefault1 = new XMLSettingsScreenshot("MTN for MVids (Auto Width)")
+                {
+                    k_ColorBackground = "eeeeee",
+                    f_FontFile = "arial.ttf",
+                    F_FontColor = "000000",
+                    F_FontSize = 12,
+                    g_GapBetweenShots = 8,
+                    L_LocInfo = 4,
+                    L_LocTimestamp = 2,
+                    j_JpgQuality = 97,
+                    N_InfoSuffix = ""
+                };
+                Engine.mtnProfileMgr.MtnProfiles.Add(mtnDefault1);
+                XMLSettingsScreenshot mtnDefault2 = new XMLSettingsScreenshot("MTN for MVids (Fixed Width)")
+                {
+                    k_ColorBackground = "eeeeee",
+                    f_FontFile = "arial.ttf",
+                    F_FontColor = "000000",
+                    F_FontSize = 12,
+                    g_GapBetweenShots = 8,
+                    L_LocInfo = 4,
+                    L_LocTimestamp = 2,
+                    j_JpgQuality = 97,
+                    w_Width = 800,
+                    N_InfoSuffix = ""
+                };
+                Engine.mtnProfileMgr.MtnProfiles.Add(mtnDefault2);
+            }
+
+            foreach (XMLSettingsScreenshot mtnProfile in Engine.mtnProfileMgr.MtnProfiles)
+            {
+                lbMtnProfiles.Items.Add(mtnProfile);
+            }
+            lbMtnProfiles.SelectedIndex = Engine.mtnProfileMgr.MtnProfileActive;
+
             this.chkCreateTorrent.Checked = Engine.conf.TorrentCreateAuto;
             this.chkTorrentOrganize.Checked = Engine.conf.TorrentsOrganize;
 
@@ -532,12 +527,14 @@ namespace TDMaker
                 {
                     lbTrackers.Items.Add(myTracker);
                 }
-                if (lbTrackers.Items.Count > 0) {
-                	lbTrackers.SelectedIndex = 0;               	
+                if (lbTrackers.Items.Count > 0)
+                {
+                    lbTrackers.SelectedIndex = 0;
                 }
             }
-            if (lbTrackerGroups.Items.Count > 0 ) {
-            	lbTrackerGroups.SelectedIndex = 0;
+            if (lbTrackerGroups.Items.Count > 0)
+            {
+                lbTrackerGroups.SelectedIndex = 0;
             }
 
             FillTrackersComboBox();
@@ -551,11 +548,6 @@ namespace TDMaker
             chkTorrentOrganize.Checked = Engine.conf.TorrentsOrganize;
 
             txtTorrentCustomFolder.Text = Engine.conf.CustomTorrentsDir;
-        }
-
-        private void btnCopy_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(txtBBScrFull.Text);
         }
 
         private string CreatePublishInitial(ref TorrentInfo ti)
@@ -594,8 +586,6 @@ namespace TDMaker
                     // creates screenshot
                     TorrentInfo ti = new TorrentInfo(bwApp, mi);
                     ti.PublishString = CreatePublishInitial(ref ti);
-
-                    bwApp.ReportProgress((int)ProgressType.UPDATE_SCREENSHOTS_LIST, ti.MyMedia.Screenshot);
 
                     if (Engine.conf.WritePublish)
                     {
@@ -695,10 +685,6 @@ namespace TDMaker
             btnCreateTorrent.Enabled = !bwApp.IsBusy && lbFiles.Items.Count > 0;
             btnAnalyze.Enabled = !bwApp.IsBusy && lbFiles.Items.Count > 0;
 
-            btnCopy0.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtScrFull.Text);
-            btnCopy1.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtBBScrFull.Text);
-            btnCopy2.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtBBScrForums.Text);
-
             btnPublish.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtPublish.Text);
 
             txtTorrentCustomFolder.Enabled = rbTorrentFolderCustom.Checked;
@@ -706,7 +692,6 @@ namespace TDMaker
             chkTorrentOrganize.Enabled = rbTorrentFolderCustom.Checked;
 
             gbTemplatesInternal.Enabled = !chkTemplatesMode.Checked;
-
         }
 
         private void bwApp_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -724,15 +709,7 @@ namespace TDMaker
                         }
                         if (mTorrentInfo != null)
                         {
-                            txtScrFull.Text = mTorrentInfo.MyMedia.Screenshot.Full;
-                            txtBBScrForums.Text = mTorrentInfo.MyMedia.Screenshot.LinkedThumbnail;
-                            pbScreenshot.ImageLocation = mTorrentInfo.MyMedia.Screenshot.LocalPath;
-
-                            if (!string.IsNullOrEmpty(txtScrFull.Text))
-                                txtBBScrFull.Text = string.Format("[img]{0}[/img]", txtScrFull.Text);
-
                             PublishOptionsPacket pop = mTorrentInfo.PublishOptions;
-
                             // initialize quick publish checkboxes
                             chkQuickAlignCenter.Checked = pop.AlignCenter;
                             chkQuickFullPicture.Checked = pop.FullPicture;
@@ -740,7 +717,6 @@ namespace TDMaker
                             cboQuickTemplate.SelectedIndex = cboTemplate.SelectedIndex;
 
                             this.UpdatePublish(mTorrentInfo);
-
                         }
                         break;
                 }
@@ -752,22 +728,18 @@ namespace TDMaker
 
         }
 
+        void pbScreenshot_MouseClick(object sender, MouseEventArgs e)
+        {
+            PictureBox pbScreenshot = sender as PictureBox;
+            Process.Start(pbScreenshot.ImageLocation);
+        }
+
         private void tmrStatus_Tick(object sender, EventArgs e)
         {
             tssPerc.Text = (bwApp.IsBusy ? string.Format("{0}%", (100.0 * (double)pBar.Value / (double)pBar.Maximum).ToString("0.0")) : "");
             btnBrowse.Enabled = !bwApp.IsBusy;
             btnAnalyze.Enabled = !bwApp.IsBusy && lbFiles.Items.Count > 0;
             lbStatus.SelectedIndex = lbStatus.Items.Count - 1;
-        }
-
-        private void btnCopy2_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(txtBBScrForums.Text);
-        }
-
-        private void btnCopy0_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(txtScrFull.Text);
         }
 
         private void OpenFile()
@@ -842,7 +814,22 @@ namespace TDMaker
                     case ProgressType.REPORT_MEDIAINFO_SUMMARY:
                         MediaInfo2 mi = (MediaInfo2)e.UserState;
                         gbDVD.Enabled = (mi.MediaType == MediaType.MEDIA_DISC);
-                        txtMediaInfo.Text = mi.Overall.Summary;
+                        foreach (MediaFile mf in mi.MediaFiles)
+                        {
+                            TextBox infoText = new TextBox()
+                            {
+                                Dock = DockStyle.Fill,
+                                Multiline = true,
+                                ReadOnly = true,
+                                ScrollBars = System.Windows.Forms.ScrollBars.Both,
+                                Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                                Text = mf.Summary,
+                                WordWrap = false
+                            };
+                            TabPage tp = new TabPage(mf.FileName);
+                            tp.Controls.Add(infoText);
+                            tcMediaInfo.TabPages.Add(tp);
+                        }
                         break;
 
                     case ProgressType.UPDATE_PROGRESSBAR_MAX:
@@ -852,9 +839,10 @@ namespace TDMaker
 
                     case ProgressType.UPDATE_SCREENSHOTS_LIST:
                         Screenshot sp = (Screenshot)e.UserState;
-                        if (sp.Full != null)
+                        if (sp != null)
                         {
-                            lbScreenshots.Items.Add(sp.Full);
+                            lbScreenshots.Items.Add(sp);
+                            lbScreenshots.SelectedIndex = lbScreenshots.Items.Count - 1;
                         }
                         break;
                     case ProgressType.UPDATE_STATUSBAR_DEBUG:
@@ -870,12 +858,12 @@ namespace TDMaker
         private void chkScreenshotUpload_CheckedChanged(object sender, EventArgs e)
         {
             chkUploadFullScreenshot.Enabled = chkScreenshotUpload.Checked;
+            Engine.conf.TakeScreenshot = chkScreenshotUpload.Checked;
             Engine.conf.UploadScreenshot = chkScreenshotUpload.Checked;
         }
 
         private void btnAnalyze_Click(object sender, EventArgs e)
         {
-            lbScreenshots.Items.Clear();
             string[] files = new string[lbFiles.Items.Count];
             for (int i = 0; i < lbFiles.Items.Count; i++)
             {
@@ -886,17 +874,10 @@ namespace TDMaker
             this.AnalyzeMedia(wt);
         }
 
-        private void txtScrFull_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtScrFull.Text))
-                System.Diagnostics.Process.Start(txtScrFull.Text);
-        }
-
         private void ShowAboutWindow()
         {
             AboutBox ab = new AboutBox();
             ab.ShowDialog();
-
         }
 
         private void cmsAppAbout_Click(object sender, EventArgs e)
@@ -1063,13 +1044,6 @@ namespace TDMaker
             FileSystem.OpenDirScreenshots();
         }
 
-        private void chkScreenshot_CheckedChanged(object sender, EventArgs e)
-        {
-            gbScreenshotForums.Enabled = chkScreenshot.Checked;
-            gbScreenshotFull.Enabled = chkScreenshot.Checked;
-            Engine.conf.TakeScreenshot = chkScreenshot.Checked;
-        }
-
         private void tsmTemplates_Click(object sender, EventArgs e)
         {
             FileSystem.OpenDirTemplates();
@@ -1090,23 +1064,11 @@ namespace TDMaker
         private void cboScreenshotDest_SelectedIndexChanged(object sender, EventArgs e)
         {
             Engine.conf.ImageUploader = (ImageDestType2)cboScreenshotDest.SelectedIndex;
-            tpHosting.Enabled = cboScreenshotDest.SelectedIndex == 0;
         }
 
         private void tsmLogsDir_Click(object sender, EventArgs e)
         {
             FileSystem.OpenDirLogs();
-        }
-
-        private void lbScreenshots_DoubleClick(object sender, EventArgs e)
-        {
-            Process.Start(lbScreenshots.SelectedItem.ToString());
-        }
-
-        private void lbScreenshots_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (lbScreenshots.SelectedItem != null)
-                txtScrFull.Text = lbScreenshots.SelectedItem.ToString();
         }
 
         private void btnTemplatesRewrite_Click(object sender, EventArgs e)
@@ -1263,7 +1225,8 @@ namespace TDMaker
             string info = "";
             if (tcMain.SelectedTab == tpMainMediaInfo)
             {
-                info = txtMediaInfo.Text;
+                TextBox txtInfo = tcMediaInfo.SelectedTab.Controls[0] as TextBox;
+                info = txtInfo.Text;
             }
             else
             {
@@ -1352,14 +1315,6 @@ namespace TDMaker
         private void miHelpVersionHistory_Click(object sender, EventArgs e)
         {
             OpenVersionHistory();
-        }
-
-        private void pbScreenshot_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtScrFull.Text))
-            {
-                Process.Start(txtScrFull.Text);
-            }
         }
 
         private void chkCreateTorrent_CheckedChanged(object sender, EventArgs e)
@@ -1612,60 +1567,86 @@ namespace TDMaker
                 }
             }
         }
-        
+
         void PgMtnPropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
-        	txtMtnArgs.Text = Adapter.GetMtnArg(Engine.mtnProfileMgr.GetMtnProfileActive());
-        	if (lbMtnProfiles.SelectedIndex > -1) {
-        		lbMtnProfiles.Items[lbMtnProfiles.SelectedIndex] = Engine.mtnProfileMgr.GetMtnProfileActive();
-        	}
+            txtMtnArgs.Text = Adapter.GetMtnArg(Engine.mtnProfileMgr.GetMtnProfileActive());
+            if (lbMtnProfiles.SelectedIndex > -1)
+            {
+                lbMtnProfiles.Items[lbMtnProfiles.SelectedIndex] = Engine.mtnProfileMgr.GetMtnProfileActive();
+            }
         }
-        
+
         void TbnAddMtnProfileClick(object sender, EventArgs e)
         {
-        	InputBox ib = new InputBox(); 
-        	ib.Title = "Enter profile name..."; 
-        	ib.InputText = "Default";
-        	if (ib.ShowDialog() == DialogResult.OK)
-        	{
-        		XMLSettingsScreenshot mtnProfile = new XMLSettingsScreenshot(ib.InputText);
-        		Engine.mtnProfileMgr.MtnProfiles.Add(mtnProfile);
-        		lbMtnProfiles.Items.Add(mtnProfile);
-        		lbMtnProfiles.SelectedIndex = lbMtnProfiles.Items.Count-1;
-        	}
+            InputBox ib = new InputBox();
+            ib.Title = "Enter profile name...";
+            ib.InputText = "Default";
+            if (ib.ShowDialog() == DialogResult.OK)
+            {
+                XMLSettingsScreenshot mtnProfile = new XMLSettingsScreenshot(ib.InputText);
+                Engine.mtnProfileMgr.MtnProfiles.Add(mtnProfile);
+                lbMtnProfiles.Items.Add(mtnProfile);
+                lbMtnProfiles.SelectedIndex = lbMtnProfiles.Items.Count - 1;
+            }
         }
-        
+
         void LbMtnProfilesSelectedIndexChanged(object sender, EventArgs e)
         {
-        	if (lbMtnProfiles.SelectedIndex > -1) 
-        	{
-        		XMLSettingsScreenshot mtnProfile = lbMtnProfiles.Items[lbMtnProfiles.SelectedIndex] as XMLSettingsScreenshot ;
-        		pgMtn.SelectedObject = mtnProfile;
-        		Engine.mtnProfileMgr.MtnProfileActive = lbMtnProfiles.SelectedIndex;
-        		txtMtnArgs.Text = Adapter.GetMtnArg(mtnProfile);
-        	}
+            if (lbMtnProfiles.SelectedIndex > -1)
+            {
+                XMLSettingsScreenshot mtnProfile = lbMtnProfiles.Items[lbMtnProfiles.SelectedIndex] as XMLSettingsScreenshot;
+                pgMtn.SelectedObject = mtnProfile;
+                Engine.mtnProfileMgr.MtnProfileActive = lbMtnProfiles.SelectedIndex;
+                txtMtnArgs.Text = Adapter.GetMtnArg(mtnProfile);
+            }
         }
-        
+
         void BtnRemoveMtnProfileClick(object sender, EventArgs e)
         {
-        	int sel = lbMtnProfiles.SelectedIndex;
-	        if (sel >= 0) {
-	        	lbMtnProfiles.Items.RemoveAt(sel);
-	        	Engine.mtnProfileMgr.MtnProfiles.RemoveAt(sel);
-	        	sel = sel-1;
-	        	if (sel<0) {
-	        		sel = 0;
-	        	}
-	        	if (lbMtnProfiles.Items.Count>0) {
-	        		lbMtnProfiles.SelectedIndex = sel;		
-	        	}        		
-        	}
+            int sel = lbMtnProfiles.SelectedIndex;
+            if (sel >= 0)
+            {
+                lbMtnProfiles.Items.RemoveAt(sel);
+                Engine.mtnProfileMgr.MtnProfiles.RemoveAt(sel);
+                sel = sel - 1;
+                if (sel < 0)
+                {
+                    sel = 0;
+                }
+                if (lbMtnProfiles.Items.Count > 0)
+                {
+                    lbMtnProfiles.SelectedIndex = sel;
+                }
+            }
 
         }
-        
+
         void ChkProxyEnableCheckedChanged(object sender, EventArgs e)
         {
-        	Engine.conf.ProxyEnabled = chkProxyEnable.Checked;
+            Engine.conf.ProxyEnabled = chkProxyEnable.Checked;
+        }
+
+        private void lbScreenshots_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int sel = lbScreenshots.SelectedIndex;
+            if (sel > -1)
+            {
+                Screenshot ss = lbScreenshots.Items[sel] as Screenshot;
+                if (ss != null)
+                {
+                    pbScreenshot.ImageLocation = ss.LocalPath;
+                    pgScreenshot.SelectedObject = ss;
+                }
+            }
+        }
+
+        private void pbScreenshot_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (File.Exists(pbScreenshot.ImageLocation))
+            {
+                Process.Start(pbScreenshot.ImageLocation);
+            }
         }
     }
 }
