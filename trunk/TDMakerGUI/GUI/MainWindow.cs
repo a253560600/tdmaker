@@ -515,6 +515,12 @@ namespace TDMaker
                 {
                     lbTrackers.Items.Add(myTracker);
                 }
+                if (lbTrackers.Items.Count > 0) {
+                	lbTrackers.SelectedIndex = 0;               	
+                }
+            }
+            if (lbTrackerGroups.Items.Count > 0 ) {
+            	lbTrackerGroups.SelectedIndex = 0;
             }
 
             FillTrackersComboBox();
@@ -1593,6 +1599,9 @@ namespace TDMaker
         void PgMtnPropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
         	txtMtnArgs.Text = Adapter.GetMtnArg(Engine.mtnProfileMgr.GetMtnProfileActive());
+        	if (lbMtnProfiles.SelectedIndex > -1) {
+        		lbMtnProfiles.Items[lbMtnProfiles.SelectedIndex] = Engine.mtnProfileMgr.GetMtnProfileActive();
+        	}
         }
         
         void TbnAddMtnProfileClick(object sender, EventArgs e)
@@ -1617,6 +1626,20 @@ namespace TDMaker
         		pgMtn.SelectedObject = mtnProfile;
         		Engine.mtnProfileMgr.MtnProfileActive = lbMtnProfiles.SelectedIndex;
         		txtMtnArgs.Text = Adapter.GetMtnArg(mtnProfile);
+        	}
+        }
+        
+        void BtnRemoveMtnProfileClick(object sender, EventArgs e)
+        {
+        	int sel = lbMtnProfiles.SelectedIndex;
+        	lbMtnProfiles.Items.RemoveAt(sel);
+        	Engine.mtnProfileMgr.MtnProfiles.RemoveAt(sel);
+        	sel = sel-1;
+        	if (sel<0) {
+        		sel = 0;
+        	}
+        	if (lbMtnProfiles.Items.Count>0) {
+        		lbMtnProfiles.SelectedIndex = sel;		
         	}
         }
     }

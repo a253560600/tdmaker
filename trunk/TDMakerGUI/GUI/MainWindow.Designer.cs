@@ -1115,6 +1115,7 @@ namespace TDMaker
         	this.btnRemoveMtnProfile.TabIndex = 1;
         	this.btnRemoveMtnProfile.Text = "Remove";
         	this.btnRemoveMtnProfile.UseVisualStyleBackColor = true;
+        	this.btnRemoveMtnProfile.Click += new System.EventHandler(this.BtnRemoveMtnProfileClick);
         	// 
         	// lbMtnProfiles
         	// 
