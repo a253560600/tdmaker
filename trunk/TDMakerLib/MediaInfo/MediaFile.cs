@@ -41,13 +41,14 @@ namespace TDMakerLib
         public string FileSizeString { get; set; }
         public string Format { get; set; }
         public string FormatInfo { get; set; }
-        public string Source { get; set; }
+        public Screenshot Screenshot { get; set; }
+        public string Source { get; set; }        
         private string mSubtitles = "None";
         public string Subtitles { get { return mSubtitles; } set { mSubtitles = value; } }
         /// <summary>
         /// This is what you get for mi.Option("Complete");
         /// </summary>
-        public string Summary { get; set; }
+        public string Summary { get; set; }            
         public TagLib.File TagLibFile { get; set; }
 
         public List<AudioInfo> Audio { get; set; }
@@ -67,7 +68,7 @@ namespace TDMakerLib
 
             this.Audio = new List<AudioInfo>();
             this.Video = new VideoInfo();
-
+            this.Screenshot = new Screenshot();
             this.ReadFile();
         }
 

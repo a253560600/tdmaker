@@ -14,6 +14,29 @@ namespace TDMakerLib
 {
     public class TorrentInfo
     {
+    	/// <summary>
+        /// Default Publish String representation of a Torrent
+        /// </summary>
+        /// <returns>Publish String</returns>
+        public override string ToString()
+        {
+            return CreatePublish(this.PublishOptions);
+        }
+
+        /// <summary>
+        /// MediaInfo2 Object
+        /// </summary>
+        public MediaInfo2 MyMedia { get; set; }
+        /// <summary>
+        /// String Representation of Publish tab
+        /// ToString() should be called at least once
+        /// </summary>
+        public string PublishString { get; set; }
+        /// <summary>
+        /// Options for Publishing
+        /// </summary>
+        public PublishOptionsPacket PublishOptions { get; set; }
+        
         private BackgroundWorker mBwApp = null;
 
         public TorrentInfo(BackgroundWorker bwApp, MediaInfo2 mi)
@@ -27,19 +50,28 @@ namespace TDMakerLib
 
             if (Engine.conf.TakeScreenshot)
             {
-                if (mi.Overall != null && TakeScreenshot(mi.Overall.FilePath) &&
-                    Engine.conf.UploadScreenshot)
-                {
-                    UploadScreenshot(mi.Overall.FilePath);
-                }
+            	TakeScreenshots();
+            }
+            if (Engine.conf.UploadScreenshot) 
+            {
+            	UploadScreenshots();
             }
 
         }
-
-        private bool TakeScreenshot(String mediaFilePath)
+        
+        private void TakeScreenshots()
         {
-            bool succes = true;
-            Console.WriteLine("Taking Screenshot for " + Path.GetFileName(mediaFilePath));
+            	foreach(MediaFile mf in this.MyMedia.MediaFiles)            	
+            	{
+            		TakeScreenshot(mf);
+            	}        	
+        }
+
+        private bool TakeScreenshot(MediaFile mf)
+        {
+        	bool success = true;
+        	String mediaFilePath = mf.FilePath;
+            Debug.WriteLine("Taking Screenshot for " + Path.GetFileName(mediaFilePath));
             mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, "Taking Screenshot for " + Path.GetFileName(mediaFilePath));
 
             try
@@ -86,28 +118,37 @@ namespace TDMakerLib
                         }
                     }
                 }
-
             }
             catch (Exception ex)
             {
-                succes = false;
+                success = false;
                 Console.WriteLine(ex.ToString());
                 mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, ex.Message + " for " + Path.GetFileName(mediaFilePath));
             }
 
-            return succes;
-
+            return success;
         }
 
-        private void UploadScreenshot(String mediaFilePath)
+        private void UploadScreenshots()
         {
+        	foreach(MediaFile mf in this.MyMedia.MediaFiles)
+        	{
+        		ImageFileManager imf = UploadScreenshot(mf.FilePath);
+        		if (imf != null && imf.ImageFileList != null && imf.ImageFileList.Count > 0) {        		
+        			mf.Screenshot.LocalPath = imf.LocalFilePath;
+                    mf.Screenshot.Full = imf.GetFullImageUrl();
+                    mf.Screenshot.LinkedThumbnail = imf.GetLinkedThumbnailForumUrl();
+        		}
+        	}
+        }
+        private ImageFileManager UploadScreenshot(string mediaFilePath)
+        {        	
         	string ssPath = Path.Combine(Engine.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + Engine.mtnProfileMgr.GetMtnProfileActive().o_OutputSuffix);
             ImageUploader imageUploader = null;
-
+            ImageFileManager imf = null;
+                
             if (File.Exists(ssPath))
             {
-                ImageFileManager imf = null;
-
                 switch ((ImageDestType2)Engine.conf.ImageUploader)
                 {
                     case ImageDestType2.IMAGESHACK:
@@ -131,6 +172,15 @@ namespace TDMakerLib
                 if (imageUploader != null)
                 {
                     int retry = 0;
+                    
+                    if (Engine.conf.ProxyEnabled) 
+                    {                    	
+	                    ProxySettings proxy = new ProxySettings(); 
+	                    proxy.ProxyEnabled = true;                     	
+                    	proxy.ProxyActive = Engine.conf.ProxySettings;
+                    	Uploader.ProxySettings = proxy;                    
+                    }
+                    
                     while (retry <= 3 && imf == null || (retry <= 3 && imf != null && imf.ImageFileList.Count < 1))
                     {
                         retry++;
@@ -143,7 +193,8 @@ namespace TDMakerLib
 
                 if (imf != null && imf.ImageFileList.Count > 0)
                 {
-                    MyMedia.Screenshot.LocalPath = ssPath;
+                	imf.LocalFilePath = ssPath;
+                    MyMedia.Screenshot.LocalPath = imf.LocalFilePath;
                     MyMedia.Screenshot.Full = imf.GetFullImageUrl();
                     MyMedia.Screenshot.LinkedThumbnail = imf.GetLinkedThumbnailForumUrl();
 
@@ -156,7 +207,7 @@ namespace TDMakerLib
                 }
 
             }
-
+            return imf;
         }
 
         /// <summary>
@@ -234,29 +285,5 @@ namespace TDMakerLib
 
             return sbPublish.ToString();
         }
-
-        /// <summary>
-        /// Default Publish String representation of a Torrent
-        /// </summary>
-        /// <returns>Publish String</returns>
-        public override string ToString()
-        {
-            return CreatePublish(this.PublishOptions);
-        }
-
-        /// <summary>
-        /// MediaInfo2 Object
-        /// </summary>
-        public MediaInfo2 MyMedia { get; set; }
-        /// <summary>
-        /// String Representation of Publish tab
-        /// ToString() should be called at least once
-        /// </summary>
-        public string PublishString { get; set; }
-        /// <summary>
-        /// Options for Publishing
-        /// </summary>
-        public PublishOptionsPacket PublishOptions { get; set; }
-
     }
 }

@@ -157,6 +157,9 @@ namespace TDMaker
         	this.lbTrackers = new System.Windows.Forms.ListBox();
         	this.cboTrackerGroupActive = new System.Windows.Forms.ComboBox();
         	this.chkCreateTorrent = new System.Windows.Forms.CheckBox();
+        	this.tpProxy = new System.Windows.Forms.TabPage();
+        	this.chkProxyEnable = new System.Windows.Forms.CheckBox();
+        	this.pgProxy = new System.Windows.Forms.PropertyGrid();
         	this.tpAdvanced = new System.Windows.Forms.TabPage();
         	this.pgApp = new System.Windows.Forms.PropertyGrid();
         	this.tmrStatus = new System.Windows.Forms.Timer(this.components);
@@ -245,6 +248,7 @@ namespace TDMaker
         	this.flpTrackerGroups.SuspendLayout();
         	this.gbTrackerGroups.SuspendLayout();
         	this.gbTrackers.SuspendLayout();
+        	this.tpProxy.SuspendLayout();
         	this.tpAdvanced.SuspendLayout();
         	this.cmsApp.SuspendLayout();
         	((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
@@ -982,6 +986,7 @@ namespace TDMaker
         	this.tcOptions.Controls.Add(this.tpOptionsMTN);
         	this.tcOptions.Controls.Add(this.tpPublish);
         	this.tcOptions.Controls.Add(this.tpTorrents);
+        	this.tcOptions.Controls.Add(this.tpProxy);
         	this.tcOptions.Controls.Add(this.tpAdvanced);
         	this.tcOptions.Dock = System.Windows.Forms.DockStyle.Fill;
         	this.tcOptions.Location = new System.Drawing.Point(0, 0);
@@ -1732,6 +1737,37 @@ namespace TDMaker
         	this.chkCreateTorrent.UseVisualStyleBackColor = true;
         	this.chkCreateTorrent.CheckedChanged += new System.EventHandler(this.chkCreateTorrent_CheckedChanged);
         	// 
+        	// tpProxy
+        	// 
+        	this.tpProxy.Controls.Add(this.chkProxyEnable);
+        	this.tpProxy.Controls.Add(this.pgProxy);
+        	this.tpProxy.Location = new System.Drawing.Point(4, 22);
+        	this.tpProxy.Name = "tpProxy";
+        	this.tpProxy.Padding = new System.Windows.Forms.Padding(3);
+        	this.tpProxy.Size = new System.Drawing.Size(848, 419);
+        	this.tpProxy.TabIndex = 4;
+        	this.tpProxy.Text = "Proxy";
+        	this.tpProxy.UseVisualStyleBackColor = true;
+        	// 
+        	// chkProxyEnable
+        	// 
+        	this.chkProxyEnable.Location = new System.Drawing.Point(16, 16);
+        	this.chkProxyEnable.Name = "chkProxyEnable";
+        	this.chkProxyEnable.Size = new System.Drawing.Size(104, 24);
+        	this.chkProxyEnable.TabIndex = 1;
+        	this.chkProxyEnable.Text = "Enable &Proxy";
+        	this.chkProxyEnable.UseVisualStyleBackColor = true;
+        	this.chkProxyEnable.CheckedChanged += new System.EventHandler(this.ChkProxyEnableCheckedChanged);
+        	// 
+        	// pgProxy
+        	// 
+        	this.pgProxy.Location = new System.Drawing.Point(16, 48);
+        	this.pgProxy.Name = "pgProxy";
+        	this.pgProxy.PropertySort = System.Windows.Forms.PropertySort.NoSort;
+        	this.pgProxy.Size = new System.Drawing.Size(448, 152);
+        	this.pgProxy.TabIndex = 0;
+        	this.pgProxy.ToolbarVisible = false;
+        	// 
         	// tpAdvanced
         	// 
         	this.tpAdvanced.Controls.Add(this.pgApp);
@@ -1748,6 +1784,7 @@ namespace TDMaker
         	this.pgApp.Dock = System.Windows.Forms.DockStyle.Fill;
         	this.pgApp.Location = new System.Drawing.Point(3, 3);
         	this.pgApp.Name = "pgApp";
+        	this.pgApp.PropertySort = System.Windows.Forms.PropertySort.Categorized;
         	this.pgApp.Size = new System.Drawing.Size(842, 413);
         	this.pgApp.TabIndex = 0;
         	this.pgApp.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.pgApp_PropertyValueChanged);
@@ -2177,6 +2214,7 @@ namespace TDMaker
         	this.flpTrackerGroups.ResumeLayout(false);
         	this.gbTrackerGroups.ResumeLayout(false);
         	this.gbTrackers.ResumeLayout(false);
+        	this.tpProxy.ResumeLayout(false);
         	this.tpAdvanced.ResumeLayout(false);
         	this.cmsApp.ResumeLayout(false);
         	((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
@@ -2185,6 +2223,9 @@ namespace TDMaker
         	this.ResumeLayout(false);
         	this.PerformLayout();
         }
+        private System.Windows.Forms.PropertyGrid pgProxy;
+        private System.Windows.Forms.CheckBox chkProxyEnable;
+        private System.Windows.Forms.TabPage tpProxy;
         private System.Windows.Forms.TableLayoutPanel tlpMtnProfiles;
         private System.Windows.Forms.TableLayoutPanel tlpMtnUsage;
         private System.Windows.Forms.ListBox lbMtnProfiles;

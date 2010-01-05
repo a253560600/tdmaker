@@ -478,6 +478,9 @@ namespace TDMaker
             nudHeading2Size.Value = (decimal)Engine.conf.FontSizeHeading2;
             nudHeading3Size.Value = (decimal)Engine.conf.FontSizeHeading3;
             nudBodySize.Value = (decimal)Engine.conf.FontSizeBody;
+            
+            chkProxyEnable.Checked = Engine.conf.ProxyEnabled;
+            pgProxy.SelectedObject = Engine.conf.ProxySettings;
 
             SettingsReadOptionsMTN();
             SettingsReadOptionsTorrents();
@@ -1641,6 +1644,11 @@ namespace TDMaker
         	if (lbMtnProfiles.Items.Count>0) {
         		lbMtnProfiles.SelectedIndex = sel;		
         	}
+        }
+        
+        void ChkProxyEnableCheckedChanged(object sender, EventArgs e)
+        {
+        	Engine.conf.ProxyEnabled = chkProxyEnable.Checked;
         }
     }
 }
