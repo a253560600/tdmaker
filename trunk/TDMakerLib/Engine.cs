@@ -327,10 +327,6 @@ namespace TDMakerLib
 
         public static void Unload()
         {
-            if (conf != null)
-            {
-                conf.Write();
-            }
             if (!Portable)
             {
                 mAppSettings.Write();

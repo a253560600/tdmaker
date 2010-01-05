@@ -148,119 +148,8 @@ namespace TDMaker
             }
 
             if (Engine.conf.TakeScreenshot)
-            {
-                // Create MTN Arg
-
-                // Fill Screenshot object : coded parameters in alphabetical order
-                StringBuilder sbMTNArgs = new StringBuilder();
-                if (Engine.conf.ScreenshotSettings.P_QuitAfterDone)
-                {
-                    sbMTNArgs.Append("-P ");
-                }
-                sbMTNArgs.Append(string.Format("-w{0} ", Engine.conf.ScreenshotSettings.w_Width));
-                if (Engine.conf.chkMTN_h_Height)
-                {
-                    sbMTNArgs.Append(string.Format("-h{0} ", Engine.conf.ScreenshotSettings.h_MinHeight));
-                }
-                sbMTNArgs.Append(string.Format("-c{0} ", Engine.conf.ScreenshotSettings.c_Columns));
-                sbMTNArgs.Append(string.Format("-r{0} ", Engine.conf.ScreenshotSettings.r_Rows));
-                if (Engine.conf.chkMTN_F_FontColor)
-                {
-                    sbMTNArgs.Append(string.Format("-k{0} ", Engine.conf.ScreenshotSettings.k_ColorBackground));
-                }
-
-                if (Engine.conf.chkMTN_i_MediaInfoTurnOff || Engine.IsUNIX)
-                {
-                    sbMTNArgs.Append("-i ");
-                }
-                else if (!Engine.IsUNIX)
-                {
-                    if (Engine.conf.chkMTN_f_Font)
-                    {
-                        sbMTNArgs.Append(string.Format("-f {0} ", Engine.conf.ScreenshotSettings.f_Font));
-                    }
-                    if (Engine.conf.chkMTN_k_ColorBackground && Engine.conf.chkMTN_F_FontSize)
-                    {
-                        sbMTNArgs.Append(string.Format("-F {0}:{1} ", Engine.conf.ScreenshotSettings.F_FontColor, Engine.conf.ScreenshotSettings.F_FontSize));
-                    }
-                }
-                if (!Engine.conf.chkMTN_L_LocTimestamp || Engine.IsUNIX)
-                {
-                    sbMTNArgs.Append("-t ");
-                }
-                else if (!Engine.IsUNIX)
-                {
-                    if (Engine.conf.chkMTN_L_LocInfo && Engine.conf.chkMTN_L_LocTimestamp)
-                    {
-                        sbMTNArgs.Append(string.Format("-L {0}:{1} ", Engine.conf.ScreenshotSettings.L_LocInfo + 1, Engine.conf.ScreenshotSettings.L_LocTimestamp + 1));
-                    }
-                }
-
-                if (Engine.conf.chkMTN_g_Gap)
-                {
-                    sbMTNArgs.Append(string.Format("-g {0} ", Engine.conf.ScreenshotSettings.g_GapBetweenShots));
-                }
-                if (Engine.conf.chkMTN_j_JPEGQuality)
-                {
-                    sbMTNArgs.Append(string.Format("-j {0} ", Engine.conf.ScreenshotSettings.j_JpgQuality));
-                }
-                if (Engine.conf.chkMTN_s_TimeStep)
-                {
-                    sbMTNArgs.Append(string.Format("-s {0} ", Engine.conf.ScreenshotSettings.s_TimeStep));
-                }
-
-                if (Engine.conf.chkMTN_D_EdgeDetection)
-                {
-                    sbMTNArgs.Append(string.Format("-D {0} ", Engine.conf.ScreenshotSettings.D_EdgeDetection));
-                }
-
-                if (Engine.conf.chkMTN_B_OmitBegin)
-                {
-                    sbMTNArgs.Append(string.Format("-B {0} ", Engine.conf.ScreenshotSettings.B_OmitBegin));
-                }
-
-                if (Engine.conf.chkMTN_E_OmitEnd)
-                {
-                    sbMTNArgs.Append(string.Format("-E {0} ", Engine.conf.ScreenshotSettings.E_OmitEnd));
-                }
-
-                // Not supported in MTN 2.45
-                //if (chkMTN_z_SeekMode.Checked)
-                //{
-                //    sbMTNArgs.Append("-z ");
-                //}
-                //else
-                //{
-                //    sbMTNArgs.Append("-Z ");
-                //}
-
-                if (Engine.conf.chkMTN_N_WriteInfo || Engine.IsUNIX)
-                {
-                    sbMTNArgs.Append(string.Format("-N {0} ", Engine.conf.ScreenshotSettings.N_InfoSuffix));
-                    mi.Screenshot.Settings.N_InfoSuffix = Engine.conf.ScreenshotSettings.N_InfoSuffix;
-                }
-
-                if (Engine.conf.chkMTN_o_OutputSuffix)
-                {
-                    sbMTNArgs.Append(string.Format("-o {0} ", Engine.conf.ScreenshotSettings.o_OutputSuffix));
-                    mi.Screenshot.Settings.o_OutputSuffix = txtMTN_o_OutputSuffix.Text;
-                }
-                if (chkMTN_v_Verbose.Checked)
-                {
-                    sbMTNArgs.Append("-v ");
-                }
-                if (chkMTN_T_Title.Checked)
-                {
-                    if (txtMTN_T_Title.Text == "%Title%")
-                    {
-                        txtMTN_T_Title.Text = txtTitle.Text;
-                    }
-                    sbMTNArgs.Append(string.Format("-T \"{0}\" ", txtMTN_T_Title.Text));
-                }
-
-                sbMTNArgs.Append(string.Format("-O \"{0}\" ", Engine.GetScreenShotsDir()));
-
-                mi.Screenshot.MTNArgs = sbMTNArgs.ToString();
+            { 
+                mi.Screenshot.MTNArgs = Adapter.GetMtnArg(Engine.conf.ScreenshotSettings); 
 
                 // Screenshots Mode
                 if (Engine.conf.UploadScreenshot)
@@ -270,7 +159,7 @@ namespace TDMaker
             }
             return mi;
         }
-
+        
         private void AnalyzeMedia(WorkerTask wt)
         {
             List<MediaInfo2> miList = new List<MediaInfo2>();
@@ -279,7 +168,6 @@ namespace TDMaker
             {
                 if (File.Exists(p) || Directory.Exists(p))
                 {
-
                     MakeGUIReadyForAnalysis();
 
                     MediaInfo2 mi = this.PrepareNewMedia(p);
@@ -300,7 +188,6 @@ namespace TDMaker
                     // lbStatus.Items.Add("Analyzing Media using MediaInfo.");
 
                     miList.Add(mi);
-
                 }
             }
 
@@ -368,8 +255,8 @@ namespace TDMaker
         private void SettingsWrite()
         {
             // MTN Args
-            cboMTN_L_LocInfo.SelectedIndex = Engine.conf.ScreenshotSettings.L_LocInfo;
-            cboMTN_L_LocTimestamp.SelectedIndex = Engine.conf.ScreenshotSettings.L_LocTimestamp;
+            cboMTN_L_LocInfo.SelectedIndex = Engine.conf.ScreenshotSettings.L_LocInfo-1;
+            cboMTN_L_LocTimestamp.SelectedIndex = Engine.conf.ScreenshotSettings.L_LocTimestamp-1;
 
             // Source
             if (!Engine.conf.Sources.Contains(cboSource.Text))
@@ -519,8 +406,8 @@ namespace TDMaker
             if (string.IsNullOrEmpty(Engine.conf.MTNPath))
                 Engine.conf.MTNPath = Path.Combine(Application.StartupPath, "mtn.exe");
 
-            cboMTN_L_LocInfo.SelectedIndex = Engine.conf.ScreenshotSettings.L_LocInfo;
-            cboMTN_L_LocTimestamp.SelectedIndex = Engine.conf.ScreenshotSettings.L_LocTimestamp;
+            cboMTN_L_LocInfo.SelectedIndex = Engine.conf.ScreenshotSettings.L_LocInfo-1;
+            cboMTN_L_LocTimestamp.SelectedIndex = Engine.conf.ScreenshotSettings.L_LocTimestamp-1;
 
             cboMTN_f_FontType.Items.Clear();
             foreach (string s in Engine.conf.MTNFonts)
@@ -646,7 +533,7 @@ namespace TDMaker
             this.chkTorrentOrganize.Checked = Engine.conf.TorrentsOrganize;
 
             this.cboMTN_F_FontColor.Text = Engine.conf.ScreenshotSettings.F_FontColor;
-            this.cboMTN_f_FontType.Text = Engine.conf.ScreenshotSettings.f_Font;
+            this.cboMTN_f_FontType.Text = Engine.conf.ScreenshotSettings.f_FontFile;
             this.cboMTN_k_ColorBkgrd.Text = Engine.conf.ScreenshotSettings.k_ColorBackground;
 
             this.nudMTN_B_OmitStart.Value = Engine.conf.ScreenshotSettings.B_OmitBegin;
@@ -659,28 +546,10 @@ namespace TDMaker
             this.nudMTN_r_Rows.Value = Engine.conf.ScreenshotSettings.r_Rows;
             this.nudMTN_s_TimeStep.Value = Engine.conf.ScreenshotSettings.s_TimeStep;
             this.nudMTN_w_Width.Value = Engine.conf.ScreenshotSettings.w_Width;
-
-            this.chkMTN_B_OmitBegin.Checked = Engine.conf.chkMTN_B_OmitBegin;
-            this.chkMTN_D_EdgeDetection.Checked = Engine.conf.chkMTN_D_EdgeDetection;
-            this.chkMTN_E_OmitEnd.Checked = Engine.conf.chkMTN_E_OmitEnd;
-            this.chkMTN_f_Font.Checked = Engine.conf.chkMTN_f_Font;
-            this.chkMTN_F_FontColor.Checked = Engine.conf.chkMTN_F_FontColor;
-            this.chkMTN_F_FontSize.Checked = Engine.conf.chkMTN_F_FontSize;
-            this.chkMTN_g_Gap.Checked = Engine.conf.chkMTN_g_Gap;
-            this.chkMTN_h_Height.Checked = Engine.conf.chkMTN_h_Height;
+            
             this.chkMTN_i_MediaInfoTurnOff.Checked = Engine.conf.ScreenshotSettings.i_InfoOff;
-            this.chkMTN_j_JPEGQuality.Checked = Engine.conf.chkMTN_j_JPEGQuality;
-            this.chkMTN_k_ColorBackground.Checked = Engine.conf.chkMTN_k_ColorBackground;
-            this.chkMTN_L_LocInfo.Checked = Engine.conf.chkMTN_L_LocInfo;
-            this.chkMTN_N_WriteInfo.Checked = Engine.conf.chkMTN_N_WriteInfo;
-            this.chkMTN_o_OutputSuffix.Checked = Engine.conf.chkMTN_o_OutputSuffix;
             this.chkMTN_P_QuitAfterDone.Checked = Engine.conf.ScreenshotSettings.P_QuitAfterDone;
-            this.chkMTN_s_TimeStep.Checked = Engine.conf.chkMTN_s_TimeStep;
-            this.chkMTN_T_Title.Checked = Engine.conf.chkMTN_T_Title;
-            this.chkMTN_L_LocTimestamp.Checked = Engine.conf.chkMTN_L_LocTimestamp;
-            this.chkMTN_v_Verbose.Checked = Engine.conf.chkMTN_v_Verbose;
-            this.chkMTN_w_Width.Checked = Engine.conf.chkMTN_w_Width;
-            this.chkMTN_z_SeekMode.Checked = Engine.conf.ScreenshotSettings.z_Seek;
+            this.chkMTN_z_SeekMode.Checked = Engine.conf.ScreenshotSettings.z_AlwaysSeek;
 
             this.rbTorrentDefaultFolder.Checked = Engine.conf.TorrentFolderDefault;
 
@@ -1894,12 +1763,12 @@ namespace TDMaker
 
         private void txtMTN_T_Title_TextChanged(object sender, EventArgs e)
         {
-
+        	Engine.conf.txtMTN_T_Title = txtMTN_T_Title.Text;
         }
 
         private void chkMTN_f_Font_CheckedChanged(object sender, EventArgs e)
         {
-
+        	
         }
 
         private void cboMTN_f_FontType_SelectedIndexChanged(object sender, EventArgs e)
@@ -1955,6 +1824,11 @@ namespace TDMaker
         private void txtMTN_o_OutputSuffix_TextChanged(object sender, EventArgs e)
         {
 
+        }
+        
+        void PgMtnPropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        {
+        	txtMtnArgs.Text = Adapter.GetMtnArg(Engine.conf.ScreenshotSettings);
         }
     }
 }
