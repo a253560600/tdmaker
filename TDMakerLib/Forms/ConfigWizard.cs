@@ -26,14 +26,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using MS.WindowsAPICodePack.Internal;
-using Microsoft.WindowsAPICodePack.Dialogs;
 using UploadersLib;
 using TDMakerLib;
 
 namespace TDMakerLib
 {
-    public partial class ConfigWizard : DavuxLib.Controls.GlassForm
+    public partial class ConfigWizard : Form 
     {
         public bool PreferSystemFolders { get; private set; }
         public string RootFolder { get; private set; }
@@ -62,28 +60,14 @@ namespace TDMakerLib
         {
             string oldDir = txtRootFolder.Text;
             string newDir = string.Empty;
-            if (CoreHelpers.RunningOnWin7) 
-            {
-            	CommonOpenFileDialog dlg = new CommonOpenFileDialog();
-            	dlg.EnsureReadOnly = true;
-            	dlg.IsFolderPicker = true;
-            	dlg.AllowNonFileSystemItems = true;
-            	dlg.Title = "Configure Root diretory...";
 
-            	if (dlg.ShowDialog() == CommonFileDialogResult.OK)
-            	{
-            		newDir = dlg.FileName;
-            	}
-            }
-            else
+            FolderBrowserDialog dlg = new FolderBrowserDialog();
+            dlg.Description = "Configure Root diretory...";
+            if (dlg.ShowDialog() == DialogResult.OK)
             {
-            	FolderBrowserDialog dlg = new FolderBrowserDialog();
-            	dlg.Description = "Configure Root diretory...";
-            	if (dlg.ShowDialog() == DialogResult.OK)
-            	{
-            		newDir = dlg.SelectedPath;
-            	}
+                newDir = dlg.SelectedPath;
             }
+
             if (!string.IsNullOrEmpty(newDir))
             {
             	txtRootFolder.Text = newDir;

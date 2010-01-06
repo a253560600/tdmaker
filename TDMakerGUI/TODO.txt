@@ -1,7 +1,7 @@
-﻿Multiple MTN configurations
+﻿Fix Check for updates
+
 Import trackers.xml before public release
 
-Proxy Support
 Revamp Configuration of Dirs similar to ZScreen 
 
 Logo PictureBox is disabled until figured out where the best place is to put
@@ -37,17 +37,3 @@ Full Automation [tacoking]
 	
 	
 Image Hosting: achumpatoxford.com and hdimage.org , both really fast and reliable
-
-
-Full Implementation of MTN Usage:
-  
-  -b 0.80 : skip if % blank is higher; 0:skip all 1:skip really blank >1:off  
-  -C -1 : cut movie and thumbnails not more than the specified seconds; <=0:off  
-     
-Not Implemented:
-
--a aspect_ratio : override input file's display aspect ratio
--p : pause before exiting; default on in win32    
--n : run at normal priority
--I : save individual shots too
--W : dont overwrite existing files, i.e. update mode

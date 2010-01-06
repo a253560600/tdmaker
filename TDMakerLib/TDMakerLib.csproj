@@ -31,19 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DavuxLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\DavuxLib.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\Microsoft.WindowsAPICodePack.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
-    </Reference>
     <Reference Include="MonoTorrent, Version=0.70.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\MonoTorrent.dll</HintPath>
@@ -70,29 +58,20 @@
     <Reference Include="UploadersLib">
       <HintPath>..\Lib\UploadersLib.dll</HintPath>
     </Reference>
-    <Reference Include="ZSS.UpdateCheckerLib">
-      <HintPath>..\Lib\ZSS.UpdateCheckerLib.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Global\Adapter.cs" />
-    <Compile Include="Helpers\FontDialogEditor.cs" />
-    <Compile Include="Helpers\ColorDialogEditor.cs" />
-    <Compile Include="Helpers\ExeFileNameEditor.cs" />
-    <Compile Include="Forms\AboutBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\AboutBox.Designer.cs">
-      <DependentUpon>AboutBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Global\Enums.cs" />
-    <Compile Include="Helpers\AppSettings.cs" />
     <Compile Include="Forms\ConfigWizard.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ConfigWizard.designer.cs">
       <DependentUpon>ConfigWizard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Global\Adapter.cs" />
+    <Compile Include="Helpers\FontDialogEditor.cs" />
+    <Compile Include="Helpers\ColorDialogEditor.cs" />
+    <Compile Include="Helpers\ExeFileNameEditor.cs" />
+    <Compile Include="Global\Enums.cs" />
+    <Compile Include="Helpers\AppSettings.cs" />
     <Compile Include="Global\Extensions.cs" />
     <Compile Include="Global\FileSystem.cs" />
     <Compile Include="Helpers\AppInfo.cs" />
@@ -121,11 +100,6 @@
     <Compile Include="Torrents\TorrentUploader.cs" />
     <Compile Include="Torrents\Tracker.cs" />
     <Compile Include="Torrents\TrackerManager.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Forms\ConfigWizard.resx">
-      <DependentUpon>ConfigWizard.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Templates\Default\Disc.txt" />
@@ -188,11 +162,13 @@
     <EmbeddedResource Include="Templates\MTN\FileVideoInfo.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Forms\AboutBox.resx">
-      <DependentUpon>AboutBox.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Templates\MTN\GeneralInfo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\ConfigWizard.resx">
+      <DependentUpon>ConfigWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VersionHistory.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

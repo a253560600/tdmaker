@@ -23,6 +23,7 @@
 
 using System;
 using System.Text;
+using UploadersLib.Helpers;
 
 namespace TDMakerLib
 {
@@ -31,6 +32,12 @@ namespace TDMakerLib
     /// </summary>
     public static class Adapter
     {
+        public static ProxySettings CheckProxySettings()
+        {
+            FileSystem.AppendDebug("Proxy Enabled: " + Engine.conf.ProxyEnabled.ToString());
+            return new ProxySettings { ProxyEnabled = Engine.conf.ProxyEnabled, ProxyActive = Engine.conf.ProxySettings };
+        }
+
         public static string GetMtnArg(XMLSettingsScreenshot screenshotSettings)
         {
             // Fill Screenshot object : coded parameters in alphabetical order except for columns, rows and width
@@ -58,7 +65,7 @@ namespace TDMakerLib
             {
                 sbMTNArgs.Append(string.Format("-B {0} ", Engine.mtnProfileMgr.GetMtnProfileActive().B_OmitBegin));
             }
-            
+
             // c is added earlier
 
             if (Engine.mtnProfileMgr.GetMtnProfileActive().C_CutMovie != XMLSettingsScreenshot.C_CutMovie_default)
@@ -103,7 +110,7 @@ namespace TDMakerLib
             }
 
             // i is added earlier
-            
+
             if (Engine.mtnProfileMgr.GetMtnProfileActive().I_IndivScreens)
             {
                 sbMTNArgs.Append("-I ");
@@ -147,11 +154,11 @@ namespace TDMakerLib
             {
                 sbMTNArgs.Append("-P ");
             }
-            else if (Engine.mtnProfileMgr.GetMtnProfileActive().p_PauseBeforeExit )
+            else if (Engine.mtnProfileMgr.GetMtnProfileActive().p_PauseBeforeExit)
             {
-            	sbMTNArgs.Append("-p ");
+                sbMTNArgs.Append("-p ");
             }
-            
+
             // r is added earlier
 
             if (Engine.mtnProfileMgr.GetMtnProfileActive().s_TimeStep != XMLSettingsScreenshot.s_TimeStep_default)
@@ -160,7 +167,7 @@ namespace TDMakerLib
             }
 
             // t is added earlier
-            
+
             if (Engine.mtnProfileMgr.GetMtnProfileActive().T_TitleTextAdd)
             {
                 if (Engine.mtnProfileMgr.GetMtnProfileActive().T_TitleText == "%Title%")
@@ -175,7 +182,7 @@ namespace TDMakerLib
             }
 
             // w is added earlier
-            
+
             if (Engine.mtnProfileMgr.GetMtnProfileActive().z_AlwaysSeek)
             {
                 sbMTNArgs.Append("-z ");

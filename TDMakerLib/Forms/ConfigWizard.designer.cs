@@ -181,7 +181,6 @@
             this.Controls.Add(this.gbPublishOptions);
             this.Controls.Add(this.btnOK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.GlassArea = new System.Windows.Forms.Padding(0, 0, 0, 45);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "ConfigWizard";
