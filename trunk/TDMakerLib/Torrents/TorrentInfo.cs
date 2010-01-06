@@ -15,15 +15,6 @@ namespace TDMakerLib
     public class TorrentInfo
     {
         /// <summary>
-        /// Default Publish String representation of a Torrent
-        /// </summary>
-        /// <returns>Publish String</returns>
-        public override string ToString()
-        {
-            return CreatePublish(this.PublishOptions);
-        }
-
-        /// <summary>
         /// MediaInfo2 Object
         /// </summary>
         public MediaInfo2 MyMedia { get; set; }
@@ -285,5 +276,20 @@ namespace TDMakerLib
 
             return sbPublish.ToString();
         }
+        
+        /// <summary>
+        /// Default Publish String representation of a Torrent
+        /// </summary>
+        /// <returns>Publish String</returns>
+        public string ToStringPublish()
+        {
+            return CreatePublish(this.PublishOptions);
+        }
+        
+		public override string ToString()
+		{
+			return Path.GetFileName(this.MyMedia.Location);
+		}
+		
     }
 }

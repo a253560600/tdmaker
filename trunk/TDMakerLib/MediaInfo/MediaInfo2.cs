@@ -324,7 +324,7 @@ namespace TDMakerLib
             if (this.MediaFiles.Count > 1 && this.MediaType == MediaType.MEDIA_DISC)
             // is a DVD so need Overall Info only
             {
-                sbBody.AppendLine(this.Overall.ToString());
+                sbBody.AppendLine(this.Overall.ToStringPublish());
             }
             else
             // If the loaded folder is not a Disc but individual ripped files
@@ -333,7 +333,7 @@ namespace TDMakerLib
                 {
                     sbBody.AppendLine(bb.Size(fontSizeHeading2, bb.BoldItalic(mf.FileName)));
                     sbBody.AppendLine();
-                    sbBody.AppendLine(mf.ToString());
+                    sbBody.AppendLine(mf.ToStringPublish());
                 }
             }
 

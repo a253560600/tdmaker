@@ -47,7 +47,7 @@ namespace TDMakerLib
         private string mSubtitles = "None";
         public string Subtitles { get { return mSubtitles; } set { mSubtitles = value; } }
         /// <summary>
-        /// This is what you get for mi.Option("Complete");
+        /// This is what you get for mi.Option("Complete") using MediaInfo
         /// </summary>
         public string Summary { get; set; }            
         public TagLib.File TagLibFile { get; set; }
@@ -266,6 +266,11 @@ namespace TDMakerLib
         {
             return this.HasAudio && !this.HasVideo;
         }
+        
+		public override string ToString()
+		{
+			return this.FileName;
+		}
 
         /// <summary>
         /// String representation of an Audio file
@@ -280,7 +285,7 @@ namespace TDMakerLib
         /// Returns a Publish layout of Media Info that has Audio and Video
         /// </summary>
         /// <returns></returns>
-        public override string ToString()
+        public string ToStringPublish()
         {
 
             int fontSizeHeading3 = (int)(Engine.conf.PreText && Engine.conf.LargerPreText == true ?

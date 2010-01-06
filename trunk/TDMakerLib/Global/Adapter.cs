@@ -58,6 +58,8 @@ namespace TDMakerLib
             {
                 sbMTNArgs.Append(string.Format("-B {0} ", Engine.mtnProfileMgr.GetMtnProfileActive().B_OmitBegin));
             }
+            
+            // c is added earlier
 
             if (Engine.mtnProfileMgr.GetMtnProfileActive().C_CutMovie != XMLSettingsScreenshot.C_CutMovie_default)
             {
@@ -100,6 +102,8 @@ namespace TDMakerLib
                 sbMTNArgs.Append(string.Format("-h {0} ", Engine.mtnProfileMgr.GetMtnProfileActive().h_MinHeight));
             }
 
+            // i is added earlier
+            
             if (Engine.mtnProfileMgr.GetMtnProfileActive().I_IndivScreens)
             {
                 sbMTNArgs.Append("-I ");
@@ -143,12 +147,20 @@ namespace TDMakerLib
             {
                 sbMTNArgs.Append("-P ");
             }
+            else if (Engine.mtnProfileMgr.GetMtnProfileActive().p_PauseBeforeExit )
+            {
+            	sbMTNArgs.Append("-p ");
+            }
+            
+            // r is added earlier
 
             if (Engine.mtnProfileMgr.GetMtnProfileActive().s_TimeStep != XMLSettingsScreenshot.s_TimeStep_default)
             {
                 sbMTNArgs.Append(string.Format("-s {0} ", Engine.mtnProfileMgr.GetMtnProfileActive().s_TimeStep));
             }
 
+            // t is added earlier
+            
             if (Engine.mtnProfileMgr.GetMtnProfileActive().T_TitleTextAdd)
             {
                 if (Engine.mtnProfileMgr.GetMtnProfileActive().T_TitleText == "%Title%")
@@ -162,6 +174,8 @@ namespace TDMakerLib
                 sbMTNArgs.Append("-v ");
             }
 
+            // w is added earlier
+            
             if (Engine.mtnProfileMgr.GetMtnProfileActive().z_AlwaysSeek)
             {
                 sbMTNArgs.Append("-z ");
