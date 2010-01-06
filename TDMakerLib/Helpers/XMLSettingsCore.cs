@@ -134,8 +134,8 @@ namespace TDMakerLib
         public ImageDestType2 ImageUploader = ImageDestType2.IMAGESHACK ;
         [Category("MTN / Image Uploaders"), DefaultValue(""), Description("ImageShack registration code")]
         public string ImageShackRegCode { get; set; }
-        [Category("MTN / Image Uploaders"), DefaultValue(false), Description("Randomize ImageShack file name")]
-        public bool ImageShakeRandomizeFileName { get; set; }
+        [Category("MTN / Image Uploaders"), DefaultValue(false), Description("Use ImageShack registration code")]
+        public bool UseImageShackRegCode { get; set; }
 
         // Tab 4.3 - Options - Torrent Creator
         [Browsable(false)]
