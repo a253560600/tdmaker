@@ -257,7 +257,13 @@ namespace TDMakerLib
 
                 pattern = GetStringFromAnyPattern(pattern, mi.Overall);
                 pattern = GetStyles(pattern); // apply any formatting
-                pattern = GetScreenshotInfo(pattern, mi.Overall);
+                foreach(MediaFile mf in mi.MediaFiles)
+                {
+                	if (mf.Screenshot != null) {
+                		pattern = GetScreenshotInfo(pattern, mf);
+                		break;
+                	}
+                }
             }
             return pattern;
         }

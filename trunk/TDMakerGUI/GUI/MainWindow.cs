@@ -21,7 +21,7 @@ namespace TDMaker
         /// <summary>
         /// Global TorrentInfo for Using Quick Pre/Align Center commands
         /// </summary>
-        private TorrentInfoMgr mTorrentInfo = null;
+        private TorrentInfo mTorrentInfo = null;
 
         public MainWindow()
         {
@@ -150,16 +150,6 @@ namespace TDMaker
                 mi.TemplateLocation = Path.Combine(Engine.TemplatesDir, cboTemplate.Text);
             }
 
-            if (Engine.conf.TakeScreenshot)
-            {
-                mi.Screenshot.MTNArgs = Adapter.GetMtnArg(Engine.mtnProfileMgr.GetMtnProfileActive());
-
-                // Screenshots Mode
-                if (Engine.conf.UploadScreenshot)
-                {
-                    mi.TakeScreenshots = TakeScreenshotsType.TAKE_ONE_SCREENSHOT;
-                }
-            }
             return mi;
         }
 
@@ -548,7 +538,7 @@ namespace TDMaker
             txtTorrentCustomFolder.Text = Engine.conf.CustomTorrentsDir;
         }
 
-        private string CreatePublishInitial(ref TorrentInfoMgr ti)
+        private string CreatePublishInitial(ref TorrentInfo ti)
         {
             PublishOptionsPacket pop = new PublishOptionsPacket();
             pop.AlignCenter = Engine.conf.AlignCenter;
@@ -653,7 +643,7 @@ namespace TDMaker
             }
         }
 
-        private string CreatePublish(TorrentInfoMgr ti, PublishOptionsPacket pop)
+        private string CreatePublish(TorrentInfo ti, PublishOptionsPacket pop)
         {
             string pt = "";
 
@@ -701,7 +691,7 @@ namespace TDMaker
                         List<TorrentInfo> tiList = (List<TorrentInfo>)e.Result;
                         if (tiList.Count > 0)
                         {
-                            mTorrentInfo = new TorrentInfoMgr(tiList);
+                        	mTorrentInfo = tiList[tiList.Count-1]; // new TorrentInfoMgr(tiList);
                         }
                         if (mTorrentInfo != null)
                         {
@@ -1164,7 +1154,7 @@ namespace TDMaker
             this.UpdatePublish(mTorrentInfo);
         }
 
-        private void UpdatePublish(TorrentInfoMgr ti)
+        private void UpdatePublish(TorrentInfo ti)
         {
             if (ti != null)
             {
@@ -1182,8 +1172,6 @@ namespace TDMaker
                 }
             }
         }
-
-
 
         private void rbTInt_CheckedChanged(object sender, EventArgs e)
         {
