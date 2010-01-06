@@ -1,4 +1,8 @@
-﻿Fix Check for updates
+﻿TDMaker Wizard when drag n drop a file or folder
+
+You dragged a file/folder
+What you want to do
+
 
 Import trackers.xml before public release
 
