@@ -12,6 +12,8 @@ using TDMakerLib.MediaInfo;
 using TDMakerLib.Helpers;
 using UploadersLib;
 using ZScreenLib;
+using ZSS.UpdateCheckerLib;
+using TDMakerLib.Properties;
 
 namespace TDMaker
 {
@@ -118,7 +120,7 @@ namespace TDMaker
         /// <param name="p">File or Folder path of the Media</param>
         /// <returns>MediaInfo2 object</returns>
         private MediaInfo2 PrepareNewMedia(string p)
-        {      
+        {
             MediaInfo2 mi = new MediaInfo2(p);
             mi.Extras = cboExtras.Text;
             if (cboSource.Text == "DVD")
@@ -676,7 +678,7 @@ namespace TDMaker
             {
                 switch (Loader.CurrentTask)
                 {
-                    case TaskType.ANALYZE_MEDIA:                        
+                    case TaskType.ANALYZE_MEDIA:
                         if (GetTorrentInfo() != null)
                         {
                             PublishOptionsPacket pop = GetTorrentInfo().PublishOptions;
@@ -784,17 +786,17 @@ namespace TDMaker
                         gbDVD.Enabled = (mi.MediaType == MediaType.MEDIA_DISC);
                         foreach (MediaFile mf in mi.MediaFiles)
                         {
-                        	lbMediaInfo.Items.Add(mf);                                           	
-                        	lbMediaInfo.SelectedIndex = lbMediaInfo.Items.Count-1;
-                        }                        
+                            lbMediaInfo.Items.Add(mf);
+                            lbMediaInfo.SelectedIndex = lbMediaInfo.Items.Count - 1;
+                        }
                         break;
 
                     case ProgressType.REPORT_TORRENTINFO:
-                        TorrentInfo ti = e.UserState as TorrentInfo; 
+                        TorrentInfo ti = e.UserState as TorrentInfo;
                         lbPublish.Items.Add(ti);
-                        lbPublish.SelectedIndex = lbPublish.Items.Count-1;
+                        lbPublish.SelectedIndex = lbPublish.Items.Count - 1;
                         break;
-                        
+
                     case ProgressType.UPDATE_PROGRESSBAR_MAX:
                         pBar.Style = ProgressBarStyle.Continuous;
                         pBar.Maximum = (int)e.UserState;
@@ -936,13 +938,14 @@ namespace TDMaker
 
         private TorrentInfo GetTorrentInfo()
         {
-        	TorrentInfo ti = null; 
-        	if (lbPublish.SelectedIndex > -1) {
-        		ti = lbPublish.Items[lbPublish.SelectedIndex] as TorrentInfo;
-        	}
-        	return ti;
+            TorrentInfo ti = null;
+            if (lbPublish.SelectedIndex > -1)
+            {
+                ti = lbPublish.Items[lbPublish.SelectedIndex] as TorrentInfo;
+            }
+            return ti;
         }
-        
+
         private void createPublishUser()
         {
             if (GetTorrentInfo() != null)
@@ -1023,9 +1026,36 @@ namespace TDMaker
 
         private void CheckUpdates(bool manual)
         {
-            //McoreSystem.UpdateChecker uc = new McoreSystem.UpdateChecker("http://code.google.com/p/tdmaker/downloads/list");
-            //uc.Manual = manual;
-            //uc.CheckUpdates();
+            BackgroundWorker updateThread = new BackgroundWorker { WorkerReportsProgress = true };
+            updateThread.DoWork += new DoWorkEventHandler(updateThread_DoWork);
+            updateThread.ProgressChanged += new ProgressChangedEventHandler(updateThread_ProgressChanged);
+            updateThread.RunWorkerAsync(Application.ProductName);
+        }
+
+        private void updateThread_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            switch (e.ProgressPercentage)
+            {
+                case 1:
+                    MessageBox.Show(e.UserState as string, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
+            }
+        }
+
+        private void updateThread_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = (BackgroundWorker)sender;
+            NewVersionWindowOptions nvwo = new NewVersionWindowOptions { MyImage = Resources.GenuineAdv };
+
+            UpdateCheckerOptions uco = new UpdateCheckerOptions
+            {
+                CheckBeta = true,
+                MyNewVersionWindowOptions = nvwo
+            };
+            uco.ProxySettings = Adapter.CheckProxySettings().GetWebProxy;
+            UpdateChecker updateChecker = new UpdateChecker((string)e.Argument, uco);
+            worker.ReportProgress(1, updateChecker.StartCheckUpdate());
+            updateChecker.ShowPrompt();
         }
 
         private void tsmUpdatesCheck_Click(object sender, EventArgs e)
@@ -1617,21 +1647,21 @@ namespace TDMaker
                 Process.Start(pbScreenshot.ImageLocation);
             }
         }
-        
+
         void LbMediaInfoSelectedIndexChanged(object sender, EventArgs e)
         {
-        	if (lbMediaInfo.SelectedIndex > -1 ) 
-        	{
-        		txtMediaInfo.Text = (lbMediaInfo.Items[lbMediaInfo.SelectedIndex] as MediaFile).Summary;
-        	}        	
+            if (lbMediaInfo.SelectedIndex > -1)
+            {
+                txtMediaInfo.Text = (lbMediaInfo.Items[lbMediaInfo.SelectedIndex] as MediaFile).Summary;
+            }
         }
-        
+
         void LbPublishSelectedIndexChanged(object sender, EventArgs e)
         {
-        	if (lbPublish.SelectedIndex > -1 ) 
-        	{
-        		createPublishUser();
-        	}
+            if (lbPublish.SelectedIndex > -1)
+            {
+                createPublishUser();
+            }
         }
     }
 }
