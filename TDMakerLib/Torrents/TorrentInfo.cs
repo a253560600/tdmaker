@@ -246,7 +246,6 @@ namespace TDMakerLib
             sbPublish.Append(GetScreenshotString(options));
 
             return sbPublish.ToString();
-
         }
 
         public string GetMediaInfo(string p, PublishOptionsPacket options)
