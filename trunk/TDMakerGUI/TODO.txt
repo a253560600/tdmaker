@@ -1,4 +1,5 @@
 ﻿TDMaker Wizard when drag n drop a file or folder
+Support for Collection/VOB
 
 You dragged a file/folder
 What you want to do
