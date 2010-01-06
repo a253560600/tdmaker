@@ -493,7 +493,8 @@ namespace TDMaker
 
             this.rbTorrentDefaultFolder.Checked = Engine.conf.TorrentFolderDefault;
 
-            this.txtImageShackRegCode.Text = Engine.conf.ImageShackRegCode;
+            txtImageShackRegCode.Text = Engine.conf.ImageShackRegCode;
+            chkUseImageShackRegCode.Checked = Engine.conf.UseImageShackRegCode;
         }
 
         private void SettingsReadOptionsTorrents()
@@ -1668,6 +1669,16 @@ namespace TDMaker
             {
                 createPublishUser();
             }
+        }
+
+        private void txtImageShackRegCode_TextChanged(object sender, EventArgs e)
+        {
+            Engine.conf.ImageShackRegCode = txtImageShackRegCode.Text;
+        }
+
+        private void chkUseImageShackRegCode_CheckedChanged(object sender, EventArgs e)
+        {
+            Engine.conf.UseImageShackRegCode = chkUseImageShackRegCode.Checked;
         }
     }
 }

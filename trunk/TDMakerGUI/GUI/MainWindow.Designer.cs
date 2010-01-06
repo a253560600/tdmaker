@@ -98,7 +98,6 @@ namespace TDMaker
             this.lbMtnProfiles = new System.Windows.Forms.ListBox();
             this.tpHosting = new System.Windows.Forms.TabPage();
             this.gbImageShack = new System.Windows.Forms.GroupBox();
-            this.chkRandomizeFileNameImageShack = new System.Windows.Forms.CheckBox();
             this.btnImageShackImages = new System.Windows.Forms.Button();
             this.txtImageShackRegCode = new System.Windows.Forms.TextBox();
             this.btnImageShackRegCode = new System.Windows.Forms.Button();
@@ -1009,31 +1008,20 @@ namespace TDMaker
             // 
             // gbImageShack
             // 
-            this.gbImageShack.Controls.Add(this.chkRandomizeFileNameImageShack);
             this.gbImageShack.Controls.Add(this.btnImageShackImages);
             this.gbImageShack.Controls.Add(this.txtImageShackRegCode);
             this.gbImageShack.Controls.Add(this.btnImageShackRegCode);
             this.gbImageShack.Controls.Add(this.chkUseImageShackRegCode);
             this.gbImageShack.Location = new System.Drawing.Point(16, 56);
             this.gbImageShack.Name = "gbImageShack";
-            this.gbImageShack.Size = new System.Drawing.Size(648, 88);
+            this.gbImageShack.Size = new System.Drawing.Size(648, 64);
             this.gbImageShack.TabIndex = 8;
             this.gbImageShack.TabStop = false;
             this.gbImageShack.Text = "ImageShack";
             // 
-            // chkRandomizeFileNameImageShack
-            // 
-            this.chkRandomizeFileNameImageShack.AutoSize = true;
-            this.chkRandomizeFileNameImageShack.Location = new System.Drawing.Point(16, 24);
-            this.chkRandomizeFileNameImageShack.Name = "chkRandomizeFileNameImageShack";
-            this.chkRandomizeFileNameImageShack.Size = new System.Drawing.Size(207, 17);
-            this.chkRandomizeFileNameImageShack.TabIndex = 3;
-            this.chkRandomizeFileNameImageShack.Text = "Randomize File Name for ImageShack";
-            this.chkRandomizeFileNameImageShack.UseVisualStyleBackColor = true;
-            // 
             // btnImageShackImages
             // 
-            this.btnImageShackImages.Location = new System.Drawing.Point(542, 42);
+            this.btnImageShackImages.Location = new System.Drawing.Point(542, 24);
             this.btnImageShackImages.Name = "btnImageShackImages";
             this.btnImageShackImages.Size = new System.Drawing.Size(75, 23);
             this.btnImageShackImages.TabIndex = 7;
@@ -1043,14 +1031,15 @@ namespace TDMaker
             // 
             // txtImageShackRegCode
             // 
-            this.txtImageShackRegCode.Location = new System.Drawing.Point(157, 44);
+            this.txtImageShackRegCode.Location = new System.Drawing.Point(157, 26);
             this.txtImageShackRegCode.Name = "txtImageShackRegCode";
             this.txtImageShackRegCode.Size = new System.Drawing.Size(298, 20);
             this.txtImageShackRegCode.TabIndex = 4;
+            this.txtImageShackRegCode.TextChanged += new System.EventHandler(this.txtImageShackRegCode_TextChanged);
             // 
             // btnImageShackRegCode
             // 
-            this.btnImageShackRegCode.Location = new System.Drawing.Point(461, 42);
+            this.btnImageShackRegCode.Location = new System.Drawing.Point(461, 24);
             this.btnImageShackRegCode.Name = "btnImageShackRegCode";
             this.btnImageShackRegCode.Size = new System.Drawing.Size(75, 23);
             this.btnImageShackRegCode.TabIndex = 6;
@@ -1061,12 +1050,13 @@ namespace TDMaker
             // chkUseImageShackRegCode
             // 
             this.chkUseImageShackRegCode.AutoSize = true;
-            this.chkUseImageShackRegCode.Location = new System.Drawing.Point(16, 47);
+            this.chkUseImageShackRegCode.Location = new System.Drawing.Point(16, 29);
             this.chkUseImageShackRegCode.Name = "chkUseImageShackRegCode";
             this.chkUseImageShackRegCode.Size = new System.Drawing.Size(135, 17);
             this.chkUseImageShackRegCode.TabIndex = 5;
             this.chkUseImageShackRegCode.Text = "Use Registration Code:";
             this.chkUseImageShackRegCode.UseVisualStyleBackColor = true;
+            this.chkUseImageShackRegCode.CheckedChanged += new System.EventHandler(this.chkUseImageShackRegCode_CheckedChanged);
             // 
             // flpScreenshots1
             // 
@@ -1076,7 +1066,7 @@ namespace TDMaker
             this.flpScreenshots1.Controls.Add(this.cboScreenshotDest);
             this.flpScreenshots1.Location = new System.Drawing.Point(16, 16);
             this.flpScreenshots1.Name = "flpScreenshots1";
-            this.flpScreenshots1.Size = new System.Drawing.Size(331, 27);
+            this.flpScreenshots1.Size = new System.Drawing.Size(363, 27);
             this.flpScreenshots1.TabIndex = 0;
             // 
             // chkScreenshotUpload
@@ -1098,7 +1088,7 @@ namespace TDMaker
             this.cboScreenshotDest.FormattingEnabled = true;
             this.cboScreenshotDest.Location = new System.Drawing.Point(138, 3);
             this.cboScreenshotDest.Name = "cboScreenshotDest";
-            this.cboScreenshotDest.Size = new System.Drawing.Size(190, 21);
+            this.cboScreenshotDest.Size = new System.Drawing.Size(222, 21);
             this.cboScreenshotDest.TabIndex = 2;
             this.cboScreenshotDest.SelectedIndexChanged += new System.EventHandler(this.cboScreenshotDest_SelectedIndexChanged);
             // 
@@ -2214,7 +2204,6 @@ namespace TDMaker
         private System.Windows.Forms.ToolStripMenuItem tsmTemplates;
         private System.Windows.Forms.ToolStripMenuItem tsmUpdatesCheck;
         private System.Windows.Forms.ComboBox cboScreenshotDest;
-        private System.Windows.Forms.CheckBox chkRandomizeFileNameImageShack;
         private System.Windows.Forms.ToolStripMenuItem tsmLogsDir;
         private System.Windows.Forms.ListBox lbFiles;
         private System.Windows.Forms.CheckBox chkSource;
