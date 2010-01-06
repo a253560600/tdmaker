@@ -14,6 +14,7 @@ using UploadersLib;
 using ZScreenLib;
 using ZSS.UpdateCheckerLib;
 using TDMakerLib.Properties;
+using System.Text.RegularExpressions;
 
 namespace TDMaker
 {
@@ -1037,7 +1038,12 @@ namespace TDMaker
             switch (e.ProgressPercentage)
             {
                 case 1:
-                    MessageBox.Show(e.UserState as string, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    string info = e.UserState as string;
+                    if (!string.IsNullOrEmpty(info))
+                    {
+                        string[] updates = Regex.Split(info, "\r\n");
+                        lbStatus.Items.AddRange(updates);
+                    }
                     break;
             }
         }

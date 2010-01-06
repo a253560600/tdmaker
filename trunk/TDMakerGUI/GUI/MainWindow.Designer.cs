@@ -336,11 +336,13 @@ namespace TDMaker
             // 
             this.lbStatus.BackColor = System.Drawing.SystemColors.Control;
             this.lbStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbStatus.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbStatus.FormattingEnabled = true;
+            this.lbStatus.ItemHeight = 15;
             this.lbStatus.Location = new System.Drawing.Point(3, 16);
             this.lbStatus.Name = "lbStatus";
             this.lbStatus.ScrollAlwaysVisible = true;
-            this.lbStatus.Size = new System.Drawing.Size(822, 95);
+            this.lbStatus.Size = new System.Drawing.Size(822, 94);
             this.lbStatus.TabIndex = 11;
             // 
             // groupBox9
