@@ -16,11 +16,6 @@ namespace TDMakerLib
         /// Disc property is set to true if the media is found to be DVD, BD, HDDVD source
         /// </summary>
         public MediaType MediaType { get; private set; }
-
-        /// <summary>
-        /// Mode of taking screenshots for Media files
-        /// </summary>
-        public TakeScreenshotsType TakeScreenshots { get; set; }
         /// <summary>
         /// Packet that contains Tracker Information 
         /// </summary>
@@ -39,12 +34,7 @@ namespace TDMakerLib
         public string Extras { get; set; }
         public string WebLink { get; set; }
 
-        /// <summary>
-        /// Clickable Thumbnail to get full screenshot
-        /// </summary>
-        public Screenshot Screenshot { get; set; }
-
-        private string[] mExt = new string[] { ".*" }; // { ".avi", ".divx", ".mkv", ".vob", ".mov" };
+        private string[] mExt = new string[] { ".avi", ".divx", ".mkv", ".mpeg", ".mpg", ".mov", ".rm", ".rmvb", ".vob", ".wmv" }; // { ".*" }; 
 
         public MediaFile Overall { get; set; }
         public List<MediaFile> MediaFiles { get; set; }
@@ -55,13 +45,10 @@ namespace TDMakerLib
 
         public MediaInfo2(string loc)
         {
-
             MediaFiles = new List<MediaFile>();
-            Screenshot = new Screenshot();
-
+            Overall = new MediaFile(loc, this.Source);
             // this could be a file path or a directory
             this.Location = loc;
-
         }
 
         /// <summary>
@@ -79,7 +66,6 @@ namespace TDMakerLib
         /// <param name="mf"></param>
         private void AddMedia(MediaFile mf)
         {
-
             if (mf.HasVideo || mf.HasAudio)
             {
                 this.MediaFiles.Add(mf);
@@ -100,53 +86,21 @@ namespace TDMakerLib
                 if (string.IsNullOrEmpty(Title))
                     this.Title = Path.GetFileNameWithoutExtension(this.Overall.FilePath); // this.Overall.FileName;
                 this.MediaFiles.Add(this.Overall);
-
             }
             else if (Directory.Exists(Location))
             {
-
                 // get largest file 
                 List<string> filePaths = new List<string>();
                 foreach (string ext in mExt)
                 {
                     filePaths.AddRange(Directory.GetFiles(Location, "*" + ext, SearchOption.AllDirectories));
                 }
-
-                if (filePaths.Count > 0)
+                List<FileInfo> listFileInfo = new List<FileInfo>(); 
+                foreach(string fp in filePaths)
                 {
-                    string maxPath = "";
-                    long maxSize = 0;
-
-                    for (int i = 0; i < filePaths.Count; i++)
-                    {
-                        string f = filePaths[i];
-
-                        if (!Path.GetFileName(f).ToLower().Contains("sample"))
-                        {
-
-                            FileInfo fi = new FileInfo(f);
-
-                            if (maxSize < fi.Length)
-                            {
-                                maxSize = fi.Length;
-                                maxPath = fi.FullName;
-                            }
-
-                            this.AddMedia(new MediaFile(f, this.Source));
-                        }
-                    }
-
-                    this.Overall = new MediaFile(maxPath, this.Source);
-
-                    // Set Overall File Name                
-                    this.Overall.FileName = Path.GetFileName(Location);
-                    if (Overall.FileName.ToUpper().Equals("VIDEO_TS"))
-                        Overall.FileName = Path.GetFileName(Path.GetDirectoryName(Location));
-                    if (string.IsNullOrEmpty(Title))
-                        this.Title = this.Overall.FileName;
-
+                	listFileInfo.Add(new FileInfo(fp));
                 }
-
+                
                 // Subtitles, Format: DVD Video using VTS_01_0.IFO
                 string[] ifo = Directory.GetFiles(Location, "VTS_01_0.IFO", SearchOption.AllDirectories);
                 if (ifo.Length == 1)
@@ -188,6 +142,47 @@ namespace TDMakerLib
 
                     // close ifo file
                     mi.Close();
+                }
+
+                // AFTER IDENTIFIED THE MEDIA TYPE
+                if (this.MediaType == MediaType.MEDIA_DISC) {
+                	listFileInfo.RemoveAll(x => x.Length < 1000000000);
+                }
+                
+                if (filePaths.Count > 0)
+                {
+                    string maxPath = "";
+                    long maxSize = 0;
+
+                    for (int i = 0; i < filePaths.Count; i++)
+                    {
+                        string f = filePaths[i];
+
+                        if (!Path.GetFileName(f).ToLower().Contains("sample"))
+                        {
+                            FileInfo fi = new FileInfo(f);
+
+                            if (maxSize < fi.Length)
+                            {
+                                maxSize = fi.Length;
+                                maxPath = fi.FullName;
+                            }                            
+                        }
+                    }
+                    foreach(FileInfo fi in listFileInfo)
+                    {
+                      this.AddMedia(new MediaFile(fi.FullName, this.Source));	
+                    }
+
+                    this.Overall = new MediaFile(maxPath, this.Source);
+
+                    // Set Overall File Name                
+                    this.Overall.FileName = Path.GetFileName(Location);
+                    if (Overall.FileName.ToUpper().Equals("VIDEO_TS"))
+                        Overall.FileName = Path.GetFileName(Path.GetDirectoryName(Location));
+                    if (string.IsNullOrEmpty(Title))
+                        this.Title = this.Overall.FileName;
+
                 }
 
                 // DVD Video
@@ -336,11 +331,9 @@ namespace TDMakerLib
             {
                 foreach (MediaFile mf in this.MediaFiles)
                 {
-
                     sbBody.AppendLine(bb.Size(fontSizeHeading2, bb.BoldItalic(mf.FileName)));
                     sbBody.AppendLine();
                     sbBody.AppendLine(mf.ToString());
-
                 }
             }
 

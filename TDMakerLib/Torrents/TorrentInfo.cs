@@ -56,7 +56,6 @@ namespace TDMakerLib
             {
                 UploadScreenshots();
             }
-
         }
 
         private void TakeScreenshots()
@@ -144,6 +143,7 @@ namespace TDMakerLib
                 }
             }
         }
+        
         private ImageFileManager UploadScreenshot(string mediaFilePath)
         {
             string ssPath = Path.Combine(Engine.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + Engine.mtnProfileMgr.GetMtnProfileActive().o_OutputSuffix);
@@ -197,12 +197,7 @@ namespace TDMakerLib
                 if (imf != null && imf.ImageFileList.Count > 0)
                 {
                     imf.LocalFilePath = ssPath;
-                    MyMedia.Screenshot.LocalPath = imf.LocalFilePath;
-                    MyMedia.Screenshot.Full = imf.GetFullImageUrl();
-                    MyMedia.Screenshot.LinkedThumbnail = imf.GetLinkedThumbnailForumUrl();
-
                     mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploaded {0}.", Path.GetFileName(ssPath)));
-
                 }
                 else
                 {
@@ -243,8 +238,11 @@ namespace TDMakerLib
 
             sbPublish.Append(GetMediaInfo(info, options));
             sbPublish.AppendLine();
-            sbPublish.Append(GetScreenshotString(options));
-
+            // TODO only one screenshot for DVD 
+            foreach(MediaFile mf in this.MyMedia.MediaFiles)
+            {
+            	sbPublish.Append(GetScreenshotString(mf, options));            	
+            }
             return sbPublish.ToString();
         }
 
@@ -271,18 +269,18 @@ namespace TDMakerLib
 
         }
 
-        public string GetScreenshotString(PublishOptionsPacket options)
+        public string GetScreenshotString(MediaFile mf, PublishOptionsPacket options)
         {
             StringBuilder sbPublish = new StringBuilder();
             BbCode bb = new BbCode();
 
-            if (!string.IsNullOrEmpty(MyMedia.Screenshot.Full) && options.FullPicture)
+            if (!string.IsNullOrEmpty(mf.Screenshot.Full) && options.FullPicture)
             {
-                sbPublish.AppendLine(bb.Img(MyMedia.Screenshot.Full));
+                sbPublish.AppendLine(bb.Img(mf.Screenshot.Full));
             }
-            else if (!string.IsNullOrEmpty(MyMedia.Screenshot.LinkedThumbnail))
+            else if (!string.IsNullOrEmpty(mf.Screenshot.LinkedThumbnail))
             {
-                sbPublish.AppendLine(MyMedia.Screenshot.LinkedThumbnail);
+                sbPublish.AppendLine(mf.Screenshot.LinkedThumbnail);
             }
 
             return sbPublish.ToString();

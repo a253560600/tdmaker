@@ -8,15 +8,9 @@ namespace TDMakerLib
     public enum MediaType
     {
         SINGLE_MEDIA_FILE,
+        PART_OF_MEDIA_FILES_COLLECTION,
         MEDIA_DISC,
         MUSIC_AUDIO_ALBUM
-    }
-
-    public enum TakeScreenshotsType
-    {
-        NONE,
-        TAKE_ALL_SCREENSHOTS,
-        TAKE_ONE_SCREENSHOT
     }
 
     public enum ProgressType
@@ -40,7 +34,6 @@ namespace TDMakerLib
         public bool TemplatesMode { get; set; }
         public string TemplateLocation { get; set; }
     }
-
 
     public enum TaskType
     {

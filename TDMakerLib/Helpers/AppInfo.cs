@@ -75,12 +75,7 @@ namespace McoreSystem
         #endregion
 
         #region "Constructors"
-        public AppInfo()
-        {
-            //
-            // TODO: Add constructor logic here
-            //		
-        }
+        public AppInfo() { }
 
         public AppInfo(string ProductName, string Version)
         {

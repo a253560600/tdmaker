@@ -24,6 +24,10 @@ namespace TDMakerLib
         public XMLSettingsCore()
         {
             ApplyDefaultValues(this);
+            AuthoringModes = new StringCollection();
+            DiscMenus = new StringCollection();
+            Extras = new StringCollection();
+            Sources = new StringCollection();
         }
 
         // Misc
@@ -41,24 +45,28 @@ namespace TDMakerLib
         [BrowsableAttribute(false)]
         public bool bAuthoring { get; set; }
         public string AuthoringMode = "Untouched";
-        public StringCollection AuthoringModes = new StringCollection();
+        [Category("Input"), Editor(@"System.Windows.Forms.Design.StringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(System.Drawing.Design.UITypeEditor))]
+        public StringCollection AuthoringModes { get; set; }
 
         [BrowsableAttribute(false)]
         public bool bDiscMenu { get; set; }
         public string DiscMenu = "Intact";
-        public StringCollection DiscMenus = new StringCollection();
+        [Category("Input"), Editor(@"System.Windows.Forms.Design.StringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(System.Drawing.Design.UITypeEditor))]
+        public StringCollection DiscMenus {get; set;}
 
         [BrowsableAttribute(false)]
         public bool bExtras { get; set; }
         public string Extra = "Intact";
-        public StringCollection Extras = new StringCollection();
+        [Category("Input"), Editor(@"System.Windows.Forms.Design.StringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(System.Drawing.Design.UITypeEditor))]
+        public StringCollection Extras {get; set;}
 
         // Source Properties
         [BrowsableAttribute(false)]
         public bool bSource { get; set; }
         [BrowsableAttribute(false)]
         public string Source = "DVD-9";
-        public StringCollection Sources = new StringCollection();
+        [Category("Input"), Editor(@"System.Windows.Forms.Design.StringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(System.Drawing.Design.UITypeEditor))]
+        public StringCollection Sources  {get; set;}
 
         [BrowsableAttribute(false)]
         public bool bTitle { get; set; }
