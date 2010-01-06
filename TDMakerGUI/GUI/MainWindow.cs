@@ -18,10 +18,6 @@ namespace TDMaker
     public partial class MainWindow : Form
     {
         private TrackerManager mTrackerManager = null;
-        /// <summary>
-        /// Global TorrentInfo for Using Quick Pre/Align Center commands
-        /// </summary>
-        private TorrentInfo mTorrentInfo = null;
 
         public MainWindow()
         {
@@ -55,8 +51,6 @@ namespace TDMaker
 
         private void LoadMedia(string[] ps)
         {
-            lbFiles.Items.Clear();
-
             if (1 == ps.Length)
             {
                 txtTitle.Text = Engine.GetMediaName(ps[0]);
@@ -124,12 +118,7 @@ namespace TDMaker
         /// <param name="p">File or Folder path of the Media</param>
         /// <returns>MediaInfo2 object</returns>
         private MediaInfo2 PrepareNewMedia(string p)
-        {
-            tcMediaInfo.Controls.Clear();
-            lbScreenshots.Items.Clear();
-            pbScreenshot.ImageLocation = "";
-            pgScreenshot.SelectedObject = null;
-
+        {      
             MediaInfo2 mi = new MediaInfo2(p);
             mi.Extras = cboExtras.Text;
             if (cboSource.Text == "DVD")
@@ -552,7 +541,7 @@ namespace TDMaker
 
         }
 
-        private object WorkerAnalyzeMedia(WorkerTask wt)
+        private List<TorrentInfo> WorkerAnalyzeMedia(WorkerTask wt)
         {
             List<MediaInfo2> miList = wt.MediaFiles;
             List<TorrentInfo> tiList = new List<TorrentInfo>();
@@ -572,6 +561,7 @@ namespace TDMaker
                     // creates screenshot
                     TorrentInfo ti = new TorrentInfo(bwApp, mi);
                     ti.PublishString = CreatePublishInitial(ref ti);
+                    bwApp.ReportProgress((int)ProgressType.REPORT_TORRENTINFO, ti);
 
                     if (Engine.conf.WritePublish)
                     {
@@ -635,7 +625,7 @@ namespace TDMaker
             switch (wt.Task)
             {
                 case TaskType.ANALYZE_MEDIA:
-                    e.Result = (List<TorrentInfo>)WorkerAnalyzeMedia(wt);
+                    e.Result = WorkerAnalyzeMedia(wt);
                     break;
                 case TaskType.CREATE_TORRENT:
                     WorkerCreateTorrents(wt.TorrentPackets);
@@ -686,23 +676,17 @@ namespace TDMaker
             {
                 switch (Loader.CurrentTask)
                 {
-                    case TaskType.ANALYZE_MEDIA:
-
-                        List<TorrentInfo> tiList = (List<TorrentInfo>)e.Result;
-                        if (tiList.Count > 0)
+                    case TaskType.ANALYZE_MEDIA:                        
+                        if (GetTorrentInfo() != null)
                         {
-                        	mTorrentInfo = tiList[tiList.Count-1]; // new TorrentInfoMgr(tiList);
-                        }
-                        if (mTorrentInfo != null)
-                        {
-                            PublishOptionsPacket pop = mTorrentInfo.PublishOptions;
+                            PublishOptionsPacket pop = GetTorrentInfo().PublishOptions;
                             // initialize quick publish checkboxes
                             chkQuickAlignCenter.Checked = pop.AlignCenter;
                             chkQuickFullPicture.Checked = pop.FullPicture;
                             chkQuickPre.Checked = pop.PreformattedText;
                             cboQuickTemplate.SelectedIndex = cboTemplate.SelectedIndex;
 
-                            this.UpdatePublish(mTorrentInfo);
+                            this.UpdatePublish(GetTorrentInfo());
                         }
                         break;
                 }
@@ -800,22 +784,17 @@ namespace TDMaker
                         gbDVD.Enabled = (mi.MediaType == MediaType.MEDIA_DISC);
                         foreach (MediaFile mf in mi.MediaFiles)
                         {
-                            TextBox infoText = new TextBox()
-                            {
-                                Dock = DockStyle.Fill,
-                                Multiline = true,
-                                ReadOnly = true,
-                                ScrollBars = System.Windows.Forms.ScrollBars.Both,
-                                Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-                                Text = mf.Summary,
-                                WordWrap = false
-                            };
-                            TabPage tp = new TabPage(mf.FileName);
-                            tp.Controls.Add(infoText);
-                            tcMediaInfo.TabPages.Add(tp);
-                        }
+                        	lbMediaInfo.Items.Add(mf);                                           	
+                        	lbMediaInfo.SelectedIndex = lbMediaInfo.Items.Count-1;
+                        }                        
                         break;
 
+                    case ProgressType.REPORT_TORRENTINFO:
+                        TorrentInfo ti = e.UserState as TorrentInfo; 
+                        lbPublish.Items.Add(ti);
+                        lbPublish.SelectedIndex = lbPublish.Items.Count-1;
+                        break;
+                        
                     case ProgressType.UPDATE_PROGRESSBAR_MAX:
                         pBar.Style = ProgressBarStyle.Continuous;
                         pBar.Maximum = (int)e.UserState;
@@ -955,9 +934,18 @@ namespace TDMaker
             Engine.conf.TrackerGroupActive = cboTrackerGroupActive.SelectedIndex;
         }
 
+        private TorrentInfo GetTorrentInfo()
+        {
+        	TorrentInfo ti = null; 
+        	if (lbPublish.SelectedIndex > -1) {
+        		ti = lbPublish.Items[lbPublish.SelectedIndex] as TorrentInfo;
+        	}
+        	return ti;
+        }
+        
         private void createPublishUser()
         {
-            if (mTorrentInfo != null)
+            if (GetTorrentInfo() != null)
             {
                 PublishOptionsPacket pop = new PublishOptionsPacket();
                 pop.AlignCenter = chkQuickAlignCenter.Checked;
@@ -967,7 +955,7 @@ namespace TDMaker
                 pop.TemplatesMode = rbTExt.Checked;
                 pop.TemplateLocation = Path.Combine(Engine.TemplatesDir, cboQuickTemplate.Text);
 
-                txtPublish.Text = CreatePublish(mTorrentInfo, pop);
+                txtPublish.Text = CreatePublish(GetTorrentInfo(), pop);
             }
         }
 
@@ -1151,7 +1139,7 @@ namespace TDMaker
 
         private void UpdatePublish()
         {
-            this.UpdatePublish(mTorrentInfo);
+            this.UpdatePublish(GetTorrentInfo());
         }
 
         private void UpdatePublish(TorrentInfo ti)
@@ -1186,11 +1174,11 @@ namespace TDMaker
 
         private void WriteMediaInfo(string info)
         {
-            if (mTorrentInfo != null)
+            if (GetTorrentInfo() != null)
             {
                 SaveFileDialog dlg = new SaveFileDialog();
                 dlg.Filter = "Text Files (*.txt)|*.txt";
-                dlg.FileName = mTorrentInfo.MyMedia.Title;
+                dlg.FileName = GetTorrentInfo().MyMedia.Title;
 
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
@@ -1207,8 +1195,7 @@ namespace TDMaker
             string info = "";
             if (tcMain.SelectedTab == tpMainMediaInfo)
             {
-                TextBox txtInfo = tcMediaInfo.SelectedTab.Controls[0] as TextBox;
-                info = txtInfo.Text;
+                info = txtMediaInfo.Text;
             }
             else
             {
@@ -1629,6 +1616,22 @@ namespace TDMaker
             {
                 Process.Start(pbScreenshot.ImageLocation);
             }
+        }
+        
+        void LbMediaInfoSelectedIndexChanged(object sender, EventArgs e)
+        {
+        	if (lbMediaInfo.SelectedIndex > -1 ) 
+        	{
+        		txtMediaInfo.Text = (lbMediaInfo.Items[lbMediaInfo.SelectedIndex] as MediaFile).Summary;
+        	}        	
+        }
+        
+        void LbPublishSelectedIndexChanged(object sender, EventArgs e)
+        {
+        	if (lbPublish.SelectedIndex > -1 ) 
+        	{
+        		createPublishUser();
+        	}
         }
     }
 }
