@@ -21,7 +21,7 @@ namespace TDMaker
         /// <summary>
         /// Global TorrentInfo for Using Quick Pre/Align Center commands
         /// </summary>
-        private TorrentInfo mTorrentInfo = null;
+        private TorrentInfoMgr mTorrentInfo = null;
 
         public MainWindow()
         {
@@ -55,7 +55,6 @@ namespace TDMaker
 
         private void LoadMedia(string[] ps)
         {
-
             lbFiles.Items.Clear();
 
             if (1 == ps.Length)
@@ -194,7 +193,6 @@ namespace TDMaker
             }
 
             UpdateGuiControls();
-
         }
 
         private void MainWindow_Shown(object sender, EventArgs e)
@@ -550,9 +548,8 @@ namespace TDMaker
             txtTorrentCustomFolder.Text = Engine.conf.CustomTorrentsDir;
         }
 
-        private string CreatePublishInitial(ref TorrentInfo ti)
+        private string CreatePublishInitial(ref TorrentInfoMgr ti)
         {
-
             PublishOptionsPacket pop = new PublishOptionsPacket();
             pop.AlignCenter = Engine.conf.AlignCenter;
             pop.FullPicture = Engine.conf.UploadScreenshot && Engine.conf.UseFullPicture;
@@ -574,7 +571,6 @@ namespace TDMaker
 
             foreach (MediaInfo2 mi in miList)
             {
-
                 bwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, "Reading " + Path.GetFileName(mi.Location) + " using MediaInfo...");
                 mi.ReadMedia();
 
@@ -657,7 +653,7 @@ namespace TDMaker
             }
         }
 
-        private string CreatePublish(TorrentInfo ti, PublishOptionsPacket pop)
+        private string CreatePublish(TorrentInfoMgr ti, PublishOptionsPacket pop)
         {
             string pt = "";
 
@@ -705,7 +701,7 @@ namespace TDMaker
                         List<TorrentInfo> tiList = (List<TorrentInfo>)e.Result;
                         if (tiList.Count > 0)
                         {
-                            mTorrentInfo = tiList[tiList.Count - 1];
+                            mTorrentInfo = new TorrentInfoMgr(tiList);
                         }
                         if (mTorrentInfo != null)
                         {
@@ -766,7 +762,6 @@ namespace TDMaker
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-
             if (rbFile.Checked)
             {
                 OpenFile();
@@ -775,7 +770,6 @@ namespace TDMaker
             {
                 OpenFolder();
             }
-
         }
 
         private void CopyPublish()
@@ -1170,7 +1164,7 @@ namespace TDMaker
             this.UpdatePublish(mTorrentInfo);
         }
 
-        private void UpdatePublish(TorrentInfo ti)
+        private void UpdatePublish(TorrentInfoMgr ti)
         {
             if (ti != null)
             {
