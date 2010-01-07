@@ -1,4 +1,5 @@
-﻿TDMaker Wizard when drag n drop a file or folder
+﻿Templates other than External Default does not process %Title% at the right sequence
+TDMaker Wizard when drag n drop a file or folder
 Support for Collection/VOB
 
 You dragged a file/folder

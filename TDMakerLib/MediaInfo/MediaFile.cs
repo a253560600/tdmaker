@@ -43,14 +43,15 @@ namespace TDMakerLib
         public string Format { get; set; }
         public string FormatInfo { get; set; }
         public Screenshot Screenshot { get; set; }
-        public string Source { get; set; }        
+        public string Source { get; set; }
         private string mSubtitles = "None";
         public string Subtitles { get { return mSubtitles; } set { mSubtitles = value; } }
         /// <summary>
         /// This is what you get for mi.Option("Complete") using MediaInfo
         /// </summary>
-        public string Summary { get; set; }            
+        public string Summary { get; set; }
         public TagLib.File TagLibFile { get; set; }
+        public PublishOptionsPacket PublishOptions { get; set; }
 
         public List<AudioInfo> Audio { get; set; }
         public VideoInfo Video { get; set; }
@@ -266,11 +267,11 @@ namespace TDMakerLib
         {
             return this.HasAudio && !this.HasVideo;
         }
-        
-		public override string ToString()
-		{
-			return this.FileName;
-		}
+
+        public override string ToString()
+        {
+            return this.FileName;
+        }
 
         /// <summary>
         /// String representation of an Audio file
@@ -330,6 +331,11 @@ namespace TDMakerLib
                 sbGeneral.AppendLine(string.Format("         [u]Subtitles:[/u] {0}", this.Subtitles));
             }
 
+            if (this.Screenshot != null)
+            {
+                sbGeneral.AppendLine();
+                sbGeneral.AppendLine(this.GetScreenshotString());
+            }
 
             sbBody.Append(bb.Size(fontSizeBody, sbGeneral.ToString()));
 
@@ -415,6 +421,24 @@ namespace TDMakerLib
 
             return sbBody.ToString();
         }
+
+        public string GetScreenshotString()
+        {
+            StringBuilder sbPublish = new StringBuilder();
+            BbCode bb = new BbCode();
+
+            if (!string.IsNullOrEmpty(this.Screenshot.Full) && PublishOptions.FullPicture)
+            {
+                sbPublish.AppendLine(bb.Img(this.Screenshot.Full));
+            }
+            else if (!string.IsNullOrEmpty(this.Screenshot.LinkedThumbnail))
+            {
+                sbPublish.AppendLine(this.Screenshot.LinkedThumbnail);
+            }
+
+            return sbPublish.ToString();
+        }
+
     }
 
     public class Info
