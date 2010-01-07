@@ -40,7 +40,7 @@ namespace TDMakerLib
 
         // Disc Properties
         [BrowsableAttribute(false)]
-        public bool bBrowseDir { get; set; }
+        public MediaType MediaTypeLastUsed { get; set; }
 
         [BrowsableAttribute(false)]
         public bool bAuthoring { get; set; }
