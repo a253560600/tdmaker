@@ -73,12 +73,13 @@ namespace TDMaker
             this.tpMainPublish = new System.Windows.Forms.TabPage();
             this.tlpPublish = new System.Windows.Forms.TableLayoutPanel();
             this.gbQuickPublish = new System.Windows.Forms.GroupBox();
-            this.rbTExt = new System.Windows.Forms.RadioButton();
-            this.rbTInt = new System.Windows.Forms.RadioButton();
-            this.cboQuickTemplate = new System.Windows.Forms.ComboBox();
-            this.chkQuickFullPicture = new System.Windows.Forms.CheckBox();
-            this.chkQuickAlignCenter = new System.Windows.Forms.CheckBox();
+            this.flpPublishConfig = new System.Windows.Forms.FlowLayoutPanel();
             this.chkQuickPre = new System.Windows.Forms.CheckBox();
+            this.chkQuickAlignCenter = new System.Windows.Forms.CheckBox();
+            this.chkQuickFullPicture = new System.Windows.Forms.CheckBox();
+            this.rbTInt = new System.Windows.Forms.RadioButton();
+            this.rbTExt = new System.Windows.Forms.RadioButton();
+            this.cboQuickTemplate = new System.Windows.Forms.ComboBox();
             this.txtPublish = new System.Windows.Forms.TextBox();
             this.lbPublish = new System.Windows.Forms.ListBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
@@ -209,6 +210,7 @@ namespace TDMaker
             this.tpMainPublish.SuspendLayout();
             this.tlpPublish.SuspendLayout();
             this.gbQuickPublish.SuspendLayout();
+            this.flpPublishConfig.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tcOptions.SuspendLayout();
             this.tpOptionsMTN.SuspendLayout();
@@ -710,12 +712,7 @@ namespace TDMaker
             // 
             // gbQuickPublish
             // 
-            this.gbQuickPublish.Controls.Add(this.rbTExt);
-            this.gbQuickPublish.Controls.Add(this.rbTInt);
-            this.gbQuickPublish.Controls.Add(this.cboQuickTemplate);
-            this.gbQuickPublish.Controls.Add(this.chkQuickFullPicture);
-            this.gbQuickPublish.Controls.Add(this.chkQuickAlignCenter);
-            this.gbQuickPublish.Controls.Add(this.chkQuickPre);
+            this.gbQuickPublish.Controls.Add(this.flpPublishConfig);
             this.gbQuickPublish.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbQuickPublish.Location = new System.Drawing.Point(710, 3);
             this.gbQuickPublish.Name = "gbQuickPublish";
@@ -724,22 +721,58 @@ namespace TDMaker
             this.gbQuickPublish.TabStop = false;
             this.gbQuickPublish.Text = "Options";
             // 
-            // rbTExt
+            // flpPublishConfig
             // 
-            this.rbTExt.AutoSize = true;
-            this.rbTExt.Location = new System.Drawing.Point(15, 127);
-            this.rbTExt.Name = "rbTExt";
-            this.rbTExt.Size = new System.Drawing.Size(110, 17);
-            this.rbTExt.TabIndex = 6;
-            this.rbTExt.TabStop = true;
-            this.rbTExt.Text = "E&xternal Template";
-            this.rbTExt.UseVisualStyleBackColor = true;
-            this.rbTExt.CheckedChanged += new System.EventHandler(this.rbTExt_CheckedChanged);
+            this.flpPublishConfig.Controls.Add(this.chkQuickPre);
+            this.flpPublishConfig.Controls.Add(this.chkQuickAlignCenter);
+            this.flpPublishConfig.Controls.Add(this.chkQuickFullPicture);
+            this.flpPublishConfig.Controls.Add(this.rbTInt);
+            this.flpPublishConfig.Controls.Add(this.rbTExt);
+            this.flpPublishConfig.Controls.Add(this.cboQuickTemplate);
+            this.flpPublishConfig.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flpPublishConfig.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flpPublishConfig.Location = new System.Drawing.Point(3, 16);
+            this.flpPublishConfig.Name = "flpPublishConfig";
+            this.flpPublishConfig.Size = new System.Drawing.Size(131, 414);
+            this.flpPublishConfig.TabIndex = 7;
+            // 
+            // chkQuickPre
+            // 
+            this.chkQuickPre.AutoSize = true;
+            this.chkQuickPre.Location = new System.Drawing.Point(3, 3);
+            this.chkQuickPre.Name = "chkQuickPre";
+            this.chkQuickPre.Size = new System.Drawing.Size(110, 17);
+            this.chkQuickPre.TabIndex = 0;
+            this.chkQuickPre.Text = "&Preformatted Text";
+            this.chkQuickPre.UseVisualStyleBackColor = true;
+            this.chkQuickPre.CheckedChanged += new System.EventHandler(this.chkQuickPre_CheckedChanged);
+            // 
+            // chkQuickAlignCenter
+            // 
+            this.chkQuickAlignCenter.AutoSize = true;
+            this.chkQuickAlignCenter.Location = new System.Drawing.Point(3, 26);
+            this.chkQuickAlignCenter.Name = "chkQuickAlignCenter";
+            this.chkQuickAlignCenter.Size = new System.Drawing.Size(83, 17);
+            this.chkQuickAlignCenter.TabIndex = 1;
+            this.chkQuickAlignCenter.Text = "Align &Center";
+            this.chkQuickAlignCenter.UseVisualStyleBackColor = true;
+            this.chkQuickAlignCenter.CheckedChanged += new System.EventHandler(this.chkQuickAlignCenter_CheckedChanged);
+            // 
+            // chkQuickFullPicture
+            // 
+            this.chkQuickFullPicture.AutoSize = true;
+            this.chkQuickFullPicture.Location = new System.Drawing.Point(3, 49);
+            this.chkQuickFullPicture.Name = "chkQuickFullPicture";
+            this.chkQuickFullPicture.Size = new System.Drawing.Size(78, 17);
+            this.chkQuickFullPicture.TabIndex = 2;
+            this.chkQuickFullPicture.Text = "Full &Picture";
+            this.chkQuickFullPicture.UseVisualStyleBackColor = true;
+            this.chkQuickFullPicture.CheckedChanged += new System.EventHandler(this.chkQuickFullPicture_CheckedChanged);
             // 
             // rbTInt
             // 
             this.rbTInt.AutoSize = true;
-            this.rbTInt.Location = new System.Drawing.Point(15, 104);
+            this.rbTInt.Location = new System.Drawing.Point(3, 72);
             this.rbTInt.Name = "rbTInt";
             this.rbTInt.Size = new System.Drawing.Size(107, 17);
             this.rbTInt.TabIndex = 5;
@@ -748,48 +781,29 @@ namespace TDMaker
             this.rbTInt.UseVisualStyleBackColor = true;
             this.rbTInt.CheckedChanged += new System.EventHandler(this.rbTInt_CheckedChanged);
             // 
+            // rbTExt
+            // 
+            this.rbTExt.AutoSize = true;
+            this.rbTExt.Location = new System.Drawing.Point(3, 95);
+            this.rbTExt.Name = "rbTExt";
+            this.rbTExt.Size = new System.Drawing.Size(110, 17);
+            this.rbTExt.TabIndex = 6;
+            this.rbTExt.TabStop = true;
+            this.rbTExt.Text = "E&xternal Template";
+            this.rbTExt.UseVisualStyleBackColor = true;
+            this.rbTExt.CheckedChanged += new System.EventHandler(this.rbTExt_CheckedChanged);
+            // 
             // cboQuickTemplate
             // 
+            this.cboQuickTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.cboQuickTemplate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboQuickTemplate.FormattingEnabled = true;
-            this.cboQuickTemplate.Location = new System.Drawing.Point(15, 150);
+            this.cboQuickTemplate.Location = new System.Drawing.Point(3, 118);
             this.cboQuickTemplate.Name = "cboQuickTemplate";
-            this.cboQuickTemplate.Size = new System.Drawing.Size(121, 21);
+            this.cboQuickTemplate.Size = new System.Drawing.Size(110, 21);
             this.cboQuickTemplate.TabIndex = 3;
             this.cboQuickTemplate.SelectedIndexChanged += new System.EventHandler(this.cboQuickTemplate_SelectedIndexChanged);
-            // 
-            // chkQuickFullPicture
-            // 
-            this.chkQuickFullPicture.AutoSize = true;
-            this.chkQuickFullPicture.Location = new System.Drawing.Point(15, 71);
-            this.chkQuickFullPicture.Name = "chkQuickFullPicture";
-            this.chkQuickFullPicture.Size = new System.Drawing.Size(78, 17);
-            this.chkQuickFullPicture.TabIndex = 2;
-            this.chkQuickFullPicture.Text = "Full &Picture";
-            this.chkQuickFullPicture.UseVisualStyleBackColor = true;
-            this.chkQuickFullPicture.CheckedChanged += new System.EventHandler(this.chkQuickFullPicture_CheckedChanged);
-            // 
-            // chkQuickAlignCenter
-            // 
-            this.chkQuickAlignCenter.AutoSize = true;
-            this.chkQuickAlignCenter.Location = new System.Drawing.Point(15, 48);
-            this.chkQuickAlignCenter.Name = "chkQuickAlignCenter";
-            this.chkQuickAlignCenter.Size = new System.Drawing.Size(83, 17);
-            this.chkQuickAlignCenter.TabIndex = 1;
-            this.chkQuickAlignCenter.Text = "Align &Center";
-            this.chkQuickAlignCenter.UseVisualStyleBackColor = true;
-            this.chkQuickAlignCenter.CheckedChanged += new System.EventHandler(this.chkQuickAlignCenter_CheckedChanged);
-            // 
-            // chkQuickPre
-            // 
-            this.chkQuickPre.AutoSize = true;
-            this.chkQuickPre.Location = new System.Drawing.Point(15, 25);
-            this.chkQuickPre.Name = "chkQuickPre";
-            this.chkQuickPre.Size = new System.Drawing.Size(110, 17);
-            this.chkQuickPre.TabIndex = 0;
-            this.chkQuickPre.Text = "&Preformatted Text";
-            this.chkQuickPre.UseVisualStyleBackColor = true;
-            this.chkQuickPre.CheckedChanged += new System.EventHandler(this.chkQuickPre_CheckedChanged);
             // 
             // txtPublish
             // 
@@ -797,7 +811,7 @@ namespace TDMaker
             this.txtPublish.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPublish.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPublish.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPublish.Location = new System.Drawing.Point(144, 3);
             this.txtPublish.Multiline = true;
             this.txtPublish.Name = "txtPublish";
@@ -2045,7 +2059,8 @@ namespace TDMaker
             this.tlpPublish.ResumeLayout(false);
             this.tlpPublish.PerformLayout();
             this.gbQuickPublish.ResumeLayout(false);
-            this.gbQuickPublish.PerformLayout();
+            this.flpPublishConfig.ResumeLayout(false);
+            this.flpPublishConfig.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tcOptions.ResumeLayout(false);
             this.tpOptionsMTN.ResumeLayout(false);
@@ -2257,6 +2272,7 @@ namespace TDMaker
         private System.Windows.Forms.TableLayoutPanel tlpScreenshotProps;
         private System.Windows.Forms.PropertyGrid pgScreenshot;
         private System.Windows.Forms.ComboBox cboMediaType;
+        private System.Windows.Forms.FlowLayoutPanel flpPublishConfig;
     }
 }
 

@@ -1,8 +1,9 @@
 Version 2.0
 
 2.00.0.0 Core changes to create TDMaker Dynamic Links Library
-1.18.0.0 Support for dealing with multiple Torrent Descriptions in Publish tab for multiple files
-1.17.0.0 Support for showing multiple MediaInfo summaries for multiple files
+1.19.0.0 Support for media file collections 
+1.18.0.0 Can deal with multiple Torrent Descriptions in Publish tab for multiple files
+1.17.0.0 Show multiple MediaInfo summaries for multiple files
 1.16.0.0 Added proxy support under Options tab
 1.15.0.0 Support for multiple MTN profiles
 1.14.0.0 Tracker Groups enable creation of multiple torrents of the same file for multiple trackers [issue 4]

@@ -4,6 +4,7 @@ using System.IO;
 using MediaInfoLib;
 using TDMakerLib;
 using TDMakerLib.MediaInfo;
+using System.Linq;
 
 namespace TDMakerLib
 {
@@ -37,14 +38,17 @@ namespace TDMakerLib
         private string[] mExt = new string[] { ".avi", ".divx", ".mkv", ".mpeg", ".mpg", ".mov", ".rm", ".rmvb", ".vob", ".wmv" }; // { ".*" }; 
 
         public MediaFile Overall { get; set; }
-        public List<MediaFile> MediaFiles { get; set; }
+        public List<MediaFile> MediaFiles { get; private set; }
+        public List<string> FileCollection { get; set; }
         /// <summary>
         /// Folder Path of the Template
         /// </summary>
         public string TemplateLocation { get; set; }
 
-        public MediaInfo2(string loc)
+        public MediaInfo2(MediaType mediaType, string loc)
         {
+            this.MediaType = mediaType;
+            FileCollection = new List<string>();
             MediaFiles = new List<MediaFile>();
             Overall = new MediaFile(loc, this.Source);
             // this could be a file path or a directory
@@ -68,38 +72,44 @@ namespace TDMakerLib
         {
             if (mf.HasVideo || mf.HasAudio)
             {
+                mf.Index = MediaFiles.Count + 1;
                 this.MediaFiles.Add(mf);
             }
         }
 
-        /// <summary>
-        /// Function to populate MediaInfo class
-        /// </summary>
-        public void ReadMedia()
+        public void ReadMediaFile()
         {
-            // if a folder then read all media files 
-            // append all the durations and save in Duration
-
             if (File.Exists(Location))
             {
                 this.Overall = new MediaFile(this.Location, this.Source);
                 if (string.IsNullOrEmpty(Title))
                     this.Title = Path.GetFileNameWithoutExtension(this.Overall.FilePath); // this.Overall.FileName;
-                this.MediaFiles.Add(this.Overall);
+                AddMedia(this.Overall);
             }
-            else if (Directory.Exists(Location))
+        }
+
+        public List<string> GetFilesToProcess(string dir)
+        {
+            List<string> filePaths = new List<string>();
+            foreach (string ext in mExt)
+            {
+                filePaths.AddRange(Directory.GetFiles(Location, "*" + ext, SearchOption.AllDirectories));
+            }
+
+            filePaths.RemoveAll(x => x.ToLower().Contains("sample"));
+            return filePaths;
+        }
+
+        public void ReadDirectory()
+        {
+            // if a folder then read all media files 
+            // append all the durations and save in Duration
+            if (Directory.Exists(Location))
             {
                 // get largest file 
-                List<string> filePaths = new List<string>();
-                foreach (string ext in mExt)
-                {
-                    filePaths.AddRange(Directory.GetFiles(Location, "*" + ext, SearchOption.AllDirectories));
-                }
-
-                filePaths.RemoveAll(x => x.ToLower().Contains("sample"));
-
+                FileCollection = GetFilesToProcess(Location);
                 List<FileInfo> listFileInfo = new List<FileInfo>();
-                foreach (string fp in filePaths)
+                foreach (string fp in FileCollection)
                 {
                     listFileInfo.Add(new FileInfo(fp));
                 }
@@ -153,14 +163,14 @@ namespace TDMakerLib
                     listFileInfo.RemoveAll(x => x.Length < 1000000000);
                 }
 
-                if (filePaths.Count > 0)
+                if (FileCollection.Count > 0)
                 {
                     string maxPath = "";
                     long maxSize = 0;
 
-                    for (int i = 0; i < filePaths.Count; i++)
+                    for (int i = 0; i < FileCollection.Count; i++)
                     {
-                        string f = filePaths[i];
+                        string f = FileCollection[i];
                         FileInfo fi = new FileInfo(f);
 
                         if (maxSize < fi.Length)
@@ -220,10 +230,9 @@ namespace TDMakerLib
                         this.Overall.FileSizeString = string.Format("{0} MiB", (this.Overall.FileSize / 1024.0 / 1024.0).ToString("0.00"));
 
                         this.Overall.Duration = dura;
-                        this.Overall.DurationString = Engine.GetDurationString(dura);
+                        this.Overall.DurationString2 = Engine.GetDurationString(dura);
 
                     }
-
                 }
 
             } // if Location is a directory
@@ -238,8 +247,45 @@ namespace TDMakerLib
             {
                 this.MediaType = MediaType.MUSIC_AUDIO_ALBUM;
             }
+        }
 
-        } // Read Media
+        public void ReadMediaFileCollection()
+        {
+            if (FileCollection.Count > 0)
+            {
+                FileCollection.Sort();
+
+                foreach (string p in this.FileCollection)
+                {
+                    AddMedia(new MediaFile(p, this.Source));
+                }
+                this.Title = Path.GetDirectoryName(FileCollection[0]);
+            }
+            else
+            {
+                ReadDirectory();
+            }
+        }
+
+        /// <summary>
+        /// Function to populate MediaInfo class
+        /// </summary>
+        public void ReadMedia()
+        {
+            switch (MediaType)
+            {
+                case MediaType.SINGLE_MEDIA_FILE:
+                    ReadMediaFile();
+                    break;
+                case MediaType.MEDIA_FILES_COLLECTION:
+                    ReadMediaFileCollection();
+                    break;
+                case MediaType.MEDIA_DISC:
+                case MediaType.MUSIC_AUDIO_ALBUM:
+                    ReadDirectory();
+                    break;
+            }
+        }
 
         /// <summary>
         /// Tracklist of all the Audio files in the MediaInfo. Also accessible using %Tracklist%
@@ -258,7 +304,7 @@ namespace TDMakerLib
             return new NfoReport(this.Location, null).ToString();
         }
 
-        private string ToStringMedia()
+        public string ToStringMedia()
         {
             int fontSizeHeading1 = (int)(Engine.conf.PreText && Engine.conf.LargerPreText == true ?
         Engine.conf.FontSizeHeading1 + Engine.conf.FontSizeIncr :
@@ -327,40 +373,84 @@ namespace TDMakerLib
                 sbBody.AppendLine(this.Overall.ToStringPublish());
             }
             else
-            // If the loaded folder is not a Disc but individual ripped files
             {
-                foreach (MediaFile mf in this.MediaFiles)
+                // If the loaded folder is not a Disc but individual ripped files or a collection of files
+                if (MediaType == MediaType.MEDIA_FILES_COLLECTION)
                 {
-                    sbBody.AppendLine(bb.Size(fontSizeHeading2, bb.BoldItalic(mf.FileName)));
-                    sbBody.AppendLine();
-                    sbBody.AppendLine(mf.ToStringPublish());
+                    sbBody.Append(ToStringMediaList());
+                }
+                else
+                {
+                    foreach (MediaFile mf in this.MediaFiles)
+                    {
+                        sbBody.AppendLine(bb.Size(fontSizeHeading2, bb.BoldItalic(mf.FileName)));
+                        sbBody.AppendLine();
+                        sbBody.AppendLine(mf.ToStringPublish());
+                    }
                 }
             }
-           
+
             return sbBody.ToString();
         }
 
-        /// <summary>
-        /// Default Publish String Representation
-        /// </summary>
-        /// <returns></returns>
+        /*
+        Track Number / Title                              | Len. | Rate |  FPS  | Resolution + SAR  | Size    
+        ------------------------------------------------------------------------------------------------------
+        01 What Made You Say That                         | 3:02 | 2304 | 29.97 | 704x480 / 640x480 | 54.18 MiB
+        02 Dance With The One That Brought You            | 2:29 | 1992 | 23.98 | 708x480 / 644x480 | 38.82 MiB
+        03 You Lay A Whole Lot Of Love On Me              | 2:48 | 1399 | 29.97 | 704x348 / 640x348 | 31.88 MiB
+        04 Whose Bed Have Your Boots Been Under           | 4:25 | 2004 | 23.98 | 708x480 / 644x480 | 69.42 MiB
+        05 Any Man Of Mine                                | 4:10 | 2603 | 23.98 | 640x480 / 704x480 | 83.35 MiB
+        06 The Woman In Me (Needs The man In You)         | 4:47 | 1702 | 23.98 | 704x480 / 640x480 | 64.85 MiB
+        07 (If You're Not In It For Love) I'm Outta Here! | 4:40 | 1800 | 29.97 | 704x368 / 640x368 | 66.53 MiB
+        08 You Win My Love                                | 4:33 | 2197 | 29.97 | 704x356 / 640x356 | 77.82 MiB
+        09 No One Needs To Know                           | 3:46 | 1552 | 23.98 | 704x480 / 640x480 | 47.02 MiB
+        10 Home Ain't Where His Heart Is (Anymore)        | 4:12 | 1599 | 29.97 | 704x360 / 640x360 | 53.82 MiB
+        11 God Bless The Child                            | 3:49 | 2597 | 29.97 | 704x480 / 640x480 | 76.18 MiB
+        12 Love Gets Me Every Time                        | 3:34 | 1906 | 23.98 | 704x480 / 640x480 | 53.56 MiB
+        13 Don't Be Stupid                                | 3:47 | 3006 | 23.98 | 704x480 / 640x480 | 86.57 MiB
+        14 You're Still The One                           | 3:36 | 1401 | 23.98 | 704x480 / 640x480 | 41.06 MiB
+        15 Honey I'm Home                                 | 3:43 | 2706 | 29.97 | 708x480 / 644x480 | 77.10 MiB
+        16 From This Moment On                            | 4:08 | 1603 | 23.98 | 704x480 / 640x480 | 53.09 MiB
+        17 That Don't Impress Me Much                     | 3:45 | 1996 | 23.98 | 720x480 / 655x480 | 58.72 MiB
+        18 Man! I Feel Like A Woman!                      | 3:55 | 1653 | 29.97 | 720x480 / 655x480 | 51.70 MiB
+        19 You've Got A Way                               | 3:28 | 1003 | 23.98 | 716x320 / 651x320 | 29.67 MiB
+        20 Come On Over                                   | 3:11 | 2301 | 29.97 | 716x480 / 651x480 | 56.81 MiB
+        21 Rock This Country!                             | 4:41 | 2099 | 29.97 | 708x480 / 644x480 | 76.79 MiB
+        -------------------------------------------------------------------------------------------------------
+        Total:                                            |80:19 | 1976 |                           |  1.22 GiB
+         **/
+
+        public string ToStringMediaList()
+        {
+            StringBuilder sbBody = new StringBuilder();
+            List<string> listFileNames = new List<string>();
+            foreach (string p in FileCollection)
+            {
+                listFileNames.Add(Path.GetFileName(p));
+            }
+            int width = listFileNames.Max(x => x.Length);
+
+
+            foreach (MediaFile mf in this.MediaFiles)
+            {
+                sbBody.Append(mf.Index.ToString().PadLeft(this.MediaFiles.Count.ToString().Length, '0'));
+                sbBody.Append(" ");
+                sbBody.Append(mf.FileName.PadRight(width, ' '));
+                sbBody.Append(" | ");
+                sbBody.Append(Adapter.GetDuration(mf.Duration));
+                sbBody.Append(" | ");
+                sbBody.Append(mf.Video.Resolution);
+                sbBody.Append(" | ");
+                sbBody.Append(mf.FileSizeString);
+                sbBody.AppendLine();
+            }
+            return sbBody.ToString();
+        }
+
         public override string ToString()
         {
-            string str = "";
-
-            switch (this.MediaType)
-            {
-                case MediaType.MEDIA_DISC:
-                case MediaType.SINGLE_MEDIA_FILE:
-                    str = ToStringMedia();
-                    break;
-                case MediaType.MUSIC_AUDIO_ALBUM:
-                    str = ToStringAudio();
-                    break;
-            }
-
-            return str;
-
+            return Path.GetFileName(Location);
         }
 
     }

@@ -14,6 +14,7 @@ namespace TDMakerLib
     /// </summary>
     public class MediaFile
     {
+        public int Index { get; set; }
         public bool HasAudio { get; set; }
         public bool HasVideo { get; set; }
 
@@ -25,7 +26,8 @@ namespace TDMakerLib
         /// <summary>
         /// Duration in hours:minutes:seconds
         /// </summary>
-        public string DurationString { get; set; }
+        public string DurationString2 { get; set; }
+        public string DurationString3 { get; set; }
         public string FileExtension { get; set; }
         public string FileName { get; set; }
         /// <summary>
@@ -138,8 +140,18 @@ namespace TDMakerLib
                     }
 
                     // Duration
-                    if (string.IsNullOrEmpty(this.DurationString))
-                        this.DurationString = mMI.Get(0, 0, "Duration/String2");
+                    if (string.IsNullOrEmpty(this.DurationString2))
+                        this.DurationString2 = mMI.Get(0, 0, "Duration/String2");
+
+                    if (this.Duration == 0.0)
+                    {
+                        double dura = 0.0;
+                        double.TryParse(mMI.Get(0, 0, "Duration"), out dura);
+                        this.Duration = dura;
+                    }
+
+                    if (string.IsNullOrEmpty(this.DurationString3))
+                        this.DurationString3 = mMI.Get(0, 0, "Duration/String3");
 
                     this.Bitrate = mMI.Get(StreamKind.General, 0, "OverallBitRate/String");
 
@@ -242,7 +254,6 @@ namespace TDMakerLib
                         ai.Resolution = mMI.Get(StreamKind.Audio, a, "Resolution/String");
 
                         this.Audio.Add(ai);
-
                     }
 
                     mMI.Close();
@@ -288,7 +299,6 @@ namespace TDMakerLib
         /// <returns></returns>
         public string ToStringPublish()
         {
-
             int fontSizeHeading3 = (int)(Engine.conf.PreText && Engine.conf.LargerPreText == true ?
            Engine.conf.FontSizeHeading3 + Engine.conf.FontSizeIncr :
            Engine.conf.FontSizeHeading3);
@@ -321,7 +331,7 @@ namespace TDMakerLib
             // File Size
             sbGeneral.AppendLine(string.Format("         [u]File Size:[/u] {0}", this.FileSizeString));
             // Duration
-            sbGeneral.AppendLine(string.Format("          [u]Duration:[/u] {0}", this.DurationString));
+            sbGeneral.AppendLine(string.Format("          [u]Duration:[/u] {0}", this.DurationString2));
             // Bitrate
             sbGeneral.AppendLine(string.Format("           [u]Bitrate:[/u] {0}", this.Bitrate));
 
