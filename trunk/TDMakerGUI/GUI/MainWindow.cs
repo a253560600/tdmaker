@@ -356,6 +356,9 @@ namespace TDMaker
 
         private void SettingsReadInput()
         {
+            cboMediaType.Items.Clear();
+            cboMediaType.Items.AddRange(typeof(MediaType).GetDescriptions());
+            cboMediaType.SelectedIndex = (int)Engine.conf.MediaTypeLastUsed; 
             if (Engine.conf.Sources.Count == 0)
             {
                 Engine.conf.Sources.AddRange(new string[] { "DVD-5", "DVD-9", "HDTV", "SDTV", "Blu-ray Disc", "HD DVD", "Laser Disc", "VHS" });
@@ -400,9 +403,6 @@ namespace TDMaker
 
         private void SettingsReadMedia()
         {
-            rbDir.Checked = Engine.conf.bBrowseDir;
-            rbFile.Checked = !rbDir.Checked;
-            gbDVD.Enabled = rbDir.Checked;
             rbTExt.Checked = chkTemplatesMode.Checked;
             rbTInt.Checked = !rbTExt.Checked;
 
@@ -662,6 +662,8 @@ namespace TDMaker
 
         private void UpdateGuiControls()
         {
+            gbDVD.Enabled = Engine.conf.MediaTypeLastUsed == MediaType.MEDIA_DISC; ;
+
             btnCreateTorrent.Enabled = !bwApp.IsBusy && lbFiles.Items.Count > 0;
             btnAnalyze.Enabled = !bwApp.IsBusy && lbFiles.Items.Count > 0;
 
@@ -740,13 +742,17 @@ namespace TDMaker
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            if (rbFile.Checked)
+            switch (Engine.conf.MediaTypeLastUsed)
             {
-                OpenFile();
-            }
-            else
-            {
-                OpenFolder();
+                case MediaType.SINGLE_MEDIA_FILE:
+                    OpenFile();
+                    break;
+                case MediaType.MEDIA_DISC:
+                    OpenFolder();
+                    break;
+                default:
+                    OpenFolder();
+                    break;
             }
         }
 
@@ -981,13 +987,7 @@ namespace TDMaker
 
         private void rbFile_CheckedChanged(object sender, EventArgs e)
         {
-            gbDVD.Enabled = rbDir.Checked;
-        }
-
-        private void rbDir_CheckedChanged(object sender, EventArgs e)
-        {
-            gbDVD.Enabled = rbDir.Checked;
-            Engine.conf.bBrowseDir = rbDir.Checked;
+            gbDVD.Enabled = Engine.conf.MediaTypeLastUsed != MediaType.SINGLE_MEDIA_FILE;
         }
 
         private void txtPublish_KeyPress(object sender, KeyPressEventArgs e)
@@ -1679,6 +1679,12 @@ namespace TDMaker
         private void chkUseImageShackRegCode_CheckedChanged(object sender, EventArgs e)
         {
             Engine.conf.UseImageShackRegCode = chkUseImageShackRegCode.Checked;
+        }
+
+        private void cboMediaType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Engine.conf.MediaTypeLastUsed = (MediaType)cboMediaType.SelectedIndex;
+            UpdateGuiControls();
         }
     }
 }

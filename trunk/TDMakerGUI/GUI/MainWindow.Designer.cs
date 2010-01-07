@@ -57,9 +57,8 @@ namespace TDMaker
             this.cboAuthoring = new System.Windows.Forms.ComboBox();
             this.chkAuthoring = new System.Windows.Forms.CheckBox();
             this.gbLocation = new System.Windows.Forms.GroupBox();
+            this.cboMediaType = new System.Windows.Forms.ComboBox();
             this.lbFiles = new System.Windows.Forms.ListBox();
-            this.rbDir = new System.Windows.Forms.RadioButton();
-            this.rbFile = new System.Windows.Forms.RadioButton();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.tpMainMediaInfo = new System.Windows.Forms.TabPage();
             this.tlpMediaInfo = new System.Windows.Forms.TableLayoutPanel();
@@ -514,16 +513,25 @@ namespace TDMaker
             // 
             this.gbLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbLocation.Controls.Add(this.cboMediaType);
             this.gbLocation.Controls.Add(this.lbFiles);
-            this.gbLocation.Controls.Add(this.rbDir);
-            this.gbLocation.Controls.Add(this.rbFile);
             this.gbLocation.Controls.Add(this.btnBrowse);
             this.gbLocation.Location = new System.Drawing.Point(12, 8);
             this.gbLocation.Name = "gbLocation";
             this.gbLocation.Size = new System.Drawing.Size(828, 163);
             this.gbLocation.TabIndex = 7;
             this.gbLocation.TabStop = false;
-            this.gbLocation.Text = "Location";
+            this.gbLocation.Text = "Media Type / Loation";
+            // 
+            // cboMediaType
+            // 
+            this.cboMediaType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboMediaType.FormattingEnabled = true;
+            this.cboMediaType.Location = new System.Drawing.Point(24, 24);
+            this.cboMediaType.Name = "cboMediaType";
+            this.cboMediaType.Size = new System.Drawing.Size(264, 21);
+            this.cboMediaType.TabIndex = 14;
+            this.cboMediaType.SelectedIndexChanged += new System.EventHandler(this.cboMediaType_SelectedIndexChanged);
             // 
             // lbFiles
             // 
@@ -535,31 +543,6 @@ namespace TDMaker
             this.lbFiles.Name = "lbFiles";
             this.lbFiles.Size = new System.Drawing.Size(786, 82);
             this.lbFiles.TabIndex = 13;
-            // 
-            // rbDir
-            // 
-            this.rbDir.AutoSize = true;
-            this.rbDir.Location = new System.Drawing.Point(232, 27);
-            this.rbDir.Name = "rbDir";
-            this.rbDir.Size = new System.Drawing.Size(80, 17);
-            this.rbDir.TabIndex = 9;
-            this.rbDir.TabStop = true;
-            this.rbDir.Text = "&DVD Folder";
-            this.rbDir.UseVisualStyleBackColor = true;
-            this.rbDir.CheckedChanged += new System.EventHandler(this.rbDir_CheckedChanged);
-            // 
-            // rbFile
-            // 
-            this.rbFile.AutoSize = true;
-            this.rbFile.Checked = true;
-            this.rbFile.Location = new System.Drawing.Point(26, 27);
-            this.rbFile.Name = "rbFile";
-            this.rbFile.Size = new System.Drawing.Size(71, 17);
-            this.rbFile.TabIndex = 8;
-            this.rbFile.TabStop = true;
-            this.rbFile.Text = "&Video File";
-            this.rbFile.UseVisualStyleBackColor = true;
-            this.rbFile.CheckedChanged += new System.EventHandler(this.rbFile_CheckedChanged);
             // 
             // btnBrowse
             // 
@@ -2158,8 +2141,6 @@ namespace TDMaker
         private System.Windows.Forms.ContextMenuStrip cmsApp;
         private System.Windows.Forms.ToolStripMenuItem cmsAppAbout;
         private System.Windows.Forms.TabPage tpMedia;
-        private System.Windows.Forms.RadioButton rbDir;
-        private System.Windows.Forms.RadioButton rbFile;
         private System.Windows.Forms.TextBox txtWebLink;
         private System.Windows.Forms.CheckBox chkWebLink;
         private System.Windows.Forms.GroupBox gbDVD;
@@ -2275,6 +2256,7 @@ namespace TDMaker
         private System.Windows.Forms.ListBox lbScreenshots;
         private System.Windows.Forms.TableLayoutPanel tlpScreenshotProps;
         private System.Windows.Forms.PropertyGrid pgScreenshot;
+        private System.Windows.Forms.ComboBox cboMediaType;
     }
 }
 
