@@ -8,12 +8,12 @@ namespace TDMakerLib
 {
     public enum MediaType
     {
+        [Description("Media disc e.g. DVD")]
+        MEDIA_DISC,
         [Description("Single media file")]
         SINGLE_MEDIA_FILE,
-        [Description("Part of media files collection")]
-        PART_OF_MEDIA_FILES_COLLECTION,
-        [Description("Media disc")]
-        MEDIA_DISC,
+        [Description("Media files collection")]
+        MEDIA_FILES_COLLECTION,
         [Description("Music audio album")]
         MUSIC_AUDIO_ALBUM
     }
@@ -40,5 +40,26 @@ namespace TDMakerLib
     {
         ANALYZE_MEDIA,
         CREATE_TORRENT
+    }
+
+    public enum ImageDestType2
+    {
+        [Description("ImageShack - www.imageshack.us")]
+        IMAGESHACK,
+        [Description("TinyPic - www.tinypic.com")]
+        TINYPIC,
+        [Description("ImageBin - www.imagebin.ca")]
+        IMAGEBIN,
+        [Description("Imgur - www.imgur.com")]
+        IMGUR,
+    }
+
+    public static class ImageDestType2Extensions
+    {
+        public static string ToDescriptionString(this ImageDestType2 val)
+        {
+            DescriptionAttribute[] attributes = (DescriptionAttribute[])val.GetType().GetField(val.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
+            return attributes.Length > 0 ? attributes[0].Description : string.Empty;
+        }
     }
 }

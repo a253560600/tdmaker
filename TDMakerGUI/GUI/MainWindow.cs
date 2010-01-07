@@ -41,10 +41,8 @@ namespace TDMaker
 
         private void MainWindow_DragDrop(object sender, DragEventArgs e)
         {
-
             string[] paths = (string[])e.Data.GetData(DataFormats.FileDrop, true);
             LoadMedia(paths);
-
         }
 
         private void MakeGUIReadyForAnalysis()
@@ -90,10 +88,9 @@ namespace TDMaker
             if (Engine.conf.AnalyzeAuto)
             {
                 WorkerTask wt = new WorkerTask(bwApp, TaskType.ANALYZE_MEDIA);
-                wt.FilePaths = ps;
+                wt.FileOrDirPaths = new List<string>(ps);
                 AnalyzeMedia(wt);
             }
-
         }
 
         /// <summary>
@@ -122,7 +119,7 @@ namespace TDMaker
         /// <returns>MediaInfo2 object</returns>
         private MediaInfo2 PrepareNewMedia(string p)
         {
-            MediaInfo2 mi = new MediaInfo2(p);
+            MediaInfo2 mi = new MediaInfo2(Engine.conf.MediaTypeLastUsed, p);
             mi.Extras = cboExtras.Text;
             if (cboSource.Text == "DVD")
             {
@@ -149,28 +146,49 @@ namespace TDMaker
         {
             List<MediaInfo2> miList = new List<MediaInfo2>();
 
-            foreach (string p in wt.FilePaths)
+            if (Engine.conf.MediaTypeLastUsed == MediaType.MEDIA_FILES_COLLECTION)
             {
-                if (File.Exists(p) || Directory.Exists(p))
+                wt.FileOrDirPaths.Sort();
+                string firstPath = wt.FileOrDirPaths[0];
+                MediaInfo2 mi = this.PrepareNewMedia(File.Exists(firstPath) ? Path.GetDirectoryName(wt.FileOrDirPaths[0]) : firstPath);
+                foreach (string p in wt.FileOrDirPaths)
                 {
-                    MakeGUIReadyForAnalysis();
-
-                    MediaInfo2 mi = this.PrepareNewMedia(p);
-                    if (wt.IsSingleTask() && !string.IsNullOrEmpty(txtTitle.Text))
+                    if (File.Exists(p))
                     {
-                        mi.SetTitle(txtTitle.Text);
+                        mi.FileCollection.Add(p);
                     }
+                }
+                miList.Add(mi);
+            }
+            else
+            {
+                foreach (string p in wt.FileOrDirPaths)
+                {
+                    if (File.Exists(p) || Directory.Exists(p))
+                    {
+                        MakeGUIReadyForAnalysis();
 
-                    // if it is a DVD, set the title to be name of the folder. 
-                    this.Text = string.Format("{0} - {1}", Loader.gAppInfo.GetApplicationTitle(Application.ProductName, Application.ProductVersion, McoreSystem.AppInfo.VersionDepth.MajorMinorBuild), Engine.GetMediaName(mi.Location));
+                        MediaInfo2 mi = this.PrepareNewMedia(p);
 
-                    miList.Add(mi);
+                        if (wt.IsSingleTask() && !string.IsNullOrEmpty(txtTitle.Text))
+                        {
+                            mi.SetTitle(txtTitle.Text);
+                            // if it is a DVD, set the title to be name of the folder. 
+                            this.Text = string.Format("{0} - {1}", Loader.gAppInfo.GetApplicationTitle(Application.ProductName, Application.ProductVersion, McoreSystem.AppInfo.VersionDepth.MajorMinorBuild), Engine.GetMediaName(mi.Location));
+                        }
+                        miList.Add(mi);
+                    }
                 }
             }
 
-            if (!bwApp.IsBusy)
+            wt.MediaFiles = miList;
+
+            if (Engine.conf.ShowMediaWizard)
             {
-                wt.MediaFiles = miList;
+
+            }
+            else if (!bwApp.IsBusy)
+            {
                 bwApp.RunWorkerAsync(wt);
             }
 
@@ -292,7 +310,7 @@ namespace TDMaker
 
             if (Engine.conf.UpdateCheckAuto)
             {
-                CheckUpdates(false);
+                CheckUpdates();
             }
 
             string[] args = Environment.GetCommandLineArgs();
@@ -358,7 +376,7 @@ namespace TDMaker
         {
             cboMediaType.Items.Clear();
             cboMediaType.Items.AddRange(typeof(MediaType).GetDescriptions());
-            cboMediaType.SelectedIndex = (int)Engine.conf.MediaTypeLastUsed; 
+            cboMediaType.SelectedIndex = (int)Engine.conf.MediaTypeLastUsed;
             if (Engine.conf.Sources.Count == 0)
             {
                 Engine.conf.Sources.AddRange(new string[] { "DVD-5", "DVD-9", "HDTV", "SDTV", "Blu-ray Disc", "HD DVD", "Laser Disc", "VHS" });
@@ -538,11 +556,9 @@ namespace TDMaker
             pop.FullPicture = Engine.conf.UploadScreenshot && Engine.conf.UseFullPicture;
             pop.PreformattedText = Engine.conf.PreText;
             pop.TemplatesMode = Engine.conf.TemplatesMode;
-
             ti.PublishOptions = pop;
 
             return CreatePublish(ti, pop);
-
         }
 
         private List<TorrentInfo> WorkerAnalyzeMedia(WorkerTask wt)
@@ -803,6 +819,7 @@ namespace TDMaker
                         TorrentInfo ti = e.UserState as TorrentInfo;
                         lbPublish.Items.Add(ti);
                         lbPublish.SelectedIndex = lbPublish.Items.Count - 1;
+                        rbTExt.Checked = Engine.conf.TemplatesMode;
                         break;
 
                     case ProgressType.UPDATE_PROGRESSBAR_MAX:
@@ -843,7 +860,7 @@ namespace TDMaker
                 files[i] = lbFiles.Items[i].ToString();
             }
             WorkerTask wt = new WorkerTask(bwApp, TaskType.ANALYZE_MEDIA);
-            wt.FilePaths = files;
+            wt.FileOrDirPaths = new List<string>(files);
             this.AnalyzeMedia(wt);
         }
 
@@ -1026,7 +1043,7 @@ namespace TDMaker
             FileSystem.OpenDirTemplates();
         }
 
-        private void CheckUpdates(bool manual)
+        private void CheckUpdates()
         {
             BackgroundWorker updateThread = new BackgroundWorker { WorkerReportsProgress = true };
             updateThread.DoWork += new DoWorkEventHandler(updateThread_DoWork);
@@ -1067,7 +1084,7 @@ namespace TDMaker
 
         private void tsmUpdatesCheck_Click(object sender, EventArgs e)
         {
-            CheckUpdates(true);
+            CheckUpdates();
         }
 
         private void cboScreenshotDest_SelectedIndexChanged(object sender, EventArgs e)
@@ -1285,7 +1302,7 @@ namespace TDMaker
 
         private void miHelpCheckUpdates_Click(object sender, EventArgs e)
         {
-            CheckUpdates(true);
+            CheckUpdates();
         }
 
         private void miFoldersScreenshots_Click(object sender, EventArgs e)

@@ -129,7 +129,7 @@ namespace TDMakerLib
             pattern = Regex.Replace(pattern, "%Bitrate%", mf.Bitrate, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%FileSize%", mf.FileSizeString, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Subtitles%", mf.Subtitles, RegexOptions.IgnoreCase);
-            pattern = Regex.Replace(pattern, "%Duration%", mf.DurationString, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Duration%", mf.DurationString2, RegexOptions.IgnoreCase);
 
             return pattern;
         }

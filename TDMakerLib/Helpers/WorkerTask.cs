@@ -10,17 +10,21 @@ namespace TDMakerLib
         public List<MediaInfo2> MediaFiles { get; set; }
         public BackgroundWorker MyWorker { get; private set; }
         public List<TorrentPacket> TorrentPackets { get; set; }
-        public string[] FilePaths { get; set; }
+        /// <summary>
+        /// A string array of File or Directory paths
+        /// </summary>
+        public List<string> FileOrDirPaths { get; set; }
 
         public WorkerTask(BackgroundWorker worker, TaskType task)
         {
             this.MyWorker = worker;
             this.Task = task;
+            this.FileOrDirPaths = new List<string>();
         }
 
         public bool IsSingleTask()
         {
-            return FilePaths.Length == 1;
+            return FileOrDirPaths.Count == 1;
         }
     }
 }

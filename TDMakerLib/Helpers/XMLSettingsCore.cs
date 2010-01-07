@@ -52,13 +52,13 @@ namespace TDMakerLib
         public bool bDiscMenu { get; set; }
         public string DiscMenu = "Intact";
         [Category("Input"), Editor(@"System.Windows.Forms.Design.StringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(System.Drawing.Design.UITypeEditor))]
-        public StringCollection DiscMenus {get; set;}
+        public StringCollection DiscMenus { get; set; }
 
         [BrowsableAttribute(false)]
         public bool bExtras { get; set; }
         public string Extra = "Intact";
         [Category("Input"), Editor(@"System.Windows.Forms.Design.StringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(System.Drawing.Design.UITypeEditor))]
-        public StringCollection Extras {get; set;}
+        public StringCollection Extras { get; set; }
 
         // Source Properties
         [BrowsableAttribute(false)]
@@ -66,7 +66,7 @@ namespace TDMakerLib
         [BrowsableAttribute(false)]
         public string Source = "DVD-9";
         [Category("Input"), Editor(@"System.Windows.Forms.Design.StringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(System.Drawing.Design.UITypeEditor))]
-        public StringCollection Sources  {get; set;}
+        public StringCollection Sources { get; set; }
 
         [BrowsableAttribute(false), DefaultValue(true)]
         public bool bTitle { get; set; }
@@ -97,16 +97,20 @@ namespace TDMakerLib
         public bool TemplatesMode { get; set; }
 
         // Tab 4.0 - Options - General
+        [Category("Options / General"), DefaultValue(false), Description("Show Media Wizard to simplify your tasks")]
+        public bool ShowMediaWizard { get; set; }
         [Category("Options / General"), DefaultValue(false), Description("Process media immediately after loading file or folder")]
         public bool AnalyzeAuto { get; set; }
         [Category("Options / General"), DefaultValue(true), Description("Automatically Check for Updates")]
         public bool UpdateCheckAuto { get; set; }
 
         // Tab 4.1 - Options - Publish Templates
-        [Category("Options / Publish"), DefaultValue(false), Description("Create Torrent")]
+        [Category("Options / Publish"), DefaultValue(false), Description("Write the torrent description to file")]
         public bool WritePublish { get; set; }
-        [Category("Options / Publish"), DefaultValue(true), Description("Font Size for Heading 2")]
+        [Category("Options / Publish"), DefaultValue(true), Description("Have larger text when [pre] tag is set")]
         public bool LargerPreText { get; set; }
+        [Category("Options / Publish"), DefaultValue(false), Description("Treat multiple file as a collection of files to create a single description and a torrent")]
+        public bool MultiFilesAsCollection { get; set; }
         [Category("Options / Publish / Font Sizes"), DefaultValue(5), Description("Font Size for Heading 1")]
         public int FontSizeHeading1 { get; set; }
         [Category("Options / Publish / Font Sizes"), DefaultValue(4), Description("Font Size for Heading 2")]
@@ -121,7 +125,7 @@ namespace TDMakerLib
         public int TemplateIndex { get; set; }
 
         [Category("Options / Proxy"), Description("Proxy Settings")]
-        public bool ProxyEnabled {get; set;}
+        public bool ProxyEnabled { get; set; }
         [Category("Options / Proxy"), Description("Proxy Settings")]
         public ProxyInfo ProxySettings = new ProxyInfo();
 
@@ -131,7 +135,7 @@ namespace TDMakerLib
         [EditorAttribute(typeof(ExeFileNameEditor), typeof(UITypeEditor))]
         [Category("MTN"), Description("MTN Argument")]
         public string MTNPath { get; set; }
-        public ImageDestType2 ImageUploader = ImageDestType2.IMAGESHACK ;
+        public ImageDestType2 ImageUploader = ImageDestType2.IMAGESHACK;
         [Category("MTN / Image Uploaders"), DefaultValue(""), Description("ImageShack registration code")]
         public string ImageShackRegCode { get; set; }
         [Category("MTN / Image Uploaders"), DefaultValue(false), Description("Use ImageShack registration code")]
@@ -159,7 +163,7 @@ namespace TDMakerLib
         [Category("Options / Paths"), Description("Browse to change where torrent files are saved")]
         [EditorAttribute(typeof(FolderNameEditor), typeof(UITypeEditor))]
         public string CustomTorrentsDir { get; set; }
-        
+
         public string txtMTN_T_Title = string.Empty;
 
         #region I/O Methods

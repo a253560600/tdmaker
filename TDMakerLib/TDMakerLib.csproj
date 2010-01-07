@@ -76,7 +76,6 @@
     <Compile Include="Global\FileSystem.cs" />
     <Compile Include="Helpers\AppInfo.cs" />
     <Compile Include="Helpers\BbCode.cs" />
-    <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Helpers\Options.cs" />
     <Compile Include="Helpers\Structs.cs" />
     <Compile Include="Helpers\TaskManager.cs" />

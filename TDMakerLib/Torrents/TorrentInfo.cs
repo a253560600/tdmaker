@@ -230,7 +230,7 @@ namespace TDMakerLib
             }
 
             StringBuilder sbPublish = new StringBuilder();
-            string info = this.MyMedia.ToString();
+            string info = this.MyMedia.ToStringMedia();
             sbPublish.Append(GetMediaInfo(info, options));
             sbPublish.AppendLine();
 

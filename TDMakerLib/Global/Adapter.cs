@@ -194,5 +194,12 @@ namespace TDMakerLib
 
             return sbMTNArgs.ToString();
         }
+
+        public static string GetDuration(double dura)
+        {
+            int mins = (int)dura/1000 / 60;
+            int secsLeft = (int)dura/1000 - mins * 60;
+            return string.Format("{0}:{1}", mins.ToString(), secsLeft.ToString("00"));
+        }
     }
 }
