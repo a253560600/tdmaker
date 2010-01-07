@@ -95,12 +95,15 @@ namespace TDMakerLib
                 {
                     filePaths.AddRange(Directory.GetFiles(Location, "*" + ext, SearchOption.AllDirectories));
                 }
-                List<FileInfo> listFileInfo = new List<FileInfo>(); 
-                foreach(string fp in filePaths)
+
+                filePaths.RemoveAll(x => x.ToLower().Contains("sample"));
+
+                List<FileInfo> listFileInfo = new List<FileInfo>();
+                foreach (string fp in filePaths)
                 {
-                	listFileInfo.Add(new FileInfo(fp));
+                    listFileInfo.Add(new FileInfo(fp));
                 }
-                
+
                 // Subtitles, Format: DVD Video using VTS_01_0.IFO
                 string[] ifo = Directory.GetFiles(Location, "VTS_01_0.IFO", SearchOption.AllDirectories);
                 if (ifo.Length == 1)
@@ -145,10 +148,11 @@ namespace TDMakerLib
                 }
 
                 // AFTER IDENTIFIED THE MEDIA TYPE
-                if (this.MediaType == MediaType.MEDIA_DISC) {
-                	listFileInfo.RemoveAll(x => x.Length < 1000000000);
+                if (this.MediaType == MediaType.MEDIA_DISC)
+                {
+                    listFileInfo.RemoveAll(x => x.Length < 1000000000);
                 }
-                
+
                 if (filePaths.Count > 0)
                 {
                     string maxPath = "";
@@ -157,21 +161,17 @@ namespace TDMakerLib
                     for (int i = 0; i < filePaths.Count; i++)
                     {
                         string f = filePaths[i];
+                        FileInfo fi = new FileInfo(f);
 
-                        if (!Path.GetFileName(f).ToLower().Contains("sample"))
+                        if (maxSize < fi.Length)
                         {
-                            FileInfo fi = new FileInfo(f);
-
-                            if (maxSize < fi.Length)
-                            {
-                                maxSize = fi.Length;
-                                maxPath = fi.FullName;
-                            }                            
+                            maxSize = fi.Length;
+                            maxPath = fi.FullName;
                         }
                     }
-                    foreach(FileInfo fi in listFileInfo)
+                    foreach (FileInfo fi in listFileInfo)
                     {
-                      this.AddMedia(new MediaFile(fi.FullName, this.Source));	
+                        this.AddMedia(new MediaFile(fi.FullName, this.Source));
                     }
 
                     this.Overall = new MediaFile(maxPath, this.Source);
@@ -336,7 +336,7 @@ namespace TDMakerLib
                     sbBody.AppendLine(mf.ToStringPublish());
                 }
             }
-
+           
             return sbBody.ToString();
         }
 

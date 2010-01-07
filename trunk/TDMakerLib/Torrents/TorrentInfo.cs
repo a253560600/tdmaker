@@ -222,18 +222,18 @@ namespace TDMakerLib
         /// <param name="ti"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public string CreatePublish(PublishOptionsPacket options)
+        public string CreatePublishInternal(PublishOptionsPacket options)
         {
+            foreach (MediaFile mf in this.MyMedia.MediaFiles)
+            {
+                mf.PublishOptions = options;
+            }
+
             StringBuilder sbPublish = new StringBuilder();
             string info = this.MyMedia.ToString();
-
             sbPublish.Append(GetMediaInfo(info, options));
             sbPublish.AppendLine();
-            // TODO only one screenshot for DVD 
-            foreach(MediaFile mf in this.MyMedia.MediaFiles)
-            {
-            	sbPublish.Append(GetScreenshotString(mf, options));            	
-            }
+
             return sbPublish.ToString();
         }
 
@@ -259,23 +259,6 @@ namespace TDMakerLib
             return sbPublish.ToString();
 
         }
-
-        public string GetScreenshotString(MediaFile mf, PublishOptionsPacket options)
-        {
-            StringBuilder sbPublish = new StringBuilder();
-            BbCode bb = new BbCode();
-
-            if (!string.IsNullOrEmpty(mf.Screenshot.Full) && options.FullPicture)
-            {
-                sbPublish.AppendLine(bb.Img(mf.Screenshot.Full));
-            }
-            else if (!string.IsNullOrEmpty(mf.Screenshot.LinkedThumbnail))
-            {
-                sbPublish.AppendLine(mf.Screenshot.LinkedThumbnail);
-            }
-
-            return sbPublish.ToString();
-        }
         
         /// <summary>
         /// Default Publish String representation of a Torrent
@@ -283,7 +266,7 @@ namespace TDMakerLib
         /// <returns>Publish String</returns>
         public string ToStringPublish()
         {
-            return CreatePublish(this.PublishOptions);
+            return CreatePublishInternal(this.PublishOptions);
         }
         
 		public override string ToString()

@@ -654,7 +654,7 @@ namespace TDMaker
             }
             else
             {
-                pt = ti.CreatePublish(pop);
+                pt = ti.CreatePublishInternal(pop);
             }
 
             return pt;
@@ -1201,7 +1201,7 @@ namespace TDMaker
         private void rbTInt_CheckedChanged(object sender, EventArgs e)
         {
             cboQuickTemplate.Enabled = rbTExt.Checked;
-            UpdatePublish();
+            createPublishUser();
         }
 
         private void rbTExt_CheckedChanged(object sender, EventArgs e)
