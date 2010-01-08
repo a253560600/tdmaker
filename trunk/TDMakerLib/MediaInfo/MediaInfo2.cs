@@ -259,7 +259,7 @@ namespace TDMakerLib
                 {
                     AddMedia(new MediaFile(p, this.Source));
                 }
-                this.Title = Path.GetDirectoryName(FileCollection[0]);
+                this.Title = Path.GetFileName(Path.GetDirectoryName(FileCollection[0]));
             }
             else
             {
@@ -424,35 +424,101 @@ namespace TDMakerLib
         public string ToStringMediaList()
         {
             StringBuilder sbBody = new StringBuilder();
+            
             List<string> listFileNames = new List<string>();
+            List<string> listDurations = new List<string>();
+            List<string> listResolutions = new List<string>();
+            List<string> listFileSizes = new List<string>();
+            
+            string totalSize = GetTotalSize().ToString("0.00") + " MiB";
+            string totalDura = GetTotalDurationString();
+                        
             foreach (string p in FileCollection)
             {
                 listFileNames.Add(Path.GetFileName(p));
             }
-            int width = listFileNames.Max(x => x.Length);
+            int widthFileName = listFileNames.Max(x => x.Length);
 
-
+            foreach(MediaFile mf in MediaFiles)
+            {
+            	listDurations.Add(Adapter.GetDurationString(mf.Duration));
+            	listResolutions.Add(mf.Video.Resolution);
+            	listFileSizes.Add(mf.FileSizeString);
+            	
+            }
+            int widthTracks = this.MediaFiles.Count.ToString().Length+widthFileName+1;
+            int widthDura = System.Math.Max(totalDura.Length, listDurations.Max(x => x.Length));
+            int widthRes = listResolutions.Max(x => x.Length);
+            int widthFileSizes = System.Math.Max(totalSize.Length, listFileSizes.Max(x => x.Length));
+            
+            string sampleLine = GetMediaListLine(this.MediaFiles[0],widthFileName, widthDura, widthRes, widthFileSizes);
+            
+            sbBody.Append("Track Number / Title".PadRight(widthTracks));
+            sbBody.Append(" | ");
+            sbBody.Append("mm:ss".PadLeft(widthDura));
+            sbBody.Append(" | ");
+            sbBody.Append("Res".PadRight(widthRes));
+            sbBody.Append(" | ");
+            sbBody.Append("Size".PadRight(widthFileSizes));
+            sbBody.AppendLine();
+            
+            sbBody.AppendLine("-".PadRight(sampleLine.Length, '-'));            
             foreach (MediaFile mf in this.MediaFiles)
             {
-                sbBody.Append(mf.Index.ToString().PadLeft(this.MediaFiles.Count.ToString().Length, '0'));
-                sbBody.Append(" ");
-                sbBody.Append(mf.FileName.PadRight(width, ' '));
-                sbBody.Append(" | ");
-                sbBody.Append(Adapter.GetDuration(mf.Duration));
-                sbBody.Append(" | ");
-                sbBody.Append(mf.Video.Resolution);
-                sbBody.Append(" | ");
-                sbBody.Append(mf.FileSizeString);
-                sbBody.AppendLine();
-            }
+            	sbBody.AppendLine(GetMediaListLine(mf, widthFileName, widthDura, widthRes, widthFileSizes));
+            }            
+            sbBody.AppendLine("-".PadRight(sampleLine.Length, '-'));
+            sbBody.Append("Total:".PadRight(widthTracks));
+            sbBody.Append(" | ");
+            sbBody.Append(totalDura);
+            sbBody.Append(" | ");
+            sbBody.Append(" ".PadRight(widthRes)); 
+            sbBody.Append(" | ");
+            sbBody.Append(totalSize);
+            sbBody.AppendLine();
+            
             return sbBody.ToString();
+        }
+        
+        public string GetMediaListLine(MediaFile mf, int widthFileName, int widthDura, int widthRes, int widthFileSizes)
+        {
+        	StringBuilder sbBody = new StringBuilder();
+            sbBody.Append(mf.Index.ToString().PadLeft(this.MediaFiles.Count.ToString().Length, '0'));
+            sbBody.Append(" ");
+            sbBody.Append(mf.FileName.PadRight(widthFileName, ' '));
+            sbBody.Append(" | ");
+            sbBody.Append(Adapter.GetDurationString(mf.Duration).PadLeft(widthDura, ' '));
+            sbBody.Append(" | ");
+            sbBody.Append(mf.Video.Resolution.PadLeft(widthRes, ' '));
+            sbBody.Append(" | ");
+            sbBody.Append(mf.FileSizeString.PadLeft(widthFileSizes, ' '));      	
+            return sbBody.ToString();
+        }
+        
+        public double GetTotalSize()
+        {
+        	return MediaFiles.Sum(x => x.FileSize)/1024/1024;
+        }
+        
+        /// <summary>
+        /// Return total duration in seconds
+        /// </summary>
+        /// <returns></returns>
+        public double GetTotalDuration()
+        {
+        	return MediaFiles.Sum(x => x.Duration);
+        }
+        
+        public string GetTotalDurationString()
+        {
+        	return Adapter.GetDurationString(GetTotalDuration());
         }
 
         public override string ToString()
         {
             return Path.GetFileName(Location);
         }
-
+        
     }
 
 }
