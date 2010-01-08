@@ -10,7 +10,6 @@ namespace TDMakerLib
 {
     public static class Engine
     {
-        public const string PROGRAM_FILES_APP_NAME = "TDMaker";
         private static string mProductName = Application.ProductName;
         public static McoreSystem.AppInfo mAppInfo = new McoreSystem.AppInfo(mProductName, Application.ProductVersion, McoreSystem.AppInfo.SoftwareCycle.Beta, false);
         public static bool Portable { get; private set; }
@@ -41,12 +40,12 @@ namespace TDMakerLib
         public static bool IsUNIX { get; private set; }
 
         private static string[] AppDirs;
-       
+
         public static string DefaultXMLFilePath { get; private set; }
 
         public static XMLSettingsCore conf;
-        public static XMLSettingsMtnProfiles mtnProfileMgr; 
-        
+        public static XMLSettingsMtnProfiles mtnProfileMgr;
+
         private static bool RunConfig = false;
 
         public static bool DetectUnix()
@@ -277,6 +276,11 @@ namespace TDMakerLib
             DefaultXMLFilePath = Path.Combine(SettingsDir, XMLSettingsCore.XMLFileName);
         }
 
+        public static string GetProductName()
+        {
+            return mAppInfo.GetApplicationTitle(McoreSystem.AppInfo.VersionDepth.MajorMinorBuild);
+        }
+
         public static bool Load()
         {
             FileSystem.AppendDebug("Operating System: " + Environment.OSVersion.VersionString);
@@ -320,6 +324,7 @@ namespace TDMakerLib
                 conf = XMLSettingsCore.Read();
                 mtnProfileMgr = XMLSettingsMtnProfiles.Read();
             }
+            mAppInfo.AppName = mProductName;
             return configResult == DialogResult.OK;
         }
 
