@@ -134,7 +134,7 @@ namespace TDMakerLib
                 }
             }
         }
-        
+
         private ImageFileManager UploadScreenshot(string mediaFilePath)
         {
             string ssPath = Path.Combine(Engine.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + Engine.mtnProfileMgr.GetMtnProfileActive().o_OutputSuffix);
@@ -232,9 +232,8 @@ namespace TDMakerLib
             StringBuilder sbPublish = new StringBuilder();
             string info = this.MyMedia.ToStringMedia();
             sbPublish.Append(GetMediaInfo(info, options));
-            sbPublish.AppendLine();
 
-            return sbPublish.ToString();
+            return sbPublish.ToString().Trim();
         }
 
         public string GetMediaInfo(string p, PublishOptionsPacket options)
@@ -259,7 +258,7 @@ namespace TDMakerLib
             return sbPublish.ToString();
 
         }
-        
+
         /// <summary>
         /// Default Publish String representation of a Torrent
         /// </summary>
@@ -268,11 +267,11 @@ namespace TDMakerLib
         {
             return CreatePublishInternal(this.PublishOptions);
         }
-        
-		public override string ToString()
-		{
-			return Path.GetFileName(this.MyMedia.Location);
-		}
-		
+
+        public override string ToString()
+        {
+            return Path.GetFileName(this.MyMedia.Location);
+        }
+
     }
 }
