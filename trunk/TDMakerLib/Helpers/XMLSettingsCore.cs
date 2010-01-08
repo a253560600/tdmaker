@@ -39,8 +39,7 @@ namespace TDMakerLib
         // Tab 1 - Input
 
         // Disc Properties
-        [BrowsableAttribute(false)]
-        public MediaType MediaTypeLastUsed { get; set; }
+        public MediaType MediaTypeLastUsed = MediaType.MEDIA_FILES_COLLECTION;
 
         [BrowsableAttribute(false)]
         public bool bAuthoring { get; set; }

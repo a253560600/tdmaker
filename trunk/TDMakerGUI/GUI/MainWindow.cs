@@ -119,7 +119,12 @@ namespace TDMaker
         /// <returns>MediaInfo2 object</returns>
         private MediaInfo2 PrepareNewMedia(string p)
         {
-            MediaInfo2 mi = new MediaInfo2(Engine.conf.MediaTypeLastUsed, p);
+            MediaType mt = Engine.conf.MediaTypeLastUsed;
+            if (mt != MediaType.MEDIA_FILES_COLLECTION)
+            {
+                mt = File.Exists(p) ? MediaType.SINGLE_MEDIA_FILE : MediaType.MEDIA_DISC;
+            }
+            MediaInfo2 mi = new MediaInfo2(mt, p);
             mi.Extras = cboExtras.Text;
             if (cboSource.Text == "DVD")
             {
@@ -174,7 +179,7 @@ namespace TDMaker
                         {
                             mi.SetTitle(txtTitle.Text);
                             // if it is a DVD, set the title to be name of the folder. 
-                            this.Text = string.Format("{0} - {1}", Loader.gAppInfo.GetApplicationTitle(Application.ProductName, Application.ProductVersion, McoreSystem.AppInfo.VersionDepth.MajorMinorBuild), Engine.GetMediaName(mi.Location));
+                            this.Text = string.Format("{0} - {1}", Engine.GetProductName(), Engine.GetMediaName(mi.Location));
                         }
                         miList.Add(mi);
                     }
@@ -206,7 +211,7 @@ namespace TDMaker
 
             if (!File.Exists(Engine.conf.MTNPath))
             {
-                Engine.conf.MTNPath = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), Engine.PROGRAM_FILES_APP_NAME), mtnExe);
+                Engine.conf.MTNPath = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), Application.ProductName), mtnExe);
             }
 
             if (!File.Exists(Engine.conf.MTNPath))
@@ -302,9 +307,7 @@ namespace TDMaker
 
             sBar.Text = string.Format("Ready.");
 
-            this.Text = Loader.gAppInfo.GetApplicationTitle(Application.ProductName, Application.ProductVersion,
-                McoreSystem.AppInfo.VersionDepth.MajorMinorBuild) +
-                " - Drag and Drop a Movie file or folder...";
+            this.Text = Engine.GetProductName() + " - Drag and Drop a Movie file or folder...";
 
             UpdateGuiControls();
 
