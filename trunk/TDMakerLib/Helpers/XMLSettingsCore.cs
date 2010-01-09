@@ -28,6 +28,7 @@ namespace TDMakerLib
             DiscMenus = new StringCollection();
             Extras = new StringCollection();
             Sources = new StringCollection();
+            SupportedFileTypesVideo = new StringCollection();
         }
 
         // Misc
@@ -67,6 +68,12 @@ namespace TDMakerLib
         [Category("Input"), Editor(@"System.Windows.Forms.Design.StringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(System.Drawing.Design.UITypeEditor))]
         public StringCollection Sources { get; set; }
 
+        [Category("Input"),
+        Editor(@"System.Windows.Forms.Design.StringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            typeof(System.Drawing.Design.UITypeEditor)),
+        Description("Supported file types by MediaInfo and MTN. Add more file types only if you are absolutely sure both MediaInfo and MTN can handle those.")]
+        public StringCollection SupportedFileTypesVideo { get; set; }
+
         [BrowsableAttribute(false), DefaultValue(true)]
         public bool bTitle { get; set; }
         [BrowsableAttribute(false)]
@@ -78,10 +85,8 @@ namespace TDMakerLib
          */
 
         // Tab 3 - Publish 
-        [Category("Screenshots"), DefaultValue(true), Description("Capture Screenshots using MTN")]
-        public bool TakeScreenshot { get; set; }
-        [Category("Screenshots"), DefaultValue(true), Description("Upload screenshot.")]
-        public bool UploadScreenshot { get; set; }
+        [Category("Screenshots"), DefaultValue(false), Description("Upload screenshot.")]
+        public bool UploadScreenshots { get; set; }
         [Category("Screenshots"), DefaultValue(true), Description("Use full image URL in the torrent description.")]
         public bool UseFullPicture { get; set; }
         [Category("Screenshots"), DefaultValue(true), Description(@"Keep Screenshots in Pictures\MTN")]
@@ -96,7 +101,7 @@ namespace TDMakerLib
         public bool TemplatesMode { get; set; }
 
         // Tab 4.0 - Options - General
-        [Category("Options / General"), DefaultValue(false), Description("Show Media Wizard to simplify your tasks")]
+        [Category("Options / General"), DefaultValue(true), Description("Show Media Wizard to simplify your tasks")]
         public bool ShowMediaWizard { get; set; }
         [Category("Options / General"), DefaultValue(false), Description("Process media immediately after loading file or folder")]
         public bool AnalyzeAuto { get; set; }
@@ -108,8 +113,6 @@ namespace TDMakerLib
         public bool WritePublish { get; set; }
         [Category("Options / Publish"), DefaultValue(true), Description("Have larger text when [pre] tag is set")]
         public bool LargerPreText { get; set; }
-        [Category("Options / Publish"), DefaultValue(false), Description("Treat multiple file as a collection of files to create a single description and a torrent")]
-        public bool MultiFilesAsCollection { get; set; }
         [Category("Options / Publish / Font Sizes"), DefaultValue(5), Description("Font Size for Heading 1")]
         public int FontSizeHeading1 { get; set; }
         [Category("Options / Publish / Font Sizes"), DefaultValue(4), Description("Font Size for Heading 2")]
@@ -145,8 +148,8 @@ namespace TDMakerLib
         public int TrackerGroupActive { get; set; }
         [Category("Torrent Creator"), DefaultValue(false), Description("Create Torrent")]
         public bool TorrentCreateAuto { get; set; }
-        [Category("Torrent Creator"), DefaultValue(false), Description("Create torrents in the same folders as the media file")]
-        public bool TorrentFolderDefault { get; set; }
+        [Category("Torrent Creator"), DefaultValue(LocationType.ParentFolder), Description("Create torrents in the same folders as the media file, default torrent folder or in a custom folder")]
+        public LocationType TorrentLocationChoice { get; set; }
         [Category("Torrent Creator"), DefaultValue(false), Description("Save torrent files in sub-folders organized by tracker namer")]
         public bool TorrentsOrganize { get; set; }
         public List<TrackerGroup> TrackerGroups = new List<TrackerGroup>();

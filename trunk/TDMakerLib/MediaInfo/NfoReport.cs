@@ -9,7 +9,7 @@ namespace TDMakerLib.MediaInfo
 {
     class NfoReport
     {
-        private string[] mAudioTypes = { ".mp3", ".flac" };
+        private string[] mAudioTypes = {".m4a", ".wma", ".mp3", ".flac" };
 
         private StringBuilder msbAudio = new StringBuilder();
         private StringBuilder msbAlbumInfo = new StringBuilder();
