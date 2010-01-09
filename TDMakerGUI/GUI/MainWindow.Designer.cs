@@ -109,6 +109,7 @@ namespace TDMaker
             this.chkScreenshotUpload = new System.Windows.Forms.CheckBox();
             this.cboScreenshotDest = new System.Windows.Forms.ComboBox();
             this.tpPublish = new System.Windows.Forms.TabPage();
+            this.cboPublishType = new System.Windows.Forms.ComboBox();
             this.btnTemplatesRewrite = new System.Windows.Forms.Button();
             this.cboTemplate = new System.Windows.Forms.ComboBox();
             this.gbTemplatesInternal = new System.Windows.Forms.GroupBox();
@@ -197,7 +198,8 @@ namespace TDMaker
             this.miHelpCheckUpdates = new System.Windows.Forms.ToolStripMenuItem();
             this.miHelpVersionHistory = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.cboPublishType = new System.Windows.Forms.ComboBox();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiPreferKnownFolders = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.tcMain.SuspendLayout();
             this.tpMedia.SuspendLayout();
@@ -451,6 +453,7 @@ namespace TDMaker
             // 
             // cboDiscMenu
             // 
+            this.cboDiscMenu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboDiscMenu.FormattingEnabled = true;
             this.cboDiscMenu.Location = new System.Drawing.Point(121, 58);
             this.cboDiscMenu.Name = "cboDiscMenu";
@@ -473,6 +476,7 @@ namespace TDMaker
             // 
             // cboExtras
             // 
+            this.cboExtras.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboExtras.FormattingEnabled = true;
             this.cboExtras.Location = new System.Drawing.Point(121, 86);
             this.cboExtras.Name = "cboExtras";
@@ -495,6 +499,7 @@ namespace TDMaker
             // 
             // cboAuthoring
             // 
+            this.cboAuthoring.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboAuthoring.FormattingEnabled = true;
             this.cboAuthoring.Location = new System.Drawing.Point(121, 29);
             this.cboAuthoring.Name = "cboAuthoring";
@@ -1147,6 +1152,16 @@ namespace TDMaker
             this.tpPublish.TabIndex = 2;
             this.tpPublish.Text = "Publish Templates";
             this.tpPublish.UseVisualStyleBackColor = true;
+            // 
+            // cboPublishType
+            // 
+            this.cboPublishType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboPublishType.FormattingEnabled = true;
+            this.cboPublishType.Location = new System.Drawing.Point(160, 13);
+            this.cboPublishType.Name = "cboPublishType";
+            this.cboPublishType.Size = new System.Drawing.Size(195, 21);
+            this.cboPublishType.TabIndex = 14;
+            this.cboPublishType.SelectedIndexChanged += new System.EventHandler(this.cboPublishType_SelectedIndexChanged_1);
             // 
             // btnTemplatesRewrite
             // 
@@ -1968,7 +1983,9 @@ namespace TDMaker
             this.toolStripSeparator4,
             this.miFoldersLogs,
             this.miFoldersSettings,
-            this.miFoldersTemplates});
+            this.miFoldersTemplates,
+            this.toolStripSeparator5,
+            this.tsmiPreferKnownFolders});
             this.foldersToolStripMenuItem1.Name = "foldersToolStripMenuItem1";
             this.foldersToolStripMenuItem1.Size = new System.Drawing.Size(54, 20);
             this.foldersToolStripMenuItem1.Text = "&Folders";
@@ -1976,28 +1993,28 @@ namespace TDMaker
             // miFoldersScreenshots
             // 
             this.miFoldersScreenshots.Name = "miFoldersScreenshots";
-            this.miFoldersScreenshots.Size = new System.Drawing.Size(156, 22);
+            this.miFoldersScreenshots.Size = new System.Drawing.Size(188, 22);
             this.miFoldersScreenshots.Text = "&Screenshots...";
             this.miFoldersScreenshots.Click += new System.EventHandler(this.miFoldersScreenshots_Click);
             // 
             // miFoldersTorrents
             // 
             this.miFoldersTorrents.Name = "miFoldersTorrents";
-            this.miFoldersTorrents.Size = new System.Drawing.Size(156, 22);
+            this.miFoldersTorrents.Size = new System.Drawing.Size(188, 22);
             this.miFoldersTorrents.Text = "&Torrents...";
             this.miFoldersTorrents.Click += new System.EventHandler(this.miFoldersTorrents_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(153, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(185, 6);
             // 
             // miFoldersLogs
             // 
             this.miFoldersLogs.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miFoldersLogsDebug});
             this.miFoldersLogs.Name = "miFoldersLogs";
-            this.miFoldersLogs.Size = new System.Drawing.Size(156, 22);
+            this.miFoldersLogs.Size = new System.Drawing.Size(188, 22);
             this.miFoldersLogs.Text = "&Logs...";
             this.miFoldersLogs.Click += new System.EventHandler(this.miFoldersLogs_Click);
             // 
@@ -2011,14 +2028,14 @@ namespace TDMaker
             // miFoldersSettings
             // 
             this.miFoldersSettings.Name = "miFoldersSettings";
-            this.miFoldersSettings.Size = new System.Drawing.Size(156, 22);
+            this.miFoldersSettings.Size = new System.Drawing.Size(188, 22);
             this.miFoldersSettings.Text = "&Settings...";
             this.miFoldersSettings.Click += new System.EventHandler(this.miFoldersSettings_Click);
             // 
             // miFoldersTemplates
             // 
             this.miFoldersTemplates.Name = "miFoldersTemplates";
-            this.miFoldersTemplates.Size = new System.Drawing.Size(156, 22);
+            this.miFoldersTemplates.Size = new System.Drawing.Size(188, 22);
             this.miFoldersTemplates.Text = "&Templates...";
             this.miFoldersTemplates.Click += new System.EventHandler(this.miFoldersTemplates_Click);
             // 
@@ -2053,15 +2070,18 @@ namespace TDMaker
             this.tsmiAbout.Text = "&About...";
             this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
             // 
-            // cboPublishType
+            // toolStripSeparator5
             // 
-            this.cboPublishType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboPublishType.FormattingEnabled = true;
-            this.cboPublishType.Location = new System.Drawing.Point(160, 13);
-            this.cboPublishType.Name = "cboPublishType";
-            this.cboPublishType.Size = new System.Drawing.Size(195, 21);
-            this.cboPublishType.TabIndex = 14;
-            this.cboPublishType.SelectedIndexChanged += new System.EventHandler(this.cboPublishType_SelectedIndexChanged_1);
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(185, 6);
+            // 
+            // tsmiPreferKnownFolders
+            // 
+            this.tsmiPreferKnownFolders.CheckOnClick = true;
+            this.tsmiPreferKnownFolders.Name = "tsmiPreferKnownFolders";
+            this.tsmiPreferKnownFolders.Size = new System.Drawing.Size(188, 22);
+            this.tsmiPreferKnownFolders.Text = "Prefer &Known Folders";
+            this.tsmiPreferKnownFolders.Click += new System.EventHandler(this.tsmiPreferKnownFolders_Click);
             // 
             // MainWindow
             // 
@@ -2328,6 +2348,8 @@ namespace TDMaker
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.ComboBox cboPublishTypeQuick;
         private System.Windows.Forms.ComboBox cboPublishType;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem tsmiPreferKnownFolders;
     }
 }
 
