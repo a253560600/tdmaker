@@ -9,11 +9,11 @@ namespace TDMakerLib
     public enum MediaType
     {
         [Description("Media disc e.g. DVD")]
-        MEDIA_DISC,
+        MediaDisc,
         [Description("Single media file")]
-        SINGLE_MEDIA_FILE,
+        MediaIndiv,
         [Description("Media files collection")]
-        MEDIA_FILES_COLLECTION,
+        MediaCollection,
         [Description("Music audio album")]
         MUSIC_AUDIO_ALBUM
     }

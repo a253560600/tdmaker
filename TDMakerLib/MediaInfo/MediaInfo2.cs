@@ -6,6 +6,7 @@ using TDMakerLib;
 using TDMakerLib.MediaInfo;
 using System.Linq;
 using System.Diagnostics;
+using System;
 
 namespace TDMakerLib
 {
@@ -122,7 +123,7 @@ namespace TDMakerLib
                 string[] ifo = Directory.GetFiles(Location, "VTS_01_0.IFO", SearchOption.AllDirectories);
                 if (ifo.Length == 1) // CHECK IF A DVD
                 {
-                    this.MediaTypeChoice = MediaType.MEDIA_DISC;
+                    this.MediaTypeChoice = MediaType.MediaDisc;
                     MediaInfoLib.MediaInfo mi = new MediaInfoLib.MediaInfo();
                     mi.Open(ifo[0]);
 
@@ -159,6 +160,9 @@ namespace TDMakerLib
 
                     // close ifo file
                     mi.Close();
+
+                    // AFTER IDENTIFIED THE MEDIA TYPE IS A DVD
+                    listFileInfo.RemoveAll(x => x.Length < 1000000000);
                 }
 
                 // Set Media Type
@@ -175,12 +179,6 @@ namespace TDMakerLib
                 if (allAudio)
                 {
                     this.MediaTypeChoice = MediaType.MUSIC_AUDIO_ALBUM;
-                }
-
-                // AFTER IDENTIFIED THE MEDIA TYPE
-                if (this.MediaTypeChoice == MediaType.MEDIA_DISC)
-                {
-                    listFileInfo.RemoveAll(x => x.Length < 1000000000);
                 }
 
                 if (FileCollection.Count > 0)
@@ -217,7 +215,7 @@ namespace TDMakerLib
 
                 // DVD Video
                 // Combined Duration and File Size
-                if (MediaTypeChoice == MediaType.MEDIA_DISC)
+                if (MediaTypeChoice == MediaType.MediaDisc)
                 {
                     string[] vobFiles = Directory.GetFiles(Location, "*.vob", SearchOption.AllDirectories);
                     if (vobFiles.Length > 0)
@@ -283,13 +281,20 @@ namespace TDMakerLib
         {
             switch (MediaTypeChoice)
             {
-                case MediaType.SINGLE_MEDIA_FILE:
-                    ReadMediaFile();
+                case MediaType.MediaIndiv:
+                    if (File.Exists(Location))
+                    {
+                        ReadMediaFile();
+                    }
+                    else
+                    {
+                        ReadDirectory();
+                    }
                     break;
-                case MediaType.MEDIA_FILES_COLLECTION:
+                case MediaType.MediaCollection:
                     ReadMediaFileCollection();
                     break;
-                case MediaType.MEDIA_DISC:
+                case MediaType.MediaDisc:
                 case MediaType.MUSIC_AUDIO_ALBUM:
                     ReadDirectory();
                     break;
@@ -347,7 +352,7 @@ namespace TDMakerLib
                 sbTitleInfo.AppendLine(string.Format("[u]Source:[/u] {0}", this.Source));
             }
 
-            if (MediaTypeChoice == MediaType.MEDIA_DISC)
+            if (MediaTypeChoice == MediaType.MediaDisc)
             {
                 // Authoring
                 if (Engine.conf.bAuthoring && !string.IsNullOrEmpty(this.Authoring))
@@ -376,7 +381,7 @@ namespace TDMakerLib
                 sbBody.AppendLine();
             }
 
-            if (this.MediaFiles.Count > 1 && this.MediaTypeChoice == MediaType.MEDIA_DISC)
+            if (this.MediaFiles.Count > 1 && this.MediaTypeChoice == MediaType.MediaDisc)
             // is a DVD so need Overall Info only
             {
                 sbBody.AppendLine(this.Overall.ToStringPublish());
@@ -384,7 +389,7 @@ namespace TDMakerLib
             else
             {
                 // If the loaded folder is not a Disc but individual ripped files or a collection of files
-                if (MediaTypeChoice == MediaType.MEDIA_FILES_COLLECTION)
+                if (MediaTypeChoice == MediaType.MediaCollection)
                 {
                     sbBody.Append(ToStringMediaList());
                 }
@@ -432,6 +437,7 @@ namespace TDMakerLib
 
         public string ToStringMediaList()
         {
+            string titleTracks = "Track Number / Title";
             StringBuilder sbBody = new StringBuilder();
 
             List<string> listFileNames = new List<string>();
@@ -446,29 +452,29 @@ namespace TDMakerLib
             {
                 listFileNames.Add(Path.GetFileName(p));
             }
-            int widthFileName = listFileNames.Max(x => x.Length);
+            int widthFileName = Math.Max(titleTracks.Length, listFileNames.Max(x => x.Length));
 
             foreach (MediaFile mf in MediaFiles)
             {
                 listDurations.Add(Adapter.GetDurationString(mf.Duration));
                 listResolutions.Add(mf.Video.Resolution);
                 listFileSizes.Add(mf.FileSizeString);
-
             }
-            int widthTracks = this.MediaFiles.Count.ToString().Length + widthFileName + 1;
-            int widthDura = System.Math.Max(totalDura.Length, listDurations.Max(x => x.Length));
+
+            int widthTracks = Math.Max(titleTracks.Length, this.MediaFiles.Count.ToString().Length + widthFileName + 1);
+            int widthDura = Math.Max(totalDura.Length, listDurations.Max(x => x.Length));
             int widthRes = listResolutions.Max(x => x.Length);
-            int widthFileSizes = System.Math.Max(totalSize.Length, listFileSizes.Max(x => x.Length));
+            int widthFileSizes = Math.Max(totalSize.Length, listFileSizes.Max(x => x.Length));
 
             string sampleLine = GetMediaListLine(this.MediaFiles[0], widthFileName, widthDura, widthRes, widthFileSizes);
 
-            sbBody.Append("Track Number / Title".PadRight(widthTracks));
+            sbBody.Append(titleTracks.PadRight(widthTracks));
             sbBody.Append(" | ");
             sbBody.Append("mm:ss".PadLeft(widthDura));
             sbBody.Append(" | ");
-            sbBody.Append("Res".PadRight(widthRes));
+            sbBody.Append("Res".PadLeft(widthRes));
             sbBody.Append(" | ");
-            sbBody.Append("Size".PadRight(widthFileSizes));
+            sbBody.Append("Size".PadLeft(widthFileSizes));
             sbBody.AppendLine();
 
             sbBody.AppendLine("-".PadRight(sampleLine.Length, '-'));

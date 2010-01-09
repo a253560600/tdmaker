@@ -121,10 +121,6 @@ namespace TDMaker
         private MediaInfo2 PrepareNewMedia(WorkerTask wt, string p)
         {
             MediaType mt = wt.MediaTypeChoice;
-            if (mt != MediaType.MEDIA_FILES_COLLECTION)
-            {
-                mt = File.Exists(p) ? MediaType.SINGLE_MEDIA_FILE : MediaType.MEDIA_DISC;
-            }
             MediaInfo2 mi = new MediaInfo2(mt, p);
             mi.Extras = cboExtras.Text;
             if (cboSource.Text == "DVD")
@@ -152,12 +148,21 @@ namespace TDMaker
         {
             List<MediaInfo2> miList = new List<MediaInfo2>();
 
-            // fill previous settings
-            wt.TorrentCreateAuto = Engine.conf.TorrentCreateAuto;
-            wt.UploadScreenshot = Engine.conf.UploadScreenshots;
-            wt.MediaTypeChoice = Engine.conf.MediaTypeLastUsed;
+            MediaWizardOptions mwo = Engine.GetMediaType(wt.FileOrDirPaths);
+            wt.MediaTypeChoice = mwo.MediaTypeChoice;
+            if (mwo.PromptShown)
+            {
+                wt.TorrentCreateAuto = mwo.CreateTorrent;
+                wt.UploadScreenshot = mwo.ScreenshotsInclude;
+            }
+            else
+            {
+                // fill previous settings
+                wt.TorrentCreateAuto = Engine.conf.TorrentCreateAuto;
+                wt.UploadScreenshot = Engine.conf.ScreenshotsCreate;
+            }
 
-            if (Engine.conf.ShowMediaWizard)
+            if (!mwo.PromptShown && Engine.conf.ShowMediaWizardAlways)
             {
                 MediaWizard mw = new MediaWizard(wt);
                 if (mw.ShowDialog() == DialogResult.OK)
@@ -168,7 +173,7 @@ namespace TDMaker
                 }
             }
 
-            if (wt.MediaTypeChoice == MediaType.MEDIA_FILES_COLLECTION)
+            if (wt.MediaTypeChoice == MediaType.MediaCollection)
             {
                 wt.FileOrDirPaths.Sort();
                 string firstPath = wt.FileOrDirPaths[0];
@@ -313,7 +318,7 @@ namespace TDMaker
 
             sBar.Text = string.Format("Ready.");
 
-            this.Text = Engine.GetProductName() + " - Drag and Drop a Movie file or folder...";
+            this.Text = Engine.GetProductName();
 
             UpdateGuiControls();
 
@@ -380,9 +385,6 @@ namespace TDMaker
 
         private void SettingsReadInput()
         {
-            cboMediaType.Items.Clear();
-            cboMediaType.Items.AddRange(typeof(MediaType).GetDescriptions());
-            cboMediaType.SelectedIndex = (int)Engine.conf.MediaTypeLastUsed;
             if (Engine.conf.Sources.Count == 0)
             {
                 Engine.conf.Sources.AddRange(new string[] { "DVD-5", "DVD-9", "HDTV", "SDTV", "Blu-ray Disc", "HD DVD", "Laser Disc", "VHS" });
@@ -451,7 +453,7 @@ namespace TDMaker
 
         private void SettingsReadScreenshots()
         {
-            chkScreenshotUpload.Checked = Engine.conf.UploadScreenshots;
+            chkScreenshotUpload.Checked = Engine.conf.ScreenshotsCreate;
         }
 
         private void SettingsReadOptions()
@@ -696,8 +698,6 @@ namespace TDMaker
 
         private void UpdateGuiControls()
         {
-            gbDVD.Enabled = Engine.conf.MediaTypeLastUsed == MediaType.MEDIA_DISC; ;
-
             btnCreateTorrent.Enabled = !bwApp.IsBusy && lbFiles.Items.Count > 0;
             btnAnalyze.Enabled = !bwApp.IsBusy && lbFiles.Items.Count > 0;
 
@@ -779,18 +779,7 @@ namespace TDMaker
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            switch (Engine.conf.MediaTypeLastUsed)
-            {
-                case MediaType.SINGLE_MEDIA_FILE:
-                    OpenFile();
-                    break;
-                case MediaType.MEDIA_DISC:
-                    OpenFolder();
-                    break;
-                default:
-                    OpenFolder();
-                    break;
-            }
+            OpenFile();
         }
 
         private void CopyPublish()
@@ -828,7 +817,7 @@ namespace TDMaker
 
                     case ProgressType.REPORT_MEDIAINFO_SUMMARY:
                         MediaInfo2 mi = (MediaInfo2)e.UserState;
-                        gbDVD.Enabled = (mi.MediaTypeChoice == MediaType.MEDIA_DISC);
+                        gbDVD.Enabled = (mi.MediaTypeChoice == MediaType.MediaDisc);
                         foreach (MediaFile mf in mi.MediaFiles)
                         {
                             lbMediaInfo.Items.Add(mf);
@@ -841,6 +830,7 @@ namespace TDMaker
                         lbPublish.Items.Add(ti);
                         lbPublish.SelectedIndex = lbPublish.Items.Count - 1;
                         rbTExt.Checked = Engine.conf.TemplatesMode;
+                        chkQuickFullPicture.Checked = Engine.conf.UseFullPicture;
                         break;
 
                     case ProgressType.UPDATE_PROGRESSBAR_MAX:
@@ -869,7 +859,7 @@ namespace TDMaker
         private void chkScreenshotUpload_CheckedChanged(object sender, EventArgs e)
         {
             chkUploadFullScreenshot.Enabled = chkScreenshotUpload.Checked;
-            Engine.conf.UploadScreenshots = chkScreenshotUpload.Checked;
+            Engine.conf.ScreenshotsCreate = chkScreenshotUpload.Checked;
         }
 
         private void btnAnalyze_Click(object sender, EventArgs e)
@@ -1020,11 +1010,6 @@ namespace TDMaker
         private void chkQuickFullPicture_CheckedChanged(object sender, EventArgs e)
         {
             createPublishUser();
-        }
-
-        private void rbFile_CheckedChanged(object sender, EventArgs e)
-        {
-            gbDVD.Enabled = Engine.conf.MediaTypeLastUsed != MediaType.SINGLE_MEDIA_FILE;
         }
 
         private void txtPublish_KeyPress(object sender, KeyPressEventArgs e)
@@ -1715,7 +1700,6 @@ namespace TDMaker
 
         private void cboMediaType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Engine.conf.MediaTypeLastUsed = (MediaType)cboMediaType.SelectedIndex;
             UpdateGuiControls();
         }
 
@@ -1748,6 +1732,16 @@ namespace TDMaker
                 txtScreenshotsLoc.Text = dlg.SelectedPath;
                 Engine.conf.CustomScreenshotsDir = txtScreenshotsLoc.Text;
             }
+        }
+
+        private void btnBrowseDir_Click(object sender, EventArgs e)
+        {
+            OpenFolder();
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            lbFiles.Items.Clear();
         }
     }
 }
