@@ -9,28 +9,23 @@ namespace TDMakerLib
     {
         public MediaWizardOptions Options = new MediaWizardOptions();
 
-        public MediaWizard(List<string> FileOrDirPaths)
+        private MediaWizard()
         {
             InitializeComponent();
-            PrepareUserActionMsg(FileOrDirPaths);
             chkCreateTorrent.Checked = Engine.conf.TorrentCreateAuto;
-            chkScreenshotsCreate.Checked = Engine.conf.ScreenshotsCreate;
+            chkScreenshotsCreate.Checked = Engine.conf.ScreenshotsUpload;
+        }
+
+        public MediaWizard(List<string> FileOrDirPaths)
+            : this()
+        {
+            PrepareUserActionMsg(FileOrDirPaths);
         }
 
         public MediaWizard(WorkerTask wt)
+            : this()
         {
-            InitializeComponent();
             PrepareUserActionMsg(wt.FileOrDirPaths);
-            PrepareUI();
-        }
-
-        private void PrepareUI()
-        {
-            switch (this.Options.MediaTypeChoice)
-            {
-                case MediaType.MediaCollection:
-                    break;
-            }
         }
 
         private void PrepareUserActionMsg(List<string> myFilesOrDirs)
@@ -39,6 +34,8 @@ namespace TDMakerLib
             {
                 lblUserActionMsg.Text = "You are about to analyze a single file...";
                 this.Options.MediaTypeChoice = MediaType.MediaIndiv;
+                rbFilesAsIndiv.Checked = true;
+                gbQuestion.Enabled = false;
             }
             else
             {

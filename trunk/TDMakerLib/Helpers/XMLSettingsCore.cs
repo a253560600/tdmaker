@@ -31,12 +31,6 @@ namespace TDMakerLib
             SupportedFileTypesVideo = new StringCollection();
         }
 
-        // Misc
-        [BrowsableAttribute(false)]
-        public bool RunOnce { get; set; }
-        [BrowsableAttribute(false)]
-        public bool UpgradeSettings { get; set; }
-
         // Tab 1 - Input
 
         // Disc Properties
@@ -79,8 +73,8 @@ namespace TDMakerLib
          */
 
         // Tab 3 - Publish 
-        [Category("Screenshots"), DefaultValue(false), Description("Upload screenshot.")]
-        public bool ScreenshotsCreate { get; set; }
+        [Category("Screenshots"), DefaultValue(true), Description("Create screenshots using MTN and upload")]
+        public bool ScreenshotsUpload { get; set; }
         [Category("Screenshots"), DefaultValue(true), Description("Use full image URL in the torrent description.")]
         public bool UseFullPicture { get; set; }
         [Category("Screenshots"), DefaultValue(LocationType.KnownFolder), Description("Create screenshots in the same folders as the media file, default torrent folder or in a custom folder")]

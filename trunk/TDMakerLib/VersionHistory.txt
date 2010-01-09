@@ -1,5 +1,6 @@
 Version 2.0 - 20100115
 
+2.00.0.1 Screenshots were not uploaded when location was set to Known Folder [Issue 8]
 2.00.0.0 Core changes to create TDMaker Dynamic Links Library
 1.19.5.0 Option to include MediaInfo information in Publish instead of templates [notatoad]
 1.19.4.0 Support for %EncodedDate% and %Video_DisplayAspectRatio% syntax [coj]

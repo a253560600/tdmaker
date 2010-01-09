@@ -71,7 +71,7 @@ namespace TDMakerLib
                     Engine.conf.MTNPath = assemblyMTN;
                 }
 
-                mf.Screenshot.MTNArgs = Adapter.GetMtnArg(Path.GetDirectoryName(mf.FilePath), Engine.mtnProfileMgr.GetMtnProfileActive());
+                mf.Screenshot.MTNArgs = Adapter.GetMtnArg(Engine.GetScreenShotsDir(mf.FilePath), Engine.mtnProfileMgr.GetMtnProfileActive());
                 string args = string.Format("{0} \"{1}\"", mf.Screenshot.MTNArgs, mediaFilePath);
 
                 Process p = new Process();
@@ -228,7 +228,7 @@ namespace TDMakerLib
             {
                 sbMediaInfo.AppendLine(BbCode.Bold(mf.FileName));
                 sbMediaInfo.AppendLine();
-                sbMediaInfo.AppendLine(mf.Summary);
+                sbMediaInfo.AppendLine(mf.Summary.Trim());
             }
             sbPublish.AppendLine(GetMediaInfo(sbMediaInfo.ToString(), options));
             foreach (MediaFile mf in MyMedia.MediaFiles)
