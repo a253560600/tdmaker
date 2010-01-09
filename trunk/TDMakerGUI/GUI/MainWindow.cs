@@ -523,7 +523,7 @@ namespace TDMaker
             {
                 lbMtnProfiles.Items.Add(mtnProfile);
             }
-            lbMtnProfiles.SelectedIndex = Engine.mtnProfileMgr.MtnProfileActive;
+            lbMtnProfiles.SelectedIndex = Math.Min(Engine.mtnProfileMgr.MtnProfiles.Count - 1, Engine.mtnProfileMgr.MtnProfileActive);
 
             this.chkCreateTorrent.Checked = Engine.conf.TorrentCreateAuto;
             this.chkTorrentOrganize.Checked = Engine.conf.TorrentsOrganize;
