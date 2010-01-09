@@ -6,4 +6,5 @@
           [u]Duration:[/u] %Duration%
            [u]Bitrate:[/u] %Bitrate%
          [u]Subtitles:[/u] %Subtitles%
+           [u]Encoder:[/u] %EncodedApplication%        
 [/size]

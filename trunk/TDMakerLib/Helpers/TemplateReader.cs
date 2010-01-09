@@ -126,10 +126,11 @@ namespace TDMakerLib
         private string GetGeneralInfo(string pattern, MediaFile mf)
         {
             pattern = Regex.Replace(pattern, "%Format%", mf.Format, RegexOptions.IgnoreCase);
-            pattern = Regex.Replace(pattern, "%Bitrate%", mf.Bitrate, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Bitrate%", mf.BitrateOverall, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%FileSize%", mf.FileSizeString, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Subtitles%", mf.Subtitles, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Duration%", mf.DurationString2, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%EncodedApplication%", mf.EncodedApplication, RegexOptions.IgnoreCase);
 
             return pattern;
         }
@@ -145,7 +146,7 @@ namespace TDMakerLib
             pattern = Regex.Replace(pattern, "%Video_BitsPerPixelFrame%", mf.Video.BitsPerPixelXFrame, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Video_Width%", mf.Video.Width, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Video_Height%", mf.Video.Height, RegexOptions.IgnoreCase);
-
+            pattern = Regex.Replace(pattern, "%Video_EncodedLibrarySettings%", mf.Video.EncodedLibrarySettings, RegexOptions.IgnoreCase);
             return pattern;
         }
 
@@ -257,12 +258,13 @@ namespace TDMakerLib
 
                 pattern = GetStringFromAnyPattern(pattern, mi.Overall);
                 pattern = GetStyles(pattern); // apply any formatting
-                foreach(MediaFile mf in mi.MediaFiles)
+                foreach (MediaFile mf in mi.MediaFiles)
                 {
-                	if (mf.Screenshot != null) {
-                		pattern = GetScreenshotInfo(pattern, mf);
-                		break;
-                	}
+                    if (mf.Screenshot != null)
+                    {
+                        pattern = GetScreenshotInfo(pattern, mf);
+                        break;
+                    }
                 }
             }
             return pattern;
