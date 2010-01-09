@@ -19,6 +19,7 @@ namespace TDMakerLib
         public bool HasVideo { get; set; }
 
         // General 
+        public string EncodedDate { get; set; }
         public string EncodedApplication { get; set; }
         public string BitrateOverall { get; set; }
         /// <summary>
@@ -103,7 +104,6 @@ namespace TDMakerLib
                     Debug.WriteLine("Loading MediaInfo.dll");
                     mMI = new MediaInfoLib.MediaInfo();
                     Debug.WriteLine("Loaded MediaInfo.dll");
-
                 }
                 catch (Exception ex)
                 {
@@ -157,6 +157,7 @@ namespace TDMakerLib
 
                     this.BitrateOverall = mMI.Get(StreamKind.General, 0, "OverallBitRate/String");
                     this.EncodedApplication = mMI.Get(StreamKind.General, 0, "Encoded_Application");
+                    this.EncodedDate = mMI.Get(StreamKind.General, 0, "Encoded_Date");
 
                     if (string.IsNullOrEmpty(this.Subtitles))
                     {
@@ -214,6 +215,8 @@ namespace TDMakerLib
                         this.Video.Codec = mMI.Get(StreamKind.Video, 0, "Encoded_Library");
                     }
                     this.Video.EncodedLibrarySettings = mMI.Get(StreamKind.Video, 0, "Encoded_Library_Settings");
+                    this.Video.DisplayAspectRatio = mMI.Get(StreamKind.Video, 0, "DisplayAspectRatio/String");
+                    
                     if (string.IsNullOrEmpty(this.Video.Codec))
                         this.Video.Codec = mMI.Get(StreamKind.Video, 0, "CodecID/Hint");
                     if (string.IsNullOrEmpty(this.Video.Codec))
@@ -311,9 +314,6 @@ namespace TDMakerLib
                 Engine.conf.FontSizeBody + Engine.conf.FontSizeIncr :
                 Engine.conf.FontSizeBody);
 
-
-            BbCode bb = new BbCode();
-
             StringBuilder sbBody = new StringBuilder();
 
             //*********************
@@ -321,7 +321,7 @@ namespace TDMakerLib
             //*********************   
             StringBuilder sbGeneral = new StringBuilder();
 
-            sbBody.AppendLine(bb.Size(fontSizeHeading3, bb.BoldItalic("General:")));
+            sbBody.AppendLine(BbCode.Size(fontSizeHeading3, BbCode.BoldItalic("General:")));
             sbBody.AppendLine();
 
             // Format
@@ -345,13 +345,12 @@ namespace TDMakerLib
                 sbGeneral.AppendLine(string.Format("         [u]Subtitles:[/u] {0}", this.Subtitles));
             }
 
+            sbBody.AppendLine(BbCode.Size(fontSizeBody, sbGeneral.ToString()));
+
             if (this.Screenshot != null)
             {
-                sbGeneral.AppendLine();
-                sbGeneral.AppendLine(this.GetScreenshotString());
+                sbBody.AppendLine(this.GetScreenshotString());
             }
-
-            sbBody.Append(bb.Size(fontSizeBody, sbGeneral.ToString()));
 
             //*********************
             //* Video
@@ -359,7 +358,7 @@ namespace TDMakerLib
             VideoInfo vi = this.Video;
 
             sbBody.AppendLine();
-            sbBody.AppendLine(bb.Size(fontSizeHeading3, bb.BoldItalic("Video:")));
+            sbBody.AppendLine(BbCode.Size(fontSizeHeading3, BbCode.BoldItalic("Video:")));
             sbBody.AppendLine();
 
             StringBuilder sbVideo = new StringBuilder();
@@ -391,7 +390,7 @@ namespace TDMakerLib
                 vi.Width,
                 vi.Height));
 
-            sbBody.Append(bb.Size(fontSizeBody, sbVideo.ToString()));
+            sbBody.Append(BbCode.Size(fontSizeBody, sbVideo.ToString()));
 
             //*********************
             //* Audio
@@ -404,7 +403,7 @@ namespace TDMakerLib
                 AudioInfo ai = this.Audio[a];
 
                 sbBody.AppendLine();
-                sbBody.AppendLine(string.Format(bb.Size(fontSizeHeading3, bb.BoldItalic("Audio #{0}:")), a + 1));
+                sbBody.AppendLine(string.Format(BbCode.Size(fontSizeHeading3, BbCode.BoldItalic("Audio #{0}:")), a + 1));
                 sbBody.AppendLine();
 
                 StringBuilder sbAudio = new StringBuilder();
@@ -429,7 +428,7 @@ namespace TDMakerLib
                 if (!string.IsNullOrEmpty(ai.Resolution))
                     sbAudio.AppendLine(string.Format(("        [u]Resolution:[/u] {0}"), ai.Resolution));
 
-                sbBody.Append(bb.Size(fontSizeBody, sbAudio.ToString()));
+                sbBody.Append(BbCode.Size(fontSizeBody, sbAudio.ToString()));
                 sbBody.AppendLine();
             }
 
@@ -439,11 +438,10 @@ namespace TDMakerLib
         public string GetScreenshotString()
         {
             StringBuilder sbPublish = new StringBuilder();
-            BbCode bb = new BbCode();
 
             if (!string.IsNullOrEmpty(this.Screenshot.Full) && PublishOptions.FullPicture)
             {
-                sbPublish.AppendLine(bb.Img(this.Screenshot.Full));
+                sbPublish.AppendLine(BbCode.Img(this.Screenshot.Full));
             }
             else if (!string.IsNullOrEmpty(this.Screenshot.LinkedThumbnail))
             {
@@ -482,6 +480,7 @@ namespace TDMakerLib
         public string ScanType { get; set; }
         public string Width { get; set; }
         public string BitsPerPixelXFrame { get; set; }
+        public string DisplayAspectRatio { get; set; }
         public string EncodedLibrarySettings { get; set; }
     }
 }

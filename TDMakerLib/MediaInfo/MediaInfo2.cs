@@ -332,15 +332,12 @@ namespace TDMakerLib
                 Engine.conf.FontSizeBody + Engine.conf.FontSizeIncr :
                 Engine.conf.FontSizeBody);
 
-
-            BbCode bb = new BbCode();
-
             StringBuilder sbBody = new StringBuilder();
 
             // Show Title
             if (Engine.conf.bTitle)
             {
-                sbBody.AppendLine(bb.Size(fontSizeHeading1, bb.Bold(this.Title)));
+                sbBody.AppendLine(BbCode.Size(fontSizeHeading1, BbCode.Bold(this.Title)));
                 sbBody.AppendLine();
             }
 
@@ -377,7 +374,7 @@ namespace TDMakerLib
 
             if (!string.IsNullOrEmpty(sbTitleInfo.ToString()))
             {
-                sbBody.AppendLine(bb.Size(fontSizeBody, sbTitleInfo.ToString()));
+                sbBody.AppendLine(BbCode.Size(fontSizeBody, sbTitleInfo.ToString()));
                 sbBody.AppendLine();
             }
 
@@ -397,7 +394,7 @@ namespace TDMakerLib
                 {
                     foreach (MediaFile mf in this.MediaFiles)
                     {
-                        sbBody.AppendLine(bb.Size(fontSizeHeading2, bb.BoldItalic(mf.FileName)));
+                        sbBody.AppendLine(BbCode.Size(fontSizeHeading2, BbCode.BoldItalic(mf.FileName)));
                         sbBody.AppendLine();
                         sbBody.AppendLine(mf.ToStringPublish());
                     }

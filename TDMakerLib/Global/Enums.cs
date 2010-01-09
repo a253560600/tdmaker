@@ -28,6 +28,16 @@ namespace TDMakerLib
         CustomFolder,
     }
 
+    public enum PublishInfoType
+    {
+        [Description("Internal Template")]
+        InternalTemplate,
+        [Description("External Template")]
+        ExternalTemplate,
+        [Description("MediaInfo")]
+        MediaInfo
+    }
+
     public enum TakeScreenshotsType
     {
         NONE,

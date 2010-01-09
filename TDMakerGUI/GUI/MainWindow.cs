@@ -65,7 +65,7 @@ namespace TDMaker
                 return false;
             }
 
-            return false;
+            return true;
         }
 
         private void LoadMedia(string[] ps)
@@ -155,7 +155,7 @@ namespace TDMaker
             mi.WebLink = txtWebLink.Text;
             mi.TorrentPacketInfo = new TorrentPacket(GetTracker(), p);
 
-            if (Engine.conf.TemplatesMode)
+            if (Engine.conf.PublishInfoTypeChoice == PublishInfoType.ExternalTemplate)
             {
                 mi.TemplateLocation = Path.Combine(Engine.TemplatesDir, cboTemplate.Text);
             }
@@ -388,6 +388,7 @@ namespace TDMaker
         {
             SettingsReadInput();
             SettingsReadMedia();
+            SettingsReadPublish();
             SettingsReadScreenshots();
             SettingsReadOptions();
 
@@ -456,9 +457,6 @@ namespace TDMaker
 
         private void SettingsReadMedia()
         {
-            rbTExt.Checked = chkTemplatesMode.Checked;
-            rbTInt.Checked = !rbTExt.Checked;
-
             chkAuthoring.Checked = Engine.conf.bAuthoring;
             cboAuthoring.Text = Engine.conf.AuthoringMode;
 
@@ -477,9 +475,19 @@ namespace TDMaker
             chkScreenshotUpload.Checked = Engine.conf.ScreenshotsCreate;
         }
 
+        private void SettingsReadPublish()
+        {
+            if (cboPublishTypeQuick.Items.Count == 0)
+            {
+                cboPublishTypeQuick.Items.AddRange(typeof(PublishInfoType).GetDescriptions());
+                cboPublishType.Items.AddRange(typeof(PublishInfoType).GetDescriptions());
+            }
+            cboPublishType.SelectedIndex = (int)Engine.conf.PublishInfoTypeChoice;
+            cboPublishTypeQuick.SelectedIndex = (int)Engine.conf.PublishInfoTypeChoice;
+        }
+
         private void SettingsReadOptions()
         {
-            chkTemplatesMode.Checked = Engine.conf.TemplatesMode;
             cboTemplate.SelectedIndex = Engine.conf.TemplateIndex;
             chkUploadFullScreenshot.Checked = Engine.conf.UseFullPicture;
 
@@ -597,7 +605,7 @@ namespace TDMaker
             pop.AlignCenter = Engine.conf.AlignCenter;
             pop.FullPicture = ti.MyMedia.UploadScreenshots && Engine.conf.UseFullPicture;
             pop.PreformattedText = Engine.conf.PreText;
-            pop.TemplatesMode = Engine.conf.TemplatesMode;
+            pop.PublishInfoTypeChoice = Engine.conf.PublishInfoTypeChoice;
             ti.PublishOptions = pop;
 
             return CreatePublish(ti, pop);
@@ -698,20 +706,24 @@ namespace TDMaker
         {
             string pt = "";
 
-            if (pop.TemplatesMode)
+            switch (pop.PublishInfoTypeChoice)
             {
-                if (Directory.Exists(pop.TemplateLocation))
-                {
-                    pt = ti.CreatePublish(pop, new TemplateReader(pop.TemplateLocation, ti));
-                }
-                else if (Directory.Exists(ti.MyMedia.TemplateLocation))
-                {
-                    pt = ti.CreatePublish(pop, new TemplateReader(ti.MyMedia.TemplateLocation, ti));
-                }
-            }
-            else
-            {
-                pt = ti.CreatePublishInternal(pop);
+                case PublishInfoType.ExternalTemplate:
+                    if (Directory.Exists(pop.TemplateLocation))
+                    {
+                        pt = ti.CreatePublish(pop, new TemplateReader(pop.TemplateLocation, ti));
+                    }
+                    else if (Directory.Exists(ti.MyMedia.TemplateLocation))
+                    {
+                        pt = ti.CreatePublish(pop, new TemplateReader(ti.MyMedia.TemplateLocation, ti));
+                    }
+                    break;
+                case PublishInfoType.InternalTemplate:
+                    pt = ti.CreatePublishInternal(pop);
+                    break;
+                case PublishInfoType.MediaInfo:
+                    pt = ti.CreatePublishMediaInfo(pop);
+                    break;
             }
 
             return pt;
@@ -850,7 +862,7 @@ namespace TDMaker
                         TorrentInfo ti = e.UserState as TorrentInfo;
                         lbPublish.Items.Add(ti);
                         lbPublish.SelectedIndex = lbPublish.Items.Count - 1;
-                        rbTExt.Checked = Engine.conf.TemplatesMode;
+                        cboPublishTypeQuick.SelectedIndex = (int)Engine.conf.PublishInfoTypeChoice;
                         chkQuickFullPicture.Checked = Engine.conf.UseFullPicture;
                         break;
 
@@ -1011,7 +1023,7 @@ namespace TDMaker
                 pop.FullPicture = chkQuickFullPicture.Checked;
                 pop.PreformattedText = chkQuickPre.Checked;
 
-                pop.TemplatesMode = rbTExt.Checked;
+                pop.PublishInfoTypeChoice = (PublishInfoType)cboPublishTypeQuick.SelectedIndex;
                 pop.TemplateLocation = Path.Combine(Engine.TemplatesDir, cboQuickTemplate.Text);
 
                 txtPublish.Text = CreatePublish(GetTorrentInfo(), pop);
@@ -1045,8 +1057,7 @@ namespace TDMaker
 
         private void chkTemplatesMode_CheckedChanged(object sender, EventArgs e)
         {
-            gbTemplatesInternal.Enabled = !chkTemplatesMode.Checked;
-            Engine.conf.TemplatesMode = chkTemplatesMode.Checked;
+            chkTemplatesMode.CheckState = CheckState.Indeterminate;
         }
 
         private void btnMTNHelp_Click(object sender, EventArgs e)
@@ -1239,17 +1250,6 @@ namespace TDMaker
                     txtPublish.ForeColor = System.Drawing.SystemColors.WindowText;
                 }
             }
-        }
-
-        private void rbTInt_CheckedChanged(object sender, EventArgs e)
-        {
-            cboQuickTemplate.Enabled = rbTExt.Checked;
-            createPublishUser();
-        }
-
-        private void rbTExt_CheckedChanged(object sender, EventArgs e)
-        {
-            createPublishUser();
         }
 
         private void WriteMediaInfo(string info)
@@ -1763,6 +1763,19 @@ namespace TDMaker
         private void cboSource_SelectedIndexChanged(object sender, EventArgs e)
         {
             // we do nothing
+        }
+
+        private void cboPublishType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            createPublishUser();
+            cboQuickTemplate.Enabled = (PublishInfoType)cboPublishTypeQuick.SelectedIndex == PublishInfoType.ExternalTemplate;
+        }
+
+        private void cboPublishType_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            Engine.conf.PublishInfoTypeChoice = (PublishInfoType)cboPublishType.SelectedIndex;
+            cboTemplate.Enabled = Engine.conf.PublishInfoTypeChoice == PublishInfoType.ExternalTemplate;
+            gbTemplatesInternal.Enabled = Engine.conf.PublishInfoTypeChoice == PublishInfoType.InternalTemplate;
         }
     }
 }

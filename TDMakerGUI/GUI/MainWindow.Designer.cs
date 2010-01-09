@@ -78,8 +78,7 @@ namespace TDMaker
             this.chkQuickPre = new System.Windows.Forms.CheckBox();
             this.chkQuickAlignCenter = new System.Windows.Forms.CheckBox();
             this.chkQuickFullPicture = new System.Windows.Forms.CheckBox();
-            this.rbTInt = new System.Windows.Forms.RadioButton();
-            this.rbTExt = new System.Windows.Forms.RadioButton();
+            this.cboPublishTypeQuick = new System.Windows.Forms.ComboBox();
             this.cboQuickTemplate = new System.Windows.Forms.ComboBox();
             this.txtPublish = new System.Windows.Forms.TextBox();
             this.lbPublish = new System.Windows.Forms.ListBox();
@@ -198,6 +197,7 @@ namespace TDMaker
             this.miHelpCheckUpdates = new System.Windows.Forms.ToolStripMenuItem();
             this.miHelpVersionHistory = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.cboPublishType = new System.Windows.Forms.ComboBox();
             this.statusStrip1.SuspendLayout();
             this.tcMain.SuspendLayout();
             this.tpMedia.SuspendLayout();
@@ -735,15 +735,14 @@ namespace TDMaker
             this.gbQuickPublish.Size = new System.Drawing.Size(137, 433);
             this.gbQuickPublish.TabIndex = 1;
             this.gbQuickPublish.TabStop = false;
-            this.gbQuickPublish.Text = "Options";
+            this.gbQuickPublish.Text = "Quick Options";
             // 
             // flpPublishConfig
             // 
             this.flpPublishConfig.Controls.Add(this.chkQuickPre);
             this.flpPublishConfig.Controls.Add(this.chkQuickAlignCenter);
             this.flpPublishConfig.Controls.Add(this.chkQuickFullPicture);
-            this.flpPublishConfig.Controls.Add(this.rbTInt);
-            this.flpPublishConfig.Controls.Add(this.rbTExt);
+            this.flpPublishConfig.Controls.Add(this.cboPublishTypeQuick);
             this.flpPublishConfig.Controls.Add(this.cboQuickTemplate);
             this.flpPublishConfig.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flpPublishConfig.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
@@ -785,29 +784,15 @@ namespace TDMaker
             this.chkQuickFullPicture.UseVisualStyleBackColor = true;
             this.chkQuickFullPicture.CheckedChanged += new System.EventHandler(this.chkQuickFullPicture_CheckedChanged);
             // 
-            // rbTInt
+            // cboPublishTypeQuick
             // 
-            this.rbTInt.AutoSize = true;
-            this.rbTInt.Location = new System.Drawing.Point(3, 72);
-            this.rbTInt.Name = "rbTInt";
-            this.rbTInt.Size = new System.Drawing.Size(107, 17);
-            this.rbTInt.TabIndex = 5;
-            this.rbTInt.TabStop = true;
-            this.rbTInt.Text = "&Internal Template";
-            this.rbTInt.UseVisualStyleBackColor = true;
-            this.rbTInt.CheckedChanged += new System.EventHandler(this.rbTInt_CheckedChanged);
-            // 
-            // rbTExt
-            // 
-            this.rbTExt.AutoSize = true;
-            this.rbTExt.Location = new System.Drawing.Point(3, 95);
-            this.rbTExt.Name = "rbTExt";
-            this.rbTExt.Size = new System.Drawing.Size(110, 17);
-            this.rbTExt.TabIndex = 6;
-            this.rbTExt.TabStop = true;
-            this.rbTExt.Text = "E&xternal Template";
-            this.rbTExt.UseVisualStyleBackColor = true;
-            this.rbTExt.CheckedChanged += new System.EventHandler(this.rbTExt_CheckedChanged);
+            this.cboPublishTypeQuick.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboPublishTypeQuick.FormattingEnabled = true;
+            this.cboPublishTypeQuick.Location = new System.Drawing.Point(3, 72);
+            this.cboPublishTypeQuick.Name = "cboPublishTypeQuick";
+            this.cboPublishTypeQuick.Size = new System.Drawing.Size(121, 21);
+            this.cboPublishTypeQuick.TabIndex = 7;
+            this.cboPublishTypeQuick.SelectedIndexChanged += new System.EventHandler(this.cboPublishType_SelectedIndexChanged);
             // 
             // cboQuickTemplate
             // 
@@ -815,9 +800,9 @@ namespace TDMaker
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.cboQuickTemplate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboQuickTemplate.FormattingEnabled = true;
-            this.cboQuickTemplate.Location = new System.Drawing.Point(3, 118);
+            this.cboQuickTemplate.Location = new System.Drawing.Point(3, 99);
             this.cboQuickTemplate.Name = "cboQuickTemplate";
-            this.cboQuickTemplate.Size = new System.Drawing.Size(110, 21);
+            this.cboQuickTemplate.Size = new System.Drawing.Size(121, 21);
             this.cboQuickTemplate.TabIndex = 3;
             this.cboQuickTemplate.SelectedIndexChanged += new System.EventHandler(this.cboQuickTemplate_SelectedIndexChanged);
             // 
@@ -1148,6 +1133,7 @@ namespace TDMaker
             // 
             // tpPublish
             // 
+            this.tpPublish.Controls.Add(this.cboPublishType);
             this.tpPublish.Controls.Add(this.btnTemplatesRewrite);
             this.tpPublish.Controls.Add(this.cboTemplate);
             this.tpPublish.Controls.Add(this.gbTemplatesInternal);
@@ -1177,7 +1163,7 @@ namespace TDMaker
             // 
             this.cboTemplate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTemplate.FormattingEnabled = true;
-            this.cboTemplate.Location = new System.Drawing.Point(252, 14);
+            this.cboTemplate.Location = new System.Drawing.Point(360, 13);
             this.cboTemplate.Name = "cboTemplate";
             this.cboTemplate.Size = new System.Drawing.Size(195, 21);
             this.cboTemplate.TabIndex = 9;
@@ -1390,11 +1376,13 @@ namespace TDMaker
             // chkTemplatesMode
             // 
             this.chkTemplatesMode.AutoSize = true;
+            this.chkTemplatesMode.Checked = true;
+            this.chkTemplatesMode.CheckState = System.Windows.Forms.CheckState.Indeterminate;
             this.chkTemplatesMode.Location = new System.Drawing.Point(16, 16);
             this.chkTemplatesMode.Name = "chkTemplatesMode";
-            this.chkTemplatesMode.Size = new System.Drawing.Size(230, 17);
+            this.chkTemplatesMode.Size = new System.Drawing.Size(139, 17);
             this.chkTemplatesMode.TabIndex = 0;
-            this.chkTemplatesMode.Text = "Create description using External &Template:";
+            this.chkTemplatesMode.Text = "Create description using";
             this.chkTemplatesMode.UseVisualStyleBackColor = true;
             this.chkTemplatesMode.CheckedChanged += new System.EventHandler(this.chkTemplatesMode_CheckedChanged);
             // 
@@ -2065,6 +2053,16 @@ namespace TDMaker
             this.tsmiAbout.Text = "&About...";
             this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
             // 
+            // cboPublishType
+            // 
+            this.cboPublishType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboPublishType.FormattingEnabled = true;
+            this.cboPublishType.Location = new System.Drawing.Point(160, 13);
+            this.cboPublishType.Name = "cboPublishType";
+            this.cboPublishType.Size = new System.Drawing.Size(195, 21);
+            this.cboPublishType.TabIndex = 14;
+            this.cboPublishType.SelectedIndexChanged += new System.EventHandler(this.cboPublishType_SelectedIndexChanged_1);
+            // 
             // MainWindow
             // 
             this.AcceptButton = this.btnBrowse;
@@ -2269,8 +2267,6 @@ namespace TDMaker
         private System.Windows.Forms.Button btnRefreshTrackers;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem tsmSettingsDir;
-        private System.Windows.Forms.RadioButton rbTExt;
-        private System.Windows.Forms.RadioButton rbTInt;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem miFileOpenFolder;
@@ -2330,6 +2326,8 @@ namespace TDMaker
         private System.Windows.Forms.Button btnScreenshotsLocBrowse;
         private System.Windows.Forms.Button btnBrowseDir;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.ComboBox cboPublishTypeQuick;
+        private System.Windows.Forms.ComboBox cboPublishType;
     }
 }
 
