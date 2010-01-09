@@ -18,7 +18,9 @@ namespace TDMakerLib
         public bool HasAudio { get; set; }
         public bool HasVideo { get; set; }
 
-        public string Bitrate { get; set; }
+        // General 
+        public string EncodedApplication { get; set; }
+        public string BitrateOverall { get; set; }
         /// <summary>
         /// Duration in seconds
         /// </summary>
@@ -153,7 +155,8 @@ namespace TDMakerLib
                     if (string.IsNullOrEmpty(this.DurationString3))
                         this.DurationString3 = mMI.Get(0, 0, "Duration/String3");
 
-                    this.Bitrate = mMI.Get(StreamKind.General, 0, "OverallBitRate/String");
+                    this.BitrateOverall = mMI.Get(StreamKind.General, 0, "OverallBitRate/String");
+                    this.EncodedApplication = mMI.Get(StreamKind.General, 0, "Encoded_Application");
 
                     if (string.IsNullOrEmpty(this.Subtitles))
                     {
@@ -210,6 +213,7 @@ namespace TDMakerLib
                     {
                         this.Video.Codec = mMI.Get(StreamKind.Video, 0, "Encoded_Library");
                     }
+                    this.Video.EncodedLibrarySettings = mMI.Get(StreamKind.Video, 0, "Encoded_Library_Settings");
                     if (string.IsNullOrEmpty(this.Video.Codec))
                         this.Video.Codec = mMI.Get(StreamKind.Video, 0, "CodecID/Hint");
                     if (string.IsNullOrEmpty(this.Video.Codec))
@@ -333,7 +337,7 @@ namespace TDMakerLib
             // Duration
             sbGeneral.AppendLine(string.Format("          [u]Duration:[/u] {0}", this.DurationString2));
             // Bitrate
-            sbGeneral.AppendLine(string.Format("           [u]Bitrate:[/u] {0}", this.Bitrate));
+            sbGeneral.AppendLine(string.Format("           [u]Bitrate:[/u] {0}", this.BitrateOverall));
 
             // Subtitles            
             if (!string.IsNullOrEmpty(this.Subtitles))
@@ -478,6 +482,6 @@ namespace TDMakerLib
         public string ScanType { get; set; }
         public string Width { get; set; }
         public string BitsPerPixelXFrame { get; set; }
-
+        public string EncodedLibrarySettings { get; set; }
     }
 }

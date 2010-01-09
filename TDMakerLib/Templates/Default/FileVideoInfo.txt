@@ -7,4 +7,5 @@
          [u]Scan Type:[/u] %Video_ScanType%
 [u]Bits/(Pixel*Frame):[/u] %Video_BitsPerPixelFrame%
         [u]Resolution:[/u] %Video_Width%x%Video_Height%
+  [u]Encoder Settings:[/u] %Video_EncodedLibrarySettings%       
 [/size]
