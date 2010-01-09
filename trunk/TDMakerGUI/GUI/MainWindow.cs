@@ -269,27 +269,6 @@ namespace TDMaker
 
         private void SettingsWrite()
         {
-            // Source
-            if (!Engine.conf.Sources.Contains(cboSource.Text))
-            {
-                Engine.conf.Sources.Add(cboSource.Text);
-            }
-            // Source Edits
-            if (!Engine.conf.AuthoringModes.Contains(cboAuthoring.Text))
-            {
-                Engine.conf.Sources.Add(cboAuthoring.Text);
-            }
-            // Menus
-            if (!Engine.conf.DiscMenus.Contains(cboDiscMenu.Text))
-            {
-                Engine.conf.DiscMenus.Add(cboDiscMenu.Text);
-            }
-            // Extras
-            if (!Engine.conf.Extras.Contains(cboExtras.Text))
-            {
-                Engine.conf.Sources.Add(cboExtras.Text);
-            }
-
             Engine.conf.TrackerGroupActive = cboTrackerGroupActive.SelectedIndex;
             Engine.conf.TemplateIndex = cboTemplate.SelectedIndex;
 
@@ -386,6 +365,8 @@ namespace TDMaker
 
         private void SettingsRead()
         {
+            tsmiPreferKnownFolders.Checked = Engine.mAppSettings.PreferSystemFolders;
+
             SettingsReadInput();
             SettingsReadMedia();
             SettingsReadPublish();
@@ -1776,6 +1757,12 @@ namespace TDMaker
             Engine.conf.PublishInfoTypeChoice = (PublishInfoType)cboPublishType.SelectedIndex;
             cboTemplate.Enabled = Engine.conf.PublishInfoTypeChoice == PublishInfoType.ExternalTemplate;
             gbTemplatesInternal.Enabled = Engine.conf.PublishInfoTypeChoice == PublishInfoType.InternalTemplate;
+        }
+
+        private void tsmiPreferKnownFolders_Click(object sender, EventArgs e)
+        {
+            Engine.mAppSettings.PreferSystemFolders = tsmiPreferKnownFolders.Checked;
+            Engine.InitializeDefaultFolderPaths();
         }
     }
 }

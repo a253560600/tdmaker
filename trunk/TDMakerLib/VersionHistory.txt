@@ -16,7 +16,7 @@ Version 2.0 - 20100115
 1.13.0.0 MTN Screenshot preview for multiple files under Screenshots tab
 1.12.1.0 Tweak 1.7.1.00 was removed due to API changes and in favor of other image uploaders
 1.12.0.0 Using ZScreen UploadersLib.dll to support ImageShack, TinyPic, ImageBin and Imgur hosting services
-1.11.0.0 Option to prefer known folders for Settings and Data
+1.11.0.0 Option to prefer known folders for Settings and Data [Issue 2]
 1.10.0.2 Fixed errors while uploading to TinyPic
 
 Version 1.10 - 20090216

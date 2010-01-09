@@ -28,9 +28,9 @@ namespace TDMakerLib
 
         public static void OpenDirTorrents()
         {
-            if (Directory.Exists(Engine.conf.CustomTorrentsDir))
+            if (Directory.Exists(Engine.TorrentsDir))
             {
-                Process.Start(Engine.conf.CustomTorrentsDir);
+                Process.Start(Engine.TorrentsDir);
             }
         }
 

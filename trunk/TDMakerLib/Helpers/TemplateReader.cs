@@ -170,7 +170,6 @@ namespace TDMakerLib
 
         private string GetStringFromAudio(string pattern, AudioInfo ai)
         {
-
             pattern = Regex.Replace(pattern, "%Audio_%Format%", ai.Format, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Audio_Format%", ai.Format, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Audio_Bitrate%", ai.Bitrate, RegexOptions.IgnoreCase);
@@ -178,9 +177,7 @@ namespace TDMakerLib
             pattern = Regex.Replace(pattern, "%Audio_Channels%", ai.Channels, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Audio_SamplingRate%", ai.SamplingRate, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Audio_Resolution%", ai.Resolution, RegexOptions.IgnoreCase);
-
             return pattern;
-
         }
 
         private string CreateFileInfo(MediaInfo2 mi)

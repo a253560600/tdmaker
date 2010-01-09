@@ -34,8 +34,8 @@ namespace TDMakerLib
         public static string LogsDir = zLogsDir;
         public static string PicturesDir = zPicturesDir;
         public static string SettingsDir = zSettingsDir;
-        public static string TemplatesDir = conf != null && conf.UseCustomTemplatesDir ? conf.CustomTemplatesDir : TemplatesDir;
-        public static string TorrentsDir = conf != null && conf.UseCustomTorrentsDir ? conf.CustomTorrentsDir : TorrentsDir;
+        public static string TemplatesDir = conf != null && Directory.Exists(conf.CustomTemplatesDir) && conf.UseCustomTemplatesDir ? conf.CustomTemplatesDir : TemplatesDir;
+        public static string TorrentsDir = conf != null && Directory.Exists(conf.CustomTorrentsDir) && conf.UseCustomTorrentsDir ? conf.CustomTorrentsDir : TorrentsDir;
 
         public static bool IsUNIX { get; private set; }
 
@@ -151,11 +151,11 @@ namespace TDMakerLib
 
         public static MediaWizardOptions GetMediaType(List<string> FileOrDirPaths)
         {
-            MediaWizardOptions mwo = new MediaWizardOptions() { MediaTypeChoice = MediaType.MediaIndiv};
-            
+            MediaWizardOptions mwo = new MediaWizardOptions() { MediaTypeChoice = MediaType.MediaIndiv };
+
             if (FileOrDirPaths.Count == 1)
             {
-                mwo.MediaTypeChoice  = MediaType.MediaIndiv;
+                mwo.MediaTypeChoice = MediaType.MediaIndiv;
             }
             else
             {
@@ -178,7 +178,7 @@ namespace TDMakerLib
                         string dir = FileOrDirPaths[0];
                         if (MediaIsDisc(dir))
                         {
-                             mwo.MediaTypeChoice = MediaType.MediaDisc;
+                            mwo.MediaTypeChoice = MediaType.MediaDisc;
                         }
                     }
                 }
