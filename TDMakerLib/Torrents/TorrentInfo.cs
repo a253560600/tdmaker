@@ -39,12 +39,9 @@ namespace TDMakerLib
 
             this.mBwApp = bwApp;
 
-            if (Engine.conf.TakeScreenshot)
+            if (mi.UploadScreenshots)
             {
                 TakeScreenshots();
-            }
-            if (Engine.conf.UploadScreenshot)
-            {
                 UploadScreenshots();
             }
         }
@@ -125,11 +122,14 @@ namespace TDMakerLib
             foreach (MediaFile mf in this.MyMedia.MediaFiles)
             {
                 ImageFileManager imf = UploadScreenshot(mf.FilePath);
-                if (imf != null && imf.ImageFileList != null && imf.ImageFileList.Count > 0)
+                if (imf != null)
                 {
                     mf.Screenshot.LocalPath = imf.LocalFilePath;
-                    mf.Screenshot.Full = imf.GetFullImageUrl();
-                    mf.Screenshot.LinkedThumbnail = imf.GetLinkedThumbnailForumUrl();
+                    if (imf.ImageFileList != null && imf.ImageFileList.Count > 0)
+                    {
+                        mf.Screenshot.Full = imf.GetFullImageUrl();
+                        mf.Screenshot.LinkedThumbnail = imf.GetLinkedThumbnailForumUrl();
+                    }
                     mBwApp.ReportProgress((int)ProgressType.UPDATE_SCREENSHOTS_LIST, mf.Screenshot);
                 }
             }
@@ -158,6 +158,9 @@ namespace TDMakerLib
                     case ImageDestType2.IMGUR:
                         imageUploader = new Imgur();
                         break;
+                    case ImageDestType2.FILE:
+                        imf = new ImageFileManager() { LocalFilePath = ssPath };
+                        break;
                     default:
                         imageUploader = new UploadersLib.ImageUploaders.Imgur();
                         break;
@@ -185,16 +188,18 @@ namespace TDMakerLib
                     }
                 }
 
-                if (imf != null && imf.ImageFileList.Count > 0)
+                if (imf != null)
                 {
-                    imf.LocalFilePath = ssPath;
-                    mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploaded {0}.", Path.GetFileName(ssPath)));
+                    if (imf.ImageFileList.Count > 0)
+                    {
+                        imf.LocalFilePath = ssPath;
+                        mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploaded {0}.", Path.GetFileName(ssPath)));
+                    }
                 }
                 else
                 {
                     mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Failed uploading {0}. Try again later.", Path.GetFileName(ssPath)));
                 }
-
             }
             return imf;
         }
@@ -230,7 +235,7 @@ namespace TDMakerLib
             }
 
             StringBuilder sbPublish = new StringBuilder();
-            string info = this.MyMedia.ToStringMedia();
+            string info = MyMedia.MediaTypeChoice == MediaType.MUSIC_AUDIO_ALBUM ? MyMedia.ToStringAudio() : MyMedia.ToStringMedia();
             sbPublish.Append(GetMediaInfo(info, options));
 
             return sbPublish.ToString().Trim();

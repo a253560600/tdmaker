@@ -5,6 +5,7 @@ using MediaInfoLib;
 using TDMakerLib;
 using TDMakerLib.MediaInfo;
 using System.Linq;
+using System.Diagnostics;
 
 namespace TDMakerLib
 {
@@ -16,7 +17,7 @@ namespace TDMakerLib
         /// <summary>
         /// Disc property is set to true if the media is found to be DVD, BD, HDDVD source
         /// </summary>
-        public MediaType MediaType { get; private set; }
+        public MediaType MediaTypeChoice { get; private set; }
         /// <summary>
         /// Packet that contains Tracker Information 
         /// </summary>
@@ -26,6 +27,10 @@ namespace TDMakerLib
         /// </summary>
         public string Location { get; private set; }
         /// <summary>
+        /// Check here Screennshots were taken
+        /// </summary>
+        public bool UploadScreenshots { get; set; }
+        /// <summary>
         /// Title is same as Overall.FileName
         /// </summary>
         public string Title { get; private set; }
@@ -34,8 +39,6 @@ namespace TDMakerLib
         public string Menu { get; set; }
         public string Extras { get; set; }
         public string WebLink { get; set; }
-
-        private string[] mExt = new string[] { ".avi", ".divx", ".mkv", ".mpeg", ".mpg", ".mov", ".rm", ".rmvb", ".vob", ".wmv" }; // { ".*" }; 
 
         public MediaFile Overall { get; set; }
         public List<MediaFile> MediaFiles { get; private set; }
@@ -47,7 +50,7 @@ namespace TDMakerLib
 
         public MediaInfo2(MediaType mediaType, string loc)
         {
-            this.MediaType = mediaType;
+            this.MediaTypeChoice = mediaType;
             FileCollection = new List<string>();
             MediaFiles = new List<MediaFile>();
             Overall = new MediaFile(loc, this.Source);
@@ -91,12 +94,13 @@ namespace TDMakerLib
         public List<string> GetFilesToProcess(string dir)
         {
             List<string> filePaths = new List<string>();
-            foreach (string ext in mExt)
+            foreach (string ext in Engine.conf.SupportedFileTypesVideo)
             {
                 filePaths.AddRange(Directory.GetFiles(Location, "*" + ext, SearchOption.AllDirectories));
+                Debug.WriteLine("Processing " + ext);
             }
 
-            filePaths.RemoveAll(x => x.ToLower().Contains("sample"));
+            filePaths.RemoveAll(x => Path.GetFileName(x).ToLower().Contains("sample"));
             return filePaths;
         }
 
@@ -116,9 +120,9 @@ namespace TDMakerLib
 
                 // Subtitles, Format: DVD Video using VTS_01_0.IFO
                 string[] ifo = Directory.GetFiles(Location, "VTS_01_0.IFO", SearchOption.AllDirectories);
-                if (ifo.Length == 1)
+                if (ifo.Length == 1) // CHECK IF A DVD
                 {
-                    this.MediaType = MediaType.MEDIA_DISC;
+                    this.MediaTypeChoice = MediaType.MEDIA_DISC;
                     MediaInfoLib.MediaInfo mi = new MediaInfoLib.MediaInfo();
                     mi.Open(ifo[0]);
 
@@ -157,8 +161,24 @@ namespace TDMakerLib
                     mi.Close();
                 }
 
+                // Set Media Type
+                bool allAudio = true;
+                List<MediaFile> tempMediaFiles = new List<MediaFile>();
+                foreach (string fp in FileCollection)
+                {
+                    tempMediaFiles.Add(new MediaFile(fp, this.Source));
+                }
+                foreach (MediaFile mf in tempMediaFiles)
+                {
+                    allAudio = mf.IsAudioFile() && allAudio;
+                }
+                if (allAudio)
+                {
+                    this.MediaTypeChoice = MediaType.MUSIC_AUDIO_ALBUM;
+                }
+
                 // AFTER IDENTIFIED THE MEDIA TYPE
-                if (this.MediaType == MediaType.MEDIA_DISC)
+                if (this.MediaTypeChoice == MediaType.MEDIA_DISC)
                 {
                     listFileInfo.RemoveAll(x => x.Length < 1000000000);
                 }
@@ -197,7 +217,7 @@ namespace TDMakerLib
 
                 // DVD Video
                 // Combined Duration and File Size
-                if (MediaType == MediaType.MEDIA_DISC)
+                if (MediaTypeChoice == MediaType.MEDIA_DISC)
                 {
                     string[] vobFiles = Directory.GetFiles(Location, "*.vob", SearchOption.AllDirectories);
                     if (vobFiles.Length > 0)
@@ -236,17 +256,6 @@ namespace TDMakerLib
                 }
 
             } // if Location is a directory
-
-            // Set Media Type
-            bool allAudio = true;
-            foreach (MediaFile mf in MediaFiles)
-            {
-                allAudio = mf.IsAudioFile() && allAudio;
-            }
-            if (allAudio)
-            {
-                this.MediaType = MediaType.MUSIC_AUDIO_ALBUM;
-            }
         }
 
         public void ReadMediaFileCollection()
@@ -272,7 +281,7 @@ namespace TDMakerLib
         /// </summary>
         public void ReadMedia()
         {
-            switch (MediaType)
+            switch (MediaTypeChoice)
             {
                 case MediaType.SINGLE_MEDIA_FILE:
                     ReadMediaFile();
@@ -338,7 +347,7 @@ namespace TDMakerLib
                 sbTitleInfo.AppendLine(string.Format("[u]Source:[/u] {0}", this.Source));
             }
 
-            if (MediaType == MediaType.MEDIA_DISC)
+            if (MediaTypeChoice == MediaType.MEDIA_DISC)
             {
                 // Authoring
                 if (Engine.conf.bAuthoring && !string.IsNullOrEmpty(this.Authoring))
@@ -367,7 +376,7 @@ namespace TDMakerLib
                 sbBody.AppendLine();
             }
 
-            if (this.MediaFiles.Count > 1 && this.MediaType == MediaType.MEDIA_DISC)
+            if (this.MediaFiles.Count > 1 && this.MediaTypeChoice == MediaType.MEDIA_DISC)
             // is a DVD so need Overall Info only
             {
                 sbBody.AppendLine(this.Overall.ToStringPublish());
@@ -375,7 +384,7 @@ namespace TDMakerLib
             else
             {
                 // If the loaded folder is not a Disc but individual ripped files or a collection of files
-                if (MediaType == MediaType.MEDIA_FILES_COLLECTION)
+                if (MediaTypeChoice == MediaType.MEDIA_FILES_COLLECTION)
                 {
                     sbBody.Append(ToStringMediaList());
                 }

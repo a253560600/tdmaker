@@ -7,12 +7,24 @@ namespace TDMaker
 {
     public partial class MediaWizard : Form
     {
-        WorkerTask MyTask = null;
+        private WorkerTask MyTask = null;
+        public MediaWizardOptions Options = new MediaWizardOptions();
 
         public MediaWizard(WorkerTask wt)
         {
             InitializeComponent();
             MyTask = wt;
+            PrepareUserActionMsg();
+            PrepareUI();
+        }
+
+        private void PrepareUI()
+        {
+            switch (this.Options.MediaTypeChoice)
+            {
+                case MediaType.MEDIA_FILES_COLLECTION:
+                    break;
+            }
         }
 
         private void PrepareUserActionMsg()
@@ -20,6 +32,7 @@ namespace TDMaker
             if (MyTask.FileOrDirPaths.Count == 1)
             {
                 lblUserActionMsg.Text = "You are about to analyze a single file...";
+                this.Options.MediaTypeChoice = MediaType.SINGLE_MEDIA_FILE;
             }
             else
             {
@@ -45,13 +58,47 @@ namespace TDMaker
                     {
                         lblUserActionMsg.Text = "You are about to analayze a collection of directories...";
                     }
+                    this.Options.MediaTypeChoice = MediaType.MEDIA_DISC;
                 }
                 else // no dir found
                 {
                     lblUserActionMsg.Text = "You are about to a collection of files...";
+                    this.Options.MediaTypeChoice = MediaType.MEDIA_FILES_COLLECTION;
                 }
             }
         }
 
+        private void rbFilesAsIndiv_CheckedChanged(object sender, System.EventArgs e)
+        {
+            this.Options.MediaTypeChoice = MediaType.SINGLE_MEDIA_FILE;
+        }
+
+        private void btnOK_Click(object sender, System.EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private void rbFilesAsColl_CheckedChanged(object sender, System.EventArgs e)
+        {
+            this.Options.MediaTypeChoice = MediaType.MEDIA_FILES_COLLECTION;
+        }
+
+        private void chkScreenshotsInclude_CheckedChanged(object sender, System.EventArgs e)
+        {
+            this.Options.ScreenshotsInclude = chkScreenshotsInclude.Checked;
+        }
+
+        private void chkCreateTorrent_CheckedChanged(object sender, System.EventArgs e)
+        {
+            this.Options.CreateTorrent = chkCreateTorrent.Checked;
+        }
+    }
+
+    public class MediaWizardOptions
+    {
+        public bool ScreenshotsInclude { get; set; }
+        public bool CreateTorrent { get; set; }
+        public MediaType MediaTypeChoice { get; set; }
     }
 }

@@ -86,7 +86,6 @@ namespace TDMaker
             this.tcOptions = new System.Windows.Forms.TabControl();
             this.tpOptionsMTN = new System.Windows.Forms.TabPage();
             this.tlpMTN = new System.Windows.Forms.TableLayoutPanel();
-            this.txtMtnArgs = new System.Windows.Forms.TextBox();
             this.tlpMtnUsage = new System.Windows.Forms.TableLayoutPanel();
             this.pgMtn = new System.Windows.Forms.PropertyGrid();
             this.tlpMtnProfiles = new System.Windows.Forms.TableLayoutPanel();
@@ -94,6 +93,8 @@ namespace TDMaker
             this.tbnAddMtnProfile = new System.Windows.Forms.Button();
             this.btnRemoveMtnProfile = new System.Windows.Forms.Button();
             this.lbMtnProfiles = new System.Windows.Forms.ListBox();
+            this.txtMtnArgs = new System.Windows.Forms.TextBox();
+            this.tpImageHosting = new System.Windows.Forms.TabPage();
             this.gbImageShack = new System.Windows.Forms.GroupBox();
             this.btnImageShackImages = new System.Windows.Forms.Button();
             this.txtImageShackRegCode = new System.Windows.Forms.TextBox();
@@ -124,12 +125,11 @@ namespace TDMaker
             this.tpTorrents = new System.Windows.Forms.TabPage();
             this.btnRefreshTrackers = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.cboTorrentLoc = new System.Windows.Forms.ComboBox();
             this.chkWritePublish = new System.Windows.Forms.CheckBox();
             this.chkTorrentOrganize = new System.Windows.Forms.CheckBox();
             this.btnBrowseTorrentCustomFolder = new System.Windows.Forms.Button();
             this.txtTorrentCustomFolder = new System.Windows.Forms.TextBox();
-            this.rbTorrentFolderCustom = new System.Windows.Forms.RadioButton();
-            this.rbTorrentDefaultFolder = new System.Windows.Forms.RadioButton();
             this.gbTrackerMgr = new System.Windows.Forms.GroupBox();
             this.tlpTrackers = new System.Windows.Forms.TableLayoutPanel();
             this.flpTrackers = new System.Windows.Forms.FlowLayoutPanel();
@@ -170,14 +170,14 @@ namespace TDMaker
             this.ttApp = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.miFileOpenFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFileOpenFile = new System.Windows.Forms.ToolStripMenuItem();
             this.miFileOpenFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.miFileSaveTorrent = new System.Windows.Forms.ToolStripMenuItem();
             this.miFileSaveInfoAs = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.miFileExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiEditTools = new System.Windows.Forms.ToolStripMenuItem();
             this.miEditCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.foldersToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.miFoldersScreenshots = new System.Windows.Forms.ToolStripMenuItem();
@@ -190,8 +190,8 @@ namespace TDMaker
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miHelpCheckUpdates = new System.Windows.Forms.ToolStripMenuItem();
             this.miHelpVersionHistory = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tpImageHosting = new System.Windows.Forms.TabPage();
+            this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.tcMain.SuspendLayout();
             this.tpMedia.SuspendLayout();
@@ -216,6 +216,7 @@ namespace TDMaker
             this.tlpMtnUsage.SuspendLayout();
             this.tlpMtnProfiles.SuspendLayout();
             this.flpMtn.SuspendLayout();
+            this.tpImageHosting.SuspendLayout();
             this.gbImageShack.SuspendLayout();
             this.flpScreenshots1.SuspendLayout();
             this.tpPublish.SuspendLayout();
@@ -239,7 +240,6 @@ namespace TDMaker
             this.cmsApp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.menuStrip1.SuspendLayout();
-            this.tpImageHosting.SuspendLayout();
             this.SuspendLayout();
             // 
             // bwApp
@@ -879,16 +879,6 @@ namespace TDMaker
             this.tlpMTN.Size = new System.Drawing.Size(842, 413);
             this.tlpMTN.TabIndex = 7;
             // 
-            // txtMtnArgs
-            // 
-            this.txtMtnArgs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtMtnArgs.Location = new System.Drawing.Point(3, 374);
-            this.txtMtnArgs.Multiline = true;
-            this.txtMtnArgs.Name = "txtMtnArgs";
-            this.txtMtnArgs.ReadOnly = true;
-            this.txtMtnArgs.Size = new System.Drawing.Size(836, 36);
-            this.txtMtnArgs.TabIndex = 6;
-            // 
             // tlpMtnUsage
             // 
             this.tlpMtnUsage.ColumnCount = 2;
@@ -966,6 +956,28 @@ namespace TDMaker
             this.lbMtnProfiles.Size = new System.Drawing.Size(197, 316);
             this.lbMtnProfiles.TabIndex = 8;
             this.lbMtnProfiles.SelectedIndexChanged += new System.EventHandler(this.LbMtnProfilesSelectedIndexChanged);
+            // 
+            // txtMtnArgs
+            // 
+            this.txtMtnArgs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtMtnArgs.Location = new System.Drawing.Point(3, 374);
+            this.txtMtnArgs.Multiline = true;
+            this.txtMtnArgs.Name = "txtMtnArgs";
+            this.txtMtnArgs.ReadOnly = true;
+            this.txtMtnArgs.Size = new System.Drawing.Size(836, 36);
+            this.txtMtnArgs.TabIndex = 6;
+            // 
+            // tpImageHosting
+            // 
+            this.tpImageHosting.Controls.Add(this.gbImageShack);
+            this.tpImageHosting.Controls.Add(this.flpScreenshots1);
+            this.tpImageHosting.Location = new System.Drawing.Point(4, 22);
+            this.tpImageHosting.Name = "tpImageHosting";
+            this.tpImageHosting.Padding = new System.Windows.Forms.Padding(3);
+            this.tpImageHosting.Size = new System.Drawing.Size(848, 419);
+            this.tpImageHosting.TabIndex = 5;
+            this.tpImageHosting.Text = "Image Hosting";
+            this.tpImageHosting.UseVisualStyleBackColor = true;
             // 
             // gbImageShack
             // 
@@ -1336,12 +1348,12 @@ namespace TDMaker
             // 
             this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox8.Controls.Add(this.label1);
+            this.groupBox8.Controls.Add(this.cboTorrentLoc);
             this.groupBox8.Controls.Add(this.chkWritePublish);
             this.groupBox8.Controls.Add(this.chkTorrentOrganize);
             this.groupBox8.Controls.Add(this.btnBrowseTorrentCustomFolder);
             this.groupBox8.Controls.Add(this.txtTorrentCustomFolder);
-            this.groupBox8.Controls.Add(this.rbTorrentFolderCustom);
-            this.groupBox8.Controls.Add(this.rbTorrentDefaultFolder);
             this.groupBox8.Location = new System.Drawing.Point(17, 288);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(809, 122);
@@ -1349,10 +1361,20 @@ namespace TDMaker
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Save Location";
             // 
+            // cboTorrentLoc
+            // 
+            this.cboTorrentLoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTorrentLoc.FormattingEnabled = true;
+            this.cboTorrentLoc.Location = new System.Drawing.Point(16, 16);
+            this.cboTorrentLoc.Name = "cboTorrentLoc";
+            this.cboTorrentLoc.Size = new System.Drawing.Size(288, 21);
+            this.cboTorrentLoc.TabIndex = 6;
+            this.cboTorrentLoc.SelectedIndexChanged += new System.EventHandler(this.cboTorrentLoc_SelectedIndexChanged);
+            // 
             // chkWritePublish
             // 
             this.chkWritePublish.AutoSize = true;
-            this.chkWritePublish.Location = new System.Drawing.Point(19, 91);
+            this.chkWritePublish.Location = new System.Drawing.Point(16, 96);
             this.chkWritePublish.Name = "chkWritePublish";
             this.chkWritePublish.Size = new System.Drawing.Size(241, 17);
             this.chkWritePublish.TabIndex = 5;
@@ -1365,7 +1387,7 @@ namespace TDMaker
             this.chkTorrentOrganize.AutoSize = true;
             this.chkTorrentOrganize.Checked = true;
             this.chkTorrentOrganize.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkTorrentOrganize.Location = new System.Drawing.Point(114, 67);
+            this.chkTorrentOrganize.Location = new System.Drawing.Point(114, 71);
             this.chkTorrentOrganize.Name = "chkTorrentOrganize";
             this.chkTorrentOrganize.Size = new System.Drawing.Size(293, 17);
             this.chkTorrentOrganize.TabIndex = 4;
@@ -1376,7 +1398,7 @@ namespace TDMaker
             // btnBrowseTorrentCustomFolder
             // 
             this.btnBrowseTorrentCustomFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowseTorrentCustomFolder.Location = new System.Drawing.Point(704, 39);
+            this.btnBrowseTorrentCustomFolder.Location = new System.Drawing.Point(704, 43);
             this.btnBrowseTorrentCustomFolder.Name = "btnBrowseTorrentCustomFolder";
             this.btnBrowseTorrentCustomFolder.Size = new System.Drawing.Size(75, 23);
             this.btnBrowseTorrentCustomFolder.TabIndex = 3;
@@ -1388,34 +1410,11 @@ namespace TDMaker
             // 
             this.txtTorrentCustomFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTorrentCustomFolder.Location = new System.Drawing.Point(114, 41);
+            this.txtTorrentCustomFolder.Location = new System.Drawing.Point(112, 44);
             this.txtTorrentCustomFolder.Name = "txtTorrentCustomFolder";
             this.txtTorrentCustomFolder.Size = new System.Drawing.Size(584, 20);
             this.txtTorrentCustomFolder.TabIndex = 2;
             this.txtTorrentCustomFolder.TextChanged += new System.EventHandler(this.txtTorrentCustomFolder_TextChanged);
-            // 
-            // rbTorrentFolderCustom
-            // 
-            this.rbTorrentFolderCustom.AutoSize = true;
-            this.rbTorrentFolderCustom.Location = new System.Drawing.Point(19, 42);
-            this.rbTorrentFolderCustom.Name = "rbTorrentFolderCustom";
-            this.rbTorrentFolderCustom.Size = new System.Drawing.Size(89, 17);
-            this.rbTorrentFolderCustom.TabIndex = 1;
-            this.rbTorrentFolderCustom.Text = "Custom folder";
-            this.rbTorrentFolderCustom.UseVisualStyleBackColor = true;
-            this.rbTorrentFolderCustom.CheckedChanged += new System.EventHandler(this.rbTorrentFolderCustom_CheckedChanged);
-            // 
-            // rbTorrentDefaultFolder
-            // 
-            this.rbTorrentDefaultFolder.AutoSize = true;
-            this.rbTorrentDefaultFolder.Location = new System.Drawing.Point(19, 19);
-            this.rbTorrentDefaultFolder.Name = "rbTorrentDefaultFolder";
-            this.rbTorrentDefaultFolder.Size = new System.Drawing.Size(147, 17);
-            this.rbTorrentDefaultFolder.TabIndex = 0;
-            this.rbTorrentDefaultFolder.TabStop = true;
-            this.rbTorrentDefaultFolder.Text = "Parent folder of the Media";
-            this.rbTorrentDefaultFolder.UseVisualStyleBackColor = true;
-            this.rbTorrentDefaultFolder.CheckedChanged += new System.EventHandler(this.rbTorrentDefaultFolder_CheckedChanged);
             // 
             // gbTrackerMgr
             // 
@@ -1787,7 +1786,7 @@ namespace TDMaker
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.editToolStripMenuItem,
+            this.tsmiEditTools,
             this.foldersToolStripMenuItem1,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -1799,7 +1798,7 @@ namespace TDMaker
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miFileOpenFile,
+            this.tsmiFileOpenFile,
             this.miFileOpenFolder,
             this.toolStripSeparator,
             this.miFileSaveTorrent,
@@ -1810,15 +1809,15 @@ namespace TDMaker
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
-            // miFileOpenFile
+            // tsmiFileOpenFile
             // 
-            this.miFileOpenFile.Image = ((System.Drawing.Image)(resources.GetObject("miFileOpenFile.Image")));
-            this.miFileOpenFile.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.miFileOpenFile.Name = "miFileOpenFile";
-            this.miFileOpenFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.miFileOpenFile.Size = new System.Drawing.Size(226, 22);
-            this.miFileOpenFile.Text = "&Open File...";
-            this.miFileOpenFile.Click += new System.EventHandler(this.miFileOpenFile_Click);
+            this.tsmiFileOpenFile.Image = ((System.Drawing.Image)(resources.GetObject("tsmiFileOpenFile.Image")));
+            this.tsmiFileOpenFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsmiFileOpenFile.Name = "tsmiFileOpenFile";
+            this.tsmiFileOpenFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.tsmiFileOpenFile.Size = new System.Drawing.Size(226, 22);
+            this.tsmiFileOpenFile.Text = "&Open File...";
+            this.tsmiFileOpenFile.Click += new System.EventHandler(this.miFileOpenFile_Click);
             // 
             // miFileOpenFolder
             // 
@@ -1865,13 +1864,13 @@ namespace TDMaker
             this.miFileExit.Text = "E&xit";
             this.miFileExit.Click += new System.EventHandler(this.miFileExit_Click);
             // 
-            // editToolStripMenuItem
+            // tsmiEditTools
             // 
-            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiEditTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miEditCopy});
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.editToolStripMenuItem.Text = "&Edit";
+            this.tsmiEditTools.Name = "tsmiEditTools";
+            this.tsmiEditTools.Size = new System.Drawing.Size(37, 20);
+            this.tsmiEditTools.Text = "&Edit";
             // 
             // miEditCopy
             // 
@@ -1950,7 +1949,7 @@ namespace TDMaker
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miHelpCheckUpdates,
             this.miHelpVersionHistory,
-            this.aboutToolStripMenuItem});
+            this.tsmiAbout});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.helpToolStripMenuItem.Text = "&Help";
@@ -1969,24 +1968,21 @@ namespace TDMaker
             this.miHelpVersionHistory.Text = "&Version History...";
             this.miHelpVersionHistory.Click += new System.EventHandler(this.miHelpVersionHistory_Click);
             // 
-            // aboutToolStripMenuItem
+            // tsmiAbout
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.aboutToolStripMenuItem.Text = "&About...";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.tsmiAbout.Name = "tsmiAbout";
+            this.tsmiAbout.Size = new System.Drawing.Size(186, 22);
+            this.tsmiAbout.Text = "&About...";
+            this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
             // 
-            // tpImageHosting
+            // label1
             // 
-            this.tpImageHosting.Controls.Add(this.gbImageShack);
-            this.tpImageHosting.Controls.Add(this.flpScreenshots1);
-            this.tpImageHosting.Location = new System.Drawing.Point(4, 22);
-            this.tpImageHosting.Name = "tpImageHosting";
-            this.tpImageHosting.Padding = new System.Windows.Forms.Padding(3);
-            this.tpImageHosting.Size = new System.Drawing.Size(848, 419);
-            this.tpImageHosting.TabIndex = 5;
-            this.tpImageHosting.Text = "Image Hosting";
-            this.tpImageHosting.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(16, 48);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(87, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Custom Directory";
             // 
             // MainWindow
             // 
@@ -2045,6 +2041,8 @@ namespace TDMaker
             this.tlpMtnUsage.ResumeLayout(false);
             this.tlpMtnProfiles.ResumeLayout(false);
             this.flpMtn.ResumeLayout(false);
+            this.tpImageHosting.ResumeLayout(false);
+            this.tpImageHosting.PerformLayout();
             this.gbImageShack.ResumeLayout(false);
             this.gbImageShack.PerformLayout();
             this.flpScreenshots1.ResumeLayout(false);
@@ -2076,8 +2074,6 @@ namespace TDMaker
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.tpImageHosting.ResumeLayout(false);
-            this.tpImageHosting.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2142,8 +2138,6 @@ namespace TDMaker
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.Button btnBrowseTorrentCustomFolder;
         private System.Windows.Forms.TextBox txtTorrentCustomFolder;
-        private System.Windows.Forms.RadioButton rbTorrentFolderCustom;
-        private System.Windows.Forms.RadioButton rbTorrentDefaultFolder;
         private System.Windows.Forms.GroupBox gbTrackerMgr;
         private System.Windows.Forms.CheckBox chkTorrentOrganize;
         private System.Windows.Forms.ListBox lbStatus;
@@ -2202,10 +2196,10 @@ namespace TDMaker
         private System.Windows.Forms.ToolStripMenuItem miFileSaveInfoAs;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem miFileExit;
-        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiEditTools;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem miFileOpenFile;
+        private System.Windows.Forms.ToolStripMenuItem tsmiAbout;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFileOpenFile;
         private System.Windows.Forms.ToolStripMenuItem miEditCopy;
         private System.Windows.Forms.ToolStripMenuItem miHelpCheckUpdates;
         private System.Windows.Forms.ToolStripMenuItem miHelpVersionHistory;
@@ -2245,6 +2239,8 @@ namespace TDMaker
         private System.Windows.Forms.ComboBox cboMediaType;
         private System.Windows.Forms.FlowLayoutPanel flpPublishConfig;
         private System.Windows.Forms.TabPage tpImageHosting;
+        private System.Windows.Forms.ComboBox cboTorrentLoc;
+        private System.Windows.Forms.Label label1;
     }
 }
 

@@ -61,13 +61,14 @@ namespace TDMaker
                 }
             }
 
-            if (!Engine.conf.WritePublish && ps.Length > 1)
-            {
-                if (MessageBox.Show("Writing Publish info to File is recommended when analysing multiple files or folders. \n\nWould you like to turn this feature on?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    Engine.conf.WritePublish = true;
-                }
-            }
+            // COMMENTED UNTIL RECALLED WHY THIS IS NEEDED
+            //if (!Engine.conf.WritePublish && ps.Length > 1)
+            //{
+            //    if (MessageBox.Show("Writing Publish info to File is recommended when analysing multiple files or folders. \n\nWould you like to turn this feature on?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //    {
+            //        Engine.conf.WritePublish = true;
+            //    }
+            //}
 
             List<TorrentPacket> tps = new List<TorrentPacket>();
 
@@ -117,9 +118,9 @@ namespace TDMaker
         /// </summary>
         /// <param name="p">File or Folder path of the Media</param>
         /// <returns>MediaInfo2 object</returns>
-        private MediaInfo2 PrepareNewMedia(string p)
+        private MediaInfo2 PrepareNewMedia(WorkerTask wt, string p)
         {
-            MediaType mt = Engine.conf.MediaTypeLastUsed;
+            MediaType mt = wt.MediaTypeChoice;
             if (mt != MediaType.MEDIA_FILES_COLLECTION)
             {
                 mt = File.Exists(p) ? MediaType.SINGLE_MEDIA_FILE : MediaType.MEDIA_DISC;
@@ -151,11 +152,27 @@ namespace TDMaker
         {
             List<MediaInfo2> miList = new List<MediaInfo2>();
 
-            if (Engine.conf.MediaTypeLastUsed == MediaType.MEDIA_FILES_COLLECTION)
+            // fill previous settings
+            wt.TorrentCreateAuto = Engine.conf.TorrentCreateAuto;
+            wt.UploadScreenshot = Engine.conf.UploadScreenshots;
+            wt.MediaTypeChoice = Engine.conf.MediaTypeLastUsed;
+
+            if (Engine.conf.ShowMediaWizard)
+            {
+                MediaWizard mw = new MediaWizard(wt);
+                if (mw.ShowDialog() == DialogResult.OK)
+                {
+                    wt.TorrentCreateAuto = mw.Options.CreateTorrent;
+                    wt.UploadScreenshot = mw.Options.ScreenshotsInclude;
+                    wt.MediaTypeChoice = mw.Options.MediaTypeChoice;
+                }
+            }
+
+            if (wt.MediaTypeChoice == MediaType.MEDIA_FILES_COLLECTION)
             {
                 wt.FileOrDirPaths.Sort();
                 string firstPath = wt.FileOrDirPaths[0];
-                MediaInfo2 mi = this.PrepareNewMedia(File.Exists(firstPath) ? Path.GetDirectoryName(wt.FileOrDirPaths[0]) : firstPath);
+                MediaInfo2 mi = this.PrepareNewMedia(wt, File.Exists(firstPath) ? Path.GetDirectoryName(wt.FileOrDirPaths[0]) : firstPath);
                 foreach (string p in wt.FileOrDirPaths)
                 {
                     if (File.Exists(p))
@@ -173,7 +190,7 @@ namespace TDMaker
                     {
                         MakeGUIReadyForAnalysis();
 
-                        MediaInfo2 mi = this.PrepareNewMedia(p);
+                        MediaInfo2 mi = this.PrepareNewMedia(wt, p);
 
                         if (wt.IsSingleTask() && !string.IsNullOrEmpty(txtTitle.Text))
                         {
@@ -188,11 +205,8 @@ namespace TDMaker
 
             wt.MediaFiles = miList;
 
-            if (Engine.conf.ShowMediaWizard)
-            {
 
-            }
-            else if (!bwApp.IsBusy)
+            if (!bwApp.IsBusy)
             {
                 bwApp.RunWorkerAsync(wt);
             }
@@ -253,7 +267,7 @@ namespace TDMaker
             Engine.conf.TrackerGroupActive = cboTrackerGroupActive.SelectedIndex;
             Engine.conf.TemplateIndex = cboTemplate.SelectedIndex;
 
-            Engine.conf.TorrentFolderDefault = rbTorrentDefaultFolder.Checked;
+            Engine.conf.TorrentLocationChoice = (LocationType)cboTorrentLoc.SelectedIndex;
 
             Engine.conf.ImageUploader = (ImageDestType2)cboScreenshotDest.SelectedIndex;
 
@@ -369,9 +383,6 @@ namespace TDMaker
             if (string.IsNullOrEmpty(Engine.conf.MTNPath))
                 Engine.conf.MTNPath = Path.Combine(Application.StartupPath, "mtn.exe");
 
-            rbTorrentDefaultFolder.Checked = Engine.conf.TorrentFolderDefault;
-            rbTorrentFolderCustom.Checked = !rbTorrentDefaultFolder.Checked;
-
             pgApp.SelectedObject = Engine.conf;
         }
 
@@ -395,6 +406,10 @@ namespace TDMaker
             if (Engine.conf.DiscMenus.Count == 0)
             {
                 Engine.conf.DiscMenus.AddRange(new string[] { "Intact", "Removed", "Shrunk" });
+            }
+            if (Engine.conf.SupportedFileTypesVideo.Count == 0)
+            {
+                Engine.conf.SupportedFileTypesVideo.AddRange(new string[] { ".avi", ".divx", ".mkv", ".mpeg", ".mpg", ".mov", ".rm", ".rmvb", ".vob", ".wmv" });
             }
 
             cboSource.Items.Clear();
@@ -444,7 +459,7 @@ namespace TDMaker
 
         private void SettingsReadScreenshots()
         {
-            chkScreenshotUpload.Checked = Engine.conf.UploadScreenshot;
+            chkScreenshotUpload.Checked = Engine.conf.UploadScreenshots;
         }
 
         private void SettingsReadOptions()
@@ -512,8 +527,6 @@ namespace TDMaker
             this.chkCreateTorrent.Checked = Engine.conf.TorrentCreateAuto;
             this.chkTorrentOrganize.Checked = Engine.conf.TorrentsOrganize;
 
-            this.rbTorrentDefaultFolder.Checked = Engine.conf.TorrentFolderDefault;
-
             txtImageShackRegCode.Text = Engine.conf.ImageShackRegCode;
             chkUseImageShackRegCode.Checked = Engine.conf.UseImageShackRegCode;
         }
@@ -545,7 +558,11 @@ namespace TDMaker
                 cboTrackerGroupActive.SelectedIndex = Engine.conf.TrackerGroupActive;
             }
 
-            rbTorrentDefaultFolder.Checked = Engine.conf.TorrentFolderDefault;
+            if (cboTorrentLoc.Items.Count == 0)
+            {
+                cboTorrentLoc.Items.AddRange(typeof(LocationType).GetDescriptions());
+            }
+            cboTorrentLoc.SelectedIndex = (int)Engine.conf.TorrentLocationChoice;
             chkWritePublish.Checked = Engine.conf.WritePublish;
             chkTorrentOrganize.Checked = Engine.conf.TorrentsOrganize;
 
@@ -556,7 +573,7 @@ namespace TDMaker
         {
             PublishOptionsPacket pop = new PublishOptionsPacket();
             pop.AlignCenter = Engine.conf.AlignCenter;
-            pop.FullPicture = Engine.conf.UploadScreenshot && Engine.conf.UseFullPicture;
+            pop.FullPicture = ti.MyMedia.UploadScreenshots && Engine.conf.UseFullPicture;
             pop.PreformattedText = Engine.conf.PreText;
             pop.TemplatesMode = Engine.conf.TemplatesMode;
             ti.PublishOptions = pop;
@@ -582,6 +599,7 @@ namespace TDMaker
                     FileSystem.WriteDebugLog();
 
                     // creates screenshot
+                    mi.UploadScreenshots = wt.UploadScreenshot;
                     TorrentInfo ti = new TorrentInfo(bwApp, mi);
                     ti.PublishString = CreatePublishInitial(ref ti);
                     bwApp.ReportProgress((int)ProgressType.REPORT_TORRENTINFO, ti);
@@ -604,7 +622,7 @@ namespace TDMaker
 
                     tiList.Add(ti);
 
-                    if (Engine.conf.TorrentCreateAuto)
+                    if (wt.TorrentCreateAuto)
                     {
                         new TaskManager(new WorkerTask(bwApp, Loader.CurrentTask)).WorkerCreateTorrent(mi.TorrentPacketInfo);
                     }
@@ -618,8 +636,6 @@ namespace TDMaker
             return tiList;
 
         }
-
-
 
         private object WorkerCreateTorrents(List<TorrentPacket> tps)
         {
@@ -688,9 +704,9 @@ namespace TDMaker
 
             btnPublish.Enabled = !bwApp.IsBusy && !string.IsNullOrEmpty(txtPublish.Text);
 
-            txtTorrentCustomFolder.Enabled = rbTorrentFolderCustom.Checked;
-            btnBrowseTorrentCustomFolder.Enabled = rbTorrentFolderCustom.Checked;
-            chkTorrentOrganize.Enabled = rbTorrentFolderCustom.Checked;
+            txtTorrentCustomFolder.Enabled = Engine.conf.TorrentLocationChoice == LocationType.CustomFolder;
+            btnBrowseTorrentCustomFolder.Enabled = Engine.conf.TorrentLocationChoice == LocationType.CustomFolder;
+            chkTorrentOrganize.Enabled = Engine.conf.TorrentLocationChoice == LocationType.CustomFolder; 
 
             gbTemplatesInternal.Enabled = !chkTemplatesMode.Checked;
         }
@@ -810,7 +826,7 @@ namespace TDMaker
 
                     case ProgressType.REPORT_MEDIAINFO_SUMMARY:
                         MediaInfo2 mi = (MediaInfo2)e.UserState;
-                        gbDVD.Enabled = (mi.MediaType == MediaType.MEDIA_DISC);
+                        gbDVD.Enabled = (mi.MediaTypeChoice == MediaType.MEDIA_DISC);
                         foreach (MediaFile mf in mi.MediaFiles)
                         {
                             lbMediaInfo.Items.Add(mf);
@@ -851,8 +867,7 @@ namespace TDMaker
         private void chkScreenshotUpload_CheckedChanged(object sender, EventArgs e)
         {
             chkUploadFullScreenshot.Enabled = chkScreenshotUpload.Checked;
-            Engine.conf.TakeScreenshot = chkScreenshotUpload.Checked;
-            Engine.conf.UploadScreenshot = chkScreenshotUpload.Checked;
+            Engine.conf.UploadScreenshots = chkScreenshotUpload.Checked;
         }
 
         private void btnAnalyze_Click(object sender, EventArgs e)
@@ -1205,7 +1220,7 @@ namespace TDMaker
             {
                 txtPublish.Text = CreatePublishInitial(ref ti);
 
-                if (ti.MyMedia.MediaType == MediaType.MUSIC_AUDIO_ALBUM)
+                if (ti.MyMedia.MediaTypeChoice == MediaType.MUSIC_AUDIO_ALBUM)
                 {
                     txtPublish.BackColor = System.Drawing.Color.Black;
                     txtPublish.ForeColor = System.Drawing.Color.White;
@@ -1283,7 +1298,7 @@ namespace TDMaker
             CreateTorrentButton();
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tsmiAbout_Click(object sender, EventArgs e)
         {
             ShowAboutWindow();
         }
@@ -1541,11 +1556,6 @@ namespace TDMaker
             Engine.conf.WritePublish = chkWritePublish.Checked;
         }
 
-        private void rbTorrentDefaultFolder_CheckedChanged(object sender, EventArgs e)
-        {
-            Engine.conf.TorrentFolderDefault = rbTorrentDefaultFolder.Checked;
-        }
-
         private void txtTorrentCustomFolder_TextChanged(object sender, EventArgs e)
         {
 
@@ -1704,6 +1714,12 @@ namespace TDMaker
         private void cboMediaType_SelectedIndexChanged(object sender, EventArgs e)
         {
             Engine.conf.MediaTypeLastUsed = (MediaType)cboMediaType.SelectedIndex;
+            UpdateGuiControls();
+        }
+
+        private void cboTorrentLoc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Engine.conf.TorrentLocationChoice = (LocationType)cboTorrentLoc.SelectedIndex;
             UpdateGuiControls();
         }
     }

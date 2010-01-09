@@ -18,6 +18,16 @@ namespace TDMakerLib
         MUSIC_AUDIO_ALBUM
     }
 
+    public enum LocationType
+    {
+        [Description("Parent folder of the media file")]
+        ParentFolder,
+        [Description("Default folder in %localappdata%")]
+        KnownFolder,
+        [Description("Custom folder")]
+        CustomFolder,
+    }
+
     public enum TakeScreenshotsType
     {
         NONE,
@@ -52,6 +62,8 @@ namespace TDMakerLib
         IMAGEBIN,
         [Description("Imgur - www.imgur.com")]
         IMGUR,
+        [Description("File")]
+        FILE
     }
 
     public static class ImageDestType2Extensions
