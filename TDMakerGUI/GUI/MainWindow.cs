@@ -5,16 +5,15 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using TDMakerLib;
-using ZSS;
-using TDMakerLib.MediaInfo;
 using TDMakerLib.Helpers;
+using TDMakerLib.Properties;
 using UploadersLib;
 using ZScreenLib;
+using ZSS;
 using ZSS.UpdateCheckerLib;
-using TDMakerLib.Properties;
-using System.Text.RegularExpressions;
 
 namespace TDMaker
 {
@@ -180,7 +179,7 @@ namespace TDMaker
             {
                 // fill previous settings
                 wt.TorrentCreateAuto = Engine.conf.TorrentCreateAuto;
-                wt.UploadScreenshot = Engine.conf.ScreenshotsCreate;
+                wt.UploadScreenshot = Engine.conf.ScreenshotsUpload;
             }
 
             if (!mwo.PromptShown && Engine.conf.ShowMediaWizardAlways)
@@ -453,7 +452,7 @@ namespace TDMaker
 
         private void SettingsReadScreenshots()
         {
-            chkScreenshotUpload.Checked = Engine.conf.ScreenshotsCreate;
+            chkScreenshotUpload.Checked = Engine.conf.ScreenshotsUpload;
         }
 
         private void SettingsReadPublish()
@@ -529,11 +528,14 @@ namespace TDMaker
                 Engine.mtnProfileMgr.MtnProfiles.Add(mtnDefault2);
             }
 
-            foreach (XMLSettingsScreenshot mtnProfile in Engine.mtnProfileMgr.MtnProfiles)
+            if (lbMtnProfiles.Items.Count == 0)
             {
-                lbMtnProfiles.Items.Add(mtnProfile);
+                foreach (XMLSettingsScreenshot mtnProfile in Engine.mtnProfileMgr.MtnProfiles)
+                {
+                    lbMtnProfiles.Items.Add(mtnProfile);
+                }
+                lbMtnProfiles.SelectedIndex = Math.Min(Engine.mtnProfileMgr.MtnProfiles.Count - 1, Engine.mtnProfileMgr.MtnProfileActive);
             }
-            lbMtnProfiles.SelectedIndex = Math.Min(Engine.mtnProfileMgr.MtnProfiles.Count - 1, Engine.mtnProfileMgr.MtnProfileActive);
 
             this.chkCreateTorrent.Checked = Engine.conf.TorrentCreateAuto;
             this.chkTorrentOrganize.Checked = Engine.conf.TorrentsOrganize;
@@ -751,8 +753,8 @@ namespace TDMaker
 
             UpdateGuiControls();
             pBar.Style = ProgressBarStyle.Continuous;
+            lbFiles.Items.Clear();
             sBar.Text = "Ready.";
-
         }
 
         void pbScreenshot_MouseClick(object sender, MouseEventArgs e)
@@ -873,7 +875,7 @@ namespace TDMaker
         private void chkScreenshotUpload_CheckedChanged(object sender, EventArgs e)
         {
             chkUploadFullScreenshot.Enabled = chkScreenshotUpload.Checked;
-            Engine.conf.ScreenshotsCreate = chkScreenshotUpload.Checked;
+            Engine.conf.ScreenshotsUpload = chkScreenshotUpload.Checked;
         }
 
         private void btnAnalyze_Click(object sender, EventArgs e)
@@ -1761,8 +1763,13 @@ namespace TDMaker
 
         private void tsmiPreferKnownFolders_Click(object sender, EventArgs e)
         {
-            Engine.mAppSettings.PreferSystemFolders = tsmiPreferKnownFolders.Checked;
-            Engine.InitializeDefaultFolderPaths();
+            ConfigWizard cw = new ConfigWizard(Engine.RootAppFolder);
+            if (cw.ShowDialog() == DialogResult.OK)
+            {
+                Engine.mAppSettings.PreferSystemFolders = cw.PreferSystemFolders;
+                tsmiPreferKnownFolders.Checked = cw.PreferSystemFolders;
+                Engine.InitializeDefaultFolderPaths();
+            }
         }
     }
 }

@@ -194,12 +194,12 @@ namespace TDMaker
             this.miFoldersLogsDebug = new System.Windows.Forms.ToolStripMenuItem();
             this.miFoldersSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.miFoldersTemplates = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiPreferKnownFolders = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miHelpCheckUpdates = new System.Windows.Forms.ToolStripMenuItem();
             this.miHelpVersionHistory = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiPreferKnownFolders = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.tcMain.SuspendLayout();
             this.tpMedia.SuspendLayout();
@@ -1993,28 +1993,28 @@ namespace TDMaker
             // miFoldersScreenshots
             // 
             this.miFoldersScreenshots.Name = "miFoldersScreenshots";
-            this.miFoldersScreenshots.Size = new System.Drawing.Size(188, 22);
+            this.miFoldersScreenshots.Size = new System.Drawing.Size(200, 22);
             this.miFoldersScreenshots.Text = "&Screenshots...";
             this.miFoldersScreenshots.Click += new System.EventHandler(this.miFoldersScreenshots_Click);
             // 
             // miFoldersTorrents
             // 
             this.miFoldersTorrents.Name = "miFoldersTorrents";
-            this.miFoldersTorrents.Size = new System.Drawing.Size(188, 22);
+            this.miFoldersTorrents.Size = new System.Drawing.Size(200, 22);
             this.miFoldersTorrents.Text = "&Torrents...";
             this.miFoldersTorrents.Click += new System.EventHandler(this.miFoldersTorrents_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(185, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(197, 6);
             // 
             // miFoldersLogs
             // 
             this.miFoldersLogs.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miFoldersLogsDebug});
             this.miFoldersLogs.Name = "miFoldersLogs";
-            this.miFoldersLogs.Size = new System.Drawing.Size(188, 22);
+            this.miFoldersLogs.Size = new System.Drawing.Size(200, 22);
             this.miFoldersLogs.Text = "&Logs...";
             this.miFoldersLogs.Click += new System.EventHandler(this.miFoldersLogs_Click);
             // 
@@ -2028,16 +2028,28 @@ namespace TDMaker
             // miFoldersSettings
             // 
             this.miFoldersSettings.Name = "miFoldersSettings";
-            this.miFoldersSettings.Size = new System.Drawing.Size(188, 22);
+            this.miFoldersSettings.Size = new System.Drawing.Size(200, 22);
             this.miFoldersSettings.Text = "&Settings...";
             this.miFoldersSettings.Click += new System.EventHandler(this.miFoldersSettings_Click);
             // 
             // miFoldersTemplates
             // 
             this.miFoldersTemplates.Name = "miFoldersTemplates";
-            this.miFoldersTemplates.Size = new System.Drawing.Size(188, 22);
+            this.miFoldersTemplates.Size = new System.Drawing.Size(200, 22);
             this.miFoldersTemplates.Text = "&Templates...";
             this.miFoldersTemplates.Click += new System.EventHandler(this.miFoldersTemplates_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(197, 6);
+            // 
+            // tsmiPreferKnownFolders
+            // 
+            this.tsmiPreferKnownFolders.Name = "tsmiPreferKnownFolders";
+            this.tsmiPreferKnownFolders.Size = new System.Drawing.Size(200, 22);
+            this.tsmiPreferKnownFolders.Text = "Prefer &Known Folders...";
+            this.tsmiPreferKnownFolders.Click += new System.EventHandler(this.tsmiPreferKnownFolders_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -2069,19 +2081,6 @@ namespace TDMaker
             this.tsmiAbout.Size = new System.Drawing.Size(186, 22);
             this.tsmiAbout.Text = "&About...";
             this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(185, 6);
-            // 
-            // tsmiPreferKnownFolders
-            // 
-            this.tsmiPreferKnownFolders.CheckOnClick = true;
-            this.tsmiPreferKnownFolders.Name = "tsmiPreferKnownFolders";
-            this.tsmiPreferKnownFolders.Size = new System.Drawing.Size(188, 22);
-            this.tsmiPreferKnownFolders.Text = "Prefer &Known Folders";
-            this.tsmiPreferKnownFolders.Click += new System.EventHandler(this.tsmiPreferKnownFolders_Click);
             // 
             // MainWindow
             // 

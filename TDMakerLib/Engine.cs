@@ -185,6 +185,7 @@ namespace TDMakerLib
                 else // no dir found
                 {
                     MediaWizard mw = new MediaWizard(FileOrDirPaths);
+                    
                     if (mw.ShowDialog() == DialogResult.OK)
                     {
                         mwo = mw.Options;
