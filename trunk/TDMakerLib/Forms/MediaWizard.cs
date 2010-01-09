@@ -1,20 +1,26 @@
 ﻿using System.Windows.Forms;
-using TDMakerLib;
 using System.Collections.Generic;
 using System.IO;
+using System.Drawing;
 
-namespace TDMaker
+namespace TDMakerLib
 {
     public partial class MediaWizard : Form
     {
-        private WorkerTask MyTask = null;
         public MediaWizardOptions Options = new MediaWizardOptions();
+
+        public MediaWizard(List<string> FileOrDirPaths)
+        {
+            InitializeComponent();
+            PrepareUserActionMsg(FileOrDirPaths);
+            chkCreateTorrent.Checked = Engine.conf.TorrentCreateAuto;
+            chkScreenshotsCreate.Checked = Engine.conf.ScreenshotsCreate;
+        }
 
         public MediaWizard(WorkerTask wt)
         {
             InitializeComponent();
-            MyTask = wt;
-            PrepareUserActionMsg();
+            PrepareUserActionMsg(wt.FileOrDirPaths);
             PrepareUI();
         }
 
@@ -22,29 +28,36 @@ namespace TDMaker
         {
             switch (this.Options.MediaTypeChoice)
             {
-                case MediaType.MEDIA_FILES_COLLECTION:
+                case MediaType.MediaCollection:
                     break;
             }
         }
 
-        private void PrepareUserActionMsg()
+        private void PrepareUserActionMsg(List<string> myFilesOrDirs)
         {
-            if (MyTask.FileOrDirPaths.Count == 1)
+            if (myFilesOrDirs.Count == 1)
             {
                 lblUserActionMsg.Text = "You are about to analyze a single file...";
-                this.Options.MediaTypeChoice = MediaType.SINGLE_MEDIA_FILE;
+                this.Options.MediaTypeChoice = MediaType.MediaIndiv;
             }
             else
             {
                 bool bDirFound = false;
+                bool bFileFound = false;
                 int dirCount = 0;
+                int filesCount = 0;
 
-                foreach (string fd in MyTask.FileOrDirPaths)
+                foreach (string fd in myFilesOrDirs)
                 {
                     if (Directory.Exists(fd))
                     {
                         dirCount++;
                         bDirFound = true;
+                    }
+                    else if (File.Exists(fd))
+                    {
+                        filesCount++;
+                        bFileFound = true;
                     }
                     if (dirCount > 1) break;
                 }
@@ -58,19 +71,19 @@ namespace TDMaker
                     {
                         lblUserActionMsg.Text = "You are about to analayze a collection of directories...";
                     }
-                    this.Options.MediaTypeChoice = MediaType.MEDIA_DISC;
+                    this.Options.MediaTypeChoice = MediaType.MediaDisc;
                 }
                 else // no dir found
                 {
                     lblUserActionMsg.Text = "You are about to a collection of files...";
-                    this.Options.MediaTypeChoice = MediaType.MEDIA_FILES_COLLECTION;
+                    this.Options.MediaTypeChoice = MediaType.MediaCollection;
                 }
             }
         }
 
         private void rbFilesAsIndiv_CheckedChanged(object sender, System.EventArgs e)
         {
-            this.Options.MediaTypeChoice = MediaType.SINGLE_MEDIA_FILE;
+            this.Options.MediaTypeChoice = MediaType.MediaIndiv;
         }
 
         private void btnOK_Click(object sender, System.EventArgs e)
@@ -81,12 +94,12 @@ namespace TDMaker
 
         private void rbFilesAsColl_CheckedChanged(object sender, System.EventArgs e)
         {
-            this.Options.MediaTypeChoice = MediaType.MEDIA_FILES_COLLECTION;
+            this.Options.MediaTypeChoice = MediaType.MediaCollection;
         }
 
         private void chkScreenshotsInclude_CheckedChanged(object sender, System.EventArgs e)
         {
-            this.Options.ScreenshotsInclude = chkScreenshotsInclude.Checked;
+            this.Options.ScreenshotsInclude = chkScreenshotsCreate.Checked;
         }
 
         private void chkCreateTorrent_CheckedChanged(object sender, System.EventArgs e)
@@ -100,5 +113,6 @@ namespace TDMaker
         public bool ScreenshotsInclude { get; set; }
         public bool CreateTorrent { get; set; }
         public MediaType MediaTypeChoice { get; set; }
+        public bool PromptShown { get; set; }
     }
 }

@@ -40,8 +40,6 @@ namespace TDMakerLib
         // Tab 1 - Input
 
         // Disc Properties
-        public MediaType MediaTypeLastUsed = MediaType.MEDIA_FILES_COLLECTION;
-
         [BrowsableAttribute(false)]
         public bool bAuthoring { get; set; }
         public string AuthoringMode = "Untouched";
@@ -86,7 +84,7 @@ namespace TDMakerLib
 
         // Tab 3 - Publish 
         [Category("Screenshots"), DefaultValue(false), Description("Upload screenshot.")]
-        public bool UploadScreenshots { get; set; }
+        public bool ScreenshotsCreate { get; set; }
         [Category("Screenshots"), DefaultValue(true), Description("Use full image URL in the torrent description.")]
         public bool UseFullPicture { get; set; }
         [Category("Screenshots"), DefaultValue(LocationType.KnownFolder), Description("Create screenshots in the same folders as the media file, default torrent folder or in a custom folder")]
@@ -103,8 +101,8 @@ namespace TDMakerLib
         public bool TemplatesMode { get; set; }
 
         // Tab 4.0 - Options - General
-        [Category("Options / General"), DefaultValue(true), Description("Show Media Wizard to simplify your tasks")]
-        public bool ShowMediaWizard { get; set; }
+        [Category("Options / General"), DefaultValue(true), Description("Show Media Wizard always; otherwise it will only be shown when you import multiple files")]
+        public bool ShowMediaWizardAlways { get; set; }
         [Category("Options / General"), DefaultValue(false), Description("Process media immediately after loading file or folder")]
         public bool AnalyzeAuto { get; set; }
         [Category("Options / General"), DefaultValue(true), Description("Automatically Check for Updates")]

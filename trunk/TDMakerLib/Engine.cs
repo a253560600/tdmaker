@@ -149,6 +149,53 @@ namespace TDMakerLib
             return disc;
         }
 
+        public static MediaWizardOptions GetMediaType(List<string> FileOrDirPaths)
+        {
+            MediaWizardOptions mwo = new MediaWizardOptions() { MediaTypeChoice = MediaType.MediaIndiv};
+            
+            if (FileOrDirPaths.Count == 1)
+            {
+                mwo.MediaTypeChoice  = MediaType.MediaIndiv;
+            }
+            else
+            {
+                bool bDirFound = false;
+                int dirCount = 0;
+
+                foreach (string fd in FileOrDirPaths)
+                {
+                    if (Directory.Exists(fd))
+                    {
+                        dirCount++;
+                        bDirFound = true;
+                    }
+                    if (dirCount > 1) break;
+                }
+                if (bDirFound)
+                {
+                    if (dirCount == 1)
+                    {
+                        string dir = FileOrDirPaths[0];
+                        if (MediaIsDisc(dir))
+                        {
+                             mwo.MediaTypeChoice = MediaType.MediaDisc;
+                        }
+                    }
+                }
+                else // no dir found
+                {
+                    MediaWizard mw = new MediaWizard(FileOrDirPaths);
+                    if (mw.ShowDialog() == DialogResult.OK)
+                    {
+                        mwo = mw.Options;
+                        mwo.PromptShown = true;
+                    }
+                }
+            }
+
+            return mwo;
+        }
+
         /// <summary>
         /// Function to determine DVD-5 or DVD-9
         /// </summary>

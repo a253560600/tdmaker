@@ -57,7 +57,8 @@ namespace TDMaker
             this.cboAuthoring = new System.Windows.Forms.ComboBox();
             this.chkAuthoring = new System.Windows.Forms.CheckBox();
             this.gbLocation = new System.Windows.Forms.GroupBox();
-            this.cboMediaType = new System.Windows.Forms.ComboBox();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnBrowseDir = new System.Windows.Forms.Button();
             this.lbFiles = new System.Windows.Forms.ListBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.tpMainMediaInfo = new System.Windows.Forms.TabPage();
@@ -517,7 +518,8 @@ namespace TDMaker
             // 
             this.gbLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbLocation.Controls.Add(this.cboMediaType);
+            this.gbLocation.Controls.Add(this.btnClear);
+            this.gbLocation.Controls.Add(this.btnBrowseDir);
             this.gbLocation.Controls.Add(this.lbFiles);
             this.gbLocation.Controls.Add(this.btnBrowse);
             this.gbLocation.Location = new System.Drawing.Point(12, 8);
@@ -525,17 +527,29 @@ namespace TDMaker
             this.gbLocation.Size = new System.Drawing.Size(828, 163);
             this.gbLocation.TabIndex = 7;
             this.gbLocation.TabStop = false;
-            this.gbLocation.Text = "Media Type / Loation";
+            this.gbLocation.Text = "Locations - Browse or Drag and Drop a Movie file or folder...";
             // 
-            // cboMediaType
+            // btnClear
             // 
-            this.cboMediaType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboMediaType.FormattingEnabled = true;
-            this.cboMediaType.Location = new System.Drawing.Point(24, 24);
-            this.cboMediaType.Name = "cboMediaType";
-            this.cboMediaType.Size = new System.Drawing.Size(264, 21);
-            this.cboMediaType.TabIndex = 14;
-            this.cboMediaType.SelectedIndexChanged += new System.EventHandler(this.cboMediaType_SelectedIndexChanged);
+            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClear.Location = new System.Drawing.Point(736, 24);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.TabIndex = 15;
+            this.btnClear.Text = "&Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnBrowseDir
+            // 
+            this.btnBrowseDir.AutoSize = true;
+            this.btnBrowseDir.Location = new System.Drawing.Point(168, 24);
+            this.btnBrowseDir.Name = "btnBrowseDir";
+            this.btnBrowseDir.Size = new System.Drawing.Size(134, 23);
+            this.btnBrowseDir.TabIndex = 14;
+            this.btnBrowseDir.Text = "&Browse for a directory...";
+            this.btnBrowseDir.UseVisualStyleBackColor = true;
+            this.btnBrowseDir.Click += new System.EventHandler(this.btnBrowseDir_Click);
             // 
             // lbFiles
             // 
@@ -550,13 +564,12 @@ namespace TDMaker
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBrowse.AutoSize = true;
-            this.btnBrowse.Location = new System.Drawing.Point(740, 24);
+            this.btnBrowse.Location = new System.Drawing.Point(24, 24);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(72, 23);
+            this.btnBrowse.Size = new System.Drawing.Size(134, 23);
             this.btnBrowse.TabIndex = 7;
-            this.btnBrowse.Text = "&Browse...";
+            this.btnBrowse.Text = "&Browse for a file or files...";
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
@@ -2305,7 +2318,6 @@ namespace TDMaker
         private System.Windows.Forms.ListBox lbScreenshots;
         private System.Windows.Forms.TableLayoutPanel tlpScreenshotProps;
         private System.Windows.Forms.PropertyGrid pgScreenshot;
-        private System.Windows.Forms.ComboBox cboMediaType;
         private System.Windows.Forms.FlowLayoutPanel flpPublishConfig;
         private System.Windows.Forms.TabPage tpImageHosting;
         private System.Windows.Forms.ComboBox cboTorrentLoc;
@@ -2315,6 +2327,8 @@ namespace TDMaker
         private System.Windows.Forms.ComboBox cboScreenshotsLoc;
         private System.Windows.Forms.TextBox txtScreenshotsLoc;
         private System.Windows.Forms.Button btnScreenshotsLocBrowse;
+        private System.Windows.Forms.Button btnBrowseDir;
+        private System.Windows.Forms.Button btnClear;
     }
 }
 
