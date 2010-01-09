@@ -1,5 +1,6 @@
 Version 2.0 - 20100115
 
+2.00.1.0 Screenshots location is now customizable to save screenshots in the same folder as the media file
 2.00.0.0 Core changes to create TDMaker Dynamic Links Library
 1.19.0.0 Option to show Media Wizard to simplify tasks
 1.18.0.0 Portable mode when there is a "TDMaker" folder in the startup directory

@@ -71,7 +71,7 @@ namespace TDMakerLib
                     Engine.conf.MTNPath = assemblyMTN;
                 }
 
-                mf.Screenshot.MTNArgs = Adapter.GetMtnArg(Engine.mtnProfileMgr.GetMtnProfileActive());
+                mf.Screenshot.MTNArgs = Adapter.GetMtnArg(Path.GetDirectoryName(mf.FilePath), Engine.mtnProfileMgr.GetMtnProfileActive());
                 string args = string.Format("{0} \"{1}\"", mf.Screenshot.MTNArgs, mediaFilePath);
 
                 Process p = new Process();
@@ -98,7 +98,7 @@ namespace TDMakerLib
                     // Save _s.txt to MediaInfo2.Overall object
                     if (string.IsNullOrEmpty(MyMedia.Overall.Summary))
                     {
-                        string info = Path.Combine(Engine.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + Engine.mtnProfileMgr.GetMtnProfileActive().N_InfoSuffix);
+                        string info = Path.Combine(Engine.GetScreenShotsDir(mediaFilePath), Path.GetFileNameWithoutExtension(mediaFilePath) + Engine.mtnProfileMgr.GetMtnProfileActive().N_InfoSuffix);
 
                         using (StreamReader sr = new StreamReader(info))
                         {
@@ -137,7 +137,7 @@ namespace TDMakerLib
 
         private ImageFileManager UploadScreenshot(string mediaFilePath)
         {
-            string ssPath = Path.Combine(Engine.GetScreenShotsDir(), Path.GetFileNameWithoutExtension(mediaFilePath) + Engine.mtnProfileMgr.GetMtnProfileActive().o_OutputSuffix);
+            string ssPath = Path.Combine(Engine.GetScreenShotsDir(mediaFilePath), Path.GetFileNameWithoutExtension(mediaFilePath) + Engine.mtnProfileMgr.GetMtnProfileActive().o_OutputSuffix);
             ImageUploader imageUploader = null;
             ImageFileManager imf = null;
 

@@ -95,6 +95,11 @@ namespace TDMaker
             this.lbMtnProfiles = new System.Windows.Forms.ListBox();
             this.txtMtnArgs = new System.Windows.Forms.TextBox();
             this.tpImageHosting = new System.Windows.Forms.TabPage();
+            this.gbScreenshotsLoc = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cboScreenshotsLoc = new System.Windows.Forms.ComboBox();
+            this.txtScreenshotsLoc = new System.Windows.Forms.TextBox();
+            this.btnScreenshotsLocBrowse = new System.Windows.Forms.Button();
             this.gbImageShack = new System.Windows.Forms.GroupBox();
             this.btnImageShackImages = new System.Windows.Forms.Button();
             this.txtImageShackRegCode = new System.Windows.Forms.TextBox();
@@ -125,6 +130,7 @@ namespace TDMaker
             this.tpTorrents = new System.Windows.Forms.TabPage();
             this.btnRefreshTrackers = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.cboTorrentLoc = new System.Windows.Forms.ComboBox();
             this.chkWritePublish = new System.Windows.Forms.CheckBox();
             this.chkTorrentOrganize = new System.Windows.Forms.CheckBox();
@@ -191,7 +197,6 @@ namespace TDMaker
             this.miHelpCheckUpdates = new System.Windows.Forms.ToolStripMenuItem();
             this.miHelpVersionHistory = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.tcMain.SuspendLayout();
             this.tpMedia.SuspendLayout();
@@ -217,6 +222,7 @@ namespace TDMaker
             this.tlpMtnProfiles.SuspendLayout();
             this.flpMtn.SuspendLayout();
             this.tpImageHosting.SuspendLayout();
+            this.gbScreenshotsLoc.SuspendLayout();
             this.gbImageShack.SuspendLayout();
             this.flpScreenshots1.SuspendLayout();
             this.tpPublish.SuspendLayout();
@@ -969,6 +975,7 @@ namespace TDMaker
             // 
             // tpImageHosting
             // 
+            this.tpImageHosting.Controls.Add(this.gbScreenshotsLoc);
             this.tpImageHosting.Controls.Add(this.gbImageShack);
             this.tpImageHosting.Controls.Add(this.flpScreenshots1);
             this.tpImageHosting.Location = new System.Drawing.Point(4, 22);
@@ -979,22 +986,79 @@ namespace TDMaker
             this.tpImageHosting.Text = "Image Hosting";
             this.tpImageHosting.UseVisualStyleBackColor = true;
             // 
+            // gbScreenshotsLoc
+            // 
+            this.gbScreenshotsLoc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbScreenshotsLoc.Controls.Add(this.label2);
+            this.gbScreenshotsLoc.Controls.Add(this.cboScreenshotsLoc);
+            this.gbScreenshotsLoc.Controls.Add(this.txtScreenshotsLoc);
+            this.gbScreenshotsLoc.Controls.Add(this.btnScreenshotsLocBrowse);
+            this.gbScreenshotsLoc.Location = new System.Drawing.Point(8, 56);
+            this.gbScreenshotsLoc.Name = "gbScreenshotsLoc";
+            this.gbScreenshotsLoc.Size = new System.Drawing.Size(808, 96);
+            this.gbScreenshotsLoc.TabIndex = 9;
+            this.gbScreenshotsLoc.TabStop = false;
+            this.gbScreenshotsLoc.Text = "Save Location";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(16, 56);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(87, 13);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Custom Directory";
+            // 
+            // cboScreenshotsLoc
+            // 
+            this.cboScreenshotsLoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboScreenshotsLoc.FormattingEnabled = true;
+            this.cboScreenshotsLoc.Location = new System.Drawing.Point(16, 24);
+            this.cboScreenshotsLoc.Name = "cboScreenshotsLoc";
+            this.cboScreenshotsLoc.Size = new System.Drawing.Size(288, 21);
+            this.cboScreenshotsLoc.TabIndex = 10;
+            this.cboScreenshotsLoc.SelectedIndexChanged += new System.EventHandler(this.cboScreenshotsLoc_SelectedIndexChanged);
+            // 
+            // txtScreenshotsLoc
+            // 
+            this.txtScreenshotsLoc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtScreenshotsLoc.Location = new System.Drawing.Point(112, 52);
+            this.txtScreenshotsLoc.Name = "txtScreenshotsLoc";
+            this.txtScreenshotsLoc.Size = new System.Drawing.Size(568, 20);
+            this.txtScreenshotsLoc.TabIndex = 8;
+            // 
+            // btnScreenshotsLocBrowse
+            // 
+            this.btnScreenshotsLocBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnScreenshotsLocBrowse.Location = new System.Drawing.Point(688, 51);
+            this.btnScreenshotsLocBrowse.Name = "btnScreenshotsLocBrowse";
+            this.btnScreenshotsLocBrowse.Size = new System.Drawing.Size(75, 23);
+            this.btnScreenshotsLocBrowse.TabIndex = 9;
+            this.btnScreenshotsLocBrowse.Text = "&Browse";
+            this.btnScreenshotsLocBrowse.UseVisualStyleBackColor = true;
+            this.btnScreenshotsLocBrowse.Click += new System.EventHandler(this.btnScreenshotsLocBrowse_Click);
+            // 
             // gbImageShack
             // 
+            this.gbImageShack.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gbImageShack.Controls.Add(this.btnImageShackImages);
             this.gbImageShack.Controls.Add(this.txtImageShackRegCode);
             this.gbImageShack.Controls.Add(this.btnImageShackRegCode);
             this.gbImageShack.Controls.Add(this.chkUseImageShackRegCode);
-            this.gbImageShack.Location = new System.Drawing.Point(12, 58);
+            this.gbImageShack.Location = new System.Drawing.Point(8, 160);
             this.gbImageShack.Name = "gbImageShack";
-            this.gbImageShack.Size = new System.Drawing.Size(648, 64);
+            this.gbImageShack.Size = new System.Drawing.Size(808, 64);
             this.gbImageShack.TabIndex = 8;
             this.gbImageShack.TabStop = false;
             this.gbImageShack.Text = "ImageShack";
             // 
             // btnImageShackImages
             // 
-            this.btnImageShackImages.Location = new System.Drawing.Point(542, 24);
+            this.btnImageShackImages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnImageShackImages.Location = new System.Drawing.Point(716, 24);
             this.btnImageShackImages.Name = "btnImageShackImages";
             this.btnImageShackImages.Size = new System.Drawing.Size(75, 23);
             this.btnImageShackImages.TabIndex = 7;
@@ -1004,15 +1068,18 @@ namespace TDMaker
             // 
             // txtImageShackRegCode
             // 
-            this.txtImageShackRegCode.Location = new System.Drawing.Point(157, 26);
+            this.txtImageShackRegCode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtImageShackRegCode.Location = new System.Drawing.Point(161, 26);
             this.txtImageShackRegCode.Name = "txtImageShackRegCode";
-            this.txtImageShackRegCode.Size = new System.Drawing.Size(298, 20);
+            this.txtImageShackRegCode.Size = new System.Drawing.Size(467, 20);
             this.txtImageShackRegCode.TabIndex = 4;
             this.txtImageShackRegCode.TextChanged += new System.EventHandler(this.txtImageShackRegCode_TextChanged);
             // 
             // btnImageShackRegCode
             // 
-            this.btnImageShackRegCode.Location = new System.Drawing.Point(461, 24);
+            this.btnImageShackRegCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnImageShackRegCode.Location = new System.Drawing.Point(635, 24);
             this.btnImageShackRegCode.Name = "btnImageShackRegCode";
             this.btnImageShackRegCode.Size = new System.Drawing.Size(75, 23);
             this.btnImageShackRegCode.TabIndex = 6;
@@ -1360,6 +1427,15 @@ namespace TDMaker
             this.groupBox8.TabIndex = 4;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Save Location";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(16, 48);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(87, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Custom Directory";
             // 
             // cboTorrentLoc
             // 
@@ -1975,15 +2051,6 @@ namespace TDMaker
             this.tsmiAbout.Text = "&About...";
             this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 48);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Custom Directory";
-            // 
             // MainWindow
             // 
             this.AcceptButton = this.btnBrowse;
@@ -2007,8 +2074,8 @@ namespace TDMaker
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.Shown += new System.EventHandler(this.MainWindow_Shown);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainWindow_DragDrop);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainWindow_FormClosed);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainWindow_DragEnter);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.tcMain.ResumeLayout(false);
@@ -2043,6 +2110,8 @@ namespace TDMaker
             this.flpMtn.ResumeLayout(false);
             this.tpImageHosting.ResumeLayout(false);
             this.tpImageHosting.PerformLayout();
+            this.gbScreenshotsLoc.ResumeLayout(false);
+            this.gbScreenshotsLoc.PerformLayout();
             this.gbImageShack.ResumeLayout(false);
             this.gbImageShack.PerformLayout();
             this.flpScreenshots1.ResumeLayout(false);
@@ -2241,6 +2310,11 @@ namespace TDMaker
         private System.Windows.Forms.TabPage tpImageHosting;
         private System.Windows.Forms.ComboBox cboTorrentLoc;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox gbScreenshotsLoc;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cboScreenshotsLoc;
+        private System.Windows.Forms.TextBox txtScreenshotsLoc;
+        private System.Windows.Forms.Button btnScreenshotsLocBrowse;
     }
 }
 

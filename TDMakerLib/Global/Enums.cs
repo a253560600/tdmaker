@@ -22,7 +22,7 @@ namespace TDMakerLib
     {
         [Description("Parent folder of the media file")]
         ParentFolder,
-        [Description("Default folder in %localappdata%")]
+        [Description("Default folder")]
         KnownFolder,
         [Description("Custom folder")]
         CustomFolder,

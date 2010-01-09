@@ -275,14 +275,6 @@ namespace TDMaker
             Engine.mtnProfileMgr.Write();
         }
 
-        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            // this.WindowState = FormWindowState.Minimized;
-            SettingsWrite();
-            FileSystem.WriteDebugLog();
-            Engine.ClearScreenshots();
-        }
-
         private void MainWindow_Load(object sender, EventArgs e)
         {
             ConfigureDirs();
@@ -480,6 +472,13 @@ namespace TDMaker
 
             chkProxyEnable.Checked = Engine.conf.ProxyEnabled;
             pgProxy.SelectedObject = Engine.conf.ProxySettings;
+
+            if (cboScreenshotsLoc.Items.Count == 0)
+            {
+                cboScreenshotsLoc.Items.AddRange(typeof(LocationType).GetDescriptions());
+            }
+            cboScreenshotsLoc.SelectedIndex = (int)Engine.conf.ScreenshotsLoc;
+            txtScreenshotsLoc.Text = Engine.conf.CustomScreenshotsDir;
 
             SettingsReadOptionsMTN();
             SettingsReadOptionsTorrents();
@@ -706,7 +705,10 @@ namespace TDMaker
 
             txtTorrentCustomFolder.Enabled = Engine.conf.TorrentLocationChoice == LocationType.CustomFolder;
             btnBrowseTorrentCustomFolder.Enabled = Engine.conf.TorrentLocationChoice == LocationType.CustomFolder;
-            chkTorrentOrganize.Enabled = Engine.conf.TorrentLocationChoice == LocationType.CustomFolder; 
+            chkTorrentOrganize.Enabled = Engine.conf.TorrentLocationChoice == LocationType.CustomFolder;
+
+            txtScreenshotsLoc.Enabled = Engine.conf.ScreenshotsLoc == LocationType.CustomFolder;
+            btnScreenshotsLocBrowse.Enabled = Engine.conf.ScreenshotsLoc == LocationType.CustomFolder;
 
             gbTemplatesInternal.Enabled = !chkTemplatesMode.Checked;
         }
@@ -1721,6 +1723,31 @@ namespace TDMaker
         {
             Engine.conf.TorrentLocationChoice = (LocationType)cboTorrentLoc.SelectedIndex;
             UpdateGuiControls();
+        }
+
+        private void cboScreenshotsLoc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Engine.conf.ScreenshotsLoc = (LocationType)cboScreenshotsLoc.SelectedIndex;
+            UpdateGuiControls();
+        }
+
+        private void MainWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // this.WindowState = FormWindowState.Minimized;
+            SettingsWrite();
+            FileSystem.WriteDebugLog();
+            pbScreenshot.ImageLocation = null; // need this to successfully clear screenshots
+            Engine.ClearScreenshots();
+        }
+
+        private void btnScreenshotsLocBrowse_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dlg = new FolderBrowserDialog();
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                txtScreenshotsLoc.Text = dlg.SelectedPath;
+                Engine.conf.CustomScreenshotsDir = txtScreenshotsLoc.Text;
+            }
         }
     }
 }
