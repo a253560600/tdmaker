@@ -43,16 +43,15 @@ namespace TDMakerLib
         public string GetMediaInfo(string p, PublishOptionsPacket options)
         {
             StringBuilder sbPublish = new StringBuilder();
-            BbCode bb = new BbCode();
 
             if (options.AlignCenter)
             {
-                p = bb.AlignCenter(p);
+                p = BbCode.AlignCenter(p);
             }
 
             if (options.PreformattedText)
             {
-                sbPublish.AppendLine(bb.Pre(p));
+                sbPublish.AppendLine(BbCode.Pre(p));
             }
             else
             {

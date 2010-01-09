@@ -93,8 +93,6 @@ namespace TDMakerLib
         public bool AlignCenter { get; set; }
         [Category("Publish / Config"), DefaultValue(false), Description("Setting true will retain the formatting on some message boards")]
         public bool PreText { get; set; }
-        [Category("Publish / Config"), DefaultValue(true), Description("Setting true will use Templates to generate the description")]
-        public bool TemplatesMode { get; set; }
 
         // Tab 4.0 - Options - General
         [Category("Options / General"), DefaultValue(true), Description("Show Media Wizard always; otherwise it will only be shown when you import multiple files")]
@@ -109,6 +107,8 @@ namespace TDMakerLib
         public bool WritePublish { get; set; }
         [Category("Options / Publish"), DefaultValue(true), Description("Have larger text when [pre] tag is set")]
         public bool LargerPreText { get; set; }
+        [Category("Publish / Publish"), DefaultValue(PublishInfoType.ExternalTemplate), Description("Use internal template, external templates or information in MediaInfo in the torrent description in Publish tab")]
+        public PublishInfoType PublishInfoTypeChoice { get; set; }
         [Category("Options / Publish / Font Sizes"), DefaultValue(5), Description("Font Size for Heading 1")]
         public int FontSizeHeading1 { get; set; }
         [Category("Options / Publish / Font Sizes"), DefaultValue(4), Description("Font Size for Heading 2")]

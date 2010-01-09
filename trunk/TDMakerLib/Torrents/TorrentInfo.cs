@@ -220,6 +220,24 @@ namespace TDMakerLib
             return sbPublish.ToString();
         }
 
+        public string CreatePublishMediaInfo(PublishOptionsPacket options)
+        {
+            StringBuilder sbPublish = new StringBuilder();
+            StringBuilder sbMediaInfo = new StringBuilder();
+            foreach (MediaFile mf in MyMedia.MediaFiles)
+            {
+                sbMediaInfo.AppendLine(BbCode.Bold(mf.FileName));
+                sbMediaInfo.AppendLine();
+                sbMediaInfo.AppendLine(mf.Summary);
+            }
+            sbPublish.AppendLine(GetMediaInfo(sbMediaInfo.ToString(), options));
+            foreach (MediaFile mf in MyMedia.MediaFiles)
+            {
+                sbPublish.AppendLine(mf.GetScreenshotString());
+            }
+            return sbPublish.ToString();
+        }
+
         /// <summary>
         /// Create Publish based on Default (built-in) Template. 
         /// Uses ToString() method of MediaInfo2
@@ -244,16 +262,15 @@ namespace TDMakerLib
         public string GetMediaInfo(string p, PublishOptionsPacket options)
         {
             StringBuilder sbPublish = new StringBuilder();
-            BbCode bb = new BbCode();
 
             if (options.AlignCenter)
             {
-                p = bb.AlignCenter(p);
+                p = BbCode.AlignCenter(p);
             }
 
             if (options.PreformattedText)
             {
-                sbPublish.AppendLine(bb.Pre(p));
+                sbPublish.AppendLine(BbCode.Pre(p));
             }
             else
             {

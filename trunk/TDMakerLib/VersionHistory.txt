@@ -1,6 +1,8 @@
 Version 2.0 - 20100115
 
 2.00.0.0 Core changes to create TDMaker Dynamic Links Library
+1.19.5.0 Option to include MediaInfo information in Publish instead of templates [notatoad]
+1.19.4.0 Support for %EncodedDate% and %Video_DisplayAspectRatio% syntax [coj]
 1.19.3.0 Source input is now mandatory [fopkins]
 1.19.2.0 Support for %EncodedApplication% and %Video_EncodedLibrarySettings% syntax [coj]
 1.19.1.0 Screenshots location is now customizable to save screenshots in the same folder as the media file

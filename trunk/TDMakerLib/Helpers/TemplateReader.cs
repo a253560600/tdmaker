@@ -131,7 +131,7 @@ namespace TDMakerLib
             pattern = Regex.Replace(pattern, "%Subtitles%", mf.Subtitles, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Duration%", mf.DurationString2, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%EncodedApplication%", mf.EncodedApplication, RegexOptions.IgnoreCase);
-
+            pattern = Regex.Replace(pattern, "%EncodedDate%", mf.EncodedDate, RegexOptions.IgnoreCase);
             return pattern;
         }
 
@@ -144,6 +144,7 @@ namespace TDMakerLib
             pattern = Regex.Replace(pattern, "%Video_FrameRate%", mf.Video.FrameRate, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Video_ScanType%", mf.Video.ScanType, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Video_BitsPerPixelFrame%", mf.Video.BitsPerPixelXFrame, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Video_DisplayAspectRatio%", mf.Video.DisplayAspectRatio, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Video_Width%", mf.Video.Width, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Video_Height%", mf.Video.Height, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Video_EncodedLibrarySettings%", mf.Video.EncodedLibrarySettings, RegexOptions.IgnoreCase);
