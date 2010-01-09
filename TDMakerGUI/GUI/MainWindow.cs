@@ -50,6 +50,24 @@ namespace TDMaker
             pBar.Value = 0;
         }
 
+        private bool ValidateInput()
+        {
+            StringBuilder sbMsg = new StringBuilder();
+            // checks 
+            if (string.IsNullOrEmpty(cboSource.Text))
+            {
+                sbMsg.AppendLine("Source was empty.");
+            }
+
+            if (sbMsg.Length > 0)
+            {
+                MessageBox.Show("The following errors were found:\n\n" + sbMsg.ToString(), Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            return false;
+        }
+
         private void LoadMedia(string[] ps)
         {
             if (1 == ps.Length)
@@ -92,6 +110,7 @@ namespace TDMaker
                 wt.FileOrDirPaths = new List<string>(ps);
                 AnalyzeMedia(wt);
             }
+
         }
 
         /// <summary>
@@ -146,6 +165,8 @@ namespace TDMaker
 
         private void AnalyzeMedia(WorkerTask wt)
         {
+            if (!ValidateInput()) return;
+
             List<MediaInfo2> miList = new List<MediaInfo2>();
 
             MediaWizardOptions mwo = Engine.GetMediaType(wt.FileOrDirPaths);
@@ -387,7 +408,9 @@ namespace TDMaker
         {
             if (Engine.conf.Sources.Count == 0)
             {
-                Engine.conf.Sources.AddRange(new string[] { "DVD-5", "DVD-9", "HDTV", "SDTV", "Blu-ray Disc", "HD DVD", "Laser Disc", "VHS" });
+                Engine.conf.Sources.AddRange(new string[] { "CAM", "TC", "TS", "R5", "DVD-Screener", 
+                                                            "DVD", "TV", "HDTV", "Blu-ray", "HD-DVD", 
+                                                            "Laser Disc", "VHS", "Unknown" });
             }
             if (Engine.conf.Extras.Count == 0)
             {
@@ -445,8 +468,6 @@ namespace TDMaker
             chkExtras.Checked = Engine.conf.bExtras;
             cboExtras.Text = Engine.conf.Extra;
 
-            chkSource.Checked = Engine.conf.bSource;
-            cboSource.Text = Engine.conf.Source;
             chkTitle.Checked = Engine.conf.bTitle;
             chkWebLink.Checked = Engine.conf.bWebLink;
         }
@@ -1387,12 +1408,7 @@ namespace TDMaker
 
         private void chkSource_CheckedChanged(object sender, EventArgs e)
         {
-            Engine.conf.bSource = chkSource.Checked;
-        }
-
-        private void cboSource_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Engine.conf.Source = cboSource.Text;
+            chkSource.CheckState = CheckState.Indeterminate;
         }
 
         private void chkTitle_CheckedChanged(object sender, EventArgs e)
@@ -1742,6 +1758,11 @@ namespace TDMaker
         private void btnClear_Click(object sender, EventArgs e)
         {
             lbFiles.Items.Clear();
+        }
+
+        private void cboSource_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // we do nothing
         }
     }
 }

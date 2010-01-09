@@ -347,7 +347,7 @@ namespace TDMakerLib
             StringBuilder sbTitleInfo = new StringBuilder();
 
             // Source 
-            if (Engine.conf.bSource && !string.IsNullOrEmpty(Engine.conf.Source))
+            if (!string.IsNullOrEmpty(this.Source))
             {
                 sbTitleInfo.AppendLine(string.Format("[u]Source:[/u] {0}", this.Source));
             }

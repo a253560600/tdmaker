@@ -405,7 +405,7 @@ namespace TDMaker
             // 
             this.chkSource.AutoSize = true;
             this.chkSource.Checked = true;
-            this.chkSource.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSource.CheckState = System.Windows.Forms.CheckState.Indeterminate;
             this.chkSource.Location = new System.Drawing.Point(22, 31);
             this.chkSource.Name = "chkSource";
             this.chkSource.Size = new System.Drawing.Size(60, 17);
@@ -426,10 +426,11 @@ namespace TDMaker
             // 
             // cboSource
             // 
+            this.cboSource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSource.FormattingEnabled = true;
             this.cboSource.Location = new System.Drawing.Point(117, 29);
             this.cboSource.Name = "cboSource";
-            this.cboSource.Size = new System.Drawing.Size(121, 21);
+            this.cboSource.Size = new System.Drawing.Size(203, 21);
             this.cboSource.TabIndex = 0;
             this.cboSource.SelectedIndexChanged += new System.EventHandler(this.cboSource_SelectedIndexChanged);
             // 
