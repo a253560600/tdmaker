@@ -40,6 +40,11 @@ namespace TDMakerLib
 
         public static string GetMtnArg(XMLSettingsScreenshot screenshotSettings)
         {
+            return GetMtnArg(Engine.PicturesDir, screenshotSettings);
+        }
+
+        public static string GetMtnArg(string screenshotDir, XMLSettingsScreenshot screenshotSettings)
+        {
             // Fill Screenshot object : coded parameters in alphabetical order except for columns, rows and width
 
             StringBuilder sbMTNArgs = new StringBuilder();
@@ -148,7 +153,7 @@ namespace TDMakerLib
                 sbMTNArgs.Append(string.Format("-o {0} ", Engine.mtnProfileMgr.GetMtnProfileActive().o_OutputSuffix));
             }
 
-            sbMTNArgs.Append(string.Format("-O \"{0}\" ", Engine.GetScreenShotsDir()));
+            sbMTNArgs.Append(string.Format("-O \"{0}\" ", screenshotDir));
 
             if (Engine.mtnProfileMgr.GetMtnProfileActive().P_QuitAfterDone)
             {
@@ -197,8 +202,8 @@ namespace TDMakerLib
 
         public static string GetDurationString(double dura)
         {
-            int mins = (int)dura/1000 / 60;
-            int secsLeft = (int)dura/1000 - mins * 60;
+            int mins = (int)dura / 1000 / 60;
+            int secsLeft = (int)dura / 1000 - mins * 60;
             return string.Format("{0}:{1}", mins.ToString(), secsLeft.ToString("00"));
         }
     }

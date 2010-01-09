@@ -89,8 +89,10 @@ namespace TDMakerLib
         public bool UploadScreenshots { get; set; }
         [Category("Screenshots"), DefaultValue(true), Description("Use full image URL in the torrent description.")]
         public bool UseFullPicture { get; set; }
-        [Category("Screenshots"), DefaultValue(true), Description(@"Keep Screenshots in Pictures\MTN")]
-        public bool KeepScreenshot { get; set; }
+        [Category("Screenshots"), DefaultValue(LocationType.KnownFolder), Description("Create screenshots in the same folders as the media file, default torrent folder or in a custom folder")]
+        public LocationType ScreenshotsLoc { get; set; }
+        [Category("Screenshots"), DefaultValue(true), Description("Keep or delete screenshots after processing files")]
+        public bool KeepScreenshots { get; set; }
 
         // Tab 3 - Publish - Options
         [Category("Publish / Config"), DefaultValue(false), Description("Setting true will center align the description")]
@@ -165,6 +167,9 @@ namespace TDMakerLib
         [Category("Options / Paths"), Description("Browse to change where torrent files are saved")]
         [EditorAttribute(typeof(FolderNameEditor), typeof(UITypeEditor))]
         public string CustomTorrentsDir { get; set; }
+        [Category("Options / Paths"), Description("Browse to change where screenshots are saved")]
+        [EditorAttribute(typeof(FolderNameEditor), typeof(UITypeEditor))]
+        public string CustomScreenshotsDir { get; set; }
 
         public string txtMTN_T_Title = string.Empty;
 

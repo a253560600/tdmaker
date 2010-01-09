@@ -98,9 +98,41 @@ namespace TDMakerLib
 
         }
 
+        /// <summary>
+        /// Used to browse the defaule Screneshots folder only
+        /// </summary>
+        /// <returns></returns>
         public static string GetScreenShotsDir()
         {
-            return (Engine.conf.KeepScreenshot ? Engine.zPicturesDir : Engine.zTempDir);
+            return GetScreenShotsDir("");
+        }
+
+        public static string GetScreenShotsDir(string mediaFilePath)
+        {
+            switch (Engine.conf.ScreenshotsLoc)
+            {
+                case LocationType.CustomFolder:
+                    return Directory.Exists(Engine.conf.CustomScreenshotsDir) ? Engine.conf.CustomScreenshotsDir : Engine.PicturesDir;
+                case LocationType.ParentFolder:
+                    if (string.IsNullOrEmpty(mediaFilePath))
+                    {
+                        if (Engine.conf.ScreenshotsLoc == LocationType.CustomFolder && Directory.Exists(Engine.conf.CustomScreenshotsDir))
+                        {
+                            return Engine.conf.CustomScreenshotsDir;
+                        }
+                        else
+                        {
+                            return Engine.PicturesDir;
+                        }
+                    }
+                    else
+                    {
+                        return Path.GetDirectoryName(mediaFilePath);
+                    }
+                case LocationType.KnownFolder:
+                default:
+                    return Engine.conf.KeepScreenshots ? Engine.PicturesDir : Engine.zTempDir;
+            }
         }
 
         public static bool MediaIsDisc(string p)
@@ -143,7 +175,7 @@ namespace TDMakerLib
 
         public static void ClearScreenshots()
         {
-            if (!Engine.conf.KeepScreenshot)
+            if (!Engine.conf.KeepScreenshots)
             {
                 // delete if option set to temporary location 
                 string[] files = Directory.GetFiles(Engine.zTempDir, "*.*", SearchOption.AllDirectories);
