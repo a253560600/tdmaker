@@ -59,10 +59,6 @@ namespace TDMakerLib
         public StringCollection Extras { get; set; }
 
         // Source Properties
-        [BrowsableAttribute(false)]
-        public bool bSource { get; set; }
-        [BrowsableAttribute(false)]
-        public string Source = "DVD-9";
         [Category("Input"), Editor(@"System.Windows.Forms.Design.StringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(System.Drawing.Design.UITypeEditor))]
         public StringCollection Sources { get; set; }
 

@@ -105,6 +105,7 @@
     <Compile Include="Torrents\TorrentUploader.cs" />
     <Compile Include="Torrents\Tracker.cs" />
     <Compile Include="Torrents\TrackerManager.cs" />
+    <Compile Include="Torrents\XMLTorrentUpload.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Templates\Default\Disc.txt" />

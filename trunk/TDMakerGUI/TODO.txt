@@ -1,14 +1,5 @@
-﻿Templates other than External Default does not process %Title% at the right sequence
-TDMaker Wizard when drag n drop a file or folder
-Support for Collection/VOB
-
-You dragged a file/folder
+﻿You dragged a file/folder
 What you want to do
-
-
-Import trackers.xml before public release
-
-Revamp Configuration of Dirs similar to ZScreen 
 
 Logo PictureBox is disabled until figured out where the best place is to put
 Reorganize Code to isoloate methods from MainWindow.cs
@@ -20,10 +11,6 @@ Header.txt and Footer.txt to be accessed from Settings folder
 Command Line Interface
 
 Support for audio using taglib-sharp
-
-Profiles support
-
-Run Once Wizard
 
 Support for Multi-Disc DVDs
 	Tiesto DVD
