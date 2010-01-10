@@ -462,6 +462,11 @@ namespace TDMakerLib
         public string FormatProfile { get; set; }
         public string FormatVersion { get; set; }
         public string Resolution { get; set; }
+
+        public Info()
+        {
+            this.Resolution = "Unknown";
+        }
     }
 
     public class AudioInfo : Info

@@ -117,7 +117,7 @@ namespace TDMaker
             this.chkPre = new System.Windows.Forms.CheckBox();
             this.chkPreIncreaseFontSize = new System.Windows.Forms.CheckBox();
             this.chkAlignCenter = new System.Windows.Forms.CheckBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.gbFonts = new System.Windows.Forms.GroupBox();
             this.nudHeading1Size = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.nudHeading2Size = new System.Windows.Forms.NumericUpDown();
@@ -231,7 +231,7 @@ namespace TDMaker
             this.tpPublish.SuspendLayout();
             this.gbTemplatesInternal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeIncr)).BeginInit();
-            this.groupBox6.SuspendLayout();
+            this.gbFonts.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeading1Size)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeading2Size)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeading3Size)).BeginInit();
@@ -424,6 +424,7 @@ namespace TDMaker
             this.txtWebLink.Name = "txtWebLink";
             this.txtWebLink.Size = new System.Drawing.Size(402, 20);
             this.txtWebLink.TabIndex = 10;
+            this.ttApp.SetToolTip(this.txtWebLink, "IMDB URL");
             this.txtWebLink.TextChanged += new System.EventHandler(this.txtWebLink_TextChanged);
             // 
             // cboSource
@@ -565,8 +566,11 @@ namespace TDMaker
             this.lbFiles.HorizontalScrollbar = true;
             this.lbFiles.Location = new System.Drawing.Point(26, 57);
             this.lbFiles.Name = "lbFiles";
+            this.lbFiles.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lbFiles.Size = new System.Drawing.Size(786, 82);
+            this.lbFiles.Sorted = true;
             this.lbFiles.TabIndex = 13;
+            this.lbFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbFiles_KeyDown);
             // 
             // btnBrowse
             // 
@@ -833,6 +837,7 @@ namespace TDMaker
             this.lbPublish.FormattingEnabled = true;
             this.lbPublish.Location = new System.Drawing.Point(3, 3);
             this.lbPublish.Name = "lbPublish";
+            this.lbPublish.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lbPublish.Size = new System.Drawing.Size(135, 433);
             this.lbPublish.TabIndex = 2;
             this.lbPublish.SelectedIndexChanged += new System.EventHandler(this.LbPublishSelectedIndexChanged);
@@ -1142,7 +1147,7 @@ namespace TDMaker
             this.tpPublish.Controls.Add(this.btnTemplatesRewrite);
             this.tpPublish.Controls.Add(this.cboTemplate);
             this.tpPublish.Controls.Add(this.gbTemplatesInternal);
-            this.tpPublish.Controls.Add(this.groupBox6);
+            this.tpPublish.Controls.Add(this.gbFonts);
             this.tpPublish.Controls.Add(this.chkUploadFullScreenshot);
             this.tpPublish.Controls.Add(this.chkTemplatesMode);
             this.tpPublish.Location = new System.Drawing.Point(4, 22);
@@ -1250,22 +1255,22 @@ namespace TDMaker
             this.chkAlignCenter.UseVisualStyleBackColor = true;
             this.chkAlignCenter.CheckedChanged += new System.EventHandler(this.chkAlignCenter_CheckedChanged);
             // 
-            // groupBox6
+            // gbFonts
             // 
-            this.groupBox6.Controls.Add(this.nudHeading1Size);
-            this.groupBox6.Controls.Add(this.label9);
-            this.groupBox6.Controls.Add(this.nudHeading2Size);
-            this.groupBox6.Controls.Add(this.label8);
-            this.groupBox6.Controls.Add(this.nudHeading3Size);
-            this.groupBox6.Controls.Add(this.label7);
-            this.groupBox6.Controls.Add(this.nudBodySize);
-            this.groupBox6.Controls.Add(this.label3);
-            this.groupBox6.Location = new System.Drawing.Point(455, 72);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(190, 148);
-            this.groupBox6.TabIndex = 7;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Font Size";
+            this.gbFonts.Controls.Add(this.nudHeading1Size);
+            this.gbFonts.Controls.Add(this.label9);
+            this.gbFonts.Controls.Add(this.nudHeading2Size);
+            this.gbFonts.Controls.Add(this.label8);
+            this.gbFonts.Controls.Add(this.nudHeading3Size);
+            this.gbFonts.Controls.Add(this.label7);
+            this.gbFonts.Controls.Add(this.nudBodySize);
+            this.gbFonts.Controls.Add(this.label3);
+            this.gbFonts.Location = new System.Drawing.Point(455, 72);
+            this.gbFonts.Name = "gbFonts";
+            this.gbFonts.Size = new System.Drawing.Size(190, 148);
+            this.gbFonts.TabIndex = 7;
+            this.gbFonts.TabStop = false;
+            this.gbFonts.Text = "Font Size";
             // 
             // nudHeading1Size
             // 
@@ -2152,8 +2157,8 @@ namespace TDMaker
             this.gbTemplatesInternal.ResumeLayout(false);
             this.gbTemplatesInternal.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeIncr)).EndInit();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
+            this.gbFonts.ResumeLayout(false);
+            this.gbFonts.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeading1Size)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeading2Size)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeading3Size)).EndInit();
@@ -2215,7 +2220,7 @@ namespace TDMaker
         private System.Windows.Forms.CheckBox chkPre;
         private System.Windows.Forms.NumericUpDown nudBodySize;
         private System.Windows.Forms.NumericUpDown nudHeading3Size;
-        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.GroupBox gbFonts;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown nudFontSizeIncr;
