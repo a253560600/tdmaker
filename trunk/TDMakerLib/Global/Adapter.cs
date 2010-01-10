@@ -234,6 +234,10 @@ namespace TDMakerLib
                     {
                         pt = ti.CreatePublish(pop, new TemplateReader(ti.MediaMy.TemplateLocation, ti));
                     }
+                    else
+                    {
+                        pt = ti.CreatePublishInternal(pop);
+                    }
                     break;
                 case PublishInfoType.InternalTemplate:
                     pt = ti.CreatePublishInternal(pop);
