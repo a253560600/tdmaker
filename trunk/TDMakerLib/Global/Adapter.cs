@@ -24,6 +24,7 @@
 using System;
 using System.Text;
 using UploadersLib.Helpers;
+using System.Text.RegularExpressions;
 
 namespace TDMakerLib
 {
@@ -205,6 +206,14 @@ namespace TDMakerLib
             int mins = (int)dura / 1000 / 60;
             int secsLeft = (int)dura / 1000 - mins * 60;
             return string.Format("{0}:{1}", mins.ToString(), secsLeft.ToString("00"));
+        }
+
+        /// <summary>
+        /// Remove HTML from string with Regex.
+        /// </summary>
+        public static string StringImg(string source)
+        {
+            return Regex.Replace(source, @"\[img\].*?\[/img\]", string.Empty);
         }
     }
 }

@@ -349,7 +349,11 @@ namespace TDMakerLib
 
             if (this.Screenshot != null)
             {
-                sbBody.AppendLine(this.GetScreenshotString());
+                string ss = this.GetScreenshotString();
+                if (ss.Length > 0)
+                {
+                    sbBody.AppendLine(this.GetScreenshotString());
+                }
             }
 
             //*********************
@@ -441,11 +445,11 @@ namespace TDMakerLib
 
             if (!string.IsNullOrEmpty(this.Screenshot.Full) && PublishOptions.FullPicture)
             {
-                sbPublish.AppendLine(BbCode.Img(this.Screenshot.Full));
+                sbPublish.Append(BbCode.Img(this.Screenshot.Full));
             }
             else if (!string.IsNullOrEmpty(this.Screenshot.LinkedThumbnail))
             {
-                sbPublish.AppendLine(this.Screenshot.LinkedThumbnail);
+                sbPublish.Append(this.Screenshot.LinkedThumbnail);
             }
 
             return sbPublish.ToString();
