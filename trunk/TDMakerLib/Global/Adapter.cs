@@ -25,6 +25,7 @@ using System;
 using System.Text;
 using UploadersLib.Helpers;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace TDMakerLib
 {
@@ -215,5 +216,38 @@ namespace TDMakerLib
         {
             return Regex.Replace(source, @"\[img\].*?\[/img\]", string.Empty);
         }
+
+        #region Publish 
+
+        public static string CreatePublish(TorrentInfo ti, PublishOptionsPacket pop)
+        {
+            string pt = "";
+
+            switch (pop.PublishInfoTypeChoice)
+            {
+                case PublishInfoType.ExternalTemplate:
+                    if (Directory.Exists(pop.TemplateLocation))
+                    {
+                        pt = ti.CreatePublish(pop, new TemplateReader(pop.TemplateLocation, ti));
+                    }
+                    else if (Directory.Exists(ti.MediaMy.TemplateLocation))
+                    {
+                        pt = ti.CreatePublish(pop, new TemplateReader(ti.MediaMy.TemplateLocation, ti));
+                    }
+                    break;
+                case PublishInfoType.InternalTemplate:
+                    pt = ti.CreatePublishInternal(pop);
+                    break;
+                case PublishInfoType.MediaInfo:
+                    pt = ti.CreatePublishMediaInfo(pop);
+                    break;
+            }
+
+            ti.MediaMy.ReleaseDescription = Adapter.StringImg(pt).Trim(); ;
+
+            return pt;
+        }
+
+        #endregion
     }
 }

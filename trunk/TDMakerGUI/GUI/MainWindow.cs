@@ -592,7 +592,7 @@ namespace TDMaker
             pop.PublishInfoTypeChoice = Engine.conf.PublishInfoTypeChoice;
             ti.PublishOptions = pop;
 
-            return CreatePublish(ti, pop);
+            return Adapter.CreatePublish(ti, pop);
         }
 
         private List<TorrentInfo> WorkerAnalyzeMedia(WorkerTask wt)
@@ -637,12 +637,12 @@ namespace TDMaker
 
                 if (wt.TorrentCreateAuto)
                 {
-                    mi.TorrentCreateInfoMy = new TaskManager(new WorkerTask(bwApp, Loader.CurrentTask)).WorkerCreateTorrent(mi.TorrentCreateInfoMy);
+                    mi.TorrentCreateInfoMy.CreateTorrent(bwApp);
                 }
 
                 if (Engine.conf.XMLTorrentUploadCreate)
                 {
-                    string fp = Path.Combine(FileSystem.GetTorrentFolderPath(mi.TorrentCreateInfoMy), Engine.GetMediaName(mi.TorrentCreateInfoMy.MediaLocation)) + ".xml";
+                    string fp = Path.Combine(mi.TorrentCreateInfoMy.GetTorrentFolderPath(), Engine.GetMediaName(mi.TorrentCreateInfoMy.MediaLocation)) + ".xml";
                     FileSystem.GetXMLTorrentUpload(mi).Write2(fp);
                 }
 
@@ -661,10 +661,10 @@ namespace TDMaker
                 foreach (TorrentInfo ti in wt.MediaList)
                 {
                     TorrentCreateInfo tci = ti.MediaMy.TorrentCreateInfoMy;
-                    new TaskManager(new WorkerTask(bwApp, Loader.CurrentTask)).WorkerCreateTorrent(tci);
+                    tci.CreateTorrent(wt.MyWorker);
                     if (Engine.conf.XMLTorrentUploadCreate)
                     {
-                        string fp = Path.Combine(FileSystem.GetTorrentFolderPath(tci), Engine.GetMediaName(tci.MediaLocation)) + ".xml";
+                        string fp = Path.Combine(tci.GetTorrentFolderPath(), Engine.GetMediaName(tci.MediaLocation)) + ".xml";
                         FileSystem.GetXMLTorrentUpload(ti.MediaMy).Write(fp);
                     }
                 }
@@ -696,34 +696,7 @@ namespace TDMaker
             }
         }
 
-        private string CreatePublish(TorrentInfo ti, PublishOptionsPacket pop)
-        {
-            string pt = "";
 
-            switch (pop.PublishInfoTypeChoice)
-            {
-                case PublishInfoType.ExternalTemplate:
-                    if (Directory.Exists(pop.TemplateLocation))
-                    {
-                        pt = ti.CreatePublish(pop, new TemplateReader(pop.TemplateLocation, ti));
-                    }
-                    else if (Directory.Exists(ti.MediaMy.TemplateLocation))
-                    {
-                        pt = ti.CreatePublish(pop, new TemplateReader(ti.MediaMy.TemplateLocation, ti));
-                    }
-                    break;
-                case PublishInfoType.InternalTemplate:
-                    pt = ti.CreatePublishInternal(pop);
-                    break;
-                case PublishInfoType.MediaInfo:
-                    pt = ti.CreatePublishMediaInfo(pop);
-                    break;
-            }
-
-            ti.MediaMy.ReleaseDescription = Adapter.StringImg(pt); ;
-
-            return pt;
-        }
 
         private void UpdateGuiControls()
         {
@@ -1024,7 +997,7 @@ namespace TDMaker
                 pop.PublishInfoTypeChoice = (PublishInfoType)cboPublishTypeQuick.SelectedIndex;
                 pop.TemplateLocation = Path.Combine(Engine.TemplatesDir, cboQuickTemplate.Text);
 
-                txtPublish.Text = CreatePublish(GetTorrentInfo(), pop);
+                txtPublish.Text = Adapter.CreatePublish(GetTorrentInfo(), pop);
             }
         }
 

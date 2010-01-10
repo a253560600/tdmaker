@@ -83,7 +83,7 @@ namespace TDMakerLib
             }
         }
 
-        public void ReadMediaFile()
+        private void ReadMediaFile()
         {
             if (File.Exists(Location))
             {
@@ -107,7 +107,7 @@ namespace TDMakerLib
             return filePaths;
         }
 
-        public void ReadDirectory()
+        private void ReadDirectory()
         {
             // if a folder then read all media files 
             // append all the durations and save in Duration
@@ -258,7 +258,7 @@ namespace TDMakerLib
             } // if Location is a directory
         }
 
-        public void ReadMediaFileCollection()
+        private void ReadMediaFileCollection()
         {
             if (FileCollection.Count > 0)
             {
@@ -405,7 +405,7 @@ namespace TDMakerLib
 
             // CREATING XML TORRENT UPLOAD FILE DOES NOT REQUIRE SCREENSHOT IN RELEASE DESCRIPTION
             // THE SCREENSHOTS ARE IN THE XML INSTEAD
-          
+
             foreach (MediaFile mf in this.MediaFiles)
             {
                 if (mf.Screenshot != null)
