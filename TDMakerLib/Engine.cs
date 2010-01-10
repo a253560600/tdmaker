@@ -10,16 +10,16 @@ namespace TDMakerLib
 {
     public static class Engine
     {
-        private static string mProductName = Application.ProductName;
+        private static string mProductName = "TDMaker"; // NOT Application.ProductName because both CLI and GUI needs common access
         public static McoreSystem.AppInfo mAppInfo = new McoreSystem.AppInfo(mProductName, Application.ProductVersion, McoreSystem.AppInfo.SoftwareCycle.Beta, false);
         public static bool Portable { get; private set; }
         public static bool MultipleInstance { get; private set; }
 
-        internal static readonly string zRoamingAppDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Application.ProductName);
-        internal static readonly string zLocalAppDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName);
+        internal static readonly string zRoamingAppDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), mProductName);
+        internal static readonly string zLocalAppDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), mProductName);
 
         internal static readonly string zLogsDir = Path.Combine(zLocalAppDataFolder, "Logs");
-        internal static readonly string zPicturesDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), Application.ProductName);
+        internal static readonly string zPicturesDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), mProductName);
         internal static readonly string zSettingsDir = Path.Combine(zRoamingAppDataFolder, "Settings");
         internal static readonly string zTemplatesDir = Path.Combine(zRoamingAppDataFolder, "Templates");
         internal static readonly string zTorrentsDir = Path.Combine(zLocalAppDataFolder, "Torrents");
@@ -28,7 +28,7 @@ namespace TDMakerLib
         public static AppSettings mAppSettings = AppSettings.Read();
 
         private static readonly string PortableRootFolder = Application.ProductName; // using relative paths
-        public static string DefaultRootAppFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), Application.ProductName);
+        public static string DefaultRootAppFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), mProductName);
         public static string RootAppFolder { get; set; }
 
         public static string LogsDir = zLogsDir;
@@ -155,6 +155,11 @@ namespace TDMakerLib
 
         public static MediaWizardOptions GetMediaType(List<string> FileOrDirPaths)
         {
+            return GetMediaType(FileOrDirPaths, false);
+        }
+
+        public static MediaWizardOptions GetMediaType(List<string> FileOrDirPaths, bool silent)
+        {
             MediaWizardOptions mwo = new MediaWizardOptions() { MediaTypeChoice = MediaType.MediaIndiv };
 
             if (FileOrDirPaths.Count == 1)
@@ -186,7 +191,7 @@ namespace TDMakerLib
                         }
                     }
                 }
-                else // no dir found
+                else if (!silent) // no dir found
                 {
                     MediaWizard mw = new MediaWizard(FileOrDirPaths);
                     

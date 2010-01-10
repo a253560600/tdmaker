@@ -30,10 +30,14 @@ namespace TDMakerLib
 
         private BackgroundWorker BwAppMy = null;
 
-        public TorrentInfo(BackgroundWorker bwApp, MediaInfo2 mi)
+        public TorrentInfo(MediaInfo2 mi)
         {
-            // load the MediaInfo object
             this.MediaMy = mi;
+        }
+
+        public TorrentInfo(BackgroundWorker bwApp, MediaInfo2 mi)
+            : this(mi)
+        {
             this.BwAppMy = bwApp;
         }
 
@@ -54,12 +58,34 @@ namespace TDMakerLib
             }
         }
 
+        private void ReportProgress(ProgressType percentProgress, object userState)
+        {
+            if (BwAppMy != null)
+            {
+                BwAppMy.ReportProgress((int)percentProgress, userState);
+            }
+            else
+            {
+                switch (percentProgress)
+                {
+                    case ProgressType.UPDATE_STATUSBAR_DEBUG:
+                        Console.WriteLine((string)userState);
+                        break;
+                    case ProgressType.UPDATE_SCREENSHOTS_LIST:
+                        Screenshot ss = userState as Screenshot;
+                        Console.WriteLine("Screenshot: " + ss.Full);
+                        break;
+                }
+            }
+        }
+
         private bool TakeScreenshot(MediaFile mf)
         {
             bool success = true;
             String mediaFilePath = mf.FilePath;
             Debug.WriteLine("Taking Screenshot for " + Path.GetFileName(mediaFilePath));
-            BwAppMy.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, "Taking Screenshot for " + Path.GetFileName(mediaFilePath));
+
+            ReportProgress(ProgressType.UPDATE_STATUSBAR_DEBUG, "Taking Screenshot for " + Path.GetFileName(mediaFilePath));
 
             try
             {
@@ -111,7 +137,7 @@ namespace TDMakerLib
             {
                 success = false;
                 Debug.WriteLine(ex.ToString());
-                BwAppMy.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, ex.Message + " for " + Path.GetFileName(mediaFilePath));
+                ReportProgress(ProgressType.UPDATE_STATUSBAR_DEBUG, ex.Message + " for " + Path.GetFileName(mediaFilePath));
             }
 
             return success;
@@ -122,7 +148,7 @@ namespace TDMakerLib
             foreach (MediaFile mf in this.MediaMy.MediaFiles)
             {
                 ImageFileManager imf = UploadScreenshot(mf.FilePath);
-                if (imf != null)
+                if (imf != null && mf.Screenshot != null)
                 {
                     mf.Screenshot.LocalPath = imf.LocalFilePath;
                     if (imf.ImageFileList != null && imf.ImageFileList.Count > 0)
@@ -130,7 +156,7 @@ namespace TDMakerLib
                         mf.Screenshot.Full = imf.GetFullImageUrl();
                         mf.Screenshot.LinkedThumbnail = imf.GetLinkedThumbnailForumUrl();
                     }
-                    BwAppMy.ReportProgress((int)ProgressType.UPDATE_SCREENSHOTS_LIST, mf.Screenshot);
+                    ReportProgress(ProgressType.UPDATE_SCREENSHOTS_LIST, mf.Screenshot);
                 }
             }
         }
@@ -183,7 +209,7 @@ namespace TDMakerLib
                         retry++;
                         if (retry > 1)
                             Thread.Sleep(2000);
-                        BwAppMy.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploading {0} to {1}... Attempt {2}", Path.GetFileName(ssPath), imageUploader.Name, retry));
+                        ReportProgress(ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploading {0} to {1}... Attempt {2}", Path.GetFileName(ssPath), imageUploader.Name, retry));
                         imf = imageUploader.UploadImage(ssPath);
                     }
                 }
@@ -193,12 +219,12 @@ namespace TDMakerLib
                     if (imf.ImageFileList.Count > 0)
                     {
                         imf.LocalFilePath = ssPath;
-                        BwAppMy.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploaded {0}.", Path.GetFileName(ssPath)));
+                        ReportProgress(ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploaded {0}.", Path.GetFileName(ssPath)));
                     }
                 }
                 else
                 {
-                    BwAppMy.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Failed uploading {0}. Try again later.", Path.GetFileName(ssPath)));
+                    ReportProgress(ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Failed uploading {0}. Try again later.", Path.GetFileName(ssPath)));
                 }
             }
             return imf;

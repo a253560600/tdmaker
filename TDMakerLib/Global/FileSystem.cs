@@ -192,34 +192,6 @@ namespace TDMakerLib
             return xmlUpload;
         }
 
-        public static string GetTorrentFolderPath(TorrentCreateInfo tci)
-        {
-            string dir = "";
-
-            switch (Engine.conf.TorrentLocationChoice)
-            {
-                case LocationType.CustomFolder:
-                    if (Directory.Exists(Engine.conf.CustomTorrentsDir) && Engine.conf.TorrentsOrganize)
-                    {
-                        dir = Path.Combine(Engine.conf.CustomTorrentsDir, tci.TrackerGroupActive.Name);
-                    }
-                    else
-                    {
-                        dir = Engine.conf.CustomTorrentsDir;
-                    }
-                    break;
-                case LocationType.KnownFolder:
-                    dir = Engine.TorrentsDir;
-                    break;
-                case LocationType.ParentFolder:
-                    dir = Path.GetDirectoryName(tci.MediaLocation);
-                    break;
-            }
-
-            return dir;
-
-        }
-
         /// <summary>
         /// Function to move a directory with overwriting existing files
         /// </summary>
