@@ -137,16 +137,20 @@ namespace TDMakerLib
 
         public static bool MediaIsDisc(string p)
         {
-            bool disc = Directory.Exists(p);
+            bool dir = Directory.Exists(p);
 
-            if (disc)
+            if (dir)
             {
                 string[] ifo = Directory.GetFiles(p, "VTS_01_0.IFO", SearchOption.AllDirectories);
                 string[] vob = Directory.GetFiles(p, "*.VOB", SearchOption.AllDirectories);
-                disc = ifo.Length > 0 && vob.Length > 0;
+                dir = ifo.Length > 0 && vob.Length > 0;
+            }
+            else if (File.Exists(p))
+            {
+                dir = Path.GetExtension(p).ToLower() == "iso";
             }
 
-            return disc;
+            return dir;
         }
 
         public static MediaWizardOptions GetMediaType(List<string> FileOrDirPaths)

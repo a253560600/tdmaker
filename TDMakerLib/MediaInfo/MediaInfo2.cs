@@ -403,6 +403,17 @@ namespace TDMakerLib
                 }
             }
 
+            // CREATING XML TORRENT UPLOAD FILE DOES NOT REQUIRE SCREENSHOT IN RELEASE DESCRIPTION
+            // THE SCREENSHOTS ARE IN THE XML INSTEAD
+          
+            foreach (MediaFile mf in this.MediaFiles)
+            {
+                if (mf.Screenshot != null)
+                {
+                    sbBody.AppendLine(mf.GetScreenshotString());
+                }
+            }
+
             return sbBody.ToString();
         }
 
@@ -489,20 +500,6 @@ namespace TDMakerLib
             sbBody.Append(" ".PadRight(widthRes));
             sbBody.Append(" | ");
             sbBody.AppendLine(totalSize);
-
-            // CREATING XML TORRENT UPLOAD FILE DOES NOT REQUIRE SCREENSHOT IN RELEASE DESCRIPTION
-            // THE SCREENSHOTS ARE IN THE XML INSTEAD
-            if (!Engine.conf.XMLTorrentUploadCreate)
-            {
-                sbBody.AppendLine();
-                foreach (MediaFile mf in this.MediaFiles)
-                {
-                    if (mf.Screenshot != null)
-                    {
-                        sbBody.AppendLine(mf.GetScreenshotString());
-                    }
-                }
-            }
 
             return sbBody.ToString();
         }

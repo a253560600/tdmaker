@@ -72,10 +72,6 @@ namespace TDMaker
             if (1 == ps.Length)
             {
                 txtTitle.Text = Engine.GetMediaName(ps[0]);
-                if (cboSource.Text == "DVD")
-                {
-                    cboSource.Text = Engine.GetDVDString(ps[0]);
-                }
             }
 
             // COMMENTED UNTIL RECALLED WHY THIS IS NEEDED
@@ -611,47 +607,43 @@ namespace TDMaker
 
                 bwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, "Reading " + Path.GetFileName(mi.Location) + " using MediaInfo...");
                 mi.ReadMedia();
+                bwApp.ReportProgress((int)ProgressType.REPORT_MEDIAINFO_SUMMARY, mi);
+                FileSystem.WriteDebugLog();
 
-                if (mi.Overall != null)
+                // creates screenshot
+                mi.UploadScreenshots = wt.UploadScreenshot;
+                if (wt.UploadScreenshot)
                 {
-                    bwApp.ReportProgress((int)ProgressType.REPORT_MEDIAINFO_SUMMARY, mi);
-                    FileSystem.WriteDebugLog();
+                    ti.CreateScreenshots();
+                }
+                ti.PublishString = CreatePublishInitial(ti);
+                bwApp.ReportProgress((int)ProgressType.REPORT_TORRENTINFO, ti);
 
-                    // creates screenshot
-                    mi.UploadScreenshots = wt.UploadScreenshot;
-                    if (wt.UploadScreenshot)
+                if (Engine.conf.WritePublish)
+                {
+                    // create textFiles of MediaInfo           
+                    string txtPath = Path.Combine(mi.TorrentCreateInfoMy.TorrentFolder, mi.Overall.FileName) + ".txt";
+
+                    if (!Directory.Exists(mi.TorrentCreateInfoMy.TorrentFolder))
                     {
-                        ti.CreateScreenshots();
-                    }
-                    ti.PublishString = CreatePublishInitial(ti);
-                    bwApp.ReportProgress((int)ProgressType.REPORT_TORRENTINFO, ti);
-
-                    if (Engine.conf.WritePublish)
-                    {
-                        // create textFiles of MediaInfo           
-                        string txtPath = Path.Combine(mi.TorrentCreateInfoMy.TorrentFolder, mi.Overall.FileName) + ".txt";
-
-                        if (!Directory.Exists(mi.TorrentCreateInfoMy.TorrentFolder))
-                        {
-                            Directory.CreateDirectory(mi.TorrentCreateInfoMy.TorrentFolder);
-                        }
-
-                        using (StreamWriter sw = new StreamWriter(txtPath))
-                        {
-                            sw.WriteLine(ti.PublishString);
-                        }
+                        Directory.CreateDirectory(mi.TorrentCreateInfoMy.TorrentFolder);
                     }
 
-                    if (wt.TorrentCreateAuto)
+                    using (StreamWriter sw = new StreamWriter(txtPath))
                     {
-                        mi.TorrentCreateInfoMy = new TaskManager(new WorkerTask(bwApp, Loader.CurrentTask)).WorkerCreateTorrent(mi.TorrentCreateInfoMy);
+                        sw.WriteLine(ti.PublishString);
                     }
+                }
 
-                    if (Engine.conf.XMLTorrentUploadCreate)
-                    {
-                        string fp = Path.Combine(FileSystem.GetTorrentFolderPath(mi.TorrentCreateInfoMy), Engine.GetMediaName(mi.TorrentCreateInfoMy.MediaLocation)) + ".xml";
-                        FileSystem.GetXMLTorrentUpload(mi).Write2(fp);
-                    }
+                if (wt.TorrentCreateAuto)
+                {
+                    mi.TorrentCreateInfoMy = new TaskManager(new WorkerTask(bwApp, Loader.CurrentTask)).WorkerCreateTorrent(mi.TorrentCreateInfoMy);
+                }
+
+                if (Engine.conf.XMLTorrentUploadCreate)
+                {
+                    string fp = Path.Combine(FileSystem.GetTorrentFolderPath(mi.TorrentCreateInfoMy), Engine.GetMediaName(mi.TorrentCreateInfoMy.MediaLocation)) + ".xml";
+                    FileSystem.GetXMLTorrentUpload(mi).Write2(fp);
                 }
 
                 bwApp.ReportProgress((int)ProgressType.INCREMENT_PROGRESS_WITH_MSG, mi.Title);
@@ -673,7 +665,7 @@ namespace TDMaker
                     if (Engine.conf.XMLTorrentUploadCreate)
                     {
                         string fp = Path.Combine(FileSystem.GetTorrentFolderPath(tci), Engine.GetMediaName(tci.MediaLocation)) + ".xml";
-                        FileSystem.GetXMLTorrentUpload(ti.MediaMy).Write2(fp);
+                        FileSystem.GetXMLTorrentUpload(ti.MediaMy).Write(fp);
                     }
                 }
             }
@@ -728,7 +720,7 @@ namespace TDMaker
                     break;
             }
 
-            ti.MediaMy.ReleaseDescription = pt;
+            ti.MediaMy.ReleaseDescription = Adapter.StringImg(pt); ;
 
             return pt;
         }
