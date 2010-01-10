@@ -1,5 +1,4 @@
-﻿You dragged a file/folder
-What you want to do
+﻿Create XML file for moovies upload
 
 Logo PictureBox is disabled until figured out where the best place is to put
 Reorganize Code to isoloate methods from MainWindow.cs

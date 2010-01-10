@@ -22,13 +22,13 @@ namespace TDMakerLib
         /// <summary>
         /// Packet that contains Tracker Information 
         /// </summary>
-        public TorrentPacket TorrentPacketInfo { get; set; }
+        public TorrentCreateInfo TorrentCreateInfoMy { get; set; }
         /// <summary>
         /// FilePath or DirectoryPath of the Media
         /// </summary>
         public string Location { get; private set; }
         /// <summary>
-        /// Check here Screennshots were taken
+        /// Check here Screenshots were taken
         /// </summary>
         public bool UploadScreenshots { get; set; }
         /// <summary>
@@ -40,6 +40,8 @@ namespace TDMakerLib
         public string Menu { get; set; }
         public string Extras { get; set; }
         public string WebLink { get; set; }
+
+        public string ReleaseDescription { get; set; }
 
         public MediaFile Overall { get; set; }
         public List<MediaFile> MediaFiles { get; private set; }
@@ -487,12 +489,18 @@ namespace TDMakerLib
             sbBody.Append(" ".PadRight(widthRes));
             sbBody.Append(" | ");
             sbBody.AppendLine(totalSize);
-            sbBody.AppendLine();
-            foreach (MediaFile mf in this.MediaFiles)
+
+            // CREATING XML TORRENT UPLOAD FILE DOES NOT REQUIRE SCREENSHOT IN RELEASE DESCRIPTION
+            // THE SCREENSHOTS ARE IN THE XML INSTEAD
+            if (!Engine.conf.XMLTorrentUploadCreate)
             {
-                if (mf.Screenshot != null)
+                sbBody.AppendLine();
+                foreach (MediaFile mf in this.MediaFiles)
                 {
-                    sbBody.AppendLine(mf.GetScreenshotString());
+                    if (mf.Screenshot != null)
+                    {
+                        sbBody.AppendLine(mf.GetScreenshotString());
+                    }
                 }
             }
 

@@ -16,14 +16,12 @@ namespace TDMakerLib.Helpers
             this.mTask = task;
         }
 
-        public bool WorkerCreateTorrent(TorrentPacket tp)
+        public TorrentCreateInfo WorkerCreateTorrent(TorrentCreateInfo tci)
         {
-            bool success = true;
-
-            string p = tp.MediaLocation;
+            string p = tci.MediaLocation;
             if (File.Exists(p) || Directory.Exists(p))
             {
-                foreach (Tracker myTracker in tp.TrackerGroupActive.Trackers)
+                foreach (Tracker myTracker in tci.TrackerGroupActive.Trackers)
                 {
                     MonoTorrent.Common.TorrentCreator tc = new MonoTorrent.Common.TorrentCreator();
                     tc.Private = true;
@@ -37,18 +35,18 @@ namespace TDMakerLib.Helpers
                     tc.Announces.Add(temp);
 
                     string torrentFileName = string.Format("{0} - {1}.torrent", (File.Exists(p) ? Path.GetFileName(p) : Engine.GetMediaName(p)), myTracker.Name);
-                    string torrentPath = Path.Combine(tp.TorrentFolder, torrentFileName);
+                    tci.SetTorrentFilePath(torrentFileName);
 
-                    if (!Directory.Exists(tp.TorrentFolder))
-                        Directory.CreateDirectory(Path.GetDirectoryName(torrentPath));
+                    if (!Directory.Exists(tci.TorrentFolder))
+                        Directory.CreateDirectory(Path.GetDirectoryName(tci.TorrentFilePath));
 
-                    mTask.MyWorker.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Creating {0}", torrentPath));
-                    tc.Create(torrentPath);
-                    mTask.MyWorker.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Created {0}", torrentPath));
+                    mTask.MyWorker.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Creating {0}", tci.TorrentFilePath));
+                    tc.Create(tci.TorrentFilePath);
+                    mTask.MyWorker.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Created {0}", tci.TorrentFilePath));
                 }
             }
 
-            return success;
+            return tci;
         }
     }
 }

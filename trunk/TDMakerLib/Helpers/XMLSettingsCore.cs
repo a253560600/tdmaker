@@ -27,7 +27,7 @@ namespace TDMakerLib
             AuthoringModes = new StringCollection();
             DiscMenus = new StringCollection();
             Extras = new StringCollection();
-            Sources = new StringCollection();
+            MediaSources = new StringCollection();
             SupportedFileTypesVideo = new StringCollection();
         }
 
@@ -54,7 +54,7 @@ namespace TDMakerLib
 
         // Source Properties
         [Category("Input"), Editor(@"System.Windows.Forms.Design.StringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(System.Drawing.Design.UITypeEditor))]
-        public StringCollection Sources { get; set; }
+        public StringCollection MediaSources { get; set; }
 
         [Category("Input"),
         Editor(@"System.Windows.Forms.Design.StringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
@@ -143,6 +143,8 @@ namespace TDMakerLib
         [Category("Torrent Creator"), DefaultValue(false), Description("Save torrent files in sub-folders organized by tracker namer")]
         public bool TorrentsOrganize { get; set; }
         public List<TrackerGroup> TrackerGroups = new List<TrackerGroup>();
+        [Category("Torrent Creator"), DefaultValue(false), Description("Create XML Torrent Upload file")]
+        public bool XMLTorrentUploadCreate { get; set; }
 
         // Tab 4.4 - Options - Paths
         [Category("Options / Paths"), DefaultValue(false), Description("Use custom Templates directory")]
