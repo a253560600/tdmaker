@@ -17,7 +17,7 @@ namespace TDMakerLib
         /// <summary>
         /// MediaInfo2 Object
         /// </summary>
-        public MediaInfo2 MyMedia { get; set; }
+        public MediaInfo2 MediaMy { get; set; }
         /// <summary>
         /// String Representation of Publish tab
         /// ToString() should be called at least once
@@ -28,27 +28,27 @@ namespace TDMakerLib
         /// </summary>
         public PublishOptionsPacket PublishOptions { get; set; }
 
-        private BackgroundWorker mBwApp = null;
+        private BackgroundWorker BwAppMy = null;
 
         public TorrentInfo(BackgroundWorker bwApp, MediaInfo2 mi)
         {
             // load the MediaInfo object
-            MyMedia = mi;
+            this.MediaMy = mi;
+            this.BwAppMy = bwApp;
+        }
 
-            string p = mi.Location;
-
-            this.mBwApp = bwApp;
-
-            if (mi.UploadScreenshots)
-            {
-                TakeScreenshots();
-                UploadScreenshots();
-            }
+        /// <summary>
+        /// Createa and upload screenshots
+        /// </summary>
+        public void CreateScreenshots()
+        {
+            TakeScreenshots();
+            UploadScreenshots();
         }
 
         private void TakeScreenshots()
         {
-            foreach (MediaFile mf in this.MyMedia.MediaFiles)
+            foreach (MediaFile mf in this.MediaMy.MediaFiles)
             {
                 TakeScreenshot(mf);
             }
@@ -59,7 +59,7 @@ namespace TDMakerLib
             bool success = true;
             String mediaFilePath = mf.FilePath;
             Debug.WriteLine("Taking Screenshot for " + Path.GetFileName(mediaFilePath));
-            mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, "Taking Screenshot for " + Path.GetFileName(mediaFilePath));
+            BwAppMy.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, "Taking Screenshot for " + Path.GetFileName(mediaFilePath));
 
             try
             {
@@ -96,13 +96,13 @@ namespace TDMakerLib
                 if (Engine.IsUNIX)
                 {
                     // Save _s.txt to MediaInfo2.Overall object
-                    if (string.IsNullOrEmpty(MyMedia.Overall.Summary))
+                    if (string.IsNullOrEmpty(MediaMy.Overall.Summary))
                     {
                         string info = Path.Combine(Engine.GetScreenShotsDir(mediaFilePath), Path.GetFileNameWithoutExtension(mediaFilePath) + Engine.mtnProfileMgr.GetMtnProfileActive().N_InfoSuffix);
 
                         using (StreamReader sr = new StreamReader(info))
                         {
-                            MyMedia.Overall.Summary = sr.ReadToEnd();
+                            MediaMy.Overall.Summary = sr.ReadToEnd();
                         }
                     }
                 }
@@ -111,7 +111,7 @@ namespace TDMakerLib
             {
                 success = false;
                 Debug.WriteLine(ex.ToString());
-                mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, ex.Message + " for " + Path.GetFileName(mediaFilePath));
+                BwAppMy.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, ex.Message + " for " + Path.GetFileName(mediaFilePath));
             }
 
             return success;
@@ -119,7 +119,7 @@ namespace TDMakerLib
 
         private void UploadScreenshots()
         {
-            foreach (MediaFile mf in this.MyMedia.MediaFiles)
+            foreach (MediaFile mf in this.MediaMy.MediaFiles)
             {
                 ImageFileManager imf = UploadScreenshot(mf.FilePath);
                 if (imf != null)
@@ -130,7 +130,7 @@ namespace TDMakerLib
                         mf.Screenshot.Full = imf.GetFullImageUrl();
                         mf.Screenshot.LinkedThumbnail = imf.GetLinkedThumbnailForumUrl();
                     }
-                    mBwApp.ReportProgress((int)ProgressType.UPDATE_SCREENSHOTS_LIST, mf.Screenshot);
+                    BwAppMy.ReportProgress((int)ProgressType.UPDATE_SCREENSHOTS_LIST, mf.Screenshot);
                 }
             }
         }
@@ -183,7 +183,7 @@ namespace TDMakerLib
                         retry++;
                         if (retry > 1)
                             Thread.Sleep(2000);
-                        mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploading {0} to {1}... Attempt {2}", Path.GetFileName(ssPath), imageUploader.Name, retry));
+                        BwAppMy.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploading {0} to {1}... Attempt {2}", Path.GetFileName(ssPath), imageUploader.Name, retry));
                         imf = imageUploader.UploadImage(ssPath);
                     }
                 }
@@ -193,12 +193,12 @@ namespace TDMakerLib
                     if (imf.ImageFileList.Count > 0)
                     {
                         imf.LocalFilePath = ssPath;
-                        mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploaded {0}.", Path.GetFileName(ssPath)));
+                        BwAppMy.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploaded {0}.", Path.GetFileName(ssPath)));
                     }
                 }
                 else
                 {
-                    mBwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Failed uploading {0}. Try again later.", Path.GetFileName(ssPath)));
+                    BwAppMy.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Failed uploading {0}. Try again later.", Path.GetFileName(ssPath)));
                 }
             }
             return imf;
@@ -224,14 +224,14 @@ namespace TDMakerLib
         {
             StringBuilder sbPublish = new StringBuilder();
             StringBuilder sbMediaInfo = new StringBuilder();
-            foreach (MediaFile mf in MyMedia.MediaFiles)
+            foreach (MediaFile mf in MediaMy.MediaFiles)
             {
                 sbMediaInfo.AppendLine(BbCode.Bold(mf.FileName));
                 sbMediaInfo.AppendLine();
                 sbMediaInfo.AppendLine(mf.Summary.Trim());
             }
             sbPublish.AppendLine(GetMediaInfo(sbMediaInfo.ToString(), options));
-            foreach (MediaFile mf in MyMedia.MediaFiles)
+            foreach (MediaFile mf in MediaMy.MediaFiles)
             {
                 sbPublish.AppendLine(mf.GetScreenshotString());
             }
@@ -247,13 +247,13 @@ namespace TDMakerLib
         /// <returns></returns>
         public string CreatePublishInternal(PublishOptionsPacket options)
         {
-            foreach (MediaFile mf in this.MyMedia.MediaFiles)
+            foreach (MediaFile mf in this.MediaMy.MediaFiles)
             {
                 mf.PublishOptions = options;
             }
 
             StringBuilder sbPublish = new StringBuilder();
-            string info = MyMedia.MediaTypeChoice == MediaType.MUSIC_AUDIO_ALBUM ? MyMedia.ToStringAudio() : MyMedia.ToStringMedia();
+            string info = MediaMy.MediaTypeChoice == MediaType.MUSIC_AUDIO_ALBUM ? MediaMy.ToStringAudio() : MediaMy.ToStringMedia();
             sbPublish.Append(GetMediaInfo(info, options));
 
             return sbPublish.ToString().Trim();
@@ -292,7 +292,7 @@ namespace TDMakerLib
 
         public override string ToString()
         {
-            return Path.GetFileName(this.MyMedia.Location);
+            return Path.GetFileName(this.MediaMy.Location);
         }
 
     }

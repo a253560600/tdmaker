@@ -529,6 +529,7 @@ namespace TDMaker
             this.gbLocation.Controls.Add(this.btnBrowseDir);
             this.gbLocation.Controls.Add(this.lbFiles);
             this.gbLocation.Controls.Add(this.btnBrowse);
+            this.gbLocation.Controls.Add(this.pbLogo);
             this.gbLocation.Location = new System.Drawing.Point(12, 8);
             this.gbLocation.Name = "gbLocation";
             this.gbLocation.Size = new System.Drawing.Size(828, 163);
@@ -837,7 +838,6 @@ namespace TDMaker
             this.lbPublish.FormattingEnabled = true;
             this.lbPublish.Location = new System.Drawing.Point(3, 3);
             this.lbPublish.Name = "lbPublish";
-            this.lbPublish.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lbPublish.Size = new System.Drawing.Size(135, 433);
             this.lbPublish.TabIndex = 2;
             this.lbPublish.SelectedIndexChanged += new System.EventHandler(this.LbPublishSelectedIndexChanged);
@@ -1746,7 +1746,7 @@ namespace TDMaker
             this.btnPublish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPublish.AutoSize = true;
             this.btnPublish.Enabled = false;
-            this.btnPublish.Location = new System.Drawing.Point(708, 510);
+            this.btnPublish.Location = new System.Drawing.Point(768, 512);
             this.btnPublish.Name = "btnPublish";
             this.btnPublish.Size = new System.Drawing.Size(106, 23);
             this.btnPublish.TabIndex = 5;
@@ -1760,7 +1760,7 @@ namespace TDMaker
             this.btnAnalyze.AutoSize = true;
             this.btnAnalyze.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnAnalyze.Enabled = false;
-            this.btnAnalyze.Location = new System.Drawing.Point(28, 509);
+            this.btnAnalyze.Location = new System.Drawing.Point(16, 512);
             this.btnAnalyze.Name = "btnAnalyze";
             this.btnAnalyze.Size = new System.Drawing.Size(104, 23);
             this.btnAnalyze.TabIndex = 9;
@@ -1863,7 +1863,7 @@ namespace TDMaker
             this.btnCreateTorrent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCreateTorrent.AutoSize = true;
             this.btnCreateTorrent.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnCreateTorrent.Location = new System.Drawing.Point(138, 509);
+            this.btnCreateTorrent.Location = new System.Drawing.Point(136, 512);
             this.btnCreateTorrent.Name = "btnCreateTorrent";
             this.btnCreateTorrent.Size = new System.Drawing.Size(85, 23);
             this.btnCreateTorrent.TabIndex = 10;
@@ -1874,9 +1874,9 @@ namespace TDMaker
             // pbLogo
             // 
             this.pbLogo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pbLogo.Location = new System.Drawing.Point(242, 506);
+            this.pbLogo.Location = new System.Drawing.Point(312, 16);
             this.pbLogo.Name = "pbLogo";
-            this.pbLogo.Size = new System.Drawing.Size(356, 29);
+            this.pbLogo.Size = new System.Drawing.Size(392, 29);
             this.pbLogo.TabIndex = 11;
             this.pbLogo.TabStop = false;
             // 
@@ -2095,12 +2095,11 @@ namespace TDMaker
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(892, 566);
             this.ContextMenuStrip = this.cmsApp;
+            this.Controls.Add(this.btnAnalyze);
+            this.Controls.Add(this.btnCreateTorrent);
+            this.Controls.Add(this.btnPublish);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.btnCreateTorrent);
-            this.Controls.Add(this.btnAnalyze);
-            this.Controls.Add(this.pbLogo);
-            this.Controls.Add(this.btnPublish);
             this.Controls.Add(this.tcMain);
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(900, 600);

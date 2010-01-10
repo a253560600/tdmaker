@@ -7,7 +7,7 @@ namespace TDMakerLib
     public class WorkerTask
     {
         public TaskType Task { get; private set; }
-        public List<MediaInfo2> MediaList { get; set; }
+        public List<TorrentInfo> MediaList { get; set; }
         public BackgroundWorker MyWorker { get; private set; }
         public List<TorrentCreateInfo> TorrentPackets { get; set; }
         /// <summary>
