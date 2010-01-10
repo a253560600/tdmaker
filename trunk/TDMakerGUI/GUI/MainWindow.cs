@@ -1081,7 +1081,7 @@ namespace TDMaker
 
             UpdateCheckerOptions uco = new UpdateCheckerOptions
             {
-                CheckBeta = true,
+                CheckBeta = false,
                 MyNewVersionWindowOptions = nvwo
             };
             uco.ProxySettings = Adapter.CheckProxySettings().GetWebProxy;
