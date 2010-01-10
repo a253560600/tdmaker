@@ -51,9 +51,17 @@ namespace TDMakerCLI
             {
                 Engine.InitializeDefaultFolderPaths();
                 Engine.mtnProfileMgr = XMLSettingsMtnProfiles.Read();
-                Console.WriteLine(string.Format("Media location: {0}", mMediaLoc));
-                Console.WriteLine(string.Format("Settings file:  {0}", mSettingsFile));
-                Console.WriteLine(string.Format("MTN Path:       {0}", Engine.conf.MTNPath));
+
+                Console.WriteLine("Media location:");
+                Console.WriteLine(mMediaLoc);
+                Console.WriteLine();
+
+                Console.WriteLine("Settings file");
+                Console.WriteLine(mSettingsFile);
+                Console.WriteLine();
+
+                Console.WriteLine("MTN Path:");
+                Console.WriteLine(Engine.conf.MTNPath);
                 Console.WriteLine();
 
                 List<string> listFileOrDir = new List<string>() { mMediaLoc };
@@ -65,22 +73,36 @@ namespace TDMakerCLI
                 MediaInfo2 mi = new MediaInfo2(mwo.MediaTypeChoice, mMediaLoc);
                 TorrentInfo ti = new TorrentInfo(mi);
                 mi.ReadMedia();
+
                 if (mScreenshotsCreate)
                 {
                     ti.CreateScreenshots();
                 }
+                PublishOptionsPacket pop = new PublishOptionsPacket()
+                {
+                    AlignCenter = Engine.conf.AlignCenter,
+                    FullPicture = Engine.conf.UseFullPicture,
+                    PreformattedText = Engine.conf.PreText,
+                    PublishInfoTypeChoice = Engine.conf.PublishInfoTypeChoice,
+                    TemplateLocation = Path.Combine(Engine.TemplatesDir, "Default")
+                };
+
+                ti.PublishString = Adapter.CreatePublish(ti, pop);
+                Console.WriteLine();
+                Console.WriteLine("Release Description: ");
+                Console.WriteLine();
+                Console.WriteLine(ti.PublishString);
+                Console.WriteLine();
 
                 if (mTorrentCreate)
                 {
                     ti.MediaMy.TorrentCreateInfoMy = new TorrentCreateInfo(Engine.conf.TrackerGroups[Engine.conf.TrackerGroupActive], mMediaLoc);
                     ti.MediaMy.TorrentCreateInfoMy.CreateTorrent();
                 }
-
             }
+            Console.WriteLine();
             Console.WriteLine("Press any key to exit.");
             Console.ReadLine();
         }
-
-
     }
 }
