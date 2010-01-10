@@ -228,8 +228,13 @@ namespace TDMaker
                 }
             }
 
-            wt.MediaList = miList;
-
+            List<TorrentInfo> tiList = new List<TorrentInfo>();
+            foreach (MediaInfo2 mi in miList)
+            {
+                TorrentInfo ti = new TorrentInfo(bwApp, mi);
+                tiList.Add(ti);
+            }
+            wt.MediaList = tiList;
 
             if (!bwApp.IsBusy)
             {
@@ -582,11 +587,11 @@ namespace TDMaker
             txtTorrentCustomFolder.Text = Engine.conf.CustomTorrentsDir;
         }
 
-        private string CreatePublishInitial(ref TorrentInfo ti)
+        private string CreatePublishInitial(TorrentInfo ti)
         {
             PublishOptionsPacket pop = new PublishOptionsPacket();
             pop.AlignCenter = Engine.conf.AlignCenter;
-            pop.FullPicture = ti.MyMedia.UploadScreenshots && Engine.conf.UseFullPicture;
+            pop.FullPicture = ti.MediaMy.UploadScreenshots && Engine.conf.UseFullPicture;
             pop.PreformattedText = Engine.conf.PreText;
             pop.PublishInfoTypeChoice = Engine.conf.PublishInfoTypeChoice;
             ti.PublishOptions = pop;
@@ -596,13 +601,14 @@ namespace TDMaker
 
         private List<TorrentInfo> WorkerAnalyzeMedia(WorkerTask wt)
         {
-            List<MediaInfo2> miList = wt.MediaList;
-            List<TorrentInfo> tiList = new List<TorrentInfo>();
+            List<TorrentInfo> tiListTemp = wt.MediaList;
 
-            bwApp.ReportProgress((int)ProgressType.UPDATE_PROGRESSBAR_MAX, miList.Count);
+            bwApp.ReportProgress((int)ProgressType.UPDATE_PROGRESSBAR_MAX, tiListTemp.Count);
 
-            foreach (MediaInfo2 mi in miList)
+            foreach (TorrentInfo ti in tiListTemp)
             {
+                MediaInfo2 mi = ti.MediaMy;
+
                 bwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, "Reading " + Path.GetFileName(mi.Location) + " using MediaInfo...");
                 mi.ReadMedia();
 
@@ -613,8 +619,11 @@ namespace TDMaker
 
                     // creates screenshot
                     mi.UploadScreenshots = wt.UploadScreenshot;
-                    TorrentInfo ti = new TorrentInfo(bwApp, mi);
-                    ti.PublishString = CreatePublishInitial(ref ti);
+                    if (wt.UploadScreenshot)
+                    {
+                        ti.CreateScreenshots();
+                    }
+                    ti.PublishString = CreatePublishInitial(ti);
                     bwApp.ReportProgress((int)ProgressType.REPORT_TORRENTINFO, ti);
 
                     if (Engine.conf.WritePublish)
@@ -633,8 +642,6 @@ namespace TDMaker
                         }
                     }
 
-                    tiList.Add(ti);
-
                     if (wt.TorrentCreateAuto)
                     {
                         mi.TorrentCreateInfoMy = new TaskManager(new WorkerTask(bwApp, Loader.CurrentTask)).WorkerCreateTorrent(mi.TorrentCreateInfoMy);
@@ -643,7 +650,7 @@ namespace TDMaker
                     if (Engine.conf.XMLTorrentUploadCreate)
                     {
                         string fp = Path.Combine(FileSystem.GetTorrentFolderPath(mi.TorrentCreateInfoMy), Engine.GetMediaName(mi.TorrentCreateInfoMy.MediaLocation)) + ".xml";
-                        FileSystem.GetXMLTorrentUpload(mi).Write(fp);
+                        FileSystem.GetXMLTorrentUpload(mi).Write2(fp);
                     }
                 }
 
@@ -651,19 +658,23 @@ namespace TDMaker
 
             }
 
-            return tiList;
+            return tiListTemp;
 
         }
 
         private object WorkerCreateTorrents(WorkerTask wt)
         {
-            List<TorrentCreateInfo> tps = wt.TorrentPackets;
-
             try
             {
-                foreach (TorrentCreateInfo tp in tps)
+                foreach (TorrentInfo ti in wt.MediaList)
                 {
-                    new TaskManager(new WorkerTask(bwApp, Loader.CurrentTask)).WorkerCreateTorrent(tp);
+                    TorrentCreateInfo tci = ti.MediaMy.TorrentCreateInfoMy;
+                    new TaskManager(new WorkerTask(bwApp, Loader.CurrentTask)).WorkerCreateTorrent(tci);
+                    if (Engine.conf.XMLTorrentUploadCreate)
+                    {
+                        string fp = Path.Combine(FileSystem.GetTorrentFolderPath(tci), Engine.GetMediaName(tci.MediaLocation)) + ".xml";
+                        FileSystem.GetXMLTorrentUpload(ti.MediaMy).Write2(fp);
+                    }
                 }
             }
             catch (Exception ex)
@@ -704,9 +715,9 @@ namespace TDMaker
                     {
                         pt = ti.CreatePublish(pop, new TemplateReader(pop.TemplateLocation, ti));
                     }
-                    else if (Directory.Exists(ti.MyMedia.TemplateLocation))
+                    else if (Directory.Exists(ti.MediaMy.TemplateLocation))
                     {
-                        pt = ti.CreatePublish(pop, new TemplateReader(ti.MyMedia.TemplateLocation, ti));
+                        pt = ti.CreatePublish(pop, new TemplateReader(ti.MediaMy.TemplateLocation, ti));
                     }
                     break;
                 case PublishInfoType.InternalTemplate:
@@ -716,8 +727,8 @@ namespace TDMaker
                     pt = ti.CreatePublishMediaInfo(pop);
                     break;
             }
-            
-            ti.MyMedia.ReleaseDescription = pt;
+
+            ti.MediaMy.ReleaseDescription = pt;
 
             return pt;
         }
@@ -779,6 +790,7 @@ namespace TDMaker
             btnAnalyze.Text = "Create &Description" + (lbFiles.SelectedItems.Count > 1 ? "s" : "");
             btnCreateTorrent.Text = "Create &Torrent" + (lbPublish.SelectedItems.Count > 1 ? "s" : "");
             btnBrowse.Enabled = !bwApp.IsBusy;
+            btnBrowseDir.Enabled = !bwApp.IsBusy;
             btnAnalyze.Enabled = !bwApp.IsBusy && lbFiles.Items.Count > 0;
             lbStatus.SelectedIndex = lbStatus.Items.Count - 1;
         }
@@ -950,13 +962,16 @@ namespace TDMaker
             if (!bwApp.IsBusy)
             {
                 List<TorrentCreateInfo> tps = new List<TorrentCreateInfo>();
+                List<TorrentInfo> tiList = new List<TorrentInfo>();
                 foreach (TorrentInfo ti in lbPublish.SelectedItems)
                 {
-                    tps.Add(new TorrentCreateInfo(GetTracker(), ti.MyMedia.Location));
+                    tps.Add(new TorrentCreateInfo(GetTracker(), ti.MediaMy.Location));
+                    tiList.Add(ti);
                 }
                 if (tps.Count > 0)
                 {
                     WorkerTask wt = new WorkerTask(bwApp, TaskType.CREATE_TORRENT);
+                    wt.MediaList = tiList;
                     wt.TorrentPackets = tps;
                     bwApp.RunWorkerAsync(wt);
 
@@ -1228,9 +1243,9 @@ namespace TDMaker
         {
             if (ti != null)
             {
-                txtPublish.Text = CreatePublishInitial(ref ti);
+                txtPublish.Text = CreatePublishInitial(ti);
 
-                if (ti.MyMedia.MediaTypeChoice == MediaType.MUSIC_AUDIO_ALBUM)
+                if (ti.MediaMy.MediaTypeChoice == MediaType.MUSIC_AUDIO_ALBUM)
                 {
                     txtPublish.BackColor = System.Drawing.Color.Black;
                     txtPublish.ForeColor = System.Drawing.Color.White;
@@ -1249,7 +1264,7 @@ namespace TDMaker
             {
                 SaveFileDialog dlg = new SaveFileDialog();
                 dlg.Filter = "Text Files (*.txt)|*.txt";
-                dlg.FileName = GetTorrentInfo().MyMedia.Title;
+                dlg.FileName = GetTorrentInfo().MediaMy.Title;
 
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
