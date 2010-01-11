@@ -188,7 +188,7 @@ Source: "..\Lib\64-bit\MediaInfo.dll"; DestDir: "{app}"; Flags: ignoreversion; C
 
 
 [Icons]
-Name: {code:GetCodeVar|StartMenu}\{#ExeName}; Filename: {app}\{#ExeName}.exe; AppUserModelID: {#ExeName}
+Name: {group}\{#ExeName}; Filename: {app}\{#ExeName}.exe; AppUserModelID: {#ExeName}
 ;Name: "{group}\TDMaker Manual"; Filename: "{app}\TDMaker-manual.pdf"
 Name: {code:GetCodeVar|Desktop}\{#ExeName}; Filename: {app}\{#ExeName}.exe; Tasks: desktopicon
 ;Name: "{group}\Uninstall {#ExeName}"; Filename: "{uninstallexe}"
