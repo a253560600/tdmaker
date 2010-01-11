@@ -23,7 +23,7 @@ namespace TDMakerLib
             sbDesc.AppendLine(Application.StartupPath);
             sbDesc.AppendLine();
             sbDesc.AppendLine("Settings file:");
-            sbDesc.AppendLine(Engine.DefaultXMLFilePath);
+            sbDesc.AppendLine(Engine.mAppSettings.XMLSettingsFile);
             this.textBoxDescription.Text = sbDesc.ToString();
         }
 

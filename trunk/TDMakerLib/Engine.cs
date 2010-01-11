@@ -41,12 +41,8 @@ namespace TDMakerLib
 
         private static string[] AppDirs;
 
-        public static string DefaultXMLFilePath { get; private set; }
-
         public static XMLSettingsCore conf;
         public static XMLSettingsMtnProfiles mtnProfileMgr;
-
-        private static bool RunConfig = false;
 
         public static bool DetectUnix()
         {
@@ -66,7 +62,7 @@ namespace TDMakerLib
                     Directory.CreateDirectory(SettingsDir);
                 }
 
-                return DefaultXMLFilePath;                                  // v2.x               
+                return Engine.mAppSettings.XMLSettingsFile;                                  // v2.x               
             }
         }
 
@@ -361,8 +357,7 @@ namespace TDMakerLib
                     Directory.CreateDirectory(dp);
                 }
             }
-
-            DefaultXMLFilePath = Path.Combine(SettingsDir, XMLSettingsCore.XMLFileName);
+            Engine.mAppSettings.XMLSettingsFile = Path.Combine(SettingsDir, XMLSettingsCore.XMLFileName);
         }
 
         public static string GetProductName()
@@ -390,10 +385,6 @@ namespace TDMakerLib
                 {
                     ConfigWizard cw = new ConfigWizard(DefaultRootAppFolder);
                     configResult = cw.ShowDialog();
-                    Engine.mAppSettings.RootDir = cw.RootFolder;
-                    Engine.mAppSettings.PreferSystemFolders = cw.PreferSystemFolders;
-                    Engine.mAppSettings.ImageUploader = cw.ImageDestinationType;
-                    RunConfig = true;
                 }
                 if (!string.IsNullOrEmpty(Engine.mAppSettings.RootDir))
                 {
