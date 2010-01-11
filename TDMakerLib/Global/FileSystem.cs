@@ -10,8 +10,18 @@ namespace TDMakerLib
 {
     public static class FileSystem
     {
-        public static StringBuilder mDebug = new StringBuilder();
+        public delegate void DebugLogEventHandler(string line);
+        public static event DebugLogEventHandler DebugLogChanged;
+        public static StringBuilder DebugLog = new StringBuilder();
         public static string DebugLogFilePath = Path.Combine(Engine.LogsDir, string.Format("{0}-{1}-debug.txt", Application.ProductName, DateTime.Now.ToString("yyyyMMdd")));
+
+        private static void OnDebugLogChanged(string line)
+        {
+            if (DebugLogChanged != null)
+            {
+                DebugLogChanged(line);
+            }
+        }
 
         public static void AppendDebug(Exception ex)
         {
@@ -20,10 +30,14 @@ namespace TDMakerLib
 
         public static void AppendDebug(string msg)
         {
-            // a modified http://iso.org/iso/en/prods-services/popstds/datesandtime.html - McoreD
-            string line = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss - ") + msg;
-            Debug.WriteLine(line);
-            mDebug.AppendLine(line);
+            if (!string.IsNullOrEmpty(msg))
+            {
+                // a modified http://iso.org/iso/en/prods-services/popstds/datesandtime.html - McoreD
+                string line = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss - ") + msg;
+                Debug.WriteLine(line);
+                DebugLog.AppendLine(line);
+                OnDebugLogChanged(line);
+            }
         }
 
         public static void OpenDirTorrents()
@@ -74,21 +88,23 @@ namespace TDMakerLib
             }
         }
 
-        public static void WriteDebugLog()
+        public static void WriteDebugFile()
         {
-            try
+            if (!string.IsNullOrEmpty(Engine.LogsDir))
             {
-                using (StreamWriter sw = new StreamWriter(DebugLogFilePath, true))
+                AppendDebug("Writing Debug file");
+                string fpDebug = Path.Combine(Engine.LogsDir, string.Format("{0}-{1}-debug.txt", Application.ProductName, DateTime.Now.ToString("yyyyMMdd")));
+                if (Engine.conf.WriteDebugFile)
                 {
-                    sw.WriteLine(mDebug.ToString());
+                    if (DebugLog.Length > 0)
+                    {
+                        using (StreamWriter sw = new StreamWriter(fpDebug, true))
+                        {
+                            sw.WriteLine(DebugLog.ToString());
+                            DebugLog = new StringBuilder();
+                        }
+                    }
                 }
-                mDebug = new System.Text.StringBuilder();
-                // clear
-                GC.Collect();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
             }
         }
 

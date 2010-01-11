@@ -20,21 +20,12 @@ namespace TDMaker
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            if (Engine.Load())
+            if (Engine.TurnOn())
             {
-                if (args.Length > 1 && Engine.IsUNIX)
-                {
-                    // we process the args
-                    Console.WriteLine(Environment.CommandLine);
-                }
-                else
-                {
-                    Application.Run(new MainWindow());
-                }
+                Engine.LoadSettingsLatest();
+                Application.Run(new MainWindow());
+                Engine.TurnOff();
             }
-            Engine.Unload();
         }
-
-
     }
 }

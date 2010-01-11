@@ -246,8 +246,31 @@ namespace TDMaker
             }
         }
 
+        private void FileSystem_DebugLogChanged(string line)
+        {
+            if (!rtbDebugLog.IsDisposed)
+            {
+                MethodInvoker method = delegate
+                {
+                    rtbDebugLog.AppendText(line + Environment.NewLine);
+                };
+
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(method);
+                }
+                else
+                {
+                    method.Invoke();
+                }
+            }
+        }
+
         private void MainWindow_Shown(object sender, EventArgs e)
         {
+            rtbDebugLog.Text = FileSystem.DebugLog.ToString();
+            FileSystem.DebugLogChanged += new FileSystem.DebugLogEventHandler(FileSystem_DebugLogChanged);
+
             string mtnExe = (Engine.IsUNIX ? "mtn" : "mtn.exe");
 
             if (!File.Exists(Engine.conf.MTNPath))
@@ -331,13 +354,6 @@ namespace TDMaker
             if (Engine.conf.UpdateCheckAuto)
             {
                 CheckUpdates();
-            }
-
-            string[] args = Environment.GetCommandLineArgs();
-            if (args.Length > 1)
-            {
-                // we process the args
-                lbStatus.Items.Add(Environment.CommandLine);
             }
         }
 
@@ -614,7 +630,7 @@ namespace TDMaker
                 bwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, "Reading " + Path.GetFileName(mi.Location) + " using MediaInfo...");
                 mi.ReadMedia();
                 bwApp.ReportProgress((int)ProgressType.REPORT_MEDIAINFO_SUMMARY, mi);
-                FileSystem.WriteDebugLog();
+                FileSystem.WriteDebugFile();
 
                 // creates screenshot
                 mi.UploadScreenshots = wt.UploadScreenshot;
@@ -1712,7 +1728,7 @@ namespace TDMaker
         {
             // this.WindowState = FormWindowState.Minimized;
             SettingsWrite();
-            FileSystem.WriteDebugLog();
+            FileSystem.WriteDebugFile();
             pbScreenshot.ImageLocation = null; // need this to successfully clear screenshots
             Engine.ClearScreenshots();
         }

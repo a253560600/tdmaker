@@ -212,7 +212,7 @@ namespace TDMakerLib
         /// <summary>
         /// Remove HTML from string with Regex.
         /// </summary>
-        public static string StringImg(string source)
+        public static string StripImg(string source)
         {
             return Regex.Replace(source, @"\[img\].*?\[/img\]", string.Empty);
         }
@@ -247,7 +247,7 @@ namespace TDMakerLib
                     break;
             }
 
-            ti.MediaMy.ReleaseDescription = Adapter.StringImg(pt).Trim(); ;
+            ti.MediaMy.ReleaseDescription = Adapter.StripImg(pt).Trim(); ;
 
             return pt;
         }
