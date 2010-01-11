@@ -1,9 +1,4 @@
-﻿Create XML file for moovies upload in the CLI version
-
-1.21.0.0 Support for processing music audio album folders
-1.20.0.0 Create an XML file for upload pages on some trackers
-
-Logo PictureBox is disabled until figured out where the best place is to put
+﻿Logo PictureBox is disabled until figured out where the best place is to put
 Reorganize Code to isoloate methods from MainWindow.cs
 If Audio Format contains WMA and Description is not null then use Description of the codec
 Cancel Button to abort BackgroundWorker

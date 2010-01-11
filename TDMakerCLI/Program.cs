@@ -17,6 +17,7 @@ namespace TDMakerCLI
             bool mScreenshotsCreate = false;
             bool mTorrentCreate = false;
             bool mFileCollection = false;
+            bool mShowHelp = false;
 
             var p = new OptionSet() 
             {
@@ -24,8 +25,14 @@ namespace TDMakerCLI
                 { "m|media=", "Location of the media file/folder", v => mMediaLoc = v },
                 { "o|options=", "Location of the settings file", v => mSettingsFile = v },
                 { "s", "Create and upload screenshots", v => mScreenshotsCreate = v != null},
-                { "t", "Create torrent file", v => mTorrentCreate = v != null}                
+                { "t", "Create torrent file", v => mTorrentCreate = v != null},
+                { "h|help",  "Show this message and exit", v => mShowHelp = v != null },
             };
+
+            if (args.Length == 0)
+            {
+                mShowHelp = true;
+            }
 
             // give cli the ability to replace environment variables
             string[] args2 = new string[args.Length];
@@ -35,7 +42,23 @@ namespace TDMakerCLI
                 args2[count++] = arg.Replace("%appdata%", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
             }
 
-            p.Parse(args2);
+            try
+            {
+                p.Parse(args2);
+            }
+            catch (Exception ex)
+            {
+                Console.Write("tdmakercli: ");
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Try 'tdmakercli --help' for more information.");
+                return;
+            }
+
+            if (mShowHelp)
+            {
+                ShowHelp(p);
+                return;
+            }
 
             if (!File.Exists(mSettingsFile))
             {
@@ -109,6 +132,15 @@ namespace TDMakerCLI
             Console.WriteLine();
             Console.WriteLine("Press any key to exit.");
             Console.ReadLine();
+        }
+
+        static void ShowHelp(OptionSet p)
+        {
+            Console.WriteLine("Usage: tdmakercli [OPTIONS]");
+            Console.WriteLine();
+            Console.WriteLine("Options:");
+            p.WriteOptionDescriptions(Console.Out);
+            Console.WriteLine();
         }
     }
 }
