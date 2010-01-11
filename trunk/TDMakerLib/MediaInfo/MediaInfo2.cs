@@ -390,7 +390,7 @@ namespace TDMakerLib
                 // If the loaded folder is not a Disc but individual ripped files or a collection of files
                 if (MediaTypeChoice == MediaType.MediaCollection)
                 {
-                    sbBody.Append(ToStringMediaList());
+                    sbBody.AppendLine(ToStringMediaList());
                 }
                 else
                 {
@@ -405,7 +405,10 @@ namespace TDMakerLib
 
             // CREATING XML TORRENT UPLOAD FILE DOES NOT REQUIRE SCREENSHOT IN RELEASE DESCRIPTION
             // THE SCREENSHOTS ARE IN THE XML INSTEAD
-
+            if (this.HasScreenshots())
+            {
+                sbBody.AppendLine();
+            }
             foreach (MediaFile mf in this.MediaFiles)
             {
                 if (mf.Screenshot != null)
@@ -499,7 +502,7 @@ namespace TDMakerLib
             sbBody.Append(" | ");
             sbBody.Append(" ".PadRight(widthRes));
             sbBody.Append(" | ");
-            sbBody.AppendLine(totalSize);
+            sbBody.Append(totalSize);
 
             return sbBody.ToString();
         }
@@ -543,6 +546,19 @@ namespace TDMakerLib
             return Path.GetFileName(Location);
         }
 
+        public bool HasScreenshots()
+        {
+            bool hasSs = false;
+            foreach (MediaFile mf in this.MediaFiles)
+            {
+                if (mf.Screenshot != null && !string.IsNullOrEmpty(mf.Screenshot.Full))
+                {
+                    hasSs = true;
+                    return hasSs;
+                }
+            }
+            return hasSs;
+        }
     }
 
 }

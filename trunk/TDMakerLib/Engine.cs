@@ -160,7 +160,9 @@ namespace TDMakerLib
         {
             MediaWizardOptions mwo = new MediaWizardOptions() { MediaTypeChoice = MediaType.MediaIndiv };
 
-            if (FileOrDirPaths.Count == 1)
+            bool showWizard = false;
+
+            if (FileOrDirPaths.Count == 1 && File.Exists(FileOrDirPaths[0]))
             {
                 mwo.MediaTypeChoice = MediaType.MediaIndiv;
             }
@@ -187,18 +189,27 @@ namespace TDMakerLib
                         {
                             mwo.MediaTypeChoice = MediaType.MediaDisc;
                         }
+                        else
+                        {
+                            showWizard = true;
+                        }
                     }
                 }
                 else if (!silent) // no dir found
                 {
-                    MediaWizard mw = new MediaWizard(FileOrDirPaths);
-                    mwo.DialogResultMy = mw.ShowDialog();
-                    if (mwo.DialogResultMy == DialogResult.OK)
-                    {
-                        mwo = mw.Options;
-                        mwo.PromptShown = true;
-                    }
+                    showWizard = true;
                 }
+            }
+
+            if (showWizard)
+            {
+                MediaWizard mw = new MediaWizard(FileOrDirPaths);
+                mwo.DialogResultMy = mw.ShowDialog();
+                if (mwo.DialogResultMy == DialogResult.OK)
+                {                 
+                    mwo = mw.Options;
+                }
+                mwo.PromptShown = true;         
             }
 
             return mwo;
