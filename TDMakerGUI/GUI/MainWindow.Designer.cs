@@ -199,6 +199,8 @@ namespace TDMaker
             this.miHelpCheckUpdates = new System.Windows.Forms.ToolStripMenuItem();
             this.miHelpVersionHistory = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.scMainContainer = new System.Windows.Forms.SplitContainer();
+            this.pMainContainer = new System.Windows.Forms.Panel();
             this.statusStrip1.SuspendLayout();
             this.tcMain.SuspendLayout();
             this.tpMedia.SuspendLayout();
@@ -248,6 +250,10 @@ namespace TDMaker
             this.tpAdvanced.SuspendLayout();
             this.cmsApp.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.scMainContainer.Panel1.SuspendLayout();
+            this.scMainContainer.Panel2.SuspendLayout();
+            this.scMainContainer.SuspendLayout();
+            this.pMainContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // bwApp
@@ -278,8 +284,9 @@ namespace TDMaker
             // 
             // sBar
             // 
+            this.sBar.Margin = new System.Windows.Forms.Padding(5, 3, 0, 2);
             this.sBar.Name = "sBar";
-            this.sBar.Size = new System.Drawing.Size(759, 17);
+            this.sBar.Size = new System.Drawing.Size(750, 17);
             this.sBar.Spring = true;
             this.sBar.Text = "Ready";
             this.sBar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -291,23 +298,22 @@ namespace TDMaker
             // 
             // pBar
             // 
+            this.pBar.Margin = new System.Windows.Forms.Padding(1, 3, 5, 3);
             this.pBar.Name = "pBar";
             this.pBar.Size = new System.Drawing.Size(100, 16);
             // 
             // tcMain
             // 
-            this.tcMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tcMain.Controls.Add(this.tpMedia);
             this.tcMain.Controls.Add(this.tpMainMediaInfo);
             this.tcMain.Controls.Add(this.tabPage2);
             this.tcMain.Controls.Add(this.tpMainPublish);
             this.tcMain.Controls.Add(this.tabPage4);
-            this.tcMain.Location = new System.Drawing.Point(8, 32);
+            this.tcMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcMain.Location = new System.Drawing.Point(0, 0);
             this.tcMain.Name = "tcMain";
             this.tcMain.SelectedIndex = 0;
-            this.tcMain.Size = new System.Drawing.Size(864, 471);
+            this.tcMain.Size = new System.Drawing.Size(882, 474);
             this.tcMain.TabIndex = 4;
             this.tcMain.SelectedIndexChanged += new System.EventHandler(this.tcMain_SelectedIndexChanged);
             // 
@@ -319,19 +325,21 @@ namespace TDMaker
             this.tpMedia.Controls.Add(this.gbLocation);
             this.tpMedia.Location = new System.Drawing.Point(4, 22);
             this.tpMedia.Name = "tpMedia";
-            this.tpMedia.Size = new System.Drawing.Size(856, 445);
+            this.tpMedia.Size = new System.Drawing.Size(874, 448);
             this.tpMedia.TabIndex = 4;
             this.tpMedia.Text = "Input";
             this.tpMedia.UseVisualStyleBackColor = true;
             // 
             // groupBox10
             // 
-            this.groupBox10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.groupBox10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox10.Controls.Add(this.lbStatus);
-            this.groupBox10.Location = new System.Drawing.Point(12, 322);
+            this.groupBox10.Location = new System.Drawing.Point(8, 288);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(828, 116);
+            this.groupBox10.Padding = new System.Windows.Forms.Padding(5);
+            this.groupBox10.Size = new System.Drawing.Size(856, 149);
             this.groupBox10.TabIndex = 13;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Progress";
@@ -342,11 +350,12 @@ namespace TDMaker
             this.lbStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbStatus.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbStatus.FormattingEnabled = true;
+            this.lbStatus.IntegralHeight = false;
             this.lbStatus.ItemHeight = 15;
-            this.lbStatus.Location = new System.Drawing.Point(3, 16);
+            this.lbStatus.Location = new System.Drawing.Point(5, 18);
             this.lbStatus.Name = "lbStatus";
             this.lbStatus.ScrollAlwaysVisible = true;
-            this.lbStatus.Size = new System.Drawing.Size(822, 94);
+            this.lbStatus.Size = new System.Drawing.Size(846, 126);
             this.lbStatus.TabIndex = 11;
             // 
             // groupBox9
@@ -359,20 +368,19 @@ namespace TDMaker
             this.groupBox9.Controls.Add(this.chkSource);
             this.groupBox9.Controls.Add(this.txtWebLink);
             this.groupBox9.Controls.Add(this.cboSource);
-            this.groupBox9.Location = new System.Drawing.Point(297, 178);
+            this.groupBox9.Location = new System.Drawing.Point(272, 176);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(543, 133);
+            this.groupBox9.Size = new System.Drawing.Size(592, 104);
             this.groupBox9.TabIndex = 12;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Source Properties";
             // 
             // chkTitle
             // 
-            this.chkTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkTitle.AutoSize = true;
             this.chkTitle.Checked = true;
             this.chkTitle.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkTitle.Location = new System.Drawing.Point(22, 60);
+            this.chkTitle.Location = new System.Drawing.Point(16, 50);
             this.chkTitle.Name = "chkTitle";
             this.chkTitle.Size = new System.Drawing.Size(49, 17);
             this.chkTitle.TabIndex = 14;
@@ -382,19 +390,18 @@ namespace TDMaker
             // 
             // txtTitle
             // 
-            this.txtTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.txtTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTitle.Location = new System.Drawing.Point(117, 59);
+            this.txtTitle.Location = new System.Drawing.Point(112, 48);
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(402, 20);
+            this.txtTitle.Size = new System.Drawing.Size(464, 20);
             this.txtTitle.TabIndex = 15;
             this.txtTitle.TextChanged += new System.EventHandler(this.txtTitle_TextChanged);
             // 
             // chkWebLink
             // 
-            this.chkWebLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkWebLink.AutoSize = true;
-            this.chkWebLink.Location = new System.Drawing.Point(22, 90);
+            this.chkWebLink.Location = new System.Drawing.Point(16, 74);
             this.chkWebLink.Name = "chkWebLink";
             this.chkWebLink.Size = new System.Drawing.Size(75, 17);
             this.chkWebLink.TabIndex = 9;
@@ -407,7 +414,7 @@ namespace TDMaker
             this.chkSource.AutoSize = true;
             this.chkSource.Checked = true;
             this.chkSource.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-            this.chkSource.Location = new System.Drawing.Point(22, 31);
+            this.chkSource.Location = new System.Drawing.Point(16, 26);
             this.chkSource.Name = "chkSource";
             this.chkSource.Size = new System.Drawing.Size(60, 17);
             this.chkSource.TabIndex = 13;
@@ -417,11 +424,11 @@ namespace TDMaker
             // 
             // txtWebLink
             // 
-            this.txtWebLink.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.txtWebLink.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtWebLink.Location = new System.Drawing.Point(117, 89);
+            this.txtWebLink.Location = new System.Drawing.Point(112, 72);
             this.txtWebLink.Name = "txtWebLink";
-            this.txtWebLink.Size = new System.Drawing.Size(402, 20);
+            this.txtWebLink.Size = new System.Drawing.Size(464, 20);
             this.txtWebLink.TabIndex = 10;
             this.ttApp.SetToolTip(this.txtWebLink, "IMDB URL");
             this.txtWebLink.TextChanged += new System.EventHandler(this.txtWebLink_TextChanged);
@@ -430,7 +437,7 @@ namespace TDMaker
             // 
             this.cboSource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSource.FormattingEnabled = true;
-            this.cboSource.Location = new System.Drawing.Point(117, 29);
+            this.cboSource.Location = new System.Drawing.Point(112, 24);
             this.cboSource.Name = "cboSource";
             this.cboSource.Size = new System.Drawing.Size(203, 21);
             this.cboSource.TabIndex = 0;
@@ -444,9 +451,9 @@ namespace TDMaker
             this.gbDVD.Controls.Add(this.chkExtras);
             this.gbDVD.Controls.Add(this.cboAuthoring);
             this.gbDVD.Controls.Add(this.chkAuthoring);
-            this.gbDVD.Location = new System.Drawing.Point(12, 178);
+            this.gbDVD.Location = new System.Drawing.Point(8, 176);
             this.gbDVD.Name = "gbDVD";
-            this.gbDVD.Size = new System.Drawing.Size(269, 133);
+            this.gbDVD.Size = new System.Drawing.Size(256, 104);
             this.gbDVD.TabIndex = 11;
             this.gbDVD.TabStop = false;
             this.gbDVD.Text = "DVD Properties";
@@ -455,7 +462,7 @@ namespace TDMaker
             // 
             this.cboDiscMenu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboDiscMenu.FormattingEnabled = true;
-            this.cboDiscMenu.Location = new System.Drawing.Point(121, 58);
+            this.cboDiscMenu.Location = new System.Drawing.Point(120, 48);
             this.cboDiscMenu.Name = "cboDiscMenu";
             this.cboDiscMenu.Size = new System.Drawing.Size(121, 21);
             this.cboDiscMenu.TabIndex = 18;
@@ -466,7 +473,7 @@ namespace TDMaker
             this.chkDiscMenu.AutoSize = true;
             this.chkDiscMenu.Checked = true;
             this.chkDiscMenu.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDiscMenu.Location = new System.Drawing.Point(26, 60);
+            this.chkDiscMenu.Location = new System.Drawing.Point(16, 51);
             this.chkDiscMenu.Name = "chkDiscMenu";
             this.chkDiscMenu.Size = new System.Drawing.Size(56, 17);
             this.chkDiscMenu.TabIndex = 17;
@@ -478,7 +485,7 @@ namespace TDMaker
             // 
             this.cboExtras.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboExtras.FormattingEnabled = true;
-            this.cboExtras.Location = new System.Drawing.Point(121, 86);
+            this.cboExtras.Location = new System.Drawing.Point(120, 72);
             this.cboExtras.Name = "cboExtras";
             this.cboExtras.Size = new System.Drawing.Size(121, 21);
             this.cboExtras.TabIndex = 16;
@@ -489,7 +496,7 @@ namespace TDMaker
             this.chkExtras.AutoSize = true;
             this.chkExtras.Checked = true;
             this.chkExtras.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkExtras.Location = new System.Drawing.Point(26, 88);
+            this.chkExtras.Location = new System.Drawing.Point(16, 75);
             this.chkExtras.Name = "chkExtras";
             this.chkExtras.Size = new System.Drawing.Size(58, 17);
             this.chkExtras.TabIndex = 15;
@@ -501,7 +508,7 @@ namespace TDMaker
             // 
             this.cboAuthoring.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboAuthoring.FormattingEnabled = true;
-            this.cboAuthoring.Location = new System.Drawing.Point(121, 29);
+            this.cboAuthoring.Location = new System.Drawing.Point(120, 24);
             this.cboAuthoring.Name = "cboAuthoring";
             this.cboAuthoring.Size = new System.Drawing.Size(121, 21);
             this.cboAuthoring.TabIndex = 14;
@@ -512,7 +519,7 @@ namespace TDMaker
             this.chkAuthoring.AutoSize = true;
             this.chkAuthoring.Checked = true;
             this.chkAuthoring.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkAuthoring.Location = new System.Drawing.Point(26, 32);
+            this.chkAuthoring.Location = new System.Drawing.Point(16, 27);
             this.chkAuthoring.Name = "chkAuthoring";
             this.chkAuthoring.Size = new System.Drawing.Size(74, 17);
             this.chkAuthoring.TabIndex = 13;
@@ -528,9 +535,9 @@ namespace TDMaker
             this.gbLocation.Controls.Add(this.lbFiles);
             this.gbLocation.Controls.Add(this.btnBrowse);
             this.gbLocation.Controls.Add(this.pbLogo);
-            this.gbLocation.Location = new System.Drawing.Point(12, 8);
+            this.gbLocation.Location = new System.Drawing.Point(8, 8);
             this.gbLocation.Name = "gbLocation";
-            this.gbLocation.Size = new System.Drawing.Size(828, 163);
+            this.gbLocation.Size = new System.Drawing.Size(856, 160);
             this.gbLocation.TabIndex = 7;
             this.gbLocation.TabStop = false;
             this.gbLocation.Text = "Locations - Browse or Drag and Drop a Movie file or folder...";
@@ -538,7 +545,7 @@ namespace TDMaker
             // btnBrowseDir
             // 
             this.btnBrowseDir.AutoSize = true;
-            this.btnBrowseDir.Location = new System.Drawing.Point(168, 24);
+            this.btnBrowseDir.Location = new System.Drawing.Point(144, 24);
             this.btnBrowseDir.Name = "btnBrowseDir";
             this.btnBrowseDir.Size = new System.Drawing.Size(134, 23);
             this.btnBrowseDir.TabIndex = 14;
@@ -552,10 +559,11 @@ namespace TDMaker
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.lbFiles.FormattingEnabled = true;
             this.lbFiles.HorizontalScrollbar = true;
-            this.lbFiles.Location = new System.Drawing.Point(26, 57);
+            this.lbFiles.IntegralHeight = false;
+            this.lbFiles.Location = new System.Drawing.Point(8, 56);
             this.lbFiles.Name = "lbFiles";
             this.lbFiles.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbFiles.Size = new System.Drawing.Size(786, 82);
+            this.lbFiles.Size = new System.Drawing.Size(840, 96);
             this.lbFiles.Sorted = true;
             this.lbFiles.TabIndex = 13;
             this.lbFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbFiles_KeyDown);
@@ -563,7 +571,7 @@ namespace TDMaker
             // btnBrowse
             // 
             this.btnBrowse.AutoSize = true;
-            this.btnBrowse.Location = new System.Drawing.Point(24, 24);
+            this.btnBrowse.Location = new System.Drawing.Point(8, 24);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(134, 23);
             this.btnBrowse.TabIndex = 7;
@@ -574,7 +582,7 @@ namespace TDMaker
             // pbLogo
             // 
             this.pbLogo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pbLogo.Location = new System.Drawing.Point(312, 16);
+            this.pbLogo.Location = new System.Drawing.Point(304, 13);
             this.pbLogo.Name = "pbLogo";
             this.pbLogo.Size = new System.Drawing.Size(392, 29);
             this.pbLogo.TabIndex = 11;
@@ -586,7 +594,7 @@ namespace TDMaker
             this.tpMainMediaInfo.Location = new System.Drawing.Point(4, 22);
             this.tpMainMediaInfo.Name = "tpMainMediaInfo";
             this.tpMainMediaInfo.Padding = new System.Windows.Forms.Padding(3);
-            this.tpMainMediaInfo.Size = new System.Drawing.Size(856, 445);
+            this.tpMainMediaInfo.Size = new System.Drawing.Size(874, 448);
             this.tpMainMediaInfo.TabIndex = 0;
             this.tpMainMediaInfo.Text = "Media Info";
             this.tpMainMediaInfo.UseVisualStyleBackColor = true;
@@ -603,7 +611,7 @@ namespace TDMaker
             this.tlpMediaInfo.Name = "tlpMediaInfo";
             this.tlpMediaInfo.RowCount = 1;
             this.tlpMediaInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpMediaInfo.Size = new System.Drawing.Size(850, 439);
+            this.tlpMediaInfo.Size = new System.Drawing.Size(868, 442);
             this.tlpMediaInfo.TabIndex = 0;
             // 
             // lbMediaInfo
@@ -611,22 +619,24 @@ namespace TDMaker
             this.lbMediaInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbMediaInfo.FormattingEnabled = true;
             this.lbMediaInfo.HorizontalScrollbar = true;
+            this.lbMediaInfo.IntegralHeight = false;
             this.lbMediaInfo.Location = new System.Drawing.Point(3, 3);
             this.lbMediaInfo.Name = "lbMediaInfo";
-            this.lbMediaInfo.Size = new System.Drawing.Size(164, 433);
+            this.lbMediaInfo.Size = new System.Drawing.Size(167, 436);
             this.lbMediaInfo.TabIndex = 0;
             this.lbMediaInfo.SelectedIndexChanged += new System.EventHandler(this.LbMediaInfoSelectedIndexChanged);
             // 
             // txtMediaInfo
             // 
+            this.txtMediaInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtMediaInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtMediaInfo.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMediaInfo.Location = new System.Drawing.Point(173, 3);
+            this.txtMediaInfo.Location = new System.Drawing.Point(176, 3);
             this.txtMediaInfo.Multiline = true;
             this.txtMediaInfo.Name = "txtMediaInfo";
             this.txtMediaInfo.ReadOnly = true;
             this.txtMediaInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtMediaInfo.Size = new System.Drawing.Size(674, 433);
+            this.txtMediaInfo.Size = new System.Drawing.Size(689, 436);
             this.txtMediaInfo.TabIndex = 1;
             // 
             // tabPage2
@@ -635,7 +645,7 @@ namespace TDMaker
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(856, 445);
+            this.tabPage2.Size = new System.Drawing.Size(874, 448);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Screenshots";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -652,7 +662,7 @@ namespace TDMaker
             this.tlpScreenshots.Name = "tlpScreenshots";
             this.tlpScreenshots.RowCount = 1;
             this.tlpScreenshots.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpScreenshots.Size = new System.Drawing.Size(850, 439);
+            this.tlpScreenshots.Size = new System.Drawing.Size(868, 442);
             this.tlpScreenshots.TabIndex = 1;
             // 
             // lbScreenshots
@@ -660,9 +670,10 @@ namespace TDMaker
             this.lbScreenshots.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbScreenshots.FormattingEnabled = true;
             this.lbScreenshots.HorizontalScrollbar = true;
+            this.lbScreenshots.IntegralHeight = false;
             this.lbScreenshots.Location = new System.Drawing.Point(3, 3);
             this.lbScreenshots.Name = "lbScreenshots";
-            this.lbScreenshots.Size = new System.Drawing.Size(249, 433);
+            this.lbScreenshots.Size = new System.Drawing.Size(254, 436);
             this.lbScreenshots.TabIndex = 2;
             this.lbScreenshots.SelectedIndexChanged += new System.EventHandler(this.lbScreenshots_SelectedIndexChanged);
             // 
@@ -673,12 +684,13 @@ namespace TDMaker
             this.tlpScreenshotProps.Controls.Add(this.pbScreenshot, 0, 0);
             this.tlpScreenshotProps.Controls.Add(this.pgScreenshot, 0, 1);
             this.tlpScreenshotProps.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpScreenshotProps.Location = new System.Drawing.Point(258, 3);
+            this.tlpScreenshotProps.Location = new System.Drawing.Point(260, 0);
+            this.tlpScreenshotProps.Margin = new System.Windows.Forms.Padding(0);
             this.tlpScreenshotProps.Name = "tlpScreenshotProps";
             this.tlpScreenshotProps.RowCount = 2;
             this.tlpScreenshotProps.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tlpScreenshotProps.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlpScreenshotProps.Size = new System.Drawing.Size(589, 433);
+            this.tlpScreenshotProps.Size = new System.Drawing.Size(608, 442);
             this.tlpScreenshotProps.TabIndex = 3;
             // 
             // pbScreenshot
@@ -687,7 +699,7 @@ namespace TDMaker
             this.pbScreenshot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbScreenshot.Location = new System.Drawing.Point(3, 3);
             this.pbScreenshot.Name = "pbScreenshot";
-            this.pbScreenshot.Size = new System.Drawing.Size(583, 340);
+            this.pbScreenshot.Size = new System.Drawing.Size(602, 347);
             this.pbScreenshot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbScreenshot.TabIndex = 1;
             this.pbScreenshot.TabStop = false;
@@ -697,10 +709,10 @@ namespace TDMaker
             // 
             this.pgScreenshot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pgScreenshot.HelpVisible = false;
-            this.pgScreenshot.Location = new System.Drawing.Point(3, 349);
+            this.pgScreenshot.Location = new System.Drawing.Point(3, 356);
             this.pgScreenshot.Name = "pgScreenshot";
             this.pgScreenshot.PropertySort = System.Windows.Forms.PropertySort.NoSort;
-            this.pgScreenshot.Size = new System.Drawing.Size(583, 81);
+            this.pgScreenshot.Size = new System.Drawing.Size(602, 83);
             this.pgScreenshot.TabIndex = 2;
             this.pgScreenshot.ToolbarVisible = false;
             // 
@@ -710,7 +722,7 @@ namespace TDMaker
             this.tpMainPublish.Location = new System.Drawing.Point(4, 22);
             this.tpMainPublish.Name = "tpMainPublish";
             this.tpMainPublish.Padding = new System.Windows.Forms.Padding(3);
-            this.tpMainPublish.Size = new System.Drawing.Size(856, 445);
+            this.tpMainPublish.Size = new System.Drawing.Size(874, 448);
             this.tpMainPublish.TabIndex = 2;
             this.tpMainPublish.Text = "Publish";
             this.tpMainPublish.UseVisualStyleBackColor = true;
@@ -729,16 +741,16 @@ namespace TDMaker
             this.tlpPublish.Name = "tlpPublish";
             this.tlpPublish.RowCount = 1;
             this.tlpPublish.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpPublish.Size = new System.Drawing.Size(850, 439);
+            this.tlpPublish.Size = new System.Drawing.Size(868, 442);
             this.tlpPublish.TabIndex = 2;
             // 
             // gbQuickPublish
             // 
             this.gbQuickPublish.Controls.Add(this.flpPublishConfig);
             this.gbQuickPublish.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbQuickPublish.Location = new System.Drawing.Point(710, 3);
+            this.gbQuickPublish.Location = new System.Drawing.Point(725, 3);
             this.gbQuickPublish.Name = "gbQuickPublish";
-            this.gbQuickPublish.Size = new System.Drawing.Size(137, 433);
+            this.gbQuickPublish.Size = new System.Drawing.Size(140, 436);
             this.gbQuickPublish.TabIndex = 1;
             this.gbQuickPublish.TabStop = false;
             this.gbQuickPublish.Text = "Quick Options";
@@ -754,7 +766,7 @@ namespace TDMaker
             this.flpPublishConfig.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flpPublishConfig.Location = new System.Drawing.Point(3, 16);
             this.flpPublishConfig.Name = "flpPublishConfig";
-            this.flpPublishConfig.Size = new System.Drawing.Size(131, 414);
+            this.flpPublishConfig.Size = new System.Drawing.Size(134, 417);
             this.flpPublishConfig.TabIndex = 7;
             // 
             // chkQuickPre
@@ -818,12 +830,13 @@ namespace TDMaker
             this.txtPublish.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPublish.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPublish.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPublish.Location = new System.Drawing.Point(144, 3);
+            this.txtPublish.Location = new System.Drawing.Point(147, 3);
             this.txtPublish.Multiline = true;
             this.txtPublish.Name = "txtPublish";
             this.txtPublish.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtPublish.Size = new System.Drawing.Size(560, 433);
+            this.txtPublish.Size = new System.Drawing.Size(572, 436);
             this.txtPublish.TabIndex = 0;
             this.txtPublish.WordWrap = false;
             this.txtPublish.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPublish_KeyPress);
@@ -832,9 +845,10 @@ namespace TDMaker
             // 
             this.lbPublish.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbPublish.FormattingEnabled = true;
+            this.lbPublish.IntegralHeight = false;
             this.lbPublish.Location = new System.Drawing.Point(3, 3);
             this.lbPublish.Name = "lbPublish";
-            this.lbPublish.Size = new System.Drawing.Size(135, 433);
+            this.lbPublish.Size = new System.Drawing.Size(138, 436);
             this.lbPublish.TabIndex = 2;
             this.lbPublish.SelectedIndexChanged += new System.EventHandler(this.LbPublishSelectedIndexChanged);
             // 
@@ -843,7 +857,7 @@ namespace TDMaker
             this.tabPage4.Controls.Add(this.tcOptions);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(856, 445);
+            this.tabPage4.Size = new System.Drawing.Size(874, 448);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Options";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -860,7 +874,7 @@ namespace TDMaker
             this.tcOptions.Location = new System.Drawing.Point(0, 0);
             this.tcOptions.Name = "tcOptions";
             this.tcOptions.SelectedIndex = 0;
-            this.tcOptions.Size = new System.Drawing.Size(856, 445);
+            this.tcOptions.Size = new System.Drawing.Size(874, 448);
             this.tcOptions.TabIndex = 11;
             // 
             // tpOptionsMTN
@@ -869,7 +883,7 @@ namespace TDMaker
             this.tpOptionsMTN.Location = new System.Drawing.Point(4, 22);
             this.tpOptionsMTN.Name = "tpOptionsMTN";
             this.tpOptionsMTN.Padding = new System.Windows.Forms.Padding(3);
-            this.tpOptionsMTN.Size = new System.Drawing.Size(848, 419);
+            this.tpOptionsMTN.Size = new System.Drawing.Size(866, 422);
             this.tpOptionsMTN.TabIndex = 0;
             this.tpOptionsMTN.Text = "Movie Thumbnailer";
             this.tpOptionsMTN.UseVisualStyleBackColor = true;
@@ -887,7 +901,7 @@ namespace TDMaker
             this.tlpMTN.RowCount = 2;
             this.tlpMTN.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90F));
             this.tlpMTN.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlpMTN.Size = new System.Drawing.Size(842, 413);
+            this.tlpMTN.Size = new System.Drawing.Size(860, 416);
             this.tlpMTN.TabIndex = 7;
             // 
             // tlpMtnUsage
@@ -902,15 +916,15 @@ namespace TDMaker
             this.tlpMtnUsage.Name = "tlpMtnUsage";
             this.tlpMtnUsage.RowCount = 1;
             this.tlpMtnUsage.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpMtnUsage.Size = new System.Drawing.Size(836, 365);
+            this.tlpMtnUsage.Size = new System.Drawing.Size(854, 368);
             this.tlpMtnUsage.TabIndex = 1;
             // 
             // pgMtn
             // 
             this.pgMtn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pgMtn.Location = new System.Drawing.Point(212, 3);
+            this.pgMtn.Location = new System.Drawing.Point(216, 3);
             this.pgMtn.Name = "pgMtn";
-            this.pgMtn.Size = new System.Drawing.Size(621, 359);
+            this.pgMtn.Size = new System.Drawing.Size(635, 362);
             this.pgMtn.TabIndex = 0;
             this.pgMtn.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.PgMtnPropertyValueChanged);
             // 
@@ -926,14 +940,14 @@ namespace TDMaker
             this.tlpMtnProfiles.RowCount = 2;
             this.tlpMtnProfiles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMtnProfiles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
-            this.tlpMtnProfiles.Size = new System.Drawing.Size(203, 359);
+            this.tlpMtnProfiles.Size = new System.Drawing.Size(207, 362);
             this.tlpMtnProfiles.TabIndex = 1;
             // 
             // flpMtn
             // 
             this.flpMtn.Controls.Add(this.tbnAddMtnProfile);
             this.flpMtn.Controls.Add(this.btnRemoveMtnProfile);
-            this.flpMtn.Location = new System.Drawing.Point(3, 326);
+            this.flpMtn.Location = new System.Drawing.Point(3, 329);
             this.flpMtn.Name = "flpMtn";
             this.flpMtn.Size = new System.Drawing.Size(162, 30);
             this.flpMtn.TabIndex = 7;
@@ -964,18 +978,18 @@ namespace TDMaker
             this.lbMtnProfiles.FormattingEnabled = true;
             this.lbMtnProfiles.Location = new System.Drawing.Point(3, 3);
             this.lbMtnProfiles.Name = "lbMtnProfiles";
-            this.lbMtnProfiles.Size = new System.Drawing.Size(197, 316);
+            this.lbMtnProfiles.Size = new System.Drawing.Size(201, 316);
             this.lbMtnProfiles.TabIndex = 8;
             this.lbMtnProfiles.SelectedIndexChanged += new System.EventHandler(this.LbMtnProfilesSelectedIndexChanged);
             // 
             // txtMtnArgs
             // 
             this.txtMtnArgs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtMtnArgs.Location = new System.Drawing.Point(3, 374);
+            this.txtMtnArgs.Location = new System.Drawing.Point(3, 377);
             this.txtMtnArgs.Multiline = true;
             this.txtMtnArgs.Name = "txtMtnArgs";
             this.txtMtnArgs.ReadOnly = true;
-            this.txtMtnArgs.Size = new System.Drawing.Size(836, 36);
+            this.txtMtnArgs.Size = new System.Drawing.Size(854, 36);
             this.txtMtnArgs.TabIndex = 6;
             // 
             // tpImageHosting
@@ -986,7 +1000,7 @@ namespace TDMaker
             this.tpImageHosting.Location = new System.Drawing.Point(4, 22);
             this.tpImageHosting.Name = "tpImageHosting";
             this.tpImageHosting.Padding = new System.Windows.Forms.Padding(3);
-            this.tpImageHosting.Size = new System.Drawing.Size(848, 419);
+            this.tpImageHosting.Size = new System.Drawing.Size(866, 422);
             this.tpImageHosting.TabIndex = 5;
             this.tpImageHosting.Text = "Image Hosting";
             this.tpImageHosting.UseVisualStyleBackColor = true;
@@ -1001,7 +1015,7 @@ namespace TDMaker
             this.gbScreenshotsLoc.Controls.Add(this.btnScreenshotsLocBrowse);
             this.gbScreenshotsLoc.Location = new System.Drawing.Point(8, 56);
             this.gbScreenshotsLoc.Name = "gbScreenshotsLoc";
-            this.gbScreenshotsLoc.Size = new System.Drawing.Size(808, 96);
+            this.gbScreenshotsLoc.Size = new System.Drawing.Size(826, 96);
             this.gbScreenshotsLoc.TabIndex = 9;
             this.gbScreenshotsLoc.TabStop = false;
             this.gbScreenshotsLoc.Text = "Save Location";
@@ -1031,13 +1045,13 @@ namespace TDMaker
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtScreenshotsLoc.Location = new System.Drawing.Point(112, 52);
             this.txtScreenshotsLoc.Name = "txtScreenshotsLoc";
-            this.txtScreenshotsLoc.Size = new System.Drawing.Size(568, 20);
+            this.txtScreenshotsLoc.Size = new System.Drawing.Size(586, 20);
             this.txtScreenshotsLoc.TabIndex = 8;
             // 
             // btnScreenshotsLocBrowse
             // 
             this.btnScreenshotsLocBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnScreenshotsLocBrowse.Location = new System.Drawing.Point(688, 51);
+            this.btnScreenshotsLocBrowse.Location = new System.Drawing.Point(706, 51);
             this.btnScreenshotsLocBrowse.Name = "btnScreenshotsLocBrowse";
             this.btnScreenshotsLocBrowse.Size = new System.Drawing.Size(75, 23);
             this.btnScreenshotsLocBrowse.TabIndex = 9;
@@ -1055,7 +1069,7 @@ namespace TDMaker
             this.gbImageShack.Controls.Add(this.chkUseImageShackRegCode);
             this.gbImageShack.Location = new System.Drawing.Point(8, 160);
             this.gbImageShack.Name = "gbImageShack";
-            this.gbImageShack.Size = new System.Drawing.Size(808, 64);
+            this.gbImageShack.Size = new System.Drawing.Size(826, 64);
             this.gbImageShack.TabIndex = 8;
             this.gbImageShack.TabStop = false;
             this.gbImageShack.Text = "ImageShack";
@@ -1063,7 +1077,7 @@ namespace TDMaker
             // btnImageShackImages
             // 
             this.btnImageShackImages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnImageShackImages.Location = new System.Drawing.Point(716, 24);
+            this.btnImageShackImages.Location = new System.Drawing.Point(734, 24);
             this.btnImageShackImages.Name = "btnImageShackImages";
             this.btnImageShackImages.Size = new System.Drawing.Size(75, 23);
             this.btnImageShackImages.TabIndex = 7;
@@ -1077,14 +1091,14 @@ namespace TDMaker
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtImageShackRegCode.Location = new System.Drawing.Point(161, 26);
             this.txtImageShackRegCode.Name = "txtImageShackRegCode";
-            this.txtImageShackRegCode.Size = new System.Drawing.Size(467, 20);
+            this.txtImageShackRegCode.Size = new System.Drawing.Size(485, 20);
             this.txtImageShackRegCode.TabIndex = 4;
             this.txtImageShackRegCode.TextChanged += new System.EventHandler(this.txtImageShackRegCode_TextChanged);
             // 
             // btnImageShackRegCode
             // 
             this.btnImageShackRegCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnImageShackRegCode.Location = new System.Drawing.Point(635, 24);
+            this.btnImageShackRegCode.Location = new System.Drawing.Point(653, 24);
             this.btnImageShackRegCode.Name = "btnImageShackRegCode";
             this.btnImageShackRegCode.Size = new System.Drawing.Size(75, 23);
             this.btnImageShackRegCode.TabIndex = 6;
@@ -1149,7 +1163,7 @@ namespace TDMaker
             this.tpPublish.Location = new System.Drawing.Point(4, 22);
             this.tpPublish.Name = "tpPublish";
             this.tpPublish.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPublish.Size = new System.Drawing.Size(848, 419);
+            this.tpPublish.Size = new System.Drawing.Size(866, 422);
             this.tpPublish.TabIndex = 2;
             this.tpPublish.Text = "Publish Templates";
             this.tpPublish.UseVisualStyleBackColor = true;
@@ -1412,7 +1426,7 @@ namespace TDMaker
             this.tpTorrents.Location = new System.Drawing.Point(4, 22);
             this.tpTorrents.Name = "tpTorrents";
             this.tpTorrents.Padding = new System.Windows.Forms.Padding(3);
-            this.tpTorrents.Size = new System.Drawing.Size(848, 419);
+            this.tpTorrents.Size = new System.Drawing.Size(866, 422);
             this.tpTorrents.TabIndex = 1;
             this.tpTorrents.Text = "Torrent Creator";
             this.tpTorrents.UseVisualStyleBackColor = true;
@@ -1420,7 +1434,7 @@ namespace TDMaker
             // btnRefreshTrackers
             // 
             this.btnRefreshTrackers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRefreshTrackers.Location = new System.Drawing.Point(745, 10);
+            this.btnRefreshTrackers.Location = new System.Drawing.Point(763, 10);
             this.btnRefreshTrackers.Name = "btnRefreshTrackers";
             this.btnRefreshTrackers.Size = new System.Drawing.Size(75, 23);
             this.btnRefreshTrackers.TabIndex = 5;
@@ -1441,7 +1455,7 @@ namespace TDMaker
             this.groupBox8.Controls.Add(this.txtTorrentCustomFolder);
             this.groupBox8.Location = new System.Drawing.Point(17, 288);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(809, 122);
+            this.groupBox8.Size = new System.Drawing.Size(827, 122);
             this.groupBox8.TabIndex = 4;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Save Location";
@@ -1492,7 +1506,7 @@ namespace TDMaker
             // btnBrowseTorrentCustomFolder
             // 
             this.btnBrowseTorrentCustomFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowseTorrentCustomFolder.Location = new System.Drawing.Point(704, 43);
+            this.btnBrowseTorrentCustomFolder.Location = new System.Drawing.Point(722, 43);
             this.btnBrowseTorrentCustomFolder.Name = "btnBrowseTorrentCustomFolder";
             this.btnBrowseTorrentCustomFolder.Size = new System.Drawing.Size(75, 23);
             this.btnBrowseTorrentCustomFolder.TabIndex = 3;
@@ -1506,7 +1520,7 @@ namespace TDMaker
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTorrentCustomFolder.Location = new System.Drawing.Point(112, 44);
             this.txtTorrentCustomFolder.Name = "txtTorrentCustomFolder";
-            this.txtTorrentCustomFolder.Size = new System.Drawing.Size(584, 20);
+            this.txtTorrentCustomFolder.Size = new System.Drawing.Size(602, 20);
             this.txtTorrentCustomFolder.TabIndex = 2;
             this.txtTorrentCustomFolder.TextChanged += new System.EventHandler(this.txtTorrentCustomFolder_TextChanged);
             // 
@@ -1517,7 +1531,7 @@ namespace TDMaker
             this.gbTrackerMgr.Controls.Add(this.tlpTrackers);
             this.gbTrackerMgr.Location = new System.Drawing.Point(17, 40);
             this.gbTrackerMgr.Name = "gbTrackerMgr";
-            this.gbTrackerMgr.Size = new System.Drawing.Size(809, 240);
+            this.gbTrackerMgr.Size = new System.Drawing.Size(827, 240);
             this.gbTrackerMgr.TabIndex = 3;
             this.gbTrackerMgr.TabStop = false;
             this.gbTrackerMgr.Text = "Tracker Manager";
@@ -1539,7 +1553,7 @@ namespace TDMaker
             this.tlpTrackers.RowCount = 2;
             this.tlpTrackers.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpTrackers.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
-            this.tlpTrackers.Size = new System.Drawing.Size(803, 221);
+            this.tlpTrackers.Size = new System.Drawing.Size(821, 221);
             this.tlpTrackers.TabIndex = 0;
             // 
             // flpTrackers
@@ -1547,9 +1561,9 @@ namespace TDMaker
             this.flpTrackers.Controls.Add(this.btnAddTracker);
             this.flpTrackers.Controls.Add(this.btnRemoveTracker);
             this.flpTrackers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flpTrackers.Location = new System.Drawing.Point(203, 188);
+            this.flpTrackers.Location = new System.Drawing.Point(208, 188);
             this.flpTrackers.Name = "flpTrackers";
-            this.flpTrackers.Size = new System.Drawing.Size(194, 30);
+            this.flpTrackers.Size = new System.Drawing.Size(199, 30);
             this.flpTrackers.TabIndex = 4;
             // 
             // btnAddTracker
@@ -1575,10 +1589,10 @@ namespace TDMaker
             // pgTracker
             // 
             this.pgTracker.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pgTracker.Location = new System.Drawing.Point(403, 3);
+            this.pgTracker.Location = new System.Drawing.Point(413, 3);
             this.pgTracker.Name = "pgTracker";
             this.pgTracker.PropertySort = System.Windows.Forms.PropertySort.NoSort;
-            this.pgTracker.Size = new System.Drawing.Size(397, 179);
+            this.pgTracker.Size = new System.Drawing.Size(405, 179);
             this.pgTracker.TabIndex = 1;
             this.pgTracker.ToolbarVisible = false;
             this.pgTracker.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.PgTrackerPropertyValueChanged);
@@ -1590,7 +1604,7 @@ namespace TDMaker
             this.flpTrackerGroups.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flpTrackerGroups.Location = new System.Drawing.Point(3, 188);
             this.flpTrackerGroups.Name = "flpTrackerGroups";
-            this.flpTrackerGroups.Size = new System.Drawing.Size(194, 30);
+            this.flpTrackerGroups.Size = new System.Drawing.Size(199, 30);
             this.flpTrackerGroups.TabIndex = 3;
             // 
             // btnAddTrackerGroup
@@ -1619,7 +1633,7 @@ namespace TDMaker
             this.gbTrackerGroups.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbTrackerGroups.Location = new System.Drawing.Point(3, 3);
             this.gbTrackerGroups.Name = "gbTrackerGroups";
-            this.gbTrackerGroups.Size = new System.Drawing.Size(194, 179);
+            this.gbTrackerGroups.Size = new System.Drawing.Size(199, 179);
             this.gbTrackerGroups.TabIndex = 5;
             this.gbTrackerGroups.TabStop = false;
             this.gbTrackerGroups.Text = "Groups";
@@ -1630,7 +1644,7 @@ namespace TDMaker
             this.lbTrackerGroups.FormattingEnabled = true;
             this.lbTrackerGroups.Location = new System.Drawing.Point(3, 16);
             this.lbTrackerGroups.Name = "lbTrackerGroups";
-            this.lbTrackerGroups.Size = new System.Drawing.Size(188, 160);
+            this.lbTrackerGroups.Size = new System.Drawing.Size(193, 160);
             this.lbTrackerGroups.TabIndex = 2;
             this.lbTrackerGroups.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbTrackerGroups_MouseDoubleClick);
             this.lbTrackerGroups.SelectedIndexChanged += new System.EventHandler(this.lbTrackerGroups_SelectedIndexChanged);
@@ -1639,9 +1653,9 @@ namespace TDMaker
             // 
             this.gbTrackers.Controls.Add(this.lbTrackers);
             this.gbTrackers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbTrackers.Location = new System.Drawing.Point(203, 3);
+            this.gbTrackers.Location = new System.Drawing.Point(208, 3);
             this.gbTrackers.Name = "gbTrackers";
-            this.gbTrackers.Size = new System.Drawing.Size(194, 179);
+            this.gbTrackers.Size = new System.Drawing.Size(199, 179);
             this.gbTrackers.TabIndex = 6;
             this.gbTrackers.TabStop = false;
             this.gbTrackers.Text = "Trackers";
@@ -1652,7 +1666,7 @@ namespace TDMaker
             this.lbTrackers.FormattingEnabled = true;
             this.lbTrackers.Location = new System.Drawing.Point(3, 16);
             this.lbTrackers.Name = "lbTrackers";
-            this.lbTrackers.Size = new System.Drawing.Size(188, 160);
+            this.lbTrackers.Size = new System.Drawing.Size(193, 160);
             this.lbTrackers.TabIndex = 0;
             this.lbTrackers.SelectedIndexChanged += new System.EventHandler(this.lbTrackers_SelectedIndexChanged);
             // 
@@ -1664,7 +1678,7 @@ namespace TDMaker
             this.cboTrackerGroupActive.FormattingEnabled = true;
             this.cboTrackerGroupActive.Location = new System.Drawing.Point(209, 12);
             this.cboTrackerGroupActive.Name = "cboTrackerGroupActive";
-            this.cboTrackerGroupActive.Size = new System.Drawing.Size(530, 21);
+            this.cboTrackerGroupActive.Size = new System.Drawing.Size(548, 21);
             this.cboTrackerGroupActive.TabIndex = 2;
             this.cboTrackerGroupActive.SelectedIndexChanged += new System.EventHandler(this.cboAnnounceURL_SelectedIndexChanged);
             // 
@@ -1686,7 +1700,7 @@ namespace TDMaker
             this.tpProxy.Location = new System.Drawing.Point(4, 22);
             this.tpProxy.Name = "tpProxy";
             this.tpProxy.Padding = new System.Windows.Forms.Padding(3);
-            this.tpProxy.Size = new System.Drawing.Size(848, 419);
+            this.tpProxy.Size = new System.Drawing.Size(866, 422);
             this.tpProxy.TabIndex = 4;
             this.tpProxy.Text = "Proxy";
             this.tpProxy.UseVisualStyleBackColor = true;
@@ -1716,7 +1730,7 @@ namespace TDMaker
             this.tpAdvanced.Location = new System.Drawing.Point(4, 22);
             this.tpAdvanced.Name = "tpAdvanced";
             this.tpAdvanced.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAdvanced.Size = new System.Drawing.Size(848, 419);
+            this.tpAdvanced.Size = new System.Drawing.Size(866, 422);
             this.tpAdvanced.TabIndex = 3;
             this.tpAdvanced.Text = "Advanced";
             this.tpAdvanced.UseVisualStyleBackColor = true;
@@ -1727,7 +1741,7 @@ namespace TDMaker
             this.pgApp.Location = new System.Drawing.Point(3, 3);
             this.pgApp.Name = "pgApp";
             this.pgApp.PropertySort = System.Windows.Forms.PropertySort.Categorized;
-            this.pgApp.Size = new System.Drawing.Size(842, 413);
+            this.pgApp.Size = new System.Drawing.Size(860, 416);
             this.pgApp.TabIndex = 0;
             this.pgApp.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.pgApp_PropertyValueChanged);
             // 
@@ -1742,7 +1756,7 @@ namespace TDMaker
             this.btnPublish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPublish.AutoSize = true;
             this.btnPublish.Enabled = false;
-            this.btnPublish.Location = new System.Drawing.Point(768, 512);
+            this.btnPublish.Location = new System.Drawing.Point(768, 8);
             this.btnPublish.Name = "btnPublish";
             this.btnPublish.Size = new System.Drawing.Size(106, 23);
             this.btnPublish.TabIndex = 5;
@@ -1756,7 +1770,7 @@ namespace TDMaker
             this.btnAnalyze.AutoSize = true;
             this.btnAnalyze.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnAnalyze.Enabled = false;
-            this.btnAnalyze.Location = new System.Drawing.Point(16, 512);
+            this.btnAnalyze.Location = new System.Drawing.Point(8, 8);
             this.btnAnalyze.Name = "btnAnalyze";
             this.btnAnalyze.Size = new System.Drawing.Size(104, 23);
             this.btnAnalyze.TabIndex = 9;
@@ -1773,7 +1787,7 @@ namespace TDMaker
             this.tmsVersionHistory,
             this.cmsAppAbout});
             this.cmsApp.Name = "cmsApp";
-            this.cmsApp.Size = new System.Drawing.Size(187, 98);
+            this.cmsApp.Size = new System.Drawing.Size(181, 98);
             // 
             // foldersToolStripMenuItem
             // 
@@ -1785,72 +1799,72 @@ namespace TDMaker
             this.tsmSettingsDir,
             this.tsmTemplates});
             this.foldersToolStripMenuItem.Name = "foldersToolStripMenuItem";
-            this.foldersToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.foldersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.foldersToolStripMenuItem.Text = "&Folders";
             // 
             // tsmScreenshots
             // 
             this.tsmScreenshots.Name = "tsmScreenshots";
-            this.tsmScreenshots.Size = new System.Drawing.Size(156, 22);
+            this.tsmScreenshots.Size = new System.Drawing.Size(146, 22);
             this.tsmScreenshots.Text = "&Screenshots...";
             this.tsmScreenshots.Click += new System.EventHandler(this.tsmScreenshots_Click);
             // 
             // tsmTorrentsDir
             // 
             this.tsmTorrentsDir.Name = "tsmTorrentsDir";
-            this.tsmTorrentsDir.Size = new System.Drawing.Size(156, 22);
+            this.tsmTorrentsDir.Size = new System.Drawing.Size(146, 22);
             this.tsmTorrentsDir.Text = "&Torrents...";
             this.tsmTorrentsDir.Click += new System.EventHandler(this.tsmTorrentsDir_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(153, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(143, 6);
             // 
             // tsmLogsDir
             // 
             this.tsmLogsDir.Name = "tsmLogsDir";
-            this.tsmLogsDir.Size = new System.Drawing.Size(156, 22);
+            this.tsmLogsDir.Size = new System.Drawing.Size(146, 22);
             this.tsmLogsDir.Text = "&Logs...";
             this.tsmLogsDir.Click += new System.EventHandler(this.tsmLogsDir_Click);
             // 
             // tsmSettingsDir
             // 
             this.tsmSettingsDir.Name = "tsmSettingsDir";
-            this.tsmSettingsDir.Size = new System.Drawing.Size(156, 22);
+            this.tsmSettingsDir.Size = new System.Drawing.Size(146, 22);
             this.tsmSettingsDir.Text = "&Settings...";
             this.tsmSettingsDir.Click += new System.EventHandler(this.tsmSettingsDir_Click);
             // 
             // tsmTemplates
             // 
             this.tsmTemplates.Name = "tsmTemplates";
-            this.tsmTemplates.Size = new System.Drawing.Size(156, 22);
+            this.tsmTemplates.Size = new System.Drawing.Size(146, 22);
             this.tsmTemplates.Text = "Templates...";
             this.tsmTemplates.Click += new System.EventHandler(this.tsmTemplates_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(183, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // tsmUpdatesCheck
             // 
             this.tsmUpdatesCheck.Name = "tsmUpdatesCheck";
-            this.tsmUpdatesCheck.Size = new System.Drawing.Size(186, 22);
+            this.tsmUpdatesCheck.Size = new System.Drawing.Size(180, 22);
             this.tsmUpdatesCheck.Text = "Check for &Updates...";
             this.tsmUpdatesCheck.Click += new System.EventHandler(this.tsmUpdatesCheck_Click);
             // 
             // tmsVersionHistory
             // 
             this.tmsVersionHistory.Name = "tmsVersionHistory";
-            this.tmsVersionHistory.Size = new System.Drawing.Size(186, 22);
+            this.tmsVersionHistory.Size = new System.Drawing.Size(180, 22);
             this.tmsVersionHistory.Text = "&Version History...";
             this.tmsVersionHistory.Click += new System.EventHandler(this.tmsVersionHistory_Click);
             // 
             // cmsAppAbout
             // 
             this.cmsAppAbout.Name = "cmsAppAbout";
-            this.cmsAppAbout.Size = new System.Drawing.Size(186, 22);
+            this.cmsAppAbout.Size = new System.Drawing.Size(180, 22);
             this.cmsAppAbout.Text = "&About...";
             this.cmsAppAbout.Click += new System.EventHandler(this.cmsAppAbout_Click);
             // 
@@ -1859,7 +1873,7 @@ namespace TDMaker
             this.btnCreateTorrent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCreateTorrent.AutoSize = true;
             this.btnCreateTorrent.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnCreateTorrent.Location = new System.Drawing.Point(136, 512);
+            this.btnCreateTorrent.Location = new System.Drawing.Point(120, 8);
             this.btnCreateTorrent.Name = "btnCreateTorrent";
             this.btnCreateTorrent.Size = new System.Drawing.Size(85, 23);
             this.btnCreateTorrent.TabIndex = 10;
@@ -1891,7 +1905,7 @@ namespace TDMaker
             this.toolStripSeparator3,
             this.miFileExit});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // tsmiFileOpenFile
@@ -1900,7 +1914,7 @@ namespace TDMaker
             this.tsmiFileOpenFile.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsmiFileOpenFile.Name = "tsmiFileOpenFile";
             this.tsmiFileOpenFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.tsmiFileOpenFile.Size = new System.Drawing.Size(226, 22);
+            this.tsmiFileOpenFile.Size = new System.Drawing.Size(223, 22);
             this.tsmiFileOpenFile.Text = "&Open File...";
             this.tsmiFileOpenFile.Click += new System.EventHandler(this.miFileOpenFile_Click);
             // 
@@ -1911,14 +1925,14 @@ namespace TDMaker
             this.miFileOpenFolder.Name = "miFileOpenFolder";
             this.miFileOpenFolder.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
                         | System.Windows.Forms.Keys.O)));
-            this.miFileOpenFolder.Size = new System.Drawing.Size(226, 22);
+            this.miFileOpenFolder.Size = new System.Drawing.Size(223, 22);
             this.miFileOpenFolder.Text = "&Open Folder...";
             this.miFileOpenFolder.Click += new System.EventHandler(this.miFileOpenFolder_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(223, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(220, 6);
             // 
             // miFileSaveTorrent
             // 
@@ -1926,26 +1940,26 @@ namespace TDMaker
             this.miFileSaveTorrent.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.miFileSaveTorrent.Name = "miFileSaveTorrent";
             this.miFileSaveTorrent.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.miFileSaveTorrent.Size = new System.Drawing.Size(226, 22);
+            this.miFileSaveTorrent.Size = new System.Drawing.Size(223, 22);
             this.miFileSaveTorrent.Text = "&Save Torrent";
             this.miFileSaveTorrent.Click += new System.EventHandler(this.miFileSaveTorrent_Click);
             // 
             // miFileSaveInfoAs
             // 
             this.miFileSaveInfoAs.Name = "miFileSaveInfoAs";
-            this.miFileSaveInfoAs.Size = new System.Drawing.Size(226, 22);
+            this.miFileSaveInfoAs.Size = new System.Drawing.Size(223, 22);
             this.miFileSaveInfoAs.Text = "&Save Publish Info As...";
             this.miFileSaveInfoAs.Click += new System.EventHandler(this.miFileSaveInfoAs_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(223, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(220, 6);
             // 
             // miFileExit
             // 
             this.miFileExit.Name = "miFileExit";
-            this.miFileExit.Size = new System.Drawing.Size(226, 22);
+            this.miFileExit.Size = new System.Drawing.Size(223, 22);
             this.miFileExit.Text = "E&xit";
             this.miFileExit.Click += new System.EventHandler(this.miFileExit_Click);
             // 
@@ -1954,7 +1968,7 @@ namespace TDMaker
             this.tsmiEditTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miEditCopy});
             this.tsmiEditTools.Name = "tsmiEditTools";
-            this.tsmiEditTools.Size = new System.Drawing.Size(37, 20);
+            this.tsmiEditTools.Size = new System.Drawing.Size(39, 20);
             this.tsmiEditTools.Text = "&Edit";
             // 
             // miEditCopy
@@ -1963,7 +1977,7 @@ namespace TDMaker
             this.miEditCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.miEditCopy.Name = "miEditCopy";
             this.miEditCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.miEditCopy.Size = new System.Drawing.Size(149, 22);
+            this.miEditCopy.Size = new System.Drawing.Size(144, 22);
             this.miEditCopy.Text = "&Copy";
             this.miEditCopy.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
@@ -1979,67 +1993,67 @@ namespace TDMaker
             this.toolStripSeparator5,
             this.tsmiPreferKnownFolders});
             this.foldersToolStripMenuItem1.Name = "foldersToolStripMenuItem1";
-            this.foldersToolStripMenuItem1.Size = new System.Drawing.Size(54, 20);
+            this.foldersToolStripMenuItem1.Size = new System.Drawing.Size(57, 20);
             this.foldersToolStripMenuItem1.Text = "&Folders";
             // 
             // miFoldersScreenshots
             // 
             this.miFoldersScreenshots.Name = "miFoldersScreenshots";
-            this.miFoldersScreenshots.Size = new System.Drawing.Size(200, 22);
+            this.miFoldersScreenshots.Size = new System.Drawing.Size(195, 22);
             this.miFoldersScreenshots.Text = "&Screenshots...";
             this.miFoldersScreenshots.Click += new System.EventHandler(this.miFoldersScreenshots_Click);
             // 
             // miFoldersTorrents
             // 
             this.miFoldersTorrents.Name = "miFoldersTorrents";
-            this.miFoldersTorrents.Size = new System.Drawing.Size(200, 22);
+            this.miFoldersTorrents.Size = new System.Drawing.Size(195, 22);
             this.miFoldersTorrents.Text = "&Torrents...";
             this.miFoldersTorrents.Click += new System.EventHandler(this.miFoldersTorrents_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(197, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(192, 6);
             // 
             // miFoldersLogs
             // 
             this.miFoldersLogs.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miFoldersLogsDebug});
             this.miFoldersLogs.Name = "miFoldersLogs";
-            this.miFoldersLogs.Size = new System.Drawing.Size(200, 22);
+            this.miFoldersLogs.Size = new System.Drawing.Size(195, 22);
             this.miFoldersLogs.Text = "&Logs...";
             this.miFoldersLogs.Click += new System.EventHandler(this.miFoldersLogs_Click);
             // 
             // miFoldersLogsDebug
             // 
             this.miFoldersLogsDebug.Name = "miFoldersLogsDebug";
-            this.miFoldersLogsDebug.Size = new System.Drawing.Size(128, 22);
+            this.miFoldersLogsDebug.Size = new System.Drawing.Size(118, 22);
             this.miFoldersLogsDebug.Text = "&Debug...";
             this.miFoldersLogsDebug.Click += new System.EventHandler(this.miFoldersLogsDebug_Click);
             // 
             // miFoldersSettings
             // 
             this.miFoldersSettings.Name = "miFoldersSettings";
-            this.miFoldersSettings.Size = new System.Drawing.Size(200, 22);
+            this.miFoldersSettings.Size = new System.Drawing.Size(195, 22);
             this.miFoldersSettings.Text = "&Settings...";
             this.miFoldersSettings.Click += new System.EventHandler(this.miFoldersSettings_Click);
             // 
             // miFoldersTemplates
             // 
             this.miFoldersTemplates.Name = "miFoldersTemplates";
-            this.miFoldersTemplates.Size = new System.Drawing.Size(200, 22);
+            this.miFoldersTemplates.Size = new System.Drawing.Size(195, 22);
             this.miFoldersTemplates.Text = "&Templates...";
             this.miFoldersTemplates.Click += new System.EventHandler(this.miFoldersTemplates_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(197, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(192, 6);
             // 
             // tsmiPreferKnownFolders
             // 
             this.tsmiPreferKnownFolders.Name = "tsmiPreferKnownFolders";
-            this.tsmiPreferKnownFolders.Size = new System.Drawing.Size(200, 22);
+            this.tsmiPreferKnownFolders.Size = new System.Drawing.Size(195, 22);
             this.tsmiPreferKnownFolders.Text = "Prefer &Known Folders...";
             this.tsmiPreferKnownFolders.Click += new System.EventHandler(this.tsmiPreferKnownFolders_Click);
             // 
@@ -2050,29 +2064,61 @@ namespace TDMaker
             this.miHelpVersionHistory,
             this.tsmiAbout});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // miHelpCheckUpdates
             // 
             this.miHelpCheckUpdates.Name = "miHelpCheckUpdates";
-            this.miHelpCheckUpdates.Size = new System.Drawing.Size(186, 22);
+            this.miHelpCheckUpdates.Size = new System.Drawing.Size(180, 22);
             this.miHelpCheckUpdates.Text = "&Check for Updates...";
             this.miHelpCheckUpdates.Click += new System.EventHandler(this.miHelpCheckUpdates_Click);
             // 
             // miHelpVersionHistory
             // 
             this.miHelpVersionHistory.Name = "miHelpVersionHistory";
-            this.miHelpVersionHistory.Size = new System.Drawing.Size(186, 22);
+            this.miHelpVersionHistory.Size = new System.Drawing.Size(180, 22);
             this.miHelpVersionHistory.Text = "&Version History...";
             this.miHelpVersionHistory.Click += new System.EventHandler(this.miHelpVersionHistory_Click);
             // 
             // tsmiAbout
             // 
             this.tsmiAbout.Name = "tsmiAbout";
-            this.tsmiAbout.Size = new System.Drawing.Size(186, 22);
+            this.tsmiAbout.Size = new System.Drawing.Size(180, 22);
             this.tsmiAbout.Text = "&About...";
             this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
+            // 
+            // scMainContainer
+            // 
+            this.scMainContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scMainContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.scMainContainer.Location = new System.Drawing.Point(5, 3);
+            this.scMainContainer.Name = "scMainContainer";
+            this.scMainContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // scMainContainer.Panel1
+            // 
+            this.scMainContainer.Panel1.Controls.Add(this.tcMain);
+            // 
+            // scMainContainer.Panel2
+            // 
+            this.scMainContainer.Panel2.Controls.Add(this.btnCreateTorrent);
+            this.scMainContainer.Panel2.Controls.Add(this.btnAnalyze);
+            this.scMainContainer.Panel2.Controls.Add(this.btnPublish);
+            this.scMainContainer.Size = new System.Drawing.Size(882, 512);
+            this.scMainContainer.SplitterDistance = 474;
+            this.scMainContainer.SplitterWidth = 1;
+            this.scMainContainer.TabIndex = 13;
+            // 
+            // pMainContainer
+            // 
+            this.pMainContainer.Controls.Add(this.scMainContainer);
+            this.pMainContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pMainContainer.Location = new System.Drawing.Point(0, 24);
+            this.pMainContainer.Name = "pMainContainer";
+            this.pMainContainer.Padding = new System.Windows.Forms.Padding(5, 3, 5, 5);
+            this.pMainContainer.Size = new System.Drawing.Size(892, 520);
+            this.pMainContainer.TabIndex = 14;
             // 
             // MainWindow
             // 
@@ -2082,12 +2128,9 @@ namespace TDMaker
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(892, 566);
             this.ContextMenuStrip = this.cmsApp;
-            this.Controls.Add(this.btnAnalyze);
-            this.Controls.Add(this.btnCreateTorrent);
-            this.Controls.Add(this.btnPublish);
+            this.Controls.Add(this.pMainContainer);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.tcMain);
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(900, 600);
             this.Name = "MainWindow";
@@ -2098,6 +2141,7 @@ namespace TDMaker
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainWindow_DragDrop);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainWindow_FormClosed);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainWindow_DragEnter);
+            this.Resize += new System.EventHandler(this.MainWindow_Resize);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.tcMain.ResumeLayout(false);
@@ -2165,6 +2209,11 @@ namespace TDMaker
             this.cmsApp.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.scMainContainer.Panel1.ResumeLayout(false);
+            this.scMainContainer.Panel2.ResumeLayout(false);
+            this.scMainContainer.Panel2.PerformLayout();
+            this.scMainContainer.ResumeLayout(false);
+            this.pMainContainer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2339,6 +2388,8 @@ namespace TDMaker
         private System.Windows.Forms.ComboBox cboPublishType;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem tsmiPreferKnownFolders;
+        private System.Windows.Forms.SplitContainer scMainContainer;
+        private System.Windows.Forms.Panel pMainContainer;
     }
 }
 
