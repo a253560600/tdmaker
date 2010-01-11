@@ -103,6 +103,11 @@ namespace TDMakerLib
         {
             this.Options.CreateTorrent = chkCreateTorrent.Checked;
         }
+
+        private void btnCancel_Click(object sender, System.EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+        }
     }
 
     public class MediaWizardOptions
@@ -111,5 +116,6 @@ namespace TDMakerLib
         public bool CreateTorrent { get; set; }
         public MediaType MediaTypeChoice { get; set; }
         public bool PromptShown { get; set; }
+        public DialogResult DialogResultMy { get; set; }
     }
 }
