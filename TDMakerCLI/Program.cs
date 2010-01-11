@@ -98,6 +98,12 @@ namespace TDMakerCLI
                 {
                     ti.MediaMy.TorrentCreateInfoMy = new TorrentCreateInfo(Engine.conf.TrackerGroups[Engine.conf.TrackerGroupActive], mMediaLoc);
                     ti.MediaMy.TorrentCreateInfoMy.CreateTorrent();
+
+                    if (Engine.conf.XMLTorrentUploadCreate)
+                    {
+                        string fp = Path.Combine(ti.MediaMy.TorrentCreateInfoMy.GetTorrentFolderPath(), Engine.GetMediaName(ti.MediaMy.TorrentCreateInfoMy.MediaLocation)) + ".xml";
+                        FileSystem.GetXMLTorrentUpload(ti.MediaMy).Write2(fp);
+                    }
                 }
             }
             Console.WriteLine();

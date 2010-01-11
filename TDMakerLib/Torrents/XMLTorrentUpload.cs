@@ -78,6 +78,7 @@ namespace TDMakerLib
 
                 serial = null;
                 fs = null;
+                Console.WriteLine("Wrote: " + filePath);
             }
             catch (Exception e)
             {
