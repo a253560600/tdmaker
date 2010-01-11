@@ -190,8 +190,8 @@ namespace TDMakerLib
                 else if (!silent) // no dir found
                 {
                     MediaWizard mw = new MediaWizard(FileOrDirPaths);
-                    
-                    if (mw.ShowDialog() == DialogResult.OK)
+                    mwo.DialogResultMy = mw.ShowDialog();
+                    if (mwo.DialogResultMy == DialogResult.OK)
                     {
                         mwo = mw.Options;
                         mwo.PromptShown = true;
@@ -357,7 +357,12 @@ namespace TDMakerLib
                     Directory.CreateDirectory(dp);
                 }
             }
-            Engine.mAppSettings.XMLSettingsFile = Path.Combine(SettingsDir, XMLSettingsCore.XMLFileName);
+
+            string latestSettingsFile = Path.Combine(SettingsDir, XMLSettingsCore.XMLFileName);
+            if (File.Exists(latestSettingsFile))
+            {
+                Engine.mAppSettings.XMLSettingsFile = latestSettingsFile;
+            }
         }
 
         public static string GetProductName()

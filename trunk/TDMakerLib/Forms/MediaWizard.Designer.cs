@@ -38,6 +38,7 @@
             this.lblUserActionMsg = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
             this.gbTasks = new System.Windows.Forms.GroupBox();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.gbQuestion.SuspendLayout();
             this.flpFileOptions.SuspendLayout();
             this.flpTasks.SuspendLayout();
@@ -140,7 +141,7 @@
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.Location = new System.Drawing.Point(379, 271);
+            this.btnOK.Location = new System.Drawing.Point(312, 272);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 4;
@@ -159,12 +160,23 @@
             this.gbTasks.TabStop = false;
             this.gbTasks.Text = "Tasks";
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(392, 272);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 6;
+            this.btnCancel.Text = "&Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // MediaWizard
             // 
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(487, 306);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.gbTasks);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.lblUserActionMsg);
@@ -198,6 +210,7 @@
         private System.Windows.Forms.RadioButton rbFilesAsColl;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.GroupBox gbTasks;
+        private System.Windows.Forms.Button btnCancel;
 
 
     }

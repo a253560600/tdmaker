@@ -53,7 +53,7 @@ namespace TDMaker
         {
             StringBuilder sbMsg = new StringBuilder();
             // checks 
-            if (string.IsNullOrEmpty(cboSource.Text))
+            if (string.IsNullOrEmpty(cboSource.Text) && Engine.conf.PublishInfoTypeChoice != PublishInfoType.MediaInfo)
             {
                 sbMsg.AppendLine("Source was empty.");
             }
@@ -162,14 +162,17 @@ namespace TDMaker
         {
             if (!ValidateInput()) return;
 
+            DialogResult dlgResult = DialogResult.OK;
             List<MediaInfo2> miList = new List<MediaInfo2>();
 
             MediaWizardOptions mwo = Engine.GetMediaType(wt.FileOrDirPaths);
+
             wt.MediaTypeChoice = mwo.MediaTypeChoice;
             if (mwo.PromptShown)
             {
                 wt.TorrentCreateAuto = mwo.CreateTorrent;
                 wt.UploadScreenshot = mwo.ScreenshotsInclude;
+                dlgResult = mwo.DialogResultMy;
             }
             else
             {
@@ -181,7 +184,8 @@ namespace TDMaker
             if (!mwo.PromptShown && Engine.conf.ShowMediaWizardAlways)
             {
                 MediaWizard mw = new MediaWizard(wt);
-                if (mw.ShowDialog() == DialogResult.OK)
+                dlgResult = mw.ShowDialog();
+                if (dlgResult == DialogResult.OK)
                 {
                     wt.TorrentCreateAuto = mw.Options.CreateTorrent;
                     wt.UploadScreenshot = mw.Options.ScreenshotsInclude;
@@ -189,55 +193,58 @@ namespace TDMaker
                 }
             }
 
-            if (wt.MediaTypeChoice == MediaType.MediaCollection)
+            if (dlgResult == DialogResult.OK)
             {
-                wt.FileOrDirPaths.Sort();
-                string firstPath = wt.FileOrDirPaths[0];
-                MediaInfo2 mi = this.PrepareNewMedia(wt, File.Exists(firstPath) ? Path.GetDirectoryName(wt.FileOrDirPaths[0]) : firstPath);
-                foreach (string p in wt.FileOrDirPaths)
+                if (wt.MediaTypeChoice == MediaType.MediaCollection)
                 {
-                    if (File.Exists(p))
+                    wt.FileOrDirPaths.Sort();
+                    string firstPath = wt.FileOrDirPaths[0];
+                    MediaInfo2 mi = this.PrepareNewMedia(wt, File.Exists(firstPath) ? Path.GetDirectoryName(wt.FileOrDirPaths[0]) : firstPath);
+                    foreach (string p in wt.FileOrDirPaths)
                     {
-                        mi.FileCollection.Add(p);
-                    }
-                }
-                miList.Add(mi);
-            }
-            else
-            {
-                foreach (string p in wt.FileOrDirPaths)
-                {
-                    if (File.Exists(p) || Directory.Exists(p))
-                    {
-                        MakeGUIReadyForAnalysis();
-
-                        MediaInfo2 mi = this.PrepareNewMedia(wt, p);
-
-                        if (wt.IsSingleTask() && !string.IsNullOrEmpty(txtTitle.Text))
+                        if (File.Exists(p))
                         {
-                            mi.SetTitle(txtTitle.Text);
-                            // if it is a DVD, set the title to be name of the folder. 
-                            this.Text = string.Format("{0} - {1}", Engine.GetProductName(), Engine.GetMediaName(mi.Location));
+                            mi.FileCollection.Add(p);
                         }
-                        miList.Add(mi);
+                    }
+                    miList.Add(mi);
+                }
+                else
+                {
+                    foreach (string p in wt.FileOrDirPaths)
+                    {
+                        if (File.Exists(p) || Directory.Exists(p))
+                        {
+                            MakeGUIReadyForAnalysis();
+
+                            MediaInfo2 mi = this.PrepareNewMedia(wt, p);
+
+                            if (wt.IsSingleTask() && !string.IsNullOrEmpty(txtTitle.Text))
+                            {
+                                mi.SetTitle(txtTitle.Text);
+                                // if it is a DVD, set the title to be name of the folder. 
+                                this.Text = string.Format("{0} - {1}", Engine.GetProductName(), Engine.GetMediaName(mi.Location));
+                            }
+                            miList.Add(mi);
+                        }
                     }
                 }
-            }
 
-            List<TorrentInfo> tiList = new List<TorrentInfo>();
-            foreach (MediaInfo2 mi in miList)
-            {
-                TorrentInfo ti = new TorrentInfo(bwApp, mi);
-                tiList.Add(ti);
-            }
-            wt.MediaList = tiList;
+                List<TorrentInfo> tiList = new List<TorrentInfo>();
+                foreach (MediaInfo2 mi in miList)
+                {
+                    TorrentInfo ti = new TorrentInfo(bwApp, mi);
+                    tiList.Add(ti);
+                }
+                wt.MediaList = tiList;
 
-            if (!bwApp.IsBusy)
-            {
-                bwApp.RunWorkerAsync(wt);
-            }
+                if (!bwApp.IsBusy)
+                {
+                    bwApp.RunWorkerAsync(wt);
+                }
 
-            UpdateGuiControls();
+                UpdateGuiControls();
+            }
         }
 
         private void MainWindow_Shown(object sender, EventArgs e)
@@ -408,7 +415,7 @@ namespace TDMaker
             }
             if (Engine.conf.SupportedFileTypesVideo.Count == 0)
             {
-                Engine.conf.SupportedFileTypesVideo.AddRange(new string[] { ".avi", ".divx", ".mkv", ".mpeg", ".mpg", ".mov", ".rm", ".rmvb", ".vob", ".wmv" });
+                Engine.conf.SupportedFileTypesVideo.AddRange(new string[] { ".avi", ".divx", ".mkv", ".mpeg", ".mpg", ".mov", ".ogm", ".rm", ".rmvb", ".vob", ".wmv" });
             }
 
             cboSource.Items.Clear();
@@ -1724,11 +1731,6 @@ namespace TDMaker
         private void btnBrowseDir_Click(object sender, EventArgs e)
         {
             OpenFolder();
-        }
-
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            lbFiles.Items.Clear();
         }
 
         private void cboSource_SelectedIndexChanged(object sender, EventArgs e)

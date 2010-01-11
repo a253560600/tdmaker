@@ -57,10 +57,10 @@ namespace TDMaker
             this.cboAuthoring = new System.Windows.Forms.ComboBox();
             this.chkAuthoring = new System.Windows.Forms.CheckBox();
             this.gbLocation = new System.Windows.Forms.GroupBox();
-            this.btnClear = new System.Windows.Forms.Button();
             this.btnBrowseDir = new System.Windows.Forms.Button();
             this.lbFiles = new System.Windows.Forms.ListBox();
             this.btnBrowse = new System.Windows.Forms.Button();
+            this.pbLogo = new System.Windows.Forms.PictureBox();
             this.tpMainMediaInfo = new System.Windows.Forms.TabPage();
             this.tlpMediaInfo = new System.Windows.Forms.TableLayoutPanel();
             this.lbMediaInfo = new System.Windows.Forms.ListBox();
@@ -173,7 +173,6 @@ namespace TDMaker
             this.tmsVersionHistory = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsAppAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.btnCreateTorrent = new System.Windows.Forms.Button();
-            this.pbLogo = new System.Windows.Forms.PictureBox();
             this.ttApp = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -207,6 +206,7 @@ namespace TDMaker
             this.groupBox9.SuspendLayout();
             this.gbDVD.SuspendLayout();
             this.gbLocation.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.tpMainMediaInfo.SuspendLayout();
             this.tlpMediaInfo.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -247,7 +247,6 @@ namespace TDMaker
             this.tpProxy.SuspendLayout();
             this.tpAdvanced.SuspendLayout();
             this.cmsApp.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -525,7 +524,6 @@ namespace TDMaker
             // 
             this.gbLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbLocation.Controls.Add(this.btnClear);
             this.gbLocation.Controls.Add(this.btnBrowseDir);
             this.gbLocation.Controls.Add(this.lbFiles);
             this.gbLocation.Controls.Add(this.btnBrowse);
@@ -536,17 +534,6 @@ namespace TDMaker
             this.gbLocation.TabIndex = 7;
             this.gbLocation.TabStop = false;
             this.gbLocation.Text = "Locations - Browse or Drag and Drop a Movie file or folder...";
-            // 
-            // btnClear
-            // 
-            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClear.Location = new System.Drawing.Point(736, 24);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 23);
-            this.btnClear.TabIndex = 15;
-            this.btnClear.Text = "&Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnBrowseDir
             // 
@@ -583,6 +570,15 @@ namespace TDMaker
             this.btnBrowse.Text = "&Browse for a file or files...";
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            // 
+            // pbLogo
+            // 
+            this.pbLogo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pbLogo.Location = new System.Drawing.Point(312, 16);
+            this.pbLogo.Name = "pbLogo";
+            this.pbLogo.Size = new System.Drawing.Size(392, 29);
+            this.pbLogo.TabIndex = 11;
+            this.pbLogo.TabStop = false;
             // 
             // tpMainMediaInfo
             // 
@@ -1871,15 +1867,6 @@ namespace TDMaker
             this.btnCreateTorrent.UseVisualStyleBackColor = true;
             this.btnCreateTorrent.Click += new System.EventHandler(this.btnCreateTorrent_Click);
             // 
-            // pbLogo
-            // 
-            this.pbLogo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pbLogo.Location = new System.Drawing.Point(312, 16);
-            this.pbLogo.Name = "pbLogo";
-            this.pbLogo.Size = new System.Drawing.Size(392, 29);
-            this.pbLogo.TabIndex = 11;
-            this.pbLogo.TabStop = false;
-            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -2122,6 +2109,7 @@ namespace TDMaker
             this.gbDVD.PerformLayout();
             this.gbLocation.ResumeLayout(false);
             this.gbLocation.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.tpMainMediaInfo.ResumeLayout(false);
             this.tlpMediaInfo.ResumeLayout(false);
             this.tlpMediaInfo.PerformLayout();
@@ -2175,7 +2163,6 @@ namespace TDMaker
             this.tpProxy.ResumeLayout(false);
             this.tpAdvanced.ResumeLayout(false);
             this.cmsApp.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -2348,7 +2335,6 @@ namespace TDMaker
         private System.Windows.Forms.TextBox txtScreenshotsLoc;
         private System.Windows.Forms.Button btnScreenshotsLocBrowse;
         private System.Windows.Forms.Button btnBrowseDir;
-        private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.ComboBox cboPublishTypeQuick;
         private System.Windows.Forms.ComboBox cboPublishType;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;

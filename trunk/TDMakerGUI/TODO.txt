@@ -1,4 +1,7 @@
-﻿Create XML file for moovies upload
+﻿Create XML file for moovies upload in the CLI version
+
+1.21.0.0 Support for processing music audio album folders
+1.20.0.0 Create an XML file for upload pages on some trackers
 
 Logo PictureBox is disabled until figured out where the best place is to put
 Reorganize Code to isoloate methods from MainWindow.cs
