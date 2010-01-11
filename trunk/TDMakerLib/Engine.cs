@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using System.Windows.Forms;
 using System.Diagnostics;
+using UploadersLib.Helpers;
 
 namespace TDMakerLib
 {
@@ -38,6 +39,7 @@ namespace TDMakerLib
         public static string TorrentsDir = conf != null && Directory.Exists(conf.CustomTorrentsDir) && conf.UseCustomTorrentsDir ? conf.CustomTorrentsDir : TorrentsDir;
 
         public static bool IsUNIX { get; private set; }
+        private static bool RunConfig = false;
 
         private static string[] AppDirs;
 
@@ -370,7 +372,7 @@ namespace TDMakerLib
             return mAppInfo.GetApplicationTitle(McoreSystem.AppInfo.VersionDepth.MajorMinorBuild);
         }
 
-        public static bool Load()
+        public static bool TurnOn()
         {
             FileSystem.AppendDebug("Operating System: " + Environment.OSVersion.VersionString);
             FileSystem.AppendDebug("Product Version: " + mAppInfo.GetApplicationTitleFull());
@@ -390,6 +392,7 @@ namespace TDMakerLib
                 {
                     ConfigWizard cw = new ConfigWizard(DefaultRootAppFolder);
                     configResult = cw.ShowDialog();
+                    RunConfig = true;
                 }
                 if (!string.IsNullOrEmpty(Engine.mAppSettings.RootDir))
                 {
@@ -406,19 +409,61 @@ namespace TDMakerLib
                 FileSystem.AppendDebug(string.Format("Root Folder: {0}", mAppSettings.PreferSystemFolders ? zLocalAppDataFolder : RootAppFolder));
                 FileSystem.AppendDebug("Initializing Default folder paths...");
                 Engine.InitializeDefaultFolderPaths(); // happens before XMLSettings is readed
-                conf = XMLSettingsCore.Read();
-                mtnProfileMgr = XMLSettingsMtnProfiles.Read();
             }
             mAppInfo.AppName = mProductName;
             return configResult == DialogResult.OK;
         }
 
-        public static void Unload()
+        public static void TurnOff()
         {
             if (!Portable)
             {
                 mAppSettings.Write();
             }
+            FileSystem.WriteDebugFile();
+        }
+
+        public static void LoadSettingsLatest()
+        {
+            string fp = string.Empty;
+            string settingsDir = Path.GetDirectoryName(Engine.mAppSettings.XMLSettingsFile);
+            if (!string.IsNullOrEmpty(settingsDir))
+            {
+                List<ImageFile> imgFiles = new List<ImageFile>();
+                string[] files = Directory.GetFiles(settingsDir, mProductName + "-*-Settings.xml");
+                if (files.Length > 0)
+                {
+                    foreach (string f in files)
+                    {
+                        imgFiles.Add(new ImageFile(f));
+                    }
+                    imgFiles.Sort();
+                    fp = imgFiles[imgFiles.Count - 1].LocalFilePath;
+                }
+            }
+            XMLSettingsCore.XMLFileName = Path.GetFileName(fp);
+            LoadSettings(fp);
+        }
+
+        public static void LoadSettings(string fp)
+        {
+            if (string.IsNullOrEmpty(fp))
+            {
+                FileSystem.AppendDebug("Reading " + Engine.XMLSettingsFile);
+                Engine.conf = XMLSettingsCore.Read();
+            }
+            else
+            {
+                FileSystem.AppendDebug("Reading " + fp);
+                Engine.conf = XMLSettingsCore.Read(fp);
+            }
+
+            // Use Configuration Wizard Settings if applied
+            if (RunConfig)
+            {
+                Engine.conf.ImageUploader = Engine.mAppSettings.ImageUploader;
+            }
+            mtnProfileMgr = XMLSettingsMtnProfiles.Read();
         }
     }
 }

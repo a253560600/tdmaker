@@ -95,6 +95,8 @@ namespace TDMakerLib
         public bool AnalyzeAuto { get; set; }
         [Category("Options / General"), DefaultValue(true), Description("Automatically Check for Updates")]
         public bool UpdateCheckAuto { get; set; }
+        [Category("Options / General"), DefaultValue(true), Description("Write debug information into a log file.")]
+        public bool WriteDebugFile { get; set; }
 
         // Tab 4.1 - Options - Publish Templates
         [Category("Options / Publish"), DefaultValue(false), Description("Write the torrent description to file")]
