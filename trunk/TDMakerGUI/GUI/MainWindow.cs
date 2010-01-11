@@ -8,7 +8,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using TDMakerLib;
-using TDMakerLib.Helpers;
 using TDMakerLib.Properties;
 using UploadersLib;
 using ZScreenLib;
@@ -1776,6 +1775,11 @@ namespace TDMaker
                     lbFiles.Items.Remove(fd);
                 }
             }
+        }
+
+        private void MainWindow_Resize(object sender, EventArgs e)
+        {
+            this.Refresh();
         }
     }
 }
