@@ -30,7 +30,7 @@ namespace TDMakerLib
 
         private void PrepareUserActionMsg(List<string> myFilesOrDirs)
         {
-            if (myFilesOrDirs.Count == 1)
+            if (myFilesOrDirs.Count == 1 && File.Exists(myFilesOrDirs[0]))
             {
                 lblUserActionMsg.Text = "You are about to analyze a single file...";
                 this.Options.MediaTypeChoice = MediaType.MediaIndiv;
@@ -107,6 +107,11 @@ namespace TDMakerLib
         private void btnCancel_Click(object sender, System.EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
+        }
+
+        private void MediaWizard_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Options.DialogResultMy = this.DialogResult;
         }
     }
 

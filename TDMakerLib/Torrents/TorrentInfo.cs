@@ -255,6 +255,7 @@ namespace TDMakerLib
                 sbMediaInfo.AppendLine(BbCode.Bold(mf.FileName));
                 sbMediaInfo.AppendLine();
                 sbMediaInfo.AppendLine(mf.Summary.Trim());
+                sbMediaInfo.AppendLine();
             }
             sbPublish.AppendLine(GetMediaInfo(sbMediaInfo.ToString(), options));
             foreach (MediaFile mf in MediaMy.MediaFiles)

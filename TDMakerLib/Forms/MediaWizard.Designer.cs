@@ -187,6 +187,7 @@
             this.Name = "MediaWizard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TDMaker - Media Wizard";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MediaWizard_FormClosed);
             this.gbQuestion.ResumeLayout(false);
             this.flpFileOptions.ResumeLayout(false);
             this.flpFileOptions.PerformLayout();
