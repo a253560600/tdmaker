@@ -1755,7 +1755,6 @@ namespace TDMaker
             ConfigWizard cw = new ConfigWizard(Engine.RootAppFolder);
             if (cw.ShowDialog() == DialogResult.OK)
             {
-                Engine.mAppSettings.PreferSystemFolders = cw.PreferSystemFolders;
                 tsmiPreferKnownFolders.Checked = cw.PreferSystemFolders;
                 Engine.InitializeDefaultFolderPaths();
             }

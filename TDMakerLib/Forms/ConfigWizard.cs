@@ -41,6 +41,7 @@ namespace TDMakerLib
         {
             InitializeComponent();
             this.Text = string.Format("TDMaker {0} - Configuration Wizard", Application.ProductVersion);
+            chkPreferSystemFolders.Checked = Engine.mAppSettings.PreferSystemFolders;
             txtRootFolder.Text = rootDir;
             this.RootFolder = rootDir;
             foreach (ImageDestType2 sdt in Enum.GetValues(typeof(ImageDestType2)))
@@ -53,6 +54,11 @@ namespace TDMakerLib
         private void btnOK_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
+            Engine.mAppSettings.RootDir = this.RootFolder;
+            Engine.mAppSettings.PreferSystemFolders = this.PreferSystemFolders;
+            Engine.mAppSettings.ImageUploader = this.ImageDestinationType;
+            Engine.InitializeDefaultFolderPaths();
+            Debug.WriteLine(Engine.mAppSettings.XMLSettingsFile);            
             this.Close();
         }
 
@@ -100,10 +106,10 @@ namespace TDMakerLib
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(string.Format("If enabled {0} will create the data folders at the following locations:", Application.ProductName));
             sb.AppendLine();
-            sb.AppendLine(string.Format("Settings:\t{0}\\{1}\\Settings", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Application.ProductName));
-            sb.AppendLine(string.Format("Images:\t{0}\\{1}", Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), Application.ProductName));
-            sb.AppendLine(string.Format("Text:\t{0}\\{1}", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Application.ProductName));
-            sb.AppendLine(string.Format("Logs:\t{0}\\{1}\\Logs", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName));
+            sb.AppendLine(string.Format("Settings:\t{0}", Engine.zSettingsDir));
+            sb.AppendLine(string.Format("Screenshots:\t{0}", Engine.zPicturesDir));
+            sb.AppendLine(string.Format("Torrents:\t{0}", Engine.zTorrentsDir));
+            sb.AppendLine(string.Format("Logs:\t\t{0}", Engine.zLogsDir));
             ttApp.SetToolTip(chkPreferSystemFolders, sb.ToString());
         }
 
