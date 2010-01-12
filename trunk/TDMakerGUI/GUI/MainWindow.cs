@@ -631,7 +631,7 @@ namespace TDMaker
                 mi.ReadMedia();
                 bwApp.ReportProgress((int)ProgressType.REPORT_MEDIAINFO_SUMMARY, mi);
 
-                // TemplateReader2 tr2 = new TemplateReader2(mi.Overall.Summary);
+                MappingHelper tr2 = new MappingHelper(mi.Overall.Summary);
                 
                 // creates screenshot
                 mi.UploadScreenshots = wt.UploadScreenshot;
