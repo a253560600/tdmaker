@@ -6,43 +6,50 @@ using System.Globalization;
 
 namespace TDMakerLib.Templates
 {
-    public class TemplateItem
+    public class MIFieldValue
     {
-        public string OrginalName { get; set; }
-        public string OrginalValue { get; set; }
-        public string OrginalPrefix { get; set; }
-        public string Name { get; set; }
+        private string OrginalName { get; set; }
+        private string OrginalValue { get; set; }
+        private string OrginalPrefix { get; set; }
+        private string Name { get; set; }
         public string Value { get; set; }
-        public string NameWithPrefix { get; set; }
-        public string NameForReplace { get; set; }
+        private string NameWithPrefix { get; set; }
+        public string Field { get; set; }
 
         private char replaceChar = '%';
 
-        public TemplateItem(string name, string value, string prefix)
+        public MIFieldValue(string name, string value, string prefix)
         {
-            OrginalName = name;
+            OrginalName = name.Trim();
             OrginalValue = value;
             OrginalPrefix = prefix;
-
             TextInfo ti = new CultureInfo("en-US", false).TextInfo;
-            Name = ti.ToTitleCase(name.Trim());
             string tempName = string.Empty;
-            foreach (char c in Name)
+
+            foreach (char c in name)
             {
                 if (Char.IsLetterOrDigit(c))
                 {
                     tempName += c;
                 }
+                else if (c == '(' || c == ')')
+                {
+                    continue;
+                }
+                else
+                {
+                    tempName += " ";
+                }
             }
-            Name = tempName;
-            Value = value.Trim();
+            Name = ti.ToTitleCase(tempName.Trim()).Replace(" ", "");
+            Value = tempName;
             NameWithPrefix = string.Format("{0}_{1}", prefix, Name);
-            NameForReplace = string.Format("{0}{1}{2}", replaceChar, NameWithPrefix, replaceChar);
+            Field = string.Format("{0}{1}{2}", replaceChar, NameWithPrefix, replaceChar);
         }
 
-        public string ToString()
+        public override string ToString()
         {
-            return string.Format("{0} = {1}", NameWithPrefix, Value);
+            return string.Format("{0} = {1}", Field, Value);
         }
     }
 }
