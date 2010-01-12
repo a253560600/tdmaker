@@ -5,9 +5,9 @@
 
 = Introduction =
 
-Templates are located in 
+If known folders are preferred, Templates are located in 
 {{{
-\%UserName%\Documents\Applications\Torrent Description Maker\Templates
+\%AppData%\TDMaker\Templates
 }}}
 
 By default there will 3 Templates installed: Default, Minimal and MTN. 
@@ -51,8 +51,10 @@ Apart from these syntaxes both files support all the syntaxes listed below. Howe
  * *%Video_FrameRate%*
  * *%Video_ScanType%*
  * *%Video_BitsPerPixelFrame%*
+ * *%Video_DisplayAspectRatio%*
  * *%Video_Width%*
  * *%Video_Height%*
+ * *%Video_EncodedLibrarySettings%*
 
  * *%Format%*
  * *%Bitrate%*
@@ -88,6 +90,8 @@ Apart from these syntaxes both files support all the syntaxes listed below. Howe
  * *%FileSize%*
  * *%Subtitles%*
  * *%Duration%*
+ * *%EncodedApplication%*
+ * *%EncodedDate%*
 
 = Creating a new Template =
 
