@@ -22,7 +22,7 @@ namespace TDMaker
 
             if (Engine.TurnOn())
             {
-                Engine.LoadSettingsLatest();
+                Engine.LoadSettings();
                 Application.Run(new MainWindow());
                 Engine.TurnOff();
             }

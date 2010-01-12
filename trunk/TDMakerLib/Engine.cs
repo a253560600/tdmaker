@@ -12,8 +12,10 @@ namespace TDMakerLib
     public static class Engine
     {
         private static string mProductName = "TDMaker"; // NOT Application.ProductName because both CLI and GUI needs common access
+        private static readonly string PortableRootFolder = mProductName; // using relative paths
+        
         public static McoreSystem.AppInfo mAppInfo = new McoreSystem.AppInfo(mProductName, Application.ProductVersion, McoreSystem.AppInfo.SoftwareCycle.Beta, false);
-        public static bool Portable { get; private set; }
+        public static bool Portable = Directory.Exists(Path.Combine(Application.StartupPath, PortableRootFolder));
         public static bool MultipleInstance { get; private set; }
 
         internal static readonly string zRoamingAppDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), mProductName);
@@ -28,7 +30,7 @@ namespace TDMakerLib
 
         public static AppSettings mAppSettings = AppSettings.Read();
 
-        private static readonly string PortableRootFolder = Application.ProductName; // using relative paths
+
         public static string DefaultRootAppFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), mProductName);
         public static string RootAppFolder { get; set; }
 
@@ -64,7 +66,7 @@ namespace TDMakerLib
                     Directory.CreateDirectory(SettingsDir);
                 }
 
-                return Engine.mAppSettings.XMLSettingsFile;                                  // v2.x               
+                return Engine.mAppSettings.XMLSettingsFile;                          
             }
         }
 
@@ -391,7 +393,6 @@ namespace TDMakerLib
 
             if (Directory.Exists(Path.Combine(Application.StartupPath, PortableRootFolder)))
             {
-                Portable = true;
                 mAppSettings.PreferSystemFolders = false;
                 RootAppFolder = PortableRootFolder;
                 mProductName += " Portable";
@@ -405,13 +406,13 @@ namespace TDMakerLib
                     configResult = cw.ShowDialog();
                     RunConfig = true;
                 }
-                if (!string.IsNullOrEmpty(Engine.mAppSettings.RootDir))
+                if (!string.IsNullOrEmpty(Engine.mAppSettings.RootDir) && Directory.Exists(Engine.mAppSettings.RootDir))
                 {
                     RootAppFolder = Engine.mAppSettings.RootDir;
                 }
                 else
                 {
-                    RootAppFolder = DefaultRootAppFolder;
+                    RootAppFolder = Engine.mAppSettings.PreferSystemFolders ? zLocalAppDataFolder : DefaultRootAppFolder;
                 }
             }
             if (configResult == DialogResult.OK)
@@ -434,14 +435,30 @@ namespace TDMakerLib
             FileSystem.WriteDebugFile();
         }
 
+        public static void LoadSettings()
+        {
+            LoadSettings(string.Empty);
+        }
+        
         public static void LoadSettingsLatest()
         {
-            string fp = string.Empty;
-            string settingsDir = Path.GetDirectoryName(Engine.mAppSettings.XMLSettingsFile);
-            if (!string.IsNullOrEmpty(settingsDir))
+        	string fp = GetLatestSettingsFile();          
+            XMLSettingsCore.XMLFileName = Path.GetFileName(fp);
+            LoadSettings(fp);
+        }
+
+        public static string GetLatestSettingsFile()
+        {
+        	return GetLatestSettingsFile(Path.GetDirectoryName(Engine.mAppSettings.XMLSettingsFile));
+        }
+        
+        public static string GetLatestSettingsFile(string settingsDir)
+        {
+        	string fp = string.Empty;
+        	if (!string.IsNullOrEmpty(settingsDir))
             {
                 List<ImageFile> imgFiles = new List<ImageFile>();
-                string[] files = Directory.GetFiles(settingsDir, mProductName + "-*-Settings.xml");
+                string[] files = Directory.GetFiles(settingsDir, Application.ProductName + "-*-Settings.xml");
                 if (files.Length > 0)
                 {
                     foreach (string f in files)
@@ -452,10 +469,9 @@ namespace TDMakerLib
                     fp = imgFiles[imgFiles.Count - 1].LocalFilePath;
                 }
             }
-            XMLSettingsCore.XMLFileName = Path.GetFileName(fp);
-            LoadSettings(fp);
+        	return fp;
         }
-
+        
         public static void LoadSettings(string fp)
         {
             if (string.IsNullOrEmpty(fp))
