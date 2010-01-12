@@ -9,10 +9,10 @@ namespace TDMakerLib.Templates
     public class MIFieldValue
     {
         private string OrginalName { get; set; }
-        private string OrginalValue { get; set; }
+        public string Value { get; set; }
         private string OrginalPrefix { get; set; }
         private string Name { get; set; }
-        public string Value { get; set; }
+        private string OriginalField { get; set; }
         private string NameWithPrefix { get; set; }
         public string Field { get; set; }
 
@@ -21,7 +21,7 @@ namespace TDMakerLib.Templates
         public MIFieldValue(string name, string value, string prefix)
         {
             OrginalName = name.Trim();
-            OrginalValue = value;
+            Value = value;
             OrginalPrefix = prefix;
             TextInfo ti = new CultureInfo("en-US", false).TextInfo;
             string tempName = string.Empty;
@@ -42,14 +42,14 @@ namespace TDMakerLib.Templates
                 }
             }
             Name = ti.ToTitleCase(tempName.Trim()).Replace(" ", "");
-            Value = tempName;
+            OriginalField = tempName;
             NameWithPrefix = string.Format("{0}_{1}", prefix, Name);
             Field = string.Format("{0}{1}{2}", replaceChar, NameWithPrefix, replaceChar);
         }
 
         public override string ToString()
         {
-            return string.Format("{0} = {1}", Field, Value);
+            return string.Format("{0} = {1}", Field, OriginalField);
         }
     }
 }
