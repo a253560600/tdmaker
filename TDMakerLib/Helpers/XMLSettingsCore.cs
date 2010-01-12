@@ -196,7 +196,7 @@ namespace TDMakerLib
 
         public static XMLSettingsCore Read()
         {
-            string settingsFile = Engine.mAppSettings.GetSettingsFilePath(XMLFileName);
+			string settingsFile = Engine.Portable ? Engine.GetLatestSettingsFile(Engine.SettingsDir) : Engine.mAppSettings.GetSettingsFilePath();
             if (!File.Exists(settingsFile))
             {
                 if (File.Exists(Engine.mAppSettings.XMLSettingsFile))
@@ -211,13 +211,13 @@ namespace TDMakerLib
                 }
             }
 
-            if (File.Exists(settingsFile) && settingsFile != Engine.mAppSettings.GetSettingsFilePath(XMLFileName))
+            if (File.Exists(settingsFile) && settingsFile != Engine.mAppSettings.GetSettingsFilePath())
             {
                 // Update AppSettings.xml
-                File.Copy(settingsFile, Engine.mAppSettings.GetSettingsFilePath(XMLFileName));
+                File.Copy(settingsFile, Engine.mAppSettings.GetSettingsFilePath());
             }
 
-            Engine.mAppSettings.XMLSettingsFile = Engine.mAppSettings.GetSettingsFilePath(XMLFileName);
+            Engine.mAppSettings.XMLSettingsFile = Engine.mAppSettings.GetSettingsFilePath();
             return Read(Engine.mAppSettings.XMLSettingsFile);
         }
 

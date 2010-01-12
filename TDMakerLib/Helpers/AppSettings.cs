@@ -31,11 +31,16 @@ namespace TDMakerLib
             return Read(AppSettingsFile);
         }
        
+        public string GetSettingsFilePath()
+        {
+            return Path.Combine(Engine.SettingsDir, XMLSettingsCore.XMLFileName);
+        }
+
         public string GetSettingsFilePath(string fileName)
         {
             return Path.Combine(Engine.SettingsDir, fileName);
         }
-
+        
         public static AppSettings Read(string filePath)
         {
             if (!Directory.Exists(Path.GetDirectoryName(filePath)))
