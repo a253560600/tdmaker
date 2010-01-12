@@ -13,7 +13,7 @@ namespace TDMakerLib
     {
         private static string mProductName = "TDMaker"; // NOT Application.ProductName because both CLI and GUI needs common access
         private static readonly string PortableRootFolder = mProductName; // using relative paths
-        
+
         public static McoreSystem.AppInfo mAppInfo = new McoreSystem.AppInfo(mProductName, Application.ProductVersion, McoreSystem.AppInfo.SoftwareCycle.Beta, false);
         public static bool Portable = Directory.Exists(Path.Combine(Application.StartupPath, PortableRootFolder));
         public static bool MultipleInstance { get; private set; }
@@ -66,179 +66,8 @@ namespace TDMakerLib
                     Directory.CreateDirectory(SettingsDir);
                 }
 
-                return Engine.mAppSettings.XMLSettingsFile;                          
+                return Engine.mAppSettings.XMLSettingsFile;
             }
-        }
-
-        public static string GetMediaName(string p)
-        {
-
-            string name = "";
-
-            if (File.Exists(p))
-            {
-                string ext = Path.GetExtension(p).ToLower();
-                if (ext == ".vob" && Path.GetFileName(Path.GetDirectoryName(p)) == "VIDEO_TS")
-                {
-                    name = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(p)));
-                }
-                else
-                {
-                    name = Path.GetFileNameWithoutExtension(p);
-                }
-            }
-            else if (Directory.Exists(p))
-            {
-                name = Path.GetFileName(p);
-                if (name.ToUpper().Equals("VIDEO_TS"))
-                    name = Path.GetFileName(Path.GetDirectoryName(p));
-            }
-
-            return name;
-
-        }
-
-        /// <summary>
-        /// Used to browse the defaule Screneshots folder only
-        /// </summary>
-        /// <returns></returns>
-        public static string GetScreenShotsDir()
-        {
-            return GetScreenShotsDir("");
-        }
-
-        public static string GetScreenShotsDir(string mediaFilePath)
-        {
-            switch (Engine.conf.ScreenshotsLoc)
-            {
-                case LocationType.CustomFolder:
-                    return Directory.Exists(Engine.conf.CustomScreenshotsDir) ? Engine.conf.CustomScreenshotsDir : Engine.PicturesDir;
-                case LocationType.ParentFolder:
-                    if (string.IsNullOrEmpty(mediaFilePath))
-                    {
-                        if (Engine.conf.ScreenshotsLoc == LocationType.CustomFolder && Directory.Exists(Engine.conf.CustomScreenshotsDir))
-                        {
-                            return Engine.conf.CustomScreenshotsDir;
-                        }
-                        else
-                        {
-                            return Engine.PicturesDir;
-                        }
-                    }
-                    else
-                    {
-                        return Path.GetDirectoryName(mediaFilePath);
-                    }
-                case LocationType.KnownFolder:
-                default:
-                    return Engine.conf.KeepScreenshots ? Engine.PicturesDir : Engine.zTempDir;
-            }
-        }
-
-        public static bool MediaIsDisc(string p)
-        {
-            bool dir = Directory.Exists(p);
-
-            if (dir)
-            {
-                string[] ifo = Directory.GetFiles(p, "VTS_01_0.IFO", SearchOption.AllDirectories);
-                string[] vob = Directory.GetFiles(p, "*.VOB", SearchOption.AllDirectories);
-                dir = ifo.Length > 0 && vob.Length > 0;
-            }
-            else if (File.Exists(p))
-            {
-                dir = Path.GetExtension(p).ToLower() == "iso";
-            }
-
-            return dir;
-        }
-
-        public static MediaWizardOptions GetMediaType(List<string> FileOrDirPaths)
-        {
-            return GetMediaType(FileOrDirPaths, false);
-        }
-
-        public static MediaWizardOptions GetMediaType(List<string> FileOrDirPaths, bool silent)
-        {
-            MediaWizardOptions mwo = new MediaWizardOptions() { MediaTypeChoice = MediaType.MediaIndiv };
-
-            bool showWizard = false;
-
-            if (FileOrDirPaths.Count == 1 && File.Exists(FileOrDirPaths[0]))
-            {
-                mwo.MediaTypeChoice = MediaType.MediaIndiv;
-            }
-            else
-            {
-                bool bDirFound = false;
-                int dirCount = 0;
-
-                foreach (string fd in FileOrDirPaths)
-                {
-                    if (Directory.Exists(fd))
-                    {
-                        dirCount++;
-                        bDirFound = true;
-                    }
-                    if (dirCount > 1) break;
-                }
-                if (bDirFound)
-                {
-                    if (dirCount == 1)
-                    {
-                        string dir = FileOrDirPaths[0];
-                        if (MediaIsDisc(dir))
-                        {
-                            mwo.MediaTypeChoice = MediaType.MediaDisc;
-                        }
-                        else
-                        {
-                            showWizard = true;
-                        }
-                    }
-                }
-                else if (!silent) // no dir found
-                {
-                    showWizard = true;
-                }
-            }
-
-            if (showWizard)
-            {
-                MediaWizard mw = new MediaWizard(FileOrDirPaths);
-                mwo.DialogResultMy = mw.ShowDialog();
-                if (mwo.DialogResultMy == DialogResult.OK)
-                {                 
-                    mwo = mw.Options;
-                }
-                mwo.PromptShown = true;         
-            }
-
-            return mwo;
-        }
-
-        /// <summary>
-        /// Function to determine DVD-5 or DVD-9
-        /// </summary>
-        /// <returns>DVD-5 or DVD-9</returns>
-        public static string GetDVDString(string p)
-        {
-            string ss = "DVD";
-            double size = 0.0;      // size in Bytes
-            if (MediaIsDisc(p))
-            {
-                string[] files = Directory.GetFiles(p, "*.*", SearchOption.AllDirectories);
-                foreach (string f in files)
-                {
-                    FileInfo fi = new FileInfo(f);
-                    size += fi.Length;
-                }
-                if (size > 0.0)
-                {
-                    ss = (size > 4.7 * 1000.0 * 1000.0 * 1000.0 ? "DVD-9" : "DVD-5");
-                }
-            }
-            return ss;
         }
 
         public static void ClearScreenshots()
@@ -439,23 +268,23 @@ namespace TDMakerLib
         {
             LoadSettings(string.Empty);
         }
-        
+
         public static void LoadSettingsLatest()
         {
-        	string fp = GetLatestSettingsFile();          
+            string fp = GetLatestSettingsFile();
             XMLSettingsCore.XMLFileName = Path.GetFileName(fp);
             LoadSettings(fp);
         }
 
         public static string GetLatestSettingsFile()
         {
-        	return GetLatestSettingsFile(Path.GetDirectoryName(Engine.mAppSettings.XMLSettingsFile));
+            return GetLatestSettingsFile(Path.GetDirectoryName(Engine.mAppSettings.XMLSettingsFile));
         }
-        
+
         public static string GetLatestSettingsFile(string settingsDir)
         {
-        	string fp = string.Empty;
-        	if (!string.IsNullOrEmpty(settingsDir))
+            string fp = string.Empty;
+            if (!string.IsNullOrEmpty(settingsDir))
             {
                 List<ImageFile> imgFiles = new List<ImageFile>();
                 string[] files = Directory.GetFiles(settingsDir, Application.ProductName + "-*-Settings.xml");
@@ -469,9 +298,9 @@ namespace TDMakerLib
                     fp = imgFiles[imgFiles.Count - 1].LocalFilePath;
                 }
             }
-        	return fp;
+            return fp;
         }
-        
+
         public static void LoadSettings(string fp)
         {
             if (string.IsNullOrEmpty(fp))

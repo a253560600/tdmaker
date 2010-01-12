@@ -50,9 +50,9 @@ namespace TDMakerLib
 
         public static void OpenDirScreenshots()
         {
-            if (Directory.Exists(Engine.GetScreenShotsDir()))
+            if (Directory.Exists(GetScreenShotsDir()))
             {
-                Process.Start(Engine.GetScreenShotsDir());
+                Process.Start(GetScreenShotsDir());
             }
         }
 
@@ -110,6 +110,45 @@ namespace TDMakerLib
                         }
                     }
                 }
+            }
+        }
+
+
+
+        /// <summary>
+        /// Used to browse the defaule Screneshots folder only
+        /// </summary>
+        /// <returns></returns>
+        public static string GetScreenShotsDir()
+        {
+            return GetScreenShotsDir("");
+        }
+
+        public static string GetScreenShotsDir(string mediaFilePath)
+        {
+            switch (Engine.conf.ScreenshotsLoc)
+            {
+                case LocationType.CustomFolder:
+                    return Directory.Exists(Engine.conf.CustomScreenshotsDir) ? Engine.conf.CustomScreenshotsDir : Engine.PicturesDir;
+                case LocationType.ParentFolder:
+                    if (string.IsNullOrEmpty(mediaFilePath))
+                    {
+                        if (Engine.conf.ScreenshotsLoc == LocationType.CustomFolder && Directory.Exists(Engine.conf.CustomScreenshotsDir))
+                        {
+                            return Engine.conf.CustomScreenshotsDir;
+                        }
+                        else
+                        {
+                            return Engine.PicturesDir;
+                        }
+                    }
+                    else
+                    {
+                        return Path.GetDirectoryName(mediaFilePath);
+                    }
+                case LocationType.KnownFolder:
+                default:
+                    return Engine.conf.KeepScreenshots ? Engine.PicturesDir : Engine.zTempDir;
             }
         }
 

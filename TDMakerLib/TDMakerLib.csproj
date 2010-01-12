@@ -99,6 +99,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\XMLSettingsScreenshot.cs" />
     <Compile Include="Helpers\XMLSettingsCore.cs" />
+    <Compile Include="Templates\TemplateReader2.cs" />
     <Compile Include="Torrents\TorrentInfoMgr.cs" />
     <Compile Include="Torrents\HttpWebMultipartRequest.cs" />
     <Compile Include="Torrents\TorrentInfo.cs" />
@@ -179,6 +180,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="VersionHistory.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\MediaInfo.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
