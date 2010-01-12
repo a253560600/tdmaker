@@ -23,7 +23,7 @@ namespace TDMakerLib
                 if (temp.Length > 1)
                 {
                     TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
-                    string syntax = myTI.ToTitleCase(temp[0].Trim()).Replace(" ", "").Replace(@"\", "").Replace("/", "").Replace("(", "").Replace(")", "").Replace("*", "");
+                    string syntax = myTI.ToTitleCase(temp[0].Trim().Replace(@"\", "").Replace("/", "").Replace("(", "").Replace(")", "").Replace("*", "")).Replace(" ", "");
                     string value = temp[1].Trim();
                     listSyntax.Add(string.Format("%{0}_{1}%", prefix, syntax));
                     listValues.Add(value);
