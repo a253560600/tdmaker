@@ -630,7 +630,6 @@ namespace TDMaker
                 bwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, "Reading " + Path.GetFileName(mi.Location) + " using MediaInfo...");
                 mi.ReadMedia();
                 bwApp.ReportProgress((int)ProgressType.REPORT_MEDIAINFO_SUMMARY, mi);
-                FileSystem.WriteDebugFile();
 
                 // creates screenshot
                 mi.UploadScreenshots = wt.UploadScreenshot;
@@ -1728,7 +1727,6 @@ namespace TDMaker
         {
             // this.WindowState = FormWindowState.Minimized;
             SettingsWrite();
-            FileSystem.WriteDebugFile();
             pbScreenshot.ImageLocation = null; // need this to successfully clear screenshots
             Engine.ClearScreenshots();
         }

@@ -367,7 +367,7 @@ namespace TDMakerLib
 
             StringBuilder sbVideo = new StringBuilder();
             // Format            
-            sbVideo.Append(string.Format("            [u]Format:[/u] {0}", this.Video.Format));
+            sbVideo.Append(string.Format("              [u]Format:[/u] {0}", this.Video.Format));
             if (!string.IsNullOrEmpty(this.Video.FormatVersion))
             {
                 sbVideo.Append(string.Format(" {0}", this.Video.FormatVersion));
@@ -376,21 +376,22 @@ namespace TDMakerLib
 
             // Codec
             if (!string.IsNullOrEmpty(vi.Codec))
-                sbVideo.AppendLine(string.Format("             [u]Codec:[/u] {0}", vi.Codec));
+                sbVideo.AppendLine(string.Format("               [u]Codec:[/u] {0}", vi.Codec));
             // Bitrate
-            sbVideo.AppendLine(string.Format("           [u]Bitrate:[/u] {0}", this.Video.Bitrate));
+            sbVideo.AppendLine(string.Format("             [u]Bitrate:[/u] {0}", this.Video.Bitrate));
             // Standard            
             if (!string.IsNullOrEmpty(vi.Standard))
-                sbVideo.AppendLine(string.Format("          [u]Standard:[/u] {0}", this.Video.Standard));
+                sbVideo.AppendLine(string.Format("            [u]Standard:[/u] {0}", this.Video.Standard));
             // Frame Rate
-            sbVideo.AppendLine(string.Format("        [u]Frame Rate:[/u] {0}", vi.FrameRate));
+            sbVideo.AppendLine(string.Format("          [u]Frame Rate:[/u] {0}", vi.FrameRate));
 
             // Scan Type
-            sbVideo.AppendLine(string.Format("         [u]Scan Type:[/u] {0}", vi.ScanType));
-            sbVideo.AppendLine(string.Format("[u]Bits/(Pixel*Frame):[/u] {0}", vi.BitsPerPixelXFrame));
+            sbVideo.AppendLine(string.Format("           [u]Scan Type:[/u] {0}", vi.ScanType));
+            sbVideo.AppendLine(string.Format("  [u]Bits/(Pixel*Frame):[/u] {0}", vi.BitsPerPixelXFrame));
+            sbVideo.AppendLine(string.Format("[u]Display Aspect Ratio:[/u] {0}", vi.DisplayAspectRatio));
 
             // Resolution
-            sbVideo.AppendLine(string.Format("        [u]Resolution:[/u] {0}x{1}",
+            sbVideo.AppendLine(string.Format("          [u]Resolution:[/u] {0}x{1}",
                 vi.Width,
                 vi.Height));
 
