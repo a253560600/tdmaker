@@ -88,7 +88,7 @@ namespace TDMakerLib
         [Category("Publish / Config"), DefaultValue(false), Description("Setting true will retain the formatting on some message boards")]
         public bool PreText { get; set; }
 
-        // Tab 4.0 - Options - General
+        // Tab 4.1 - Options - General
         [Category("Options / General"), DefaultValue(true), Description("Show Media Wizard always; otherwise it will only be shown when you import multiple files")]
         public bool ShowMediaWizardAlways { get; set; }
         [Category("Options / General"), DefaultValue(false), Description("Process media immediately after loading file or folder")]
@@ -98,7 +98,7 @@ namespace TDMakerLib
         [Category("Options / General"), DefaultValue(true), Description("Write debug information into a log file.")]
         public bool WriteDebugFile { get; set; }
 
-        // Tab 4.1 - Options - Publish Templates
+        // Tab 4.4 - Options - Publish Templates
         [Category("Options / Publish"), DefaultValue(false), Description("Write the torrent description to file")]
         public bool WritePublish { get; set; }
         [Category("Options / Publish"), DefaultValue(true), Description("Have larger text when [pre] tag is set")]
@@ -129,13 +129,15 @@ namespace TDMakerLib
         [EditorAttribute(typeof(ExeFileNameEditor), typeof(UITypeEditor))]
         [Category("MTN"), Description("MTN Argument")]
         public string MTNPath { get; set; }
-        public ImageDestType2 ImageUploader = ImageDestType2.IMAGESHACK;
+
+        // Tab 4.3 - Options - Image Hosting 
+        public ImageDestType2 ImageUploader = ImageDestType2.IMGUR;
         [Category("MTN / Image Uploaders"), DefaultValue(""), Description("ImageShack registration code")]
         public string ImageShackRegCode { get; set; }
         [Category("MTN / Image Uploaders"), DefaultValue(false), Description("Use ImageShack registration code")]
         public bool UseImageShackRegCode { get; set; }
 
-        // Tab 4.3 - Options - Torrent Creator
+        // Tab 4.5 - Options - Torrent Creator
         [Browsable(false)]
         public int TrackerGroupActive { get; set; }
         [Category("Torrent Creator"), DefaultValue(false), Description("Create Torrent")]
@@ -148,7 +150,7 @@ namespace TDMakerLib
         [Category("Torrent Creator"), DefaultValue(false), Description("Create XML Torrent Upload file")]
         public bool XMLTorrentUploadCreate { get; set; }
 
-        // Tab 4.4 - Options - Paths
+        // Tab 4.0 - Options - Paths
         [Category("Options / Paths"), DefaultValue(false), Description("Use custom Templates directory")]
         public bool UseCustomTemplatesDir { get; set; }
         [Category("Options / Paths"), Description("Browse to reconfigure the Templates folder path")]
