@@ -30,7 +30,7 @@ namespace TDMakerLib
         private string mFileInfo = "";
 
         /// <summary>
-        /// Constructure of TemplateReader
+        /// Constructor of TemplateReader
         /// </summary>
         /// <param name="loc">Directory Path of the Template</param>
         /// <param name="ti">TorrentInfo object that has MediaInfo</param>
@@ -155,7 +155,6 @@ namespace TDMakerLib
         {
             StringBuilder sbAudio = new StringBuilder();
 
-
             for (int i = 0; i < mf.Audio.Count; i++)
             {
                 string info = pattern;
@@ -170,7 +169,6 @@ namespace TDMakerLib
 
         private string GetStringFromAudio(string pattern, AudioInfo ai)
         {
-            pattern = Regex.Replace(pattern, "%Audio_%Format%", ai.Format, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Audio_Format%", ai.Format, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Audio_Bitrate%", ai.Bitrate, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Audio_BitrateMode%", ai.BitrateMode, RegexOptions.IgnoreCase);
