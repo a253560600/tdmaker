@@ -88,7 +88,7 @@ namespace TDMakerCLI
                 Console.WriteLine();
 
                 List<string> listFileOrDir = new List<string>() { mMediaLoc };
-                MediaWizardOptions mwo = Engine.GetMediaType(listFileOrDir, true);
+                MediaWizardOptions mwo = Adapter.GetMediaType(listFileOrDir, true);
                 if (mwo.MediaTypeChoice == MediaType.MediaIndiv && mFileCollection)
                 {
                     mwo.MediaTypeChoice = MediaType.MediaCollection;
@@ -124,7 +124,7 @@ namespace TDMakerCLI
 
                     if (Engine.conf.XMLTorrentUploadCreate)
                     {
-                        string fp = Path.Combine(ti.MediaMy.TorrentCreateInfoMy.GetTorrentFolderPath(), Engine.GetMediaName(ti.MediaMy.TorrentCreateInfoMy.MediaLocation)) + ".xml";
+                        string fp = Path.Combine(ti.MediaMy.TorrentCreateInfoMy.GetTorrentFolderPath(), Adapter.GetMediaName(ti.MediaMy.TorrentCreateInfoMy.MediaLocation)) + ".xml";
                         FileSystem.GetXMLTorrentUpload(ti.MediaMy).Write2(fp);
                     }
                 }

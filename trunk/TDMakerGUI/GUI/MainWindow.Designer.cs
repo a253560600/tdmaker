@@ -84,6 +84,8 @@ namespace TDMaker
             this.lbPublish = new System.Windows.Forms.ListBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tcOptions = new System.Windows.Forms.TabControl();
+            this.tpAdvanced = new System.Windows.Forms.TabPage();
+            this.pgApp = new System.Windows.Forms.PropertyGrid();
             this.tpOptionsMTN = new System.Windows.Forms.TabPage();
             this.tlpMTN = new System.Windows.Forms.TableLayoutPanel();
             this.tlpMtnUsage = new System.Windows.Forms.TableLayoutPanel();
@@ -155,8 +157,8 @@ namespace TDMaker
             this.tpProxy = new System.Windows.Forms.TabPage();
             this.chkProxyEnable = new System.Windows.Forms.CheckBox();
             this.pgProxy = new System.Windows.Forms.PropertyGrid();
-            this.tpAdvanced = new System.Windows.Forms.TabPage();
-            this.pgApp = new System.Windows.Forms.PropertyGrid();
+            this.tpDebug = new System.Windows.Forms.TabPage();
+            this.rtbDebugLog = new System.Windows.Forms.RichTextBox();
             this.tmrStatus = new System.Windows.Forms.Timer(this.components);
             this.btnPublish = new System.Windows.Forms.Button();
             this.btnAnalyze = new System.Windows.Forms.Button();
@@ -201,8 +203,6 @@ namespace TDMaker
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.scMainContainer = new System.Windows.Forms.SplitContainer();
             this.pMainContainer = new System.Windows.Forms.Panel();
-            this.tpDebug = new System.Windows.Forms.TabPage();
-            this.rtbDebugLog = new System.Windows.Forms.RichTextBox();
             this.statusStrip1.SuspendLayout();
             this.tcMain.SuspendLayout();
             this.tpMedia.SuspendLayout();
@@ -223,6 +223,7 @@ namespace TDMaker
             this.flpPublishConfig.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tcOptions.SuspendLayout();
+            this.tpAdvanced.SuspendLayout();
             this.tpOptionsMTN.SuspendLayout();
             this.tlpMTN.SuspendLayout();
             this.tlpMtnUsage.SuspendLayout();
@@ -249,14 +250,13 @@ namespace TDMaker
             this.gbTrackerGroups.SuspendLayout();
             this.gbTrackers.SuspendLayout();
             this.tpProxy.SuspendLayout();
-            this.tpAdvanced.SuspendLayout();
+            this.tpDebug.SuspendLayout();
             this.cmsApp.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.scMainContainer.Panel1.SuspendLayout();
             this.scMainContainer.Panel2.SuspendLayout();
             this.scMainContainer.SuspendLayout();
             this.pMainContainer.SuspendLayout();
-            this.tpDebug.SuspendLayout();
             this.SuspendLayout();
             // 
             // bwApp
@@ -317,7 +317,7 @@ namespace TDMaker
             this.tcMain.Location = new System.Drawing.Point(0, 0);
             this.tcMain.Name = "tcMain";
             this.tcMain.SelectedIndex = 0;
-            this.tcMain.Size = new System.Drawing.Size(882, 477);
+            this.tcMain.Size = new System.Drawing.Size(882, 480);
             this.tcMain.TabIndex = 4;
             this.tcMain.SelectedIndexChanged += new System.EventHandler(this.tcMain_SelectedIndexChanged);
             // 
@@ -329,7 +329,7 @@ namespace TDMaker
             this.tpMedia.Controls.Add(this.gbLocation);
             this.tpMedia.Location = new System.Drawing.Point(4, 22);
             this.tpMedia.Name = "tpMedia";
-            this.tpMedia.Size = new System.Drawing.Size(874, 451);
+            this.tpMedia.Size = new System.Drawing.Size(874, 454);
             this.tpMedia.TabIndex = 4;
             this.tpMedia.Text = "Input";
             this.tpMedia.UseVisualStyleBackColor = true;
@@ -343,7 +343,7 @@ namespace TDMaker
             this.groupBox10.Location = new System.Drawing.Point(8, 288);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox10.Size = new System.Drawing.Size(856, 152);
+            this.groupBox10.Size = new System.Drawing.Size(856, 155);
             this.groupBox10.TabIndex = 13;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Progress";
@@ -359,7 +359,7 @@ namespace TDMaker
             this.lbStatus.Location = new System.Drawing.Point(5, 18);
             this.lbStatus.Name = "lbStatus";
             this.lbStatus.ScrollAlwaysVisible = true;
-            this.lbStatus.Size = new System.Drawing.Size(846, 129);
+            this.lbStatus.Size = new System.Drawing.Size(846, 132);
             this.lbStatus.TabIndex = 11;
             // 
             // groupBox9
@@ -598,7 +598,7 @@ namespace TDMaker
             this.tpMainMediaInfo.Location = new System.Drawing.Point(4, 22);
             this.tpMainMediaInfo.Name = "tpMainMediaInfo";
             this.tpMainMediaInfo.Padding = new System.Windows.Forms.Padding(3);
-            this.tpMainMediaInfo.Size = new System.Drawing.Size(874, 451);
+            this.tpMainMediaInfo.Size = new System.Drawing.Size(874, 454);
             this.tpMainMediaInfo.TabIndex = 0;
             this.tpMainMediaInfo.Text = "Media Info";
             this.tpMainMediaInfo.UseVisualStyleBackColor = true;
@@ -615,7 +615,7 @@ namespace TDMaker
             this.tlpMediaInfo.Name = "tlpMediaInfo";
             this.tlpMediaInfo.RowCount = 1;
             this.tlpMediaInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpMediaInfo.Size = new System.Drawing.Size(868, 445);
+            this.tlpMediaInfo.Size = new System.Drawing.Size(868, 448);
             this.tlpMediaInfo.TabIndex = 0;
             // 
             // lbMediaInfo
@@ -626,13 +626,12 @@ namespace TDMaker
             this.lbMediaInfo.IntegralHeight = false;
             this.lbMediaInfo.Location = new System.Drawing.Point(3, 3);
             this.lbMediaInfo.Name = "lbMediaInfo";
-            this.lbMediaInfo.Size = new System.Drawing.Size(167, 439);
+            this.lbMediaInfo.Size = new System.Drawing.Size(167, 442);
             this.lbMediaInfo.TabIndex = 0;
             this.lbMediaInfo.SelectedIndexChanged += new System.EventHandler(this.LbMediaInfoSelectedIndexChanged);
             // 
             // txtMediaInfo
             // 
-            this.txtMediaInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtMediaInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtMediaInfo.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMediaInfo.Location = new System.Drawing.Point(176, 3);
@@ -640,7 +639,7 @@ namespace TDMaker
             this.txtMediaInfo.Name = "txtMediaInfo";
             this.txtMediaInfo.ReadOnly = true;
             this.txtMediaInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtMediaInfo.Size = new System.Drawing.Size(689, 439);
+            this.txtMediaInfo.Size = new System.Drawing.Size(689, 442);
             this.txtMediaInfo.TabIndex = 1;
             // 
             // tabPage2
@@ -649,7 +648,7 @@ namespace TDMaker
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(874, 451);
+            this.tabPage2.Size = new System.Drawing.Size(874, 454);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Screenshots";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -666,7 +665,7 @@ namespace TDMaker
             this.tlpScreenshots.Name = "tlpScreenshots";
             this.tlpScreenshots.RowCount = 1;
             this.tlpScreenshots.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpScreenshots.Size = new System.Drawing.Size(868, 445);
+            this.tlpScreenshots.Size = new System.Drawing.Size(868, 448);
             this.tlpScreenshots.TabIndex = 1;
             // 
             // lbScreenshots
@@ -677,7 +676,7 @@ namespace TDMaker
             this.lbScreenshots.IntegralHeight = false;
             this.lbScreenshots.Location = new System.Drawing.Point(3, 3);
             this.lbScreenshots.Name = "lbScreenshots";
-            this.lbScreenshots.Size = new System.Drawing.Size(254, 439);
+            this.lbScreenshots.Size = new System.Drawing.Size(254, 442);
             this.lbScreenshots.TabIndex = 2;
             this.lbScreenshots.SelectedIndexChanged += new System.EventHandler(this.lbScreenshots_SelectedIndexChanged);
             // 
@@ -694,7 +693,7 @@ namespace TDMaker
             this.tlpScreenshotProps.RowCount = 2;
             this.tlpScreenshotProps.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tlpScreenshotProps.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlpScreenshotProps.Size = new System.Drawing.Size(608, 445);
+            this.tlpScreenshotProps.Size = new System.Drawing.Size(608, 448);
             this.tlpScreenshotProps.TabIndex = 3;
             // 
             // pbScreenshot
@@ -703,7 +702,7 @@ namespace TDMaker
             this.pbScreenshot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbScreenshot.Location = new System.Drawing.Point(3, 3);
             this.pbScreenshot.Name = "pbScreenshot";
-            this.pbScreenshot.Size = new System.Drawing.Size(602, 350);
+            this.pbScreenshot.Size = new System.Drawing.Size(602, 352);
             this.pbScreenshot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbScreenshot.TabIndex = 1;
             this.pbScreenshot.TabStop = false;
@@ -713,10 +712,10 @@ namespace TDMaker
             // 
             this.pgScreenshot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pgScreenshot.HelpVisible = false;
-            this.pgScreenshot.Location = new System.Drawing.Point(3, 359);
+            this.pgScreenshot.Location = new System.Drawing.Point(3, 361);
             this.pgScreenshot.Name = "pgScreenshot";
             this.pgScreenshot.PropertySort = System.Windows.Forms.PropertySort.NoSort;
-            this.pgScreenshot.Size = new System.Drawing.Size(602, 83);
+            this.pgScreenshot.Size = new System.Drawing.Size(602, 84);
             this.pgScreenshot.TabIndex = 2;
             this.pgScreenshot.ToolbarVisible = false;
             // 
@@ -726,7 +725,7 @@ namespace TDMaker
             this.tpMainPublish.Location = new System.Drawing.Point(4, 22);
             this.tpMainPublish.Name = "tpMainPublish";
             this.tpMainPublish.Padding = new System.Windows.Forms.Padding(3);
-            this.tpMainPublish.Size = new System.Drawing.Size(874, 451);
+            this.tpMainPublish.Size = new System.Drawing.Size(874, 454);
             this.tpMainPublish.TabIndex = 2;
             this.tpMainPublish.Text = "Publish";
             this.tpMainPublish.UseVisualStyleBackColor = true;
@@ -745,7 +744,7 @@ namespace TDMaker
             this.tlpPublish.Name = "tlpPublish";
             this.tlpPublish.RowCount = 1;
             this.tlpPublish.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpPublish.Size = new System.Drawing.Size(868, 445);
+            this.tlpPublish.Size = new System.Drawing.Size(868, 448);
             this.tlpPublish.TabIndex = 2;
             // 
             // gbQuickPublish
@@ -754,7 +753,7 @@ namespace TDMaker
             this.gbQuickPublish.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbQuickPublish.Location = new System.Drawing.Point(725, 3);
             this.gbQuickPublish.Name = "gbQuickPublish";
-            this.gbQuickPublish.Size = new System.Drawing.Size(140, 439);
+            this.gbQuickPublish.Size = new System.Drawing.Size(140, 442);
             this.gbQuickPublish.TabIndex = 1;
             this.gbQuickPublish.TabStop = false;
             this.gbQuickPublish.Text = "Quick Options";
@@ -770,7 +769,7 @@ namespace TDMaker
             this.flpPublishConfig.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flpPublishConfig.Location = new System.Drawing.Point(3, 16);
             this.flpPublishConfig.Name = "flpPublishConfig";
-            this.flpPublishConfig.Size = new System.Drawing.Size(134, 420);
+            this.flpPublishConfig.Size = new System.Drawing.Size(134, 423);
             this.flpPublishConfig.TabIndex = 7;
             // 
             // chkQuickPre
@@ -839,7 +838,7 @@ namespace TDMaker
             this.txtPublish.Multiline = true;
             this.txtPublish.Name = "txtPublish";
             this.txtPublish.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtPublish.Size = new System.Drawing.Size(572, 439);
+            this.txtPublish.Size = new System.Drawing.Size(572, 442);
             this.txtPublish.TabIndex = 0;
             this.txtPublish.WordWrap = false;
             this.txtPublish.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPublish_KeyPress);
@@ -851,7 +850,7 @@ namespace TDMaker
             this.lbPublish.IntegralHeight = false;
             this.lbPublish.Location = new System.Drawing.Point(3, 3);
             this.lbPublish.Name = "lbPublish";
-            this.lbPublish.Size = new System.Drawing.Size(138, 439);
+            this.lbPublish.Size = new System.Drawing.Size(138, 442);
             this.lbPublish.TabIndex = 2;
             this.lbPublish.SelectedIndexChanged += new System.EventHandler(this.LbPublishSelectedIndexChanged);
             // 
@@ -860,7 +859,7 @@ namespace TDMaker
             this.tabPage4.Controls.Add(this.tcOptions);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(874, 451);
+            this.tabPage4.Size = new System.Drawing.Size(874, 454);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Options";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -877,8 +876,29 @@ namespace TDMaker
             this.tcOptions.Location = new System.Drawing.Point(0, 0);
             this.tcOptions.Name = "tcOptions";
             this.tcOptions.SelectedIndex = 0;
-            this.tcOptions.Size = new System.Drawing.Size(874, 451);
+            this.tcOptions.Size = new System.Drawing.Size(874, 454);
             this.tcOptions.TabIndex = 11;
+            // 
+            // tpAdvanced
+            // 
+            this.tpAdvanced.Controls.Add(this.pgApp);
+            this.tpAdvanced.Location = new System.Drawing.Point(4, 22);
+            this.tpAdvanced.Name = "tpAdvanced";
+            this.tpAdvanced.Padding = new System.Windows.Forms.Padding(3);
+            this.tpAdvanced.Size = new System.Drawing.Size(866, 428);
+            this.tpAdvanced.TabIndex = 3;
+            this.tpAdvanced.Text = "General";
+            this.tpAdvanced.UseVisualStyleBackColor = true;
+            // 
+            // pgApp
+            // 
+            this.pgApp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pgApp.Location = new System.Drawing.Point(3, 3);
+            this.pgApp.Name = "pgApp";
+            this.pgApp.PropertySort = System.Windows.Forms.PropertySort.Categorized;
+            this.pgApp.Size = new System.Drawing.Size(860, 422);
+            this.pgApp.TabIndex = 0;
+            this.pgApp.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.pgApp_PropertyValueChanged);
             // 
             // tpOptionsMTN
             // 
@@ -1727,26 +1747,29 @@ namespace TDMaker
             this.pgProxy.TabIndex = 0;
             this.pgProxy.ToolbarVisible = false;
             // 
-            // tpAdvanced
+            // tpDebug
             // 
-            this.tpAdvanced.Controls.Add(this.pgApp);
-            this.tpAdvanced.Location = new System.Drawing.Point(4, 22);
-            this.tpAdvanced.Name = "tpAdvanced";
-            this.tpAdvanced.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAdvanced.Size = new System.Drawing.Size(866, 425);
-            this.tpAdvanced.TabIndex = 3;
-            this.tpAdvanced.Text = "General";
-            this.tpAdvanced.UseVisualStyleBackColor = true;
+            this.tpDebug.Controls.Add(this.rtbDebugLog);
+            this.tpDebug.Location = new System.Drawing.Point(4, 22);
+            this.tpDebug.Name = "tpDebug";
+            this.tpDebug.Padding = new System.Windows.Forms.Padding(3);
+            this.tpDebug.Size = new System.Drawing.Size(874, 454);
+            this.tpDebug.TabIndex = 5;
+            this.tpDebug.Text = "Debug";
+            this.tpDebug.UseVisualStyleBackColor = true;
             // 
-            // pgApp
+            // rtbDebugLog
             // 
-            this.pgApp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pgApp.Location = new System.Drawing.Point(3, 3);
-            this.pgApp.Name = "pgApp";
-            this.pgApp.PropertySort = System.Windows.Forms.PropertySort.Categorized;
-            this.pgApp.Size = new System.Drawing.Size(860, 419);
-            this.pgApp.TabIndex = 0;
-            this.pgApp.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.pgApp_PropertyValueChanged);
+            this.rtbDebugLog.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.rtbDebugLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbDebugLog.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.rtbDebugLog.Location = new System.Drawing.Point(3, 3);
+            this.rtbDebugLog.Name = "rtbDebugLog";
+            this.rtbDebugLog.ReadOnly = true;
+            this.rtbDebugLog.Size = new System.Drawing.Size(868, 448);
+            this.rtbDebugLog.TabIndex = 1;
+            this.rtbDebugLog.Text = "";
+            this.rtbDebugLog.WordWrap = false;
             // 
             // tmrStatus
             // 
@@ -1759,7 +1782,7 @@ namespace TDMaker
             this.btnPublish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPublish.AutoSize = true;
             this.btnPublish.Enabled = false;
-            this.btnPublish.Location = new System.Drawing.Point(768, 5);
+            this.btnPublish.Location = new System.Drawing.Point(768, 2);
             this.btnPublish.Name = "btnPublish";
             this.btnPublish.Size = new System.Drawing.Size(106, 23);
             this.btnPublish.TabIndex = 5;
@@ -1773,7 +1796,7 @@ namespace TDMaker
             this.btnAnalyze.AutoSize = true;
             this.btnAnalyze.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnAnalyze.Enabled = false;
-            this.btnAnalyze.Location = new System.Drawing.Point(8, 5);
+            this.btnAnalyze.Location = new System.Drawing.Point(8, 2);
             this.btnAnalyze.Name = "btnAnalyze";
             this.btnAnalyze.Size = new System.Drawing.Size(104, 23);
             this.btnAnalyze.TabIndex = 9;
@@ -1876,7 +1899,7 @@ namespace TDMaker
             this.btnCreateTorrent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCreateTorrent.AutoSize = true;
             this.btnCreateTorrent.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnCreateTorrent.Location = new System.Drawing.Point(120, 5);
+            this.btnCreateTorrent.Location = new System.Drawing.Point(120, 2);
             this.btnCreateTorrent.Name = "btnCreateTorrent";
             this.btnCreateTorrent.Size = new System.Drawing.Size(85, 23);
             this.btnCreateTorrent.TabIndex = 10;
@@ -2109,7 +2132,7 @@ namespace TDMaker
             this.scMainContainer.Panel2.Controls.Add(this.btnAnalyze);
             this.scMainContainer.Panel2.Controls.Add(this.btnPublish);
             this.scMainContainer.Size = new System.Drawing.Size(882, 512);
-            this.scMainContainer.SplitterDistance = 477;
+            this.scMainContainer.SplitterDistance = 480;
             this.scMainContainer.SplitterWidth = 1;
             this.scMainContainer.TabIndex = 13;
             // 
@@ -2122,30 +2145,6 @@ namespace TDMaker
             this.pMainContainer.Padding = new System.Windows.Forms.Padding(5, 3, 5, 5);
             this.pMainContainer.Size = new System.Drawing.Size(892, 520);
             this.pMainContainer.TabIndex = 14;
-            // 
-            // tpDebug
-            // 
-            this.tpDebug.Controls.Add(this.rtbDebugLog);
-            this.tpDebug.Location = new System.Drawing.Point(4, 22);
-            this.tpDebug.Name = "tpDebug";
-            this.tpDebug.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDebug.Size = new System.Drawing.Size(874, 451);
-            this.tpDebug.TabIndex = 5;
-            this.tpDebug.Text = "Debug";
-            this.tpDebug.UseVisualStyleBackColor = true;
-            // 
-            // rtbDebugLog
-            // 
-            this.rtbDebugLog.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.rtbDebugLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtbDebugLog.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.rtbDebugLog.Location = new System.Drawing.Point(3, 3);
-            this.rtbDebugLog.Name = "rtbDebugLog";
-            this.rtbDebugLog.ReadOnly = true;
-            this.rtbDebugLog.Size = new System.Drawing.Size(868, 445);
-            this.rtbDebugLog.TabIndex = 1;
-            this.rtbDebugLog.Text = "";
-            this.rtbDebugLog.WordWrap = false;
             // 
             // MainWindow
             // 
@@ -2196,6 +2195,7 @@ namespace TDMaker
             this.flpPublishConfig.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tcOptions.ResumeLayout(false);
+            this.tpAdvanced.ResumeLayout(false);
             this.tpOptionsMTN.ResumeLayout(false);
             this.tlpMTN.ResumeLayout(false);
             this.tlpMTN.PerformLayout();
@@ -2232,7 +2232,7 @@ namespace TDMaker
             this.gbTrackerGroups.ResumeLayout(false);
             this.gbTrackers.ResumeLayout(false);
             this.tpProxy.ResumeLayout(false);
-            this.tpAdvanced.ResumeLayout(false);
+            this.tpDebug.ResumeLayout(false);
             this.cmsApp.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -2241,7 +2241,6 @@ namespace TDMaker
             this.scMainContainer.Panel2.PerformLayout();
             this.scMainContainer.ResumeLayout(false);
             this.pMainContainer.ResumeLayout(false);
-            this.tpDebug.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

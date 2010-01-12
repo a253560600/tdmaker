@@ -70,7 +70,7 @@ namespace TDMaker
         {
             if (1 == ps.Length)
             {
-                txtTitle.Text = Engine.GetMediaName(ps[0]);
+                txtTitle.Text = Adapter.GetMediaName(ps[0]);
             }
 
             // COMMENTED UNTIL RECALLED WHY THIS IS NEEDED
@@ -138,7 +138,7 @@ namespace TDMaker
             mi.Extras = cboExtras.Text;
             if (cboSource.Text == "DVD")
             {
-                mi.Source = Engine.GetDVDString(p);
+                mi.Source = Adapter.GetDVDString(p);
             }
             else
             {
@@ -164,7 +164,7 @@ namespace TDMaker
             DialogResult dlgResult = DialogResult.OK;
             List<MediaInfo2> miList = new List<MediaInfo2>();
 
-            MediaWizardOptions mwo = Engine.GetMediaType(wt.FileOrDirPaths);
+            MediaWizardOptions mwo = Adapter.GetMediaType(wt.FileOrDirPaths);
 
             wt.MediaTypeChoice = mwo.MediaTypeChoice;
             if (mwo.PromptShown)
@@ -222,7 +222,7 @@ namespace TDMaker
                             {
                                 mi.SetTitle(txtTitle.Text);
                                 // if it is a DVD, set the title to be name of the folder. 
-                                this.Text = string.Format("{0} - {1}", Engine.GetProductName(), Engine.GetMediaName(mi.Location));
+                                this.Text = string.Format("{0} - {1}", Engine.GetProductName(), Adapter.GetMediaName(mi.Location));
                             }
                             miList.Add(mi);
                         }
@@ -631,6 +631,8 @@ namespace TDMaker
                 mi.ReadMedia();
                 bwApp.ReportProgress((int)ProgressType.REPORT_MEDIAINFO_SUMMARY, mi);
 
+                TemplateReader2 tr2 = new TemplateReader2(mi.Overall.Summary);
+                
                 // creates screenshot
                 mi.UploadScreenshots = wt.UploadScreenshot;
                 if (wt.UploadScreenshot)
@@ -663,7 +665,7 @@ namespace TDMaker
 
                 if (Engine.conf.XMLTorrentUploadCreate)
                 {
-                    string fp = Path.Combine(mi.TorrentCreateInfoMy.GetTorrentFolderPath(), Engine.GetMediaName(mi.TorrentCreateInfoMy.MediaLocation)) + ".xml";
+                    string fp = Path.Combine(mi.TorrentCreateInfoMy.GetTorrentFolderPath(), Adapter.GetMediaName(mi.TorrentCreateInfoMy.MediaLocation)) + ".xml";
                     FileSystem.GetXMLTorrentUpload(mi).Write2(fp);
                 }
 
@@ -685,7 +687,7 @@ namespace TDMaker
                     tci.CreateTorrent(wt.MyWorker);
                     if (Engine.conf.XMLTorrentUploadCreate)
                     {
-                        string fp = Path.Combine(tci.GetTorrentFolderPath(), Engine.GetMediaName(tci.MediaLocation)) + ".xml";
+                        string fp = Path.Combine(tci.GetTorrentFolderPath(), Adapter.GetMediaName(tci.MediaLocation)) + ".xml";
                         FileSystem.GetXMLTorrentUpload(ti.MediaMy).Write(fp);
                     }
                 }
@@ -786,7 +788,24 @@ namespace TDMaker
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Multiselect = true;
             dlg.Title = "Browse for Media file...";
-            //dlg.Filter = "Media Files|*.avi; *.divx; *.mkv; *.ogm; *.vob;";
+            StringBuilder sbExt = new StringBuilder();
+            sbExt.Append("Media Files (");
+            StringBuilder sbExtDesc = new StringBuilder(); 
+            foreach (string ext in Engine.conf.SupportedFileTypesVideo)
+            {
+                sbExtDesc.Append("*");
+                sbExtDesc.Append(ext);
+                sbExtDesc.Append("; ");
+            }
+            sbExt.Append(sbExtDesc.ToString().TrimEnd().TrimEnd(';'));
+            sbExt.Append(")|");
+            foreach (string ext in Engine.conf.SupportedFileTypesVideo)
+            {
+                sbExt.Append("*");
+                sbExt.Append(ext);
+                sbExt.Append("; ");
+            }
+            dlg.Filter = sbExt.ToString().TrimEnd();
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 LoadMedia(dlg.FileNames);
