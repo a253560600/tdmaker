@@ -632,7 +632,7 @@ namespace TDMaker
                 bwApp.ReportProgress((int)ProgressType.REPORT_MEDIAINFO_SUMMARY, mi);
 
                 MappingHelper tr2 = new MappingHelper(mi.Overall.Summary);
-                
+
                 // creates screenshot
                 mi.UploadScreenshots = wt.UploadScreenshot;
                 if (wt.UploadScreenshot)
@@ -665,7 +665,7 @@ namespace TDMaker
 
                 if (Engine.conf.XMLTorrentUploadCreate)
                 {
-                    string fp = Path.Combine(mi.TorrentCreateInfoMy.GetTorrentFolderPath(), Adapter.GetMediaName(mi.TorrentCreateInfoMy.MediaLocation)) + ".xml";
+                    string fp = Path.Combine(mi.TorrentCreateInfoMy.TorrentFolder, Adapter.GetMediaName(mi.TorrentCreateInfoMy.MediaLocation)) + ".xml";
                     FileSystem.GetXMLTorrentUpload(mi).Write2(fp);
                 }
 
@@ -687,7 +687,7 @@ namespace TDMaker
                     tci.CreateTorrent(wt.MyWorker);
                     if (Engine.conf.XMLTorrentUploadCreate)
                     {
-                        string fp = Path.Combine(tci.GetTorrentFolderPath(), Adapter.GetMediaName(tci.MediaLocation)) + ".xml";
+                        string fp = Path.Combine(tci.TorrentFolder, Adapter.GetMediaName(tci.MediaLocation)) + ".xml";
                         FileSystem.GetXMLTorrentUpload(ti.MediaMy).Write(fp);
                     }
                 }
@@ -790,7 +790,7 @@ namespace TDMaker
             dlg.Title = "Browse for Media file...";
             StringBuilder sbExt = new StringBuilder();
             sbExt.Append("Media Files (");
-            StringBuilder sbExtDesc = new StringBuilder(); 
+            StringBuilder sbExtDesc = new StringBuilder();
             foreach (string ext in Engine.conf.SupportedFileTypesVideo)
             {
                 sbExtDesc.Append("*");

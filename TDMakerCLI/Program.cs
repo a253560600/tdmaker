@@ -12,21 +12,29 @@ namespace TDMakerCLI
     {
         static void Main(string[] args)
         {
+            string mImagesDir = string.Empty;
             string mMediaLoc = string.Empty;
+            string mRootDir = string.Empty;
             string mSettingsFile = string.Empty;
+            string mTorrentDir = string.Empty;
             bool mScreenshotsCreate = false;
             bool mTorrentCreate = false;
             bool mFileCollection = false;
             bool mShowHelp = false;
+            bool mXmlCreate = false;
 
             var p = new OptionSet() 
             {
                 { "c", "Treat multiple files as a collection", v => mFileCollection = v != null},
                 { "m|media=", "Location of the media file/folder", v => mMediaLoc = v },
                 { "o|options=", "Location of the settings file", v => mSettingsFile = v },
+                { "rd=", "Root directory for screenshots, torrent and all other output files. Overrides all other custom folders.", v => mRootDir = v },
                 { "s", "Create and upload screenshots", v => mScreenshotsCreate = v != null},
-                { "t", "Create torrent file", v => mTorrentCreate = v != null},
-                { "h|help",  "Show this message and exit", v => mShowHelp = v != null },
+                { "sd=", "Create screenshots in a custom folder and upload", v => mImagesDir = v },
+                { "t", "Create torrent file in the parent folder of the media file", v => mTorrentCreate = v != null},
+                { "td=", "Create torrent file in a custom folder", v => mTorrentDir = v},
+                { "x|xml",  "Folder path of the XML torrent description file", v => mXmlCreate = v != null },
+                { "h|help",  "Show this message and exit", v => mShowHelp = v != null }
             };
 
             if (args.Length == 0)
@@ -97,10 +105,20 @@ namespace TDMakerCLI
                 TorrentInfo ti = new TorrentInfo(mi);
                 mi.ReadMedia();
 
+                // set root folder for images or set images dir if set one
+                string ssDir = Directory.Exists(mRootDir) ? mRootDir : mImagesDir;
                 if (mScreenshotsCreate)
                 {
-                    ti.CreateScreenshots();
+                    if (Directory.Exists(ssDir))
+                    {
+                        ti.CreateScreenshots(ssDir);
+                    }
+                    else
+                    {
+                        ti.CreateScreenshots();
+                    }
                 }
+
                 PublishOptionsPacket pop = new PublishOptionsPacket()
                 {
                     AlignCenter = Engine.conf.AlignCenter,
@@ -117,14 +135,21 @@ namespace TDMakerCLI
                 Console.WriteLine(ti.PublishString);
                 Console.WriteLine();
 
-                if (mTorrentCreate)
+                string torrentDir = Directory.Exists(mRootDir) ? mRootDir : mTorrentDir;
+                // create a torrent
+                if (mTorrentCreate || Directory.Exists(torrentDir))
                 {
                     ti.MediaMy.TorrentCreateInfoMy = new TorrentCreateInfo(Engine.conf.TrackerGroups[Engine.conf.TrackerGroupActive], mMediaLoc);
+                    if (Directory.Exists(mTorrentDir))
+                    {
+                        ti.MediaMy.TorrentCreateInfoMy.TorrentFolder = torrentDir;
+                    }
                     ti.MediaMy.TorrentCreateInfoMy.CreateTorrent();
 
-                    if (Engine.conf.XMLTorrentUploadCreate)
+                    // create xml file
+                    if (mXmlCreate)
                     {
-                        string fp = Path.Combine(ti.MediaMy.TorrentCreateInfoMy.GetTorrentFolderPath(), Adapter.GetMediaName(ti.MediaMy.TorrentCreateInfoMy.MediaLocation)) + ".xml";
+                        string fp = Path.Combine(ti.MediaMy.TorrentCreateInfoMy.TorrentFolder, Adapter.GetMediaName(ti.MediaMy.TorrentCreateInfoMy.MediaLocation)) + ".xml";
                         FileSystem.GetXMLTorrentUpload(ti.MediaMy).Write2(fp);
                     }
                 }
