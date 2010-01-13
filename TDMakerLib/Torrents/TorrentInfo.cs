@@ -111,7 +111,7 @@ namespace TDMakerLib
                 Debug.WriteLine("MTN Path: " + assemblyMTN);
                 Debug.WriteLine("MTN Args: " + args);
 
-                psi.WindowStyle = (Engine.conf.ShowMTNWindow ? ProcessWindowStyle.Normal : ProcessWindowStyle.Hidden);
+                psi.WindowStyle = (Engine.conf.ShowMTNWindow ? ProcessWindowStyle.Normal : ProcessWindowStyle.Minimized);
                 Debug.WriteLine("MTN Window: " + psi.WindowStyle.ToString());
                 psi.Arguments = args;
 
