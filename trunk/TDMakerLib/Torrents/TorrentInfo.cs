@@ -50,11 +50,25 @@ namespace TDMakerLib
             UploadScreenshots();
         }
 
+        public void CreateScreenshots(string ssDir)
+        {
+            TakeScreenshots(ssDir);
+            UploadScreenshots();
+        }
+
         private void TakeScreenshots()
         {
             foreach (MediaFile mf in this.MediaMy.MediaFiles)
             {
                 TakeScreenshot(mf);
+            }
+        }
+
+        private void TakeScreenshots(string ssDir)
+        {
+            foreach (MediaFile mf in this.MediaMy.MediaFiles)
+            {
+                TakeScreenshot(mf, ssDir);
             }
         }
 
@@ -81,6 +95,11 @@ namespace TDMakerLib
 
         private bool TakeScreenshot(MediaFile mf)
         {
+            return TakeScreenshot(mf, FileSystem.GetScreenShotsDir(mf.FilePath));
+        }
+
+        private bool TakeScreenshot(MediaFile mf, string ssDir)
+        {
             bool success = true;
             String mediaFilePath = mf.FilePath;
             Debug.WriteLine("Taking Screenshot for " + Path.GetFileName(mediaFilePath));
@@ -97,7 +116,7 @@ namespace TDMakerLib
                     Engine.conf.MTNPath = assemblyMTN;
                 }
 
-                mf.Screenshot.MTNArgs = Adapter.GetMtnArg(FileSystem.GetScreenShotsDir(mf.FilePath), Engine.mtnProfileMgr.GetMtnProfileActive());
+                mf.Screenshot.MTNArgs = Adapter.GetMtnArg(ssDir, Engine.mtnProfileMgr.GetMtnProfileActive());
                 string args = string.Format("{0} \"{1}\"", mf.Screenshot.MTNArgs, mediaFilePath);
 
                 Process p = new Process();

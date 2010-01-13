@@ -10,7 +10,7 @@ namespace TDMakerLib
     {
         public TrackerGroup TrackerGroupActive { get; private set; }
         public string MediaLocation { get; private set; }
-        public string TorrentFolder { get; private set; }
+        public string TorrentFolder { get; set; }
         public string TorrentFilePath { get; private set; }
 
         public TorrentCreateInfo(TrackerGroup tracker, string mediaLoc)
@@ -20,7 +20,7 @@ namespace TDMakerLib
             this.TorrentFolder = GetTorrentFolderPath();
         }
 
-        public string GetTorrentFolderPath()
+        private string GetTorrentFolderPath()
         {
             string dir = "";
 
@@ -67,31 +67,38 @@ namespace TDMakerLib
         public void CreateTorrent(BackgroundWorker workerMy)
         {
             string p = this.MediaLocation;
-            if (File.Exists(p) || Directory.Exists(p))
+            if (this.TrackerGroupActive != null)
             {
-                foreach (Tracker myTracker in this.TrackerGroupActive.Trackers)
+                if (File.Exists(p) || Directory.Exists(p))
                 {
-                    MonoTorrent.Common.TorrentCreator tc = new MonoTorrent.Common.TorrentCreator();
-                    tc.Private = true;
-                    tc.Comment = Adapter.GetMediaName(p);
-                    tc.Path = p;
-                    tc.PublisherUrl = "http://code.google.com/p/tdmaker";
-                    tc.Publisher = Application.ProductName;
-                    tc.StoreMD5 = true;
-                    List<string> temp = new List<string>();
-                    temp.Add(myTracker.AnnounceURL);
-                    tc.Announces.Add(temp);
+                    foreach (Tracker myTracker in this.TrackerGroupActive.Trackers)
+                    {
+                        MonoTorrent.Common.TorrentCreator tc = new MonoTorrent.Common.TorrentCreator();
+                        tc.Private = true;
+                        tc.Comment = Adapter.GetMediaName(p);
+                        tc.Path = p;
+                        tc.PublisherUrl = "http://code.google.com/p/tdmaker";
+                        tc.Publisher = Application.ProductName;
+                        tc.StoreMD5 = true;
+                        List<string> temp = new List<string>();
+                        temp.Add(myTracker.AnnounceURL);
+                        tc.Announces.Add(temp);
 
-                    string torrentFileName = string.Format("{0} - {1}.torrent", (File.Exists(p) ? Path.GetFileName(p) : Adapter.GetMediaName(p)), myTracker.Name);
-                    this.SetTorrentFilePath(torrentFileName);
+                        string torrentFileName = string.Format("{0} - {1}.torrent", (File.Exists(p) ? Path.GetFileName(p) : Adapter.GetMediaName(p)), myTracker.Name);
+                        this.SetTorrentFilePath(torrentFileName);
 
-                    if (!Directory.Exists(this.TorrentFolder))
-                        Directory.CreateDirectory(Path.GetDirectoryName(this.TorrentFilePath));
+                        if (!Directory.Exists(this.TorrentFolder))
+                            Directory.CreateDirectory(Path.GetDirectoryName(this.TorrentFilePath));
 
-                    ReportProgress(workerMy, ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Creating {0}", this.TorrentFilePath));
-                    tc.Create(this.TorrentFilePath);
-                    ReportProgress(workerMy, ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Created {0}", this.TorrentFilePath));
+                        ReportProgress(workerMy, ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Creating {0}", this.TorrentFilePath));
+                        tc.Create(this.TorrentFilePath);
+                        ReportProgress(workerMy, ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Created {0}", this.TorrentFilePath));
+                    }
                 }
+            }
+            else
+            {
+                Console.WriteLine("There were no active trackers configured to create a torrent.");
             }
         }
 
