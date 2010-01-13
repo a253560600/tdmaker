@@ -265,7 +265,7 @@ namespace TDMakerLib
             return sbPublish.ToString();
         }
 
-        public string CreatePublishMediaInfo(PublishOptionsPacket options)
+        public string CreatePublishMediaInfo(PublishOptionsPacket pop)
         {
             StringBuilder sbPublish = new StringBuilder();
             StringBuilder sbMediaInfo = new StringBuilder();
@@ -276,10 +276,10 @@ namespace TDMakerLib
                 sbMediaInfo.AppendLine(mf.Summary.Trim());
                 sbMediaInfo.AppendLine();
             }
-            sbPublish.AppendLine(GetMediaInfo(sbMediaInfo.ToString(), options));
+            sbPublish.AppendLine(GetMediaInfo(sbMediaInfo.ToString(), pop));
             foreach (MediaFile mf in MediaMy.MediaFiles)
             {
-                sbPublish.AppendLine(mf.GetScreenshotString());
+                sbPublish.AppendLine(mf.GetScreenshotString(pop));
             }
             return sbPublish.ToString();
         }
@@ -291,16 +291,11 @@ namespace TDMakerLib
         /// <param name="ti"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public string CreatePublishInternal(PublishOptionsPacket options)
+        public string CreatePublishInternal(PublishOptionsPacket pop)
         {
-            foreach (MediaFile mf in this.MediaMy.MediaFiles)
-            {
-                mf.PublishOptions = options;
-            }
-
             StringBuilder sbPublish = new StringBuilder();
-            string info = MediaMy.MediaTypeChoice == MediaType.MUSIC_AUDIO_ALBUM ? MediaMy.ToStringAudio() : MediaMy.ToStringMedia();
-            sbPublish.Append(GetMediaInfo(info, options));
+            string info = MediaMy.MediaTypeChoice == MediaType.MUSIC_AUDIO_ALBUM ? MediaMy.ToStringAudio() : MediaMy.ToStringMedia(pop);
+            sbPublish.Append(GetMediaInfo(info, pop));
 
             return sbPublish.ToString().Trim();
         }
