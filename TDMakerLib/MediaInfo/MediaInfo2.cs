@@ -320,7 +320,7 @@ namespace TDMakerLib
             return new NfoReport(this.Location, null).ToString();
         }
 
-        public string ToStringMedia()
+        public string ToStringMedia(PublishOptionsPacket pop)
         {
             int fontSizeHeading1 = (int)(Engine.conf.PreText && Engine.conf.LargerPreText == true ?
         Engine.conf.FontSizeHeading1 + Engine.conf.FontSizeIncr :
@@ -383,7 +383,7 @@ namespace TDMakerLib
             if (this.MediaFiles.Count > 1 && this.MediaTypeChoice == MediaType.MediaDisc)
             // is a DVD so need Overall Info only
             {
-                sbBody.AppendLine(this.Overall.ToStringPublish());
+                sbBody.AppendLine(this.Overall.ToStringPublish(pop));
             }
             else
             {
@@ -398,7 +398,7 @@ namespace TDMakerLib
                     {
                         sbBody.AppendLine(BbCode.Size(fontSizeHeading2, BbCode.BoldItalic(mf.FileName)));
                         sbBody.AppendLine();
-                        sbBody.AppendLine(mf.ToStringPublish());
+                        sbBody.AppendLine(mf.ToStringPublish(pop));
                     }
                 }
             }
@@ -413,7 +413,7 @@ namespace TDMakerLib
             {
                 if (mf.Screenshot != null)
                 {
-                    sbBody.AppendLine(mf.GetScreenshotString());
+                    sbBody.AppendLine(mf.GetScreenshotString(pop));
                 }
             }
 

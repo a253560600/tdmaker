@@ -56,7 +56,6 @@ namespace TDMakerLib
         /// </summary>
         public string Summary { get; set; }
         public TagLib.File TagLibFile { get; set; }
-        public PublishOptionsPacket PublishOptions { get; set; }
 
         public List<AudioInfo> Audio { get; set; }
         public VideoInfo Video { get; set; }
@@ -304,7 +303,7 @@ namespace TDMakerLib
         /// Returns a Publish layout of Media Info that has Audio and Video
         /// </summary>
         /// <returns></returns>
-        public string ToStringPublish()
+        public string ToStringPublish(PublishOptionsPacket pop)
         {
             int fontSizeHeading3 = (int)(Engine.conf.PreText && Engine.conf.LargerPreText == true ?
            Engine.conf.FontSizeHeading3 + Engine.conf.FontSizeIncr :
@@ -349,10 +348,10 @@ namespace TDMakerLib
 
             if (this.Screenshot != null)
             {
-                string ss = this.GetScreenshotString();
+                string ss = this.GetScreenshotString(pop);
                 if (ss.Length > 0)
                 {
-                    sbBody.AppendLine(this.GetScreenshotString());
+                    sbBody.AppendLine(this.GetScreenshotString(pop));
                 }
             }
 
@@ -440,11 +439,11 @@ namespace TDMakerLib
             return sbBody.ToString();
         }
 
-        public string GetScreenshotString()
+        public string GetScreenshotString(PublishOptionsPacket pop)
         {
             StringBuilder sbPublish = new StringBuilder();
 
-            if (!string.IsNullOrEmpty(this.Screenshot.Full) && PublishOptions.FullPicture)
+            if (!string.IsNullOrEmpty(this.Screenshot.Full) && pop.FullPicture)
             {
                 sbPublish.Append(BbCode.Img(this.Screenshot.Full));
             }

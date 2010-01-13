@@ -326,6 +326,7 @@ namespace TDMakerLib
                 mwo.PromptShown = true;
             }
 
+            FileSystem.AppendDebug("Determined media type as: " + mwo.MediaTypeChoice.ToString());
             return mwo;
         }
 

@@ -430,7 +430,7 @@ namespace TDMaker
             }
             if (Engine.conf.SupportedFileTypesVideo.Count == 0)
             {
-                Engine.conf.SupportedFileTypesVideo.AddRange(new string[] { ".avi", ".divx", ".mkv", ".mpeg", ".mpg", ".mov", ".ogm", ".rm", ".rmvb", ".vob", ".wmv" });
+                Engine.conf.SupportedFileTypesVideo.AddRange(new string[] { ".avi", ".divx", ".mkv", ".mpeg", ".mpg", ".mov", ".mp4", ".ogm", ".rm", ".rmvb", ".ts", ".vob", ".wmv" });
             }
 
             cboSource.Items.Clear();
@@ -1185,7 +1185,6 @@ namespace TDMaker
         private void cboQuickTemplate_SelectedIndexChanged(object sender, EventArgs e)
         {
             createPublishUser();
-
         }
 
         private string GetHexColor()
