@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using TDMakerLib;
 using System.Text;
+using MediaInfoLib;
 
 namespace TDMakerLib
 {
@@ -24,6 +25,11 @@ namespace TDMakerLib
             sbDesc.AppendLine();
             sbDesc.AppendLine("Settings file:");
             sbDesc.AppendLine(Engine.mAppSettings.XMLSettingsFile);
+            MediaInfoLib.MediaInfo mi = new MediaInfoLib.MediaInfo();
+            sbDesc.AppendLine();
+            sbDesc.AppendLine("Using:");
+            sbDesc.AppendLine(mi.Option("Info_Version") + " from http://sourceforge.net/projects/mediainfo");
+            sbDesc.AppendLine("Movie Thumbnailer v200808a:");
             this.textBoxDescription.Text = sbDesc.ToString();
         }
 
