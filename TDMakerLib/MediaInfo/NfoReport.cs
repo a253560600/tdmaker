@@ -9,8 +9,6 @@ namespace TDMakerLib.MediaInfo
 {
     class NfoReport
     {
-        private string[] mAudioTypes = {".m4a", ".wma", ".mp3", ".flac" };
-
         private StringBuilder msbAudio = new StringBuilder();
         private StringBuilder msbAlbumInfo = new StringBuilder();
         private StringBuilder msbExtraFiles = new StringBuilder();
@@ -25,7 +23,7 @@ namespace TDMakerLib.MediaInfo
         public string Ripper { get; set; }
         public string Encoder { get; set; }
         public string Codec { get; set; }
-        public string CodecProfile{ get; set; }
+        public string CodecProfile { get; set; }
 
         public double TotalBitrate { get; private set; }
 
@@ -49,7 +47,7 @@ namespace TDMakerLib.MediaInfo
         public string TrackList(List<string> lstAudioFiles)
         {
 
-            StringBuilder msbAudio = new StringBuilder(); 
+            StringBuilder msbAudio = new StringBuilder();
 
             TagLib.File f = TagLib.File.Create(lstAudioFiles[0]);
 
@@ -116,7 +114,7 @@ namespace TDMakerLib.MediaInfo
             return sbExtraFiles.ToString();
 
         }
- 
+
         private void sMakeNfo()
         {
             // browse the album folder
@@ -127,7 +125,7 @@ namespace TDMakerLib.MediaInfo
             lstTotalFiles.AddRange(Directory.GetFiles(mFolderPath, "*.*", SearchOption.TopDirectoryOnly));
             lstExtraFiles.AddRange(lstTotalFiles);
 
-            foreach (string ext in mAudioTypes)
+            foreach (string ext in Engine.conf.SupportedFileExtAudio)
             {
                 foreach (string f in lstTotalFiles)
                 {

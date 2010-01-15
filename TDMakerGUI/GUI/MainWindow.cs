@@ -428,9 +428,13 @@ namespace TDMaker
             {
                 Engine.conf.DiscMenus.AddRange(new string[] { "Intact", "Removed", "Shrunk" });
             }
-            if (Engine.conf.SupportedFileTypesVideo.Count == 0)
+            if (Engine.conf.SupportedFileExtVideo.Count == 0)
             {
-                Engine.conf.SupportedFileTypesVideo.AddRange(new string[] { ".avi", ".divx", ".mkv", ".mpeg", ".mpg", ".mov", ".mp4", ".ogm", ".rm", ".rmvb", ".ts", ".vob", ".wmv" });
+                Engine.conf.SupportedFileExtVideo.AddRange(new string[] { ".3g2", ".3gp", ".3gp2", ".3gpp", ".amr", ".asf", ".asx", ".avi", ".d2v", ".dat", ".divx", ".drc", ".dsa", ".dsm", ".dss", ".dsv", ".flc", ".fli", ".flic", ".flv", ".hdmov", ".ivf", ".m1v", ".m2ts", ".m2v", ".m4v", ".mkv", ".mov", ".mp2v", ".mp4", ".mpcpl", ".mpe", ".mpeg", ".mpg", ".mpv", ".mpv2", ".ogm", ".qt", ".ram", ".ratdvd", ".rm", ".rmvb", ".roq", ".rp", ".rpm", ".rt", ".swf", ".ts", ".vob", ".vp6", ".wm", ".wmp", ".wmv", ".wmx", ".wvx" });
+            }
+            if (Engine.conf.SupportedFileExtAudio.Count == 0)
+            {
+                Engine.conf.SupportedFileExtAudio.AddRange(new string[] { ".aac", ".aiff", ".ape", ".flac", ".m4a", ".mp3", ".mpc", ".ogg", ".mp4", ".wma" });
             }
 
             cboSource.Items.Clear();
@@ -754,7 +758,7 @@ namespace TDMaker
                             chkQuickPre.Checked = pop.PreformattedText;
                             cboQuickTemplate.SelectedIndex = cboTemplate.SelectedIndex;
 
-                            this.UpdatePublish(GetTorrentInfo());
+                            this.createPublishUser();
                         }
                         break;
                 }
@@ -791,7 +795,7 @@ namespace TDMaker
             StringBuilder sbExt = new StringBuilder();
             sbExt.Append("Media Files (");
             StringBuilder sbExtDesc = new StringBuilder();
-            foreach (string ext in Engine.conf.SupportedFileTypesVideo)
+            foreach (string ext in Engine.conf.SupportedFileExtVideo)
             {
                 sbExtDesc.Append("*");
                 sbExtDesc.Append(ext);
@@ -799,7 +803,7 @@ namespace TDMaker
             }
             sbExt.Append(sbExtDesc.ToString().TrimEnd().TrimEnd(';'));
             sbExt.Append(")|");
-            foreach (string ext in Engine.conf.SupportedFileTypesVideo)
+            foreach (string ext in Engine.conf.SupportedFileExtVideo)
             {
                 sbExt.Append("*");
                 sbExt.Append(ext);
@@ -842,14 +846,14 @@ namespace TDMaker
 
         private void bwApp_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            string msg = "";
-            if (e.UserState.GetType() == typeof(string))
-            {
-                msg = e.UserState.ToString();
-            }
-
             if (e.UserState != null)
             {
+                string msg = "";
+                if (e.UserState.GetType() == typeof(string))
+                {
+                    msg = e.UserState.ToString();
+                }
+
                 ProgressType perc = (ProgressType)e.ProgressPercentage;
 
                 switch (perc)
@@ -1027,7 +1031,8 @@ namespace TDMaker
 
         private void createPublishUser()
         {
-            if (GetTorrentInfo() != null)
+            TorrentInfo ti = GetTorrentInfo();
+            if (ti != null)
             {
                 PublishOptionsPacket pop = new PublishOptionsPacket();
                 pop.AlignCenter = chkQuickAlignCenter.Checked;
@@ -1037,7 +1042,18 @@ namespace TDMaker
                 pop.PublishInfoTypeChoice = (PublishInfoType)cboPublishTypeQuick.SelectedIndex;
                 pop.TemplateLocation = Path.Combine(Engine.TemplatesDir, cboQuickTemplate.Text);
 
-                txtPublish.Text = Adapter.CreatePublish(GetTorrentInfo(), pop);
+                txtPublish.Text = Adapter.CreatePublish(ti, pop);
+
+                if (ti.MediaMy.MediaTypeChoice == MediaType.MusicAudioAlbum)
+                {
+                    txtPublish.BackColor = System.Drawing.Color.Black;
+                    txtPublish.ForeColor = System.Drawing.Color.White;
+                }
+                else
+                {
+                    txtPublish.BackColor = System.Drawing.SystemColors.Window;
+                    txtPublish.ForeColor = System.Drawing.SystemColors.WindowText;
+                }
             }
         }
 
@@ -1236,30 +1252,6 @@ namespace TDMaker
         private void tsmSettingsDir_Click(object sender, EventArgs e)
         {
             FileSystem.OpenDirSettings();
-        }
-
-        private void UpdatePublish()
-        {
-            this.UpdatePublish(GetTorrentInfo());
-        }
-
-        private void UpdatePublish(TorrentInfo ti)
-        {
-            if (ti != null)
-            {
-                txtPublish.Text = CreatePublishInitial(ti);
-
-                if (ti.MediaMy.MediaTypeChoice == MediaType.MUSIC_AUDIO_ALBUM)
-                {
-                    txtPublish.BackColor = System.Drawing.Color.Black;
-                    txtPublish.ForeColor = System.Drawing.Color.White;
-                }
-                else
-                {
-                    txtPublish.BackColor = System.Drawing.SystemColors.Window;
-                    txtPublish.ForeColor = System.Drawing.SystemColors.WindowText;
-                }
-            }
         }
 
         private void WriteMediaInfo(string info)

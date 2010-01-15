@@ -97,7 +97,7 @@ namespace TDMakerLib
         public List<string> GetFilesToProcess(string dir)
         {
             List<string> filePaths = new List<string>();
-            foreach (string ext in Engine.conf.SupportedFileTypesVideo)
+            foreach (string ext in Engine.conf.SupportedFileExtVideo)
             {
                 filePaths.AddRange(Directory.GetFiles(Location, "*" + ext, SearchOption.AllDirectories));
                 Debug.WriteLine("Processing " + ext);
@@ -167,20 +167,11 @@ namespace TDMakerLib
                     listFileInfo.RemoveAll(x => x.Length < 1000000000);
                 }
 
-                // Set Media Type
-                bool allAudio = true;
-                List<MediaFile> tempMediaFiles = new List<MediaFile>();
-                foreach (string fp in FileCollection)
-                {
-                    tempMediaFiles.Add(new MediaFile(fp, this.Source));
-                }
-                foreach (MediaFile mf in tempMediaFiles)
-                {
-                    allAudio = mf.IsAudioFile() && allAudio;
-                }
+                // Set Media Type                
+                bool allAudio = Adapter.MediaIsAudio(FileCollection);
                 if (allAudio)
                 {
-                    this.MediaTypeChoice = MediaType.MUSIC_AUDIO_ALBUM;
+                    this.MediaTypeChoice = MediaType.MusicAudioAlbum;
                 }
 
                 if (FileCollection.Count > 0)
@@ -297,7 +288,7 @@ namespace TDMakerLib
                     ReadMediaFileCollection();
                     break;
                 case MediaType.MediaDisc:
-                case MediaType.MUSIC_AUDIO_ALBUM:
+                case MediaType.MusicAudioAlbum:
                     ReadDirectory();
                     break;
             }
