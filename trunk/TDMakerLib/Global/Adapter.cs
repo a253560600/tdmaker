@@ -247,6 +247,32 @@ namespace TDMakerLib
 
         }
 
+        public static bool MediaIsAudio(string dir)
+        {         
+            List<string> fileColl = new List<string>();
+            foreach (string ext in Engine.conf.SupportedFileExtAudio)
+            {
+                fileColl.AddRange(Directory.GetFiles(dir, ext, SearchOption.AllDirectories));
+            }
+            return MediaIsAudio(fileColl);
+        }
+
+        public static bool MediaIsAudio(List<string> fileColl)
+        {
+            bool allAudio = true;
+            List<MediaFile> tempMediaFiles = new List<MediaFile>();
+            foreach (string fp in fileColl)
+            {
+                tempMediaFiles.Add(new MediaFile(fp, ""));
+            }
+
+            foreach (MediaFile mf in tempMediaFiles)
+            {
+                allAudio = mf.IsAudioFile() && allAudio;
+            }
+            return allAudio;
+        }
+
         public static bool MediaIsDisc(string p)
         {
             bool dir = Directory.Exists(p);
@@ -303,6 +329,10 @@ namespace TDMakerLib
                         {
                             mwo.MediaTypeChoice = MediaType.MediaDisc;
                         }
+                        else if (MediaIsAudio(dir))
+                        {
+                            mwo.MediaTypeChoice = MediaType.MusicAudioAlbum;
+                        }
                         else
                         {
                             showWizard = true;
@@ -355,7 +385,7 @@ namespace TDMakerLib
         }
 
 
-        #region Publish 
+        #region Publish
 
         public static string CreatePublish(TorrentInfo ti, PublishOptionsPacket pop)
         {

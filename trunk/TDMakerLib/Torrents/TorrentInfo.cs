@@ -294,7 +294,7 @@ namespace TDMakerLib
         public string CreatePublishInternal(PublishOptionsPacket pop)
         {
             StringBuilder sbPublish = new StringBuilder();
-            string info = MediaMy.MediaTypeChoice == MediaType.MUSIC_AUDIO_ALBUM ? MediaMy.ToStringAudio() : MediaMy.ToStringMedia(pop);
+            string info = MediaMy.MediaTypeChoice == MediaType.MusicAudioAlbum ? MediaMy.ToStringAudio() : MediaMy.ToStringMedia(pop);
             sbPublish.Append(GetMediaInfo(info, pop));
 
             return sbPublish.ToString().Trim();

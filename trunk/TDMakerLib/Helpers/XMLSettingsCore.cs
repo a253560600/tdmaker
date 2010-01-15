@@ -28,7 +28,8 @@ namespace TDMakerLib
             DiscMenus = new StringCollection();
             Extras = new StringCollection();
             MediaSources = new StringCollection();
-            SupportedFileTypesVideo = new StringCollection();
+            SupportedFileExtAudio = new StringCollection();
+            SupportedFileExtVideo = new StringCollection();
         }
 
         // Tab 1 - Input
@@ -56,11 +57,12 @@ namespace TDMakerLib
         [Category("Input"), Editor(@"System.Windows.Forms.Design.StringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(System.Drawing.Design.UITypeEditor))]
         public StringCollection MediaSources { get; set; }
 
-        [Category("Input"),
-        Editor(@"System.Windows.Forms.Design.StringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-            typeof(System.Drawing.Design.UITypeEditor)),
+        [Category("Input"), Editor(@"System.Windows.Forms.Design.StringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(System.Drawing.Design.UITypeEditor)),
         Description("Supported file types by MediaInfo and MTN. Add more file types only if you are absolutely sure both MediaInfo and MTN can handle those.")]
-        public StringCollection SupportedFileTypesVideo { get; set; }
+        public StringCollection SupportedFileExtVideo { get; set; }
+        [Category("Input"), Editor(@"System.Windows.Forms.Design.StringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(System.Drawing.Design.UITypeEditor)),
+        Description("Supported file types by TDMaker to create a Music Album NFO file. Add more file types only if you are absolutely sure both MediaInfo and MTN can handle those.")]
+        public StringCollection SupportedFileExtAudio { get; set; }
 
         [BrowsableAttribute(false), DefaultValue(true)]
         public bool bTitle { get; set; }
@@ -198,7 +200,7 @@ namespace TDMakerLib
 
         public static XMLSettingsCore Read()
         {
-			string settingsFile = Engine.Portable ? Engine.GetLatestSettingsFile(Engine.SettingsDir) : Engine.mAppSettings.GetSettingsFilePath();
+            string settingsFile = Engine.Portable ? Engine.GetLatestSettingsFile(Engine.SettingsDir) : Engine.mAppSettings.GetSettingsFilePath();
             if (!File.Exists(settingsFile))
             {
                 if (File.Exists(Engine.mAppSettings.XMLSettingsFile))

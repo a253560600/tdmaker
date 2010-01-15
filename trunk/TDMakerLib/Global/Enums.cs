@@ -15,7 +15,7 @@ namespace TDMakerLib
         [Description("Media files collection")]
         MediaCollection,
         [Description("Music audio album")]
-        MUSIC_AUDIO_ALBUM
+        MusicAudioAlbum
     }
 
     public enum LocationType
