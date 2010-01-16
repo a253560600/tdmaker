@@ -337,7 +337,7 @@ namespace TDMakerLib
                         {
                             mwo.MediaTypeChoice = MediaType.MusicAudioAlbum;
                         }
-                        else
+                        else if (!silent)
                         {
                             showWizard = true;
                         }

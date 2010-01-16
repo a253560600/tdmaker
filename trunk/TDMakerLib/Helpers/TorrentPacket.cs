@@ -87,9 +87,6 @@ namespace TDMakerLib
                         string torrentFileName = string.Format("{0} - {1}.torrent", (File.Exists(p) ? Path.GetFileName(p) : Adapter.GetMediaName(p)), myTracker.Name);
                         this.SetTorrentFilePath(torrentFileName);
 
-                        if (!Directory.Exists(this.TorrentFolder))
-                            Directory.CreateDirectory(Path.GetDirectoryName(this.TorrentFilePath));
-
                         ReportProgress(workerMy, ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Creating {0}", this.TorrentFilePath));
                         tc.Create(this.TorrentFilePath);
                         ReportProgress(workerMy, ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Created {0}", this.TorrentFilePath));
