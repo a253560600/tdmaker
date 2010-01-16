@@ -1,5 +1,6 @@
 Version 2.0 - 20100115
 
+2.00.1.1 MTN parameter t_TimeStampOff was working in reverse logic [tampad]
 2.00.1.0 Source input is not mandatory when the description is based on MediaInfo [tampad]
 2.00.0.1 Screenshots were not uploaded when location was set to Known Folder [Issue 8]
 2.00.0.0 Core changes to create TDMaker Command Line Interface

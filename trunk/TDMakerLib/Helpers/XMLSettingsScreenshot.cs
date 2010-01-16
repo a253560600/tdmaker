@@ -86,7 +86,7 @@ namespace TDMakerLib
         public string k_ColorBackground { get; set; }
         [Category("MTN / Optional"), DefaultValue(L_LocInfo_default), Description("location of text; 1=lower left, 2=lower right, 3=upper right, 4=upper left")]
         public int L_LocInfo { get; set; }
-        [Category("MTN / Optional"), DefaultValue(4), Description("location of timestamp text; 1=lower left, 2=lower right, 3=upper right, 4=upper left")]
+        [Category("MTN / Optional"), DefaultValue(L_LocInfo_default), Description("location of timestamp text; 1=lower left, 2=lower right, 3=upper right, 4=upper left")]
         public int L_LocTimestamp { get; set; }
         [Category("MTN / Optional"), DefaultValue(n_Priority_default), Description("run at normal priority")]
         public bool n_Priority { get; set; }
