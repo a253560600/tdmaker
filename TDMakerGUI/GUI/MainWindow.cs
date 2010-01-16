@@ -635,8 +635,6 @@ namespace TDMaker
                 mi.ReadMedia();
                 bwApp.ReportProgress((int)ProgressType.REPORT_MEDIAINFO_SUMMARY, mi);
 
-                // MappingHelper tr2 = new MappingHelper(mi.Overall.Summary);
-
                 // creates screenshot
                 mi.UploadScreenshots = wt.UploadScreenshot;
                 if (wt.UploadScreenshot)
@@ -645,6 +643,8 @@ namespace TDMaker
                 }
                 ti.PublishString = CreatePublishInitial(ti);
                 bwApp.ReportProgress((int)ProgressType.REPORT_TORRENTINFO, ti);
+
+                MappingHelper mh = new MappingHelper(mi.Overall.Summary);
 
                 if (Engine.conf.WritePublish)
                 {
