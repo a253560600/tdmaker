@@ -14,10 +14,7 @@ Using Mono this Wiki page shows attempts taken to run TDMaker in Linux and Mac O
  * Creating Description using MediaInfo (or MTN)
 
 ==What's not working so far?==
- * Tracker URLs are not saved. If you add a Tracker, TDMaker won't load again. You need to delete the following file if this happens.
-{{{
-~/Applications/TDMaker/Settings/trackers.xml
-}}}
+* Unknown
 
 = Getting Started = 
  * Download Mono Framework from http://www.go-mono.com/mono-downloads/download.html
@@ -33,10 +30,10 @@ Using Mono this Wiki page shows attempts taken to run TDMaker in Linux and Mac O
 == !MediaInfo ==
  * Download appropriate MediaInfo library and its dependencies from http://mediainfo.sourceforge.net/en/Download
   * for Mac OS X:
-   # https://sourceforge.net/project/showfiles.php?group_id=86862&package_id=197932
+   # http://downloads.sourceforge.net/mediainfo/MediaInfo_DLL_0.7.27_Mac_Universal.tar.bz2
   * for Ubuntu:
-   # http://downloads.sourceforge.net/zenlib/libzen0_0.3.5-1_i386.Debian_Etch.deb
-   # http://downloads.sourceforge.net/mediainfo/libmediainfo0_0.7.8-1_i386.Debian_Etch.deb
+   # http://downloads.sourceforge.net/mediainfo/libmediainfo0_0.7.27-1_amd64.Ubuntu_9.10.deb
+   # http://downloads.sourceforge.net/zenlib/libzen0_0.4.10-1_amd64.Ubuntu_9.10.deb
 
 == Setting up TDMaker.exe.config==
 To map MediaInfo.dll to the relevant Linux library, you need to create a TDMaker.exe.config file and have the following. The following file needs to be in the same directory TDMaker.exe is in. This file is already included in the zip file downloaded. So extracting all files would have this file in the right place.
