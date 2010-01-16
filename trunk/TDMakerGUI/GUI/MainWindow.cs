@@ -1676,17 +1676,9 @@ namespace TDMaker
                 Screenshot ss = lbScreenshots.Items[sel] as Screenshot;
                 if (ss != null)
                 {
-                    Console.WriteLine(new StackFrame(1).GetMethod().Name);
-                    try
-                    {
-                        pbScreenshot.WaitOnLoad = true;
-                        pbScreenshot.ImageLocation = ss.LocalPath;
-                        pgScreenshot.SelectedObject = ss;
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.StackTrace);
-                    }
+                    pbScreenshot.WaitOnLoad = true;
+                    pbScreenshot.ImageLocation = ss.LocalPath;
+                    pgScreenshot.SelectedObject = ss;
                 }
             }
         }
