@@ -135,13 +135,13 @@ namespace TDMakerLib
                 sbMTNArgs.Append(string.Format("-k {0} ", Engine.mtnProfileMgr.GetMtnProfileActive().k_ColorBackground));
             }
 
-            if (!Engine.mtnProfileMgr.GetMtnProfileActive().t_TimeStampOff || Engine.IsUNIX)
+            if (Engine.mtnProfileMgr.GetMtnProfileActive().t_TimeStampOff || Engine.IsUNIX)
             {
                 sbMTNArgs.Append("-t ");
             }
             else if (!Engine.IsUNIX)
             {
-                if (Engine.mtnProfileMgr.GetMtnProfileActive().L_LocInfo != XMLSettingsScreenshot.L_LocInfo_default)
+                if (Engine.mtnProfileMgr.GetMtnProfileActive().L_LocInfo != XMLSettingsScreenshot.L_LocInfo_default || Engine.mtnProfileMgr.GetMtnProfileActive().L_LocTimestamp != XMLSettingsScreenshot.L_LocInfo_default)
                 {
                     sbMTNArgs.Append(string.Format("-L {0}:{1} ", Engine.mtnProfileMgr.GetMtnProfileActive().L_LocInfo, Engine.mtnProfileMgr.GetMtnProfileActive().L_LocTimestamp));
                 }
