@@ -30,6 +30,8 @@ namespace TDMakerLib
         /// 480p, 576p, 720p, 1080i, 1080p, custom
         /// </summary>
         public string Resolution { get; set; }
+        public string Width { get; set; }
+        public string Height{ get; set; }
         /// <summary>
         /// Source: CAM, TS, HD-DVD etc.
         /// </summary>

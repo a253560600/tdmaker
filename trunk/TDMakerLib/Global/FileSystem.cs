@@ -241,6 +241,8 @@ namespace TDMakerLib
                 MediaInfoSummary = mi.Overall.Summary,
                 Format = format,
                 Resolution = res,
+                Width = mi.Overall.Video.Width,
+                Height = mi.Overall.Video.Height, 
                 Media = media,
                 FileType = fileType
             };
