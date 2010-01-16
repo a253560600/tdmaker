@@ -23,7 +23,14 @@ namespace TDMaker
             if (Engine.TurnOn())
             {
                 Engine.LoadSettings();
-                Application.Run(new MainWindow());
+                try
+                {
+                    Application.Run(new MainWindow());
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.StackTrace);
+                }
                 Engine.TurnOff();
             }
         }
