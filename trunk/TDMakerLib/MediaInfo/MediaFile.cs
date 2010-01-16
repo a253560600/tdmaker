@@ -238,11 +238,10 @@ namespace TDMakerLib
                     int.TryParse(mMI.Get(StreamKind.General, 0, "AudioCount"), out audioCount);
                     this.HasAudio = audioCount > 0;
 
-                    for (int a = 0; a < audioCount; a++)
+                    for (int id = 0; id < audioCount; id++)
                     {
-                        AudioInfo ai = new AudioInfo();
-
-                        ai.Format = mMI.Get(StreamKind.Audio, a, "Format");
+                        AudioInfo ai = new AudioInfo(id);
+                        ai.Format = mMI.Get(StreamKind.Audio, id, "Format");
                         ai.FormatVersion = mMI.Get(StreamKind.Audio, 0, "Format_Version");
                         ai.FormatProfile = mMI.Get(StreamKind.Audio, 0, "Format_Profile");
 
@@ -252,12 +251,12 @@ namespace TDMakerLib
                         if (string.IsNullOrEmpty(ai.Codec))
                             ai.Codec = mMI.Get(StreamKind.Audio, 0, "CodecID");
 
-                        ai.Bitrate = mMI.Get(StreamKind.Audio, a, "BitRate/String");
-                        ai.BitrateMode = mMI.Get(StreamKind.Audio, a, "BitRate_Mode/String");
+                        ai.Bitrate = mMI.Get(StreamKind.Audio, id, "BitRate/String");
+                        ai.BitrateMode = mMI.Get(StreamKind.Audio, id, "BitRate_Mode/String");
 
-                        ai.Channels = mMI.Get(StreamKind.Audio, a, "Channel(s)/String");
-                        ai.SamplingRate = mMI.Get(StreamKind.Audio, a, "SamplingRate/String");
-                        ai.Resolution = mMI.Get(StreamKind.Audio, a, "Resolution/String");
+                        ai.Channels = mMI.Get(StreamKind.Audio, id, "Channel(s)/String");
+                        ai.SamplingRate = mMI.Get(StreamKind.Audio, id, "SamplingRate/String");
+                        ai.Resolution = mMI.Get(StreamKind.Audio, id, "Resolution/String");
 
                         this.Audio.Add(ai);
                     }
@@ -476,9 +475,15 @@ namespace TDMakerLib
     public class AudioInfo : Info
     {
         //         
+        public int Index { get; set; }
         public string BitrateMode { get; set; }
         public string Channels { get; set; }
         public string SamplingRate { get; set; }
+
+        public AudioInfo(int id)
+        {
+            this.Index = id;
+        }
     }
 
     public class VideoInfo : Info

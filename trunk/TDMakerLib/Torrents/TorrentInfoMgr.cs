@@ -29,7 +29,7 @@ namespace TDMakerLib
         /// </summary>
         /// <param name="tr"></param>
         /// <returns></returns>
-        public string CreatePublish(PublishOptionsPacket options, TemplateReader tr)
+        public string CreatePublish(PublishOptionsPacket options, TemplateReader2 tr)
         {
             tr.SetFullScreenshot(options.FullPicture);
             tr.CreateInfo();
