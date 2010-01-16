@@ -635,7 +635,7 @@ namespace TDMaker
                 mi.ReadMedia();
                 bwApp.ReportProgress((int)ProgressType.REPORT_MEDIAINFO_SUMMARY, mi);
 
-                MappingHelper tr2 = new MappingHelper(mi.Overall.Summary);
+                // MappingHelper tr2 = new MappingHelper(mi.Overall.Summary);
 
                 // creates screenshot
                 mi.UploadScreenshots = wt.UploadScreenshot;
@@ -1676,8 +1676,17 @@ namespace TDMaker
                 Screenshot ss = lbScreenshots.Items[sel] as Screenshot;
                 if (ss != null)
                 {
-                    pbScreenshot.ImageLocation = ss.LocalPath;
-                    pgScreenshot.SelectedObject = ss;
+                    Console.WriteLine(new StackFrame(1).GetMethod().Name);
+                    try
+                    {
+                        pbScreenshot.WaitOnLoad = true;
+                        pbScreenshot.ImageLocation = ss.LocalPath;
+                        pgScreenshot.SelectedObject = ss;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.StackTrace);
+                    }
                 }
             }
         }
