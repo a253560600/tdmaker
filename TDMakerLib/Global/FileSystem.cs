@@ -158,7 +158,6 @@ namespace TDMakerLib
             string res = string.Empty;
             string media = mi.Source;
 
-            bool isMkv = false;
             if (mi.MediaTypeChoice == MediaType.MediaDisc)
             {
                 format = mi.Source;
@@ -182,7 +181,6 @@ namespace TDMakerLib
                 else if (codec.Contains("avc") || codec.Contains("x264"))
                 {
                     format = "H.264";
-                    isMkv = true;
                 }
             }
 
