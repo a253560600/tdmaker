@@ -10,29 +10,33 @@ namespace TDMakerCLI
 {
     public class Program
     {
+        private static string mMediaLoc = string.Empty;
+        private static string mScreenshotDir = string.Empty;
+        private static bool mScreenshotsCreate = false;
+        private static string mTorrentsDir = string.Empty;
+        private static bool mTorrentCreate = false;
+        private static bool mXmlCreate = false;
+
         static void Main(string[] args)
         {
-            string mImagesDir = string.Empty;
-            string mMediaLoc = string.Empty;
-            string mRootDir = string.Empty;
+            string dirImages = string.Empty;
+            string dirRoot = string.Empty;
             string mSettingsFile = string.Empty;
-            string mTorrentDir = string.Empty;
-            bool mScreenshotsCreate = false;
-            bool mTorrentCreate = false;
+            string dirTorrents = string.Empty;
+
             bool mFileCollection = false;
             bool mShowHelp = false;
-            bool mXmlCreate = false;
 
             var p = new OptionSet() 
             {
                 { "c", "Treat multiple files as a collection", v => mFileCollection = v != null},
                 { "m|media=", "Location of the media file/folder", v => mMediaLoc = v },
                 { "o|options=", "Location of the settings file", v => mSettingsFile = v },
-                { "rd=", "Root directory for screenshots, torrent and all other output files. Overrides all other custom folders.", v => mRootDir = v },
+                { "rd=", "Root directory for screenshots, torrent and all other output files. Overrides all other custom folders.", v => dirRoot = v },
                 { "s", "Create and upload screenshots", v => mScreenshotsCreate = v != null},
-                { "sd=", "Create screenshots in a custom folder and upload", v => mImagesDir = v },
+                { "sd=", "Create screenshots in a custom folder and upload", v => dirImages = v },
                 { "t", "Create torrent file in the parent folder of the media file", v => mTorrentCreate = v != null},
-                { "td=", "Create torrent file in a custom folder", v => mTorrentDir = v},
+                { "td=", "Create torrent file in a custom folder", v => dirTorrents = v},
                 { "x|xml",  "Folder path of the XML torrent description file", v => mXmlCreate = v != null },
                 { "h|help",  "Show this message and exit", v => mShowHelp = v != null }
             };
@@ -53,6 +57,10 @@ namespace TDMakerCLI
             try
             {
                 p.Parse(args2);
+                // set root folder for images or set images dir if set one
+                mScreenshotDir = Directory.Exists(dirRoot) ? dirRoot : dirImages;
+                // set root folder for torrents or set torrents dir if set one
+                mTorrentsDir = Directory.Exists(dirRoot) ? dirRoot : dirTorrents;
             }
             catch (Exception ex)
             {
@@ -78,6 +86,7 @@ namespace TDMakerCLI
             {
                 Engine.conf = XMLSettingsCore.Read(mSettingsFile);
             }
+
             if (Engine.conf != null)
             {
                 Engine.InitializeDefaultFolderPaths();
@@ -105,55 +114,11 @@ namespace TDMakerCLI
                 TorrentInfo ti = new TorrentInfo(mi);
                 mi.ReadMedia();
 
-                // set root folder for images or set images dir if set one
-                string ssDir = Directory.Exists(mRootDir) ? mRootDir : mImagesDir;
-                if (mScreenshotsCreate)
-                {
-                    if (Directory.Exists(ssDir))
-                    {
-                        ti.CreateScreenshots(ssDir);
-                    }
-                    else
-                    {
-                        ti.CreateScreenshots();
-                    }
-                }
-
-                PublishOptionsPacket pop = new PublishOptionsPacket()
-                {
-                    AlignCenter = Engine.conf.AlignCenter,
-                    FullPicture = Engine.conf.UseFullPicture,
-                    PreformattedText = Engine.conf.PreText,
-                    PublishInfoTypeChoice = Engine.conf.PublishInfoTypeChoice,
-                    TemplateLocation = Path.Combine(Engine.TemplatesDir, "Default")
-                };
-
-                ti.PublishString = Adapter.CreatePublish(ti, pop);
-                Console.WriteLine();
-                Console.WriteLine("Release Description: ");
-                Console.WriteLine();
-                Console.WriteLine(ti.PublishString);
-                Console.WriteLine();
-
-                string torrentDir = Directory.Exists(mRootDir) ? mRootDir : mTorrentDir;
-                // create a torrent
-                if (mTorrentCreate || Directory.Exists(torrentDir))
-                {
-                    ti.MediaMy.TorrentCreateInfoMy = new TorrentCreateInfo(Engine.conf.TrackerGroups[Engine.conf.TrackerGroupActive], mMediaLoc);
-                    if (Directory.Exists(mTorrentDir))
-                    {
-                        ti.MediaMy.TorrentCreateInfoMy.TorrentFolder = torrentDir;
-                    }
-                    ti.MediaMy.TorrentCreateInfoMy.CreateTorrent();
-
-                    // create xml file
-                    if (mXmlCreate)
-                    {
-                        string fp = Path.Combine(ti.MediaMy.TorrentCreateInfoMy.TorrentFolder, Adapter.GetMediaName(ti.MediaMy.TorrentCreateInfoMy.MediaLocation)) + ".xml";
-                        FileSystem.GetXMLTorrentUpload(ti.MediaMy).Write2(fp);
-                    }
-                }
+                CreateScreenshot(ti);
+                CreatePublish(ti);
+                CreateTorrent(ti);
             }
+
             Console.WriteLine();
             Console.WriteLine("Press any key to exit.");
             Console.ReadLine();
@@ -166,6 +131,66 @@ namespace TDMakerCLI
             Console.WriteLine("Options:");
             p.WriteOptionDescriptions(Console.Out);
             Console.WriteLine();
+            Console.WriteLine("Example:");
+            Console.WriteLine(@"tdmakercli -m ""F:\Linux ISOs\Ubuntu"" -x -t");
+            Console.WriteLine(@"tdmakercli -m ""F:\Linux ISOs\Ubuntu"" -x -t --rd ""F:\Linux ISOs\Ubuntu""");
+            Console.WriteLine();
+            //  Console.ReadLine();
+        }
+
+        static void CreateScreenshot(TorrentInfo ti)
+        {
+            if (mScreenshotsCreate)
+            {
+                if (Directory.Exists(mScreenshotDir))
+                {
+                    ti.CreateScreenshots(mScreenshotDir);
+                }
+                else
+                {
+                    ti.CreateScreenshots();
+                }
+            }
+        }
+
+        static void CreatePublish(TorrentInfo ti)
+        {
+            PublishOptionsPacket pop = new PublishOptionsPacket()
+            {
+                AlignCenter = Engine.conf.AlignCenter,
+                FullPicture = Engine.conf.UseFullPicture,
+                PreformattedText = Engine.conf.PreText,
+                PublishInfoTypeChoice = Engine.conf.PublishInfoTypeChoice,
+                TemplateLocation = Path.Combine(Engine.TemplatesDir, "Default")
+            };
+            ti.PublishString = Adapter.CreatePublish(ti, pop);
+
+            Console.WriteLine();
+            Console.WriteLine("Release Description: ");
+            Console.WriteLine();
+            Console.WriteLine(ti.PublishString);
+            Console.WriteLine();
+        }
+
+        static void CreateTorrent(TorrentInfo ti)
+        {
+            // create a torrent
+            if (mTorrentCreate || Directory.Exists(mTorrentsDir))
+            {
+                ti.MediaMy.TorrentCreateInfoMy = new TorrentCreateInfo(Engine.conf.TrackerGroups[Engine.conf.TrackerGroupActive], mMediaLoc);
+                if (Directory.Exists(mTorrentsDir))
+                {
+                    ti.MediaMy.TorrentCreateInfoMy.TorrentFolder = mTorrentsDir;
+                }
+                ti.MediaMy.TorrentCreateInfoMy.CreateTorrent();
+
+                // create xml file
+                if (mXmlCreate)
+                {
+                    string fp = Path.Combine(ti.MediaMy.TorrentCreateInfoMy.TorrentFolder, Adapter.GetMediaName(ti.MediaMy.TorrentCreateInfoMy.MediaLocation)) + ".xml";
+                    FileSystem.GetXMLTorrentUpload(ti.MediaMy).Write2(fp);
+                }
+            }
         }
     }
 }

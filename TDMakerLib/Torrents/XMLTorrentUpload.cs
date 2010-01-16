@@ -42,6 +42,10 @@ namespace TDMakerLib
         /// TDMaker Release Description
         /// </summary>
         public string ReleaseDescription { get; set; }
+        /// <summary>
+        /// Summary from MediaInfo
+        /// </summary>
+        public string MediaInfoSummary { get; set; }
         public List<string> Screenshots { get; set; }
 
         public XMLTorrentUpload()
@@ -82,7 +86,7 @@ namespace TDMakerLib
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e.Message);
+                Console.WriteLine(e.Message);
             }
         }
 

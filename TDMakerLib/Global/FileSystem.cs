@@ -238,6 +238,7 @@ namespace TDMakerLib
             {
                 TorrentFilePath = mi.TorrentCreateInfoMy.TorrentFilePath,
                 ReleaseDescription = mi.ReleaseDescription,
+                MediaInfoSummary = mi.Overall.Summary,
                 Format = format,
                 Resolution = res,
                 Media = media,
