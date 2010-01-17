@@ -1,4 +1,4 @@
-#summary MediaInfo
+#summary MediaInfo usage explained with supported fields for Templates
 #labels Phase-Support
 
 = Details =
@@ -22,13 +22,13 @@ Dynamically supported MediaInfo fields are listed here.
 || %!General_WritingApplication% || VirtualDubMod 1.5.10.2 (build 2540/release) ||
 || %!General_WritingLibrary% || VirtualDubMod build 2540/release ||
 || *Field* || *Value* ||
-|| %!Audio_ID% || 1 ||
+|| %Audio_ID% || 1 ||
 || %!Audio_Format% || MPEG Audio ||
 || %!Audio_FormatVersion% || Version 1 ||
 || %!Audio_FormatProfile% || Layer 3 ||
 || %!Audio_FormatSettingsMode% || Joint stereo ||
-|| %!Audio_CodecID% || 55 ||
-|| %!Audio_CodecIDHint% || MP3 ||
+|| %Audio_CodecID% || 55 ||
+|| %Audio_CodecIDHint% || MP3 ||
 || %!Audio_Duration% || 1h 47mn ||
 || %!Audio_BitRateMode% || Constant ||
 || %!Audio_BitRate% || 112 Kbps ||
@@ -39,15 +39,15 @@ Dynamically supported MediaInfo fields are listed here.
 || %!Audio_InterleaveDuration% || 42 ms (1.00 video frame) ||
 || %!Audio_InterleavePreloadDuration% || 500 ms ||
 || *Field* || *Value* ||
-|| %!Video_ID% || 0 ||
+|| %Video_ID% || 0 ||
 || %!Video_Format% || MPEG-4 Visual ||
 || %!Video_FormatProfile% || Simple@L0 ||
 || %!Video_FormatSettingsBVOP% || No ||
 || %!Video_FormatSettingsQpel% || No ||
-|| %!Video_FormatSettingsGMC% || No warppoints ||
+|| %Video_FormatSettingsGMC% || No warppoints ||
 || %!Video_FormatSettingsMatrix% || Default (H.263) ||
-|| %!Video_CodecID% || DX50 ||
-|| %!Video_CodecIDHint% || DivX 5 ||
+|| %Video_CodecID% || DX50 ||
+|| %Video_CodecIDHint% || DivX 5 ||
 || %!Video_Duration% || 1h 47mn ||
 || %!Video_BitRate% || 790 Kbps ||
 || %!Video_Width% || 640 pixels ||
@@ -72,10 +72,10 @@ Dynamically supported MediaInfo fields are listed here.
 || %!General_WritingApplication% || mkvmerge v1.7.0 ('What Do You Take Me For') built on Apr 28 2006 17:20:19 ||
 || %!General_WritingLibrary% || libebml v0.7.7 + libmatroska v0.8.0 ||
 || *Field* || *Value* ||
-|| %!Audio_ID% || 2 ||
+|| %Audio_ID% || 2 ||
 || %!Audio_Format% || AC-3 ||
 || %!Audio_FormatInfo% || Audio Coding 3 ||
-|| %!Audio_CodecID% || A_AC3 ||
+|| %Audio_CodecID% || A_AC3 ||
 || %!Audio_Duration% || 1h 54mn ||
 || %!Audio_BitRateMode% || Constant ||
 || %!Audio_BitRate% || 384 Kbps ||
@@ -85,14 +85,14 @@ Dynamically supported MediaInfo fields are listed here.
 || %!Audio_StreamSize% || 314 MiB (7%) ||
 || %!Audio_Language% || English ||
 || *Field* || *Value* ||
-|| %!Video_ID% || 1 ||
+|| %Video_ID% || 1 ||
 || %!Video_Format% || AVC ||
 || %!Video_FormatInfo% || Advanced Video Codec ||
 || %!Video_FormatProfile% || High@L5.1 ||
-|| %!Video_FormatSettingsCABAC% || Yes ||
+|| %Video_FormatSettingsCABAC% || Yes ||
 || %!Video_FormatSettingsReframes% || 11 frames ||
 || %!Video_MuxingMode% || Container profile=Unknown@5.1 ||
-|| %!Video_CodecID% || V_MPEG4/ISO/AVC ||
+|| %Video_CodecID% || V_MPEG4/ISO/AVC ||
 || %!Video_Duration% || 1h 54mn ||
 || %!Video_BitRate% || 4 942 Kbps ||
 || %!Video_NominalBitRate% || 5 043 Kbps ||
@@ -117,7 +117,7 @@ Dynamically supported MediaInfo fields are listed here.
 || %!General_Duration% || 26mn 11s ||
 || %!General_OverallBitRate% || 5 467 Kbps ||
 || *Field* || *Value* ||
-|| %!Audio_ID% || 128 (0x80) ||
+|| %Audio_ID% || 128 (0x80) ||
 || %!Audio_Format% || AC-3 ||
 || %!Audio_FormatInfo% || Audio Coding 3 ||
 || %!Audio_Duration% || 26mn 11s ||
@@ -129,7 +129,7 @@ Dynamically supported MediaInfo fields are listed here.
 || %!Audio_VideoDelay% || -688ms ||
 || %!Audio_StreamSize% || 83.9 MiB (8%) ||
 || *Field* || *Value* ||
-|| %!Video_ID% || 224 (0xE0) ||
+|| %Video_ID% || 224 (0xE0) ||
 || %!Video_Format% || MPEG Video ||
 || %!Video_FormatVersion% || Version 2 ||
 || %!Video_FormatProfile% || Main@Main ||
