@@ -1,5 +1,6 @@
 #summary MediaInfo usage explained with supported fields for Templates
 #labels Phase-Support
+<wiki:toc max_depth="3" />
 
 = Details =
 
