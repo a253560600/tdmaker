@@ -41,6 +41,7 @@ namespace TDMakerLib
             this.Location = loc;
             this.TorrentInfo = ti;
             this.MappingHelperMy = new MappingHelper(ti.MediaMy.Overall.Summary);
+            this.MappingHelperMy.ListFieldsAll();
 
             // Read the files in Location
             string[] files = Directory.GetFiles(loc, "*.txt", SearchOption.AllDirectories);
