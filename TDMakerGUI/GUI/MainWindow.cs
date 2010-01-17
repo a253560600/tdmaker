@@ -526,7 +526,7 @@ namespace TDMaker
         {
             if (Engine.mtnProfileMgr.MtnProfiles.Count == 0)
             {
-                XMLSettingsScreenshot mtnDefault1 = new XMLSettingsScreenshot("MTN for MVids (Auto Width)")
+                XMLSettingsScreenshot mtnDefault1 = new XMLSettingsScreenshot("Movies (Auto Width)")
                 {
                     k_ColorBackground = "eeeeee",
                     f_FontFile = "arial.ttf",
@@ -539,7 +539,8 @@ namespace TDMaker
                     N_InfoSuffix = ""
                 };
                 Engine.mtnProfileMgr.MtnProfiles.Add(mtnDefault1);
-                XMLSettingsScreenshot mtnDefault2 = new XMLSettingsScreenshot("MTN for MVids (Fixed Width)")
+
+                XMLSettingsScreenshot mtnDefault2 = new XMLSettingsScreenshot("Movies (Fixed Width)")
                 {
                     k_ColorBackground = "eeeeee",
                     f_FontFile = "arial.ttf",
@@ -553,6 +554,25 @@ namespace TDMaker
                     N_InfoSuffix = ""
                 };
                 Engine.mtnProfileMgr.MtnProfiles.Add(mtnDefault2);
+
+                XMLSettingsScreenshot mtnDefault3 = new XMLSettingsScreenshot("Protech (4x3)")
+                {
+                    r_Rows = 4,
+                    c_Columns = 3,
+                    k_ColorBackground = "000000",
+                    D_EdgeDetection = 0,
+                    f_FontFile = "tahomabd.ttf",
+                    F_FontColor = "FFFFFF",
+                    F_FontSize = 11,
+                    g_GapBetweenShots = 8,
+                    h_MinHeight = 225,
+                    L_LocInfo = 4,
+                    L_LocTimestamp = 2,
+                    j_JpgQuality = 100,
+                    w_Width = 1024,
+                    N_InfoSuffix = ""
+                };
+                Engine.mtnProfileMgr.MtnProfiles.Add(mtnDefault3);
             }
 
             if (lbMtnProfiles.Items.Count == 0)
