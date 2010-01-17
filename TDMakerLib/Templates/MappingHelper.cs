@@ -113,7 +113,22 @@ namespace TDMakerLib
 
         public void ListFieldsGeneral()
         {
-            foreach (var pair in this.MappingsGeneral)
+            ListFields(MappingsGeneral);
+        }
+
+        public void ListFieldsAll()
+        {
+            ListFields(MappingsGeneral);
+            if (MappingsAudio.Count > 0)
+            {
+                ListFields(MappingsAudio[0]);
+            }
+            ListFields(MappingsVideo);
+        }
+
+        public void ListFields(Dictionary<string, string> dic)
+        {
+            foreach (var pair in dic)
             {
                 Console.WriteLine("{0} - {1}", pair.Key, pair.Value);
             }

@@ -165,7 +165,7 @@ namespace TDMaker
             this.gbQuickPublish = new System.Windows.Forms.GroupBox();
             this.flpPublishConfig = new System.Windows.Forms.FlowLayoutPanel();
             this.cboQuickTemplate = new System.Windows.Forms.ComboBox();
-            this.cboPublishTypeQuick = new System.Windows.Forms.ComboBox();
+            this.cboQuickPublishType = new System.Windows.Forms.ComboBox();
             this.chkQuickFullPicture = new System.Windows.Forms.CheckBox();
             this.chkQuickAlignCenter = new System.Windows.Forms.CheckBox();
             this.chkQuickPre = new System.Windows.Forms.CheckBox();
@@ -1648,7 +1648,7 @@ namespace TDMaker
             this.flpPublishConfig.Controls.Add(this.chkQuickPre);
             this.flpPublishConfig.Controls.Add(this.chkQuickAlignCenter);
             this.flpPublishConfig.Controls.Add(this.chkQuickFullPicture);
-            this.flpPublishConfig.Controls.Add(this.cboPublishTypeQuick);
+            this.flpPublishConfig.Controls.Add(this.cboQuickPublishType);
             this.flpPublishConfig.Controls.Add(this.cboQuickTemplate);
             this.flpPublishConfig.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flpPublishConfig.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
@@ -1671,13 +1671,13 @@ namespace TDMaker
             // 
             // cboPublishTypeQuick
             // 
-            this.cboPublishTypeQuick.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboPublishTypeQuick.FormattingEnabled = true;
-            this.cboPublishTypeQuick.Location = new System.Drawing.Point(3, 72);
-            this.cboPublishTypeQuick.Name = "cboPublishTypeQuick";
-            this.cboPublishTypeQuick.Size = new System.Drawing.Size(121, 21);
-            this.cboPublishTypeQuick.TabIndex = 7;
-            this.cboPublishTypeQuick.SelectedIndexChanged += new System.EventHandler(this.cboPublishType_SelectedIndexChanged);
+            this.cboQuickPublishType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboQuickPublishType.FormattingEnabled = true;
+            this.cboQuickPublishType.Location = new System.Drawing.Point(3, 72);
+            this.cboQuickPublishType.Name = "cboPublishTypeQuick";
+            this.cboQuickPublishType.Size = new System.Drawing.Size(121, 21);
+            this.cboQuickPublishType.TabIndex = 7;
+            this.cboQuickPublishType.SelectedIndexChanged += new System.EventHandler(this.cboPublishType_SelectedIndexChanged);
             // 
             // chkQuickFullPicture
             // 
@@ -2295,7 +2295,7 @@ namespace TDMaker
         private System.Windows.Forms.CheckBox chkQuickPre;
         private System.Windows.Forms.CheckBox chkQuickAlignCenter;
         private System.Windows.Forms.CheckBox chkQuickFullPicture;
-        private System.Windows.Forms.ComboBox cboPublishTypeQuick;
+        private System.Windows.Forms.ComboBox cboQuickPublishType;
         private System.Windows.Forms.ComboBox cboQuickTemplate;
         private System.Windows.Forms.TextBox txtPublish;
         private System.Windows.Forms.ListBox lbPublish;

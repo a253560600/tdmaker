@@ -484,13 +484,13 @@ namespace TDMaker
 
         private void SettingsReadPublish()
         {
-            if (cboPublishTypeQuick.Items.Count == 0)
+            if (cboQuickPublishType.Items.Count == 0)
             {
-                cboPublishTypeQuick.Items.AddRange(typeof(PublishInfoType).GetDescriptions());
+                cboQuickPublishType.Items.AddRange(typeof(PublishInfoType).GetDescriptions());
                 cboPublishType.Items.AddRange(typeof(PublishInfoType).GetDescriptions());
             }
             cboPublishType.SelectedIndex = (int)Engine.conf.PublishInfoTypeChoice;
-            cboPublishTypeQuick.SelectedIndex = (int)Engine.conf.PublishInfoTypeChoice;
+            cboQuickPublishType.SelectedIndex = (int)Engine.conf.PublishInfoTypeChoice;
         }
 
         private void SettingsReadOptions()
@@ -664,8 +664,6 @@ namespace TDMaker
                 ti.PublishString = CreatePublishInitial(ti);
                 bwApp.ReportProgress((int)ProgressType.REPORT_TORRENTINFO, ti);
 
-                MappingHelper mh = new MappingHelper(mi.Overall.Summary);
-
                 if (Engine.conf.WritePublish)
                 {
                     // create textFiles of MediaInfo           
@@ -764,26 +762,6 @@ namespace TDMaker
 
         private void bwApp_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Result != null)
-            {
-                switch (Loader.CurrentTask)
-                {
-                    case TaskType.ANALYZE_MEDIA:
-                        if (GetTorrentInfo() != null)
-                        {
-                            PublishOptionsPacket pop = GetTorrentInfo().PublishOptions;
-                            // initialize quick publish checkboxes
-                            chkQuickAlignCenter.Checked = pop.AlignCenter;
-                            chkQuickFullPicture.Checked = pop.FullPicture;
-                            chkQuickPre.Checked = pop.PreformattedText;
-                            cboQuickTemplate.SelectedIndex = cboTemplate.SelectedIndex;
-
-                            this.createPublishUser();
-                        }
-                        break;
-                }
-            }
-
             UpdateGuiControls();
             pBar.Style = ProgressBarStyle.Continuous;
             lbFiles.Items.Clear();
@@ -898,8 +876,12 @@ namespace TDMaker
                         TorrentInfo ti = e.UserState as TorrentInfo;
                         lbPublish.Items.Add(ti);
                         lbPublish.SelectedIndex = lbPublish.Items.Count - 1;
-                        cboPublishTypeQuick.SelectedIndex = (int)Engine.conf.PublishInfoTypeChoice;
+                        // initialize quick publish checkboxes                        
                         chkQuickFullPicture.Checked = Engine.conf.UseFullPicture;
+                        chkQuickAlignCenter.Checked = Engine.conf.AlignCenter;
+                        chkQuickPre.Checked = Engine.conf.PreText;
+                        cboQuickPublishType.SelectedIndex = cboPublishType.SelectedIndex;
+                        cboQuickTemplate.SelectedIndex = cboTemplate.SelectedIndex;
                         break;
 
                     case ProgressType.UPDATE_PROGRESSBAR_MAX:
@@ -1049,47 +1031,51 @@ namespace TDMaker
             return ti;
         }
 
-        private void createPublishUser()
+        private void CreatePublishUser()
         {
-            TorrentInfo ti = GetTorrentInfo();
-            if (ti != null)
+            if (!bwApp.IsBusy)
             {
-                PublishOptionsPacket pop = new PublishOptionsPacket();
-                pop.AlignCenter = chkQuickAlignCenter.Checked;
-                pop.FullPicture = chkQuickFullPicture.Checked;
-                pop.PreformattedText = chkQuickPre.Checked;
-
-                pop.PublishInfoTypeChoice = (PublishInfoType)cboPublishTypeQuick.SelectedIndex;
-                pop.TemplateLocation = Path.Combine(Engine.TemplatesDir, cboQuickTemplate.Text);
-
-                txtPublish.Text = Adapter.CreatePublish(ti, pop);
-
-                if (ti.MediaMy.MediaTypeChoice == MediaType.MusicAudioAlbum)
+                TorrentInfo ti = GetTorrentInfo();
+                if (ti != null)
                 {
-                    txtPublish.BackColor = System.Drawing.Color.Black;
-                    txtPublish.ForeColor = System.Drawing.Color.White;
+                    PublishOptionsPacket pop = new PublishOptionsPacket();
+                    pop.AlignCenter = chkQuickAlignCenter.Checked;
+                    pop.FullPicture = chkQuickFullPicture.Checked;
+                    pop.PreformattedText = chkQuickPre.Checked;
+
+                    pop.PublishInfoTypeChoice = (PublishInfoType)cboQuickPublishType.SelectedIndex;
+                    pop.TemplateLocation = Path.Combine(Engine.TemplatesDir, cboQuickTemplate.Text);
+
+                    txtPublish.Text = Adapter.CreatePublish(ti, pop);
+
+                    if (ti.MediaMy.MediaTypeChoice == MediaType.MusicAudioAlbum)
+                    {
+                        txtPublish.BackColor = System.Drawing.Color.Black;
+                        txtPublish.ForeColor = System.Drawing.Color.White;
+                    }
+                    else
+                    {
+                        txtPublish.BackColor = System.Drawing.SystemColors.Window;
+                        txtPublish.ForeColor = System.Drawing.SystemColors.WindowText;
+                    }
                 }
-                else
-                {
-                    txtPublish.BackColor = System.Drawing.SystemColors.Window;
-                    txtPublish.ForeColor = System.Drawing.SystemColors.WindowText;
-                }
+                Console.WriteLine("CreatePublish called from " + new StackFrame(1).GetMethod().Name);
             }
         }
 
         private void chkQuickPre_CheckedChanged(object sender, EventArgs e)
         {
-            createPublishUser();
+            CreatePublishUser();
         }
 
         private void chkQuickAlignCenter_CheckedChanged(object sender, EventArgs e)
         {
-            createPublishUser();
+            CreatePublishUser();
         }
 
         private void chkQuickFullPicture_CheckedChanged(object sender, EventArgs e)
         {
-            createPublishUser();
+            CreatePublishUser();
         }
 
         private void txtPublish_KeyPress(object sender, KeyPressEventArgs e)
@@ -1220,7 +1206,7 @@ namespace TDMaker
 
         private void cboQuickTemplate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            createPublishUser();
+            CreatePublishUser();
         }
 
         private string GetHexColor()
@@ -1723,7 +1709,7 @@ namespace TDMaker
         {
             if (lbPublish.SelectedIndex > -1)
             {
-                createPublishUser();
+                CreatePublishUser();
             }
         }
 
@@ -1784,8 +1770,8 @@ namespace TDMaker
 
         private void cboPublishType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            createPublishUser();
-            cboQuickTemplate.Enabled = (PublishInfoType)cboPublishTypeQuick.SelectedIndex == PublishInfoType.ExternalTemplate;
+            CreatePublishUser();
+            cboQuickTemplate.Enabled = (PublishInfoType)cboQuickPublishType.SelectedIndex == PublishInfoType.ExternalTemplate;
         }
 
         private void cboPublishType_SelectedIndexChanged_1(object sender, EventArgs e)
