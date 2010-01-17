@@ -42,7 +42,7 @@ Dynamically supported MediaInfo fields are listed here.
 || %Video_ID% || 0 ||
 || %!Video_Format% || MPEG-4 Visual ||
 || %!Video_FormatProfile% || Simple@L0 ||
-|| %!Video_FormatSettingsBVOP% || No ||
+|| %Video_FormatSettingsBVOP% || No ||
 || %!Video_FormatSettingsQpel% || No ||
 || %Video_FormatSettingsGMC% || No warppoints ||
 || %!Video_FormatSettingsMatrix% || Default (H.263) ||
@@ -133,7 +133,7 @@ Dynamically supported MediaInfo fields are listed here.
 || %!Video_Format% || MPEG Video ||
 || %!Video_FormatVersion% || Version 2 ||
 || %!Video_FormatProfile% || Main@Main ||
-|| %!Video_FormatSettingsBVOP% || Yes ||
+|| %Video_FormatSettingsBVOP% || Yes ||
 || %!Video_FormatSettingsMatrix% || Default ||
 || %!Video_Duration% || 26mn 10s ||
 || %!Video_BitRateMode% || Variable ||
