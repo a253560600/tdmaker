@@ -10,100 +10,143 @@ http://mediainfo.sourceforge.net/en
 
 = Fields =
 Dynamically supported MediaInfo fields are listed here.
-== MKV == 
-|| *Field* || *Value* ||
-|| !%General_CompleteName% || F:\PassThePopcorn\I.Robot.2004.720p.HDTV.x264-ESiR\I.Robot.2004.720p.HDTV.x264.mkv ||
-|| !%General_Format% || Matroska ||
-|| !%General_FileSize% || 4.34 GiB ||
-|| !%General_Duration% || 1h 54mn ||
-|| !%General_OverallBitRate% || 5 434 Kbps ||
-|| !%General_EncodedDate% || UTC 2006-05-24 13:36:37 ||
-|| !%General_WritingApplication% || mkvmerge v1.7.0 ('What Do You Take Me For') built on Apr 28 2006 17:20:19 ||
-|| !%General_WritingLibrary% || libebml v0.7.7 + libmatroska v0.8.0 ||
-|| *Field* || *Value* ||
-|| !%Audio_ID% || 2 ||
-|| !%Audio_Format% || AC-3 ||
-|| !%Audio_FormatInfo% || Audio Coding 3 ||
-|| !%Audio_CodecID% || A_AC3 ||
-|| !%Audio_Duration% || 1h 54mn ||
-|| !%Audio_BitRateMode% || Constant ||
-|| !%Audio_BitRate% || 384 Kbps ||
-|| !%Audio_Channels% || 6 channels ||
-|| !%Audio_ChannelPositions% || Front: L C R, Surround: L R, LFE ||
-|| !%Audio_SamplingRate% || 48.0 KHz ||
-|| !%Audio_StreamSize% || 314 MiB (7%) ||
-|| !%Audio_Language% || English ||
-|| *Field* || *Value* ||
-|| !%Video_ID% || 1 ||
-|| !%Video_Format% || AVC ||
-|| !%Video_FormatInfo% || Advanced Video Codec ||
-|| !%Video_FormatProfile% || High@L5.1 ||
-|| !%Video_FormatSettingsCABAC% || Yes ||
-|| !%Video_FormatSettingsReframes% || 11 frames ||
-|| !%Video_MuxingMode% || Container profile=Unknown@5.1 ||
-|| !%Video_CodecID% || V_MPEG4/ISO/AVC ||
-|| !%Video_Duration% || 1h 54mn ||
-|| !%Video_BitRate% || 4 942 Kbps ||
-|| !%Video_NominalBitRate% || 5 043 Kbps ||
-|| !%Video_Width% || 1 280 pixels ||
-|| !%Video_Height% || 720 pixels ||
-|| !%Video_DisplayAspectRatio% || 16:9 ||
-|| !%Video_FrameRate% || 23.976 fps ||
-|| !%Video_Resolution% || 8 bits ||
-|| !%Video_Colorimetry% || 4:2:0 ||
-|| !%Video_ScanType% || Progressive ||
-|| !%Video_BitsPixelFrame% || 0.224 ||
-|| !%Video_StreamSize% || 3.94 GiB (91%) ||
-|| !%Video_WritingLibrary% || x264 core 46 svn-517 ||
-|| !%Video_EncodingSettings% || cabac=1 / ref=8 / deblock=1:0:0 / analyse=0x3:0x133 / me=hex / subme=6 / brdo=1 / mixed_ref=1 / me_range=16 / chroma_me=1 / trellis=1 / 8x8dct=1 / cqm=0 / chroma_qp_offset=0 / slices=1 / nr=0 / decimate=1 / bframes=3 / b_pyramid=1 / b_adapt=1 / b_bias=0 / direct=2 / wpredb=1 / bime=1 / keyint=250 / keyint_min=25 / scenecut=40 / rc=2pass / bitrate=5043 / ratetol=1.0 / rceq='blurCplx^(1-qComp)' / qcomp=0.60 / qpmin=10 / qpmax=51 / qpstep=4 / cplxblur=20.0 / qblur=0.5 / ip_ratio=1.40 / pb_ratio=1.30 ||
-|| !%Video_Language% || English ||
 
 == AVI == 
 || *Field* || *Value* ||
-|| !%General_CompleteName% || F:\PassThePopcorn\Enchanted\Enchanted.avi ||
-|| !%General_Format% || AVI ||
-|| !%General_FormatInfo% || Audio Video Interleave ||
-|| !%General_FileSize% || 700 MiB ||
-|| !%General_Duration% || 1h 47mn ||
-|| !%General_OverallBitRate% || 911 Kbps ||
-|| !%General_WritingApplication% || VirtualDubMod 1.5.10.2 (build 2540/release) ||
-|| !%General_WritingLibrary% || VirtualDubMod build 2540/release ||
+|| %!General_CompleteName% || F:\PassThePopcorn\Enchanted\Enchanted.avi ||
+|| %!General_Format% || AVI ||
+|| %!General_FormatInfo% || Audio Video Interleave ||
+|| %!General_FileSize% || 700 MiB ||
+|| %!General_Duration% || 1h 47mn ||
+|| %!General_OverallBitRate% || 911 Kbps ||
+|| %!General_WritingApplication% || VirtualDubMod 1.5.10.2 (build 2540/release) ||
+|| %!General_WritingLibrary% || VirtualDubMod build 2540/release ||
 || *Field* || *Value* ||
-|| !%Audio_ID% || 1 ||
-|| !%Audio_Format% || MPEG Audio ||
-|| !%Audio_FormatVersion% || Version 1 ||
-|| !%Audio_FormatProfile% || Layer 3 ||
-|| !%Audio_FormatSettingsMode% || Joint stereo ||
-|| !%Audio_CodecID% || 55 ||
-|| !%Audio_CodecIDHint% || MP3 ||
-|| !%Audio_Duration% || 1h 47mn ||
-|| !%Audio_BitRateMode% || Constant ||
-|| !%Audio_BitRate% || 112 Kbps ||
-|| !%Audio_Channels% || 2 channels ||
-|| !%Audio_SamplingRate% || 44.1 KHz ||
-|| !%Audio_StreamSize% || 86.1 MiB (12%) ||
-|| !%Audio_Alignment% || Split accross interleaves ||
-|| !%Audio_InterleaveDuration% || 42 ms (1.00 video frame) ||
-|| !%Audio_InterleavePreloadDuration% || 500 ms ||
+|| %!Audio_ID% || 1 ||
+|| %!Audio_Format% || MPEG Audio ||
+|| %!Audio_FormatVersion% || Version 1 ||
+|| %!Audio_FormatProfile% || Layer 3 ||
+|| %!Audio_FormatSettingsMode% || Joint stereo ||
+|| %!Audio_CodecID% || 55 ||
+|| %!Audio_CodecIDHint% || MP3 ||
+|| %!Audio_Duration% || 1h 47mn ||
+|| %!Audio_BitRateMode% || Constant ||
+|| %!Audio_BitRate% || 112 Kbps ||
+|| %!Audio_Channels% || 2 channels ||
+|| %!Audio_SamplingRate% || 44.1 KHz ||
+|| %!Audio_StreamSize% || 86.1 MiB (12%) ||
+|| %!Audio_Alignment% || Split accross interleaves ||
+|| %!Audio_InterleaveDuration% || 42 ms (1.00 video frame) ||
+|| %!Audio_InterleavePreloadDuration% || 500 ms ||
 || *Field* || *Value* ||
-|| !%Video_ID% || 0 ||
-|| !%Video_Format% || MPEG-4 Visual ||
-|| !%Video_FormatProfile% || Simple@L0 ||
-|| !%Video_FormatSettingsBVOP% || No ||
-|| !%Video_FormatSettingsQpel% || No ||
-|| !%Video_FormatSettingsGMC% || No warppoints ||
-|| !%Video_FormatSettingsMatrix% || Default (H.263) ||
-|| !%Video_CodecID% || DX50 ||
-|| !%Video_CodecIDHint% || DivX 5 ||
-|| !%Video_Duration% || 1h 47mn ||
-|| !%Video_BitRate% || 790 Kbps ||
-|| !%Video_Width% || 640 pixels ||
-|| !%Video_Height% || 256 pixels ||
-|| !%Video_DisplayAspectRatio% || 2.500 ||
-|| !%Video_FrameRate% || 23.976 fps ||
-|| !%Video_Resolution% || 8 bits ||
-|| !%Video_Colorimetry% || 4:2:0 ||
-|| !%Video_ScanType% || Progressive ||
-|| !%Video_BitsPixelFrame% || 0.201 ||
-|| !%Video_StreamSize% || 607 MiB (87%) ||
-|| !%Video_WritingLibrary% || XviD 1.0.3 (UTC 2004-12-20) ||
+|| %!Video_ID% || 0 ||
+|| %!Video_Format% || MPEG-4 Visual ||
+|| %!Video_FormatProfile% || Simple@L0 ||
+|| %!Video_FormatSettingsBVOP% || No ||
+|| %!Video_FormatSettingsQpel% || No ||
+|| %!Video_FormatSettingsGMC% || No warppoints ||
+|| %!Video_FormatSettingsMatrix% || Default (H.263) ||
+|| %!Video_CodecID% || DX50 ||
+|| %!Video_CodecIDHint% || DivX 5 ||
+|| %!Video_Duration% || 1h 47mn ||
+|| %!Video_BitRate% || 790 Kbps ||
+|| %!Video_Width% || 640 pixels ||
+|| %!Video_Height% || 256 pixels ||
+|| %!Video_DisplayAspectRatio% || 2.500 ||
+|| %!Video_FrameRate% || 23.976 fps ||
+|| %!Video_Resolution% || 8 bits ||
+|| %!Video_Colorimetry% || 4:2:0 ||
+|| %!Video_ScanType% || Progressive ||
+|| %!Video_BitsPixelFrame% || 0.201 ||
+|| %!Video_StreamSize% || 607 MiB (87%) ||
+|| %!Video_WritingLibrary% || XviD 1.0.3 (UTC 2004-12-20) ||
+
+== MKV == 
+|| *Field* || *Value* ||
+|| %!General_CompleteName% || F:\I.Robot.2004.720p.HDTV.x264.mkv ||
+|| %!General_Format% || Matroska ||
+|| %!General_FileSize% || 4.34 GiB ||
+|| %!General_Duration% || 1h 54mn ||
+|| %!General_OverallBitRate% || 5 434 Kbps ||
+|| %!General_EncodedDate% || UTC 2006-05-24 13:36:37 ||
+|| %!General_WritingApplication% || mkvmerge v1.7.0 ('What Do You Take Me For') built on Apr 28 2006 17:20:19 ||
+|| %!General_WritingLibrary% || libebml v0.7.7 + libmatroska v0.8.0 ||
+|| *Field* || *Value* ||
+|| %!Audio_ID% || 2 ||
+|| %!Audio_Format% || AC-3 ||
+|| %!Audio_FormatInfo% || Audio Coding 3 ||
+|| %!Audio_CodecID% || A_AC3 ||
+|| %!Audio_Duration% || 1h 54mn ||
+|| %!Audio_BitRateMode% || Constant ||
+|| %!Audio_BitRate% || 384 Kbps ||
+|| %!Audio_Channels% || 6 channels ||
+|| %!Audio_ChannelPositions% || Front: L C R, Surround: L R, LFE ||
+|| %!Audio_SamplingRate% || 48.0 KHz ||
+|| %!Audio_StreamSize% || 314 MiB (7%) ||
+|| %!Audio_Language% || English ||
+|| *Field* || *Value* ||
+|| %!Video_ID% || 1 ||
+|| %!Video_Format% || AVC ||
+|| %!Video_FormatInfo% || Advanced Video Codec ||
+|| %!Video_FormatProfile% || High@L5.1 ||
+|| %!Video_FormatSettingsCABAC% || Yes ||
+|| %!Video_FormatSettingsReframes% || 11 frames ||
+|| %!Video_MuxingMode% || Container profile=Unknown@5.1 ||
+|| %!Video_CodecID% || V_MPEG4/ISO/AVC ||
+|| %!Video_Duration% || 1h 54mn ||
+|| %!Video_BitRate% || 4 942 Kbps ||
+|| %!Video_NominalBitRate% || 5 043 Kbps ||
+|| %!Video_Width% || 1 280 pixels ||
+|| %!Video_Height% || 720 pixels ||
+|| %!Video_DisplayAspectRatio% || 16:9 ||
+|| %!Video_FrameRate% || 23.976 fps ||
+|| %!Video_Resolution% || 8 bits ||
+|| %!Video_Colorimetry% || 4:2:0 ||
+|| %!Video_ScanType% || Progressive ||
+|| %!Video_BitsPixelFrame% || 0.224 ||
+|| %!Video_StreamSize% || 3.94 GiB (91%) ||
+|| %!Video_WritingLibrary% || x264 core 46 svn-517 ||
+|| %!Video_EncodingSettings% || cabac=1 / ref=8 / deblock=1:0:0 / analyse=0x3:0x133 / me=hex / subme=6 / brdo=1 / mixed_ref=1 / me_range=16 / chroma_me=1 / trellis=1 / 8x8dct=1 / cqm=0 / chroma_qp_offset=0 / slices=1 / nr=0 / decimate=1 / bframes=3 / b_pyramid=1 / b_adapt=1 / b_bias=0 / direct=2 / wpredb=1 / bime=1 / keyint=250 / keyint_min=25 / scenecut=40 / rc=2pass / bitrate=5043 / ratetol=1.0 / rceq='blurCplx^(1-qComp)' / qcomp=0.60 / qpmin=10 / qpmax=51 / qpstep=4 / cplxblur=20.0 / qblur=0.5 / ip_ratio=1.40 / pb_ratio=1.30 ||
+|| %!Video_Language% || English ||
+
+== VOB == 
+|| *Field* || *Value* ||
+|| %!General_CompleteName% || F:\Garfield - A Tail of Two Kitties\VIDEO_TS\VTS_01_3.VOB ||
+|| %!General_Format% || MPEG-PS ||
+|| %!General_FileSize% || 1 024 MiB ||
+|| %!General_Duration% || 26mn 11s ||
+|| %!General_OverallBitRate% || 5 467 Kbps ||
+|| *Field* || *Value* ||
+|| %!Audio_ID% || 128 (0x80) ||
+|| %!Audio_Format% || AC-3 ||
+|| %!Audio_FormatInfo% || Audio Coding 3 ||
+|| %!Audio_Duration% || 26mn 11s ||
+|| %!Audio_BitRateMode% || Constant ||
+|| %!Audio_BitRate% || 448 Kbps ||
+|| %!Audio_Channels% || 6 channels ||
+|| %!Audio_ChannelPositions% || Front: L C R, Surround: L R, LFE ||
+|| %!Audio_SamplingRate% || 48.0 KHz ||
+|| %!Audio_VideoDelay% || -688ms ||
+|| %!Audio_StreamSize% || 83.9 MiB (8%) ||
+|| *Field* || *Value* ||
+|| %!Video_ID% || 224 (0xE0) ||
+|| %!Video_Format% || MPEG Video ||
+|| %!Video_FormatVersion% || Version 2 ||
+|| %!Video_FormatProfile% || Main@Main ||
+|| %!Video_FormatSettingsBVOP% || Yes ||
+|| %!Video_FormatSettingsMatrix% || Default ||
+|| %!Video_Duration% || 26mn 10s ||
+|| %!Video_BitRateMode% || Variable ||
+|| %!Video_BitRate% || 4 802 Kbps ||
+|| %!Video_NominalBitRate% || 6 000 Kbps ||
+|| %!Video_Width% || 720 pixels ||
+|| %!Video_Height% || 576 pixels ||
+|| %!Video_DisplayAspectRatio% || 16:9 ||
+|| %!Video_FrameRate% || 25.000 fps ||
+|| %!Video_Standard% || PAL ||
+|| %!Video_Resolution% || 8 bits ||
+|| %!Video_Colorimetry% || 4:2:0 ||
+|| %!Video_ScanType% || Progressive ||
+|| %!Video_ScanOrder% || Top Field First ||
+|| %!Video_BitsPixelFrame% || 0.463 ||
+|| %!Video_StreamSize% || 899 MiB (88%) ||
