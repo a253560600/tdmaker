@@ -144,7 +144,7 @@ namespace TDMakerLib
         public int TrackerGroupActive { get; set; }
         [Category("Torrent Creator"), DefaultValue(false), Description("Create Torrent")]
         public bool TorrentCreateAuto { get; set; }
-        [Category("Torrent Creator"), DefaultValue(LocationType.ParentFolder), Description("Create torrents in the same folders as the media file, default torrent folder or in a custom folder")]
+        [Category("Torrent Creator"), DefaultValue(LocationType.KnownFolder), Description("Create torrents in the same folders as the media file, default torrent folder or in a custom folder")]
         public LocationType TorrentLocationChoice { get; set; }
         [Category("Torrent Creator"), DefaultValue(false), Description("Save torrent files in sub-folders organized by tracker namer")]
         public bool TorrentsOrganize { get; set; }
