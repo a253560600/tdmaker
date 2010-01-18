@@ -66,6 +66,14 @@ chmod +x mtn
  Public Key: b77a5c561934e089
  The assembly was not found in the Global Assembly Cache, a path listed in the MONO_PATH environment variable, or in the location of the executing assembly (/home/ajt/Downloads/TDMAKER/).
 }}}
+Using Terminal, type:
+{{{
+apt-get install libmono-winforms2.0-cil
+}}}
+* If MediaInfo is not generating, try
+{{{
+MONO_LOG_MASK=dll MONO_LOG_LEVEL=debug mono --debug TDMaker.exe
+}}}
 
 = Screenshots =
 
