@@ -130,7 +130,7 @@ namespace TDMakerLib
         {
             foreach (var pair in dic)
             {
-                Console.WriteLine("{0} - {1}", pair.Key, pair.Value);
+                Debug.WriteLine(string.Format("{0} - {1}", pair.Key, pair.Value));
             }
         }
 
@@ -140,10 +140,7 @@ namespace TDMakerLib
         /// <param name="id">Zero based index of the audio stream</param>
         public void ListFieldsAudio(int id)
         {
-            foreach (var pair in this.MappingsAudio[id])
-            {
-                Debug.WriteLine(string.Format("{0} - {1}", pair.Key, pair.Value));
-            }
+            ListFields(this.MappingsAudio[id]);
         }
     }
 }

@@ -762,10 +762,11 @@ namespace TDMaker
 
         private void bwApp_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            UpdateGuiControls();
             pBar.Style = ProgressBarStyle.Continuous;
             lbFiles.Items.Clear();
             sBar.Text = "Ready.";
+            lbPublish.SelectedIndex = lbPublish.Items.Count - 1;
+            UpdateGuiControls();
         }
 
         void pbScreenshot_MouseClick(object sender, MouseEventArgs e)
@@ -875,7 +876,6 @@ namespace TDMaker
                     case ProgressType.REPORT_TORRENTINFO:
                         TorrentInfo ti = e.UserState as TorrentInfo;
                         lbPublish.Items.Add(ti);
-                        lbPublish.SelectedIndex = lbPublish.Items.Count - 1;
                         // initialize quick publish checkboxes                        
                         chkQuickFullPicture.Checked = Engine.conf.UseFullPicture;
                         chkQuickAlignCenter.Checked = Engine.conf.AlignCenter;
