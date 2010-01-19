@@ -1,7 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-# SharpDevelop 3.1.1.5327
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDMakerGUI", "TDMakerGUI\TDMakerGUI.csproj", "{F3519E2C-4C9F-4EED-8EDA-78FED87BC10F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDMakerLib", "TDMakerLib\TDMakerLib.csproj", "{6023302C-5D3C-494A-B7D1-95A0BED8CA22}"
@@ -14,9 +13,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{515B3AAB-EB9
 		Lib\Microsoft.WindowsAPICodePack.dll = Lib\Microsoft.WindowsAPICodePack.dll
 		Lib\Microsoft.WindowsAPICodePack.Shell.dll = Lib\Microsoft.WindowsAPICodePack.Shell.dll
 		Lib\MonoTorrent.dll = Lib\MonoTorrent.dll
+		Lib\Starksoft.Net.Ftp.dll = Lib\Starksoft.Net.Ftp.dll
+		Lib\Starksoft.Net.Proxy.dll = Lib\Starksoft.Net.Proxy.dll
 		Lib\taglib-sharp.dll = Lib\taglib-sharp.dll
-		Lib\ZSS.UpdateCheckerLib.dll = Lib\ZSS.UpdateCheckerLib.dll
 		Lib\UploadersLib.dll = Lib\UploadersLib.dll
+		Lib\ZSS.UpdateCheckerLib.dll = Lib\ZSS.UpdateCheckerLib.dll
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "64-bit", "64-bit", "{865B91A1-6C9E-4668-A3C8-8962DEF78DDA}"
@@ -56,7 +57,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{C15DC8C7-86D8-4F17-9370-8098EF188559} = {515B3AAB-EB9E-47A4-80AD-0AE6E2FF17FD}
 		{865B91A1-6C9E-4668-A3C8-8962DEF78DDA} = {515B3AAB-EB9E-47A4-80AD-0AE6E2FF17FD}
+		{C15DC8C7-86D8-4F17-9370-8098EF188559} = {515B3AAB-EB9E-47A4-80AD-0AE6E2FF17FD}
 	EndGlobalSection
 EndGlobal

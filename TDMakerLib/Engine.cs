@@ -53,7 +53,7 @@ namespace TDMakerLib
             string os = System.Environment.OSVersion.ToString();
             bool b = os.Contains("Unix");
             IsUNIX = b;
-
+            Console.WriteLine("Is Unix: " + IsUNIX);
             return IsUNIX;
         }
 

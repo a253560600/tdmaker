@@ -741,8 +741,6 @@ namespace TDMaker
             }
         }
 
-
-
         private void UpdateGuiControls()
         {
             btnCreateTorrent.Enabled = !bwApp.IsBusy && lbPublish.Items.Count > 0;
