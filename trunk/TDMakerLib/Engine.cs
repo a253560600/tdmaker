@@ -53,7 +53,6 @@ namespace TDMakerLib
             string os = System.Environment.OSVersion.ToString();
             bool b = os.Contains("Unix");
             IsUNIX = b;
-            Console.WriteLine("Is Unix: " + IsUNIX);
             return IsUNIX;
         }
 
@@ -216,6 +215,7 @@ namespace TDMakerLib
 
         public static bool TurnOn()
         {
+            DetectUnix();
             FileSystem.AppendDebug("Operating System: " + Environment.OSVersion.VersionString);
             FileSystem.AppendDebug("Product Version: " + mAppInfo.GetApplicationTitleFull());
             DialogResult configResult = DialogResult.OK;
