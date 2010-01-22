@@ -14,6 +14,7 @@ namespace TDMakerLib
             InitializeComponent();
             chkCreateTorrent.Checked = Engine.conf.TorrentCreateAuto;
             chkScreenshotsCreate.Checked = Engine.conf.ScreenshotsUpload;
+            gbQuestion.Enabled = this.Options.MediaTypeChoice != MediaType.MediaDisc;
         }
 
         public MediaWizard(List<string> FileOrDirPaths)
