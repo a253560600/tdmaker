@@ -1,3 +1,5 @@
+2.01.0.0 Added Img1 image uploader support
+
 Version 2.0 - 20100115
 
 2.00.2.0 Templates can use any MediaInfo field that is available for the analyzed media [tampad]
