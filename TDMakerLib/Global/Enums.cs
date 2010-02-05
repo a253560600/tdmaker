@@ -70,6 +70,8 @@ namespace TDMakerLib
         TINYPIC,
         [Description("ImageBin - www.imagebin.ca")]
         IMAGEBIN,
+        [Description("Img1 - www.img1.us")]
+        IMG1,
         [Description("Imgur - www.imgur.com")]
         IMGUR,
         [Description("File")]

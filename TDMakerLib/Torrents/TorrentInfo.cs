@@ -200,6 +200,9 @@ namespace TDMakerLib
                     case ImageDestType2.IMAGEBIN:
                         imageUploader = new ImageBin();
                         break;
+                    case ImageDestType2.IMG1:
+                        imageUploader = new Img1Uploader();
+                        break;
                     case ImageDestType2.IMGUR:
                         imageUploader = new Imgur();
                         break;
