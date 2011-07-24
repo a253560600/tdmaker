@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TDMakerLib;
 using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace TDMakerLib
 {
     /// <summary>
-    /// Class responsible for reading Template Directories. 
-    /// A Template Directory has 7 files: 
+    /// Class responsible for reading Template Directories.
+    /// A Template Directory has 7 files:
     /// GeneralInfo.txt; VideoInfo.txt; AudioInfo.txt; Disc.txt; File.txt
     /// </summary>
     public class TemplateReader2
@@ -18,7 +16,9 @@ namespace TDMakerLib
         /// Location of the Template
         /// </summary>
         public string Location { get; private set; }
+
         public TorrentInfo TorrentInfo { get; private set; }
+
         public string PublishInfo { get; private set; }
 
         private MappingHelper MappingHelperMy = null;
@@ -75,7 +75,6 @@ namespace TDMakerLib
                     }
                 }
             }
-
         }
 
         public void SetFullScreenshot(bool arg)
@@ -179,12 +178,12 @@ namespace TDMakerLib
 
         private string GetStringFromAudio(string pattern, AudioInfo ai)
         {
-            //pattern = Regex.Replace(pattern, "%Audio_Format%", ai.Format, RegexOptions.IgnoreCase);
-            //pattern = Regex.Replace(pattern, "%Audio_Bitrate%", ai.Bitrate, RegexOptions.IgnoreCase);
-            //pattern = Regex.Replace(pattern, "%Audio_BitrateMode%", ai.BitrateMode, RegexOptions.IgnoreCase);
-            //pattern = Regex.Replace(pattern, "%Audio_Channels%", ai.Channels, RegexOptions.IgnoreCase);
-            //pattern = Regex.Replace(pattern, "%Audio_SamplingRate%", ai.SamplingRate, RegexOptions.IgnoreCase);
-            //pattern = Regex.Replace(pattern, "%Audio_Resolution%", ai.Resolution, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Audio_Format%", ai.Format, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Audio_Bitrate%", ai.Bitrate, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Audio_BitrateMode%", ai.BitrateMode, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Audio_Channels%", ai.Channels, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Audio_SamplingRate%", ai.SamplingRate, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Audio_Resolution%", ai.Resolution, RegexOptions.IgnoreCase);
 
             pattern = this.MappingHelperMy.ReplacePatternAudio(ai.Index, pattern);
 
@@ -220,7 +219,7 @@ namespace TDMakerLib
         }
 
         /// <summary>
-        /// Returns the string replacing all the syntax supported. 
+        /// Returns the string replacing all the syntax supported.
         /// Audio syntax defaults to first audio stream.
         /// </summary>
         /// <param name="pattern"></param>
@@ -284,7 +283,6 @@ namespace TDMakerLib
 
         private string GetStyles(string pattern)
         {
-
             int fontSizeHeading1 = (int)(Engine.conf.PreText && Engine.conf.LargerPreText == true ?
                 Engine.conf.FontSizeHeading1 + Engine.conf.FontSizeIncr : Engine.conf.FontSizeHeading1);
 
@@ -303,8 +301,6 @@ namespace TDMakerLib
             pattern = Regex.Replace(pattern, "%FontSize_Heading3%", fontSizeHeading3.ToString(), RegexOptions.IgnoreCase);
 
             return pattern;
-
         }
-
     }
 }

@@ -39,7 +39,7 @@
             // 
             // logoPictureBox
             // 
-            this.logoPictureBox.Image = global::TDMakerLib.Properties.Resources.GenuineAdv;
+            this.logoPictureBox.Image = global::TDMakerGUI.Properties.Resources.GenuineAdv;
             this.logoPictureBox.Location = new System.Drawing.Point(8, 8);
             this.logoPictureBox.Name = "logoPictureBox";
             this.logoPictureBox.Size = new System.Drawing.Size(128, 120);

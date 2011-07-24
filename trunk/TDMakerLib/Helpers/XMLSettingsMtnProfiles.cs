@@ -1,41 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using System.Xml.Serialization;
-using System.Collections.Specialized;
-using UploadersLib;
-using System.Windows.Forms;
-using System.ComponentModel;
-using System.Drawing.Design;
-using System.Windows.Forms.Design;
-using System.Diagnostics;
 
 namespace TDMakerLib
 {
     [XmlRoot("Settings")]
     public class XMLSettingsMtnProfiles : XMLSettings
     {
-        public static string XMLFileName = "MtnProfiles.xml"; 
+        public static string XMLFileName = "MtnProfiles.xml";
 
         public int MtnProfileActive = 0;
         public List<XMLSettingsScreenshot> MtnProfiles = new List<XMLSettingsScreenshot>();
-        
+
         public XMLSettingsMtnProfiles()
         {
             ApplyDefaultValues(this);
-        }        
-        
+        }
+
         public XMLSettingsScreenshot GetMtnProfileActive()
         {
-        	if (MtnProfiles.Count > MtnProfileActive) {
-        		return MtnProfiles[MtnProfileActive];
-        	}
-        	return new XMLSettingsScreenshot();
+            if (MtnProfiles.Count > MtnProfileActive)
+            {
+                return MtnProfiles[MtnProfileActive];
+            }
+            return new XMLSettingsScreenshot();
         }
-        
+
         #region I/O Methods
 
         public void Write(string filePath)
@@ -62,12 +54,12 @@ namespace TDMakerLib
 
         public void Write()
         {
-            Write(Engine.mAppSettings.GetSettingsFilePath(XMLFileName));
+            Write(Engine.AppConf.GetSettingsFilePath(XMLFileName));
         }
 
         public static XMLSettingsMtnProfiles Read()
         {
-            string settingsFile = Engine.mAppSettings.GetSettingsFilePath(XMLFileName);
+            string settingsFile = Engine.AppConf.GetSettingsFilePath(XMLFileName);
             return Read(settingsFile);
         }
 
@@ -100,6 +92,6 @@ namespace TDMakerLib
             return new XMLSettingsMtnProfiles();
         }
 
-        #endregion
+        #endregion I/O Methods
     }
 }

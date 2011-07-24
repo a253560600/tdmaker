@@ -1,12 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDMakerGUI", "TDMakerGUI\TDMakerGUI.csproj", "{F3519E2C-4C9F-4EED-8EDA-78FED87BC10F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDMakerLib", "TDMakerLib\TDMakerLib.csproj", "{6023302C-5D3C-494A-B7D1-95A0BED8CA22}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDMakerCLI", "TDMakerCLI\TDMakerCLI.csproj", "{A6AD6352-B867-43D4-85F5-BA7FE78ADFBB}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{515B3AAB-EB9E-47A4-80AD-0AE6E2FF17FD}"
 	ProjectSection(SolutionItems) = preProject
 		Lib\DavuxLib.dll = Lib\DavuxLib.dll
@@ -16,7 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{515B3AAB-EB9
 		Lib\Starksoft.Net.Ftp.dll = Lib\Starksoft.Net.Ftp.dll
 		Lib\Starksoft.Net.Proxy.dll = Lib\Starksoft.Net.Proxy.dll
 		Lib\taglib-sharp.dll = Lib\taglib-sharp.dll
-		Lib\UploadersLib.dll = Lib\UploadersLib.dll
 		Lib\ZSS.UpdateCheckerLib.dll = Lib\ZSS.UpdateCheckerLib.dll
 	EndProjectSection
 EndProject
@@ -28,6 +21,28 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "32-bit", "32-bit", "{C15DC8C7-86D8-4F17-9370-8098EF188559}"
 	ProjectSection(SolutionItems) = preProject
 		Lib\32-bit\MediaInfo.dll = Lib\32-bit\MediaInfo.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDMakerGUI", "TDMakerGUI\TDMakerGUI.csproj", "{F3519E2C-4C9F-4EED-8EDA-78FED87BC10F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDMakerLib", "TDMakerLib\TDMakerLib.csproj", "{6023302C-5D3C-494A-B7D1-95A0BED8CA22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDMakerCLI", "TDMakerCLI\TDMakerCLI.csproj", "{A6AD6352-B867-43D4-85F5-BA7FE78ADFBB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6BE683EA-1576-4D09-AF6A-25B67EC58112}"
+	ProjectSection(SolutionItems) = preProject
+		TDMaker Setup 2011.iss = TDMaker Setup 2011.iss
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{9ABF3833-4B74-40C1-886D-9C1C0FF9ED4B}"
+	ProjectSection(SolutionItems) = preProject
+		Tools\CommandLineParserLib.dll = Tools\CommandLineParserLib.dll
+		Tools\sgen.exe = Tools\sgen.exe
+		Tools\SharpSvn-DB44-20-Win32.dll = Tools\SharpSvn-DB44-20-Win32.dll
+		Tools\SharpSvn-SASL21-22-Win32.dll = Tools\SharpSvn-SASL21-22-Win32.dll
+		Tools\SharpSvn-Sasl21-23-win32.dll = Tools\SharpSvn-Sasl21-23-win32.dll
+		Tools\SharpSvn.dll = Tools\SharpSvn.dll
+		Tools\SVNRevToAssemblyInfo.exe = Tools\SVNRevToAssemblyInfo.exe
 	EndProjectSection
 EndProject
 Global

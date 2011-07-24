@@ -3,11 +3,8 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using System.Threading;
-using TDMakerLib;
-using TDMakerLib.Helpers;
 using UploadersLib;
-using UploadersLib.Helpers;
+using UploadersLib.HelperClasses;
 using UploadersLib.ImageUploaders;
 
 namespace TDMakerLib
@@ -18,11 +15,13 @@ namespace TDMakerLib
         /// MediaInfo2 Object
         /// </summary>
         public MediaInfo2 MediaMy { get; set; }
+
         /// <summary>
         /// String Representation of Publish tab
         /// ToString() should be called at least once
         /// </summary>
         public string PublishString { get; set; }
+
         /// <summary>
         /// Options for Publishing
         /// </summary>
@@ -166,81 +165,66 @@ namespace TDMakerLib
         {
             foreach (MediaFile mf in this.MediaMy.MediaFiles)
             {
-                ImageFileManager imf = UploadScreenshot(mf.FilePath);
-                if (imf != null && mf.Screenshot != null)
+                UploadResult ur = UploadScreenshot(mf.FilePath);
+                if (ur != null && mf.Screenshot != null)
                 {
-                    mf.Screenshot.LocalPath = imf.LocalFilePath;
-                    if (imf.ImageFileList != null && imf.ImageFileList.Count > 0)
+                    mf.Screenshot.LocalPath = ur.LocalFilePath;
+                    if (!string.IsNullOrEmpty(ur.URL))
                     {
-                        mf.Screenshot.Full = imf.GetFullImageUrl();
-                        mf.Screenshot.LinkedThumbnail = imf.GetLinkedThumbnailForumUrl();
+                        mf.Screenshot.Full = ur.GetFullImageUrl();
+                        mf.Screenshot.LinkedThumbnail = ur.ThumbnailURL;
                     }
                     ReportProgress(ProgressType.UPDATE_SCREENSHOTS_LIST, mf.Screenshot);
                 }
             }
         }
 
-        private ImageFileManager UploadScreenshot(string mediaFilePath)
+        private UploadResult UploadScreenshot(string mediaFilePath)
         {
             string ssPath = Path.Combine(FileSystem.GetScreenShotsDir(mediaFilePath), Path.GetFileNameWithoutExtension(mediaFilePath) + Engine.mtnProfileMgr.GetMtnProfileActive().o_OutputSuffix);
             ImageUploader imageUploader = null;
-            ImageFileManager imf = null;
+            UploadResult ur = null;
 
             if (File.Exists(ssPath))
             {
-                switch ((ImageDestType2)Engine.conf.ImageUploader)
+                switch ((ImageUploaderType)Engine.conf.ImageUploader)
                 {
-                    case ImageDestType2.IMAGESHACK:
-                        imageUploader = new ImageShackUploader("16BCFGWY58707bec94f7b0a773d0aa8bbf301900", Engine.conf.ImageShackRegCode, UploadMode.ANONYMOUS);
-                        // ((ImageShackUploader)imageUploader).RandomizeFileName = Program.conf.ImageShakeRandomizeFileName;
+                    case ImageUploaderType.TINYPIC:
+                        imageUploader = new TinyPicUploader(ZKeys.TinyPicID, ZKeys.TinyPicKey, Engine.MyUploadersConfig.TinyPicAccountType,
+                            Engine.MyUploadersConfig.TinyPicRegistrationCode);
                         break;
-                    case ImageDestType2.TINYPIC:
-                        imageUploader = new TinyPicUploader("e2aabb8d555322fa", "00a68ed73ddd54da52dc2d5803fa35ee", UploadMode.ANONYMOUS);
+                    case ImageUploaderType.IMGUR:
+                        imageUploader = new Imgur(Engine.MyUploadersConfig.ImgurAccountType, ZKeys.ImgurAnonymousKey, Engine.MyUploadersConfig.ImgurOAuthInfo);
                         break;
-                    case ImageDestType2.IMAGEBIN:
-                        imageUploader = new ImageBin();
-                        break;
-                    case ImageDestType2.IMG1:
-                        imageUploader = new Img1Uploader();
-                        break;
-                    case ImageDestType2.IMGUR:
-                        imageUploader = new Imgur();
-                        break;
-                    case ImageDestType2.FILE:
-                        imf = new ImageFileManager() { LocalFilePath = ssPath };
+                    case ImageUploaderType.FileUploader:
+                        ur = new UploadResult() { LocalFilePath = ssPath };
                         break;
                     default:
-                        imageUploader = new UploadersLib.ImageUploaders.Imgur();
+                        imageUploader = new ImageShackUploader(ZKeys.ImageShackKey, Engine.MyUploadersConfig.ImageShackAccountType,
+                                  Engine.MyUploadersConfig.ImageShackRegistrationCode)
+                        {
+                            IsPublic = Engine.MyUploadersConfig.ImageShackShowImagesInPublic
+                        };
                         break;
                 }
 
                 if (imageUploader != null)
                 {
-                    int retry = 0;
-
                     if (Engine.conf.ProxyEnabled)
                     {
                         ProxySettings proxy = new ProxySettings();
-                        proxy.ProxyEnabled = true;
                         proxy.ProxyActive = Engine.conf.ProxySettings;
                         Uploader.ProxySettings = proxy;
                     }
 
-                    while (retry <= 3 && imf == null || (retry <= 3 && imf != null && imf.ImageFileList.Count < 1))
-                    {
-                        retry++;
-                        if (retry > 1)
-                            Thread.Sleep(2000);
-                        ReportProgress(ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploading {0} to {1}... Attempt {2}", Path.GetFileName(ssPath), imageUploader.Name, retry));
-                        imf = imageUploader.UploadImage(ssPath);
-                    }
+                    ur = imageUploader.Upload(ssPath);
                 }
 
-                if (imf != null)
+                if (ur != null)
                 {
-                    if (imf.ImageFileList.Count > 0)
+                    if (!string.IsNullOrEmpty(ur.URL))
                     {
-                        imf.LocalFilePath = ssPath;
+                        ur.LocalFilePath = ssPath;
                         ReportProgress(ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploaded {0}.", Path.GetFileName(ssPath)));
                     }
                 }
@@ -249,7 +233,7 @@ namespace TDMakerLib
                     ReportProgress(ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Failed uploading {0}. Try again later.", Path.GetFileName(ssPath)));
                 }
             }
-            return imf;
+            return ur;
         }
 
         /// <summary>
@@ -288,7 +272,7 @@ namespace TDMakerLib
         }
 
         /// <summary>
-        /// Create Publish based on Default (built-in) Template. 
+        /// Create Publish based on Default (built-in) Template.
         /// Uses ToString() method of MediaInfo2
         /// </summary>
         /// <param name="ti"></param>
@@ -322,7 +306,6 @@ namespace TDMakerLib
             }
 
             return sbPublish.ToString();
-
         }
 
         /// <summary>
@@ -338,6 +321,5 @@ namespace TDMakerLib
         {
             return Path.GetFileName(this.MediaMy.Location);
         }
-
     }
 }

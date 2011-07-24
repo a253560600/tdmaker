@@ -78,8 +78,8 @@ namespace TDMakerCLI
 
             if (!File.Exists(mSettingsFile))
             {
-                Engine.mAppSettings = AppSettings.Read();
-                mSettingsFile = Engine.mAppSettings.XMLSettingsFile;
+                Engine.AppConf = AppSettings.Read();
+                mSettingsFile = Engine.AppConf.XMLSettingsFile;
             }
 
             if (File.Exists(mSettingsFile))

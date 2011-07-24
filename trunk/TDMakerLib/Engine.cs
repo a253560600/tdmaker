@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
-using System.Diagnostics;
-using UploadersLib.Helpers;
+using UploadersLib;
+using UploadersLib.HelperClasses;
 
 namespace TDMakerLib
 {
@@ -16,6 +15,7 @@ namespace TDMakerLib
 
         public static McoreSystem.AppInfo mAppInfo = new McoreSystem.AppInfo(mProductName, Application.ProductVersion, McoreSystem.AppInfo.SoftwareCycle.Final, false);
         public static bool Portable = Directory.Exists(Path.Combine(Application.StartupPath, PortableRootFolder));
+
         public static bool MultipleInstance { get; private set; }
 
         internal static readonly string zRoamingAppDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), mProductName);
@@ -28,10 +28,12 @@ namespace TDMakerLib
         internal static readonly string zTorrentsDir = Path.Combine(zLocalAppDataFolder, "Torrents");
         public static readonly string zTempDir = Path.Combine(zLocalAppDataFolder, "Temp");
 
-        public static AppSettings mAppSettings = AppSettings.Read();
-
+        public static AppSettings AppConf = AppSettings.Read();
 
         public static string DefaultRootAppFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), mProductName);
+
+        private static readonly string UploadersConfigFileName = "UploadersConfig.xml";
+
         public static string RootAppFolder { get; set; }
 
         public static string LogsDir = zLogsDir;
@@ -41,12 +43,16 @@ namespace TDMakerLib
         public static string TorrentsDir = conf != null && Directory.Exists(conf.CustomTorrentsDir) && conf.UseCustomTorrentsDir ? conf.CustomTorrentsDir : TorrentsDir;
 
         public static bool IsUNIX { get; private set; }
+
         private static bool RunConfig = false;
 
         private static string[] AppDirs;
 
-        public static XMLSettingsCore conf;
-        public static XMLSettingsMtnProfiles mtnProfileMgr;
+        public static XMLSettingsCore conf { get; set; }
+
+        public static XMLSettingsMtnProfiles mtnProfileMgr { get; set; }
+
+        public static UploadersConfig MyUploadersConfig { get; set; }
 
         public static bool DetectUnix()
         {
@@ -65,7 +71,15 @@ namespace TDMakerLib
                     Directory.CreateDirectory(SettingsDir);
                 }
 
-                return Engine.mAppSettings.XMLSettingsFile;
+                return Engine.AppConf.XMLSettingsFile;
+            }
+        }
+
+        public static string UploadersConfigPath
+        {
+            get
+            {
+                return Path.Combine(SettingsDir, UploadersConfigFileName);
             }
         }
 
@@ -73,7 +87,7 @@ namespace TDMakerLib
         {
             if (!Engine.conf.KeepScreenshots)
             {
-                // delete if option set to temporary location 
+                // delete if option set to temporary location
                 string[] files = Directory.GetFiles(Engine.zTempDir, "*.*", SearchOption.AllDirectories);
                 foreach (string screenshot in files)
                 {
@@ -86,7 +100,6 @@ namespace TDMakerLib
                         Debug.WriteLine(ex.Message);
                     }
                 }
-
             }
         }
 
@@ -97,7 +110,6 @@ namespace TDMakerLib
         /// <returns>DuratingString in HH:mm:ss</returns>
         public static string GetDurationString(double dura)
         {
-
             double duraSec = dura / 1000.0;
 
             long hours = (long)duraSec / 3600;
@@ -111,7 +123,6 @@ namespace TDMakerLib
                 sec.ToString("00"));
 
             return duraString;
-
         }
 
         public static void WriteTemplates(bool rewrite)
@@ -140,9 +151,7 @@ namespace TDMakerLib
                         }
                     }
                 }
-
             }
-
         }
 
         public static string GetText(string name)
@@ -174,7 +183,7 @@ namespace TDMakerLib
         /// </summary>
         public static void InitializeDefaultFolderPaths()
         {
-            if (mAppSettings.PreferSystemFolders)
+            if (AppConf.PreferSystemFolders)
             {
                 LogsDir = zLogsDir;
                 PicturesDir = zPicturesDir;
@@ -204,7 +213,7 @@ namespace TDMakerLib
             string latestSettingsFile = Path.Combine(SettingsDir, XMLSettingsCore.XMLFileName);
             if (File.Exists(latestSettingsFile))
             {
-                Engine.mAppSettings.XMLSettingsFile = latestSettingsFile;
+                Engine.AppConf.XMLSettingsFile = latestSettingsFile;
             }
         }
 
@@ -222,32 +231,32 @@ namespace TDMakerLib
 
             if (Directory.Exists(Path.Combine(Application.StartupPath, PortableRootFolder)))
             {
-                mAppSettings.PreferSystemFolders = false;
+                AppConf.PreferSystemFolders = false;
                 RootAppFolder = PortableRootFolder;
                 mProductName += " Portable";
                 mAppInfo.AppName = mProductName;
             }
             else
             {
-                if (string.IsNullOrEmpty(Engine.mAppSettings.RootDir))
+                if (string.IsNullOrEmpty(Engine.AppConf.RootDir))
                 {
                     ConfigWizard cw = new ConfigWizard(DefaultRootAppFolder);
                     configResult = cw.ShowDialog();
                     RunConfig = true;
                 }
-                if (!string.IsNullOrEmpty(Engine.mAppSettings.RootDir) && Directory.Exists(Engine.mAppSettings.RootDir))
+                if (!string.IsNullOrEmpty(Engine.AppConf.RootDir) && Directory.Exists(Engine.AppConf.RootDir))
                 {
-                    RootAppFolder = Engine.mAppSettings.RootDir;
+                    RootAppFolder = Engine.AppConf.RootDir;
                 }
                 else
                 {
-                    RootAppFolder = Engine.mAppSettings.PreferSystemFolders ? zLocalAppDataFolder : DefaultRootAppFolder;
+                    RootAppFolder = Engine.AppConf.PreferSystemFolders ? zLocalAppDataFolder : DefaultRootAppFolder;
                 }
             }
             if (configResult == DialogResult.OK)
             {
                 FileSystem.AppendDebug("Config file: " + AppSettings.AppSettingsFile);
-                FileSystem.AppendDebug(string.Format("Root Folder: {0}", mAppSettings.PreferSystemFolders ? zLocalAppDataFolder : RootAppFolder));
+                FileSystem.AppendDebug(string.Format("Root Folder: {0}", AppConf.PreferSystemFolders ? zLocalAppDataFolder : RootAppFolder));
                 FileSystem.AppendDebug("Initializing Default folder paths...");
                 Engine.InitializeDefaultFolderPaths(); // happens before XMLSettings is readed
             }
@@ -259,14 +268,16 @@ namespace TDMakerLib
         {
             if (!Portable)
             {
-                mAppSettings.Write();
+                AppConf.Write();
             }
+
             FileSystem.WriteDebugFile();
         }
 
         public static void LoadSettings()
         {
             LoadSettings(string.Empty);
+            Engine.MyUploadersConfig = UploadersConfig.Load(UploadersConfigPath);
         }
 
         public static void LoadSettingsLatest()
@@ -278,7 +289,7 @@ namespace TDMakerLib
 
         public static string GetLatestSettingsFile()
         {
-            return GetLatestSettingsFile(Path.GetDirectoryName(Engine.mAppSettings.XMLSettingsFile));
+            return GetLatestSettingsFile(Path.GetDirectoryName(Engine.AppConf.XMLSettingsFile));
         }
 
         public static string GetLatestSettingsFile(string settingsDir)
@@ -317,7 +328,7 @@ namespace TDMakerLib
             // Use Configuration Wizard Settings if applied
             if (RunConfig)
             {
-                Engine.conf.ImageUploader = Engine.mAppSettings.ImageUploader;
+                Engine.conf.ImageUploader = Engine.AppConf.ImageUploader;
             }
             mtnProfileMgr = XMLSettingsMtnProfiles.Read();
         }

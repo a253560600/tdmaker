@@ -7,8 +7,9 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using HelpersLib;
+using TDMakerGUI.Properties;
 using TDMakerLib;
-using TDMakerLib.Properties;
 using UploadersLib;
 using ZScreenLib;
 using ZSS;
@@ -51,7 +52,7 @@ namespace TDMaker
         private bool ValidateInput()
         {
             StringBuilder sbMsg = new StringBuilder();
-            // checks 
+            // checks
             if (string.IsNullOrEmpty(cboSource.Text) && Engine.conf.PublishInfoTypeChoice != PublishInfoType.MediaInfo)
             {
                 sbMsg.AppendLine("Source was empty.");
@@ -104,11 +105,10 @@ namespace TDMaker
                 wt.FileOrDirPaths = new List<string>(ps);
                 AnalyzeMedia(wt);
             }
-
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="p">File or Folder</param>
         /// <returns></returns>
@@ -121,7 +121,6 @@ namespace TDMaker
             }
             else if (Directory.Exists(p))
             {
-
             }
             return fl;
         }
@@ -221,7 +220,7 @@ namespace TDMaker
                             if (wt.IsSingleTask() && !string.IsNullOrEmpty(txtTitle.Text))
                             {
                                 mi.SetTitle(txtTitle.Text);
-                                // if it is a DVD, set the title to be name of the folder. 
+                                // if it is a DVD, set the title to be name of the folder.
                                 this.Text = string.Format("{0} - {1}", Engine.GetProductName(), Adapter.GetMediaName(mi.Location));
                             }
                             miList.Add(mi);
@@ -303,9 +302,10 @@ namespace TDMaker
 
             Engine.conf.TorrentLocationChoice = (LocationType)cboTorrentLoc.SelectedIndex;
 
-            Engine.conf.ImageUploader = (ImageDestType2)cboScreenshotDest.SelectedIndex;
+            Engine.conf.ImageUploader = (ImageUploaderType)cboScreenshotDest.SelectedIndex;
 
             Engine.conf.Write();
+            Engine.MyUploadersConfig.Save(Engine.UploadersConfigPath);
             Engine.mtnProfileMgr.Write();
         }
 
@@ -374,7 +374,6 @@ namespace TDMaker
                 cboQuickTemplate.Items.Clear();
                 cboTemplate.Items.AddRange(templateNames);
                 cboQuickTemplate.Items.AddRange(templateNames);
-
             }
             if (cboTemplate.Items.Count > 0)
             {
@@ -387,7 +386,7 @@ namespace TDMaker
 
         private void SettingsRead()
         {
-            tsmiPreferKnownFolders.Checked = Engine.mAppSettings.PreferSystemFolders;
+            tsmiPreferKnownFolders.Checked = Engine.AppConf.PreferSystemFolders;
 
             SettingsReadInput();
             SettingsReadMedia();
@@ -396,9 +395,9 @@ namespace TDMaker
             SettingsReadOptions();
 
             cboScreenshotDest.Items.Clear();
-            foreach (ImageDestType2 sdt in Enum.GetValues(typeof(ImageDestType2)))
+            foreach (ImageUploaderType sdt in Enum.GetValues(typeof(ImageUploaderType)))
             {
-                cboScreenshotDest.Items.Add(sdt.GetDescription());
+                cboScreenshotDest.Items.Add(sdt.ToDescriptionString());
             }
             cboScreenshotDest.SelectedIndex = (int)Engine.conf.ImageUploader;
 
@@ -412,8 +411,8 @@ namespace TDMaker
         {
             if (Engine.conf.MediaSources.Count == 0)
             {
-                Engine.conf.MediaSources.AddRange(new string[] { "CAM", "TC", "TS", "R5", "DVD-Screener", 
-                                                            "DVD", "TV", "HDTV", "Blu-ray", "HD-DVD", 
+                Engine.conf.MediaSources.AddRange(new string[] { "CAM", "TC", "TS", "R5", "DVD-Screener",
+                                                            "DVD", "TV", "HDTV", "Blu-ray", "HD-DVD",
                                                             "Laser Disc", "VHS", "Unknown" });
             }
             if (Engine.conf.Extras.Count == 0)
@@ -486,8 +485,8 @@ namespace TDMaker
         {
             if (cboQuickPublishType.Items.Count == 0)
             {
-                cboQuickPublishType.Items.AddRange(typeof(PublishInfoType).GetDescriptions());
-                cboPublishType.Items.AddRange(typeof(PublishInfoType).GetDescriptions());
+                cboQuickPublishType.Items.AddRange(typeof(PublishInfoType).GetEnumDescriptions());
+                cboPublishType.Items.AddRange(typeof(PublishInfoType).GetEnumDescriptions());
             }
             cboPublishType.SelectedIndex = (int)Engine.conf.PublishInfoTypeChoice;
             cboQuickPublishType.SelectedIndex = (int)Engine.conf.PublishInfoTypeChoice;
@@ -513,7 +512,7 @@ namespace TDMaker
 
             if (cboScreenshotsLoc.Items.Count == 0)
             {
-                cboScreenshotsLoc.Items.AddRange(typeof(LocationType).GetDescriptions());
+                cboScreenshotsLoc.Items.AddRange(typeof(LocationType).GetEnumDescriptions());
             }
             cboScreenshotsLoc.SelectedIndex = (int)Engine.conf.ScreenshotsLoc;
             txtScreenshotsLoc.Text = Engine.conf.CustomScreenshotsDir;
@@ -586,9 +585,6 @@ namespace TDMaker
 
             this.chkCreateTorrent.Checked = Engine.conf.TorrentCreateAuto;
             this.chkTorrentOrganize.Checked = Engine.conf.TorrentsOrganize;
-
-            txtImageShackRegCode.Text = Engine.conf.ImageShackRegCode;
-            chkUseImageShackRegCode.Checked = Engine.conf.UseImageShackRegCode;
         }
 
         private void SettingsReadOptionsTorrents()
@@ -620,7 +616,7 @@ namespace TDMaker
 
             if (cboTorrentLoc.Items.Count == 0)
             {
-                cboTorrentLoc.Items.AddRange(typeof(LocationType).GetDescriptions());
+                cboTorrentLoc.Items.AddRange(typeof(LocationType).GetEnumDescriptions());
             }
             cboTorrentLoc.SelectedIndex = (int)Engine.conf.TorrentLocationChoice;
             chkWritePublish.Checked = Engine.conf.WritePublish;
@@ -666,7 +662,7 @@ namespace TDMaker
 
                 if (Engine.conf.WritePublish)
                 {
-                    // create textFiles of MediaInfo           
+                    // create textFiles of MediaInfo
                     string txtPath = Path.Combine(mi.TorrentCreateInfoMy.TorrentFolder, mi.Overall.FileName) + ".txt";
 
                     if (!Directory.Exists(mi.TorrentCreateInfoMy.TorrentFolder))
@@ -692,11 +688,9 @@ namespace TDMaker
                 }
 
                 bwApp.ReportProgress((int)ProgressType.INCREMENT_PROGRESS_WITH_MSG, mi.Title);
-
             }
 
             return tiListTemp;
-
         }
 
         private object WorkerCreateTorrents(WorkerTask wt)
@@ -767,7 +761,7 @@ namespace TDMaker
             UpdateGuiControls();
         }
 
-        void pbScreenshot_MouseClick(object sender, MouseEventArgs e)
+        private void pbScreenshot_MouseClick(object sender, MouseEventArgs e)
         {
             PictureBox pbScreenshot = sender as PictureBox;
             Process.Start(pbScreenshot.ImageLocation);
@@ -874,7 +868,7 @@ namespace TDMaker
                     case ProgressType.REPORT_TORRENTINFO:
                         TorrentInfo ti = e.UserState as TorrentInfo;
                         lbPublish.Items.Add(ti);
-                        // initialize quick publish checkboxes                        
+                        // initialize quick publish checkboxes
                         chkQuickFullPicture.Checked = Engine.conf.UseFullPicture;
                         chkQuickAlignCenter.Checked = Engine.conf.AlignCenter;
                         chkQuickPre.Checked = Engine.conf.PreText;
@@ -901,7 +895,6 @@ namespace TDMaker
                         FileSystem.AppendDebug(msg);
                         break;
                 }
-
             }
         }
 
@@ -932,7 +925,6 @@ namespace TDMaker
         private void cmsAppAbout_Click(object sender, EventArgs e)
         {
             ShowAboutWindow();
-
         }
 
         private void FillTrackersComboBox()
@@ -1003,7 +995,6 @@ namespace TDMaker
                 Engine.conf.CustomTorrentsDir = txtTorrentCustomFolder.Text;
             }
         }
-
 
         private void rbTorrentFolderCustom_CheckedChanged(object sender, EventArgs e)
         {
@@ -1157,7 +1148,7 @@ namespace TDMaker
 
         private void cboScreenshotDest_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Engine.conf.ImageUploader = (ImageDestType2)cboScreenshotDest.SelectedIndex;
+            Engine.conf.ImageUploader = (ImageUploaderType)cboScreenshotDest.SelectedIndex;
         }
 
         private void tsmLogsDir_Click(object sender, EventArgs e)
@@ -1195,7 +1186,6 @@ namespace TDMaker
                 v.ShowDialog();
             }
         }
-
 
         private void tmsVersionHistory_Click(object sender, EventArgs e)
         {
@@ -1279,7 +1269,7 @@ namespace TDMaker
         private void miFileSaveInfoAs_Click(object sender, EventArgs e)
         {
             string info = "";
-            if (tcMain.SelectedTab == tpMainMediaInfo)
+            if (tcMain.SelectedTab == tpMediaInfo)
             {
                 info = txtMediaInfo.Text;
             }
@@ -1297,7 +1287,7 @@ namespace TDMaker
 
         private void tcMain_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tcMain.SelectedTab == tpMainMediaInfo)
+            if (tcMain.SelectedTab == tpMediaInfo)
             {
                 miFileSaveInfoAs.Text = "&Save Media Info As...";
             }
@@ -1567,10 +1557,9 @@ namespace TDMaker
 
         private void txtTorrentCustomFolder_TextChanged(object sender, EventArgs e)
         {
-
         }
 
-        void BtnAddTrackerClick(object sender, EventArgs e)
+        private void BtnAddTrackerClick(object sender, EventArgs e)
         {
             if (lbTrackerGroups.SelectedIndex > -1)
             {
@@ -1585,7 +1574,7 @@ namespace TDMaker
             }
         }
 
-        void PgTrackerPropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        private void PgTrackerPropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
             if (lbTrackers.SelectedIndex > -1 && lbTrackerGroups.SelectedIndex > -1)
             {
@@ -1613,7 +1602,7 @@ namespace TDMaker
             }
         }
 
-        void PgMtnPropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        private void PgMtnPropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
             txtMtnArgs.Text = Adapter.GetMtnArg(Engine.mtnProfileMgr.GetMtnProfileActive());
             if (lbMtnProfiles.SelectedIndex > -1)
@@ -1622,7 +1611,7 @@ namespace TDMaker
             }
         }
 
-        void TbnAddMtnProfileClick(object sender, EventArgs e)
+        private void TbnAddMtnProfileClick(object sender, EventArgs e)
         {
             InputBox ib = new InputBox();
             ib.Title = "Enter profile name...";
@@ -1636,7 +1625,7 @@ namespace TDMaker
             }
         }
 
-        void LbMtnProfilesSelectedIndexChanged(object sender, EventArgs e)
+        private void LbMtnProfilesSelectedIndexChanged(object sender, EventArgs e)
         {
             if (lbMtnProfiles.SelectedIndex > -1)
             {
@@ -1647,7 +1636,7 @@ namespace TDMaker
             }
         }
 
-        void BtnRemoveMtnProfileClick(object sender, EventArgs e)
+        private void BtnRemoveMtnProfileClick(object sender, EventArgs e)
         {
             int sel = lbMtnProfiles.SelectedIndex;
             if (sel >= 0)
@@ -1664,10 +1653,9 @@ namespace TDMaker
                     lbMtnProfiles.SelectedIndex = sel;
                 }
             }
-
         }
 
-        void ChkProxyEnableCheckedChanged(object sender, EventArgs e)
+        private void ChkProxyEnableCheckedChanged(object sender, EventArgs e)
         {
             Engine.conf.ProxyEnabled = chkProxyEnable.Checked;
         }
@@ -1695,7 +1683,7 @@ namespace TDMaker
             }
         }
 
-        void LbMediaInfoSelectedIndexChanged(object sender, EventArgs e)
+        private void LbMediaInfoSelectedIndexChanged(object sender, EventArgs e)
         {
             if (lbMediaInfo.SelectedIndex > -1)
             {
@@ -1703,22 +1691,12 @@ namespace TDMaker
             }
         }
 
-        void LbPublishSelectedIndexChanged(object sender, EventArgs e)
+        private void LbPublishSelectedIndexChanged(object sender, EventArgs e)
         {
             if (lbPublish.SelectedIndex > -1)
             {
                 CreatePublishUser();
             }
-        }
-
-        private void txtImageShackRegCode_TextChanged(object sender, EventArgs e)
-        {
-            Engine.conf.ImageShackRegCode = txtImageShackRegCode.Text;
-        }
-
-        private void chkUseImageShackRegCode_CheckedChanged(object sender, EventArgs e)
-        {
-            Engine.conf.UseImageShackRegCode = chkUseImageShackRegCode.Checked;
         }
 
         private void cboMediaType_SelectedIndexChanged(object sender, EventArgs e)
@@ -1809,6 +1787,12 @@ namespace TDMaker
         private void MainWindow_Resize(object sender, EventArgs e)
         {
             this.Refresh();
+        }
+
+        private void btnUploadersConfig_Click(object sender, EventArgs e)
+        {
+            UploadersConfigForm form = new UploadersConfigForm(Engine.MyUploadersConfig, ZKeys.GetAPIKeys());
+            form.Show();
         }
     }
 }
