@@ -293,6 +293,11 @@ namespace TDMaker
                     Engine.conf.MTNPath = dlg.FileName;
                 }
             }
+
+            if (Loader.ExplorerFilePaths.Count > 0)
+            {
+                LoadMedia(Loader.ExplorerFilePaths.ToArray());
+            }
         }
 
         private void SettingsWrite()
