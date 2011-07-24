@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using UploadersLib;
 
 namespace TDMakerLib
 {
@@ -62,25 +59,9 @@ namespace TDMakerLib
         CREATE_TORRENT
     }
 
-    public enum ImageDestType2
-    {
-        [Description("ImageShack - www.imageshack.us")]
-        IMAGESHACK,
-        [Description("TinyPic - www.tinypic.com")]
-        TINYPIC,
-        [Description("ImageBin - www.imagebin.ca")]
-        IMAGEBIN,
-        [Description("Img1 - www.img1.us")]
-        IMG1,
-        [Description("Imgur - www.imgur.com")]
-        IMGUR,
-        [Description("File")]
-        FILE
-    }
-
     public static class ImageDestType2Extensions
     {
-        public static string ToDescriptionString(this ImageDestType2 val)
+        public static string ToDescriptionString(this ImageUploaderType val)
         {
             DescriptionAttribute[] attributes = (DescriptionAttribute[])val.GetType().GetField(val.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
             return attributes.Length > 0 ? attributes[0].Description : string.Empty;

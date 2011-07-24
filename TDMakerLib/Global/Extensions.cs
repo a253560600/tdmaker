@@ -1,4 +1,5 @@
 #region License Information (GPL v2)
+
 /*
     TDMaker - A program that allows you to upload screenshots in one keystroke.
     Copyright (C) 2008-2009  Brandon Zimmerman
@@ -16,18 +17,15 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-    
+
     Optionally you can also view the license at <http://www.gnu.org/licenses/>.
 */
-#endregion
+
+#endregion License Information (GPL v2)
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Reflection;
-using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace TDMakerLib
@@ -42,17 +40,6 @@ namespace TDMakerLib
         public static int Mid(this int number, int min, int max)
         {
             return Math.Min(Math.Max(number, min), max);
-        }
-
-        public static string[] GetDescriptions(this Type type)
-        {
-            string[] descriptions = new string[Enum.GetValues(type).Length];
-            int i = 0;
-            foreach (int value in Enum.GetValues(type))
-            {
-                descriptions[i++] = UploadersLib.Extensions.GetDescription((Enum)Enum.ToObject(type, value));
-            }
-            return descriptions;
         }
 
         public static Point Intersect(this Point point, Rectangle rect)

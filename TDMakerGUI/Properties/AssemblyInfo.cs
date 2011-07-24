@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("McoreD")]
 [assembly: AssemblyProduct("TDMaker")]
-[assembly: AssemblyCopyright("Copyright © McoreD 2009 - 2010")]
+[assembly: AssemblyCopyright("Copyright © McoreD 2009 - 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

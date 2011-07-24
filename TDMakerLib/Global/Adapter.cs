@@ -1,4 +1,5 @@
 ﻿#region License Information (GPL v2)
+
 /*
     TDMaker - A program that allows you to upload screenshots in one keystroke.
     Copyright (C) 2008-2009  Brandon Zimmerman
@@ -16,18 +17,18 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-    
+
     Optionally you can also view the license at <http://www.gnu.org/licenses/>.
 */
-#endregion
 
-using System;
-using System.Text;
-using UploadersLib.Helpers;
-using System.Text.RegularExpressions;
-using System.IO;
-using System.Windows.Forms;
+#endregion License Information (GPL v2)
+
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using UploadersLib.HelperClasses;
 
 namespace TDMakerLib
 {
@@ -39,7 +40,7 @@ namespace TDMakerLib
         public static ProxySettings CheckProxySettings()
         {
             FileSystem.AppendDebug("Proxy Enabled: " + Engine.conf.ProxyEnabled.ToString());
-            return new ProxySettings { ProxyEnabled = Engine.conf.ProxyEnabled, ProxyActive = Engine.conf.ProxySettings };
+            return new ProxySettings { ProxyActive = Engine.conf.ProxySettings };
         }
 
         public static string GetMtnArg(XMLSettingsScreenshot screenshotSettings)
@@ -221,7 +222,6 @@ namespace TDMakerLib
 
         public static string GetMediaName(string p)
         {
-
             string name = "";
 
             if (File.Exists(p))
@@ -244,7 +244,6 @@ namespace TDMakerLib
             }
 
             return name;
-
         }
 
         public static bool MediaIsAudio(string dir)
@@ -388,7 +387,6 @@ namespace TDMakerLib
             return ss;
         }
 
-
         #region Publish
 
         public static string CreatePublish(TorrentInfo ti, PublishOptionsPacket pop)
@@ -424,6 +422,6 @@ namespace TDMakerLib
             return pt;
         }
 
-        #endregion
+        #endregion Publish
     }
 }

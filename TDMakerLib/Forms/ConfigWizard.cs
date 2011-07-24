@@ -1,4 +1,5 @@
 #region License Information (GPL v2)
+
 /*
     TDMaker - A program that allows you to upload screenshots in one keystroke.
     Copyright (C) 2008-2009  Brandon Zimmerman
@@ -16,10 +17,11 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-    
+
     Optionally you can also view the license at <http://www.gnu.org/licenses/>.
 */
-#endregion
+
+#endregion License Information (GPL v2)
 
 using System;
 using System.Diagnostics;
@@ -27,38 +29,39 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using UploadersLib;
-using TDMakerLib;
 
 namespace TDMakerLib
 {
-    public partial class ConfigWizard : Form 
+    public partial class ConfigWizard : Form
     {
         public bool PreferSystemFolders { get; private set; }
+
         public string RootFolder { get; private set; }
-        public ImageDestType2 ImageDestinationType { get; private set; }
+
+        public ImageUploaderType ImageDestinationType { get; private set; }
 
         public ConfigWizard(string rootDir)
         {
             InitializeComponent();
             this.Text = string.Format("TDMaker {0} - Configuration Wizard", Application.ProductVersion);
-            chkPreferSystemFolders.Checked = Engine.mAppSettings.PreferSystemFolders;
+            chkPreferSystemFolders.Checked = Engine.AppConf.PreferSystemFolders;
             txtRootFolder.Text = rootDir;
             this.RootFolder = rootDir;
-            foreach (ImageDestType2 sdt in Enum.GetValues(typeof(ImageDestType2)))
+            foreach (ImageUploaderType sdt in Enum.GetValues(typeof(ImageUploaderType)))
             {
-                cboScreenshotDest.Items.Add(sdt.GetDescription());
+                cboScreenshotDest.Items.Add(sdt.ToDescriptionString());
             }
-            cboScreenshotDest.SelectedIndex = (int)ImageDestType2.IMAGESHACK;
+            cboScreenshotDest.SelectedIndex = (int)ImageUploaderType.IMAGESHACK;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
-            Engine.mAppSettings.RootDir = this.RootFolder;
-            Engine.mAppSettings.PreferSystemFolders = this.PreferSystemFolders;
-            Engine.mAppSettings.ImageUploader = this.ImageDestinationType;
+            Engine.AppConf.RootDir = this.RootFolder;
+            Engine.AppConf.PreferSystemFolders = this.PreferSystemFolders;
+            Engine.AppConf.ImageUploader = this.ImageDestinationType;
             Engine.InitializeDefaultFolderPaths();
-            Debug.WriteLine(Engine.mAppSettings.XMLSettingsFile);            
+            Debug.WriteLine(Engine.AppConf.XMLSettingsFile);
             this.Close();
         }
 
@@ -76,9 +79,9 @@ namespace TDMakerLib
 
             if (!string.IsNullOrEmpty(newDir))
             {
-            	txtRootFolder.Text = newDir;
+                txtRootFolder.Text = newDir;
                 RootFolder = txtRootFolder.Text;
-                FileSystem.MoveDirectory(oldDir, txtRootFolder.Text);            	
+                FileSystem.MoveDirectory(oldDir, txtRootFolder.Text);
             }
         }
 
@@ -92,7 +95,7 @@ namespace TDMakerLib
 
         private void cboScreenshotDest_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ImageDestinationType = (ImageDestType2)cboScreenshotDest.SelectedIndex;
+            ImageDestinationType = (ImageUploaderType)cboScreenshotDest.SelectedIndex;
         }
 
         private void chkPreferSystemFolders_CheckedChanged(object sender, EventArgs e)

@@ -24,7 +24,7 @@ namespace TDMakerLib
             sbDesc.AppendLine(Application.StartupPath);
             sbDesc.AppendLine();
             sbDesc.AppendLine("Settings file:");
-            sbDesc.AppendLine(Engine.mAppSettings.XMLSettingsFile);
+            sbDesc.AppendLine(Engine.AppConf.XMLSettingsFile);
             MediaInfoLib.MediaInfo mi = new MediaInfoLib.MediaInfo();
             sbDesc.AppendLine();
             sbDesc.AppendLine("Using:");
