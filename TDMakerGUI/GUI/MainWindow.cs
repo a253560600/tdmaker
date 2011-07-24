@@ -55,7 +55,7 @@ namespace TDMaker
             // checks
             if (string.IsNullOrEmpty(cboSource.Text) && Engine.conf.PublishInfoTypeChoice != PublishInfoType.MediaInfo)
             {
-                sbMsg.AppendLine("Source was empty.");
+                sbMsg.AppendLine("Source information is mandatory. Use the Source drop down menu to select the correct source type.");
             }
 
             if (sbMsg.Length > 0)

@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "TDMaker"     
-#define ExePath "TDMaker\bin\Release\TDMaker.exe"
+#define ExePath "TDMakerGUI\bin\Release\TDMaker.exe"
 #define MyAppVersion GetStringFileInfo(ExePath, "Assembly Version")
 #define MyAppPublisher "TDMaker Developers"
 #define MyAppURL "http://code.google.com/p/TDMaker"
@@ -27,8 +27,8 @@ CreateAppDir=true
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 DirExistsWarning=no
-InfoAfterFile=TDMakerLib\Documents\license.txt
-InfoBeforeFile=TDMakerLib\Documents\VersionHistory.txt
+InfoAfterFile=TDMakerLib\license.txt
+InfoBeforeFile=TDMakerLib\VersionHistory.txt
 InternalCompressLevel=ultra64
 LanguageDetectionMethod=uilanguage
 MinVersion=4.90.3000,5.0.2195sp3
@@ -55,8 +55,13 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: TDMaker\bin\Release\*.exe; Excludes: *.vshost.exe; DestDir: {app}; Flags: ignoreversion
-Source: TDMaker\bin\Release\*.dll; DestDir: {app}; Flags: ignoreversion
+Source: TDMakerGUI\bin\Release\*.exe; Excludes: *.vshost.exe; DestDir: {app}; Flags: ignoreversion
+Source: TDMakerGUI\bin\Release\*.dll; DestDir: {app}; Flags: ignoreversion
+
+Source: "MTN\*.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "MTN\*.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Lib\32-bit\MediaInfo.dll"; DestDir: "{app}"; Flags: ignoreversion; Check: Not IsWin64
+Source: "Lib\64-bit\MediaInfo.dll"; DestDir: "{app}"; Flags: ignoreversion; Check: IsWin64
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppMyAppName}"
