@@ -161,10 +161,8 @@
     <PreBuildEvent>if $(ConfigurationName) == Release "$(SolutionDir)Tools\SVNRevToAssemblyInfo.exe" dir "$(ProjectDir)" file "$(ProjectDir)Properties\AssemblyInfo.cs"</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Release "$(SolutionDir)Tools\Sgen.exe" /a:"TDMakerLib.dll" /f /t:"TDMakerLib.XMLSettingsCore" /v
-if $(ConfigurationName) == Release "$(SolutionDir)Tools\Sgen.exe" /a:"TDMakerLib.dll" /f /t:"TDMakerLib.XMLSettingsMtnProfiles" /v
-if $(ConfigurationName) == Release "$(SolutionDir)Tools\Sgen.exe" /a:"TDMakerLib.dll" /f /t:"TDMakerLib.XMLSettingsScreenshot" /v
-if $(ConfigurationName) == Release "$(SolutionDir)Tools\Sgen.exe" /a:"UploadersLib.dll" /f /t:"UploadersLib.UploadersConfig"/v</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Release "$(SolutionDir)Tools\Sgen.exe" /a:"TDMakerLib.dll" /f /t:"TDMakerLib.XMLSettingsCore" /t:"TDMakerLib.XMLSettingsMtnProfiles" /t:"TDMakerLib.XMLSettingsScreenshot" /v
+</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
