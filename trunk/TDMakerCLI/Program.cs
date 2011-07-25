@@ -144,11 +144,11 @@ namespace TDMakerCLI
             {
                 if (Directory.Exists(mScreenshotDir))
                 {
-                    ti.CreateScreenshots(mScreenshotDir);
+                    ti.CreateUploadScreenshots(mScreenshotDir);
                 }
                 else
                 {
-                    ti.CreateScreenshots();
+                    ti.CreateUploadScreenshots();
                 }
             }
         }
