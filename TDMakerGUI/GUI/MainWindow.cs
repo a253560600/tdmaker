@@ -658,10 +658,8 @@ namespace TDMaker
 
                 // creates screenshot
                 mi.UploadScreenshots = wt.UploadScreenshot;
-                if (wt.UploadScreenshot)
-                {
-                    ti.CreateScreenshots();
-                }
+                ti.CreateUploadScreenshots();
+
                 ti.PublishString = CreatePublishInitial(ti);
                 bwApp.ReportProgress((int)ProgressType.REPORT_TORRENTINFO, ti);
 
@@ -888,7 +886,7 @@ namespace TDMaker
 
                     case ProgressType.UPDATE_SCREENSHOTS_LIST:
                         Screenshot sp = (Screenshot)e.UserState;
-                        if (sp != null)
+                        if (sp != null && !string.IsNullOrEmpty(sp.LocalPath))
                         {
                             lbScreenshots.Items.Add(sp);
                             lbScreenshots.SelectedIndex = lbScreenshots.Items.Count - 1;

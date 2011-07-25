@@ -43,19 +43,19 @@ namespace TDMakerLib
         /// <summary>
         /// Createa and upload screenshots
         /// </summary>
-        public void CreateScreenshots()
+        public void CreateUploadScreenshots()
         {
-            TakeScreenshots();
+            CreateScreenshots();
             UploadScreenshots();
         }
 
-        public void CreateScreenshots(string ssDir)
+        public void CreateUploadScreenshots(string ssDir)
         {
             TakeScreenshots(ssDir);
             UploadScreenshots();
         }
 
-        private void TakeScreenshots()
+        public void CreateScreenshots()
         {
             foreach (MediaFile mf in this.MediaMy.MediaFiles)
             {
@@ -101,6 +101,7 @@ namespace TDMakerLib
         {
             bool success = true;
             String mediaFilePath = mf.FilePath;
+
             Debug.WriteLine("Taking Screenshot for " + Path.GetFileName(mediaFilePath));
 
             ReportProgress(ProgressType.UPDATE_STATUSBAR_DEBUG, "Taking Screenshot for " + Path.GetFileName(mediaFilePath));
@@ -161,27 +162,30 @@ namespace TDMakerLib
             return success;
         }
 
-        private void UploadScreenshots()
+        public void UploadScreenshots()
         {
             foreach (MediaFile mf in this.MediaMy.MediaFiles)
             {
-                UploadResult ur = UploadScreenshot(mf.FilePath);
-                if (ur != null && mf.Screenshot != null)
+                string ssPath = Path.Combine(FileSystem.GetScreenShotsDir(mf.FilePath), Path.GetFileNameWithoutExtension(mf.FilePath) + Engine.mtnProfileMgr.GetMtnProfileActive().o_OutputSuffix);
+                mf.Screenshot.LocalPath = ssPath;
+                if (MediaMy.UploadScreenshots)
                 {
-                    mf.Screenshot.LocalPath = ur.LocalFilePath;
-                    if (!string.IsNullOrEmpty(ur.URL))
+                    UploadResult ur = UploadScreenshot(ssPath);
+                    if (ur != null && mf.Screenshot != null)
                     {
-                        mf.Screenshot.Full = ur.GetFullImageUrl();
-                        mf.Screenshot.LinkedThumbnail = ur.ThumbnailURL;
+                        if (!string.IsNullOrEmpty(ur.URL))
+                        {
+                            mf.Screenshot.Full = ur.GetFullImageUrl();
+                            mf.Screenshot.LinkedThumbnail = ur.ThumbnailURL;
+                        }
                     }
-                    ReportProgress(ProgressType.UPDATE_SCREENSHOTS_LIST, mf.Screenshot);
                 }
+                ReportProgress(ProgressType.UPDATE_SCREENSHOTS_LIST, mf.Screenshot);
             }
         }
 
-        private UploadResult UploadScreenshot(string mediaFilePath)
+        private UploadResult UploadScreenshot(string ssPath)
         {
-            string ssPath = Path.Combine(FileSystem.GetScreenShotsDir(mediaFilePath), Path.GetFileNameWithoutExtension(mediaFilePath) + Engine.mtnProfileMgr.GetMtnProfileActive().o_OutputSuffix);
             ImageUploader imageUploader = null;
             UploadResult ur = null;
 
