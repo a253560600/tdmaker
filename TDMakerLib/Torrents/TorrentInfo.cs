@@ -47,7 +47,7 @@ namespace TDMakerLib
         /// </summary>
         public void CreateUploadScreenshots()
         {
-            CreateScreenshots();
+            TakeScreenshots();
             UploadScreenshots();
         }
 
@@ -55,48 +55,6 @@ namespace TDMakerLib
         {
             TakeScreenshots(ssDir);
             UploadScreenshots();
-        }
-
-        public void CreateScreenshots()
-        {
-            foreach (MediaFile mf in this.MediaMy.MediaFiles)
-            {
-                TakeScreenshot(mf);
-            }
-        }
-
-        private void TakeScreenshots(string ssDir)
-        {
-            foreach (MediaFile mf in this.MediaMy.MediaFiles)
-            {
-                TakeScreenshot(mf, ssDir);
-            }
-        }
-
-        private void ReportProgress(ProgressType percentProgress, object userState)
-        {
-            if (BwAppMy != null)
-            {
-                BwAppMy.ReportProgress((int)percentProgress, userState);
-            }
-            else
-            {
-                switch (percentProgress)
-                {
-                    case ProgressType.UPDATE_STATUSBAR_DEBUG:
-                        Console.WriteLine((string)userState);
-                        break;
-                    case ProgressType.UPDATE_SCREENSHOTS_LIST:
-                        Screenshot ss = userState as Screenshot;
-                        Console.WriteLine("Screenshot: " + ss.FullImageLink);
-                        break;
-                }
-            }
-        }
-
-        private bool TakeScreenshot(MediaFile mf)
-        {
-            return TakeScreenshot(mf, FileSystem.GetScreenShotsDir(mf.FilePath));
         }
 
         private bool TakeScreenshot(MediaFile mf, string ssDir)
@@ -137,6 +95,22 @@ namespace TDMakerLib
             }
 
             return success;
+        }
+
+        private void TakeScreenshots(string ssDir)
+        {
+            foreach (MediaFile mf in this.MediaMy.MediaFiles)
+            {
+                TakeScreenshot(mf, ssDir);
+            }
+        }
+
+        public void TakeScreenshots()
+        {
+            foreach (MediaFile mf in this.MediaMy.MediaFiles)
+            {
+                TakeScreenshot(mf, FileSystem.GetScreenShotsDir(mf.FilePath));
+            }
         }
 
         public void UploadScreenshots()
@@ -275,6 +249,27 @@ namespace TDMakerLib
             sbPublish.Append(GetMediaInfo(info, pop));
 
             return sbPublish.ToString().Trim();
+        }
+
+        private void ReportProgress(ProgressType percentProgress, object userState)
+        {
+            if (BwAppMy != null)
+            {
+                BwAppMy.ReportProgress((int)percentProgress, userState);
+            }
+            else
+            {
+                switch (percentProgress)
+                {
+                    case ProgressType.UPDATE_STATUSBAR_DEBUG:
+                        Console.WriteLine((string)userState);
+                        break;
+                    case ProgressType.UPDATE_SCREENSHOTS_LIST:
+                        Screenshot ss = userState as Screenshot;
+                        Console.WriteLine("Screenshot: " + ss.FullImageLink);
+                        break;
+                }
+            }
         }
 
         public string GetMediaInfo(string p, PublishOptionsPacket options)

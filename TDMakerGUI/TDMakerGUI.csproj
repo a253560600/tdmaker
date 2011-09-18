@@ -102,7 +102,6 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\info-16-xp.png" />
