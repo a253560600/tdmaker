@@ -94,6 +94,33 @@ namespace TDMakerLib
             }
         }
 
+        /// <summary>
+        /// Function to populate MediaInfo class
+        /// </summary>
+        public void ReadMedia()
+        {
+            switch (MediaTypeChoice)
+            {
+                case MediaType.MediaIndiv:
+                    if (File.Exists(Location))
+                    {
+                        ReadMediaFile();
+                    }
+                    else
+                    {
+                        ReadDirectory();
+                    }
+                    break;
+                case MediaType.MediaCollection:
+                    ReadMediaFileCollection();
+                    break;
+                case MediaType.MediaDisc:
+                case MediaType.MusicAudioAlbum:
+                    ReadDirectory();
+                    break;
+            }
+        }
+
         public List<string> GetFilesToProcess(string dir)
         {
             List<string> filePaths = new List<string>();
@@ -267,31 +294,9 @@ namespace TDMakerLib
             }
         }
 
-        /// <summary>
-        /// Function to populate MediaInfo class
-        /// </summary>
-        public void ReadMedia()
+        public override string ToString()
         {
-            switch (MediaTypeChoice)
-            {
-                case MediaType.MediaIndiv:
-                    if (File.Exists(Location))
-                    {
-                        ReadMediaFile();
-                    }
-                    else
-                    {
-                        ReadDirectory();
-                    }
-                    break;
-                case MediaType.MediaCollection:
-                    ReadMediaFileCollection();
-                    break;
-                case MediaType.MediaDisc:
-                case MediaType.MusicAudioAlbum:
-                    ReadDirectory();
-                    break;
-            }
+            return Path.GetFileName(Location);
         }
 
         /// <summary>
@@ -530,11 +535,6 @@ namespace TDMakerLib
         public string GetTotalDurationString()
         {
             return Adapter.GetDurationString(GetTotalDuration());
-        }
-
-        public override string ToString()
-        {
-            return Path.GetFileName(Location);
         }
 
         public bool HasScreenshots()

@@ -44,9 +44,76 @@ namespace TDMaker
             LoadMedia(paths);
         }
 
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
+            ConfigureDirs();
+            // ConfigureGUIForUnix();
+            SettingsRead();
+
+            // Logo
+            string logo1 = Path.Combine(Application.StartupPath, "logo1.png");
+            if (!File.Exists(logo1))
+            {
+                logo1 = Path.Combine(Engine.SettingsDir, "logo1.png");
+            }
+
+            string logo2 = Path.Combine(Application.StartupPath, "logo.png");
+            if (!File.Exists(logo2))
+            {
+                logo2 = Path.Combine(Engine.SettingsDir, "logo.png");
+            }
+
+            if (File.Exists(logo1))
+            {
+                gbLocation.BackgroundImage = Image.FromFile(logo1);
+                gbLocation.BackgroundImageLayout = ImageLayout.Stretch;
+            }
+            else if (File.Exists(logo2))
+            {
+                //this.BackgroundImage = Image.FromFile(logo);
+                //this.BackgroundImageLayout = ImageLayout.Tile;
+                //tpMedia.BackgroundImage = Image.FromFile(logo);
+                //tpMedia.BackgroundImageLayout = ImageLayout.None;
+                pbLogo.BackgroundImage = Image.FromFile(logo2);
+                pbLogo.BackgroundImageLayout = ImageLayout.Stretch;
+                pbLogo.BackColor = System.Drawing.SystemColors.ControlDark;
+                this.BackColor = System.Drawing.SystemColors.ControlDark;
+            }
+
+            sBar.Text = string.Format("Ready.");
+
+            this.Text = Engine.GetProductName();
+
+            UpdateGuiControls();
+
+            if (Engine.conf.UpdateCheckAuto)
+            {
+                CheckUpdates();
+            }
+        }
+
         private void MakeGUIReadyForAnalysis()
         {
             pBar.Value = 0;
+        }
+
+        private void bwApp_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // start of the magic :)
+
+            WorkerTask wt = (WorkerTask)e.Argument;
+
+            Loader.CurrentTask = wt.Task;
+
+            switch (wt.Task)
+            {
+                case TaskType.ANALYZE_MEDIA:
+                    e.Result = WorkerAnalyzeMedia(wt);
+                    break;
+                case TaskType.CREATE_TORRENT:
+                    WorkerCreateTorrents(wt);
+                    break;
+            }
         }
 
         private bool ValidateInput()
@@ -154,6 +221,11 @@ namespace TDMaker
             }
 
             return mi;
+        }
+
+        private void btnCreateTorrent_Click(object sender, EventArgs e)
+        {
+            CreateTorrentButton();
         }
 
         private void AnalyzeMedia(WorkerTask wt)
@@ -329,54 +401,6 @@ namespace TDMaker
             Engine.conf.Write();
             Engine.MyUploadersConfig.Save(Engine.UploadersConfigPath);
             Engine.mtnProfileMgr.Write();
-        }
-
-        private void MainWindow_Load(object sender, EventArgs e)
-        {
-            ConfigureDirs();
-            // ConfigureGUIForUnix();
-            SettingsRead();
-
-            // Logo
-            string logo1 = Path.Combine(Application.StartupPath, "logo1.png");
-            if (!File.Exists(logo1))
-            {
-                logo1 = Path.Combine(Engine.SettingsDir, "logo1.png");
-            }
-
-            string logo2 = Path.Combine(Application.StartupPath, "logo.png");
-            if (!File.Exists(logo2))
-            {
-                logo2 = Path.Combine(Engine.SettingsDir, "logo.png");
-            }
-
-            if (File.Exists(logo1))
-            {
-                gbLocation.BackgroundImage = Image.FromFile(logo1);
-                gbLocation.BackgroundImageLayout = ImageLayout.Stretch;
-            }
-            else if (File.Exists(logo2))
-            {
-                //this.BackgroundImage = Image.FromFile(logo);
-                //this.BackgroundImageLayout = ImageLayout.Tile;
-                //tpMedia.BackgroundImage = Image.FromFile(logo);
-                //tpMedia.BackgroundImageLayout = ImageLayout.None;
-                pbLogo.BackgroundImage = Image.FromFile(logo2);
-                pbLogo.BackgroundImageLayout = ImageLayout.Stretch;
-                pbLogo.BackColor = System.Drawing.SystemColors.ControlDark;
-                this.BackColor = System.Drawing.SystemColors.ControlDark;
-            }
-
-            sBar.Text = string.Format("Ready.");
-
-            this.Text = Engine.GetProductName();
-
-            UpdateGuiControls();
-
-            if (Engine.conf.UpdateCheckAuto)
-            {
-                CheckUpdates();
-            }
         }
 
         private void ConfigureDirs()
@@ -738,25 +762,6 @@ namespace TDMaker
             return null;
         }
 
-        private void bwApp_DoWork(object sender, DoWorkEventArgs e)
-        {
-            // start of the magic :)
-
-            WorkerTask wt = (WorkerTask)e.Argument;
-
-            Loader.CurrentTask = wt.Task;
-
-            switch (wt.Task)
-            {
-                case TaskType.ANALYZE_MEDIA:
-                    e.Result = WorkerAnalyzeMedia(wt);
-                    break;
-                case TaskType.CREATE_TORRENT:
-                    WorkerCreateTorrents(wt);
-                    break;
-            }
-        }
-
         private void UpdateGuiControls()
         {
             btnCreateTorrent.Enabled = !bwApp.IsBusy && lbPublish.Items.Count > 0;
@@ -1003,10 +1008,7 @@ namespace TDMaker
             }
         }
 
-        private void btnCreateTorrent_Click(object sender, EventArgs e)
-        {
-            CreateTorrentButton();
-        }
+        public const string URL_UPDATE = "http://zscreen.googlecode.com/svn/trunk/Update.xml";
 
         private void btnBrowseTorrentCustomFolder_Click(object sender, EventArgs e)
         {
@@ -1147,7 +1149,10 @@ namespace TDMaker
             }
         }
 
-        public const string URL_UPDATE = "http://zscreen.googlecode.com/svn/trunk/Update.xml";
+        private void cboTemplate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Engine.conf.TemplateIndex = cboTemplate.SelectedIndex;
+        }
         private void updateThread_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = (BackgroundWorker)sender;
@@ -1324,6 +1329,11 @@ namespace TDMaker
             ShowAboutWindow();
         }
 
+        private void MainWindow_Resize(object sender, EventArgs e)
+        {
+            this.Refresh();
+        }
+
         private void miFileOpenFile_Click(object sender, EventArgs e)
         {
             OpenFile();
@@ -1444,9 +1454,12 @@ namespace TDMaker
             // we dont save this
         }
 
-        private void cboTemplate_SelectedIndexChanged(object sender, EventArgs e)
+        private void MainWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Engine.conf.TemplateIndex = cboTemplate.SelectedIndex;
+            // this.WindowState = FormWindowState.Minimized;
+            SettingsWrite();
+            pbScreenshot.ImageLocation = null; // need this to successfully clear screenshots
+            Engine.ClearScreenshots();
         }
 
         private void chkUploadFullScreenshot_CheckedChanged(object sender, EventArgs e)
@@ -1733,14 +1746,6 @@ namespace TDMaker
             UpdateGuiControls();
         }
 
-        private void MainWindow_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            // this.WindowState = FormWindowState.Minimized;
-            SettingsWrite();
-            pbScreenshot.ImageLocation = null; // need this to successfully clear screenshots
-            Engine.ClearScreenshots();
-        }
-
         private void btnScreenshotsLocBrowse_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dlg = new FolderBrowserDialog();
@@ -1799,11 +1804,6 @@ namespace TDMaker
                     lbFiles.Items.Remove(fd);
                 }
             }
-        }
-
-        private void MainWindow_Resize(object sender, EventArgs e)
-        {
-            this.Refresh();
         }
 
         private void btnUploadersConfig_Click(object sender, EventArgs e)

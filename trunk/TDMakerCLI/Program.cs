@@ -111,9 +111,9 @@ namespace TDMakerCLI
                     mwo.MediaTypeChoice = MediaType.MediaCollection;
                 }
                 MediaInfo2 mi = new MediaInfo2(mwo.MediaTypeChoice, mMediaLoc);
-                TorrentInfo ti = new TorrentInfo(mi);
                 mi.ReadMedia();
 
+                TorrentInfo ti = new TorrentInfo(mi);
                 CreateScreenshot(ti);
                 CreatePublish(ti);
                 CreateTorrent(ti);
