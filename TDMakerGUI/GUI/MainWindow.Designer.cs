@@ -126,20 +126,20 @@ namespace TDMaker
             this.txtPublish = new System.Windows.Forms.TextBox();
             this.lbPublish = new System.Windows.Forms.ListBox();
             this.tpScreenshotOptions = new System.Windows.Forms.TabPage();
-            this.gbThumbnailer = new System.Windows.Forms.GroupBox();
-            this.cboThumbnailer = new System.Windows.Forms.ComboBox();
             this.tcThumbnailers = new System.Windows.Forms.TabControl();
             this.tpThumbnailersGeneral = new System.Windows.Forms.TabPage();
+            this.gbUploadScreenshots = new System.Windows.Forms.GroupBox();
+            this.flpScreenshots = new System.Windows.Forms.FlowLayoutPanel();
+            this.chkScreenshotUpload = new System.Windows.Forms.CheckBox();
+            this.cboScreenshotDest = new System.Windows.Forms.ComboBox();
             this.btnUploadersConfig = new System.Windows.Forms.Button();
+            this.gbThumbnailer = new System.Windows.Forms.GroupBox();
+            this.cboThumbnailer = new System.Windows.Forms.ComboBox();
             this.gbScreenshotsLoc = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cboScreenshotsLoc = new System.Windows.Forms.ComboBox();
             this.txtScreenshotsLoc = new System.Windows.Forms.TextBox();
             this.btnScreenshotsLocBrowse = new System.Windows.Forms.Button();
-            this.flpScreenshots = new System.Windows.Forms.FlowLayoutPanel();
-            this.chkScreenshotUpload = new System.Windows.Forms.CheckBox();
-            this.cboScreenshotDest = new System.Windows.Forms.ComboBox();
-            this.tpMPlayer = new System.Windows.Forms.TabPage();
             this.tpMtn = new System.Windows.Forms.TabPage();
             this.tlpMTN = new System.Windows.Forms.TableLayoutPanel();
             this.tlpMtnUsage = new System.Windows.Forms.TableLayoutPanel();
@@ -150,6 +150,7 @@ namespace TDMaker
             this.btnRemoveMtnProfile = new System.Windows.Forms.Button();
             this.lbMtnProfiles = new System.Windows.Forms.ListBox();
             this.txtMtnArgs = new System.Windows.Forms.TextBox();
+            this.tpMPlayer = new System.Windows.Forms.TabPage();
             this.tpPublishOptions = new System.Windows.Forms.TabPage();
             this.cboPublishType = new System.Windows.Forms.ComboBox();
             this.btnTemplatesRewrite = new System.Windows.Forms.Button();
@@ -200,7 +201,7 @@ namespace TDMaker
             this.rtbDebugLog = new System.Windows.Forms.RichTextBox();
             this.tpAdvanced = new System.Windows.Forms.TabPage();
             this.pgApp = new System.Windows.Forms.PropertyGrid();
-            this.gbUploadScreenshots = new System.Windows.Forms.GroupBox();
+            this.pgMPlayerOptions = new System.Windows.Forms.PropertyGrid();
             this.statusStrip1.SuspendLayout();
             this.cmsApp.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -222,16 +223,18 @@ namespace TDMaker
             this.gbQuickPublish.SuspendLayout();
             this.flpPublishConfig.SuspendLayout();
             this.tpScreenshotOptions.SuspendLayout();
-            this.gbThumbnailer.SuspendLayout();
             this.tcThumbnailers.SuspendLayout();
             this.tpThumbnailersGeneral.SuspendLayout();
-            this.gbScreenshotsLoc.SuspendLayout();
+            this.gbUploadScreenshots.SuspendLayout();
             this.flpScreenshots.SuspendLayout();
+            this.gbThumbnailer.SuspendLayout();
+            this.gbScreenshotsLoc.SuspendLayout();
             this.tpMtn.SuspendLayout();
             this.tlpMTN.SuspendLayout();
             this.tlpMtnUsage.SuspendLayout();
             this.tlpMtnProfiles.SuspendLayout();
             this.flpMtn.SuspendLayout();
+            this.tpMPlayer.SuspendLayout();
             this.tpPublishOptions.SuspendLayout();
             this.gbTemplatesInternal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFontSizeIncr)).BeginInit();
@@ -251,7 +254,6 @@ namespace TDMaker
             this.tpProxy.SuspendLayout();
             this.tpDebug.SuspendLayout();
             this.tpAdvanced.SuspendLayout();
-            this.gbUploadScreenshots.SuspendLayout();
             this.SuspendLayout();
             // 
             // bwApp
@@ -696,7 +698,7 @@ namespace TDMaker
             this.tpMedia.Controls.Add(this.gbLocation);
             this.tpMedia.Location = new System.Drawing.Point(4, 22);
             this.tpMedia.Name = "tpMedia";
-            this.tpMedia.Size = new System.Drawing.Size(874, 566);
+            this.tpMedia.Size = new System.Drawing.Size(874, 486);
             this.tpMedia.TabIndex = 4;
             this.tpMedia.Text = "Input";
             this.tpMedia.UseVisualStyleBackColor = true;
@@ -954,7 +956,7 @@ namespace TDMaker
             this.tpMediaInfo.Location = new System.Drawing.Point(4, 22);
             this.tpMediaInfo.Name = "tpMediaInfo";
             this.tpMediaInfo.Padding = new System.Windows.Forms.Padding(3);
-            this.tpMediaInfo.Size = new System.Drawing.Size(874, 566);
+            this.tpMediaInfo.Size = new System.Drawing.Size(874, 486);
             this.tpMediaInfo.TabIndex = 0;
             this.tpMediaInfo.Text = "Media Info";
             this.tpMediaInfo.UseVisualStyleBackColor = true;
@@ -971,7 +973,7 @@ namespace TDMaker
             this.tlpMediaInfo.Name = "tlpMediaInfo";
             this.tlpMediaInfo.RowCount = 1;
             this.tlpMediaInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpMediaInfo.Size = new System.Drawing.Size(868, 560);
+            this.tlpMediaInfo.Size = new System.Drawing.Size(868, 480);
             this.tlpMediaInfo.TabIndex = 0;
             // 
             // lbMediaInfo
@@ -982,7 +984,7 @@ namespace TDMaker
             this.lbMediaInfo.IntegralHeight = false;
             this.lbMediaInfo.Location = new System.Drawing.Point(3, 3);
             this.lbMediaInfo.Name = "lbMediaInfo";
-            this.lbMediaInfo.Size = new System.Drawing.Size(167, 554);
+            this.lbMediaInfo.Size = new System.Drawing.Size(167, 474);
             this.lbMediaInfo.TabIndex = 0;
             this.lbMediaInfo.SelectedIndexChanged += new System.EventHandler(this.LbMediaInfoSelectedIndexChanged);
             // 
@@ -995,7 +997,7 @@ namespace TDMaker
             this.txtMediaInfo.Name = "txtMediaInfo";
             this.txtMediaInfo.ReadOnly = true;
             this.txtMediaInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtMediaInfo.Size = new System.Drawing.Size(689, 554);
+            this.txtMediaInfo.Size = new System.Drawing.Size(689, 474);
             this.txtMediaInfo.TabIndex = 1;
             // 
             // tpScreenshots
@@ -1004,7 +1006,7 @@ namespace TDMaker
             this.tpScreenshots.Location = new System.Drawing.Point(4, 22);
             this.tpScreenshots.Name = "tpScreenshots";
             this.tpScreenshots.Padding = new System.Windows.Forms.Padding(3);
-            this.tpScreenshots.Size = new System.Drawing.Size(874, 566);
+            this.tpScreenshots.Size = new System.Drawing.Size(874, 486);
             this.tpScreenshots.TabIndex = 1;
             this.tpScreenshots.Text = "Screenshots";
             this.tpScreenshots.UseVisualStyleBackColor = true;
@@ -1021,7 +1023,7 @@ namespace TDMaker
             this.tlpScreenshots.Name = "tlpScreenshots";
             this.tlpScreenshots.RowCount = 1;
             this.tlpScreenshots.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpScreenshots.Size = new System.Drawing.Size(868, 560);
+            this.tlpScreenshots.Size = new System.Drawing.Size(868, 480);
             this.tlpScreenshots.TabIndex = 1;
             // 
             // lbScreenshots
@@ -1032,7 +1034,7 @@ namespace TDMaker
             this.lbScreenshots.IntegralHeight = false;
             this.lbScreenshots.Location = new System.Drawing.Point(3, 3);
             this.lbScreenshots.Name = "lbScreenshots";
-            this.lbScreenshots.Size = new System.Drawing.Size(254, 554);
+            this.lbScreenshots.Size = new System.Drawing.Size(254, 474);
             this.lbScreenshots.TabIndex = 2;
             this.lbScreenshots.SelectedIndexChanged += new System.EventHandler(this.lbScreenshots_SelectedIndexChanged);
             // 
@@ -1049,7 +1051,7 @@ namespace TDMaker
             this.tlpScreenshotProps.RowCount = 2;
             this.tlpScreenshotProps.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tlpScreenshotProps.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlpScreenshotProps.Size = new System.Drawing.Size(608, 560);
+            this.tlpScreenshotProps.Size = new System.Drawing.Size(608, 480);
             this.tlpScreenshotProps.TabIndex = 3;
             // 
             // pbScreenshot
@@ -1058,7 +1060,7 @@ namespace TDMaker
             this.pbScreenshot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbScreenshot.Location = new System.Drawing.Point(3, 3);
             this.pbScreenshot.Name = "pbScreenshot";
-            this.pbScreenshot.Size = new System.Drawing.Size(602, 442);
+            this.pbScreenshot.Size = new System.Drawing.Size(602, 378);
             this.pbScreenshot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbScreenshot.TabIndex = 1;
             this.pbScreenshot.TabStop = false;
@@ -1068,10 +1070,10 @@ namespace TDMaker
             // 
             this.pgScreenshot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pgScreenshot.HelpVisible = false;
-            this.pgScreenshot.Location = new System.Drawing.Point(3, 451);
+            this.pgScreenshot.Location = new System.Drawing.Point(3, 387);
             this.pgScreenshot.Name = "pgScreenshot";
             this.pgScreenshot.PropertySort = System.Windows.Forms.PropertySort.NoSort;
-            this.pgScreenshot.Size = new System.Drawing.Size(602, 106);
+            this.pgScreenshot.Size = new System.Drawing.Size(602, 90);
             this.pgScreenshot.TabIndex = 2;
             this.pgScreenshot.ToolbarVisible = false;
             // 
@@ -1081,7 +1083,7 @@ namespace TDMaker
             this.tpPublish.Location = new System.Drawing.Point(4, 22);
             this.tpPublish.Name = "tpPublish";
             this.tpPublish.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPublish.Size = new System.Drawing.Size(874, 566);
+            this.tpPublish.Size = new System.Drawing.Size(874, 486);
             this.tpPublish.TabIndex = 2;
             this.tpPublish.Text = "Publish";
             this.tpPublish.UseVisualStyleBackColor = true;
@@ -1100,7 +1102,7 @@ namespace TDMaker
             this.tlpPublish.Name = "tlpPublish";
             this.tlpPublish.RowCount = 1;
             this.tlpPublish.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpPublish.Size = new System.Drawing.Size(868, 560);
+            this.tlpPublish.Size = new System.Drawing.Size(868, 480);
             this.tlpPublish.TabIndex = 2;
             // 
             // gbQuickPublish
@@ -1109,7 +1111,7 @@ namespace TDMaker
             this.gbQuickPublish.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbQuickPublish.Location = new System.Drawing.Point(725, 3);
             this.gbQuickPublish.Name = "gbQuickPublish";
-            this.gbQuickPublish.Size = new System.Drawing.Size(140, 554);
+            this.gbQuickPublish.Size = new System.Drawing.Size(140, 474);
             this.gbQuickPublish.TabIndex = 1;
             this.gbQuickPublish.TabStop = false;
             this.gbQuickPublish.Text = "Quick Options";
@@ -1125,7 +1127,7 @@ namespace TDMaker
             this.flpPublishConfig.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flpPublishConfig.Location = new System.Drawing.Point(3, 16);
             this.flpPublishConfig.Name = "flpPublishConfig";
-            this.flpPublishConfig.Size = new System.Drawing.Size(134, 535);
+            this.flpPublishConfig.Size = new System.Drawing.Size(134, 455);
             this.flpPublishConfig.TabIndex = 7;
             // 
             // chkQuickPre
@@ -1194,7 +1196,7 @@ namespace TDMaker
             this.txtPublish.Multiline = true;
             this.txtPublish.Name = "txtPublish";
             this.txtPublish.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtPublish.Size = new System.Drawing.Size(572, 554);
+            this.txtPublish.Size = new System.Drawing.Size(572, 474);
             this.txtPublish.TabIndex = 0;
             this.txtPublish.WordWrap = false;
             this.txtPublish.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPublish_KeyPress);
@@ -1206,7 +1208,7 @@ namespace TDMaker
             this.lbPublish.IntegralHeight = false;
             this.lbPublish.Location = new System.Drawing.Point(3, 3);
             this.lbPublish.Name = "lbPublish";
-            this.lbPublish.Size = new System.Drawing.Size(138, 554);
+            this.lbPublish.Size = new System.Drawing.Size(138, 474);
             this.lbPublish.TabIndex = 2;
             this.lbPublish.SelectedIndexChanged += new System.EventHandler(this.LbPublishSelectedIndexChanged);
             // 
@@ -1219,29 +1221,6 @@ namespace TDMaker
             this.tpScreenshotOptions.TabIndex = 6;
             this.tpScreenshotOptions.Text = "Thumbnailers";
             this.tpScreenshotOptions.UseVisualStyleBackColor = true;
-            // 
-            // gbThumbnailer
-            // 
-            this.gbThumbnailer.Controls.Add(this.cboThumbnailer);
-            this.gbThumbnailer.Location = new System.Drawing.Point(16, 16);
-            this.gbThumbnailer.Name = "gbThumbnailer";
-            this.gbThumbnailer.Size = new System.Drawing.Size(784, 45);
-            this.gbThumbnailer.TabIndex = 0;
-            this.gbThumbnailer.TabStop = false;
-            this.gbThumbnailer.Text = "Step 1- Preferred Thumbnailer";
-            // 
-            // cboThumbnailer
-            // 
-            this.cboThumbnailer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboThumbnailer.FormattingEnabled = true;
-            this.cboThumbnailer.Items.AddRange(new object[] {
-            "MTN",
-            "MPlayer"});
-            this.cboThumbnailer.Location = new System.Drawing.Point(8, 16);
-            this.cboThumbnailer.Name = "cboThumbnailer";
-            this.cboThumbnailer.Size = new System.Drawing.Size(200, 21);
-            this.cboThumbnailer.TabIndex = 0;
-            this.cboThumbnailer.SelectedIndexChanged += new System.EventHandler(this.cboThumbnailer_SelectedIndexChanged);
             // 
             // tcThumbnailers
             // 
@@ -1268,6 +1247,51 @@ namespace TDMaker
             this.tpThumbnailersGeneral.Text = "General";
             this.tpThumbnailersGeneral.UseVisualStyleBackColor = true;
             // 
+            // gbUploadScreenshots
+            // 
+            this.gbUploadScreenshots.Controls.Add(this.flpScreenshots);
+            this.gbUploadScreenshots.Location = new System.Drawing.Point(16, 208);
+            this.gbUploadScreenshots.Name = "gbUploadScreenshots";
+            this.gbUploadScreenshots.Size = new System.Drawing.Size(784, 72);
+            this.gbUploadScreenshots.TabIndex = 10;
+            this.gbUploadScreenshots.TabStop = false;
+            this.gbUploadScreenshots.Text = "Step 3 - Upload screenshots";
+            // 
+            // flpScreenshots
+            // 
+            this.flpScreenshots.AutoSize = true;
+            this.flpScreenshots.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flpScreenshots.Controls.Add(this.chkScreenshotUpload);
+            this.flpScreenshots.Controls.Add(this.cboScreenshotDest);
+            this.flpScreenshots.Controls.Add(this.btnUploadersConfig);
+            this.flpScreenshots.Location = new System.Drawing.Point(8, 24);
+            this.flpScreenshots.Name = "flpScreenshots";
+            this.flpScreenshots.Size = new System.Drawing.Size(529, 30);
+            this.flpScreenshots.TabIndex = 0;
+            // 
+            // chkScreenshotUpload
+            // 
+            this.chkScreenshotUpload.AutoSize = true;
+            this.chkScreenshotUpload.Checked = true;
+            this.chkScreenshotUpload.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkScreenshotUpload.Location = new System.Drawing.Point(3, 3);
+            this.chkScreenshotUpload.Name = "chkScreenshotUpload";
+            this.chkScreenshotUpload.Size = new System.Drawing.Size(129, 17);
+            this.chkScreenshotUpload.TabIndex = 0;
+            this.chkScreenshotUpload.Text = "Upload Screenshot to";
+            this.chkScreenshotUpload.UseVisualStyleBackColor = true;
+            this.chkScreenshotUpload.CheckedChanged += new System.EventHandler(this.chkScreenshotUpload_CheckedChanged);
+            // 
+            // cboScreenshotDest
+            // 
+            this.cboScreenshotDest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboScreenshotDest.FormattingEnabled = true;
+            this.cboScreenshotDest.Location = new System.Drawing.Point(138, 3);
+            this.cboScreenshotDest.Name = "cboScreenshotDest";
+            this.cboScreenshotDest.Size = new System.Drawing.Size(222, 21);
+            this.cboScreenshotDest.TabIndex = 2;
+            this.cboScreenshotDest.SelectedIndexChanged += new System.EventHandler(this.cboScreenshotDest_SelectedIndexChanged);
+            // 
             // btnUploadersConfig
             // 
             this.btnUploadersConfig.Location = new System.Drawing.Point(366, 3);
@@ -1277,6 +1301,29 @@ namespace TDMaker
             this.btnUploadersConfig.Text = "Uploaders Configuration...";
             this.btnUploadersConfig.UseVisualStyleBackColor = true;
             this.btnUploadersConfig.Click += new System.EventHandler(this.btnUploadersConfig_Click);
+            // 
+            // gbThumbnailer
+            // 
+            this.gbThumbnailer.Controls.Add(this.cboThumbnailer);
+            this.gbThumbnailer.Location = new System.Drawing.Point(16, 16);
+            this.gbThumbnailer.Name = "gbThumbnailer";
+            this.gbThumbnailer.Size = new System.Drawing.Size(784, 45);
+            this.gbThumbnailer.TabIndex = 0;
+            this.gbThumbnailer.TabStop = false;
+            this.gbThumbnailer.Text = "Step 1- Preferred Thumbnailer";
+            // 
+            // cboThumbnailer
+            // 
+            this.cboThumbnailer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboThumbnailer.FormattingEnabled = true;
+            this.cboThumbnailer.Items.AddRange(new object[] {
+            "MTN",
+            "MPlayer"});
+            this.cboThumbnailer.Location = new System.Drawing.Point(8, 16);
+            this.cboThumbnailer.Name = "cboThumbnailer";
+            this.cboThumbnailer.Size = new System.Drawing.Size(200, 21);
+            this.cboThumbnailer.TabIndex = 0;
+            this.cboThumbnailer.SelectedIndexChanged += new System.EventHandler(this.cboThumbnailer_SelectedIndexChanged);
             // 
             // gbScreenshotsLoc
             // 
@@ -1332,58 +1379,13 @@ namespace TDMaker
             this.btnScreenshotsLocBrowse.UseVisualStyleBackColor = true;
             this.btnScreenshotsLocBrowse.Click += new System.EventHandler(this.btnScreenshotsLocBrowse_Click);
             // 
-            // flpScreenshots
-            // 
-            this.flpScreenshots.AutoSize = true;
-            this.flpScreenshots.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flpScreenshots.Controls.Add(this.chkScreenshotUpload);
-            this.flpScreenshots.Controls.Add(this.cboScreenshotDest);
-            this.flpScreenshots.Controls.Add(this.btnUploadersConfig);
-            this.flpScreenshots.Location = new System.Drawing.Point(8, 24);
-            this.flpScreenshots.Name = "flpScreenshots";
-            this.flpScreenshots.Size = new System.Drawing.Size(529, 30);
-            this.flpScreenshots.TabIndex = 0;
-            // 
-            // chkScreenshotUpload
-            // 
-            this.chkScreenshotUpload.AutoSize = true;
-            this.chkScreenshotUpload.Checked = true;
-            this.chkScreenshotUpload.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkScreenshotUpload.Location = new System.Drawing.Point(3, 3);
-            this.chkScreenshotUpload.Name = "chkScreenshotUpload";
-            this.chkScreenshotUpload.Size = new System.Drawing.Size(129, 17);
-            this.chkScreenshotUpload.TabIndex = 0;
-            this.chkScreenshotUpload.Text = "Upload Screenshot to";
-            this.chkScreenshotUpload.UseVisualStyleBackColor = true;
-            this.chkScreenshotUpload.CheckedChanged += new System.EventHandler(this.chkScreenshotUpload_CheckedChanged);
-            // 
-            // cboScreenshotDest
-            // 
-            this.cboScreenshotDest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboScreenshotDest.FormattingEnabled = true;
-            this.cboScreenshotDest.Location = new System.Drawing.Point(138, 3);
-            this.cboScreenshotDest.Name = "cboScreenshotDest";
-            this.cboScreenshotDest.Size = new System.Drawing.Size(222, 21);
-            this.cboScreenshotDest.TabIndex = 2;
-            this.cboScreenshotDest.SelectedIndexChanged += new System.EventHandler(this.cboScreenshotDest_SelectedIndexChanged);
-            // 
-            // tpMPlayer
-            // 
-            this.tpMPlayer.Location = new System.Drawing.Point(4, 22);
-            this.tpMPlayer.Name = "tpMPlayer";
-            this.tpMPlayer.Padding = new System.Windows.Forms.Padding(3);
-            this.tpMPlayer.Size = new System.Drawing.Size(860, 470);
-            this.tpMPlayer.TabIndex = 1;
-            this.tpMPlayer.Text = "MPlayer";
-            this.tpMPlayer.UseVisualStyleBackColor = true;
-            // 
             // tpMtn
             // 
             this.tpMtn.Controls.Add(this.tlpMTN);
             this.tpMtn.Location = new System.Drawing.Point(4, 22);
             this.tpMtn.Name = "tpMtn";
             this.tpMtn.Padding = new System.Windows.Forms.Padding(3);
-            this.tpMtn.Size = new System.Drawing.Size(860, 470);
+            this.tpMtn.Size = new System.Drawing.Size(866, 460);
             this.tpMtn.TabIndex = 0;
             this.tpMtn.Text = "MTN";
             this.tpMtn.UseVisualStyleBackColor = true;
@@ -1401,7 +1403,7 @@ namespace TDMaker
             this.tlpMTN.RowCount = 2;
             this.tlpMTN.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90F));
             this.tlpMTN.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlpMTN.Size = new System.Drawing.Size(854, 464);
+            this.tlpMTN.Size = new System.Drawing.Size(860, 454);
             this.tlpMTN.TabIndex = 7;
             // 
             // tlpMtnUsage
@@ -1416,15 +1418,15 @@ namespace TDMaker
             this.tlpMtnUsage.Name = "tlpMtnUsage";
             this.tlpMtnUsage.RowCount = 1;
             this.tlpMtnUsage.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpMtnUsage.Size = new System.Drawing.Size(848, 411);
+            this.tlpMtnUsage.Size = new System.Drawing.Size(854, 402);
             this.tlpMtnUsage.TabIndex = 1;
             // 
             // pgMtn
             // 
             this.pgMtn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pgMtn.Location = new System.Drawing.Point(215, 3);
+            this.pgMtn.Location = new System.Drawing.Point(216, 3);
             this.pgMtn.Name = "pgMtn";
-            this.pgMtn.Size = new System.Drawing.Size(630, 405);
+            this.pgMtn.Size = new System.Drawing.Size(635, 396);
             this.pgMtn.TabIndex = 0;
             this.pgMtn.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.PgMtnPropertyValueChanged);
             // 
@@ -1440,14 +1442,14 @@ namespace TDMaker
             this.tlpMtnProfiles.RowCount = 2;
             this.tlpMtnProfiles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMtnProfiles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
-            this.tlpMtnProfiles.Size = new System.Drawing.Size(206, 405);
+            this.tlpMtnProfiles.Size = new System.Drawing.Size(207, 396);
             this.tlpMtnProfiles.TabIndex = 1;
             // 
             // flpMtn
             // 
             this.flpMtn.Controls.Add(this.tbnAddMtnProfile);
             this.flpMtn.Controls.Add(this.btnRemoveMtnProfile);
-            this.flpMtn.Location = new System.Drawing.Point(3, 372);
+            this.flpMtn.Location = new System.Drawing.Point(3, 363);
             this.flpMtn.Name = "flpMtn";
             this.flpMtn.Size = new System.Drawing.Size(162, 30);
             this.flpMtn.TabIndex = 7;
@@ -1478,19 +1480,30 @@ namespace TDMaker
             this.lbMtnProfiles.FormattingEnabled = true;
             this.lbMtnProfiles.Location = new System.Drawing.Point(3, 3);
             this.lbMtnProfiles.Name = "lbMtnProfiles";
-            this.lbMtnProfiles.Size = new System.Drawing.Size(200, 363);
+            this.lbMtnProfiles.Size = new System.Drawing.Size(201, 354);
             this.lbMtnProfiles.TabIndex = 8;
             this.lbMtnProfiles.SelectedIndexChanged += new System.EventHandler(this.LbMtnProfilesSelectedIndexChanged);
             // 
             // txtMtnArgs
             // 
             this.txtMtnArgs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtMtnArgs.Location = new System.Drawing.Point(3, 420);
+            this.txtMtnArgs.Location = new System.Drawing.Point(3, 411);
             this.txtMtnArgs.Multiline = true;
             this.txtMtnArgs.Name = "txtMtnArgs";
             this.txtMtnArgs.ReadOnly = true;
-            this.txtMtnArgs.Size = new System.Drawing.Size(848, 41);
+            this.txtMtnArgs.Size = new System.Drawing.Size(854, 40);
             this.txtMtnArgs.TabIndex = 6;
+            // 
+            // tpMPlayer
+            // 
+            this.tpMPlayer.Controls.Add(this.pgMPlayerOptions);
+            this.tpMPlayer.Location = new System.Drawing.Point(4, 22);
+            this.tpMPlayer.Name = "tpMPlayer";
+            this.tpMPlayer.Padding = new System.Windows.Forms.Padding(3);
+            this.tpMPlayer.Size = new System.Drawing.Size(866, 460);
+            this.tpMPlayer.TabIndex = 1;
+            this.tpMPlayer.Text = "MPlayer";
+            this.tpMPlayer.UseVisualStyleBackColor = true;
             // 
             // tpPublishOptions
             // 
@@ -1504,7 +1517,7 @@ namespace TDMaker
             this.tpPublishOptions.Location = new System.Drawing.Point(4, 22);
             this.tpPublishOptions.Name = "tpPublishOptions";
             this.tpPublishOptions.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPublishOptions.Size = new System.Drawing.Size(874, 566);
+            this.tpPublishOptions.Size = new System.Drawing.Size(874, 486);
             this.tpPublishOptions.TabIndex = 2;
             this.tpPublishOptions.Text = "Publish Templates";
             this.tpPublishOptions.UseVisualStyleBackColor = true;
@@ -1767,7 +1780,7 @@ namespace TDMaker
             this.tpTorrentCreator.Location = new System.Drawing.Point(4, 22);
             this.tpTorrentCreator.Name = "tpTorrentCreator";
             this.tpTorrentCreator.Padding = new System.Windows.Forms.Padding(3);
-            this.tpTorrentCreator.Size = new System.Drawing.Size(874, 566);
+            this.tpTorrentCreator.Size = new System.Drawing.Size(874, 486);
             this.tpTorrentCreator.TabIndex = 1;
             this.tpTorrentCreator.Text = "Torrent Creator";
             this.tpTorrentCreator.UseVisualStyleBackColor = true;
@@ -2029,7 +2042,7 @@ namespace TDMaker
             this.tpProxy.Location = new System.Drawing.Point(4, 22);
             this.tpProxy.Name = "tpProxy";
             this.tpProxy.Padding = new System.Windows.Forms.Padding(3);
-            this.tpProxy.Size = new System.Drawing.Size(874, 566);
+            this.tpProxy.Size = new System.Drawing.Size(874, 486);
             this.tpProxy.TabIndex = 4;
             this.tpProxy.Text = "Proxy";
             this.tpProxy.UseVisualStyleBackColor = true;
@@ -2059,7 +2072,7 @@ namespace TDMaker
             this.tpDebug.Location = new System.Drawing.Point(4, 22);
             this.tpDebug.Name = "tpDebug";
             this.tpDebug.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDebug.Size = new System.Drawing.Size(874, 566);
+            this.tpDebug.Size = new System.Drawing.Size(874, 486);
             this.tpDebug.TabIndex = 5;
             this.tpDebug.Text = "Debug";
             this.tpDebug.UseVisualStyleBackColor = true;
@@ -2072,7 +2085,7 @@ namespace TDMaker
             this.rtbDebugLog.Location = new System.Drawing.Point(3, 3);
             this.rtbDebugLog.Name = "rtbDebugLog";
             this.rtbDebugLog.ReadOnly = true;
-            this.rtbDebugLog.Size = new System.Drawing.Size(868, 560);
+            this.rtbDebugLog.Size = new System.Drawing.Size(868, 480);
             this.rtbDebugLog.TabIndex = 1;
             this.rtbDebugLog.Text = "";
             this.rtbDebugLog.WordWrap = false;
@@ -2083,7 +2096,7 @@ namespace TDMaker
             this.tpAdvanced.Location = new System.Drawing.Point(4, 22);
             this.tpAdvanced.Name = "tpAdvanced";
             this.tpAdvanced.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAdvanced.Size = new System.Drawing.Size(874, 566);
+            this.tpAdvanced.Size = new System.Drawing.Size(874, 486);
             this.tpAdvanced.TabIndex = 3;
             this.tpAdvanced.Text = "Advanced";
             this.tpAdvanced.UseVisualStyleBackColor = true;
@@ -2094,19 +2107,17 @@ namespace TDMaker
             this.pgApp.Location = new System.Drawing.Point(3, 3);
             this.pgApp.Name = "pgApp";
             this.pgApp.PropertySort = System.Windows.Forms.PropertySort.Categorized;
-            this.pgApp.Size = new System.Drawing.Size(868, 560);
+            this.pgApp.Size = new System.Drawing.Size(868, 480);
             this.pgApp.TabIndex = 0;
             this.pgApp.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.pgApp_PropertyValueChanged);
             // 
-            // gbUploadScreenshots
+            // pgMPlayerOptions
             // 
-            this.gbUploadScreenshots.Controls.Add(this.flpScreenshots);
-            this.gbUploadScreenshots.Location = new System.Drawing.Point(16, 208);
-            this.gbUploadScreenshots.Name = "gbUploadScreenshots";
-            this.gbUploadScreenshots.Size = new System.Drawing.Size(784, 72);
-            this.gbUploadScreenshots.TabIndex = 10;
-            this.gbUploadScreenshots.TabStop = false;
-            this.gbUploadScreenshots.Text = "Step 3 - Upload screenshots";
+            this.pgMPlayerOptions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pgMPlayerOptions.Location = new System.Drawing.Point(3, 3);
+            this.pgMPlayerOptions.Name = "pgMPlayerOptions";
+            this.pgMPlayerOptions.Size = new System.Drawing.Size(860, 454);
+            this.pgMPlayerOptions.TabIndex = 1;
             // 
             // MainWindow
             // 
@@ -2162,19 +2173,22 @@ namespace TDMaker
             this.flpPublishConfig.ResumeLayout(false);
             this.flpPublishConfig.PerformLayout();
             this.tpScreenshotOptions.ResumeLayout(false);
-            this.gbThumbnailer.ResumeLayout(false);
             this.tcThumbnailers.ResumeLayout(false);
             this.tpThumbnailersGeneral.ResumeLayout(false);
-            this.gbScreenshotsLoc.ResumeLayout(false);
-            this.gbScreenshotsLoc.PerformLayout();
+            this.gbUploadScreenshots.ResumeLayout(false);
+            this.gbUploadScreenshots.PerformLayout();
             this.flpScreenshots.ResumeLayout(false);
             this.flpScreenshots.PerformLayout();
+            this.gbThumbnailer.ResumeLayout(false);
+            this.gbScreenshotsLoc.ResumeLayout(false);
+            this.gbScreenshotsLoc.PerformLayout();
             this.tpMtn.ResumeLayout(false);
             this.tlpMTN.ResumeLayout(false);
             this.tlpMTN.PerformLayout();
             this.tlpMtnUsage.ResumeLayout(false);
             this.tlpMtnProfiles.ResumeLayout(false);
             this.flpMtn.ResumeLayout(false);
+            this.tpMPlayer.ResumeLayout(false);
             this.tpPublishOptions.ResumeLayout(false);
             this.tpPublishOptions.PerformLayout();
             this.gbTemplatesInternal.ResumeLayout(false);
@@ -2199,8 +2213,6 @@ namespace TDMaker
             this.tpProxy.ResumeLayout(false);
             this.tpDebug.ResumeLayout(false);
             this.tpAdvanced.ResumeLayout(false);
-            this.gbUploadScreenshots.ResumeLayout(false);
-            this.gbUploadScreenshots.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2377,5 +2389,6 @@ namespace TDMaker
         private System.Windows.Forms.ComboBox cboThumbnailer;
         private System.Windows.Forms.TabPage tpMPlayer;
         private System.Windows.Forms.GroupBox gbUploadScreenshots;
+        private System.Windows.Forms.PropertyGrid pgMPlayerOptions;
     }
 }

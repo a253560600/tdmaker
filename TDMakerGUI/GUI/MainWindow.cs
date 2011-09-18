@@ -540,6 +540,7 @@ namespace TDMaker
             txtScreenshotsLoc.Text = Engine.conf.CustomScreenshotsDir;
 
             cboThumbnailer.SelectedIndex = (int)Engine.conf.ThumbnailerType;
+            pgMPlayerOptions.SelectedObject = Engine.conf.MPlayerOptions;
             SettingsReadOptionsMTN();
             SettingsReadOptionsTorrents();
         }

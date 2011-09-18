@@ -54,9 +54,8 @@ namespace TDMakerLib
                 p.WaitForExit(1000 * 30);
 
                 string ssPath = Path.Combine(ScreenshotDir, Path.GetFileNameWithoutExtension(MediaFile.FilePath) + Engine.mtnProfileMgr.GetMtnProfileActive().o_OutputSuffix);
-                Screenshots.Add(new Screenshot()
+                Screenshots.Add(new Screenshot(ssPath)
                 {
-                    LocalPath = ssPath,
                     Args = args
                 });
 
