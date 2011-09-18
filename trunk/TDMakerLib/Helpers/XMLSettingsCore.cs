@@ -162,6 +162,8 @@ namespace TDMakerLib
         [Category("Thumbnailers / MPlayer"), Description("MTN Argument")]
         public string MPlayerPath { get; set; }
 
+        public MPlayerThumbnailerOptions MPlayerOptions = new MPlayerThumbnailerOptions();
+
         // Tab 4.3 - Options - Image Hosting
         public ImageUploaderType ImageUploader = ImageUploaderType.IMAGESHACK;
 

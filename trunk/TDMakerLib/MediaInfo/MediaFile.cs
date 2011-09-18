@@ -456,6 +456,28 @@ namespace TDMakerLib
             return sbPublish.ToString();
         }
 
+        public string GetMTNString()
+        {
+            /*
+               File: ITS Demo.wmv
+               Size: 15.86 MiB, Duration: 3mn 18s, Average Bitrate: 669 Kbps
+               Video: VC-1, 1024x576, 582 Kbps, 25.000 fps
+               Audio 1: WMA, 44.1 KHz, 2 channels, 75.1 Kbps
+            */
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine(string.Format("File: {0}", this.FileName));
+            sb.AppendLine(string.Format("Size: {0}, Duration: {1}, Average bitrate: {2}", this.FileSizeString, this.DurationString2, this.BitrateOverall));
+            sb.AppendLine(string.Format("Video: {0}, {1}, {2}, {3}", this.Video.Codec, this.Video.Resolution, this.Video.Bitrate, this.Video.FrameRate));
+            int aiCount = 1;
+            foreach (AudioInfo ai in this.Audio)
+            {
+                sb.AppendLine(string.Format("Audio {0}: {1}, {2}, {3}, {4}", aiCount++, ai.Codec, ai.SamplingRate, ai.Channels, ai.Bitrate));
+            }
+
+            return sb.ToString();
+        }
     }
 
     public class Info

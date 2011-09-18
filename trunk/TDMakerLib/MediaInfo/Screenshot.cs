@@ -11,12 +11,7 @@ namespace TDMakerLib
     public class Screenshot
     {
         /// <summary>
-        /// Screenshot Settings
-        /// </summary>
-        [Category("Screenshots"), Browsable(false), Description("MTN Profile Settings")]
-        public XMLSettingsScreenshot Settings { get; set; }
-        /// <summary>
-        /// MTN Argument
+        /// Argument
         /// </summary>
         [Category("Screenshots"), Description("MTN profile settings")]
         public string Args { get; set; }
@@ -36,10 +31,10 @@ namespace TDMakerLib
         /// </summary>
         [Category("Screenshots"), Description("Local file path")]
         public string LocalPath { get; set; }
-        
-        public Screenshot()
+
+        public Screenshot(string fp)
         {
-            this.Settings = new XMLSettingsScreenshot();
+            LocalPath = fp;
         }
 
         public override string ToString()

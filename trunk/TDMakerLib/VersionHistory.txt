@@ -1,6 +1,6 @@
 Version 3.0 BETA
 
-3.0.0 Ability to take png screenshots using MPlayer
+3.0.0 Ability to take png screenshots using MPlayer with options to combine multiple screenshots
 2.0.4 Opening a file with TDMaker in Explorer will load the file [Issue 18]
 2.0.3 Revised GUI with the latest UploadersLib.dll from ZScreen
 

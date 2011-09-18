@@ -6,6 +6,8 @@ using System.Text;
 using UploadersLib;
 using UploadersLib.HelperClasses;
 using UploadersLib.ImageUploaders;
+using System.Threading;
+using System.Collections.Generic;
 
 namespace TDMakerLib
 {
@@ -110,7 +112,7 @@ namespace TDMakerLib
                     mf.Thumbnailer = new MovieThumbNailer(mf, ssDir);
                     break;
                 case ThumbnailerType.MPlayer:
-                    mf.Thumbnailer = new MPlayerThumbnailer(mf, ssDir);
+                    mf.Thumbnailer = new MPlayerThumbnailer(mf, ssDir, Engine.conf.MPlayerOptions);
                     break;
             }
 
@@ -147,8 +149,10 @@ namespace TDMakerLib
                     {
                         if (ss != null)
                         {
-                            string ssPath = ss.LocalPath;
-                            UploadResult ur = UploadScreenshot(ssPath);
+                            ReportProgress(ProgressType.UPDATE_SCREENSHOTS_LIST, ss);
+
+                            UploadResult ur = UploadScreenshot(ss.LocalPath);
+
                             if (ur != null)
                             {
                                 if (!string.IsNullOrEmpty(ur.URL))
@@ -157,12 +161,14 @@ namespace TDMakerLib
                                     ss.LinkedThumbnail = ur.ThumbnailURL;
                                 }
                             }
-                            ReportProgress(ProgressType.UPDATE_SCREENSHOTS_LIST, ss);
                         }
                     }
-                }
+
+               }
             }
         }
+
+
 
         private UploadResult UploadScreenshot(string ssPath)
         {
