@@ -2,7 +2,7 @@
 
 %General_Info%
 
-[img]%ScreenshotFull%[/img]
+%ScreenshotFull%
 
 %Video_Info%
 

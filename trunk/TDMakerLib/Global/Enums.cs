@@ -59,6 +59,14 @@ namespace TDMakerLib
         CREATE_TORRENT
     }
 
+    public enum ThumbnailerType
+    {
+        [Description("MTN")]
+        MovieThumbnailer,
+        [Description("MPlayer")]
+        MPlayer
+    }
+
     public static class ImageDestType2Extensions
     {
         public static string ToDescriptionString(this ImageUploaderType val)

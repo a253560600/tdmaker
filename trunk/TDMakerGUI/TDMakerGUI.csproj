@@ -54,10 +54,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HelpersLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\HelpersLib.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
@@ -67,13 +63,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML" />
-    <Reference Include="UploadersLib">
-      <HintPath>..\Lib\UploadersLib.dll</HintPath>
-    </Reference>
-    <Reference Include="ZSS.UpdateCheckerLib, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\ZSS.UpdateCheckerLib.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GUI\AboutBox.cs">
@@ -134,6 +123,14 @@
     <Content Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\ZApps\trunk\ZSS.HelpersLib\ZSS.HelpersLib.csproj">
+      <Project>{327750E1-9FB7-4CC3-8AEA-9BC42180CAD3}</Project>
+      <Name>ZSS.HelpersLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\ZApps\trunk\ZSS.UploadersLib\ZSS.UploadersLib.csproj">
+      <Project>{E1C94415-3424-4517-A2A1-B2FDD1F59C67}</Project>
+      <Name>ZSS.UploadersLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TDMakerLib\TDMakerLib.csproj">
       <Project>{6023302C-5D3C-494A-B7D1-95A0BED8CA22}</Project>
       <Name>TDMakerLib</Name>

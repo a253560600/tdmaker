@@ -13,8 +13,7 @@ namespace TDMakerLib
                 return base.EditValue(context, provider, value);
             }
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.FileName = "mtn.exe";
-            dlg.Title = "Browse for MTN executable...";
+            dlg.Title = "Browse for Thumbnailer executable...";
             dlg.Filter = "Applications (*.exe)|*.exe";
             if (dlg.ShowDialog() == DialogResult.OK)
             {

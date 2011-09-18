@@ -16,7 +16,7 @@ namespace TDMakerLib
     	public const bool a_AspectRatio_default = false;
     	public const double b_SkipBlank_default = 0.80; 
     	public const int B_OmitBegin_default = 0; 
-    	public const int c_Columns_default = 3;
+    	public const int c_Columns_default = 1;
     	public const int C_CutMovie_default = -1; 
     	public const int D_EdgeDetection_default = 12; 
     	public const int E_OmitEnd_default = 0; 
@@ -35,7 +35,7 @@ namespace TDMakerLib
     	public const string O_OutputDir_default = "";
     	public const bool p_PauseBeforeExit_default = false;
     	public const bool P_QuitAfterDone_default = false;
-    	public const int r_Rows_default = 0; 
+    	public const int r_Rows_default = 3; 
     	public const int s_TimeStep_default = 120; 
     	public const bool t_TimeStampOff_default = false;
     	public const bool T_Text_default = false;

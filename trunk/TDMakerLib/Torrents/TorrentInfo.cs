@@ -86,7 +86,7 @@ namespace TDMakerLib
                         break;
                     case ProgressType.UPDATE_SCREENSHOTS_LIST:
                         Screenshot ss = userState as Screenshot;
-                        Console.WriteLine("Screenshot: " + ss.Full);
+                        Console.WriteLine("Screenshot: " + ss.FullImageLink);
                         break;
                 }
             }
@@ -101,56 +101,22 @@ namespace TDMakerLib
         {
             bool success = true;
             String mediaFilePath = mf.FilePath;
-
             Debug.WriteLine("Taking Screenshot for " + Path.GetFileName(mediaFilePath));
-
             ReportProgress(ProgressType.UPDATE_STATUSBAR_DEBUG, "Taking Screenshot for " + Path.GetFileName(mediaFilePath));
+
+            switch (Engine.conf.ThumbnailerType)
+            {
+                case ThumbnailerType.MovieThumbnailer:
+                    mf.Thumbnailer = new MovieThumbNailer(mf, ssDir);
+                    break;
+                case ThumbnailerType.MPlayer:
+                    mf.Thumbnailer = new MPlayerThumbnailer(mf, ssDir);
+                    break;
+            }
 
             try
             {
-                Debug.WriteLine("Creating a MTN process...");
-                string assemblyMTN = (Engine.IsUNIX ? Engine.conf.MTNPath.Replace(".exe", "") : Engine.conf.MTNPath);
-                if (string.IsNullOrEmpty(Path.GetDirectoryName(assemblyMTN)))
-                {
-                    assemblyMTN = Path.Combine(System.Windows.Forms.Application.StartupPath, assemblyMTN);
-                    Engine.conf.MTNPath = assemblyMTN;
-                }
-
-                mf.Screenshot.MTNArgs = Adapter.GetMtnArg(ssDir, Engine.mtnProfileMgr.GetMtnProfileActive());
-                string args = string.Format("{0} \"{1}\"", mf.Screenshot.MTNArgs, mediaFilePath);
-
-                Process p = new Process();
-                ProcessStartInfo psi = new ProcessStartInfo(assemblyMTN);
-
-                if (Engine.IsUNIX)
-                {
-                    psi.UseShellExecute = false;
-                }
-
-                Debug.WriteLine("MTN Path: " + assemblyMTN);
-                Debug.WriteLine("MTN Args: " + args);
-
-                psi.WindowStyle = (Engine.conf.ShowMTNWindow ? ProcessWindowStyle.Normal : ProcessWindowStyle.Minimized);
-                Debug.WriteLine("MTN Window: " + psi.WindowStyle.ToString());
-                psi.Arguments = args;
-
-                p.StartInfo = psi;
-                p.Start();
-                p.WaitForExit(1000 * 30);
-
-                if (Engine.IsUNIX)
-                {
-                    // Save _s.txt to MediaInfo2.Overall object
-                    if (string.IsNullOrEmpty(MediaMy.Overall.Summary))
-                    {
-                        string info = Path.Combine(FileSystem.GetScreenShotsDir(mediaFilePath), Path.GetFileNameWithoutExtension(mediaFilePath) + Engine.mtnProfileMgr.GetMtnProfileActive().N_InfoSuffix);
-
-                        using (StreamReader sr = new StreamReader(info))
-                        {
-                            MediaMy.Overall.Summary = sr.ReadToEnd();
-                        }
-                    }
-                }
+                mf.Thumbnailer.TakeScreenshot();
             }
             catch (Exception ex)
             {
@@ -159,28 +125,42 @@ namespace TDMakerLib
                 ReportProgress(ProgressType.UPDATE_STATUSBAR_DEBUG, ex.Message + " for " + Path.GetFileName(mediaFilePath));
             }
 
+            if (Engine.IsUNIX)
+            {
+                // Save _s.txt to MediaInfo2.Overall object
+                if (string.IsNullOrEmpty(MediaMy.Overall.Summary))
+                {
+                    MediaMy.Overall.Summary = mf.Thumbnailer.MediaSummary;
+                }
+            }
+
             return success;
         }
 
         public void UploadScreenshots()
         {
-            foreach (MediaFile mf in this.MediaMy.MediaFiles)
+            if (MediaMy.UploadScreenshots)
             {
-                string ssPath = Path.Combine(FileSystem.GetScreenShotsDir(mf.FilePath), Path.GetFileNameWithoutExtension(mf.FilePath) + Engine.mtnProfileMgr.GetMtnProfileActive().o_OutputSuffix);
-                mf.Screenshot.LocalPath = ssPath;
-                if (MediaMy.UploadScreenshots)
+                foreach (MediaFile mf in this.MediaMy.MediaFiles)
                 {
-                    UploadResult ur = UploadScreenshot(ssPath);
-                    if (ur != null && mf.Screenshot != null)
+                    foreach (Screenshot ss in mf.Thumbnailer.Screenshots)
                     {
-                        if (!string.IsNullOrEmpty(ur.URL))
+                        if (ss != null)
                         {
-                            mf.Screenshot.Full = ur.GetFullImageUrl();
-                            mf.Screenshot.LinkedThumbnail = ur.ThumbnailURL;
+                            string ssPath = ss.LocalPath;
+                            UploadResult ur = UploadScreenshot(ssPath);
+                            if (ur != null)
+                            {
+                                if (!string.IsNullOrEmpty(ur.URL))
+                                {
+                                    ss.FullImageLink = ur.GetFullImageUrl();
+                                    ss.LinkedThumbnail = ur.ThumbnailURL;
+                                }
+                            }
+                            ReportProgress(ProgressType.UPDATE_SCREENSHOTS_LIST, ss);
                         }
                     }
                 }
-                ReportProgress(ProgressType.UPDATE_SCREENSHOTS_LIST, mf.Screenshot);
             }
         }
 

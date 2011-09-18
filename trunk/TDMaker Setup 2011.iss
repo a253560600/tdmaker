@@ -35,7 +35,6 @@ MinVersion=4.90.3000,5.0.2195sp3
 OutputBaseFilename={#MyAppName}-{#MyAppVersion}-setup
 OutputDir=..\Output\
 PrivilegesRequired=none
-;SetupIconFile=TDMaker\Resources\zss-main.ico
 ShowLanguageDialog=auto
 ShowUndisplayableLanguages=false
 SignedUninstaller=false
@@ -65,7 +64,6 @@ Source: "Lib\64-bit\MediaInfo.dll"; DestDir: "{app}"; Flags: ignoreversion; Chec
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppMyAppName}"
-Name: "{group}\ZUploader"; Filename: "{app}\ZUploader.exe"
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppMyAppName}"; Tasks: desktopicon
 
 [Run]

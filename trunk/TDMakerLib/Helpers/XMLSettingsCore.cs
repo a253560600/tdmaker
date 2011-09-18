@@ -148,12 +148,19 @@ namespace TDMakerLib
         public ProxyInfo ProxySettings = new ProxyInfo();
 
         // Tab 4.2 - Options - MTN
-        [Category("MTN"), DefaultValue(false), Description("Show MTN during file creation")]
+         [Category("Thumnailers"), DefaultValue(ThumbnailerType.MPlayer), Description("Chooser thumbnailer application to take screenshots.")]
+        public ThumbnailerType ThumbnailerType { get; set; }
+
+        [Category("Thumnailers / MTN"), DefaultValue(false), Description("Show MTN during file creation")]
         public bool ShowMTNWindow { get; set; }
 
         [EditorAttribute(typeof(ExeFileNameEditor), typeof(UITypeEditor))]
         [Category("MTN"), Description("MTN Argument")]
         public string MTNPath { get; set; }
+
+        [EditorAttribute(typeof(ExeFileNameEditor), typeof(UITypeEditor))]
+        [Category("Thumbnailers / MPlayer"), Description("MTN Argument")]
+        public string MPlayerPath { get; set; }
 
         // Tab 4.3 - Options - Image Hosting
         public ImageUploaderType ImageUploader = ImageUploaderType.IMAGESHACK;

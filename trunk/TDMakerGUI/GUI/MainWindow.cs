@@ -522,6 +522,7 @@ namespace TDMaker
             cboScreenshotsLoc.SelectedIndex = (int)Engine.conf.ScreenshotsLoc;
             txtScreenshotsLoc.Text = Engine.conf.CustomScreenshotsDir;
 
+            cboThumbnailer.SelectedIndex = (int)Engine.conf.ThumbnailerType;
             SettingsReadOptionsMTN();
             SettingsReadOptionsTorrents();
         }
@@ -1128,19 +1129,14 @@ namespace TDMaker
             }
         }
 
+        public const string URL_UPDATE = "http://zscreen.googlecode.com/svn/trunk/Update.xml";
         private void updateThread_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = (BackgroundWorker)sender;
             NewVersionWindowOptions nvwo = new NewVersionWindowOptions { MyImage = Resources.GenuineAdv };
 
-            UpdateCheckerOptions uco = new UpdateCheckerOptions
-            {
-                CheckBeta = false,
-                MyNewVersionWindowOptions = nvwo
-            };
-            uco.ProxySettings = Adapter.CheckProxySettings().GetWebProxy;
-            UpdateChecker updateChecker = new UpdateChecker((string)e.Argument, uco);
-            worker.ReportProgress(1, updateChecker.StartCheckUpdate());
+            UpdateChecker updateChecker = new UpdateChecker(URL_UPDATE, Application.ProductName, new Version( Application.ProductVersion), ReleaseChannelType.Dev, Adapter.CheckProxySettings().GetWebProxy, nvwo);
+            worker.ReportProgress(1, updateChecker);
             updateChecker.ShowPrompt();
         }
 
@@ -1796,6 +1792,11 @@ namespace TDMaker
         {
             UploadersConfigForm form = new UploadersConfigForm(Engine.MyUploadersConfig, ZKeys.GetAPIKeys());
             form.Show();
+        }
+
+        private void cboThumbnailer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Engine.conf.ThumbnailerType = (ThumbnailerType)cboThumbnailer.SelectedIndex;
         }
     }
 }
