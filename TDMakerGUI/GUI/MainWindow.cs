@@ -272,25 +272,42 @@ namespace TDMaker
 
             string mtnExe = (Engine.IsUNIX ? "mtn" : "mtn.exe");
 
-            if (!File.Exists(Engine.conf.MTNPath))
+            if (Engine.conf.ThumbnailerType == ThumbnailerType.MovieThumbnailer)
             {
-                Engine.conf.MTNPath = Path.Combine(Application.StartupPath, mtnExe);
-            }
-
-            if (!File.Exists(Engine.conf.MTNPath))
-            {
-                Engine.conf.MTNPath = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), Application.ProductName), mtnExe);
-            }
-
-            if (!File.Exists(Engine.conf.MTNPath))
-            {
-                OpenFileDialog dlg = new OpenFileDialog();
-                dlg.InitialDirectory = Application.StartupPath;
-                dlg.Title = "Browse for mtn.exe";
-                dlg.Filter = "Applications (*.exe)|*.exe";
-                if (dlg.ShowDialog() == DialogResult.OK)
+                if (!File.Exists(Engine.conf.MTNPath))
                 {
-                    Engine.conf.MTNPath = dlg.FileName;
+                    Engine.conf.MTNPath = Path.Combine(Application.StartupPath, mtnExe);
+                }
+
+                if (!File.Exists(Engine.conf.MTNPath))
+                {
+                    Engine.conf.MTNPath = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), Application.ProductName), mtnExe);
+                }
+
+                if (!File.Exists(Engine.conf.MTNPath))
+                {
+                    OpenFileDialog dlg = new OpenFileDialog();
+                    dlg.InitialDirectory = Application.StartupPath;
+                    dlg.Title = "Browse for mtn.exe";
+                    dlg.Filter = "Applications (*.exe)|*.exe";
+                    if (dlg.ShowDialog() == DialogResult.OK)
+                    {
+                        Engine.conf.MTNPath = dlg.FileName;
+                    }
+                }
+            }
+            else if (Engine.conf.ThumbnailerType == ThumbnailerType.MPlayer)
+            {
+                if (!File.Exists(Engine.conf.MPlayerPath))
+                {
+                    OpenFileDialog dlg = new OpenFileDialog();
+                    dlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+                    dlg.Title = "Browse for mplayer.exe";
+                    dlg.Filter = "Applications (*.exe)|*.exe";
+                    if (dlg.ShowDialog() == DialogResult.OK)
+                    {
+                        Engine.conf.MPlayerPath = dlg.FileName;
+                    }
                 }
             }
 
