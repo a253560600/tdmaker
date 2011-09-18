@@ -115,14 +115,22 @@ namespace TDMakerLib
 
         private string GetScreenshotInfo(string pattern, MediaFile mf)
         {
-            if (!string.IsNullOrEmpty(mf.Screenshot.Full))
+            StringBuilder sbLinksFull = new StringBuilder();
+            StringBuilder sbLinksThumbs = new StringBuilder();
+
+            foreach (Screenshot ss in mf.Thumbnailer.Screenshots)
             {
-                pattern = Regex.Replace(pattern, "%ScreenshotFull%", mf.Screenshot.Full, RegexOptions.IgnoreCase);
+                if (!string.IsNullOrEmpty(ss.FullImageLink))
+                {
+                    sbLinksFull.AppendLine(string.Format("[img]{0}[/img]", ss.FullImageLink));
+                }
+                if (!string.IsNullOrEmpty(ss.LinkedThumbnail))
+                {
+                    sbLinksThumbs.AppendLine(string.Format("[img]{0}[/img]", ss.LinkedThumbnail));
+                }
             }
-            if (!string.IsNullOrEmpty(mf.Screenshot.LinkedThumbnail))
-            {
-                pattern = Regex.Replace(pattern, "%ScreenshotForums%", mf.Screenshot.LinkedThumbnail, RegexOptions.IgnoreCase);
-            }
+            pattern = Regex.Replace(pattern, "%ScreenshotFull%", sbLinksFull.ToString().Trim(), RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%ScreenshotForums%", sbLinksThumbs.ToString().Trim(), RegexOptions.IgnoreCase);
             return pattern;
         }
 
@@ -179,6 +187,7 @@ namespace TDMakerLib
         private string GetStringFromAudio(string pattern, AudioInfo ai)
         {
             pattern = Regex.Replace(pattern, "%Audio_Format%", ai.Format, RegexOptions.IgnoreCase);
+            pattern = Regex.Replace(pattern, "%Audio_%Format%", ai.Format, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Audio_Bitrate%", ai.Bitrate, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Audio_BitrateMode%", ai.BitrateMode, RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%Audio_Channels%", ai.Channels, RegexOptions.IgnoreCase);
@@ -271,7 +280,7 @@ namespace TDMakerLib
                 pattern = GetStyles(pattern); // apply any formatting
                 foreach (MediaFile mf in mi.MediaFiles)
                 {
-                    if (mf.Screenshot != null)
+                    if (mf.Thumbnailer != null)
                     {
                         pattern = GetScreenshotInfo(pattern, mf);
                         break;

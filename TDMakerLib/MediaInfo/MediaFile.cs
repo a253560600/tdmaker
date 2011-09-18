@@ -23,7 +23,7 @@ namespace TDMakerLib
         public string EncodedApplication { get; set; }
         public string BitrateOverall { get; set; }
         /// <summary>
-        /// Duration in seconds
+        /// Duration in milli seconds
         /// </summary>
         public double Duration { get; set; }
         /// <summary>
@@ -47,7 +47,7 @@ namespace TDMakerLib
         public string FileSizeString { get; set; }
         public string Format { get; set; }
         public string FormatInfo { get; set; }
-        public Screenshot Screenshot { get; set; }
+        public Thumbnailer Thumbnailer = null;
         public string Source { get; set; }
         private string mSubtitles = "None";
         public string Subtitles { get { return mSubtitles; } set { mSubtitles = value; } }
@@ -74,7 +74,6 @@ namespace TDMakerLib
 
             this.Audio = new List<AudioInfo>();
             this.Video = new VideoInfo();
-            this.Screenshot = new Screenshot();
             this.ReadFile();
         }
 
@@ -215,7 +214,7 @@ namespace TDMakerLib
                     }
                     this.Video.EncodedLibrarySettings = mMI.Get(StreamKind.Video, 0, "Encoded_Library_Settings");
                     this.Video.DisplayAspectRatio = mMI.Get(StreamKind.Video, 0, "DisplayAspectRatio/String");
-                    
+
                     if (string.IsNullOrEmpty(this.Video.Codec))
                         this.Video.Codec = mMI.Get(StreamKind.Video, 0, "CodecID/Hint");
                     if (string.IsNullOrEmpty(this.Video.Codec))
@@ -345,7 +344,7 @@ namespace TDMakerLib
 
             sbBody.AppendLine(BbCode.Size(fontSizeBody, sbGeneral.ToString()));
 
-            if (this.Screenshot != null)
+            if (this.Thumbnailer != null)
             {
                 string ss = this.GetScreenshotString(pop);
                 if (ss.Length > 0)
@@ -442,13 +441,16 @@ namespace TDMakerLib
         {
             StringBuilder sbPublish = new StringBuilder();
 
-            if (!string.IsNullOrEmpty(this.Screenshot.Full) && pop.FullPicture)
+            foreach (Screenshot ss in this.Thumbnailer.Screenshots)
             {
-                sbPublish.Append(BbCode.Img(this.Screenshot.Full));
-            }
-            else if (!string.IsNullOrEmpty(this.Screenshot.LinkedThumbnail))
-            {
-                sbPublish.Append(this.Screenshot.LinkedThumbnail);
+                if (!string.IsNullOrEmpty(ss.FullImageLink) && pop.FullPicture)
+                {
+                    sbPublish.Append(BbCode.Img(ss.FullImageLink));
+                }
+                else if (!string.IsNullOrEmpty(ss.LinkedThumbnail))
+                {
+                    sbPublish.Append(ss.LinkedThumbnail);
+                }
             }
 
             return sbPublish.ToString();

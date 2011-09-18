@@ -19,13 +19,13 @@ namespace TDMakerLib
         /// MTN Argument
         /// </summary>
         [Category("Screenshots"), Description("MTN profile settings")]
-        public string MTNArgs { get; set; }
+        public string Args { get; set; }
 
         /// <summary>
         /// URL of Full Image
         /// </summary>
         [Category("Screenshots"), Description("Full image URL")]
-        public string Full { get; set; }
+        public string FullImageLink { get; set; }
         /// <summary>
         /// URL of Linked Thumbnail
         /// </summary>

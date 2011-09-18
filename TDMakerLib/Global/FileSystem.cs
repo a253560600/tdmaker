@@ -247,7 +247,10 @@ namespace TDMakerLib
 
             foreach (MediaFile mf in mi.MediaFiles)
             {
-                xmlUpload.Screenshots.Add(mf.Screenshot.Full);
+                foreach (Screenshot ss in mf.Thumbnailer.Screenshots)
+                {
+                    xmlUpload.Screenshots.Add(ss.FullImageLink);
+                }
             }
 
             return xmlUpload;

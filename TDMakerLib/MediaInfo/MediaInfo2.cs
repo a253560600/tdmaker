@@ -402,7 +402,7 @@ namespace TDMakerLib
             }
             foreach (MediaFile mf in this.MediaFiles)
             {
-                if (mf.Screenshot != null)
+                if (mf.Thumbnailer != null)
                 {
                     sbBody.AppendLine(mf.GetScreenshotString(pop));
                 }
@@ -542,7 +542,7 @@ namespace TDMakerLib
             bool hasSs = false;
             foreach (MediaFile mf in this.MediaFiles)
             {
-                if (mf.Screenshot != null && !string.IsNullOrEmpty(mf.Screenshot.Full))
+                if (mf.Thumbnailer != null && mf.Thumbnailer.Screenshots.Count > 0 && !string.IsNullOrEmpty(mf.Thumbnailer.Screenshots[0].FullImageLink))
                 {
                     hasSs = true;
                     return hasSs;
