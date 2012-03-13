@@ -122,13 +122,13 @@
     <Content Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\ZApps\trunk\ZSS.HelpersLib\ZSS.HelpersLib.csproj">
+    <ProjectReference Include="..\..\..\ZApps\trunk\ZSS.HelpersLib\HelpersLib.csproj">
       <Project>{327750E1-9FB7-4CC3-8AEA-9BC42180CAD3}</Project>
-      <Name>ZSS.HelpersLib</Name>
+      <Name>HelpersLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\ZApps\trunk\ZSS.UploadersLib\ZSS.UploadersLib.csproj">
+    <ProjectReference Include="..\..\..\ZApps\trunk\ZSS.UploadersLib\UploadersLib.csproj">
       <Project>{E1C94415-3424-4517-A2A1-B2FDD1F59C67}</Project>
-      <Name>ZSS.UploadersLib</Name>
+      <Name>UploadersLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\TDMakerLib\TDMakerLib.csproj">
       <Project>{6023302C-5D3C-494A-B7D1-95A0BED8CA22}</Project>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Update>
+  <TDMaker>
+    <Stable>
+      <Version>3.0.0.395</Version>
+      <URL>http://tdmaker.googlecode.com/files/TDMaker-3.0.0.395-setup.exe</URL>
+      <Date>2011-09-18</Date>
+      <Summary>http://tdmaker.googlecode.com/svn/trunk/TDMakerLib/VersionHistory.txt</Summary>
+    </Stable>
+  </TDMaker>
+</Update>

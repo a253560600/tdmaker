@@ -396,7 +396,7 @@ namespace TDMaker
 
             Engine.conf.TorrentLocationChoice = (LocationType)cboTorrentLoc.SelectedIndex;
 
-            Engine.conf.ImageUploader = (ImageUploaderType)cboScreenshotDest.SelectedIndex;
+            Engine.conf.ImageUploaderType = (ImageDestination)cboScreenshotDest.SelectedIndex;
 
             Engine.conf.Write();
             Engine.MyUploadersConfig.Save(Engine.UploadersConfigPath);
@@ -441,11 +441,11 @@ namespace TDMaker
             SettingsReadOptions();
 
             cboScreenshotDest.Items.Clear();
-            foreach (ImageUploaderType sdt in Enum.GetValues(typeof(ImageUploaderType)))
+            foreach (ImageDestination sdt in Enum.GetValues(typeof(ImageDestination)))
             {
                 cboScreenshotDest.Items.Add(sdt.ToDescriptionString());
             }
-            cboScreenshotDest.SelectedIndex = (int)Engine.conf.ImageUploader;
+            cboScreenshotDest.SelectedIndex = (int)Engine.conf.ImageUploaderType;
 
             if (string.IsNullOrEmpty(Engine.conf.MTNPath))
                 Engine.conf.MTNPath = Path.Combine(Application.StartupPath, "mtn.exe");
@@ -1008,7 +1008,7 @@ namespace TDMaker
             }
         }
 
-        public const string URL_UPDATE = "http://zscreen.googlecode.com/svn/trunk/Update.xml";
+        public const string URL_UPDATE = "http://tdmaker.googlecode.com/svn/trunk/Update.xml";
 
         private void btnBrowseTorrentCustomFolder_Click(object sender, EventArgs e)
         {
@@ -1153,14 +1153,15 @@ namespace TDMaker
         {
             Engine.conf.TemplateIndex = cboTemplate.SelectedIndex;
         }
+
         private void updateThread_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = (BackgroundWorker)sender;
             NewVersionWindowOptions nvwo = new NewVersionWindowOptions { MyImage = Resources.GenuineAdv };
 
-            UpdateChecker updateChecker = new UpdateChecker(URL_UPDATE, Application.ProductName, new Version( Application.ProductVersion), ReleaseChannelType.Dev, Adapter.CheckProxySettings().GetWebProxy, nvwo);
+            UpdateChecker updateChecker = new UpdateChecker(URL_UPDATE, Application.ProductName, new Version(Application.ProductVersion), ReleaseChannelType.Dev, Adapter.CheckProxySettings().GetWebProxy, nvwo);
             worker.ReportProgress(1, updateChecker);
-            updateChecker.ShowPrompt();
+            updateChecker.CheckUpdate();
         }
 
         private void tsmUpdatesCheck_Click(object sender, EventArgs e)
@@ -1170,7 +1171,7 @@ namespace TDMaker
 
         private void cboScreenshotDest_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Engine.conf.ImageUploader = (ImageUploaderType)cboScreenshotDest.SelectedIndex;
+            Engine.conf.ImageUploaderType = (ImageDestination)cboScreenshotDest.SelectedIndex;
         }
 
         private void tsmLogsDir_Click(object sender, EventArgs e)
@@ -1808,7 +1809,7 @@ namespace TDMaker
 
         private void btnUploadersConfig_Click(object sender, EventArgs e)
         {
-            UploadersConfigForm form = new UploadersConfigForm(Engine.MyUploadersConfig, ZKeys.GetAPIKeys());
+            UploadersConfigForm form = new UploadersConfigForm(Engine.MyUploadersConfig, Engine.conf.ApiKeys);
             form.Show();
         }
 

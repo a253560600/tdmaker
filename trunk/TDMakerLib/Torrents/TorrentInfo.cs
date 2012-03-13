@@ -1,13 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Threading;
 using UploadersLib;
 using UploadersLib.HelperClasses;
 using UploadersLib.ImageUploaders;
-using System.Threading;
-using System.Collections.Generic;
 
 namespace TDMakerLib
 {
@@ -137,12 +137,9 @@ namespace TDMakerLib
                             }
                         }
                     }
-
-               }
+                }
             }
         }
-
-
 
         private UploadResult UploadScreenshot(string ssPath)
         {
@@ -151,16 +148,16 @@ namespace TDMakerLib
 
             if (File.Exists(ssPath))
             {
-                switch ((ImageUploaderType)Engine.conf.ImageUploader)
+                switch ((ImageDestination)Engine.conf.ImageUploaderType)
                 {
-                    case ImageUploaderType.TINYPIC:
+                    case ImageDestination.TinyPic:
                         imageUploader = new TinyPicUploader(ZKeys.TinyPicID, ZKeys.TinyPicKey, Engine.MyUploadersConfig.TinyPicAccountType,
                             Engine.MyUploadersConfig.TinyPicRegistrationCode);
                         break;
-                    case ImageUploaderType.IMGUR:
+                    case ImageDestination.Imgur:
                         imageUploader = new Imgur(Engine.MyUploadersConfig.ImgurAccountType, ZKeys.ImgurAnonymousKey, Engine.MyUploadersConfig.ImgurOAuthInfo);
                         break;
-                    case ImageUploaderType.FileUploader:
+                    case ImageDestination.FileUploader:
                         ur = new UploadResult() { LocalFilePath = ssPath };
                         break;
                     default:

@@ -30,6 +30,8 @@ namespace TDMakerLib
             SupportedFileExtVideo = new StringCollection();
         }
 
+        public UploadersAPIKeys ApiKeys = new UploadersAPIKeys();
+
         // Tab 1 - Input
 
         // Disc Properties
@@ -148,7 +150,7 @@ namespace TDMakerLib
         public ProxyInfo ProxySettings = new ProxyInfo();
 
         // Tab 4.2 - Options - MTN
-         [Category("Thumnailers"), DefaultValue(ThumbnailerType.MPlayer), Description("Chooser thumbnailer application to take screenshots.")]
+        [Category("Thumnailers"), DefaultValue(ThumbnailerType.MPlayer), Description("Chooser thumbnailer application to take screenshots.")]
         public ThumbnailerType ThumbnailerType { get; set; }
 
         [Category("Thumnailers / MTN"), DefaultValue(false), Description("Show MTN during file creation")]
@@ -165,7 +167,7 @@ namespace TDMakerLib
         public MPlayerThumbnailerOptions MPlayerOptions = new MPlayerThumbnailerOptions();
 
         // Tab 4.3 - Options - Image Hosting
-        public ImageUploaderType ImageUploader = ImageUploaderType.IMAGESHACK;
+        public ImageDestination ImageUploaderType = ImageDestination.ImageShack;
 
         [Category("MTN / Image Uploaders"), DefaultValue(""), Description("ImageShack registration code")]
         public string ImageShackRegCode { get; set; }
