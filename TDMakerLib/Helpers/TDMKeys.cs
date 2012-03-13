@@ -42,25 +42,5 @@ namespace TDMakerLib
         public const string TwitterConsumerSecret = "aJYZ9W1gJnGMgSqhRYrvoUyUc14FssVJOFAqHjriU";
         public const string GoogleTranslateKey = "AIzaSyCcYJvYPvS3UE0JqqsSNpjPjN1NPBmMbmE";
         public const string PicnikKey = "3aacd2de4563b8817de708b29b5bdd0e";
-
-        public static UploadersAPIKeys GetAPIKeys()
-        {
-            return new UploadersAPIKeys
-            {
-                TinyPicID = TinyPicID,
-                TinyPicKey = TinyPicKey,
-                ImgurConsumerKey = ImgurConsumerKey,
-                ImgurConsumerSecret = ImgurConsumerSecret,
-                FlickrKey = FlickrKey,
-                FlickrSecret = FlickrSecret,
-                DropboxConsumerKey = DropboxConsumerKey,
-                DropboxConsumerSecret = DropboxConsumerSecret,
-                SendSpaceKey = SendSpaceKey,
-                PastebinKey = PastebinKey,
-                TwitterConsumerKey = TwitterConsumerKey,
-                TwitterConsumerSecret = TwitterConsumerSecret,
-                GoogleTranslateKey = GoogleTranslateKey
-            };
-        }
     }
 }

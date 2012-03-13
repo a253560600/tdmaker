@@ -38,7 +38,7 @@ namespace TDMakerLib
 
         public string RootFolder { get; private set; }
 
-        public ImageUploaderType ImageDestinationType { get; private set; }
+        public ImageDestination ImageDestinationType { get; private set; }
 
         public ConfigWizard(string rootDir)
         {
@@ -47,11 +47,11 @@ namespace TDMakerLib
             chkPreferSystemFolders.Checked = Engine.AppConf.PreferSystemFolders;
             txtRootFolder.Text = rootDir;
             this.RootFolder = rootDir;
-            foreach (ImageUploaderType sdt in Enum.GetValues(typeof(ImageUploaderType)))
+            foreach (ImageDestination sdt in Enum.GetValues(typeof(ImageDestination)))
             {
                 cboScreenshotDest.Items.Add(sdt.ToDescriptionString());
             }
-            cboScreenshotDest.SelectedIndex = (int)ImageUploaderType.IMAGESHACK;
+            cboScreenshotDest.SelectedIndex = (int)ImageDestination.ImageShack;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -59,7 +59,7 @@ namespace TDMakerLib
             this.DialogResult = DialogResult.OK;
             Engine.AppConf.RootDir = this.RootFolder;
             Engine.AppConf.PreferSystemFolders = this.PreferSystemFolders;
-            Engine.AppConf.ImageUploader = this.ImageDestinationType;
+            Engine.AppConf.ImageUploaderType = this.ImageDestinationType;
             Engine.InitializeDefaultFolderPaths();
             Debug.WriteLine(Engine.AppConf.XMLSettingsFile);
             this.Close();
@@ -95,7 +95,7 @@ namespace TDMakerLib
 
         private void cboScreenshotDest_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ImageDestinationType = (ImageUploaderType)cboScreenshotDest.SelectedIndex;
+            ImageDestinationType = (ImageDestination)cboScreenshotDest.SelectedIndex;
         }
 
         private void chkPreferSystemFolders_CheckedChanged(object sender, EventArgs e)

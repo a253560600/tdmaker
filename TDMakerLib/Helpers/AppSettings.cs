@@ -18,14 +18,14 @@ namespace TDMakerLib
 
         public string UploadersConfigPath { get; set; }
 
-        public ImageUploaderType ImageUploader { get; set; }
+        public ImageDestination ImageUploaderType { get; set; }
 
         [Category("Options / General"), DefaultValue(false), Description("Prefer System Folders for all the data created by ZScreen")]
         public bool PreferSystemFolders { get; set; }
 
         public AppSettings()
         {
-            ImageUploader = ImageUploaderType.IMAGESHACK;
+            ImageUploaderType = ImageDestination.ImageShack;
         }
 
         public static AppSettings Read()

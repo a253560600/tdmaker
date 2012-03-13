@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using HelpersLib;
 using UploadersLib;
 using UploadersLib.HelperClasses;
 
@@ -328,7 +329,7 @@ namespace TDMakerLib
             // Use Configuration Wizard Settings if applied
             if (RunConfig)
             {
-                Engine.conf.ImageUploader = Engine.AppConf.ImageUploader;
+                Engine.conf.ImageUploaderType = Engine.AppConf.ImageUploaderType;
             }
             mtnProfileMgr = XMLSettingsMtnProfiles.Read();
         }
