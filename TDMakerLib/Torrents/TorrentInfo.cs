@@ -242,6 +242,7 @@ namespace TDMakerLib
                         Uploader.ProxySettings = proxy;
                     }
 
+                    ReportProgress(ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploading {0}.", Path.GetFileName(ssPath)));
                     ur = imageUploader.Upload(ssPath);
                 }
 
