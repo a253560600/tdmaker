@@ -152,78 +152,85 @@ namespace TDMakerLib
 
             if (File.Exists(ssPath))
             {
-                switch ((ImageDestination)Engine.conf.ImageUploaderType)
+                if (!string.IsNullOrEmpty(Engine.conf.PtpImgCode))
                 {
-                    case ImageDestination.TinyPic:
-                        imageUploader = new TinyPicUploader(ZKeys.TinyPicID, ZKeys.TinyPicKey, Engine.UploadersConfig.TinyPicAccountType,
-                            Engine.UploadersConfig.TinyPicRegistrationCode);
-                        break;
+                    imageUploader = new PtpImageUploader(Crypt.Decrypt(Engine.conf.PtpImgCode));
+                }
+                else
+                {
+                    switch ((ImageDestination)Engine.conf.ImageUploaderType)
+                    {
+                        case ImageDestination.TinyPic:
+                            imageUploader = new TinyPicUploader(ZKeys.TinyPicID, ZKeys.TinyPicKey, Engine.UploadersConfig.TinyPicAccountType,
+                                Engine.UploadersConfig.TinyPicRegistrationCode);
+                            break;
 
-                    case ImageDestination.Imgur:
-                        imageUploader = new Imgur(Engine.UploadersConfig.ImgurAccountType, ZKeys.ImgurAnonymousKey, Engine.UploadersConfig.ImgurOAuthInfo);
-                        break;
+                        case ImageDestination.Imgur:
+                            imageUploader = new Imgur(Engine.UploadersConfig.ImgurAccountType, ZKeys.ImgurAnonymousKey, Engine.UploadersConfig.ImgurOAuthInfo);
+                            break;
 
-                    case ImageDestination.Flickr:
-                        imageUploader = new FlickrUploader(ApiKeys.FlickrKey, ApiKeys.FlickrSecret, Engine.UploadersConfig.FlickrAuthInfo, Engine.UploadersConfig.FlickrSettings);
-                        break;
+                        case ImageDestination.Flickr:
+                            imageUploader = new FlickrUploader(ApiKeys.FlickrKey, ApiKeys.FlickrSecret, Engine.UploadersConfig.FlickrAuthInfo, Engine.UploadersConfig.FlickrSettings);
+                            break;
 
-                    case ImageDestination.Photobucket:
-                        imageUploader = new Photobucket(Engine.UploadersConfig.PhotobucketOAuthInfo, Engine.UploadersConfig.PhotobucketAccountInfo);
-                        break;
+                        case ImageDestination.Photobucket:
+                            imageUploader = new Photobucket(Engine.UploadersConfig.PhotobucketOAuthInfo, Engine.UploadersConfig.PhotobucketAccountInfo);
+                            break;
 
-                    case ImageDestination.Immio:
-                        imageUploader = new ImmioUploader();
-                        break;
+                        case ImageDestination.Immio:
+                            imageUploader = new ImmioUploader();
+                            break;
 
-                    case ImageDestination.Picasa:
-                        imageUploader = new Picasa(Engine.UploadersConfig.PicasaOAuthInfo);
-                        break;
+                        case ImageDestination.Picasa:
+                            imageUploader = new Picasa(Engine.UploadersConfig.PicasaOAuthInfo);
+                            break;
 
-                    case ImageDestination.UploadScreenshot:
-                        imageUploader = new UploadScreenshot(ApiKeys.UploadScreenshotKey);
-                        break;
+                        case ImageDestination.UploadScreenshot:
+                            imageUploader = new UploadScreenshot(ApiKeys.UploadScreenshotKey);
+                            break;
 
-                    case ImageDestination.Twitpic:
-                        int indexTwitpic = Engine.UploadersConfig.TwitterSelectedAccount;
+                        case ImageDestination.Twitpic:
+                            int indexTwitpic = Engine.UploadersConfig.TwitterSelectedAccount;
 
-                        if (Engine.UploadersConfig.TwitterOAuthInfoList != null && Engine.UploadersConfig.TwitterOAuthInfoList.IsValidIndex(indexTwitpic))
-                        {
-                            imageUploader = new TwitPicUploader(ApiKeys.TwitPicKey, Engine.UploadersConfig.TwitterOAuthInfoList[indexTwitpic])
+                            if (Engine.UploadersConfig.TwitterOAuthInfoList != null && Engine.UploadersConfig.TwitterOAuthInfoList.IsValidIndex(indexTwitpic))
                             {
-                                TwitPicThumbnailMode = Engine.UploadersConfig.TwitPicThumbnailMode,
-                                ShowFull = Engine.UploadersConfig.TwitPicShowFull
+                                imageUploader = new TwitPicUploader(ApiKeys.TwitPicKey, Engine.UploadersConfig.TwitterOAuthInfoList[indexTwitpic])
+                                {
+                                    TwitPicThumbnailMode = Engine.UploadersConfig.TwitPicThumbnailMode,
+                                    ShowFull = Engine.UploadersConfig.TwitPicShowFull
+                                };
+                            }
+                            break;
+
+                        case ImageDestination.Twitsnaps:
+                            int indexTwitsnaps = Engine.UploadersConfig.TwitterSelectedAccount;
+
+                            if (Engine.UploadersConfig.TwitterOAuthInfoList.IsValidIndex(indexTwitsnaps))
+                            {
+                                imageUploader = new TwitSnapsUploader(ApiKeys.TwitsnapsKey, Engine.UploadersConfig.TwitterOAuthInfoList[indexTwitsnaps]);
+                            }
+                            break;
+
+                        case ImageDestination.yFrog:
+                            YfrogOptions yFrogOptions = new YfrogOptions(ApiKeys.ImageShackKey);
+                            yFrogOptions.Username = Engine.UploadersConfig.YFrogUsername;
+                            yFrogOptions.Password = Engine.UploadersConfig.YFrogPassword;
+                            yFrogOptions.Source = Application.ProductName;
+                            imageUploader = new YfrogUploader(yFrogOptions);
+                            break;
+
+                        case ImageDestination.FileUploader:
+                            ur = new UploadResult() { LocalFilePath = ssPath };
+                            break;
+
+                        default:
+                            imageUploader = new ImageShackUploader(ZKeys.ImageShackKey, Engine.UploadersConfig.ImageShackAccountType,
+                                      Engine.UploadersConfig.ImageShackRegistrationCode)
+                            {
+                                IsPublic = Engine.UploadersConfig.ImageShackShowImagesInPublic
                             };
-                        }
-                        break;
-
-                    case ImageDestination.Twitsnaps:
-                        int indexTwitsnaps = Engine.UploadersConfig.TwitterSelectedAccount;
-
-                        if (Engine.UploadersConfig.TwitterOAuthInfoList.IsValidIndex(indexTwitsnaps))
-                        {
-                            imageUploader = new TwitSnapsUploader(ApiKeys.TwitsnapsKey, Engine.UploadersConfig.TwitterOAuthInfoList[indexTwitsnaps]);
-                        }
-                        break;
-
-                    case ImageDestination.yFrog:
-                        YfrogOptions yFrogOptions = new YfrogOptions(ApiKeys.ImageShackKey);
-                        yFrogOptions.Username = Engine.UploadersConfig.YFrogUsername;
-                        yFrogOptions.Password = Engine.UploadersConfig.YFrogPassword;
-                        yFrogOptions.Source = Application.ProductName;
-                        imageUploader = new YfrogUploader(yFrogOptions);
-                        break;
-
-                    case ImageDestination.FileUploader:
-                        ur = new UploadResult() { LocalFilePath = ssPath };
-                        break;
-
-                    default:
-                        imageUploader = new ImageShackUploader(ZKeys.ImageShackKey, Engine.UploadersConfig.ImageShackAccountType,
-                                  Engine.UploadersConfig.ImageShackRegistrationCode)
-                        {
-                            IsPublic = Engine.UploadersConfig.ImageShackShowImagesInPublic
-                        };
-                        break;
+                            break;
+                    }
                 }
 
                 if (imageUploader != null)
