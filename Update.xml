@@ -2,9 +2,9 @@
 <Update>
   <TDMaker>
     <Stable>
-      <Version>3.0.0.395</Version>
-      <URL>http://tdmaker.googlecode.com/files/TDMaker-3.0.0.395-setup.exe</URL>
-      <Date>2011-09-18</Date>
+      <Version>3.0.1.400</Version>
+      <URL>http://tdmaker.googlecode.com/files/TDMaker-3.0.1.400-setup.exe</URL>
+      <Date>2013-01-25</Date>
       <Summary>http://tdmaker.googlecode.com/svn/trunk/TDMakerLib/VersionHistory.txt</Summary>
     </Stable>
   </TDMaker>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HelpersLib;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -8,7 +9,6 @@ using System.IO;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 using System.Xml.Serialization;
-using HelpersLib;
 using UploadersLib;
 using UploadersLib.HelperClasses;
 
@@ -109,9 +109,6 @@ namespace TDMakerLib
         [Category("Options / General"), DefaultValue(false), Description("Process media immediately after loading file or folder")]
         public bool AnalyzeAuto { get; set; }
 
-        [Category("Options / General"), DefaultValue(true), Description("Automatically Check for Updates")]
-        public bool UpdateCheckAuto { get; set; }
-
         [Category("Options / General"), DefaultValue(true), Description("Write debug information into a log file.")]
         public bool WriteDebugFile { get; set; }
 
@@ -122,7 +119,7 @@ namespace TDMakerLib
         [Category("Options / Publish"), DefaultValue(true), Description("Have larger text when [pre] tag is set")]
         public bool LargerPreText { get; set; }
 
-        [Category("Publish / Publish"), DefaultValue(PublishInfoType.ExternalTemplate), Description("Use internal template, external templates or information in MediaInfo in the torrent description in Publish tab")]
+        [Category("Publish / Publish"), DefaultValue(PublishInfoType.MediaInfo), Description("Use internal template, external templates or information in MediaInfo in the torrent description in Publish tab")]
         public PublishInfoType PublishInfoTypeChoice { get; set; }
 
         [Category("Options / Publish / Font Sizes"), DefaultValue(5), Description("Font Size for Heading 1")]
@@ -167,7 +164,7 @@ namespace TDMakerLib
         public MPlayerThumbnailerOptions MPlayerOptions = new MPlayerThumbnailerOptions();
 
         // Tab 4.3 - Options - Image Hosting
-        public ImageDestination ImageUploaderType = ImageDestination.ImageShack;
+        public ImageDestination ImageUploaderType = ImageDestination.UploadScreenshot;
 
         [Category("MTN / Image Uploaders"), DefaultValue(""), Description("ImageShack registration code")]
         public string ImageShackRegCode { get; set; }
@@ -194,6 +191,11 @@ namespace TDMakerLib
         public bool XMLTorrentUploadCreate { get; set; }
 
         // Tab 4.0 - Options - Paths
+
+        [Category("Options / Paths"), Description("Browse to reconfigure the MediaInfo.dll folder path")]
+        [EditorAttribute(typeof(FolderNameEditor), typeof(UITypeEditor))]
+        public string CustomMediaInfoDllDir { get; set; }
+
         [Category("Options / Paths"), DefaultValue(false), Description("Use custom Templates directory")]
         public bool UseCustomTemplatesDir { get; set; }
 

@@ -1,14 +1,19 @@
-﻿using System;
+﻿using HelpersLib;
+using MediaInfoLib;
+using System;
 using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
 using TDMakerLib;
-using System.Text;
-using MediaInfoLib;
+using UpdateCheckerLib;
+using UploadersLib;
 
 namespace TDMakerLib
 {
     public partial class AboutBox : Form
     {
+        public const string URL_UPDATE = "http://tdmaker.googlecode.com/svn/trunk/Update.xml";
+
         public AboutBox()
         {
             InitializeComponent();
@@ -52,7 +57,7 @@ namespace TDMakerLib
             }
         }
 
-        public string AssemblyVersion
+        public static string AssemblyVersion
         {
             get
             {
@@ -111,11 +116,15 @@ namespace TDMakerLib
                 return ((AssemblyCompanyAttribute)attributes[0]).Company;
             }
         }
-        #endregion
 
-        private void AboutBox_Load(object sender, EventArgs e)
+        #endregion Assembly Attribute Accessors
+
+        private void AboutBox_Shown(object sender, EventArgs e)
         {
-
+            UpdateChecker updateChecker = new UpdateChecker(URL_UPDATE, Application.ProductName,
+              Assembly.GetExecutingAssembly().GetName().Version,
+              ReleaseChannelType.Stable, Uploader.ProxySettings.GetWebProxy);
+            uclUpdate.CheckUpdate(updateChecker);
         }
     }
 }

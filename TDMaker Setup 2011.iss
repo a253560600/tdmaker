@@ -31,7 +31,7 @@ InfoAfterFile=TDMakerLib\license.txt
 InfoBeforeFile=TDMakerLib\VersionHistory.txt
 InternalCompressLevel=ultra64
 LanguageDetectionMethod=uilanguage
-MinVersion=4.90.3000,5.0.2195sp3
+MinVersion=6
 OutputBaseFilename={#MyAppName}-{#MyAppVersion}-setup
 OutputDir=..\Output\
 PrivilegesRequired=none
@@ -57,8 +57,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Source: TDMakerGUI\bin\Release\*.exe; Excludes: *.vshost.exe; DestDir: {app}; Flags: ignoreversion
 Source: TDMakerGUI\bin\Release\*.dll; DestDir: {app}; Flags: ignoreversion
 
-;Source: "MTN\*.exe"; DestDir: "{app}"; Flags: ignoreversion
-;Source: "MTN\*.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "MTN\*.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "MTN\*.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Lib\32-bit\MediaInfo.dll"; DestDir: "{app}"; Flags: ignoreversion; Check: Not IsWin64
 Source: "Lib\64-bit\MediaInfo.dll"; DestDir: "{app}"; Flags: ignoreversion; Check: IsWin64
 
