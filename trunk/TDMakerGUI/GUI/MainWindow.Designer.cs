@@ -85,7 +85,7 @@ namespace TDMaker
             this.tpMedia = new System.Windows.Forms.TabPage();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.lbStatus = new System.Windows.Forms.ListBox();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.gbSourceProp = new System.Windows.Forms.GroupBox();
             this.chkTitle = new System.Windows.Forms.CheckBox();
             this.txtTitle = new System.Windows.Forms.TextBox();
             this.chkWebLink = new System.Windows.Forms.CheckBox();
@@ -207,7 +207,7 @@ namespace TDMaker
             this.tcMain.SuspendLayout();
             this.tpMedia.SuspendLayout();
             this.groupBox10.SuspendLayout();
-            this.groupBox9.SuspendLayout();
+            this.gbSourceProp.SuspendLayout();
             this.gbDVD.SuspendLayout();
             this.gbLocation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
@@ -691,7 +691,7 @@ namespace TDMaker
             // tpMedia
             // 
             this.tpMedia.Controls.Add(this.groupBox10);
-            this.tpMedia.Controls.Add(this.groupBox9);
+            this.tpMedia.Controls.Add(this.gbSourceProp);
             this.tpMedia.Controls.Add(this.gbDVD);
             this.tpMedia.Controls.Add(this.gbLocation);
             this.tpMedia.Location = new System.Drawing.Point(4, 25);
@@ -732,24 +732,24 @@ namespace TDMaker
             this.lbStatus.Size = new System.Drawing.Size(1127, 167);
             this.lbStatus.TabIndex = 11;
             // 
-            // groupBox9
+            // gpSourceProp
             // 
-            this.groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.gbSourceProp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox9.Controls.Add(this.chkTitle);
-            this.groupBox9.Controls.Add(this.txtTitle);
-            this.groupBox9.Controls.Add(this.chkWebLink);
-            this.groupBox9.Controls.Add(this.chkSource);
-            this.groupBox9.Controls.Add(this.txtWebLink);
-            this.groupBox9.Controls.Add(this.cboSource);
-            this.groupBox9.Location = new System.Drawing.Point(363, 217);
-            this.groupBox9.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox9.Size = new System.Drawing.Size(789, 128);
-            this.groupBox9.TabIndex = 12;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Source Properties";
+            this.gbSourceProp.Controls.Add(this.chkTitle);
+            this.gbSourceProp.Controls.Add(this.txtTitle);
+            this.gbSourceProp.Controls.Add(this.chkWebLink);
+            this.gbSourceProp.Controls.Add(this.chkSource);
+            this.gbSourceProp.Controls.Add(this.txtWebLink);
+            this.gbSourceProp.Controls.Add(this.cboSource);
+            this.gbSourceProp.Location = new System.Drawing.Point(363, 217);
+            this.gbSourceProp.Margin = new System.Windows.Forms.Padding(4);
+            this.gbSourceProp.Name = "gpSourceProp";
+            this.gbSourceProp.Padding = new System.Windows.Forms.Padding(4);
+            this.gbSourceProp.Size = new System.Drawing.Size(789, 128);
+            this.gbSourceProp.TabIndex = 12;
+            this.gbSourceProp.TabStop = false;
+            this.gbSourceProp.Text = "Source Properties";
             // 
             // chkTitle
             // 
@@ -2289,8 +2289,8 @@ namespace TDMaker
             this.tcMain.ResumeLayout(false);
             this.tpMedia.ResumeLayout(false);
             this.groupBox10.ResumeLayout(false);
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox9.PerformLayout();
+            this.gbSourceProp.ResumeLayout(false);
+            this.gbSourceProp.PerformLayout();
             this.gbDVD.ResumeLayout(false);
             this.gbDVD.PerformLayout();
             this.gbLocation.ResumeLayout(false);
@@ -2405,7 +2405,7 @@ namespace TDMaker
         private System.Windows.Forms.TabPage tpMedia;
         private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.ListBox lbStatus;
-        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.GroupBox gbSourceProp;
         private System.Windows.Forms.CheckBox chkTitle;
         private System.Windows.Forms.TextBox txtTitle;
         private System.Windows.Forms.CheckBox chkWebLink;

@@ -534,8 +534,12 @@ namespace TDMaker
         private void SettingsReadScreenshots()
         {
             chkScreenshotUpload.Checked = Engine.conf.ScreenshotsUpload;
-            cboScreenshotDest.Enabled = string.IsNullOrEmpty(Engine.conf.PtpImgCode);
-            btnUploadersConfig.Enabled = string.IsNullOrEmpty(Engine.conf.PtpImgCode);
+
+            gbDVD.Visible = gbSourceProp.Visible = btnUploadersConfig.Visible = cboScreenshotDest.Visible =
+                string.IsNullOrEmpty(Engine.conf.PtpImgCode);
+
+            if (!string.IsNullOrEmpty(Engine.conf.PtpImgCode))
+                chkScreenshotUpload.Text = "Upload screenshots to ptpimg.me";
         }
 
         private void SettingsReadPublish()
