@@ -534,6 +534,8 @@ namespace TDMaker
         private void SettingsReadScreenshots()
         {
             chkScreenshotUpload.Checked = Engine.conf.ScreenshotsUpload;
+            cboScreenshotDest.Enabled = string.IsNullOrEmpty(Engine.conf.PtpImgCode);
+            btnUploadersConfig.Enabled = string.IsNullOrEmpty(Engine.conf.PtpImgCode);
         }
 
         private void SettingsReadPublish()

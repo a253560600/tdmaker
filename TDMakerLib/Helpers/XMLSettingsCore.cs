@@ -83,7 +83,7 @@ namespace TDMakerLib
          */
 
         // Tab 3 - Publish
-        [Category("Screenshots"), DefaultValue(true), Description("Create screenshots using MTN and upload")]
+        [Category("Screenshots"), DefaultValue(true), Description("Create screenshots using thumbnailer and upload")]
         public bool ScreenshotsUpload { get; set; }
 
         [Category("Screenshots"), DefaultValue(true), Description("Use full image URL in the torrent description.")]
@@ -119,7 +119,7 @@ namespace TDMakerLib
         [Category("Options / Publish"), DefaultValue(true), Description("Have larger text when [pre] tag is set")]
         public bool LargerPreText { get; set; }
 
-        [Category("Publish / Publish"), DefaultValue(PublishInfoType.MediaInfo), Description("Use internal template, external templates or information in MediaInfo in the torrent description in Publish tab")]
+        [Category("Options / Publish"), DefaultValue(PublishInfoType.MediaInfo), Description("Use internal template, external templates or information in MediaInfo in the torrent description in Publish tab")]
         public PublishInfoType PublishInfoTypeChoice { get; set; }
 
         [Category("Options / Publish / Font Sizes"), DefaultValue(5), Description("Font Size for Heading 1")]
@@ -147,14 +147,14 @@ namespace TDMakerLib
         public ProxyInfo ProxySettings = new ProxyInfo();
 
         // Tab 4.2 - Options - MTN
-        [Category("Thumnailers"), DefaultValue(ThumbnailerType.MPlayer), Description("Chooser thumbnailer application to take screenshots.")]
+        [Category("Thumbnailers"), DefaultValue(ThumbnailerType.MPlayer), Description("Chooser thumbnailer application to take screenshots.")]
         public ThumbnailerType ThumbnailerType { get; set; }
 
-        [Category("Thumnailers / MTN"), DefaultValue(false), Description("Show MTN during file creation")]
+        [Category("Thumbnailers / MTN"), DefaultValue(false), Description("Show MTN during file creation")]
         public bool ShowMTNWindow { get; set; }
 
         [EditorAttribute(typeof(ExeFileNameEditor), typeof(UITypeEditor))]
-        [Category("MTN"), Description("MTN Argument")]
+        [Category("Thumbnailers / MTN"), Description("MTN Argument")]
         public string MTNPath { get; set; }
 
         [EditorAttribute(typeof(ExeFileNameEditor), typeof(UITypeEditor))]
@@ -166,10 +166,13 @@ namespace TDMakerLib
         // Tab 4.3 - Options - Image Hosting
         public ImageDestination ImageUploaderType = ImageDestination.UploadScreenshot;
 
-        [Category("MTN / Image Uploaders"), DefaultValue(""), Description("ImageShack registration code")]
+        [Category("Thumbnailers / Image Uploaders"), DefaultValue(""), Description("PtpImg registration code")]
+        public string PtpImgCode { get; set; }
+
+        [Category("Thumbnailers / Image Uploaders"), DefaultValue(""), Description("ImageShack registration code")]
         public string ImageShackRegCode { get; set; }
 
-        [Category("MTN / Image Uploaders"), DefaultValue(false), Description("Use ImageShack registration code")]
+        [Category("Thumbnailers / Image Uploaders"), DefaultValue(false), Description("Use ImageShack registration code")]
         public bool UseImageShackRegCode { get; set; }
 
         // Tab 4.5 - Options - Torrent Creator
