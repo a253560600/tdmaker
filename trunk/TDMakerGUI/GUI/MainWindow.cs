@@ -1,19 +1,19 @@
-﻿using System;
+﻿using HelpersLib;
+using MediaInfoLib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using HelpersLib;
 using TDMakerGUI.Properties;
 using TDMakerLib;
+using UpdateCheckerLib;
 using UploadersLib;
-using ZScreenLib;
-using ZSS;
-using ZSS.UpdateCheckerLib;
 
 namespace TDMaker
 {
@@ -47,6 +47,7 @@ namespace TDMaker
         private void MainWindow_Load(object sender, EventArgs e)
         {
             ConfigureDirs();
+
             // ConfigureGUIForUnix();
             SettingsRead();
 
@@ -85,11 +86,6 @@ namespace TDMaker
             this.Text = Engine.GetProductName();
 
             UpdateGuiControls();
-
-            if (Engine.conf.UpdateCheckAuto)
-            {
-                CheckUpdates();
-            }
         }
 
         private void MakeGUIReadyForAnalysis()
@@ -110,6 +106,7 @@ namespace TDMaker
                 case TaskType.ANALYZE_MEDIA:
                     e.Result = WorkerAnalyzeMedia(wt);
                     break;
+
                 case TaskType.CREATE_TORRENT:
                     WorkerCreateTorrents(wt);
                     break;
@@ -119,6 +116,7 @@ namespace TDMaker
         private bool ValidateInput()
         {
             StringBuilder sbMsg = new StringBuilder();
+
             // checks
             if (string.IsNullOrEmpty(cboSource.Text) && Engine.conf.PublishInfoTypeChoice != PublishInfoType.MediaInfo)
             {
@@ -292,6 +290,7 @@ namespace TDMaker
                             if (wt.IsSingleTask() && !string.IsNullOrEmpty(txtTitle.Text))
                             {
                                 mi.SetTitle(txtTitle.Text);
+
                                 // if it is a DVD, set the title to be name of the folder.
                                 this.Text = string.Format("{0} - {1}", Engine.GetProductName(), Adapter.GetMediaName(mi.Location));
                             }
@@ -374,11 +373,15 @@ namespace TDMaker
                 {
                     OpenFileDialog dlg = new OpenFileDialog();
                     dlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-                    dlg.Title = "Browse for mplayer.exe";
+                    dlg.Title = "Browse for mplayer.exe or download from http://code.google.com/p/mplayer-for-windows/downloads/list";
                     dlg.Filter = "Applications (*.exe)|*.exe";
                     if (dlg.ShowDialog() == DialogResult.OK)
                     {
                         Engine.conf.MPlayerPath = dlg.FileName;
+                    }
+                    else
+                    {
+                        Helpers.LoadBrowserAsync("http://code.google.com/p/mplayer-for-windows/downloads/list");
                     }
                 }
             }
@@ -399,7 +402,7 @@ namespace TDMaker
             Engine.conf.ImageUploaderType = (ImageDestination)cboScreenshotDest.SelectedIndex;
 
             Engine.conf.Write();
-            Engine.MyUploadersConfig.Save(Engine.UploadersConfigPath);
+            Engine.UploadersConfig.Save(Engine.UploadersConfigPath);
             Engine.mtnProfileMgr.Write();
         }
 
@@ -449,6 +452,12 @@ namespace TDMaker
 
             if (string.IsNullOrEmpty(Engine.conf.MTNPath))
                 Engine.conf.MTNPath = Path.Combine(Application.StartupPath, "mtn.exe");
+
+            if (string.IsNullOrEmpty(Engine.conf.CustomMediaInfoDllDir))
+            {
+                Engine.conf.CustomMediaInfoDllDir = Path.Combine(Application.StartupPath);
+            }
+            MediaInfo.SetDllDirectory(Engine.conf.CustomMediaInfoDllDir);
 
             pgApp.SelectedObject = Engine.conf;
         }
@@ -531,8 +540,8 @@ namespace TDMaker
         {
             if (cboQuickPublishType.Items.Count == 0)
             {
-                cboQuickPublishType.Items.AddRange(typeof(PublishInfoType).GetEnumDescriptions());
-                cboPublishType.Items.AddRange(typeof(PublishInfoType).GetEnumDescriptions());
+                cboQuickPublishType.Items.AddRange(Enum.GetNames(typeof(PublishInfoType)));
+                cboPublishType.Items.AddRange(Enum.GetNames(typeof(PublishInfoType)));
             }
             cboPublishType.SelectedIndex = (int)Engine.conf.PublishInfoTypeChoice;
             cboQuickPublishType.SelectedIndex = (int)Engine.conf.PublishInfoTypeChoice;
@@ -558,7 +567,7 @@ namespace TDMaker
 
             if (cboScreenshotsLoc.Items.Count == 0)
             {
-                cboScreenshotsLoc.Items.AddRange(typeof(LocationType).GetEnumDescriptions());
+                cboScreenshotsLoc.Items.AddRange(Enum.GetNames(typeof(LocationType)));
             }
             cboScreenshotsLoc.SelectedIndex = (int)Engine.conf.ScreenshotsLoc;
             txtScreenshotsLoc.Text = Engine.conf.CustomScreenshotsDir;
@@ -664,7 +673,7 @@ namespace TDMaker
 
             if (cboTorrentLoc.Items.Count == 0)
             {
-                cboTorrentLoc.Items.AddRange(typeof(LocationType).GetEnumDescriptions());
+                cboTorrentLoc.Items.AddRange(Enum.GetNames(typeof(LocationType)));
             }
             cboTorrentLoc.SelectedIndex = (int)Engine.conf.TorrentLocationChoice;
             chkWritePublish.Checked = Engine.conf.WritePublish;
@@ -895,6 +904,7 @@ namespace TDMaker
                     case ProgressType.REPORT_TORRENTINFO:
                         TorrentInfo ti = e.UserState as TorrentInfo;
                         lbPublish.Items.Add(ti);
+
                         // initialize quick publish checkboxes
                         chkQuickFullPicture.Checked = Engine.conf.UseFullPicture;
                         chkQuickAlignCenter.Checked = Engine.conf.AlignCenter;
@@ -916,6 +926,7 @@ namespace TDMaker
                             lbScreenshots.SelectedIndex = lbScreenshots.Items.Count - 1;
                         }
                         break;
+
                     case ProgressType.UPDATE_STATUSBAR_DEBUG:
                         sBar.Text = msg;
                         lbStatus.Items.Add(msg);
@@ -1007,8 +1018,6 @@ namespace TDMaker
                 }
             }
         }
-
-        public const string URL_UPDATE = "http://tdmaker.googlecode.com/svn/trunk/Update.xml";
 
         private void btnBrowseTorrentCustomFolder_Click(object sender, EventArgs e)
         {
@@ -1126,14 +1135,6 @@ namespace TDMaker
             FileSystem.OpenDirTemplates();
         }
 
-        private void CheckUpdates()
-        {
-            BackgroundWorker updateThread = new BackgroundWorker { WorkerReportsProgress = true };
-            updateThread.DoWork += new DoWorkEventHandler(updateThread_DoWork);
-            updateThread.ProgressChanged += new ProgressChangedEventHandler(updateThread_ProgressChanged);
-            updateThread.RunWorkerAsync(Application.ProductName);
-        }
-
         private void updateThread_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             switch (e.ProgressPercentage)
@@ -1152,21 +1153,6 @@ namespace TDMaker
         private void cboTemplate_SelectedIndexChanged(object sender, EventArgs e)
         {
             Engine.conf.TemplateIndex = cboTemplate.SelectedIndex;
-        }
-
-        private void updateThread_DoWork(object sender, DoWorkEventArgs e)
-        {
-            BackgroundWorker worker = (BackgroundWorker)sender;
-            NewVersionWindowOptions nvwo = new NewVersionWindowOptions { MyImage = Resources.GenuineAdv };
-
-            UpdateChecker updateChecker = new UpdateChecker(URL_UPDATE, Application.ProductName, new Version(Application.ProductVersion), ReleaseChannelType.Dev, Adapter.CheckProxySettings().GetWebProxy, nvwo);
-            worker.ReportProgress(1, updateChecker);
-            updateChecker.CheckUpdate();
-        }
-
-        private void tsmUpdatesCheck_Click(object sender, EventArgs e)
-        {
-            CheckUpdates();
         }
 
         private void cboScreenshotDest_SelectedIndexChanged(object sender, EventArgs e)
@@ -1203,7 +1189,7 @@ namespace TDMaker
 
             if (h != string.Empty)
             {
-                frmTextViewer v = new frmTextViewer(string.Format("{0} - {1}",
+                ZSS.frmTextViewer v = new ZSS.frmTextViewer(string.Format("{0} - {1}",
                     Application.ProductName, "Version History"), h);
                 v.Icon = this.Icon;
                 v.ShowDialog();
@@ -1348,11 +1334,6 @@ namespace TDMaker
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CopyPublish();
-        }
-
-        private void miHelpCheckUpdates_Click(object sender, EventArgs e)
-        {
-            CheckUpdates();
         }
 
         private void miFoldersScreenshots_Click(object sender, EventArgs e)
@@ -1537,8 +1518,8 @@ namespace TDMaker
 
         private void btnAddTrackerGroup_Click(object sender, EventArgs e)
         {
-            ZScreenLib.InputBox ib = new ZScreenLib.InputBox();
-            ib.Title = "Enter group name";
+            InputBox ib = new InputBox();
+            ib.Text = "Enter group name";
             ib.InputText = "Linux ISOs";
             if (ib.ShowDialog() == DialogResult.OK)
             {
@@ -1623,7 +1604,7 @@ namespace TDMaker
             {
                 InputBox ib = new InputBox();
                 ib.InputText = tg.Name;
-                ib.Title = "Enter new name...";
+                ib.Text = "Enter new name...";
                 if (ib.ShowDialog() == DialogResult.OK)
                 {
                     tg.Name = ib.InputText;
@@ -1644,9 +1625,7 @@ namespace TDMaker
 
         private void TbnAddMtnProfileClick(object sender, EventArgs e)
         {
-            InputBox ib = new InputBox();
-            ib.Title = "Enter profile name...";
-            ib.InputText = "Default";
+            InputBox ib = new InputBox("Enter profile name...", "Default");
             if (ib.ShowDialog() == DialogResult.OK)
             {
                 XMLSettingsScreenshot mtnProfile = new XMLSettingsScreenshot(ib.InputText);
@@ -1809,7 +1788,7 @@ namespace TDMaker
 
         private void btnUploadersConfig_Click(object sender, EventArgs e)
         {
-            UploadersConfigForm form = new UploadersConfigForm(Engine.MyUploadersConfig, Engine.conf.ApiKeys);
+            UploadersConfigForm form = new UploadersConfigForm(Engine.UploadersConfig, Engine.conf.ApiKeys);
             form.Show();
         }
 

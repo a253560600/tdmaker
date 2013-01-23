@@ -1,10 +1,10 @@
-﻿using System;
+﻿using MediaInfoLib;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
-using MediaInfoLib;
 using TDMakerLib;
-using System.Diagnostics;
 
 namespace TDMakerLib
 {
@@ -15,49 +15,70 @@ namespace TDMakerLib
     public class MediaFile
     {
         public int Index { get; set; }
+
         public bool HasAudio { get; set; }
+
         public bool HasVideo { get; set; }
 
-        // General 
+        // General
         public string EncodedDate { get; set; }
+
         public string EncodedApplication { get; set; }
+
         public string BitrateOverall { get; set; }
+
         /// <summary>
         /// Duration in milli seconds
         /// </summary>
         public double Duration { get; set; }
+
         /// <summary>
         /// Duration in hours:minutes:seconds
         /// </summary>
         public string DurationString2 { get; set; }
+
         public string DurationString3 { get; set; }
+
         public string FileExtension { get; set; }
+
         public string FileName { get; set; }
+
         /// <summary>
         /// Always a File Path of Media
         /// </summary>
         public string FilePath { get; set; }
+
         /// <summary>
         /// File Size in Bytes
         /// </summary>
         public double FileSize { get; set; }
+
         /// <summary>
         /// File Size in XX.X MiB
         /// </summary>
         public string FileSizeString { get; set; }
+
         public string Format { get; set; }
+
         public string FormatInfo { get; set; }
+
         public Thumbnailer Thumbnailer = null;
+
         public string Source { get; set; }
+
         private string mSubtitles = "None";
+
         public string Subtitles { get { return mSubtitles; } set { mSubtitles = value; } }
+
         /// <summary>
         /// This is what you get for mi.Option("Complete") using MediaInfo
         /// </summary>
         public string Summary { get; set; }
+
         public TagLib.File TagLibFile { get; set; }
 
         public List<AudioInfo> Audio { get; set; }
+
         public VideoInfo Video { get; set; }
 
         /// <summary>
@@ -90,7 +111,7 @@ namespace TDMakerLib
             {
                 //*********************
                 //* General
-                //********************* 
+                //*********************
 
                 //System.Debug.WriteLine("Current Dir1: " + System.Environment.CurrentDirectory);
                 //System.Environment.CurrentDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
@@ -166,7 +187,6 @@ namespace TDMakerLib
 
                         if (subCount > 0)
                         {
-
                             StringBuilder sbLang = new StringBuilder();
                             for (int i = 0; i < subCount; i++)
                             {
@@ -194,12 +214,11 @@ namespace TDMakerLib
                         }
 
                         this.Subtitles = sbSubs.ToString();
-
                     }
 
                     //*********************
                     //* Video
-                    //********************* 
+                    //*********************
 
                     int videoCount;
                     int.TryParse(mMI.Get(StreamKind.General, 0, "VideoCount"), out videoCount);
@@ -229,10 +248,9 @@ namespace TDMakerLib
                     this.Video.Resolution = string.Format("{0}x{1}", this.Video.Width, this.Video.Height);
                     this.Video.BitsPerPixelXFrame = mMI.Get(StreamKind.Video, 0, "Bits-(Pixel*Frame)");
 
-
                     //*********************
                     //* Audio
-                    //*********************  
+                    //*********************
                     int audioCount;
                     int.TryParse(mMI.Get(StreamKind.General, 0, "AudioCount"), out audioCount);
                     this.HasAudio = audioCount > 0;
@@ -269,11 +287,10 @@ namespace TDMakerLib
                     //    TagLib.File f = TagLib.File.Create(this.FilePath);
                     //    this.TagLibFile = f;
                     //}
-
                 }
-
             }
         }
+
         /// <summary>
         /// Method to determine if the Media File is actually an audio file
         /// </summary>
@@ -315,7 +332,7 @@ namespace TDMakerLib
 
             //*********************
             //* General
-            //*********************   
+            //*********************
             StringBuilder sbGeneral = new StringBuilder();
 
             sbBody.AppendLine(BbCode.Size(fontSizeHeading3, BbCode.BoldItalic("General:")));
@@ -331,12 +348,14 @@ namespace TDMakerLib
 
             // File Size
             sbGeneral.AppendLine(string.Format("         [u]File Size:[/u] {0}", this.FileSizeString));
+
             // Duration
             sbGeneral.AppendLine(string.Format("          [u]Duration:[/u] {0}", this.DurationString2));
+
             // Bitrate
             sbGeneral.AppendLine(string.Format("           [u]Bitrate:[/u] {0}", this.BitrateOverall));
 
-            // Subtitles            
+            // Subtitles
             if (!string.IsNullOrEmpty(this.Subtitles))
             {
                 sbGeneral.AppendLine(string.Format("         [u]Subtitles:[/u] {0}", this.Subtitles));
@@ -355,7 +374,7 @@ namespace TDMakerLib
 
             //*********************
             //* Video
-            //*********************    
+            //*********************
             VideoInfo vi = this.Video;
 
             sbBody.AppendLine();
@@ -363,7 +382,8 @@ namespace TDMakerLib
             sbBody.AppendLine();
 
             StringBuilder sbVideo = new StringBuilder();
-            // Format            
+
+            // Format
             sbVideo.Append(string.Format("              [u]Format:[/u] {0}", this.Video.Format));
             if (!string.IsNullOrEmpty(this.Video.FormatVersion))
             {
@@ -374,11 +394,14 @@ namespace TDMakerLib
             // Codec
             if (!string.IsNullOrEmpty(vi.Codec))
                 sbVideo.AppendLine(string.Format("               [u]Codec:[/u] {0}", vi.Codec));
+
             // Bitrate
             sbVideo.AppendLine(string.Format("             [u]Bitrate:[/u] {0}", this.Video.Bitrate));
-            // Standard            
+
+            // Standard
             if (!string.IsNullOrEmpty(vi.Standard))
                 sbVideo.AppendLine(string.Format("            [u]Standard:[/u] {0}", this.Video.Standard));
+
             // Frame Rate
             sbVideo.AppendLine(string.Format("          [u]Frame Rate:[/u] {0}", vi.FrameRate));
 
@@ -396,7 +419,7 @@ namespace TDMakerLib
 
             //*********************
             //* Audio
-            //*********************          
+            //*********************
 
             int audioCount = this.Audio.Count;
 
@@ -409,6 +432,7 @@ namespace TDMakerLib
                 sbBody.AppendLine();
 
                 StringBuilder sbAudio = new StringBuilder();
+
                 // Format
                 sbAudio.Append(string.Format("            [u]Format:[/u] {0}", ai.Format));
                 if (!string.IsNullOrEmpty(ai.FormatVersion))
@@ -417,15 +441,19 @@ namespace TDMakerLib
                     sbAudio.Append(string.Format(" {0}", ai.FormatProfile));
                 sbAudio.Append(Environment.NewLine);
 
-                // Codec     
+                // Codec
                 if (!string.IsNullOrEmpty(ai.Codec))
                     sbAudio.AppendLine(string.Format("             [u]Codec:[/u] {0}", ai.Codec));
+
                 // Bitrate
                 sbAudio.AppendLine(string.Format("           [u]Bitrate:[/u] {0} ({1})", ai.Bitrate, ai.BitrateMode));
+
                 // Channels
                 sbAudio.AppendLine(string.Format("          [u]Channels:[/u] {0}", ai.Channels));
+
                 // Sampling Rate
                 sbAudio.AppendLine(string.Format("     [u]Sampling Rate:[/u] {0}", ai.SamplingRate));
+
                 // Resolution
                 if (!string.IsNullOrEmpty(ai.Resolution))
                     sbAudio.AppendLine(string.Format(("        [u]Resolution:[/u] {0}"), ai.Resolution));
@@ -445,12 +473,13 @@ namespace TDMakerLib
             {
                 if (!string.IsNullOrEmpty(ss.FullImageLink) && pop.FullPicture)
                 {
-                    sbPublish.Append(BbCode.Img(ss.FullImageLink));
+                    sbPublish.AppendLine(BbCode.Img(ss.FullImageLink));
                 }
                 else if (!string.IsNullOrEmpty(ss.LinkedThumbnail))
                 {
-                    sbPublish.Append(ss.LinkedThumbnail);
+                    sbPublish.AppendLine(ss.LinkedThumbnail);
                 }
+                sbPublish.AppendLine();
             }
 
             return sbPublish.ToString();
@@ -483,11 +512,17 @@ namespace TDMakerLib
     public class Info
     {
         public string Bitrate { get; set; }
+
         public string Codec { get; set; }
+
         public string Standard { get; set; }
+
         public string Format { get; set; }
+
         public string FormatProfile { get; set; }
+
         public string FormatVersion { get; set; }
+
         public string Resolution { get; set; }
 
         public Info()
@@ -498,10 +533,13 @@ namespace TDMakerLib
 
     public class AudioInfo : Info
     {
-        //         
+        //
         public int Index { get; set; }
+
         public string BitrateMode { get; set; }
+
         public string Channels { get; set; }
+
         public string SamplingRate { get; set; }
 
         public AudioInfo(int id)
@@ -513,11 +551,17 @@ namespace TDMakerLib
     public class VideoInfo : Info
     {
         public string FrameRate { get; set; }
+
         public string Height { get; set; }
+
         public string ScanType { get; set; }
+
         public string Width { get; set; }
+
         public string BitsPerPixelXFrame { get; set; }
+
         public string DisplayAspectRatio { get; set; }
+
         public string EncodedLibrarySettings { get; set; }
     }
 }

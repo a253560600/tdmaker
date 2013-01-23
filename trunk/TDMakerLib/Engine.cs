@@ -1,9 +1,9 @@
-﻿using System;
+﻿using HelpersLib;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
-using HelpersLib;
 using UploadersLib;
 using UploadersLib.HelperClasses;
 
@@ -53,7 +53,7 @@ namespace TDMakerLib
 
         public static XMLSettingsMtnProfiles mtnProfileMgr { get; set; }
 
-        public static UploadersConfig MyUploadersConfig { get; set; }
+        public static UploadersConfig UploadersConfig { get; set; }
 
         public static bool DetectUnix()
         {
@@ -278,7 +278,7 @@ namespace TDMakerLib
         public static void LoadSettings()
         {
             LoadSettings(string.Empty);
-            Engine.MyUploadersConfig = UploadersConfig.Load(UploadersConfigPath);
+            Engine.UploadersConfig = UploadersConfig.Load(UploadersConfigPath);
         }
 
         public static void LoadSettingsLatest()

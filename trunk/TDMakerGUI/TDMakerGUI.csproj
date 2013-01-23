@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TDMakerGUI</RootNamespace>
     <AssemblyName>TDMaker</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>GenuineAdv.ico</ApplicationIcon>
     <SourceAnalysisOverrideSettingsFile>C:\Documents and Settings\e80655\Application Data\ICSharpCode/SharpDevelop3.0\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
@@ -33,6 +33,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,6 +44,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -52,6 +54,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -70,9 +73,6 @@
     </Compile>
     <Compile Include="GUI\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\InputBox.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\TextViewer.cs">
       <SubType>Form</SubType>
@@ -122,12 +122,12 @@
     <Content Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\ZApps\trunk\ZSS.HelpersLib\HelpersLib.csproj">
-      <Project>{327750E1-9FB7-4CC3-8AEA-9BC42180CAD3}</Project>
+    <ProjectReference Include="..\..\..\ShareX\trunk\HelpersLib\HelpersLib.csproj">
+      <Project>{327750e1-9fb7-4cc3-8aea-9bc42180cad3}</Project>
       <Name>HelpersLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\ZApps\trunk\ZSS.UploadersLib\UploadersLib.csproj">
-      <Project>{E1C94415-3424-4517-A2A1-B2FDD1F59C67}</Project>
+    <ProjectReference Include="..\..\..\ShareX\trunk\UploadersLib\UploadersLib.csproj">
+      <Project>{e1c94415-3424-4517-a2a1-b2fdd1f59c67}</Project>
       <Name>UploadersLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\TDMakerLib\TDMakerLib.csproj">
@@ -154,11 +154,12 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>if $(ConfigurationName) == Release "$(SolutionDir)Tools\SVNRevToAssemblyInfo.exe" dir "$(ProjectDir)" file "$(ProjectDir)Properties\AssemblyInfo.cs"</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Release "$(SolutionDir)Tools\Sgen.exe" /a:"TDMakerLib.dll" /f /t:"TDMakerLib.XMLSettingsCore" /t:"TDMakerLib.XMLSettingsMtnProfiles" /t:"TDMakerLib.XMLSettingsScreenshot" /v
-</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Diagnostics;
-using System.IO;
-using System.Drawing.Imaging;
-using System.ComponentModel;
 
 namespace TDMakerLib
 {
@@ -16,7 +16,6 @@ namespace TDMakerLib
 
         private MPlayerThumbnailer()
         {
-
         }
 
         public MPlayerThumbnailer(MediaFile mf, string ssDir, MPlayerThumbnailerOptions options)
@@ -80,7 +79,6 @@ namespace TDMakerLib
                     Screenshots.AddRange(tempSS);
                 }
             }
-
         }
     }
 
@@ -88,8 +86,10 @@ namespace TDMakerLib
     {
         [Category("Options"), DefaultValue(3), Description("# of screenshots to take")]
         public int NumberOfScreenshots { get; set; }
-        [Category("Options"), DefaultValue(true), Description("Combine all screenshots to one large screenshot")]
+
+        [Category("Options"), DefaultValue(false), Description("Combine all screenshots to one large screenshot")]
         public bool CombineScreenshots { get; set; }
+
         [Category("Options"), DefaultValue(true), Description("Add movie information to the combined screenshot")]
         public bool CombineScreenshotsAddMovieInfo { get; set; }
 

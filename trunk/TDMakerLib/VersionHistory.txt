@@ -1,5 +1,6 @@
-Version 3.0 BETA
+Version 3.0
 
+3.0.1 Default description changed to MediaInfo
 3.0.0 Core changes to add png support using MPlayer with options to combine multiple screenshots
 2.0.4 Opening a file with TDMaker in Explorer will load the file [Issue 18]
 2.0.3 Revised GUI with the latest UploadersLib.dll from ZScreen

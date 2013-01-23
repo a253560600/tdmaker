@@ -1,13 +1,16 @@
-﻿using System;
+﻿using HelpersLib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading;
+using System.Windows.Forms;
 using UploadersLib;
 using UploadersLib.HelperClasses;
 using UploadersLib.ImageUploaders;
+using UploadersLib.URLShorteners;
 
 namespace TDMakerLib
 {
@@ -69,6 +72,7 @@ namespace TDMakerLib
                 case ThumbnailerType.MovieThumbnailer:
                     mf.Thumbnailer = new MovieThumbNailer(mf, ssDir);
                     break;
+
                 case ThumbnailerType.MPlayer:
                     mf.Thumbnailer = new MPlayerThumbnailer(mf, ssDir, Engine.conf.MPlayerOptions);
                     break;
@@ -131,7 +135,7 @@ namespace TDMakerLib
                             {
                                 if (!string.IsNullOrEmpty(ur.URL))
                                 {
-                                    ss.FullImageLink = ur.GetFullImageUrl();
+                                    ss.FullImageLink = ur.URL;
                                     ss.LinkedThumbnail = ur.ThumbnailURL;
                                 }
                             }
@@ -151,20 +155,73 @@ namespace TDMakerLib
                 switch ((ImageDestination)Engine.conf.ImageUploaderType)
                 {
                     case ImageDestination.TinyPic:
-                        imageUploader = new TinyPicUploader(ZKeys.TinyPicID, ZKeys.TinyPicKey, Engine.MyUploadersConfig.TinyPicAccountType,
-                            Engine.MyUploadersConfig.TinyPicRegistrationCode);
+                        imageUploader = new TinyPicUploader(ZKeys.TinyPicID, ZKeys.TinyPicKey, Engine.UploadersConfig.TinyPicAccountType,
+                            Engine.UploadersConfig.TinyPicRegistrationCode);
                         break;
+
                     case ImageDestination.Imgur:
-                        imageUploader = new Imgur(Engine.MyUploadersConfig.ImgurAccountType, ZKeys.ImgurAnonymousKey, Engine.MyUploadersConfig.ImgurOAuthInfo);
+                        imageUploader = new Imgur(Engine.UploadersConfig.ImgurAccountType, ZKeys.ImgurAnonymousKey, Engine.UploadersConfig.ImgurOAuthInfo);
                         break;
+
+                    case ImageDestination.Flickr:
+                        imageUploader = new FlickrUploader(ApiKeys.FlickrKey, ApiKeys.FlickrSecret, Engine.UploadersConfig.FlickrAuthInfo, Engine.UploadersConfig.FlickrSettings);
+                        break;
+
+                    case ImageDestination.Photobucket:
+                        imageUploader = new Photobucket(Engine.UploadersConfig.PhotobucketOAuthInfo, Engine.UploadersConfig.PhotobucketAccountInfo);
+                        break;
+
+                    case ImageDestination.Immio:
+                        imageUploader = new ImmioUploader();
+                        break;
+
+                    case ImageDestination.Picasa:
+                        imageUploader = new Picasa(Engine.UploadersConfig.PicasaOAuthInfo);
+                        break;
+
+                    case ImageDestination.UploadScreenshot:
+                        imageUploader = new UploadScreenshot(ApiKeys.UploadScreenshotKey);
+                        break;
+
+                    case ImageDestination.Twitpic:
+                        int indexTwitpic = Engine.UploadersConfig.TwitterSelectedAccount;
+
+                        if (Engine.UploadersConfig.TwitterOAuthInfoList != null && Engine.UploadersConfig.TwitterOAuthInfoList.IsValidIndex(indexTwitpic))
+                        {
+                            imageUploader = new TwitPicUploader(ApiKeys.TwitPicKey, Engine.UploadersConfig.TwitterOAuthInfoList[indexTwitpic])
+                            {
+                                TwitPicThumbnailMode = Engine.UploadersConfig.TwitPicThumbnailMode,
+                                ShowFull = Engine.UploadersConfig.TwitPicShowFull
+                            };
+                        }
+                        break;
+
+                    case ImageDestination.Twitsnaps:
+                        int indexTwitsnaps = Engine.UploadersConfig.TwitterSelectedAccount;
+
+                        if (Engine.UploadersConfig.TwitterOAuthInfoList.IsValidIndex(indexTwitsnaps))
+                        {
+                            imageUploader = new TwitSnapsUploader(ApiKeys.TwitsnapsKey, Engine.UploadersConfig.TwitterOAuthInfoList[indexTwitsnaps]);
+                        }
+                        break;
+
+                    case ImageDestination.yFrog:
+                        YfrogOptions yFrogOptions = new YfrogOptions(ApiKeys.ImageShackKey);
+                        yFrogOptions.Username = Engine.UploadersConfig.YFrogUsername;
+                        yFrogOptions.Password = Engine.UploadersConfig.YFrogPassword;
+                        yFrogOptions.Source = Application.ProductName;
+                        imageUploader = new YfrogUploader(yFrogOptions);
+                        break;
+
                     case ImageDestination.FileUploader:
                         ur = new UploadResult() { LocalFilePath = ssPath };
                         break;
+
                     default:
-                        imageUploader = new ImageShackUploader(ZKeys.ImageShackKey, Engine.MyUploadersConfig.ImageShackAccountType,
-                                  Engine.MyUploadersConfig.ImageShackRegistrationCode)
+                        imageUploader = new ImageShackUploader(ZKeys.ImageShackKey, Engine.UploadersConfig.ImageShackAccountType,
+                                  Engine.UploadersConfig.ImageShackRegistrationCode)
                         {
-                            IsPublic = Engine.MyUploadersConfig.ImageShackShowImagesInPublic
+                            IsPublic = Engine.UploadersConfig.ImageShackShowImagesInPublic
                         };
                         break;
                 }
@@ -261,6 +318,7 @@ namespace TDMakerLib
                     case ProgressType.UPDATE_STATUSBAR_DEBUG:
                         Console.WriteLine((string)userState);
                         break;
+
                     case ProgressType.UPDATE_SCREENSHOTS_LIST:
                         Screenshot ss = userState as Screenshot;
                         Console.WriteLine("Screenshot: " + ss.FullImageLink);

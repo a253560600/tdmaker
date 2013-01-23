@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Text;
 
 namespace TDMakerLib
 {
@@ -11,7 +11,6 @@ namespace TDMakerLib
     {
         private MovieThumbNailer()
         {
-
         }
 
         public MovieThumbNailer(MediaFile mf, string ssDir)
@@ -45,7 +44,7 @@ namespace TDMakerLib
                 Debug.WriteLine("MTN Path: " + assemblyMTN);
                 Debug.WriteLine("MTN Args: " + args);
 
-                psi.WindowStyle = (Engine.conf.ShowMTNWindow ? ProcessWindowStyle.Normal : ProcessWindowStyle.Normal);
+                psi.WindowStyle = (Engine.conf.ShowMTNWindow ? ProcessWindowStyle.Normal : ProcessWindowStyle.Minimized);
                 Debug.WriteLine("MTN Window: " + psi.WindowStyle.ToString());
                 psi.Arguments = args;
 
