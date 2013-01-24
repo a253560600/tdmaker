@@ -1,16 +1,19 @@
-﻿using System.IO;
-using System.ComponentModel;
-using System.Windows.Forms;
+﻿using System;
 using System.Collections.Generic;
-using System;
+using System.ComponentModel;
+using System.IO;
+using System.Windows.Forms;
 
 namespace TDMakerLib
 {
     public class TorrentCreateInfo
     {
         public TrackerGroup TrackerGroupActive { get; private set; }
+
         public string MediaLocation { get; private set; }
+
         public string TorrentFolder { get; set; }
+
         public string TorrentFilePath { get; private set; }
 
         public TorrentCreateInfo(TrackerGroup tracker, string mediaLoc)
@@ -36,9 +39,11 @@ namespace TDMakerLib
                         dir = Engine.conf.CustomTorrentsDir;
                     }
                     break;
+
                 case LocationType.KnownFolder:
                     dir = Engine.TorrentsDir;
                     break;
+
                 case LocationType.ParentFolder:
                     dir = Path.GetDirectoryName(this.MediaLocation);
                     break;
@@ -74,6 +79,7 @@ namespace TDMakerLib
                     foreach (Tracker myTracker in this.TrackerGroupActive.Trackers)
                     {
                         MonoTorrent.Common.TorrentCreator tc = new MonoTorrent.Common.TorrentCreator();
+                        tc.CreatedBy = Application.ProductName;
                         tc.Private = true;
                         tc.Comment = Adapter.GetMediaName(p);
                         tc.Path = p;
@@ -115,6 +121,5 @@ namespace TDMakerLib
                 }
             }
         }
-
     }
 }
