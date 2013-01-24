@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TDMakerLib</RootNamespace>
     <AssemblyName>TDMakerLib</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -118,6 +118,7 @@
     <Compile Include="Helpers\XMLSettings.cs" />
     <Compile Include="Helpers\XMLSettingsMtnProfiles.cs" />
     <Compile Include="Helpers\ImageFile.cs" />
+    <Compile Include="Kernel32Helper.cs" />
     <Compile Include="MediaInfo\MediaFile.cs" />
     <Compile Include="MediaInfo\MediaInfo2.cs" />
     <Compile Include="MediaInfo\MediaInfoDLL.cs" />
