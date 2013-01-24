@@ -241,6 +241,7 @@ namespace TDMakerLib
             {
                 if (string.IsNullOrEmpty(Engine.AppConf.RootDir))
                 {
+                    RootAppFolder = DefaultRootAppFolder;
                     ConfigWizard cw = new ConfigWizard(DefaultRootAppFolder);
                     configResult = cw.ShowDialog();
                     RunConfig = true;
@@ -330,6 +331,9 @@ namespace TDMakerLib
             if (RunConfig)
             {
                 Engine.conf.ImageUploaderType = Engine.AppConf.ImageUploaderType;
+
+                if (!string.IsNullOrEmpty(Engine.conf.PtpImgCode))
+                    Engine.conf.PtpImgCode = Engine.AppConf.PtpImgCode;
             }
             mtnProfileMgr = XMLSettingsMtnProfiles.Read();
         }

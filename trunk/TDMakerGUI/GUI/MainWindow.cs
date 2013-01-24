@@ -374,7 +374,7 @@ namespace TDMaker
                     OpenFileDialog dlg = new OpenFileDialog();
                     dlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
                     dlg.Title = "Browse for mplayer.exe or download from http://code.google.com/p/mplayer-for-windows/downloads/list";
-                    dlg.Filter = "Applications (*.exe)|*.exe";
+                    dlg.Filter = "Applications (mplayer.exe)|mplayer.exe";
                     if (dlg.ShowDialog() == DialogResult.OK)
                     {
                         Engine.conf.MPlayerPath = dlg.FileName;
