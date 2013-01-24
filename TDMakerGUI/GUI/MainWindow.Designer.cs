@@ -106,6 +106,8 @@ namespace TDMaker
             this.tlpMediaInfo = new System.Windows.Forms.TableLayoutPanel();
             this.lbMediaInfo = new System.Windows.Forms.ListBox();
             this.txtMediaInfo = new System.Windows.Forms.TextBox();
+            this.gbMediaInfoQuickOptions = new System.Windows.Forms.GroupBox();
+            this.chkMediaInfoComplete = new System.Windows.Forms.CheckBox();
             this.tpScreenshots = new System.Windows.Forms.TabPage();
             this.tlpScreenshots = new System.Windows.Forms.TableLayoutPanel();
             this.lbScreenshots = new System.Windows.Forms.ListBox();
@@ -212,6 +214,7 @@ namespace TDMaker
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.tpMediaInfo.SuspendLayout();
             this.tlpMediaInfo.SuspendLayout();
+            this.gbMediaInfoQuickOptions.SuspendLayout();
             this.tpScreenshots.SuspendLayout();
             this.tlpScreenshots.SuspendLayout();
             this.tlpScreenshotProps.SuspendLayout();
@@ -315,7 +318,7 @@ namespace TDMaker
             this.tmsVersionHistory,
             this.cmsAppAbout});
             this.cmsApp.Name = "cmsApp";
-            this.cmsApp.Size = new System.Drawing.Size(188, 104);
+            this.cmsApp.Size = new System.Drawing.Size(188, 82);
             // 
             // foldersToolStripMenuItem
             // 
@@ -979,11 +982,13 @@ namespace TDMaker
             // 
             // tlpMediaInfo
             // 
-            this.tlpMediaInfo.ColumnCount = 2;
+            this.tlpMediaInfo.ColumnCount = 3;
             this.tlpMediaInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tlpMediaInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tlpMediaInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 134F));
             this.tlpMediaInfo.Controls.Add(this.lbMediaInfo, 0, 0);
             this.tlpMediaInfo.Controls.Add(this.txtMediaInfo, 1, 0);
+            this.tlpMediaInfo.Controls.Add(this.gbMediaInfoQuickOptions, 2, 0);
             this.tlpMediaInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpMediaInfo.Location = new System.Drawing.Point(4, 4);
             this.tlpMediaInfo.Margin = new System.Windows.Forms.Padding(4);
@@ -1003,7 +1008,7 @@ namespace TDMaker
             this.lbMediaInfo.Location = new System.Drawing.Point(4, 4);
             this.lbMediaInfo.Margin = new System.Windows.Forms.Padding(4);
             this.lbMediaInfo.Name = "lbMediaInfo";
-            this.lbMediaInfo.Size = new System.Drawing.Size(224, 585);
+            this.lbMediaInfo.Size = new System.Drawing.Size(197, 585);
             this.lbMediaInfo.TabIndex = 0;
             this.lbMediaInfo.SelectedIndexChanged += new System.EventHandler(this.LbMediaInfoSelectedIndexChanged);
             // 
@@ -1011,14 +1016,36 @@ namespace TDMaker
             // 
             this.txtMediaInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtMediaInfo.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMediaInfo.Location = new System.Drawing.Point(236, 4);
+            this.txtMediaInfo.Location = new System.Drawing.Point(209, 4);
             this.txtMediaInfo.Margin = new System.Windows.Forms.Padding(4);
             this.txtMediaInfo.Multiline = true;
             this.txtMediaInfo.Name = "txtMediaInfo";
             this.txtMediaInfo.ReadOnly = true;
             this.txtMediaInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtMediaInfo.Size = new System.Drawing.Size(920, 585);
+            this.txtMediaInfo.Size = new System.Drawing.Size(812, 585);
             this.txtMediaInfo.TabIndex = 1;
+            // 
+            // gbMediaInfoQuickOptions
+            // 
+            this.gbMediaInfoQuickOptions.Controls.Add(this.chkMediaInfoComplete);
+            this.gbMediaInfoQuickOptions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbMediaInfoQuickOptions.Location = new System.Drawing.Point(1028, 3);
+            this.gbMediaInfoQuickOptions.Name = "gbMediaInfoQuickOptions";
+            this.gbMediaInfoQuickOptions.Size = new System.Drawing.Size(129, 587);
+            this.gbMediaInfoQuickOptions.TabIndex = 2;
+            this.gbMediaInfoQuickOptions.TabStop = false;
+            this.gbMediaInfoQuickOptions.Text = "Quick Options";
+            // 
+            // chkMediaInfoComplete
+            // 
+            this.chkMediaInfoComplete.AutoSize = true;
+            this.chkMediaInfoComplete.Location = new System.Drawing.Point(6, 21);
+            this.chkMediaInfoComplete.Name = "chkMediaInfoComplete";
+            this.chkMediaInfoComplete.Size = new System.Drawing.Size(89, 21);
+            this.chkMediaInfoComplete.TabIndex = 0;
+            this.chkMediaInfoComplete.Text = "Complete";
+            this.chkMediaInfoComplete.UseVisualStyleBackColor = true;
+            this.chkMediaInfoComplete.CheckedChanged += new System.EventHandler(this.chkMediaInfoComplete_CheckedChanged);
             // 
             // tpScreenshots
             // 
@@ -2291,6 +2318,8 @@ namespace TDMaker
             this.tpMediaInfo.ResumeLayout(false);
             this.tlpMediaInfo.ResumeLayout(false);
             this.tlpMediaInfo.PerformLayout();
+            this.gbMediaInfoQuickOptions.ResumeLayout(false);
+            this.gbMediaInfoQuickOptions.PerformLayout();
             this.tpScreenshots.ResumeLayout(false);
             this.tlpScreenshots.ResumeLayout(false);
             this.tlpScreenshotProps.ResumeLayout(false);
@@ -2517,5 +2546,7 @@ namespace TDMaker
         private System.Windows.Forms.TabPage tpMPlayer;
         private System.Windows.Forms.GroupBox gbUploadScreenshots;
         private System.Windows.Forms.PropertyGrid pgMPlayerOptions;
+        private System.Windows.Forms.GroupBox gbMediaInfoQuickOptions;
+        private System.Windows.Forms.CheckBox chkMediaInfoComplete;
     }
 }

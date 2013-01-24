@@ -1701,9 +1701,17 @@ namespace TDMaker
 
         private void LbMediaInfoSelectedIndexChanged(object sender, EventArgs e)
         {
+            OnLbMediaInfoSelectedIndexChanged();
+        }
+
+        private void OnLbMediaInfoSelectedIndexChanged()
+        {
             if (lbMediaInfo.SelectedIndex > -1)
             {
-                txtMediaInfo.Text = (lbMediaInfo.Items[lbMediaInfo.SelectedIndex] as MediaFile).Summary;
+                if (!chkMediaInfoComplete.Checked)
+                    txtMediaInfo.Text = (lbMediaInfo.Items[lbMediaInfo.SelectedIndex] as MediaFile).Summary;
+                else
+                    txtMediaInfo.Text = (lbMediaInfo.Items[lbMediaInfo.SelectedIndex] as MediaFile).SummaryComplete;
             }
         }
 
@@ -1801,6 +1809,11 @@ namespace TDMaker
         private void cboThumbnailer_SelectedIndexChanged(object sender, EventArgs e)
         {
             Engine.conf.ThumbnailerType = (ThumbnailerType)cboThumbnailer.SelectedIndex;
+        }
+
+        private void chkMediaInfoComplete_CheckedChanged(object sender, EventArgs e)
+        {
+            OnLbMediaInfoSelectedIndexChanged();
         }
     }
 }

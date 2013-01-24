@@ -75,6 +75,11 @@ namespace TDMakerLib
         /// </summary>
         public string Summary { get; set; }
 
+        /// <summary>
+        /// This is what you get for mi.Option("Complete", "1") using MediaInfo
+        /// </summary>
+        public string SummaryComplete { get; set; }
+
         public TagLib.File TagLibFile { get; set; }
 
         public List<AudioInfo> Audio { get; set; }
@@ -117,11 +122,11 @@ namespace TDMakerLib
                 //System.Environment.CurrentDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
                 //System.Debug.WriteLine("Current Dir2: " + System.Environment.CurrentDirectory);
 
-                MediaInfoLib.MediaInfo mMI = null;
+                MediaInfoLib.MediaInfo MI = null;
                 try
                 {
                     Debug.WriteLine("Loading MediaInfo.dll");
-                    mMI = new MediaInfoLib.MediaInfo();
+                    MI = new MediaInfoLib.MediaInfo();
                     Debug.WriteLine("Loaded MediaInfo.dll");
                 }
                 catch (Exception ex)
@@ -129,13 +134,15 @@ namespace TDMakerLib
                     Debug.WriteLine(ex.ToString());
                 }
 
-                if (mMI != null)
+                if (MI != null)
                 {
                     Debug.WriteLine(string.Format("MediaInfo Opening {0}", FilePath));
-                    mMI.Open(FilePath);
+                    MI.Open(FilePath);
                     Debug.WriteLine(string.Format("MediaInfo Opened {0}", FilePath));
-                    mMI.Option("Complete", "1");
-                    this.Summary = mMI.Inform();
+                    MI.Option("Complete");
+                    this.Summary = MI.Inform();
+                    MI.Option("Complete", "1");
+                    this.SummaryComplete = MI.Inform();
 
                     if (Engine.IsUNIX)
                     {
@@ -145,14 +152,14 @@ namespace TDMakerLib
 
                     // Format Info
                     if (string.IsNullOrEmpty(this.Format))
-                        this.Format = mMI.Get(StreamKind.General, 0, "Format");
-                    this.FormatInfo = mMI.Get(StreamKind.General, 0, "Format/Info");
+                        this.Format = MI.Get(StreamKind.General, 0, "Format");
+                    this.FormatInfo = MI.Get(StreamKind.General, 0, "Format/Info");
 
                     // this.FileName = mMI.Get(0, 0, "FileName");
                     if (0 == this.FileSize)
                     {
                         double sz;
-                        double.TryParse(mMI.Get(0, 0, "FileSize"), out sz);
+                        double.TryParse(MI.Get(0, 0, "FileSize"), out sz);
                         this.FileSize = sz;
                     }
                     if (string.IsNullOrEmpty(this.FileSizeString))
@@ -162,35 +169,35 @@ namespace TDMakerLib
 
                     // Duration
                     if (string.IsNullOrEmpty(this.DurationString2))
-                        this.DurationString2 = mMI.Get(0, 0, "Duration/String2");
+                        this.DurationString2 = MI.Get(0, 0, "Duration/String2");
 
                     if (this.Duration == 0.0)
                     {
                         double dura = 0.0;
-                        double.TryParse(mMI.Get(0, 0, "Duration"), out dura);
+                        double.TryParse(MI.Get(0, 0, "Duration"), out dura);
                         this.Duration = dura;
                     }
 
                     if (string.IsNullOrEmpty(this.DurationString3))
-                        this.DurationString3 = mMI.Get(0, 0, "Duration/String3");
+                        this.DurationString3 = MI.Get(0, 0, "Duration/String3");
 
-                    this.BitrateOverall = mMI.Get(StreamKind.General, 0, "OverallBitRate/String");
-                    this.EncodedApplication = mMI.Get(StreamKind.General, 0, "Encoded_Application");
-                    this.EncodedDate = mMI.Get(StreamKind.General, 0, "Encoded_Date");
+                    this.BitrateOverall = MI.Get(StreamKind.General, 0, "OverallBitRate/String");
+                    this.EncodedApplication = MI.Get(StreamKind.General, 0, "Encoded_Application");
+                    this.EncodedDate = MI.Get(StreamKind.General, 0, "Encoded_Date");
 
                     if (string.IsNullOrEmpty(this.Subtitles))
                     {
                         StringBuilder sbSubs = new StringBuilder();
 
                         int subCount = 0;
-                        int.TryParse(mMI.Get(StreamKind.Text, 0, "StreamCount"), out subCount);
+                        int.TryParse(MI.Get(StreamKind.Text, 0, "StreamCount"), out subCount);
 
                         if (subCount > 0)
                         {
                             StringBuilder sbLang = new StringBuilder();
                             for (int i = 0; i < subCount; i++)
                             {
-                                string lang = mMI.Get(StreamKind.Text, i, "Language/String");
+                                string lang = MI.Get(StreamKind.Text, i, "Language/String");
                                 if (!string.IsNullOrEmpty(lang))
                                 {
                                     // System.Windows.Forms.MessageBox.Show(lang);
@@ -221,64 +228,64 @@ namespace TDMakerLib
                     //*********************
 
                     int videoCount;
-                    int.TryParse(mMI.Get(StreamKind.General, 0, "VideoCount"), out videoCount);
+                    int.TryParse(MI.Get(StreamKind.General, 0, "VideoCount"), out videoCount);
                     this.HasVideo = videoCount > 0;
 
-                    this.Video.Format = mMI.Get(StreamKind.Video, 0, "Format");
-                    this.Video.FormatVersion = mMI.Get(StreamKind.Video, 0, "Format_Version");
+                    this.Video.Format = MI.Get(StreamKind.Video, 0, "Format");
+                    this.Video.FormatVersion = MI.Get(StreamKind.Video, 0, "Format_Version");
 
                     if (Path.GetExtension(this.FilePath).ToLower().Equals(".mkv"))
                     {
-                        this.Video.Codec = mMI.Get(StreamKind.Video, 0, "Encoded_Library");
+                        this.Video.Codec = MI.Get(StreamKind.Video, 0, "Encoded_Library");
                     }
-                    this.Video.EncodedLibrarySettings = mMI.Get(StreamKind.Video, 0, "Encoded_Library_Settings");
-                    this.Video.DisplayAspectRatio = mMI.Get(StreamKind.Video, 0, "DisplayAspectRatio/String");
+                    this.Video.EncodedLibrarySettings = MI.Get(StreamKind.Video, 0, "Encoded_Library_Settings");
+                    this.Video.DisplayAspectRatio = MI.Get(StreamKind.Video, 0, "DisplayAspectRatio/String");
 
                     if (string.IsNullOrEmpty(this.Video.Codec))
-                        this.Video.Codec = mMI.Get(StreamKind.Video, 0, "CodecID/Hint");
+                        this.Video.Codec = MI.Get(StreamKind.Video, 0, "CodecID/Hint");
                     if (string.IsNullOrEmpty(this.Video.Codec))
-                        this.Video.Codec = mMI.Get(StreamKind.Video, 0, "CodecID");
+                        this.Video.Codec = MI.Get(StreamKind.Video, 0, "CodecID");
 
-                    this.Video.Bitrate = mMI.Get(StreamKind.Video, 0, "BitRate/String");
-                    this.Video.Standard = mMI.Get(StreamKind.Video, 0, "Standard"); ;
-                    this.Video.FrameRate = mMI.Get(StreamKind.Video, 0, "FrameRate/String");
-                    this.Video.ScanType = mMI.Get(StreamKind.Video, 0, "ScanType/String");
-                    this.Video.Height = mMI.Get(StreamKind.Video, 0, "Height");
-                    this.Video.Width = mMI.Get(StreamKind.Video, 0, "Width");
+                    this.Video.Bitrate = MI.Get(StreamKind.Video, 0, "BitRate/String");
+                    this.Video.Standard = MI.Get(StreamKind.Video, 0, "Standard"); ;
+                    this.Video.FrameRate = MI.Get(StreamKind.Video, 0, "FrameRate/String");
+                    this.Video.ScanType = MI.Get(StreamKind.Video, 0, "ScanType/String");
+                    this.Video.Height = MI.Get(StreamKind.Video, 0, "Height");
+                    this.Video.Width = MI.Get(StreamKind.Video, 0, "Width");
                     this.Video.Resolution = string.Format("{0}x{1}", this.Video.Width, this.Video.Height);
-                    this.Video.BitsPerPixelXFrame = mMI.Get(StreamKind.Video, 0, "Bits-(Pixel*Frame)");
+                    this.Video.BitsPerPixelXFrame = MI.Get(StreamKind.Video, 0, "Bits-(Pixel*Frame)");
 
                     //*********************
                     //* Audio
                     //*********************
                     int audioCount;
-                    int.TryParse(mMI.Get(StreamKind.General, 0, "AudioCount"), out audioCount);
+                    int.TryParse(MI.Get(StreamKind.General, 0, "AudioCount"), out audioCount);
                     this.HasAudio = audioCount > 0;
 
                     for (int id = 0; id < audioCount; id++)
                     {
                         AudioInfo ai = new AudioInfo(id);
-                        ai.Format = mMI.Get(StreamKind.Audio, id, "Format");
-                        ai.FormatVersion = mMI.Get(StreamKind.Audio, 0, "Format_Version");
-                        ai.FormatProfile = mMI.Get(StreamKind.Audio, 0, "Format_Profile");
+                        ai.Format = MI.Get(StreamKind.Audio, id, "Format");
+                        ai.FormatVersion = MI.Get(StreamKind.Audio, 0, "Format_Version");
+                        ai.FormatProfile = MI.Get(StreamKind.Audio, 0, "Format_Profile");
 
-                        ai.Codec = mMI.Get(StreamKind.Audio, 0, "CodecID/Hint");
+                        ai.Codec = MI.Get(StreamKind.Audio, 0, "CodecID/Hint");
                         if (string.IsNullOrEmpty(ai.Codec))
-                            ai.Codec = mMI.Get(StreamKind.Audio, 0, "CodecID/Info");
+                            ai.Codec = MI.Get(StreamKind.Audio, 0, "CodecID/Info");
                         if (string.IsNullOrEmpty(ai.Codec))
-                            ai.Codec = mMI.Get(StreamKind.Audio, 0, "CodecID");
+                            ai.Codec = MI.Get(StreamKind.Audio, 0, "CodecID");
 
-                        ai.Bitrate = mMI.Get(StreamKind.Audio, id, "BitRate/String");
-                        ai.BitrateMode = mMI.Get(StreamKind.Audio, id, "BitRate_Mode/String");
+                        ai.Bitrate = MI.Get(StreamKind.Audio, id, "BitRate/String");
+                        ai.BitrateMode = MI.Get(StreamKind.Audio, id, "BitRate_Mode/String");
 
-                        ai.Channels = mMI.Get(StreamKind.Audio, id, "Channel(s)/String");
-                        ai.SamplingRate = mMI.Get(StreamKind.Audio, id, "SamplingRate/String");
-                        ai.Resolution = mMI.Get(StreamKind.Audio, id, "Resolution/String");
+                        ai.Channels = MI.Get(StreamKind.Audio, id, "Channel(s)/String");
+                        ai.SamplingRate = MI.Get(StreamKind.Audio, id, "SamplingRate/String");
+                        ai.Resolution = MI.Get(StreamKind.Audio, id, "Resolution/String");
 
                         this.Audio.Add(ai);
                     }
 
-                    mMI.Close();
+                    MI.Close();
 
                     //// Analyse Audio only files using TagLib
 
