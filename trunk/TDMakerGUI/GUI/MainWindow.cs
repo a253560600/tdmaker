@@ -455,9 +455,9 @@ namespace TDMaker
 
             if (string.IsNullOrEmpty(Engine.conf.CustomMediaInfoDllDir))
             {
-                Engine.conf.CustomMediaInfoDllDir = Path.Combine(Application.StartupPath);
+                Engine.conf.CustomMediaInfoDllDir = Application.StartupPath;
             }
-            MediaInfo.SetDllDirectory(Engine.conf.CustomMediaInfoDllDir);
+            Kernel32Helper.SetDllDirectory(Engine.conf.CustomMediaInfoDllDir);
 
             pgApp.SelectedObject = Engine.conf;
         }

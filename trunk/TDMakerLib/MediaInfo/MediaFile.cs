@@ -134,7 +134,7 @@ namespace TDMakerLib
                     Debug.WriteLine(string.Format("MediaInfo Opening {0}", FilePath));
                     mMI.Open(FilePath);
                     Debug.WriteLine(string.Format("MediaInfo Opened {0}", FilePath));
-                    mMI.Option("Complete");
+                    mMI.Option("Complete", "1");
                     this.Summary = mMI.Inform();
 
                     if (Engine.IsUNIX)

@@ -41,7 +41,8 @@
 
 using System;
 using System.Runtime.InteropServices;
-using TDMakerLib;
+
+#pragma warning disable 1591 // Disable XML documentation warnings
 
 namespace MediaInfoLib
 {
@@ -52,7 +53,8 @@ namespace MediaInfoLib
         Audio,
         Text,
         Chapters,
-        Image
+        Image,
+        Menu,
     }
 
     public enum InfoKind
@@ -85,9 +87,6 @@ namespace MediaInfoLib
 
     public class MediaInfo
     {
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern bool SetDllDirectory(string lpPathName);
-
         //Import of DLL functions. DO NOT USE until you know what you do (MediaInfo DLL do NOT use CoTaskMemAlloc to allocate memory)
         [DllImport("MediaInfo.dll")]
         private static extern IntPtr MediaInfo_New();
@@ -161,14 +160,7 @@ namespace MediaInfoLib
         //MediaInfo class
         public MediaInfo()
         {
-            try
-            {
-                Handle = MediaInfo_New();
-            }
-            catch
-            {
-                Handle = (IntPtr)0;
-            }
+            Handle = MediaInfo_New();
             if (Environment.OSVersion.ToString().IndexOf("Windows") == -1)
                 MustUseAnsi = true;
             else
@@ -177,13 +169,11 @@ namespace MediaInfoLib
 
         ~MediaInfo()
         {
-            if (Handle == (IntPtr)0) return; MediaInfo_Delete(Handle);
+            MediaInfo_Delete(Handle);
         }
 
         public int Open(String FileName)
         {
-            if (Handle == (IntPtr)0)
-                return 0;
             if (MustUseAnsi)
             {
                 IntPtr FileName_Ptr = Marshal.StringToHGlobalAnsi(FileName);
@@ -197,33 +187,31 @@ namespace MediaInfoLib
 
         public int Open_Buffer_Init(Int64 File_Size, Int64 File_Offset)
         {
-            if (Handle == (IntPtr)0) return 0; return (int)MediaInfo_Open_Buffer_Init(Handle, File_Size, File_Offset);
+            return (int)MediaInfo_Open_Buffer_Init(Handle, File_Size, File_Offset);
         }
 
         public int Open_Buffer_Continue(IntPtr Buffer, IntPtr Buffer_Size)
         {
-            if (Handle == (IntPtr)0) return 0; return (int)MediaInfo_Open_Buffer_Continue(Handle, Buffer, Buffer_Size);
+            return (int)MediaInfo_Open_Buffer_Continue(Handle, Buffer, Buffer_Size);
         }
 
         public Int64 Open_Buffer_Continue_GoTo_Get()
         {
-            if (Handle == (IntPtr)0) return 0; return (int)MediaInfo_Open_Buffer_Continue_GoTo_Get(Handle);
+            return MediaInfo_Open_Buffer_Continue_GoTo_Get(Handle);
         }
 
         public int Open_Buffer_Finalize()
         {
-            if (Handle == (IntPtr)0) return 0; return (int)MediaInfo_Open_Buffer_Finalize(Handle);
+            return (int)MediaInfo_Open_Buffer_Finalize(Handle);
         }
 
         public void Close()
         {
-            if (Handle == (IntPtr)0) return; MediaInfo_Close(Handle);
+            MediaInfo_Close(Handle);
         }
 
         public String Inform()
         {
-            if (Handle == (IntPtr)0)
-                return "Unable to load MediaInfo library";
             if (MustUseAnsi)
                 return Marshal.PtrToStringAnsi(MediaInfoA_Inform(Handle, (IntPtr)0));
             else
@@ -232,8 +220,6 @@ namespace MediaInfoLib
 
         public String Get(StreamKind StreamKind, int StreamNumber, String Parameter, InfoKind KindOfInfo, InfoKind KindOfSearch)
         {
-            if (Handle == (IntPtr)0)
-                return "Unable to load MediaInfo library";
             if (MustUseAnsi)
             {
                 IntPtr Parameter_Ptr = Marshal.StringToHGlobalAnsi(Parameter);
@@ -247,8 +233,6 @@ namespace MediaInfoLib
 
         public String Get(StreamKind StreamKind, int StreamNumber, int Parameter, InfoKind KindOfInfo)
         {
-            if (Handle == (IntPtr)0)
-                return "Unable to load MediaInfo library";
             if (MustUseAnsi)
                 return Marshal.PtrToStringAnsi(MediaInfoA_GetI(Handle, (IntPtr)StreamKind, (IntPtr)StreamNumber, (IntPtr)Parameter, (IntPtr)KindOfInfo));
             else
@@ -257,8 +241,6 @@ namespace MediaInfoLib
 
         public String Option(String Option, String Value)
         {
-            if (Handle == (IntPtr)0)
-                return "Unable to load MediaInfo library";
             if (MustUseAnsi)
             {
                 IntPtr Option_Ptr = Marshal.StringToHGlobalAnsi(Option);
@@ -274,12 +256,12 @@ namespace MediaInfoLib
 
         public int State_Get()
         {
-            if (Handle == (IntPtr)0) return 0; return (int)MediaInfo_State_Get(Handle);
+            return (int)MediaInfo_State_Get(Handle);
         }
 
         public int Count_Get(StreamKind StreamKind, int StreamNumber)
         {
-            if (Handle == (IntPtr)0) return 0; return (int)MediaInfo_Count_Get(Handle, (IntPtr)StreamKind, (IntPtr)StreamNumber);
+            return (int)MediaInfo_Count_Get(Handle, (IntPtr)StreamKind, (IntPtr)StreamNumber);
         }
 
         private IntPtr Handle;
