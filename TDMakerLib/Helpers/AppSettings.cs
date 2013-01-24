@@ -20,6 +20,8 @@ namespace TDMakerLib
 
         public ImageDestination ImageUploaderType { get; set; }
 
+        public string PtpImgCode { get; set; }
+
         [Category("Options / General"), DefaultValue(false), Description("Prefer System Folders for all the data created by ZScreen")]
         public bool PreferSystemFolders { get; set; }
 

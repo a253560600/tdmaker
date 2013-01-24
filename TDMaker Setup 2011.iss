@@ -56,6 +56,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: TDMakerGUI\bin\Release\*.exe; Excludes: *.vshost.exe; DestDir: {app}; Flags: ignoreversion
 Source: TDMakerGUI\bin\Release\*.dll; DestDir: {app}; Flags: ignoreversion
+Source: TDMakerGUI\bin\Release\*.pdb; DestDir: {app}; Flags: ignoreversion
 
 Source: "MTN\*.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "MTN\*.dll"; DestDir: "{app}"; Flags: ignoreversion

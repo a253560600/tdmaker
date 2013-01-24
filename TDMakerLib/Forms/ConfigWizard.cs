@@ -60,6 +60,8 @@ namespace TDMakerLib
             Engine.AppConf.RootDir = this.RootFolder;
             Engine.AppConf.PreferSystemFolders = this.PreferSystemFolders;
             Engine.AppConf.ImageUploaderType = this.ImageDestinationType;
+            Engine.AppConf.PtpImgCode = this.txtPtpImgCode.Text;
+
             Engine.InitializeDefaultFolderPaths();
             Debug.WriteLine(Engine.AppConf.XMLSettingsFile);
             this.Close();

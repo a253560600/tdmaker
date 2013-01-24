@@ -48,7 +48,6 @@ namespace TDMaker
             this.tsmSettingsDir = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmTemplates = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmUpdatesCheck = new System.Windows.Forms.ToolStripMenuItem();
             this.tmsVersionHistory = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsAppAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.ttApp = new System.Windows.Forms.ToolTip(this.components);
@@ -313,11 +312,10 @@ namespace TDMaker
             this.cmsApp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.foldersToolStripMenuItem,
             this.toolStripSeparator1,
-            this.tsmUpdatesCheck,
             this.tmsVersionHistory,
             this.cmsAppAbout});
             this.cmsApp.Name = "cmsApp";
-            this.cmsApp.Size = new System.Drawing.Size(209, 106);
+            this.cmsApp.Size = new System.Drawing.Size(188, 104);
             // 
             // foldersToolStripMenuItem
             // 
@@ -329,7 +327,7 @@ namespace TDMaker
             this.tsmSettingsDir,
             this.tsmTemplates});
             this.foldersToolStripMenuItem.Name = "foldersToolStripMenuItem";
-            this.foldersToolStripMenuItem.Size = new System.Drawing.Size(208, 24);
+            this.foldersToolStripMenuItem.Size = new System.Drawing.Size(187, 24);
             this.foldersToolStripMenuItem.Text = "&Folders";
             // 
             // tsmScreenshots
@@ -375,25 +373,19 @@ namespace TDMaker
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(205, 6);
-            // 
-            // tsmUpdatesCheck
-            // 
-            this.tsmUpdatesCheck.Name = "tsmUpdatesCheck";
-            this.tsmUpdatesCheck.Size = new System.Drawing.Size(208, 24);
-            this.tsmUpdatesCheck.Text = "Check for &Updates...";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(184, 6);
             // 
             // tmsVersionHistory
             // 
             this.tmsVersionHistory.Name = "tmsVersionHistory";
-            this.tmsVersionHistory.Size = new System.Drawing.Size(208, 24);
+            this.tmsVersionHistory.Size = new System.Drawing.Size(187, 24);
             this.tmsVersionHistory.Text = "&Version History...";
             this.tmsVersionHistory.Click += new System.EventHandler(this.tmsVersionHistory_Click);
             // 
             // cmsAppAbout
             // 
             this.cmsAppAbout.Name = "cmsAppAbout";
-            this.cmsAppAbout.Size = new System.Drawing.Size(208, 24);
+            this.cmsAppAbout.Size = new System.Drawing.Size(187, 24);
             this.cmsAppAbout.Text = "&About...";
             this.cmsAppAbout.Click += new System.EventHandler(this.cmsAppAbout_Click);
             // 
@@ -732,7 +724,7 @@ namespace TDMaker
             this.lbStatus.Size = new System.Drawing.Size(1127, 167);
             this.lbStatus.TabIndex = 11;
             // 
-            // gpSourceProp
+            // gbSourceProp
             // 
             this.gbSourceProp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -744,7 +736,7 @@ namespace TDMaker
             this.gbSourceProp.Controls.Add(this.cboSource);
             this.gbSourceProp.Location = new System.Drawing.Point(363, 217);
             this.gbSourceProp.Margin = new System.Windows.Forms.Padding(4);
-            this.gbSourceProp.Name = "gpSourceProp";
+            this.gbSourceProp.Name = "gbSourceProp";
             this.gbSourceProp.Padding = new System.Windows.Forms.Padding(4);
             this.gbSourceProp.Size = new System.Drawing.Size(789, 128);
             this.gbSourceProp.TabIndex = 12;
@@ -2370,7 +2362,6 @@ namespace TDMaker
         private System.Windows.Forms.ToolStripMenuItem tsmTorrentsDir;
         private System.Windows.Forms.ToolStripMenuItem tsmScreenshots;
         private System.Windows.Forms.ToolStripMenuItem tsmTemplates;
-        private System.Windows.Forms.ToolStripMenuItem tsmUpdatesCheck;
         private System.Windows.Forms.ToolStripMenuItem tsmLogsDir;
         private System.Windows.Forms.ToolStripStatusLabel tssPerc;
         private System.Windows.Forms.ToolStripMenuItem tmsVersionHistory;
