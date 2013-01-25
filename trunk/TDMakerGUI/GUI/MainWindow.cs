@@ -538,6 +538,8 @@ namespace TDMaker
             gbDVD.Visible = gbSourceProp.Visible = btnUploadersConfig.Visible = cboScreenshotDest.Visible =
                 string.IsNullOrEmpty(Engine.conf.PtpImgCode);
 
+            gbQuickPublish.Enabled = string.IsNullOrEmpty(Engine.conf.PtpImgCode);
+
             if (!string.IsNullOrEmpty(Engine.conf.PtpImgCode))
                 chkScreenshotUpload.Text = "Upload screenshots to ptpimg.me";
         }

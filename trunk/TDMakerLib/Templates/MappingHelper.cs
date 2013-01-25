@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Collections.Specialized;
-using System.Globalization;
 using TDMakerLib.Templates;
-using System.Diagnostics;
-using System.IO;
 
 namespace TDMakerLib
 {
     public class MappingHelper
     {
-        Dictionary<string, string> MappingsGeneral { get; set; }
-        Dictionary<string, string> MappingsVideo { get; set; }
-        List<Dictionary<string, string>> MappingsAudio { get; set; }
+        private Dictionary<string, string> MappingsGeneral { get; set; }
+
+        private Dictionary<string, string> MappingsVideo { get; set; }
+
+        private List<Dictionary<string, string>> MappingsAudio { get; set; }
 
         public MappingHelper(string summary)
         {
@@ -38,20 +40,23 @@ namespace TDMakerLib
                         MIFieldValue mifv = new MIFieldValue(temp[0], temp[1], prefix);
                         if (prefix == "General")
                         {
-                            this.MappingsGeneral.Add(mifv.Field, mifv.Value);
+                            if (!this.MappingsGeneral.Keys.Contains(mifv.Field))
+                                this.MappingsGeneral.Add(mifv.Field, mifv.Value);
                         }
                         else if (prefix == "Video")
                         {
-                            this.MappingsVideo.Add(mifv.Field, mifv.Value);
+                            if (!this.MappingsVideo.Keys.Contains(mifv.Field))
+                                this.MappingsVideo.Add(mifv.Field, mifv.Value);
                         }
                         else if (prefix == "Audio")
                         {
-                            this.MappingsAudio[idAudio - 1].Add(mifv.Field, mifv.Value);
+                            if (!this.MappingsAudio[idAudio - 1].Keys.Contains(mifv.Field))
+                                this.MappingsAudio[idAudio - 1].Add(mifv.Field, mifv.Value);
                         }
                     }
                     else if (temp.Length == 1)
                     {
-                        // attempt to get audio id 
+                        // attempt to get audio id
                         string[] spTemp = Regex.Split(temp[0], " #");
                         if (spTemp.Length > 1)
                         {
