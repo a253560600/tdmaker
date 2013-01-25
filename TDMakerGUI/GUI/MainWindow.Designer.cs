@@ -985,7 +985,7 @@ namespace TDMaker
             this.tlpMediaInfo.ColumnCount = 3;
             this.tlpMediaInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tlpMediaInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tlpMediaInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 134F));
+            this.tlpMediaInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
             this.tlpMediaInfo.Controls.Add(this.lbMediaInfo, 0, 0);
             this.tlpMediaInfo.Controls.Add(this.txtMediaInfo, 1, 0);
             this.tlpMediaInfo.Controls.Add(this.gbMediaInfoQuickOptions, 2, 0);
@@ -1145,9 +1145,9 @@ namespace TDMaker
             // tlpPublish
             // 
             this.tlpPublish.ColumnCount = 3;
-            this.tlpPublish.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tlpPublish.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
-            this.tlpPublish.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tlpPublish.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.00001F));
+            this.tlpPublish.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 79.99999F));
+            this.tlpPublish.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 192F));
             this.tlpPublish.Controls.Add(this.gbQuickPublish, 2, 0);
             this.tlpPublish.Controls.Add(this.txtPublish, 1, 0);
             this.tlpPublish.Controls.Add(this.lbPublish, 0, 0);
@@ -1164,11 +1164,11 @@ namespace TDMaker
             // 
             this.gbQuickPublish.Controls.Add(this.flpPublishConfig);
             this.gbQuickPublish.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbQuickPublish.Location = new System.Drawing.Point(970, 4);
+            this.gbQuickPublish.Location = new System.Drawing.Point(971, 4);
             this.gbQuickPublish.Margin = new System.Windows.Forms.Padding(4);
             this.gbQuickPublish.Name = "gbQuickPublish";
             this.gbQuickPublish.Padding = new System.Windows.Forms.Padding(4);
-            this.gbQuickPublish.Size = new System.Drawing.Size(186, 585);
+            this.gbQuickPublish.Size = new System.Drawing.Size(185, 585);
             this.gbQuickPublish.TabIndex = 1;
             this.gbQuickPublish.TabStop = false;
             this.gbQuickPublish.Text = "Quick Options";
@@ -1185,7 +1185,7 @@ namespace TDMaker
             this.flpPublishConfig.Location = new System.Drawing.Point(4, 19);
             this.flpPublishConfig.Margin = new System.Windows.Forms.Padding(4);
             this.flpPublishConfig.Name = "flpPublishConfig";
-            this.flpPublishConfig.Size = new System.Drawing.Size(178, 562);
+            this.flpPublishConfig.Size = new System.Drawing.Size(177, 562);
             this.flpPublishConfig.TabIndex = 7;
             // 
             // chkQuickPre
@@ -1260,7 +1260,7 @@ namespace TDMaker
             this.txtPublish.Multiline = true;
             this.txtPublish.Name = "txtPublish";
             this.txtPublish.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtPublish.Size = new System.Drawing.Size(765, 585);
+            this.txtPublish.Size = new System.Drawing.Size(766, 585);
             this.txtPublish.TabIndex = 0;
             this.txtPublish.WordWrap = false;
             this.txtPublish.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPublish_KeyPress);
