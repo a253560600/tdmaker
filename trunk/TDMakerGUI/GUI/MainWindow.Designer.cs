@@ -816,7 +816,7 @@ namespace TDMaker
             this.gbDVD.Controls.Add(this.chkExtras);
             this.gbDVD.Controls.Add(this.cboAuthoring);
             this.gbDVD.Controls.Add(this.chkAuthoring);
-            this.gbDVD.Location = new System.Drawing.Point(11, 217);
+            this.gbDVD.Location = new System.Drawing.Point(8, 216);
             this.gbDVD.Margin = new System.Windows.Forms.Padding(4);
             this.gbDVD.Name = "gbDVD";
             this.gbDVD.Padding = new System.Windows.Forms.Padding(4);
@@ -920,10 +920,11 @@ namespace TDMaker
             // btnBrowseDir
             // 
             this.btnBrowseDir.AutoSize = true;
-            this.btnBrowseDir.Location = new System.Drawing.Point(255, 30);
+            this.btnBrowseDir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnBrowseDir.Location = new System.Drawing.Point(192, 32);
             this.btnBrowseDir.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrowseDir.Name = "btnBrowseDir";
-            this.btnBrowseDir.Size = new System.Drawing.Size(224, 33);
+            this.btnBrowseDir.Size = new System.Drawing.Size(168, 27);
             this.btnBrowseDir.TabIndex = 14;
             this.btnBrowseDir.Text = "&Browse for a directory...";
             this.btnBrowseDir.UseVisualStyleBackColor = true;
@@ -937,7 +938,7 @@ namespace TDMaker
             this.lbFiles.HorizontalScrollbar = true;
             this.lbFiles.IntegralHeight = false;
             this.lbFiles.ItemHeight = 16;
-            this.lbFiles.Location = new System.Drawing.Point(11, 69);
+            this.lbFiles.Location = new System.Drawing.Point(8, 72);
             this.lbFiles.Margin = new System.Windows.Forms.Padding(4);
             this.lbFiles.Name = "lbFiles";
             this.lbFiles.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
@@ -949,10 +950,11 @@ namespace TDMaker
             // btnBrowse
             // 
             this.btnBrowse.AutoSize = true;
-            this.btnBrowse.Location = new System.Drawing.Point(11, 30);
+            this.btnBrowse.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnBrowse.Location = new System.Drawing.Point(8, 32);
             this.btnBrowse.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(236, 33);
+            this.btnBrowse.Size = new System.Drawing.Size(177, 27);
             this.btnBrowse.TabIndex = 7;
             this.btnBrowse.Text = "&Browse for a file or files...";
             this.btnBrowse.UseVisualStyleBackColor = true;
@@ -961,10 +963,10 @@ namespace TDMaker
             // pbLogo
             // 
             this.pbLogo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pbLogo.Location = new System.Drawing.Point(607, 23);
+            this.pbLogo.Location = new System.Drawing.Point(856, 24);
             this.pbLogo.Margin = new System.Windows.Forms.Padding(4);
             this.pbLogo.Name = "pbLogo";
-            this.pbLogo.Size = new System.Drawing.Size(523, 36);
+            this.pbLogo.Size = new System.Drawing.Size(275, 36);
             this.pbLogo.TabIndex = 11;
             this.pbLogo.TabStop = false;
             // 
@@ -1147,7 +1149,7 @@ namespace TDMaker
             this.tlpPublish.ColumnCount = 3;
             this.tlpPublish.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.00001F));
             this.tlpPublish.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 79.99999F));
-            this.tlpPublish.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 192F));
+            this.tlpPublish.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 194F));
             this.tlpPublish.Controls.Add(this.gbQuickPublish, 2, 0);
             this.tlpPublish.Controls.Add(this.txtPublish, 1, 0);
             this.tlpPublish.Controls.Add(this.lbPublish, 0, 0);
@@ -1164,11 +1166,11 @@ namespace TDMaker
             // 
             this.gbQuickPublish.Controls.Add(this.flpPublishConfig);
             this.gbQuickPublish.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbQuickPublish.Location = new System.Drawing.Point(971, 4);
+            this.gbQuickPublish.Location = new System.Drawing.Point(969, 4);
             this.gbQuickPublish.Margin = new System.Windows.Forms.Padding(4);
             this.gbQuickPublish.Name = "gbQuickPublish";
             this.gbQuickPublish.Padding = new System.Windows.Forms.Padding(4);
-            this.gbQuickPublish.Size = new System.Drawing.Size(185, 585);
+            this.gbQuickPublish.Size = new System.Drawing.Size(187, 585);
             this.gbQuickPublish.TabIndex = 1;
             this.gbQuickPublish.TabStop = false;
             this.gbQuickPublish.Text = "Quick Options";
@@ -1185,7 +1187,7 @@ namespace TDMaker
             this.flpPublishConfig.Location = new System.Drawing.Point(4, 19);
             this.flpPublishConfig.Margin = new System.Windows.Forms.Padding(4);
             this.flpPublishConfig.Name = "flpPublishConfig";
-            this.flpPublishConfig.Size = new System.Drawing.Size(177, 562);
+            this.flpPublishConfig.Size = new System.Drawing.Size(179, 562);
             this.flpPublishConfig.TabIndex = 7;
             // 
             // chkQuickPre
@@ -1260,7 +1262,7 @@ namespace TDMaker
             this.txtPublish.Multiline = true;
             this.txtPublish.Name = "txtPublish";
             this.txtPublish.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtPublish.Size = new System.Drawing.Size(766, 585);
+            this.txtPublish.Size = new System.Drawing.Size(764, 585);
             this.txtPublish.TabIndex = 0;
             this.txtPublish.WordWrap = false;
             this.txtPublish.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPublish_KeyPress);
