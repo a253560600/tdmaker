@@ -1,4 +1,8 @@
-Version 3.0
+Version 3.1 - 
+
+* Integrated BDInfo to provide media info on Blu-ray discs
+
+Version 3.0 - 2013-01-25
 
 * MediaInfo has a Quick Options toggle to show/hide Detailed View
 * Added support for PtpImg, Picasa and UploadScreenshot
