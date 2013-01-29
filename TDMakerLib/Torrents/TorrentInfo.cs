@@ -315,8 +315,20 @@ namespace TDMakerLib
             {
                 case MediaType.MediaDisc:
                     StringBuilder sbMediaInfo = new StringBuilder();
-                    sbMediaInfo.AppendLine(Media.Overall.Summary.Trim());
-                    sbMediaInfo.AppendLine();
+                    if (Media.MediaFiles.Count > 0)
+                    {
+                        foreach (MediaFile mf in Media.MediaFiles)
+                        {
+                            sbMediaInfo.AppendLine(BbCode.Bold(mf.FileName));
+                            sbMediaInfo.AppendLine(mf.Summary.Trim());
+                            sbMediaInfo.AppendLine();
+                        }
+                    }
+                    else
+                    {
+                        sbMediaInfo.AppendLine(Media.Overall.Summary.Trim());
+                        sbMediaInfo.AppendLine();
+                    }
 
                     sbPublish.AppendLine(GetPublishString(sbMediaInfo.ToString(), pop));
 
