@@ -1,0 +1,37 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+
+namespace TDMakerLib
+{
+    public static class MediaHelper
+    {
+        public static string GetMediaName(string p)
+        {
+            string name = "";
+
+            if (File.Exists(p))
+            {
+                string ext = Path.GetExtension(p).ToLower();
+                if (ext == ".vob" && Path.GetFileName(Path.GetDirectoryName(p)) == "VIDEO_TS")
+                {
+                    name = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(p)));
+                }
+                else
+                {
+                    name = Path.GetFileNameWithoutExtension(p);
+                }
+            }
+            else if (Directory.Exists(p))
+            {
+                name = Path.GetFileName(p);
+                if (name.ToUpper().Equals("VIDEO_TS"))
+                    name = Path.GetFileName(Path.GetDirectoryName(p));
+            }
+
+            return name;
+        }
+    }
+}

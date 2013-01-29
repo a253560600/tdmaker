@@ -31,6 +31,7 @@ namespace BDInfo
     public partial class FormReport : Form
     {
         private List<TSPlaylistFile> Playlists;
+        public string report = "";
 
         public FormReport()
         {
@@ -50,23 +51,13 @@ namespace BDInfo
                 string reportName = string.Format(
                     "BDINFO.{0}.txt",
                     BDROM.VolumeLabel);
-                
+
                 reportFile = File.CreateText(Path.Combine(Environment.CurrentDirectory, reportName));
             }
             textBoxReport.Text = "";
 
-            string report = "";
             string protection = (BDROM.IsBDPlus ? "BD+" : "AACS");
             string bdjava = (BDROM.IsBDJava ? "Yes" : "No");
-
-            report += string.Format(
-                "{0,-16}{1}\r\n", "Disc Title:", BDROM.VolumeLabel);
-            report += string.Format(
-                "{0,-16}{1:N0} bytes\r\n", "Disc Size:", BDROM.Size);
-            report += string.Format(
-                "{0,-16}{1}\r\n", "Protection:", protection);
-            report += string.Format(
-                "{0,-16}{1}\r\n", "BD-Java:", bdjava);
 
             List<string> extraFeatures = new List<string>();
             if (BDROM.Is50Hz)
@@ -90,21 +81,6 @@ namespace BDInfo
                 report += string.Format(
                     "{0,-16}{1}\r\n", "Extras:", string.Join(", ", extraFeatures.ToArray()));
             }
-            report += string.Format(
-                "{0,-16}{1}\r\n", "BDInfo:", Application.ProductVersion);
-
-            report += "\r\n";
-            report += string.Format(
-                "{0,-16}{1}\r\n", "Notes:", "");
-            report += "\r\n";
-            report += "BDINFO HOME:\r\n";
-            report += "  Cinema Squid\r\n";
-            report += "    http://www.cinemasquid.com/blu-ray/tools/bdinfo\r\n";
-            report += "\r\n";
-            report += "INCLUDES FORUMS REPORT FOR:\r\n";
-            report += "  AVS Forum Blu-ray Audio and Video Specifications Thread\r\n";
-            report += "    http://www.avsforum.com/avs-vb/showthread.php?t=1155731\r\n";
-            report += "\r\n";
 
             if (scanResult.ScanException != null)
             {
@@ -123,7 +99,7 @@ namespace BDInfo
                     report += string.Format(
                         "{0}\r\n", fileException.StackTrace);
                 }
-            }            
+            }
 
             foreach (TSPlaylistFile playlist in playlists)
             {
@@ -207,7 +183,7 @@ namespace BDInfo
                             angleTimeSpan.Minutes,
                             angleTimeSpan.Seconds,
                             angleTimeSpan.Milliseconds));
-                        
+
                         angleTotalSizes.Add(string.Format(
                             "{0:N0}", angleTotalSize));
 
@@ -250,21 +226,21 @@ namespace BDInfo
 
                     audio1 = string.Format(
                         "{0} {1}",
-                        audioStream.CodecAltName, 
+                        audioStream.CodecAltName,
                         audioStream.ChannelDescription);
 
                     if (audioStream.BitRate > 0)
                     {
                         audio1 += string.Format(
-                            " {0}Kbps",
-                            (int)Math.Round((double)audioStream.BitRate/ 1000));
+                            " {0} Kbps",
+                            (int)Math.Round((double)audioStream.BitRate / 1000));
                     }
 
                     if (audioStream.SampleRate > 0 &&
                         audioStream.BitDepth > 0)
                     {
                         audio1 += string.Format(
-                            " ({0}kHz/{1}-bit)",
+                            " ({0} kHz/{1}-bit)",
                             (int)Math.Round((double)audioStream.SampleRate / 1000),
                             audioStream.BitDepth);
                     }
@@ -290,7 +266,7 @@ namespace BDInfo
                             if (audioStream.BitRate > 0)
                             {
                                 audio2 += string.Format(
-                                    " {0}Kbps",
+                                    " {0} kbps",
                                     (int)Math.Round((double)audioStream.BitRate / 1000));
                             }
 
@@ -298,7 +274,7 @@ namespace BDInfo
                                 audioStream.BitDepth > 0)
                             {
                                 audio2 += string.Format(
-                                    " ({0}kHz/{1}-bit)",
+                                    " ({0} kHz/{1}-bit)",
                                     (int)Math.Round((double)audioStream.SampleRate / 1000),
                                     audioStream.BitDepth);
                             }
@@ -307,67 +283,6 @@ namespace BDInfo
                     }
                 }
 
-                report += "\r\n";
-                report += "********************\r\n";
-                report += "PLAYLIST: " + playlist.Name + "\r\n";
-                report += "********************\r\n";
-                report += "\r\n";
-                report += "<--- BEGIN FORUMS PASTE --->\r\n";
-                report += "[code]\r\n";
-
-                report += string.Format(
-                    "{0,-64}{1,-8}{2,-8}{3,-16}{4,-16}{5,-8}{6,-8}{7,-42}{8}\r\n",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "Total",
-                    "Video",
-                    "",
-                    "");
-
-                report += string.Format(
-                    "{0,-64}{1,-8}{2,-8}{3,-16}{4,-16}{5,-8}{6,-8}{7,-42}{8}\r\n",
-                    "Title",
-                    "Codec",
-                    "Length",
-                    "Movie Size",
-                    "Disc Size",
-                    "Bitrate",
-                    "Bitrate",
-                    "Main Audio Track",
-                    "Secondary Audio Track");
-
-                report += string.Format(
-                    "{0,-64}{1,-8}{2,-8}{3,-16}{4,-16}{5,-8}{6,-8}{7,-42}{8}\r\n",
-                    "-----",
-                    "------",
-                    "-------",
-                    "--------------",
-                    "--------------",
-                    "-------",
-                    "-------",
-                    "------------------",
-                    "---------------------");
-
-                report += string.Format(
-                    "{0,-64}{1,-8}{2,-8}{3,-16}{4,-16}{5,-8}{6,-8}{7,-42}{8}\r\n",
-                    title,
-                    videoCodec,
-                    totalLengthShort,
-                    totalSize,
-                    discSize,
-                    totalBitrate,
-                    videoBitrate,
-                    audio1,
-                    audio2);
-
-                report += "[/code]\r\n";
-                report += "\r\n";
-                report += "[code]\r\n";
-
-                report += "\r\n";
                 report += "DISC INFO:\r\n";
                 report += "\r\n";
 
@@ -618,427 +533,6 @@ namespace BDInfo
                 }
 
                 report += "\r\n";
-                report += "FILES:\r\n";
-                report += "\r\n";
-                report += string.Format(
-                    "{0,-16}{1,-16}{2,-16}{3,-16}{4,-16}\r\n",
-                    "Name",
-                    "Time In",
-                    "Length",
-                    "Size",
-                    "Total Bitrate");
-                report += string.Format(
-                    "{0,-16}{1,-16}{2,-16}{3,-16}{4,-16}\r\n",
-                    "----",
-                    "-------",
-                    "------",
-                    "----",
-                    "-------------");
-
-                foreach (TSStreamClip clip in playlist.StreamClips)
-                {
-                    string clipName = clip.DisplayName;
-
-                    if (clip.AngleIndex > 0)
-                    {
-                        clipName += string.Format(
-                            " ({0})", clip.AngleIndex);
-                    }
-
-                    string clipSize = string.Format(
-                        "{0:N0}", clip.PacketSize);
-
-                    TimeSpan clipInSpan =
-                        new TimeSpan((long)(clip.RelativeTimeIn * 10000000));
-                    TimeSpan clipOutSpan =
-                        new TimeSpan((long)(clip.RelativeTimeOut * 10000000));
-                    TimeSpan clipLengthSpan =
-                        new TimeSpan((long)(clip.Length * 10000000));
-
-                    string clipTimeIn = string.Format(
-                        "{0:D1}:{1:D2}:{2:D2}.{3:D3}",
-                        clipInSpan.Hours,
-                        clipInSpan.Minutes,
-                        clipInSpan.Seconds,
-                        clipInSpan.Milliseconds);
-                    string clipLength = string.Format(
-                        "{0:D1}:{1:D2}:{2:D2}.{3:D3}",
-                        clipLengthSpan.Hours,
-                        clipLengthSpan.Minutes,
-                        clipLengthSpan.Seconds,
-                        clipLengthSpan.Milliseconds);
-
-                    string clipBitrate = Math.Round(
-                        (double)clip.PacketBitRate / 1000).ToString("N0");
-
-                    report += string.Format(
-                        "{0,-16}{1,-16}{2,-16}{3,-16}{4,-16}\r\n",
-                        clipName,
-                        clipTimeIn,
-                        clipLength,
-                        clipSize,
-                        clipBitrate);
-                }
-
-                report += "\r\n";
-                report += "CHAPTERS:\r\n";
-                report += "\r\n";
-                report += string.Format(
-                    "{0,-16}{1,-16}{2,-16}{3,-16}{4,-16}{5,-16}{6,-16}{7,-16}{8,-16}{9,-16}{10,-16}{11,-16}{12,-16}\r\n",
-                    "Number",
-                    "Time In",
-                    "Length",
-                    "Avg Video Rate",
-                    "Max 1-Sec Rate",
-                    "Max 1-Sec Time",
-                    "Max 5-Sec Rate",
-                    "Max 5-Sec Time",
-                    "Max 10Sec Rate",
-                    "Max 10Sec Time",
-                    "Avg Frame Size",
-                    "Max Frame Size",
-                    "Max Frame Time");
-                report += string.Format(
-                    "{0,-16}{1,-16}{2,-16}{3,-16}{4,-16}{5,-16}{6,-16}{7,-16}{8,-16}{9,-16}{10,-16}{11,-16}{12,-16}\r\n",
-                    "------",
-                    "-------",
-                    "------",
-                    "--------------",
-                    "--------------",
-                    "--------------",
-                    "--------------",
-                    "--------------",
-                    "--------------",
-                    "--------------",
-                    "--------------",
-                    "--------------",
-                    "--------------");
-
-                Queue<double> window1Bits = new Queue<double>();
-                Queue<double> window1Seconds = new Queue<double>();
-                double window1BitsSum = 0;
-                double window1SecondsSum = 0;
-                double window1PeakBitrate = 0;
-                double window1PeakLocation = 0;
-
-                Queue<double> window5Bits = new Queue<double>();
-                Queue<double> window5Seconds = new Queue<double>();
-                double window5BitsSum = 0;
-                double window5SecondsSum = 0;
-                double window5PeakBitrate = 0;
-                double window5PeakLocation = 0;
-
-                Queue<double> window10Bits = new Queue<double>();
-                Queue<double> window10Seconds = new Queue<double>();
-                double window10BitsSum = 0;
-                double window10SecondsSum = 0;
-                double window10PeakBitrate = 0;
-                double window10PeakLocation = 0;
-
-                double chapterPosition = 0;
-                double chapterBits = 0;
-                long chapterFrameCount = 0;
-                double chapterSeconds = 0;
-                double chapterMaxFrameSize = 0;
-                double chapterMaxFrameLocation = 0;
-
-                ushort diagPID  = playlist.VideoStreams[0].PID;
-
-                int chapterIndex = 0;
-                int clipIndex = 0;
-                int diagIndex = 0;
-
-                while (chapterIndex < playlist.Chapters.Count)
-                {
-                    TSStreamClip clip = null;
-                    TSStreamFile file = null;
-
-                    if (clipIndex < playlist.StreamClips.Count)
-                    {
-                        clip = playlist.StreamClips[clipIndex];
-                        file = clip.StreamFile;
-                    }
-
-                    double chapterStart = playlist.Chapters[chapterIndex];
-                    double chapterEnd;
-                    if (chapterIndex < playlist.Chapters.Count - 1)
-                    {
-                        chapterEnd = playlist.Chapters[chapterIndex + 1];
-                    }
-                    else
-                    {
-                        chapterEnd = playlist.TotalLength;
-                    }
-                    double chapterLength = chapterEnd - chapterStart;
-
-                    List<TSStreamDiagnostics> diagList = null;
-
-                    if (clip != null &&
-                        clip.AngleIndex == 0 &&
-                        file != null &&
-                        file.StreamDiagnostics.ContainsKey(diagPID))
-                    {
-                        diagList = file.StreamDiagnostics[diagPID];
-
-                        while (diagIndex < diagList.Count &&
-                            chapterPosition < chapterEnd)
-                        {
-                            TSStreamDiagnostics diag = diagList[diagIndex++];
-
-                            if (diag.Marker < clip.TimeIn) continue;
-
-                            chapterPosition =
-                                diag.Marker -
-                                clip.TimeIn +
-                                clip.RelativeTimeIn;
-
-                            double seconds = diag.Interval;
-                            double bits = diag.Bytes * 8.0;
-
-                            chapterBits += bits;
-                            chapterSeconds += seconds;
-
-                            if (diag.Tag != null)
-                            {
-                                chapterFrameCount++;
-                            }
-
-                            window1SecondsSum += seconds;
-                            window1Seconds.Enqueue(seconds);
-                            window1BitsSum += bits;
-                            window1Bits.Enqueue(bits);
-
-                            window5SecondsSum += diag.Interval;
-                            window5Seconds.Enqueue(diag.Interval);
-                            window5BitsSum += bits;
-                            window5Bits.Enqueue(bits);
-
-                            window10SecondsSum += seconds;
-                            window10Seconds.Enqueue(seconds);
-                            window10BitsSum += bits;
-                            window10Bits.Enqueue(bits);
-
-                            if (bits > chapterMaxFrameSize * 8)
-                            {
-                                chapterMaxFrameSize = bits / 8;
-                                chapterMaxFrameLocation = chapterPosition;
-                            }
-                            if (window1SecondsSum > 1.0)
-                            {
-                                double bitrate = window1BitsSum / window1SecondsSum;
-                                if (bitrate > window1PeakBitrate &&
-                                    chapterPosition - window1SecondsSum > 0)
-                                {
-                                    window1PeakBitrate = bitrate;
-                                    window1PeakLocation = chapterPosition - window1SecondsSum;
-                                }
-                                window1BitsSum -= window1Bits.Dequeue();
-                                window1SecondsSum -= window1Seconds.Dequeue();
-                            }
-                            if (window5SecondsSum > 5.0)
-                            {
-                                double bitrate = window5BitsSum / window5SecondsSum;
-                                if (bitrate > window5PeakBitrate &&
-                                    chapterPosition - window5SecondsSum > 0)
-                                {
-                                    window5PeakBitrate = bitrate;
-                                    window5PeakLocation = chapterPosition - window5SecondsSum;
-                                    if (window5PeakLocation < 0)
-                                    {
-                                        window5PeakLocation = 0;
-                                        window5PeakLocation = 0;
-                                    }
-                                }
-                                window5BitsSum -= window5Bits.Dequeue();
-                                window5SecondsSum -= window5Seconds.Dequeue();
-                            }
-                            if (window10SecondsSum > 10.0)
-                            {
-                                double bitrate = window10BitsSum / window10SecondsSum;
-                                if (bitrate > window10PeakBitrate &&
-                                    chapterPosition - window10SecondsSum > 0)
-                                {
-                                    window10PeakBitrate = bitrate;
-                                    window10PeakLocation = chapterPosition - window10SecondsSum;
-                                }
-                                window10BitsSum -= window10Bits.Dequeue();
-                                window10SecondsSum -= window10Seconds.Dequeue();
-                            }
-                        }
-                    }
-                    if (diagList == null ||
-                        diagIndex == diagList.Count)
-                    {
-                        if (clipIndex < playlist.StreamClips.Count)
-                        {
-                            clipIndex++; diagIndex = 0;
-                        }
-                        else
-                        {
-                            chapterPosition = chapterEnd;
-                        }
-                    }
-                    if (chapterPosition >= chapterEnd)
-                    {
-                        ++chapterIndex;
-
-                        TimeSpan window1PeakSpan = new TimeSpan((long)(window1PeakLocation * 10000000));
-                        TimeSpan window5PeakSpan = new TimeSpan((long)(window5PeakLocation * 10000000));
-                        TimeSpan window10PeakSpan = new TimeSpan((long)(window10PeakLocation * 10000000));
-                        TimeSpan chapterMaxFrameSpan = new TimeSpan((long)(chapterMaxFrameLocation * 10000000));
-                        TimeSpan chapterStartSpan = new TimeSpan((long)(chapterStart * 10000000));
-                        TimeSpan chapterEndSpan = new TimeSpan((long)(chapterEnd * 10000000));
-                        TimeSpan chapterLengthSpan = new TimeSpan((long)(chapterLength * 10000000));
-
-                        double chapterBitrate = 0;
-                        if (chapterLength > 0)
-                        {
-                            chapterBitrate = chapterBits / chapterLength;
-                        }
-                        double chapterAvgFrameSize = 0;
-                        if (chapterFrameCount > 0)
-                        {
-                            chapterAvgFrameSize = chapterBits / chapterFrameCount / 8;
-                        }
-
-                        report += string.Format(
-                            "{0,-16}{1,-16}{2,-16}{3,-16}{4,-16}{5,-16}{6,-16}{7,-16}{8,-16}{9,-16}{10,-16}{11,-16}{12,-16}\r\n",
-                            chapterIndex,
-                            string.Format("{0:D1}:{1:D2}:{2:D2}.{3:D3}", chapterStartSpan.Hours, chapterStartSpan.Minutes, chapterStartSpan.Seconds, chapterStartSpan.Milliseconds),
-                            string.Format("{0:D1}:{1:D2}:{2:D2}.{3:D3}", chapterLengthSpan.Hours, chapterLengthSpan.Minutes, chapterLengthSpan.Seconds, chapterLengthSpan.Milliseconds),
-                            string.Format("{0:N0} kbps", Math.Round(chapterBitrate / 1000)),
-                            string.Format("{0:N0} kbps", Math.Round(window1PeakBitrate / 1000)),
-                            string.Format("{0:D2}:{1:D2}:{2:D2}.{3:D3}", window1PeakSpan.Hours, window1PeakSpan.Minutes, window1PeakSpan.Seconds, window1PeakSpan.Milliseconds),
-                            string.Format("{0:N0} kbps", Math.Round(window5PeakBitrate / 1000)),
-                            string.Format("{0:D2}:{1:D2}:{2:D2}.{3:D3}", window5PeakSpan.Hours, window5PeakSpan.Minutes, window5PeakSpan.Seconds, window5PeakSpan.Milliseconds),
-                            string.Format("{0:N0} kbps", Math.Round(window10PeakBitrate / 1000)),
-                            string.Format("{0:D2}:{1:D2}:{2:D2}.{3:D3}", window10PeakSpan.Hours, window10PeakSpan.Minutes, window10PeakSpan.Seconds, window10PeakSpan.Milliseconds),
-                            string.Format("{0:N0} bytes", chapterAvgFrameSize),
-                            string.Format("{0:N0} bytes", chapterMaxFrameSize),
-                            string.Format("{0:D2}:{1:D2}:{2:D2}.{3:D3}", chapterMaxFrameSpan.Hours, chapterMaxFrameSpan.Minutes, chapterMaxFrameSpan.Seconds, chapterMaxFrameSpan.Milliseconds));
-
-                        window1Bits = new Queue<double>();
-                        window1Seconds = new Queue<double>();
-                        window1BitsSum = 0;
-                        window1SecondsSum = 0;
-                        window1PeakBitrate = 0;
-                        window1PeakLocation = 0;
-
-                        window5Bits = new Queue<double>();
-                        window5Seconds = new Queue<double>();
-                        window5BitsSum = 0;
-                        window5SecondsSum = 0;
-                        window5PeakBitrate = 0;
-                        window5PeakLocation = 0;
-
-                        window10Bits = new Queue<double>();
-                        window10Seconds = new Queue<double>();
-                        window10BitsSum = 0;
-                        window10SecondsSum = 0;
-                        window10PeakBitrate = 0;
-                        window10PeakLocation = 0;
-
-                        chapterBits = 0;
-                        chapterSeconds = 0;
-                        chapterFrameCount = 0;
-                        chapterMaxFrameSize = 0;
-                        chapterMaxFrameLocation = 0;
-                    }
-                }
-
-                if (BDInfoSettings.GenerateStreamDiagnostics)
-                {                        
-                    report += "\r\n";
-                    report += "STREAM DIAGNOSTICS:\r\n";
-                    report += "\r\n";
-                    report += string.Format(
-                        "{0,-16}{1,-16}{2,-16}{3,-16}{4,-24}{5,-24}{6,-24}{7,-16}{8,-16}\r\n",
-                        "File",
-                        "PID",
-                        "Type",
-                        "Codec",
-                        "Language",
-                        "Seconds",
-                        "Bitrate",
-                        "Bytes",
-                        "Packets");
-                    report += string.Format(
-                        "{0,-16}{1,-16}{2,-16}{3,-16}{4,-24}{5,-24}{6,-24}{7,-16}{8,-16}\r\n",
-                        "----",
-                        "---",
-                        "----",
-                        "-----",
-                        "--------",
-                        "--------------",
-                        "--------------",
-                        "-------------",
-                        "-----",
-                        "-------");
-
-                    Dictionary<string, TSStreamClip> reportedClips = new Dictionary<string, TSStreamClip>();
-                    foreach (TSStreamClip clip in playlist.StreamClips)
-                    {
-                        if (clip.StreamFile == null) continue;
-                        if (reportedClips.ContainsKey(clip.Name)) continue;
-                        reportedClips[clip.Name] = clip;
-
-                        string clipName = clip.DisplayName;
-                        if (clip.AngleIndex > 0)
-                        {
-                            clipName += string.Format(" ({0})", clip.AngleIndex);
-                        }
-                        foreach (TSStream clipStream in clip.StreamFile.Streams.Values)
-                        {
-                            if (!playlist.Streams.ContainsKey(clipStream.PID)) continue;
-
-                            TSStream playlistStream = 
-                                playlist.Streams[clipStream.PID];
-
-                            string clipBitRate = "0";
-                            string clipSeconds = "0";
-
-                            if (clip.StreamFile.Length > 0)
-                            {
-                                clipSeconds =
-                                    clip.StreamFile.Length.ToString("F3");
-                                clipBitRate = Math.Round(
-                                     (double)clipStream.PayloadBytes * 8 /
-                                     clip.StreamFile.Length / 1000).ToString("N0");
-                            }
-                            string language = "";
-                            if (playlistStream.LanguageCode != null &&
-                                playlistStream.LanguageCode.Length > 0)
-                            {
-                                language = string.Format(
-                                    "{0} ({1})", playlistStream.LanguageCode, playlistStream.LanguageName);
-                            }
-
-                            report += string.Format(
-                                "{0,-16}{1,-16}{2,-16}{3,-16}{4,-24}{5,-24}{6,-24}{7,-16}{8,-16}\r\n",
-                                clipName,
-                                string.Format("{0} (0x{1:X})", clipStream.PID, clipStream.PID),
-                                string.Format("0x{0:X2}", (byte)clipStream.StreamType),
-                                clipStream.CodecShortName,
-                                language,                                
-                                clipSeconds,
-                                clipBitRate,
-                                clipStream.PayloadBytes.ToString("N0"),
-                                clipStream.PacketCount.ToString("N0"));
-                        }
-                    }
-                }
-
-                report += "\r\n";
-                report += "[/code]\r\n";
-                report += "<---- END FORUMS PASTE ---->\r\n";
-                report += "\r\n";
-
-                if (BDInfoSettings.GenerateTextSummary)
-                {
-                    report += "QUICK SUMMARY:\r\n\r\n";
-                    report += summary;
-                    report += "\r\n";
-                }
 
                 if (BDInfoSettings.AutosaveReport && reportFile != null)
                 {
@@ -1046,7 +540,7 @@ namespace BDInfo
                     catch { }
                 }
                 textBoxReport.Text += report;
-                report = "";
+
                 GC.Collect();
             }
 
@@ -1054,7 +548,6 @@ namespace BDInfo
             {
                 try { reportFile.Write(report); }
                 catch { }
-
             }
             textBoxReport.Text += report;
 
@@ -1069,14 +562,14 @@ namespace BDInfo
         }
 
         private void buttonCopy_Click(
-            object sender, 
+            object sender,
             EventArgs e)
         {
             Clipboard.SetText(textBoxReport.Text);
         }
 
         private void textBoxReport_KeyDown(
-            object sender, 
+            object sender,
             KeyEventArgs e)
         {
             if (e.Control && (e.KeyCode == System.Windows.Forms.Keys.A))
@@ -1117,7 +610,7 @@ namespace BDInfo
         }
 
         private void buttonChart_Click(
-            object sender, 
+            object sender,
             EventArgs e)
         {
             if (Playlists == null ||
@@ -1129,7 +622,7 @@ namespace BDInfo
                 return;
             }
 
-            TSPlaylistFile playlist = 
+            TSPlaylistFile playlist =
                 (TSPlaylistFile)comboBoxPlaylist.SelectedItem;
             TSVideoStream videoStream =
                 (TSVideoStream)comboBoxStream.SelectedItem;
@@ -1146,7 +639,7 @@ namespace BDInfo
         }
 
         private void FormReport_FormClosed(
-            object sender, 
+            object sender,
             FormClosedEventArgs e)
         {
             GC.Collect();

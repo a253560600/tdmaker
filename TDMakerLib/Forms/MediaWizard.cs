@@ -67,7 +67,7 @@ namespace TDMakerLib
                     }
                     else
                     {
-                        lblUserActionMsg.Text = "You are about to analayze a collection of directories...";
+                        lblUserActionMsg.Text = "You are about to analyze a collection of directories...";
                     }
                     this.Options.MediaTypeChoice = MediaType.MediaDisc;
                 }

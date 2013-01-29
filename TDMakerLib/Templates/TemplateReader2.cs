@@ -40,7 +40,7 @@ namespace TDMakerLib
         {
             this.Location = loc;
             this.TorrentInfo = ti;
-            this.MappingHelperMy = new MappingHelper(ti.MediaMy.Overall.Summary);
+            this.MappingHelperMy = new MappingHelper(ti.Media.Overall.Summary);
             // this.MappingHelperMy.ListFieldsAll();
 
             // Read the files in Location
@@ -95,18 +95,18 @@ namespace TDMakerLib
         {
             string pattern = "";
 
-            if (TorrentInfo.MediaMy != null)
+            if (TorrentInfo.Media != null)
             {
-                if (TorrentInfo.MediaMy.MediaTypeChoice == MediaType.MediaDisc)
+                if (TorrentInfo.Media.MediaTypeChoice == MediaType.MediaDisc)
                 {
-                    pattern = CreateDiscInfo(TorrentInfo.MediaMy);
+                    pattern = CreateDiscInfo(TorrentInfo.Media);
                 }
                 else
                 {
-                    pattern = CreateFileInfo(TorrentInfo.MediaMy);
+                    pattern = CreateFileInfo(TorrentInfo.Media);
                 }
 
-                pattern = GetSourceInfo(pattern, TorrentInfo.MediaMy);
+                pattern = GetSourceInfo(pattern, TorrentInfo.Media);
                 pattern = Regex.Replace(pattern, "%NewLine%", Environment.NewLine);
 
                 PublishInfo = pattern.Trim();

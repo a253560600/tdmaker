@@ -33,6 +33,11 @@ namespace TDMakerLib
         public double Duration { get; set; }
 
         /// <summary>
+        /// Segment duration in milli seconds
+        /// </summary>
+        public double SegmentDuration { get; set; }
+
+        /// <summary>
         /// Duration in hours:minutes:seconds
         /// </summary>
         public string DurationString2 { get; set; }
@@ -176,6 +181,7 @@ namespace TDMakerLib
                         double dura = 0.0;
                         double.TryParse(MI.Get(0, 0, "Duration"), out dura);
                         this.Duration = dura;
+                        this.SegmentDuration = dura;
                     }
 
                     if (string.IsNullOrEmpty(this.DurationString3))

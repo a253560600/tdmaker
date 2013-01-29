@@ -28,7 +28,7 @@ namespace TDMakerLib
         public override void TakeScreenshot()
         {
             string tempFp = Path.Combine(ScreenshotDir, MplayerScreenshotFileName);
-            int time_slice = (int)(MediaFile.Duration / ((Options.NumberOfScreenshots + 1) * 1000));
+            int time_slice = (int)(MediaFile.SegmentDuration / ((Options.NumberOfScreenshots + 1) * 1000));
 
             if (File.Exists(tempFp))
             {
@@ -41,7 +41,7 @@ namespace TDMakerLib
             for (int i = 0; i < Options.NumberOfScreenshots; i++)
             {
                 int time_slice_elapsed = time_slice * (i + 1);
-                string arg = string.Format("-nosound -ss {0} -vf screenshot -frames 1 -vo png:z=9:outdir=\\\"{1}\\\" \"{2}\"", time_slice_elapsed,
+                string arg = string.Format("-nosound -ss {0} -zoom -vf screenshot -frames 1 -vo png:z=9:outdir=\\\"{1}\\\" \"{2}\"", time_slice_elapsed,
                                                                                                                                  ScreenshotDir,
                                                                                                                                  MediaFile.FilePath);
                 ProcessStartInfo psi = new ProcessStartInfo(Engine.conf.MPlayerPath);

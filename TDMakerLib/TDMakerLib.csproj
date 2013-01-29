@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Crypt.cs" />
+    <Compile Include="FileSystemHelper.cs" />
     <Compile Include="Forms\ConfigWizard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +120,7 @@
     <Compile Include="Helpers\XMLSettingsMtnProfiles.cs" />
     <Compile Include="Helpers\ImageFile.cs" />
     <Compile Include="Kernel32Helper.cs" />
+    <Compile Include="Helpers\MediaHelper.cs" />
     <Compile Include="MediaInfo\MediaFile.cs" />
     <Compile Include="MediaInfo\MediaInfo2.cs" />
     <Compile Include="MediaInfo\MediaInfoDLL.cs" />
@@ -246,6 +248,10 @@
     <ProjectReference Include="..\..\..\ShareX\trunk\UploadersLib\UploadersLib.csproj">
       <Project>{e1c94415-3424-4517-a2a1-b2fdd1f59c67}</Project>
       <Name>UploadersLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lib\BDInfo\BDInfo\BDInfo.csproj">
+      <Project>{3209af1d-4762-4960-9de5-13e90e77ee96}</Project>
+      <Name>BDInfo</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

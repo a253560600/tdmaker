@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.IO;
-using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace TDMakerLib
@@ -11,7 +11,9 @@ namespace TDMakerLib
     public static class FileSystem
     {
         public delegate void DebugLogEventHandler(string line);
+
         public static event DebugLogEventHandler DebugLogChanged;
+
         public static StringBuilder DebugLog = new StringBuilder();
         public static string DebugLogFilePath = Path.Combine(Engine.LogsDir, string.Format("{0}-{1}-debug.txt", Application.ProductName, DateTime.Now.ToString("yyyyMMdd")));
 
@@ -92,13 +94,13 @@ namespace TDMakerLib
         {
             if (!string.IsNullOrEmpty(Engine.LogsDir))
             {
-            	string dir = Engine.LogsDir;
-            	if (Engine.Portable)
-            	{
-            		dir = Path.Combine(Application.StartupPath, Engine.LogsDir);
-            	}
+                string dir = Engine.LogsDir;
+                if (Engine.Portable)
+                {
+                    dir = Path.Combine(Application.StartupPath, Engine.LogsDir);
+                }
                 string fpDebug = Path.Combine(dir, string.Format("{0}-{1}-debug.txt", Application.ProductName, DateTime.Now.ToString("yyyyMMdd")));
-                AppendDebug("Writing Debug file: " + fpDebug);                                
+                AppendDebug("Writing Debug file: " + fpDebug);
                 if (Engine.conf.WriteDebugFile)
                 {
                     if (DebugLog.Length > 0)
@@ -112,8 +114,6 @@ namespace TDMakerLib
                 }
             }
         }
-
-
 
         /// <summary>
         /// Used to browse the defaule Screneshots folder only
@@ -184,7 +184,6 @@ namespace TDMakerLib
                 }
             }
 
-
             if (string.IsNullOrEmpty(res) && !string.IsNullOrEmpty(mi.Overall.Video.Height) && !string.IsNullOrEmpty(mi.Overall.Video.Width))
             {
                 string height = mi.Overall.Video.Height;
@@ -240,16 +239,31 @@ namespace TDMakerLib
                 Format = format,
                 Resolution = res,
                 Width = mi.Overall.Video.Width,
-                Height = mi.Overall.Video.Height, 
+                Height = mi.Overall.Video.Height,
                 Media = media,
                 FileType = fileType
             };
 
-            foreach (MediaFile mf in mi.MediaFiles)
+            if (mi.UploadScreenshots)
             {
-                foreach (Screenshot ss in mf.Thumbnailer.Screenshots)
+                switch (mi.MediaTypeChoice)
                 {
-                    xmlUpload.Screenshots.Add(ss.FullImageLink);
+                    case MediaType.MediaDisc:
+                        foreach (Screenshot ss in mi.Overall.Thumbnailer.Screenshots)
+                        {
+                            xmlUpload.Screenshots.Add(ss.FullImageLink);
+                        }
+                        break;
+
+                    default:
+                        foreach (MediaFile mf in mi.MediaFiles)
+                        {
+                            foreach (Screenshot ss in mf.Thumbnailer.Screenshots)
+                            {
+                                xmlUpload.Screenshots.Add(ss.FullImageLink);
+                            }
+                        }
+                        break;
                 }
             }
 
@@ -313,6 +327,5 @@ namespace TDMakerLib
             }
             return ret;
         }
-
     }
 }

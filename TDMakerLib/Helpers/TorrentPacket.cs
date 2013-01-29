@@ -81,7 +81,7 @@ namespace TDMakerLib
                         MonoTorrent.Common.TorrentCreator tc = new MonoTorrent.Common.TorrentCreator();
                         tc.CreatedBy = Application.ProductName;
                         tc.Private = true;
-                        tc.Comment = Adapter.GetMediaName(p);
+                        tc.Comment = MediaHelper.GetMediaName(p);
                         tc.Path = p;
                         tc.PublisherUrl = "http://code.google.com/p/tdmaker";
                         tc.Publisher = Application.ProductName;
@@ -90,7 +90,7 @@ namespace TDMakerLib
                         temp.Add(myTracker.AnnounceURL);
                         tc.Announces.Add(temp);
 
-                        string torrentFileName = string.Format("{0} - {1}.torrent", (File.Exists(p) ? Path.GetFileName(p) : Adapter.GetMediaName(p)), myTracker.Name);
+                        string torrentFileName = string.Format("{0} - {1}.torrent", (File.Exists(p) ? Path.GetFileName(p) : MediaHelper.GetMediaName(p)), myTracker.Name);
                         this.SetTorrentFilePath(torrentFileName);
 
                         ReportProgress(workerMy, ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Creating {0}", this.TorrentFilePath));
