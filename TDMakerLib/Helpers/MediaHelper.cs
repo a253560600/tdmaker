@@ -33,5 +33,22 @@ namespace TDMakerLib
 
             return name;
         }
+
+        public static SourceType GetSourceType(string fd)
+        {
+            SourceType st = SourceType.Rip;
+
+            if (Directory.Exists(fd))
+            {
+                string[] d = Directory.GetDirectories(fd, "VIDEO_TS", SearchOption.AllDirectories);
+                if (d.Length > 0)
+                    return SourceType.DVD;
+
+                d = Directory.GetDirectories(fd, "BDMV", SearchOption.AllDirectories);
+                if (d.Length > 0)
+                    return SourceType.Bluray;
+            }
+            return st;
+        }
     }
 }

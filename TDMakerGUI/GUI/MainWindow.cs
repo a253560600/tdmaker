@@ -276,27 +276,20 @@ namespace TDMaker
                 }
                 else
                 {
-                    foreach (string p in wt.FileOrDirPaths)
+                    foreach (string fd in wt.FileOrDirPaths)
                     {
-                        if (File.Exists(p) || Directory.Exists(p))
+                        if (File.Exists(fd) || Directory.Exists(fd))
                         {
                             MakeGUIReadyForAnalysis();
 
-                            MediaInfo2 mi = this.PrepareNewMedia(wt, p);
+                            MediaInfo2 mi = this.PrepareNewMedia(wt, fd);
 
-                            if (Directory.Exists(p))
+                            mi.DiscType = MediaHelper.GetSourceType(fd);
+
+                            if (mi.DiscType == SourceType.Bluray)
                             {
-                                string[] bd = Directory.GetDirectories(p, "BDMV", SearchOption.AllDirectories);
-                                if (bd.Length == 1)
-                                {
-                                    // This is a Blu-ray disc
-                                    mi.DiscType = SourceType.Bluray;
-                                    mi.Overall = new MediaFile(FileSystemHelper.GetLargestFilePathFromDir(bd[0]), cboSource.Text);
-
-                                    mi.Overall.Summary = BDInfo(p);
-                                }
-                                else
-                                    mi.DiscType = SourceType.DVD;
+                                mi.Overall = new MediaFile(FileSystemHelper.GetLargestFilePathFromDir(fd), cboSource.Text);
+                                mi.Overall.Summary = BDInfo(fd);
                             }
 
                             if (wt.IsSingleTask() && !string.IsNullOrEmpty(txtTitle.Text))
