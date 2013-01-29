@@ -5,22 +5,39 @@ namespace TDMakerLib
 {
     public enum MediaType
     {
-        [Description("Media disc e.g. DVD")]
+        [Description("Media disc e.g. DVD or BD")]
         MediaDisc,
+
         [Description("Single media file")]
         MediaIndiv,
+
         [Description("Media files collection")]
         MediaCollection,
+
         [Description("Music audio album")]
         MusicAudioAlbum
+    }
+
+    public enum SourceType
+    {
+        [Description("Rip")]
+        Rip,
+
+        [Description("Blu-ray")]
+        Bluray,
+
+        [Description("DVD")]
+        DVD
     }
 
     public enum LocationType
     {
         [Description("Parent folder of the media file")]
         ParentFolder,
+
         [Description("Default folder")]
         KnownFolder,
+
         [Description("Custom folder")]
         CustomFolder,
     }
@@ -29,8 +46,10 @@ namespace TDMakerLib
     {
         [Description("Internal Template")]
         InternalTemplate,
+
         [Description("External Template")]
         ExternalTemplate,
+
         [Description("MediaInfo")]
         MediaInfo
     }
@@ -63,6 +82,7 @@ namespace TDMakerLib
     {
         [Description("MTN")]
         MovieThumbnailer,
+
         [Description("MPlayer")]
         MPlayer
     }

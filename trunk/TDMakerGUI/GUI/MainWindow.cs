@@ -1,4 +1,5 @@
-﻿using HelpersLib;
+﻿using BDInfo;
+using HelpersLib;
 using MediaInfoLib;
 using System;
 using System.Collections.Generic;
@@ -88,65 +89,115 @@ namespace TDMaker
             UpdateGuiControls();
         }
 
-        private void MakeGUIReadyForAnalysis()
+        private void MainWindow_Shown(object sender, EventArgs e)
         {
-            pBar.Value = 0;
-        }
+            rtbDebugLog.Text = FileSystem.DebugLog.ToString();
+            FileSystem.DebugLogChanged += new FileSystem.DebugLogEventHandler(FileSystem_DebugLogChanged);
 
-        private void bwApp_DoWork(object sender, DoWorkEventArgs e)
-        {
-            // start of the magic :)
+            string mtnExe = (Engine.IsUNIX ? "mtn" : "mtn.exe");
 
-            WorkerTask wt = (WorkerTask)e.Argument;
-
-            Loader.CurrentTask = wt.Task;
-
-            switch (wt.Task)
+            if (Engine.conf.ThumbnailerType == ThumbnailerType.MovieThumbnailer)
             {
-                case TaskType.ANALYZE_MEDIA:
-                    e.Result = WorkerAnalyzeMedia(wt);
-                    break;
+                if (!File.Exists(Engine.conf.MTNPath))
+                {
+                    Engine.conf.MTNPath = Path.Combine(Application.StartupPath, mtnExe);
+                }
 
-                case TaskType.CREATE_TORRENT:
-                    WorkerCreateTorrents(wt);
-                    break;
+                if (!File.Exists(Engine.conf.MTNPath))
+                {
+                    Engine.conf.MTNPath = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), Application.ProductName), mtnExe);
+                }
+
+                if (!File.Exists(Engine.conf.MTNPath))
+                {
+                    OpenFileDialog dlg = new OpenFileDialog();
+                    dlg.InitialDirectory = Application.StartupPath;
+                    dlg.Title = "Browse for mtn.exe";
+                    dlg.Filter = "Applications (*.exe)|*.exe";
+                    if (dlg.ShowDialog() == DialogResult.OK)
+                    {
+                        Engine.conf.MTNPath = dlg.FileName;
+                    }
+                }
+            }
+            else if (Engine.conf.ThumbnailerType == ThumbnailerType.MPlayer)
+            {
+                if (!File.Exists(Engine.conf.MPlayerPath))
+                {
+                    OpenFileDialog dlg = new OpenFileDialog();
+                    dlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+                    dlg.Title = "Browse for mplayer.exe or download from http://code.google.com/p/mplayer-for-windows/downloads/list";
+                    dlg.Filter = "Applications (mplayer.exe)|mplayer.exe";
+                    if (dlg.ShowDialog() == DialogResult.OK)
+                    {
+                        Engine.conf.MPlayerPath = dlg.FileName;
+                    }
+                    else
+                    {
+                        Helpers.LoadBrowserAsync("http://code.google.com/p/mplayer-for-windows/downloads/list");
+                    }
+                }
+            }
+
+            if (Loader.ExplorerFilePaths.Count > 0)
+            {
+                LoadMedia(Loader.ExplorerFilePaths.ToArray());
             }
         }
 
-        private bool ValidateInput()
+        private void OpenFile()
         {
-            StringBuilder sbMsg = new StringBuilder();
-
-            // checks
-            if (string.IsNullOrEmpty(cboSource.Text) && Engine.conf.PublishInfoTypeChoice != PublishInfoType.MediaInfo)
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Multiselect = true;
+            dlg.Title = "Browse for Media file...";
+            StringBuilder sbExt = new StringBuilder();
+            sbExt.Append("Media Files (");
+            StringBuilder sbExtDesc = new StringBuilder();
+            foreach (string ext in Engine.conf.SupportedFileExtVideo)
             {
-                sbMsg.AppendLine("Source information is mandatory. Use the Source drop down menu to select the correct source type.");
+                sbExtDesc.Append("*");
+                sbExtDesc.Append(ext);
+                sbExtDesc.Append("; ");
             }
-
-            if (sbMsg.Length > 0)
+            sbExt.Append(sbExtDesc.ToString().TrimEnd().TrimEnd(';'));
+            sbExt.Append(")|");
+            foreach (string ext in Engine.conf.SupportedFileExtVideo)
             {
-                MessageBox.Show("The following errors were found:\n\n" + sbMsg.ToString(), Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return false;
+                sbExt.Append("*");
+                sbExt.Append(ext);
+                sbExt.Append("; ");
             }
+            dlg.Filter = sbExt.ToString().TrimEnd();
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                LoadMedia(dlg.FileNames);
+            }
+        }
 
-            return true;
+        private void OpenFolder()
+        {
+            FolderBrowserDialog dlg = new FolderBrowserDialog();
+            dlg.Description = "Browse for media disc folder...";
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                LoadMedia(new string[] { dlg.SelectedPath });
+            }
         }
 
         private void LoadMedia(string[] ps)
         {
             if (1 == ps.Length)
             {
-                txtTitle.Text = Adapter.GetMediaName(ps[0]);
+                txtTitle.Text = MediaHelper.GetMediaName(ps[0]);
             }
 
-            // COMMENTED UNTIL RECALLED WHY THIS IS NEEDED
-            //if (!Engine.conf.WritePublish && ps.Length > 1)
-            //{
-            //    if (MessageBox.Show("Writing Publish info to File is recommended when analysing multiple files or folders. \n\nWould you like to turn this feature on?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            //    {
-            //        Engine.conf.WritePublish = true;
-            //    }
-            //}
+            if (!Engine.conf.WritePublish && ps.Length > 1)
+            {
+                if (MessageBox.Show("Writing Publish info to File is recommended when analysing multiple files or folders. \n\nWould you like to turn this feature on?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Engine.conf.WritePublish = true;
+                }
+            }
 
             List<TorrentCreateInfo> tps = new List<TorrentCreateInfo>();
 
@@ -170,60 +221,6 @@ namespace TDMaker
                 wt.FileOrDirPaths = new List<string>(ps);
                 AnalyzeMedia(wt);
             }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="p">File or Folder</param>
-        /// <returns></returns>
-        private List<string> CreateFileList(string p)
-        {
-            List<string> fl = new List<string>();
-            if (File.Exists(p))
-            {
-                fl.Add(p);
-            }
-            else if (Directory.Exists(p))
-            {
-            }
-            return fl;
-        }
-
-        /// <summary>
-        /// Gets new MediaInfo2 object from settings based on GUI Controls
-        /// </summary>
-        /// <param name="p">File or Folder path of the Media</param>
-        /// <returns>MediaInfo2 object</returns>
-        private MediaInfo2 PrepareNewMedia(WorkerTask wt, string p)
-        {
-            MediaType mt = wt.MediaTypeChoice;
-            MediaInfo2 mi = new MediaInfo2(mt, p);
-            mi.Extras = cboExtras.Text;
-            if (cboSource.Text == "DVD")
-            {
-                mi.Source = Adapter.GetDVDString(p);
-            }
-            else
-            {
-                mi.Source = cboSource.Text;
-            }
-            mi.Menu = cboDiscMenu.Text;
-            mi.Authoring = cboAuthoring.Text;
-            mi.WebLink = txtWebLink.Text;
-            mi.TorrentCreateInfoMy = new TorrentCreateInfo(GetTracker(), p);
-
-            if (Engine.conf.PublishInfoTypeChoice == PublishInfoType.ExternalTemplate)
-            {
-                mi.TemplateLocation = Path.Combine(Engine.TemplatesDir, cboTemplate.Text);
-            }
-
-            return mi;
-        }
-
-        private void btnCreateTorrent_Click(object sender, EventArgs e)
-        {
-            CreateTorrentButton();
         }
 
         private void AnalyzeMedia(WorkerTask wt)
@@ -287,18 +284,34 @@ namespace TDMaker
 
                             MediaInfo2 mi = this.PrepareNewMedia(wt, p);
 
+                            if (Directory.Exists(p))
+                            {
+                                string[] bd = Directory.GetDirectories(p, "BDMV", SearchOption.AllDirectories);
+                                if (bd.Length == 1)
+                                {
+                                    // This is a Blu-ray disc
+                                    mi.DiscType = SourceType.Bluray;
+                                    mi.Overall = new MediaFile(FileSystemHelper.GetLargestFilePathFromDir(bd[0]), cboSource.Text);
+
+                                    mi.Overall.Summary = BDInfo(p);
+                                }
+                                else
+                                    mi.DiscType = SourceType.DVD;
+                            }
+
                             if (wt.IsSingleTask() && !string.IsNullOrEmpty(txtTitle.Text))
                             {
                                 mi.SetTitle(txtTitle.Text);
 
                                 // if it is a DVD, set the title to be name of the folder.
-                                this.Text = string.Format("{0} - {1}", Engine.GetProductName(), Adapter.GetMediaName(mi.Location));
+                                this.Text = string.Format("{0} - {1}", Engine.GetProductName(), MediaHelper.GetMediaName(mi.Location));
                             }
                             miList.Add(mi);
                         }
                     }
                 }
 
+                // Attach the MediaInfo2 object in to TorrentInfo
                 List<TorrentInfo> tiList = new List<TorrentInfo>();
                 foreach (MediaInfo2 mi in miList)
                 {
@@ -314,6 +327,114 @@ namespace TDMaker
 
                 UpdateGuiControls();
             }
+        }
+
+        private string BDInfo(string p)
+        {
+            BDInfoSettings.AutosaveReport = true;
+            BDInfo.FormMain info = new BDInfo.FormMain(new string[] { p });
+
+            info.ShowDialog(this);
+
+            return info.Report;
+        }
+
+        private void MakeGUIReadyForAnalysis()
+        {
+            pBar.Value = 0;
+        }
+
+        private void bwApp_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // start of the magic :)
+
+            WorkerTask wt = (WorkerTask)e.Argument;
+
+            Loader.CurrentTask = wt.Task;
+
+            switch (wt.Task)
+            {
+                case TaskType.ANALYZE_MEDIA:
+                    e.Result = WorkerAnalyzeMedia(wt);
+                    break;
+
+                case TaskType.CREATE_TORRENT:
+                    WorkerCreateTorrents(wt);
+                    break;
+            }
+        }
+
+        private bool ValidateInput()
+        {
+            StringBuilder sbMsg = new StringBuilder();
+
+            // checks
+            if (string.IsNullOrEmpty(cboSource.Text) && Engine.conf.PublishInfoTypeChoice != PublishInfoType.MediaInfo)
+            {
+                sbMsg.AppendLine("Source information is mandatory. Use the Source drop down menu to select the correct source type.");
+            }
+
+            if (sbMsg.Length > 0)
+            {
+                MessageBox.Show("The following errors were found:\n\n" + sbMsg.ToString(), Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="p">File or Folder</param>
+        /// <returns></returns>
+        private List<string> CreateFileList(string p)
+        {
+            List<string> fl = new List<string>();
+            if (File.Exists(p))
+            {
+                fl.Add(p);
+            }
+            else if (Directory.Exists(p))
+            {
+            }
+            return fl;
+        }
+
+        /// <summary>
+        /// Gets new MediaInfo2 object from settings based on GUI Controls
+        /// </summary>
+        /// <param name="p">File or Folder path of the Media</param>
+        /// <returns>MediaInfo2 object</returns>
+        private MediaInfo2 PrepareNewMedia(WorkerTask wt, string p)
+        {
+            MediaType mt = wt.MediaTypeChoice;
+            MediaInfo2 mi = new MediaInfo2(mt, p);
+            mi.Extras = cboExtras.Text;
+            if (cboSource.Text == "DVD")
+            {
+                mi.Source = Adapter.GetDVDString(p);
+            }
+            else
+            {
+                mi.Source = cboSource.Text;
+            }
+            mi.Menu = cboDiscMenu.Text;
+            mi.Authoring = cboAuthoring.Text;
+            mi.WebLink = txtWebLink.Text;
+            mi.TorrentCreateInfoMy = new TorrentCreateInfo(GetTracker(), p);
+
+            if (Engine.conf.PublishInfoTypeChoice == PublishInfoType.ExternalTemplate)
+            {
+                mi.TemplateLocation = Path.Combine(Engine.TemplatesDir, cboTemplate.Text);
+            }
+
+            return mi;
+        }
+
+        private void btnCreateTorrent_Click(object sender, EventArgs e)
+        {
+            CreateTorrentButton();
         }
 
         private void FileSystem_DebugLogChanged(string line)
@@ -333,62 +454,6 @@ namespace TDMaker
                 {
                     method.Invoke();
                 }
-            }
-        }
-
-        private void MainWindow_Shown(object sender, EventArgs e)
-        {
-            rtbDebugLog.Text = FileSystem.DebugLog.ToString();
-            FileSystem.DebugLogChanged += new FileSystem.DebugLogEventHandler(FileSystem_DebugLogChanged);
-
-            string mtnExe = (Engine.IsUNIX ? "mtn" : "mtn.exe");
-
-            if (Engine.conf.ThumbnailerType == ThumbnailerType.MovieThumbnailer)
-            {
-                if (!File.Exists(Engine.conf.MTNPath))
-                {
-                    Engine.conf.MTNPath = Path.Combine(Application.StartupPath, mtnExe);
-                }
-
-                if (!File.Exists(Engine.conf.MTNPath))
-                {
-                    Engine.conf.MTNPath = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), Application.ProductName), mtnExe);
-                }
-
-                if (!File.Exists(Engine.conf.MTNPath))
-                {
-                    OpenFileDialog dlg = new OpenFileDialog();
-                    dlg.InitialDirectory = Application.StartupPath;
-                    dlg.Title = "Browse for mtn.exe";
-                    dlg.Filter = "Applications (*.exe)|*.exe";
-                    if (dlg.ShowDialog() == DialogResult.OK)
-                    {
-                        Engine.conf.MTNPath = dlg.FileName;
-                    }
-                }
-            }
-            else if (Engine.conf.ThumbnailerType == ThumbnailerType.MPlayer)
-            {
-                if (!File.Exists(Engine.conf.MPlayerPath))
-                {
-                    OpenFileDialog dlg = new OpenFileDialog();
-                    dlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-                    dlg.Title = "Browse for mplayer.exe or download from http://code.google.com/p/mplayer-for-windows/downloads/list";
-                    dlg.Filter = "Applications (mplayer.exe)|mplayer.exe";
-                    if (dlg.ShowDialog() == DialogResult.OK)
-                    {
-                        Engine.conf.MPlayerPath = dlg.FileName;
-                    }
-                    else
-                    {
-                        Helpers.LoadBrowserAsync("http://code.google.com/p/mplayer-for-windows/downloads/list");
-                    }
-                }
-            }
-
-            if (Loader.ExplorerFilePaths.Count > 0)
-            {
-                LoadMedia(Loader.ExplorerFilePaths.ToArray());
             }
         }
 
@@ -694,7 +759,7 @@ namespace TDMaker
         {
             PublishOptionsPacket pop = new PublishOptionsPacket();
             pop.AlignCenter = Engine.conf.AlignCenter;
-            pop.FullPicture = ti.MediaMy.UploadScreenshots && Engine.conf.UseFullPicture;
+            pop.FullPicture = ti.Media.UploadScreenshots && Engine.conf.UseFullPicture;
             pop.PreformattedText = Engine.conf.PreText;
             pop.PublishInfoTypeChoice = Engine.conf.PublishInfoTypeChoice;
             ti.PublishOptions = pop;
@@ -710,15 +775,22 @@ namespace TDMaker
 
             foreach (TorrentInfo ti in tiListTemp)
             {
-                MediaInfo2 mi = ti.MediaMy;
+                MediaInfo2 mi = ti.Media;
 
                 bwApp.ReportProgress((int)ProgressType.UPDATE_STATUSBAR_DEBUG, "Reading " + Path.GetFileName(mi.Location) + " using MediaInfo...");
-                mi.ReadMedia();
-                bwApp.ReportProgress((int)ProgressType.REPORT_MEDIAINFO_SUMMARY, mi);
+
+                if (mi.DiscType != SourceType.Bluray)
+                {
+                    mi.ReadMedia();
+                    bwApp.ReportProgress((int)ProgressType.REPORT_MEDIAINFO_SUMMARY, mi);
+                }
 
                 // creates screenshot
                 mi.UploadScreenshots = wt.UploadScreenshot;
-                ti.CreateUploadScreenshots();
+                if (wt.UploadScreenshot)
+                {
+                    ti.CreateUploadScreenshots();
+                }
 
                 ti.PublishString = CreatePublishInitial(ti);
                 bwApp.ReportProgress((int)ProgressType.REPORT_TORRENTINFO, ti);
@@ -746,7 +818,7 @@ namespace TDMaker
 
                 if (Engine.conf.XMLTorrentUploadCreate)
                 {
-                    string fp = Path.Combine(mi.TorrentCreateInfoMy.TorrentFolder, Adapter.GetMediaName(mi.TorrentCreateInfoMy.MediaLocation)) + ".xml";
+                    string fp = Path.Combine(mi.TorrentCreateInfoMy.TorrentFolder, MediaHelper.GetMediaName(mi.TorrentCreateInfoMy.MediaLocation)) + ".xml";
                     FileSystem.GetXMLTorrentUpload(mi).Write2(fp);
                 }
 
@@ -762,12 +834,12 @@ namespace TDMaker
             {
                 foreach (TorrentInfo ti in wt.MediaList)
                 {
-                    TorrentCreateInfo tci = ti.MediaMy.TorrentCreateInfoMy;
+                    TorrentCreateInfo tci = ti.Media.TorrentCreateInfoMy;
                     tci.CreateTorrent(wt.MyWorker);
                     if (Engine.conf.XMLTorrentUploadCreate)
                     {
-                        string fp = Path.Combine(tci.TorrentFolder, Adapter.GetMediaName(tci.MediaLocation)) + ".xml";
-                        FileSystem.GetXMLTorrentUpload(ti.MediaMy).Write(fp);
+                        string fp = Path.Combine(tci.TorrentFolder, MediaHelper.GetMediaName(tci.MediaLocation)) + ".xml";
+                        FileSystem.GetXMLTorrentUpload(ti.Media).Write(fp);
                     }
                 }
             }
@@ -820,45 +892,6 @@ namespace TDMaker
             btnBrowseDir.Enabled = !bwApp.IsBusy;
             btnAnalyze.Enabled = !bwApp.IsBusy && lbFiles.Items.Count > 0;
             lbStatus.SelectedIndex = lbStatus.Items.Count - 1;
-        }
-
-        private void OpenFile()
-        {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Multiselect = true;
-            dlg.Title = "Browse for Media file...";
-            StringBuilder sbExt = new StringBuilder();
-            sbExt.Append("Media Files (");
-            StringBuilder sbExtDesc = new StringBuilder();
-            foreach (string ext in Engine.conf.SupportedFileExtVideo)
-            {
-                sbExtDesc.Append("*");
-                sbExtDesc.Append(ext);
-                sbExtDesc.Append("; ");
-            }
-            sbExt.Append(sbExtDesc.ToString().TrimEnd().TrimEnd(';'));
-            sbExt.Append(")|");
-            foreach (string ext in Engine.conf.SupportedFileExtVideo)
-            {
-                sbExt.Append("*");
-                sbExt.Append(ext);
-                sbExt.Append("; ");
-            }
-            dlg.Filter = sbExt.ToString().TrimEnd();
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                LoadMedia(dlg.FileNames);
-            }
-        }
-
-        private void OpenFolder()
-        {
-            FolderBrowserDialog dlg = new FolderBrowserDialog();
-            dlg.Description = "Browse for DVD folder...";
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                LoadMedia(new string[] { dlg.SelectedPath });
-            }
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
@@ -1012,7 +1045,7 @@ namespace TDMaker
                 List<TorrentInfo> tiList = new List<TorrentInfo>();
                 foreach (TorrentInfo ti in lbPublish.SelectedItems)
                 {
-                    tps.Add(new TorrentCreateInfo(GetTracker(), ti.MediaMy.Location));
+                    tps.Add(new TorrentCreateInfo(GetTracker(), ti.Media.Location));
                     tiList.Add(ti);
                 }
                 if (tps.Count > 0)
@@ -1078,7 +1111,7 @@ namespace TDMaker
 
                     txtPublish.Text = Adapter.CreatePublish(ti, pop);
 
-                    if (ti.MediaMy.MediaTypeChoice == MediaType.MusicAudioAlbum)
+                    if (ti.Media.MediaTypeChoice == MediaType.MusicAudioAlbum)
                     {
                         txtPublish.BackColor = System.Drawing.Color.Black;
                         txtPublish.ForeColor = System.Drawing.Color.White;
@@ -1271,7 +1304,7 @@ namespace TDMaker
             {
                 SaveFileDialog dlg = new SaveFileDialog();
                 dlg.Filter = "Text Files (*.txt)|*.txt";
-                dlg.FileName = GetTorrentInfo().MediaMy.Title;
+                dlg.FileName = GetTorrentInfo().Media.Title;
 
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {

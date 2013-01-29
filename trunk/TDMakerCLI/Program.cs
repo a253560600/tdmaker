@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Mono.Options;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using TDMakerLib;
-using Mono.Options;
-using System.IO;
 
 namespace TDMakerCLI
 {
@@ -17,7 +17,7 @@ namespace TDMakerCLI
         private static bool mTorrentCreate = false;
         private static bool mXmlCreate = false;
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             string dirImages = string.Empty;
             string dirRoot = string.Empty;
@@ -27,7 +27,7 @@ namespace TDMakerCLI
             bool mFileCollection = false;
             bool mShowHelp = false;
 
-            var p = new OptionSet() 
+            var p = new OptionSet()
             {
                 { "c", "Treat multiple files as a collection", v => mFileCollection = v != null},
                 { "m|media=", "Location of the media file/folder", v => mMediaLoc = v },
@@ -57,8 +57,10 @@ namespace TDMakerCLI
             try
             {
                 p.Parse(args2);
+
                 // set root folder for images or set images dir if set one
                 mScreenshotDir = Directory.Exists(dirRoot) ? dirRoot : dirImages;
+
                 // set root folder for torrents or set torrents dir if set one
                 mTorrentsDir = Directory.Exists(dirRoot) ? dirRoot : dirTorrents;
             }
@@ -124,7 +126,7 @@ namespace TDMakerCLI
             Console.ReadLine();
         }
 
-        static void ShowHelp(OptionSet p)
+        private static void ShowHelp(OptionSet p)
         {
             Console.WriteLine("Usage: tdmakercli [OPTIONS]");
             Console.WriteLine();
@@ -135,10 +137,11 @@ namespace TDMakerCLI
             Console.WriteLine(@"tdmakercli -m ""F:\Linux ISOs\Ubuntu"" -x -t");
             Console.WriteLine(@"tdmakercli -m ""F:\Linux ISOs\Ubuntu"" -x -t --rd ""F:\Linux ISOs\Ubuntu""");
             Console.WriteLine();
+
             //  Console.ReadLine();
         }
 
-        static void CreateScreenshot(TorrentInfo ti)
+        private static void CreateScreenshot(TorrentInfo ti)
         {
             if (mScreenshotsCreate)
             {
@@ -153,7 +156,7 @@ namespace TDMakerCLI
             }
         }
 
-        static void CreatePublish(TorrentInfo ti)
+        private static void CreatePublish(TorrentInfo ti)
         {
             PublishOptionsPacket pop = new PublishOptionsPacket()
             {
@@ -172,23 +175,23 @@ namespace TDMakerCLI
             Console.WriteLine();
         }
 
-        static void CreateTorrent(TorrentInfo ti)
+        private static void CreateTorrent(TorrentInfo ti)
         {
             // create a torrent
             if (mTorrentCreate || Directory.Exists(mTorrentsDir))
             {
-                ti.MediaMy.TorrentCreateInfoMy = new TorrentCreateInfo(Engine.conf.TrackerGroups[Engine.conf.TrackerGroupActive], mMediaLoc);
+                ti.Media.TorrentCreateInfoMy = new TorrentCreateInfo(Engine.conf.TrackerGroups[Engine.conf.TrackerGroupActive], mMediaLoc);
                 if (Directory.Exists(mTorrentsDir))
                 {
-                    ti.MediaMy.TorrentCreateInfoMy.TorrentFolder = mTorrentsDir;
+                    ti.Media.TorrentCreateInfoMy.TorrentFolder = mTorrentsDir;
                 }
-                ti.MediaMy.TorrentCreateInfoMy.CreateTorrent();
+                ti.Media.TorrentCreateInfoMy.CreateTorrent();
 
                 // create xml file
                 if (mXmlCreate)
                 {
-                    string fp = Path.Combine(ti.MediaMy.TorrentCreateInfoMy.TorrentFolder, Adapter.GetMediaName(ti.MediaMy.TorrentCreateInfoMy.MediaLocation)) + ".xml";
-                    FileSystem.GetXMLTorrentUpload(ti.MediaMy).Write2(fp);
+                    string fp = Path.Combine(ti.Media.TorrentCreateInfoMy.TorrentFolder, MediaHelper.GetMediaName(ti.Media.TorrentCreateInfoMy.MediaLocation)) + ".xml";
+                    FileSystem.GetXMLTorrentUpload(ti.Media).Write2(fp);
                 }
             }
         }

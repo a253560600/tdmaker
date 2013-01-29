@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using MediaInfoLib;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
-using MediaInfoLib;
+using System.Linq;
+using System.Text;
 using TDMakerLib;
 using TDMakerLib.MediaInfo;
-using System.Linq;
-using System.Diagnostics;
-using System;
 
 namespace TDMakerLib
 {
@@ -19,33 +19,47 @@ namespace TDMakerLib
         /// Disc property is set to true if the media is found to be DVD, BD, HDDVD source
         /// </summary>
         public MediaType MediaTypeChoice { get; private set; }
+
+        public SourceType DiscType { get; set; }
+
         /// <summary>
-        /// Packet that contains Tracker Information 
+        /// Packet that contains Tracker Information
         /// </summary>
         public TorrentCreateInfo TorrentCreateInfoMy { get; set; }
+
         /// <summary>
         /// FilePath or DirectoryPath of the Media
         /// </summary>
         public string Location { get; private set; }
+
         /// <summary>
         /// Check here Screenshots were taken
         /// </summary>
         public bool UploadScreenshots { get; set; }
+
         /// <summary>
         /// Title is same as Overall.FileName
         /// </summary>
         public string Title { get; private set; }
+
         public string Source { get; set; }
+
         public string Authoring { get; set; }
+
         public string Menu { get; set; }
+
         public string Extras { get; set; }
+
         public string WebLink { get; set; }
 
         public string ReleaseDescription { get; set; }
 
         public MediaFile Overall { get; set; }
+
         public List<MediaFile> MediaFiles { get; private set; }
+
         public List<string> FileCollection { get; set; }
+
         /// <summary>
         /// Folder Path of the Template
         /// </summary>
@@ -57,6 +71,7 @@ namespace TDMakerLib
             FileCollection = new List<string>();
             MediaFiles = new List<MediaFile>();
             Overall = new MediaFile(loc, this.Source);
+
             // this could be a file path or a directory
             this.Location = loc;
         }
@@ -111,9 +126,11 @@ namespace TDMakerLib
                         ReadDirectory();
                     }
                     break;
+
                 case MediaType.MediaCollection:
                     ReadMediaFileCollection();
                     break;
+
                 case MediaType.MediaDisc:
                 case MediaType.MusicAudioAlbum:
                     ReadDirectory();
@@ -136,11 +153,11 @@ namespace TDMakerLib
 
         private void ReadDirectory()
         {
-            // if a folder then read all media files 
+            // if a folder then read all media files
             // append all the durations and save in Duration
             if (Directory.Exists(Location))
             {
-                // get largest file 
+                // get largest file
                 FileCollection = GetFilesToProcess(Location);
                 List<FileInfo> listFileInfo = new List<FileInfo>();
                 foreach (string fp in FileCollection)
@@ -154,6 +171,8 @@ namespace TDMakerLib
                 {
                     this.MediaTypeChoice = MediaType.MediaDisc;
                     MediaInfoLib.MediaInfo mi = new MediaInfoLib.MediaInfo();
+                    this.DiscType = TDMakerLib.SourceType.DVD;
+
                     mi.Open(ifo[0]);
 
                     // most prolly this will be: DVD Video
@@ -164,7 +183,6 @@ namespace TDMakerLib
 
                     if (subCount > 0)
                     {
-
                         List<string> langs = new List<string>();
                         for (int i = 0; i < subCount; i++)
                         {
@@ -194,7 +212,7 @@ namespace TDMakerLib
                     listFileInfo.RemoveAll(x => x.Length < 1000000000);
                 }
 
-                // Set Media Type                
+                // Set Media Type
                 bool allAudio = Adapter.MediaIsAudio(FileCollection);
                 if (allAudio)
                 {
@@ -203,49 +221,33 @@ namespace TDMakerLib
 
                 if (FileCollection.Count > 0)
                 {
-                    string maxPath = "";
-                    long maxSize = 0;
-
-                    for (int i = 0; i < FileCollection.Count; i++)
-                    {
-                        string f = FileCollection[i];
-                        FileInfo fi = new FileInfo(f);
-
-                        if (maxSize < fi.Length)
-                        {
-                            maxSize = fi.Length;
-                            maxPath = fi.FullName;
-                        }
-                    }
                     foreach (FileInfo fi in listFileInfo)
                     {
                         this.AddMedia(new MediaFile(fi.FullName, this.Source));
                     }
 
-                    this.Overall = new MediaFile(maxPath, this.Source);
+                    this.Overall = new MediaFile(FileSystemHelper.GetLargestFilePathFromDir(Location), this.Source);
 
-                    // Set Overall File Name                
+                    // Set Overall File Name
                     this.Overall.FileName = Path.GetFileName(Location);
                     if (Overall.FileName.ToUpper().Equals("VIDEO_TS"))
                         Overall.FileName = Path.GetFileName(Path.GetDirectoryName(Location));
                     if (string.IsNullOrEmpty(Title))
                         this.Title = this.Overall.FileName;
-
                 }
 
                 // DVD Video
                 // Combined Duration and File Size
                 if (MediaTypeChoice == MediaType.MediaDisc)
                 {
-                    string[] vobFiles = Directory.GetFiles(Location, "*.vob", SearchOption.AllDirectories);
-                    if (vobFiles.Length > 0)
+                    if (listFileInfo.Count > 0)
                     {
                         long dura = 0;
                         double size = 0;
-                        foreach (string vob in vobFiles)
+                        foreach (FileInfo fiVob in listFileInfo)
                         {
                             MediaInfoLib.MediaInfo mi = new MediaInfoLib.MediaInfo();
-                            mi.Open(vob);
+                            mi.Open(fiVob.FullName);
                             string temp = mi.Get(0, 0, "Duration");
                             if (!string.IsNullOrEmpty(temp))
                             {
@@ -254,7 +256,7 @@ namespace TDMakerLib
                                 dura += d;
                             }
 
-                            // we are interested in combined file size only for VOB files 
+                            // we are interested in combined file size only for VOB files
                             // thats why we dont calculate FileSize in FileInfo while determining largest file
                             double sz = 0;
                             double.TryParse(mi.Get(0, 0, "FileSize"), out sz);
@@ -269,10 +271,8 @@ namespace TDMakerLib
 
                         this.Overall.Duration = dura;
                         this.Overall.DurationString2 = Engine.GetDurationString(dura);
-
                     }
                 }
-
             } // if Location is a directory
         }
 
@@ -341,7 +341,7 @@ namespace TDMakerLib
 
             StringBuilder sbTitleInfo = new StringBuilder();
 
-            // Source 
+            // Source
             if (!string.IsNullOrEmpty(this.Source))
             {
                 sbTitleInfo.AppendLine(string.Format("[u]Source:[/u] {0}", this.Source));
@@ -358,11 +358,13 @@ namespace TDMakerLib
                 {
                     sbTitleInfo.AppendLine(string.Format("[u]Menu:[/u] {0}", this.Menu));
                 }
+
                 // Extras
                 if (Engine.conf.bExtras && !string.IsNullOrEmpty(this.Extras))
                 {
                     sbTitleInfo.AppendLine(string.Format("[u]Extras:[/u] {0}", this.Extras));
                 }
+
                 // WebLink
                 if (Engine.conf.bWebLink && !string.IsNullOrEmpty(this.WebLink))
                 {
@@ -377,6 +379,7 @@ namespace TDMakerLib
             }
 
             if (this.MediaFiles.Count > 1 && this.MediaTypeChoice == MediaType.MediaDisc)
+
             // is a DVD so need Overall Info only
             {
                 sbBody.AppendLine(this.Overall.ToStringPublish(pop));
@@ -417,7 +420,7 @@ namespace TDMakerLib
         }
 
         /*
-        Track Number / Title                              | Len. | Rate |  FPS  | Resolution + SAR  | Size    
+        Track Number / Title                              | Len. | Rate |  FPS  | Resolution + SAR  | Size
         ------------------------------------------------------------------------------------------------------
         01 What Made You Say That                         | 3:02 | 2304 | 29.97 | 704x480 / 640x480 | 54.18 MiB
         02 Dance With The One That Brought You            | 2:29 | 1992 | 23.98 | 708x480 / 644x480 | 38.82 MiB
@@ -551,5 +554,4 @@ namespace TDMakerLib
             return hasSs;
         }
     }
-
 }

@@ -220,32 +220,6 @@ namespace TDMakerLib
             return Regex.Replace(source, @"\[img\].*?\[/img\]", string.Empty);
         }
 
-        public static string GetMediaName(string p)
-        {
-            string name = "";
-
-            if (File.Exists(p))
-            {
-                string ext = Path.GetExtension(p).ToLower();
-                if (ext == ".vob" && Path.GetFileName(Path.GetDirectoryName(p)) == "VIDEO_TS")
-                {
-                    name = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(p)));
-                }
-                else
-                {
-                    name = Path.GetFileNameWithoutExtension(p);
-                }
-            }
-            else if (Directory.Exists(p))
-            {
-                name = Path.GetFileName(p);
-                if (name.ToUpper().Equals("VIDEO_TS"))
-                    name = Path.GetFileName(Path.GetDirectoryName(p));
-            }
-
-            return name;
-        }
-
         public static bool MediaIsAudio(string dir)
         {
             List<string> fileColl = new List<string>();
@@ -400,24 +374,26 @@ namespace TDMakerLib
                     {
                         pt = ti.CreatePublish(pop, new TemplateReader2(pop.TemplateLocation, ti));
                     }
-                    else if (Directory.Exists(ti.MediaMy.TemplateLocation))
+                    else if (Directory.Exists(ti.Media.TemplateLocation))
                     {
-                        pt = ti.CreatePublish(pop, new TemplateReader2(ti.MediaMy.TemplateLocation, ti));
+                        pt = ti.CreatePublish(pop, new TemplateReader2(ti.Media.TemplateLocation, ti));
                     }
                     else
                     {
                         pt = ti.CreatePublishInternal(pop);
                     }
                     break;
+
                 case PublishInfoType.InternalTemplate:
                     pt = ti.CreatePublishInternal(pop);
                     break;
+
                 case PublishInfoType.MediaInfo:
                     pt = ti.CreatePublishMediaInfo(pop);
                     break;
             }
 
-            ti.MediaMy.ReleaseDescription = Adapter.StripImg(pt).Trim(); ;
+            ti.Media.ReleaseDescription = Adapter.StripImg(pt).Trim(); ;
 
             return pt;
         }
