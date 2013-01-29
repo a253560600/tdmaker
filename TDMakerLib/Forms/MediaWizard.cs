@@ -1,7 +1,7 @@
-﻿using System.Windows.Forms;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
 namespace TDMakerLib
 {
@@ -63,7 +63,7 @@ namespace TDMakerLib
                 {
                     if (dirCount == 1)
                     {
-                        lblUserActionMsg.Text = "You are about to a analyze a directory...";
+                        lblUserActionMsg.Text = "You are about to analyze a directory...";
                     }
                     else
                     {
@@ -73,7 +73,7 @@ namespace TDMakerLib
                 }
                 else // no dir found
                 {
-                    lblUserActionMsg.Text = "You are about to a collection of files...";
+                    lblUserActionMsg.Text = "You are about to analyze a collection of files...";
                     this.Options.MediaTypeChoice = MediaType.MediaCollection;
                 }
             }
@@ -119,9 +119,13 @@ namespace TDMakerLib
     public class MediaWizardOptions
     {
         public bool ScreenshotsInclude { get; set; }
+
         public bool CreateTorrent { get; set; }
+
         public MediaType MediaTypeChoice { get; set; }
+
         public bool PromptShown { get; set; }
+
         public DialogResult DialogResultMy { get; set; }
     }
 }

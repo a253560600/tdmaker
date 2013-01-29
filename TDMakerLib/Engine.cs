@@ -276,10 +276,8 @@ namespace TDMakerLib
             FileSystem.WriteDebugFile();
         }
 
-        public static void LoadSettings()
+        public static void LoadProxySettings()
         {
-            LoadSettings(string.Empty);
-
             if (Engine.conf.ProxyEnabled)
             {
                 ProxySettings proxy = new ProxySettings();
@@ -291,7 +289,12 @@ namespace TDMakerLib
             {
                 Uploader.ProxySettings = new ProxySettings();
             }
+        }
 
+        public static void LoadSettings()
+        {
+            LoadSettings(string.Empty);
+            LoadProxySettings();
             Engine.UploadersConfig = UploadersConfig.Load(UploadersConfigPath);
         }
 
@@ -345,7 +348,7 @@ namespace TDMakerLib
             {
                 Engine.conf.ImageUploaderType = Engine.AppConf.ImageUploaderType;
 
-                if (!string.IsNullOrEmpty(Engine.conf.PtpImgCode))
+                if (!string.IsNullOrEmpty(Engine.AppConf.PtpImgCode))
                     Engine.conf.PtpImgCode = Engine.AppConf.PtpImgCode;
             }
             mtnProfileMgr = XMLSettingsMtnProfiles.Read();

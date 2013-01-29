@@ -106,7 +106,7 @@ namespace TDMakerLib
         [Category("Options / General"), DefaultValue(true), Description("Show Media Wizard always; otherwise it will only be shown when you import multiple files")]
         public bool ShowMediaWizardAlways { get; set; }
 
-        [Category("Options / General"), DefaultValue(false), Description("Process media immediately after loading file or folder")]
+        [Category("Options / General"), DefaultValue(true), Description("Process media immediately after loading file or folder")]
         public bool AnalyzeAuto { get; set; }
 
         [Category("Options / General"), DefaultValue(true), Description("Write debug information into a log file.")]

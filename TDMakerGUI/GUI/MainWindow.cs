@@ -769,6 +769,8 @@ namespace TDMaker
 
         private List<TorrentInfo> WorkerAnalyzeMedia(WorkerTask wt)
         {
+            Engine.LoadProxySettings();
+
             List<TorrentInfo> tiListTemp = wt.MediaList;
 
             bwApp.ReportProgress((int)ProgressType.UPDATE_PROGRESSBAR_MAX, tiListTemp.Count);
