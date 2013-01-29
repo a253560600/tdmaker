@@ -279,6 +279,19 @@ namespace TDMakerLib
         public static void LoadSettings()
         {
             LoadSettings(string.Empty);
+
+            if (Engine.conf.ProxyEnabled)
+            {
+                ProxySettings proxy = new ProxySettings();
+                proxy.ProxyConfig = EProxyConfigType.ManualProxy;
+                proxy.ProxyActive = Engine.conf.ProxySettings;
+                Uploader.ProxySettings = proxy;
+            }
+            else
+            {
+                Uploader.ProxySettings = new ProxySettings();
+            }
+
             Engine.UploadersConfig = UploadersConfig.Load(UploadersConfigPath);
         }
 

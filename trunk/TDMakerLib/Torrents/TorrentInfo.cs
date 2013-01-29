@@ -271,18 +271,6 @@ namespace TDMakerLib
 
                 if (imageUploader != null)
                 {
-                    if (Engine.conf.ProxyEnabled)
-                    {
-                        ProxySettings proxy = new ProxySettings();
-                        proxy.ProxyConfig = EProxyConfigType.ManualProxy;
-                        proxy.ProxyActive = Engine.conf.ProxySettings;
-                        Uploader.ProxySettings = proxy;
-                    }
-                    else
-                    {
-                        Uploader.ProxySettings = new ProxySettings();
-                    }
-
                     ReportProgress(ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploading {0}.", Path.GetFileName(ssPath)));
                     ur = imageUploader.Upload(ssPath);
                 }
