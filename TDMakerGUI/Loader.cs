@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using TDMakerLib;
+using UploadersLib;
+using UploadersLib.HelperClasses;
 
 namespace TDMaker
 {
