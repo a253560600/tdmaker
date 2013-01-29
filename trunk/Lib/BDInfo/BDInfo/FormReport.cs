@@ -300,7 +300,7 @@ namespace BDInfo
                         "{0,-16}{1}\r\n", "Extras:", string.Join(", ", extraFeatures.ToArray()));
                 }
                 report += string.Format(
-                    "{0,-16}{1}\r\n", "BDInfo:", Application.ProductVersion);
+                    "{0,-16}{1}\r\n", "TDMaker:", Application.ProductVersion + " (BDInfo 0.5.8)");
 
                 report += "\r\n";
                 report += "PLAYLIST REPORT:\r\n";
