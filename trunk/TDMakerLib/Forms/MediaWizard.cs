@@ -12,9 +12,6 @@ namespace TDMakerLib
         private MediaWizard()
         {
             InitializeComponent();
-            chkCreateTorrent.Checked = Engine.conf.TorrentCreateAuto;
-            chkScreenshotsCreate.Checked = Engine.conf.ScreenshotsUpload;
-            gbQuestion.Enabled = this.Options.MediaTypeChoice != MediaType.MediaDisc;
         }
 
         public MediaWizard(List<string> FileOrDirPaths)
@@ -94,6 +91,10 @@ namespace TDMakerLib
                     lblUserActionMsg.Text = "You are about to analyze a collection of files...";
                 }
             }
+
+            chkCreateTorrent.Checked = Engine.conf.TorrentCreateAuto;
+            chkScreenshotsCreate.Checked = Engine.conf.ScreenshotsUpload;
+            gbQuestion.Enabled = this.Options.MediaTypeChoice != MediaType.MediaDisc;
         }
 
         private void rbFilesAsIndiv_CheckedChanged(object sender, System.EventArgs e)
