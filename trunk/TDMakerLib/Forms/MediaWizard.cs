@@ -29,23 +29,46 @@ namespace TDMakerLib
             PrepareUserActionMsg(wt.FileOrDirPaths);
         }
 
-        private void PrepareUserActionMsg(List<string> myFilesOrDirs)
+        private void PrepareUserActionMsg(List<string> list_fd)
         {
-            if (myFilesOrDirs.Count == 1 && File.Exists(myFilesOrDirs[0]))
+            if (list_fd.Count == 1 && File.Exists(list_fd[0]))
             {
                 lblUserActionMsg.Text = "You are about to analyze a single file...";
                 this.Options.MediaTypeChoice = MediaType.MediaIndiv;
                 rbFilesAsIndiv.Checked = true;
                 gbQuestion.Enabled = false;
             }
+            else if (list_fd.Count == 1 && Directory.Exists(list_fd[0]))
+            {
+                SourceType src = MediaHelper.GetSourceType(list_fd[0]);
+                switch (src)
+                {
+                    case SourceType.Bluray:
+                        lblUserActionMsg.Text = "You are about to analyze a Blu-ray Disc...";
+                        this.Options.MediaTypeChoice = MediaType.MediaDisc;
+                        break;
+
+                    case SourceType.DVD:
+                        lblUserActionMsg.Text = "You are about to analyze a DVD...";
+                        this.Options.MediaTypeChoice = MediaType.MediaDisc;
+                        break;
+
+                    default:
+                        lblUserActionMsg.Text = "You are about to analyze a directory...";
+                        this.Options.MediaTypeChoice = MediaType.MediaCollection;
+                        break;
+                }
+            }
             else
             {
+                this.Options.MediaTypeChoice = MediaType.MediaCollection;
+
                 bool bDirFound = false;
                 bool bFileFound = false;
                 int dirCount = 0;
                 int filesCount = 0;
 
-                foreach (string fd in myFilesOrDirs)
+                foreach (string fd in list_fd)
                 {
                     if (Directory.Exists(fd))
                     {
@@ -59,22 +82,16 @@ namespace TDMakerLib
                     }
                     if (dirCount > 1) break;
                 }
-                if (bDirFound)
+                if (bDirFound && !bFileFound)
                 {
-                    if (dirCount == 1)
-                    {
-                        lblUserActionMsg.Text = "You are about to analyze a directory...";
-                    }
-                    else
+                    if (dirCount > 1)
                     {
                         lblUserActionMsg.Text = "You are about to analyze a collection of directories...";
                     }
-                    this.Options.MediaTypeChoice = MediaType.MediaDisc;
                 }
                 else // no dir found
                 {
                     lblUserActionMsg.Text = "You are about to analyze a collection of files...";
-                    this.Options.MediaTypeChoice = MediaType.MediaCollection;
                 }
             }
         }

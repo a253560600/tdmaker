@@ -302,7 +302,7 @@ namespace TDMakerLib
             tr.CreateInfo();
 
             StringBuilder sbPublish = new StringBuilder();
-            sbPublish.Append(GetMediaInfo(tr.PublishInfo, options));
+            sbPublish.Append(GetPublishString(tr.PublishInfo, options));
 
             return sbPublish.ToString();
         }
@@ -310,44 +310,37 @@ namespace TDMakerLib
         public string CreatePublishMediaInfo(PublishOptionsPacket pop)
         {
             StringBuilder sbPublish = new StringBuilder();
-            StringBuilder sbMediaInfo = new StringBuilder();
 
             switch (Media.MediaTypeChoice)
             {
                 case MediaType.MediaDisc:
+                    StringBuilder sbMediaInfo = new StringBuilder();
                     sbMediaInfo.AppendLine(Media.Overall.Summary.Trim());
                     sbMediaInfo.AppendLine();
+
+                    sbPublish.AppendLine(GetPublishString(sbMediaInfo.ToString(), pop));
+
+                    if (Media.UploadScreenshots)
+                        sbPublish.AppendLine(Media.Overall.GetScreenshotString(pop));
+
                     break;
 
                 default:
                     foreach (MediaFile mf in Media.MediaFiles)
                     {
+                        sbMediaInfo = new StringBuilder();
                         sbMediaInfo.AppendLine(BbCode.Bold(mf.FileName));
                         sbMediaInfo.AppendLine();
                         sbMediaInfo.AppendLine(mf.Summary.Trim());
                         sbMediaInfo.AppendLine();
+
+                        sbPublish.AppendLine(GetPublishString(sbMediaInfo.ToString(), pop));
+
+                        if (Media.UploadScreenshots)
+                            sbPublish.AppendLine(mf.GetScreenshotString(pop));
                     }
 
                     break;
-            }
-
-            sbPublish.AppendLine(GetMediaInfo(sbMediaInfo.ToString(), pop));
-
-            if (Media.UploadScreenshots)
-            {
-                switch (Media.MediaTypeChoice)
-                {
-                    case MediaType.MediaDisc:
-                        sbPublish.AppendLine(Media.Overall.GetScreenshotString(pop));
-                        break;
-
-                    default:
-                        foreach (MediaFile mf in Media.MediaFiles)
-                        {
-                            sbPublish.AppendLine(mf.GetScreenshotString(pop));
-                        }
-                        break;
-                }
             }
 
             return sbPublish.ToString();
@@ -364,7 +357,7 @@ namespace TDMakerLib
         {
             StringBuilder sbPublish = new StringBuilder();
             string info = Media.MediaTypeChoice == MediaType.MusicAudioAlbum ? Media.ToStringAudio() : Media.ToStringMedia(pop);
-            sbPublish.Append(GetMediaInfo(info, pop));
+            sbPublish.Append(GetPublishString(info, pop));
 
             return sbPublish.ToString().Trim();
         }
@@ -391,7 +384,7 @@ namespace TDMakerLib
             }
         }
 
-        public string GetMediaInfo(string p, PublishOptionsPacket options)
+        public string GetPublishString(string p, PublishOptionsPacket options)
         {
             StringBuilder sbPublish = new StringBuilder();
 
