@@ -223,13 +223,16 @@ namespace TDMakerLib
         public static bool MediaIsAudio(string dir)
         {
             List<string> fileColl = new List<string>();
-            foreach (string ext in Engine.conf.SupportedFileExtAudio)
+            if (Directory.Exists(dir))
             {
-                fileColl.AddRange(Directory.GetFiles(dir, "*" + ext, SearchOption.AllDirectories));
-            }
-            foreach (string ext in Engine.conf.SupportedFileExtVideo)
-            {
-                fileColl.AddRange(Directory.GetFiles(dir, "*" + ext, SearchOption.AllDirectories));
+                foreach (string ext in Engine.conf.SupportedFileExtAudio)
+                {
+                    fileColl.AddRange(Directory.GetFiles(dir, "*" + ext, SearchOption.AllDirectories));
+                }
+                foreach (string ext in Engine.conf.SupportedFileExtVideo)
+                {
+                    fileColl.AddRange(Directory.GetFiles(dir, "*" + ext, SearchOption.AllDirectories));
+                }
             }
             return MediaIsAudio(fileColl);
         }
