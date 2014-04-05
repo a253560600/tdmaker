@@ -141,7 +141,7 @@ namespace TDMakerLib
         public List<string> GetFilesToProcess(string dir)
         {
             List<string> filePaths = new List<string>();
-            foreach (string ext in Engine.conf.SupportedFileExtVideo)
+            foreach (string ext in Program.Settings.SupportedFileExtVideo)
             {
                 filePaths.AddRange(Directory.GetFiles(Location, "*" + ext, SearchOption.AllDirectories));
                 Debug.WriteLine("Processing " + ext);
@@ -270,7 +270,7 @@ namespace TDMakerLib
                         this.Overall.FileSizeString = string.Format("{0} MiB", (this.Overall.FileSize / 1024.0 / 1024.0).ToString("0.00"));
 
                         this.Overall.Duration = dura;
-                        this.Overall.DurationString2 = Engine.GetDurationString(dura);
+                        this.Overall.DurationString2 = Program.GetDurationString(dura);
                     }
                 }
             } // if Location is a directory
@@ -318,22 +318,22 @@ namespace TDMakerLib
 
         public string ToStringMedia(PublishOptionsPacket pop)
         {
-            int fontSizeHeading1 = (int)(Engine.conf.PreText && Engine.conf.LargerPreText == true ?
-        Engine.conf.FontSizeHeading1 + Engine.conf.FontSizeIncr :
-        Engine.conf.FontSizeHeading1);
+            int fontSizeHeading1 = (int)(Program.Settings.PreText && Program.Settings.LargerPreText == true ?
+        Program.Settings.FontSizeHeading1 + Program.Settings.FontSizeIncr :
+        Program.Settings.FontSizeHeading1);
 
-            int fontSizeHeading2 = (int)(Engine.conf.PreText && Engine.conf.LargerPreText == true ?
-                Engine.conf.FontSizeHeading2 + Engine.conf.FontSizeIncr :
-                Engine.conf.FontSizeHeading2);
+            int fontSizeHeading2 = (int)(Program.Settings.PreText && Program.Settings.LargerPreText == true ?
+                Program.Settings.FontSizeHeading2 + Program.Settings.FontSizeIncr :
+                Program.Settings.FontSizeHeading2);
 
-            int fontSizeBody = (int)(Engine.conf.PreText && Engine.conf.LargerPreText == true ?
-                Engine.conf.FontSizeBody + Engine.conf.FontSizeIncr :
-                Engine.conf.FontSizeBody);
+            int fontSizeBody = (int)(Program.Settings.PreText && Program.Settings.LargerPreText == true ?
+                Program.Settings.FontSizeBody + Program.Settings.FontSizeIncr :
+                Program.Settings.FontSizeBody);
 
             StringBuilder sbBody = new StringBuilder();
 
             // Show Title
-            if (Engine.conf.bTitle)
+            if (Program.Settings.bTitle)
             {
                 sbBody.AppendLine(BbCode.Size(fontSizeHeading1, BbCode.Bold(this.Title)));
                 sbBody.AppendLine();
@@ -350,23 +350,23 @@ namespace TDMakerLib
             if (MediaTypeChoice == MediaType.MediaDisc)
             {
                 // Authoring
-                if (Engine.conf.bAuthoring && !string.IsNullOrEmpty(this.Authoring))
+                if (Program.Settings.bAuthoring && !string.IsNullOrEmpty(this.Authoring))
                 {
                     sbTitleInfo.AppendLine(string.Format("[u]Authoring:[/u] {0}", this.Authoring));
                 }
-                if (Engine.conf.bDiscMenu && !string.IsNullOrEmpty(this.Menu))
+                if (Program.Settings.bDiscMenu && !string.IsNullOrEmpty(this.Menu))
                 {
                     sbTitleInfo.AppendLine(string.Format("[u]Menu:[/u] {0}", this.Menu));
                 }
 
                 // Extras
-                if (Engine.conf.bExtras && !string.IsNullOrEmpty(this.Extras))
+                if (Program.Settings.bExtras && !string.IsNullOrEmpty(this.Extras))
                 {
                     sbTitleInfo.AppendLine(string.Format("[u]Extras:[/u] {0}", this.Extras));
                 }
 
                 // WebLink
-                if (Engine.conf.bWebLink && !string.IsNullOrEmpty(this.WebLink))
+                if (Program.Settings.bWebLink && !string.IsNullOrEmpty(this.WebLink))
                 {
                     sbTitleInfo.AppendLine(string.Format("[u]Web Link:[/u] {0}", this.WebLink));
                 }

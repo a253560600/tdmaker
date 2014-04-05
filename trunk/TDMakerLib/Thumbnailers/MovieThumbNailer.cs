@@ -24,19 +24,19 @@ namespace TDMakerLib
             try
             {
                 Debug.WriteLine("Creating a MTN process...");
-                string assemblyMTN = (Engine.IsUNIX ? Engine.conf.MTNPath.Replace(".exe", "") : Engine.conf.MTNPath);
+                string assemblyMTN = (Program.IsUNIX ? Program.Settings.MTNPath.Replace(".exe", "") : Program.Settings.MTNPath);
                 if (string.IsNullOrEmpty(Path.GetDirectoryName(assemblyMTN)))
                 {
                     assemblyMTN = Path.Combine(System.Windows.Forms.Application.StartupPath, assemblyMTN);
-                    Engine.conf.MTNPath = assemblyMTN;
+                    Program.Settings.MTNPath = assemblyMTN;
                 }
 
-                string args = string.Format("{0} \"{1}\"", Adapter.GetMtnArg(ScreenshotDir, Engine.mtnProfileMgr.GetMtnProfileActive()), MediaFile.FilePath);
+                string args = string.Format("{0} \"{1}\"", Adapter.GetMtnArg(ScreenshotDir, Program.mtnProfileMgr.GetMtnProfileActive()), MediaFile.FilePath);
 
                 Process p = new Process();
                 ProcessStartInfo psi = new ProcessStartInfo(assemblyMTN);
 
-                if (Engine.IsUNIX)
+                if (Program.IsUNIX)
                 {
                     psi.UseShellExecute = false;
                 }
@@ -44,7 +44,7 @@ namespace TDMakerLib
                 Debug.WriteLine("MTN Path: " + assemblyMTN);
                 Debug.WriteLine("MTN Args: " + args);
 
-                psi.WindowStyle = (Engine.conf.ShowMTNWindow ? ProcessWindowStyle.Normal : ProcessWindowStyle.Minimized);
+                psi.WindowStyle = (Program.Settings.ShowMTNWindow ? ProcessWindowStyle.Normal : ProcessWindowStyle.Minimized);
                 Debug.WriteLine("MTN Window: " + psi.WindowStyle.ToString());
                 psi.Arguments = args;
 
@@ -52,15 +52,15 @@ namespace TDMakerLib
                 p.Start();
                 p.WaitForExit(1000 * 30);
 
-                string ssPath = Path.Combine(ScreenshotDir, Path.GetFileNameWithoutExtension(MediaFile.FilePath) + Engine.mtnProfileMgr.GetMtnProfileActive().o_OutputSuffix);
+                string ssPath = Path.Combine(ScreenshotDir, Path.GetFileNameWithoutExtension(MediaFile.FilePath) + Program.mtnProfileMgr.GetMtnProfileActive().o_OutputSuffix);
                 Screenshots.Add(new Screenshot(ssPath)
                 {
                     Args = args
                 });
 
-                if (Engine.IsUNIX)
+                if (Program.IsUNIX)
                 {
-                    string info = Path.Combine(FileSystem.GetScreenShotsDir(MediaFile.FilePath), Path.GetFileNameWithoutExtension(MediaFile.FilePath) + Engine.mtnProfileMgr.GetMtnProfileActive().N_InfoSuffix);
+                    string info = Path.Combine(FileSystem.GetScreenShotsDir(MediaFile.FilePath), Path.GetFileNameWithoutExtension(MediaFile.FilePath) + Program.mtnProfileMgr.GetMtnProfileActive().N_InfoSuffix);
 
                     using (StreamReader sr = new StreamReader(info))
                     {

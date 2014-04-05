@@ -1,4 +1,5 @@
-﻿namespace TDMakerLib
+﻿using HelpersLib;
+namespace TDMaker
 {
     partial class AboutBox
     {
@@ -34,7 +35,7 @@
             this.labelCompanyName = new System.Windows.Forms.Label();
             this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.okButton = new System.Windows.Forms.Button();
-            this.uclUpdate = new UpdateCheckerLib.UpdateCheckerLabel();
+            this.uclUpdate = new UpdateCheckerLabel();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -172,6 +173,6 @@
         private System.Windows.Forms.Label labelCompanyName;
         private System.Windows.Forms.TextBox textBoxDescription;
         private System.Windows.Forms.Button okButton;
-        public UpdateCheckerLib.UpdateCheckerLabel uclUpdate;
+        public UpdateCheckerLabel uclUpdate;
     }
 }

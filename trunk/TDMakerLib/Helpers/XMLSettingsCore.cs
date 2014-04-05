@@ -30,8 +30,6 @@ namespace TDMakerLib
             SupportedFileExtVideo = new StringCollection();
         }
 
-        public UploadersAPIKeys ApiKeys = new UploadersAPIKeys();
-
         // Tab 1 - Input
 
         // Disc Properties
@@ -164,7 +162,7 @@ namespace TDMakerLib
         public MPlayerThumbnailerOptions MPlayerOptions = new MPlayerThumbnailerOptions();
 
         // Tab 4.3 - Options - Image Hosting
-        public ImageDestination ImageUploaderType = ImageDestination.UploadScreenshot;
+        public ImageDestination ImageUploaderType = ImageDestination.Imgur;
 
         [Category("Thumbnailers / Image Uploaders"), DefaultValue(""), Description("PtpImg registration code")]
         public string PtpImgCode { get; set; }
@@ -245,34 +243,13 @@ namespace TDMakerLib
 
         public void Write()
         {
-            Write(Engine.AppConf.XMLSettingsFile);
+            Write(Program.AppConf.XMLSettingsFile);
         }
 
         public static XMLSettingsCore Read()
         {
-            string settingsFile = Engine.Portable ? Engine.GetLatestSettingsFile(Engine.SettingsDir) : Engine.AppConf.GetSettingsFilePath();
-            if (!File.Exists(settingsFile))
-            {
-                if (File.Exists(Engine.AppConf.XMLSettingsFile))
-                {
-                    // Step 2 - Attempt to read previous Application Version specific Settings file
-                    settingsFile = Engine.AppConf.XMLSettingsFile;
-                }
-                else
-                {
-                    // Step 3 - Attempt to read conventional Settings file
-                    settingsFile = Engine.XMLSettingsFile;
-                }
-            }
-
-            if (File.Exists(settingsFile) && settingsFile != Engine.AppConf.GetSettingsFilePath())
-            {
-                // Update AppSettings.xml
-                File.Copy(settingsFile, Engine.AppConf.GetSettingsFilePath());
-            }
-
-            Engine.AppConf.XMLSettingsFile = Engine.AppConf.GetSettingsFilePath();
-            return Read(Engine.AppConf.XMLSettingsFile);
+            Program.AppConf.XMLSettingsFile = Program.AppConf.GetSettingsFilePath();
+            return Read(Program.AppConf.XMLSettingsFile);
         }
 
         public static XMLSettingsCore Read(string filePath)

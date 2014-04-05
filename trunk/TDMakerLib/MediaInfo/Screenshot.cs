@@ -1,7 +1,7 @@
-﻿using TDMakerLib;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.IO;
 using System.Text;
+using TDMakerLib;
 
 namespace TDMakerLib
 {
@@ -13,7 +13,7 @@ namespace TDMakerLib
         /// <summary>
         /// Argument
         /// </summary>
-        [Category("Screenshots"), Description("MTN profile settings")]
+        [Category("Screenshots"), Description("Thumbnailer command line")]
         public string Args { get; set; }
 
         /// <summary>
@@ -21,11 +21,13 @@ namespace TDMakerLib
         /// </summary>
         [Category("Screenshots"), Description("Full image URL")]
         public string FullImageLink { get; set; }
+
         /// <summary>
         /// URL of Linked Thumbnail
         /// </summary>
         [Category("Screenshots"), Description("Linked thumnail URL")]
         public string LinkedThumbnail { get; set; }
+
         /// <summary>
         /// Local file path of the Screenshot
         /// </summary>
@@ -42,5 +44,4 @@ namespace TDMakerLib
             return Path.GetFileName(LocalPath);
         }
     }
-
 }

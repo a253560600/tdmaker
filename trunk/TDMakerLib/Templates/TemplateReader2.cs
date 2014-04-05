@@ -292,17 +292,17 @@ namespace TDMakerLib
 
         private string GetStyles(string pattern)
         {
-            int fontSizeHeading1 = (int)(Engine.conf.PreText && Engine.conf.LargerPreText == true ?
-                Engine.conf.FontSizeHeading1 + Engine.conf.FontSizeIncr : Engine.conf.FontSizeHeading1);
+            int fontSizeHeading1 = (int)(Program.Settings.PreText && Program.Settings.LargerPreText == true ?
+                Program.Settings.FontSizeHeading1 + Program.Settings.FontSizeIncr : Program.Settings.FontSizeHeading1);
 
-            int fontSizeHeading2 = (int)(Engine.conf.PreText && Engine.conf.LargerPreText == true ?
-                Engine.conf.FontSizeHeading2 + Engine.conf.FontSizeIncr : Engine.conf.FontSizeHeading2);
+            int fontSizeHeading2 = (int)(Program.Settings.PreText && Program.Settings.LargerPreText == true ?
+                Program.Settings.FontSizeHeading2 + Program.Settings.FontSizeIncr : Program.Settings.FontSizeHeading2);
 
-            int fontSizeHeading3 = (int)(Engine.conf.PreText && Engine.conf.LargerPreText == true ?
-                Engine.conf.FontSizeHeading3 + Engine.conf.FontSizeIncr : Engine.conf.FontSizeHeading3);
+            int fontSizeHeading3 = (int)(Program.Settings.PreText && Program.Settings.LargerPreText == true ?
+                Program.Settings.FontSizeHeading3 + Program.Settings.FontSizeIncr : Program.Settings.FontSizeHeading3);
 
-            int fontSizeBody = (int)(Engine.conf.PreText && Engine.conf.LargerPreText == true ?
-                Engine.conf.FontSizeBody + Engine.conf.FontSizeIncr : Engine.conf.FontSizeBody);
+            int fontSizeBody = (int)(Program.Settings.PreText && Program.Settings.LargerPreText == true ?
+                Program.Settings.FontSizeBody + Program.Settings.FontSizeIncr : Program.Settings.FontSizeBody);
 
             pattern = Regex.Replace(pattern, "%FontSize_Body%", fontSizeBody.ToString(), RegexOptions.IgnoreCase);
             pattern = Regex.Replace(pattern, "%FontSize_Heading1%", fontSizeHeading1.ToString(), RegexOptions.IgnoreCase);

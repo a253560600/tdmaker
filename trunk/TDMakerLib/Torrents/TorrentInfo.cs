@@ -67,14 +67,14 @@ namespace TDMakerLib
             Debug.WriteLine("Taking Screenshot for " + Path.GetFileName(mediaFilePath));
             ReportProgress(ProgressType.UPDATE_STATUSBAR_DEBUG, "Taking Screenshot for " + Path.GetFileName(mediaFilePath));
 
-            switch (Engine.conf.ThumbnailerType)
+            switch (Program.Settings.ThumbnailerType)
             {
                 case ThumbnailerType.MovieThumbnailer:
                     mf.Thumbnailer = new MovieThumbNailer(mf, ssDir);
                     break;
 
                 case ThumbnailerType.MPlayer:
-                    mf.Thumbnailer = new MPlayerThumbnailer(mf, ssDir, Engine.conf.MPlayerOptions);
+                    mf.Thumbnailer = new MPlayerThumbnailer(mf, ssDir, Program.Settings.MPlayerOptions);
                     break;
             }
 
@@ -89,7 +89,7 @@ namespace TDMakerLib
                 ReportProgress(ProgressType.UPDATE_STATUSBAR_DEBUG, ex.Message + " for " + Path.GetFileName(mediaFilePath));
             }
 
-            if (Engine.IsUNIX)
+            if (Program.IsUNIX)
             {
                 // Save _s.txt to MediaInfo2.Overall object
                 if (string.IsNullOrEmpty(Media.Overall.Summary))
@@ -188,83 +188,76 @@ namespace TDMakerLib
 
             if (File.Exists(ssPath))
             {
-                if (!string.IsNullOrEmpty(Engine.conf.PtpImgCode))
+                if (!string.IsNullOrEmpty(Program.Settings.PtpImgCode))
                 {
-                    imageUploader = new PtpImageUploader(Crypt.Decrypt(Engine.conf.PtpImgCode));
+                    imageUploader = new PtpImageUploader(Crypt.Decrypt(Program.Settings.PtpImgCode));
                 }
                 else
                 {
-                    switch ((ImageDestination)Engine.conf.ImageUploaderType)
+                    switch ((ImageDestination)Program.Settings.ImageUploaderType)
                     {
                         case ImageDestination.TinyPic:
-                            imageUploader = new TinyPicUploader(ZKeys.TinyPicID, ZKeys.TinyPicKey, Engine.UploadersConfig.TinyPicAccountType,
-                                Engine.UploadersConfig.TinyPicRegistrationCode);
+                            imageUploader = new TinyPicUploader(ZKeys.TinyPicID, ZKeys.TinyPicKey, Program.UploadersConfig.TinyPicAccountType,
+                                Program.UploadersConfig.TinyPicRegistrationCode);
                             break;
 
                         case ImageDestination.Imgur:
-                            imageUploader = new Imgur(Engine.UploadersConfig.ImgurAccountType, ZKeys.ImgurAnonymousKey, Engine.UploadersConfig.ImgurOAuthInfo);
+                            if (Program.UploadersConfig.ImgurOAuth2Info == null)
+                            {
+                                Program.UploadersConfig.ImgurOAuth2Info = new OAuth2Info(APIKeys.ImgurClientID, APIKeys.ImgurClientSecret);
+                            }
+
+                            imageUploader = new Imgur_v3(Program.UploadersConfig.ImgurOAuth2Info)
+                            {
+                                UploadMethod = Program.UploadersConfig.ImgurAccountType,
+                                ThumbnailType = Program.UploadersConfig.ImgurThumbnailType,
+                                UploadAlbumID = Program.UploadersConfig.ImgurAlbumID
+                            };
                             break;
 
                         case ImageDestination.Flickr:
-                            imageUploader = new FlickrUploader(ApiKeys.FlickrKey, ApiKeys.FlickrSecret, Engine.UploadersConfig.FlickrAuthInfo, Engine.UploadersConfig.FlickrSettings);
+                            imageUploader = new FlickrUploader(APIKeys.FlickrKey, APIKeys.FlickrSecret, Program.UploadersConfig.FlickrAuthInfo, Program.UploadersConfig.FlickrSettings);
                             break;
 
                         case ImageDestination.Photobucket:
-                            imageUploader = new Photobucket(Engine.UploadersConfig.PhotobucketOAuthInfo, Engine.UploadersConfig.PhotobucketAccountInfo);
-                            break;
-
-                        case ImageDestination.Immio:
-                            imageUploader = new ImmioUploader();
+                            imageUploader = new Photobucket(Program.UploadersConfig.PhotobucketOAuthInfo, Program.UploadersConfig.PhotobucketAccountInfo);
                             break;
 
                         case ImageDestination.Picasa:
-                            imageUploader = new Picasa(Engine.UploadersConfig.PicasaOAuthInfo);
-                            break;
-
-                        case ImageDestination.UploadScreenshot:
-                            imageUploader = new UploadScreenshot(ApiKeys.UploadScreenshotKey);
+                            imageUploader = new Picasa(Program.UploadersConfig.PicasaOAuth2Info)
+                            {
+                                AlbumID = Program.UploadersConfig.PicasaAlbumID
+                            };
                             break;
 
                         case ImageDestination.Twitpic:
-                            int indexTwitpic = Engine.UploadersConfig.TwitterSelectedAccount;
+                            int indexTwitpic = Program.UploadersConfig.TwitterSelectedAccount;
 
-                            if (Engine.UploadersConfig.TwitterOAuthInfoList != null && Engine.UploadersConfig.TwitterOAuthInfoList.IsValidIndex(indexTwitpic))
+                            if (Program.UploadersConfig.TwitterOAuthInfoList != null && Program.UploadersConfig.TwitterOAuthInfoList.IsValidIndex(indexTwitpic))
                             {
-                                imageUploader = new TwitPicUploader(ApiKeys.TwitPicKey, Engine.UploadersConfig.TwitterOAuthInfoList[indexTwitpic])
+                                imageUploader = new TwitPicUploader(APIKeys.TwitPicKey, Program.UploadersConfig.TwitterOAuthInfoList[indexTwitpic])
                                 {
-                                    TwitPicThumbnailMode = Engine.UploadersConfig.TwitPicThumbnailMode,
-                                    ShowFull = Engine.UploadersConfig.TwitPicShowFull
+                                    TwitPicThumbnailMode = Program.UploadersConfig.TwitPicThumbnailMode,
+                                    ShowFull = Program.UploadersConfig.TwitPicShowFull
                                 };
                             }
                             break;
 
                         case ImageDestination.Twitsnaps:
-                            int indexTwitsnaps = Engine.UploadersConfig.TwitterSelectedAccount;
+                            int indexTwitsnaps = Program.UploadersConfig.TwitterSelectedAccount;
 
-                            if (Engine.UploadersConfig.TwitterOAuthInfoList.IsValidIndex(indexTwitsnaps))
+                            if (Program.UploadersConfig.TwitterOAuthInfoList.IsValidIndex(indexTwitsnaps))
                             {
-                                imageUploader = new TwitSnapsUploader(ApiKeys.TwitsnapsKey, Engine.UploadersConfig.TwitterOAuthInfoList[indexTwitsnaps]);
+                                imageUploader = new TwitSnapsUploader(APIKeys.TwitsnapsKey, Program.UploadersConfig.TwitterOAuthInfoList[indexTwitsnaps]);
                             }
                             break;
 
                         case ImageDestination.yFrog:
-                            YfrogOptions yFrogOptions = new YfrogOptions(ApiKeys.ImageShackKey);
-                            yFrogOptions.Username = Engine.UploadersConfig.YFrogUsername;
-                            yFrogOptions.Password = Engine.UploadersConfig.YFrogPassword;
+                            YfrogOptions yFrogOptions = new YfrogOptions(APIKeys.ImageShackKey);
+                            yFrogOptions.Username = Program.UploadersConfig.YFrogUsername;
+                            yFrogOptions.Password = Program.UploadersConfig.YFrogPassword;
                             yFrogOptions.Source = Application.ProductName;
                             imageUploader = new YfrogUploader(yFrogOptions);
-                            break;
-
-                        case ImageDestination.FileUploader:
-                            ur = new UploadResult() { LocalFilePath = ssPath };
-                            break;
-
-                        default:
-                            imageUploader = new ImageShackUploader(ZKeys.ImageShackKey, Engine.UploadersConfig.ImageShackAccountType,
-                                      Engine.UploadersConfig.ImageShackRegistrationCode)
-                            {
-                                IsPublic = Engine.UploadersConfig.ImageShackShowImagesInPublic
-                            };
                             break;
                     }
                 }
@@ -279,7 +272,6 @@ namespace TDMakerLib
                 {
                     if (!string.IsNullOrEmpty(ur.URL))
                     {
-                        ur.LocalFilePath = ssPath;
                         ReportProgress(ProgressType.UPDATE_STATUSBAR_DEBUG, string.Format("Uploaded {0}.", Path.GetFileName(ssPath)));
                     }
                 }
