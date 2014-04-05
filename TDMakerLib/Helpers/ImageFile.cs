@@ -39,8 +39,6 @@ namespace UploadersLib.HelperClasses
         /// </summary>
         public string LocalFilePath { get; set; }
 
-        public LinkType Type { get; set; }
-
         public string URI { get; set; }
 
         /// <summary>
@@ -52,7 +50,9 @@ namespace UploadersLib.HelperClasses
 
         public string Source { get; set; }
 
-        public ImageFile() { }
+        public ImageFile()
+        {
+        }
 
         public ImageFile(string filePath)
         {
@@ -61,13 +61,6 @@ namespace UploadersLib.HelperClasses
             System.IO.FileInfo fi = new System.IO.FileInfo(filePath);
             this.DateModified = fi.LastWriteTime;
             this.Size = fi.Length / (decimal)(1024 * 1024);
-        }
-
-        public ImageFile(string URI, LinkType Type)
-        {
-            this.URI = URI;
-            this.Name = System.IO.Path.GetFileName(URI);
-            this.Type = Type;
         }
 
         #region IComparable<ImageFile> Members

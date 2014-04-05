@@ -5,10 +5,9 @@ using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using TDMakerLib;
-using UpdateCheckerLib;
 using UploadersLib;
 
-namespace TDMakerLib
+namespace TDMaker
 {
     public partial class AboutBox : Form
     {
@@ -29,7 +28,7 @@ namespace TDMakerLib
             sbDesc.AppendLine(Application.StartupPath);
             sbDesc.AppendLine();
             sbDesc.AppendLine("Settings file:");
-            sbDesc.AppendLine(Engine.AppConf.XMLSettingsFile);
+            sbDesc.AppendLine(Program.AppConf.XMLSettingsFile);
             MediaInfoLib.MediaInfo mi = new MediaInfoLib.MediaInfo();
             sbDesc.AppendLine();
             sbDesc.AppendLine("Using:");
@@ -121,10 +120,26 @@ namespace TDMakerLib
 
         private void AboutBox_Shown(object sender, EventArgs e)
         {
-            UpdateChecker updateChecker = new UpdateChecker(URL_UPDATE, Application.ProductName,
-              Assembly.GetExecutingAssembly().GetName().Version,
-              ReleaseChannelType.Stable, Uploader.ProxySettings.GetWebProxy);
-            uclUpdate.CheckUpdate(updateChecker);
+            CheckUpdate();
+        }
+
+        public UpdateChecker CheckUpdate()
+        {
+            UpdateChecker updateChecker = new GitHubUpdateChecker("ShareX", "ShareX");
+            updateChecker.CurrentVersion = ProgramUI.AssemblyVersion;
+            updateChecker.Proxy = ProxyInfo.Current.GetWebProxy();
+            updateChecker.CheckUpdate();
+
+            // Fallback if GitHub API fails
+            if (updateChecker.UpdateInfo == null || updateChecker.UpdateInfo.Status == UpdateStatus.UpdateCheckFailed)
+            {
+                updateChecker = new XMLUpdateChecker("http://getsharex.com/Update.xml", "ShareX");
+                updateChecker.CurrentVersion = ProgramUI.AssemblyVersion;
+                updateChecker.Proxy = ProxyInfo.Current.GetWebProxy();
+                updateChecker.CheckUpdate();
+            }
+
+            return updateChecker;
         }
     }
 }
