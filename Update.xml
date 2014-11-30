@@ -2,10 +2,10 @@
 <Update>
   <TDMaker>
     <Stable>
-      <Version>3.0.4.406</Version>
-      <URL>http://tdmaker.googlecode.com/files/TDMaker-3.0.4.406-setup.exe</URL>
-      <Date>2013-01-25</Date>
-      <Summary>http://tdmaker.googlecode.com/svn/trunk/TDMakerLib/VersionHistory.txt</Summary>
+      <Version>3.1.1.0</Version>
+      <URL>https://github.com/McoreD/TDMaker/releases/download/v3.1.1/TDMaker-3.1.1-setup.exe</URL>
+      <Date>2014-11-29</Date>
+      <Summary>https://raw.githubusercontent.com/McoreD/TDMaker/master/TDMakerLib/VersionHistory.txt</Summary>
     </Stable>
   </TDMaker>
 </Update>
