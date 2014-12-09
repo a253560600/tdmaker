@@ -85,13 +85,13 @@ Apart from these syntaxes both files support all the syntaxes listed below. Howe
 
 == !GeneralInfo.txt ==
 
- * *%Format%*
- * *%Bitrate%*
- * *%FileSize%*
- * *%Subtitles%*
- * *%Duration%*
- * *%EncodedApplication%*
- * *%EncodedDate%*
+ * *%General_Format%*
+ * *%General_Bitrate%*
+ * *%General_FileSize%*
+ * *%General_Subtitles%*
+ * *%General_Duration%*
+ * *%General_EncodedApplication%*
+ * *%General_EncodedDate%*
 
 = Creating a new Template =
 
